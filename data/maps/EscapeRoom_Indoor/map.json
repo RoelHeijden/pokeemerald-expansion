@@ -1,0 +1,41 @@
+{
+  "id": "MAP_ESCAPE_ROOM_INDOOR",
+  "name": "EscapeRoom_Indoor",
+  "layout": "LAYOUT_ESCAPE_ROOM_INDOOR",
+  "music": "MUS_RG_VS_DEOXYS",
+  "region_map_section": "MAPSEC_NONE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_NONE",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 3,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

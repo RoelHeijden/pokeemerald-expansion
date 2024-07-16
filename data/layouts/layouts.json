@@ -4410,6 +4410,26 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM",
+      "name": "EscapeRoom_Layout",
+      "width": 10,
+      "height": 10,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_NavelRock",
+      "border_filepath": "data/layouts/EscapeRoom/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM_INDOOR",
+      "name": "EscapeRoom_Indoor_Layout",
+      "width": 10,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_GenericBuilding",
+      "border_filepath": "data/layouts/EscapeRoom_Indoor/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoom_Indoor/map.bin"
     }
   ]
 }
