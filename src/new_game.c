@@ -46,6 +46,16 @@
 #include "union_room_chat.h"
 #include "constants/items.h"
 
+// added these
+#include "party_menu.h"
+#include "constants/moves.h"
+#include "constants/species.h"
+#include "constants/flags.h"
+#include "constants/abilities.h"
+void GivePokemon();
+void GiveCustomMon(u16 species, u8 level, u16 item, u16 move1, u16 move2, u16 move3, u16 move4, u8 abilityNum, u8 nature, u8 *ivs, u8 *evs);
+
+
 extern const u8 EventScript_ResetAllMapFlags[];
 
 static void ClearFrontierRecord(void);
@@ -170,7 +180,7 @@ void NewGameInitData(void)
     ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
-    SetMoney(&gSaveBlock1Ptr->money, 3000);
+    SetMoney(&gSaveBlock1Ptr->money, 0);
     SetCoins(0);
     ResetLinkContestBoolean();
     ResetGameStats();
@@ -205,6 +215,29 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+    //////////////////////////////////
+    // SetDefaultOptions();
+    GivePokemon();
+    FlagSet(FLAG_SYS_B_DASH);
+    FlagSet(FLAG_SYS_POKEMON_GET);
+}
+
+void GivePokemon(){
+    u8 ivs[NUM_STATS] = {31, 0, 31, 31, 31, 31};
+    u8 evs[NUM_STATS] = {132, 0, 252, 24, 0, 0};  // hp, atk, def, speed, sdef, satk
+    GiveCustomMon(
+        SPECIES_GARDEVOIR, 
+        30, 
+        ITEM_SITRUS_BERRY, 
+        MOVE_DISABLE, 
+        MOVE_TRICK_ROOM, 
+        MOVE_SKILL_SWAP, 
+        MOVE_PAIN_SPLIT,
+        ABILITY_SYNCHRONIZE,
+        5,  // 5 = Bold nature
+        ivs,
+        evs
+    );
 }
 
 static void ResetMiniGamesRecords(void)
