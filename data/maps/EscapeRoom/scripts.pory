@@ -1,11 +1,13 @@
 
+////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
+
 mapscripts EscapeRoom_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_UNUSED_0x40F7, 0: StartMessage
         VAR_UNUSED_0x40F7, 1: FirstPokemon
+        VAR_UNUSED_0x40F7, 2: GetBadges
     ] 
 }
-
 
 script StartMessage{
     lockall
@@ -15,6 +17,8 @@ script StartMessage{
 }
 
 script FirstPokemon{
+    // givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
+    // hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
     givemon(
         SPECIES_GARDEVOIR, 
         30, 
@@ -39,8 +43,32 @@ script FirstPokemon{
         )
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_UNUSED_0x40F7, 2)
+}
+
+script GetBadges{
+    setflag(FLAG_DEFEATED_RUSTBORO_GYM)
+    setflag(FLAG_BADGE01_GET)
+    setflag(FLAG_DEFEATED_DEWFORD_GYM)
+    setflag(FLAG_BADGE02_GET)
+    setflag(FLAG_DEFEATED_MAUVILLE_GYM)
+    setflag(FLAG_BADGE03_GET)
+    setflag(FLAG_DEFEATED_LAVARIDGE_GYM)
+    setflag(FLAG_BADGE04_GET)
+    setflag(FLAG_DEFEATED_PETALBURG_GYM)
+    setflag(FLAG_BADGE05_GET)
+    setflag(FLAG_DEFEATED_FORTREE_GYM)
+    setflag(FLAG_BADGE06_GET)
+    setflag(FLAG_DEFEATED_MOSSDEEP_GYM)
+    setflag(FLAG_BADGE07_GET)
+    setflag(FLAG_DEFEATED_SOOTOPOLIS_GYM)
+    setflag(FLAG_BADGE08_GET)
+
+    setvar(VAR_UNUSED_0x40F7, 3)
     end
 }
+
+
+////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
 script EscapeRoom_EventScript_TestSign {
@@ -50,8 +78,6 @@ script EscapeRoom_EventScript_TestSign {
 }
 
 
-// givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
-// hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
 script EscapeRoom_EventScript_GetPokemon {
     lockall
     givemon(
@@ -79,10 +105,41 @@ script EscapeRoom_EventScript_GetPokemon {
     	playfanfare(MUS_OBTAIN_ITEM)
         msgbox("Oh shit its a Smeargle.")
         removeobject(1)
-        setflag(FLAG_UNUSED_0x020)
+        setflag(FLAG_SMEARGLE_OBTAINED)
     }
     else{
     	msgbox("no room.")
     }
     releaseall
+}
+
+script EscapeRoom_EventScript_DoubleBattle1{
+    trainerbattle_double(
+        TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
+        Double1Puzzle_Intro, 
+        Double1Puzzle_Outro, 
+        Double1Puzzle_NotEnoughMons
+    )
+    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+
+////////////////////////////////////////// TEXT //////////////////////////////////////////
+
+text Double1Puzzle_NotEnoughMons{
+    "You should get a second Pokemon first"
+}
+
+text Double1Puzzle_Intro{
+    "Good luck have fun."
+}
+
+text Double1Puzzle_Outro{
+    "Fuck. Well played."
+}
+
+text Double1Puzzle_PostBattle{
+    "We're done now."
 }

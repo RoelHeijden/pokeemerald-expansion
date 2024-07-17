@@ -11804,3 +11804,32 @@ static const struct TrainerMon sParty_MayLinkPlaceholder[] = {
     .species = SPECIES_KYOGRE,
     }
 };
+
+/////////////////////////////////////////////////////////
+
+static const struct TrainerMon sParty_CustomDouble1[] = {
+   {
+    .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
+    .lvl = 18,
+    .species = SPECIES_SCRAFTY,
+    .heldItem = ITEM_NONE,
+    .moves = {MOVE_BRICK_BREAK, MOVE_DRAIN_PUNCH, MOVE_NONE, MOVE_NONE},
+    .ability = ABILITY_INTIMIDATE,
+    .nature = NATURE_BOLD,
+    .nickname = COMPOUND_STRING("Evil Scrafty")
+    },
+    {
+    .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+    .ev = TRAINER_PARTY_EVS(0, 0, 252, 252, 0, 0),
+    .lvl = 23,
+    .species = SPECIES_SMEARGLE,
+    .heldItem = ITEM_MENTAL_HERB,
+    .moves = {MOVE_SUPER_FANG, MOVE_PERISH_SONG, MOVE_NONE, MOVE_NONE},
+    .ability = ABILITY_OWN_TEMPO,
+    .nature = NATURE_TIMID,
+    .nickname = COMPOUND_STRING("Evil Smeargle")
+    },
+};
+
+
