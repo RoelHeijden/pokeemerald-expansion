@@ -39,6 +39,10 @@
 #include "window.h"
 #include "mystery_gift_menu.h"
 
+// added these
+#include "game_options.h"
+
+
 /*
  * Main menu state machine
  * -----------------------
@@ -1068,6 +1072,7 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             case ACTION_CONTINUE:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
+                SetDefaultOptions();  // added this
                 SetMainCallback2(CB2_ContinueSavedGame);
                 DestroyTask(taskId);
                 break;
