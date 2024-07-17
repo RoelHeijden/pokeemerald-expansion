@@ -3,20 +3,20 @@
 
 mapscripts EscapeRoom_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_UNUSED_0x40F7, 0: StartMessage
-        VAR_UNUSED_0x40F7, 1: FirstPokemon
-        VAR_UNUSED_0x40F7, 2: GetBadges
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScripts_PlayStartMessage
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
     ] 
 }
 
-script StartMessage{
+script EscapeRoom_MapScripts_PlayStartMessage{
     lockall
-    msgbox("Good luck.", type=MSGBOX_NPC)
-    setvar(VAR_UNUSED_0x40F7, 1)
+    msgbox(StartMessage)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
     releaseall
 }
 
-script FirstPokemon{
+script EscapeRoom_MapScripts_GetFirstPokemon{
     // givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
     // hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
     givemon(
@@ -42,10 +42,10 @@ script FirstPokemon{
         spDefIv=31,
         )
     setflag(FLAG_SYS_POKEMON_GET)
-    setvar(VAR_UNUSED_0x40F7, 2)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
 }
 
-script GetBadges{
+script EscapeRoom_MapScripts_GetBadges{
     setflag(FLAG_DEFEATED_RUSTBORO_GYM)
     setflag(FLAG_BADGE01_GET)
     setflag(FLAG_DEFEATED_DEWFORD_GYM)
@@ -63,7 +63,7 @@ script GetBadges{
     setflag(FLAG_DEFEATED_SOOTOPOLIS_GYM)
     setflag(FLAG_BADGE08_GET)
 
-    setvar(VAR_UNUSED_0x40F7, 3)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3)
     end
 }
 
@@ -73,7 +73,7 @@ script GetBadges{
 
 script EscapeRoom_EventScript_TestSign {
     lockall
-    msgbox("Fock off.")
+    msgbox(SignMessage1)
     releaseall
 }
 
@@ -103,12 +103,12 @@ script EscapeRoom_EventScript_GetPokemon {
         )
     if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY || var(VAR_RESULT) == MON_GIVEN_TO_PC){
     	playfanfare(MUS_OBTAIN_ITEM)
-        msgbox("Oh shit its a Smeargle.")
+        msgbox(SmeargleObtainedMsg)
         removeobject(1)
         setflag(FLAG_SMEARGLE_OBTAINED)
     }
     else{
-    	msgbox("no room.")
+    	msgbox(NoRoomMsg)
     }
     releaseall
 }
@@ -128,16 +128,32 @@ script EscapeRoom_EventScript_DoubleBattle1{
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
+text StartMessage{
+    "Good luck lad."
+}
+
+text SignMessage1{
+    "Fock off mate."
+}
+
+text SmeargleObtainedMsg{
+    "Oh shit it's a Smeargle."
+}
+
+text NoRoomMsg{
+    "no room."
+}
+
 text Double1Puzzle_NotEnoughMons{
-    "You should get a second Pokemon first"
+    "You first should get a second Pokemon"
 }
 
 text Double1Puzzle_Intro{
-    "Good luck have fun."
+    "Good luck have no fun."
 }
 
 text Double1Puzzle_Outro{
-    "Fuck. Well played."
+    "Fuck."
 }
 
 text Double1Puzzle_PostBattle{
