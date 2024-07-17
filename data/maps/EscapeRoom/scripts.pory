@@ -1,0 +1,61 @@
+
+mapscripts EscapeRoom_MapScripts {
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_UNUSED_0x40F7, 0: StartMessage
+    ] 
+}
+
+
+script StartMessage{
+    lockall
+    msgbox("Good luck.", type=MSGBOX_NPC)
+    setvar(VAR_UNUSED_0x40F7, 1)
+    releaseall
+    end
+}
+
+
+script EscapeRoom_EventScript_TestSign {
+    lockall
+    msgbox("Fock off.")
+    releaseall
+}
+
+
+// givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
+// hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
+script EscapeRoom_EventScript_GetPokemon {
+    lockall
+    givemon(
+        SPECIES_SMEARGLE, 
+        19, 
+        ITEM_IRON_BALL, 
+        abilityNum=0,
+        nature=5, // Bold 
+        // moves:
+        move1=MOVE_PERISH_SONG,
+        move2=MOVE_PROTECT, 
+        move3=MOVE_NONE, 
+        move4=MOVE_NONE,
+        // EVS:
+        hpEv=4,
+        defEv=252,
+        // IVS:
+        hpIv=0,
+        atkIv=0,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31,
+        )
+    if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY || var(VAR_RESULT) == MON_GIVEN_TO_PC){
+    	playfanfare(MUS_OBTAIN_ITEM)
+        msgbox("Smeargle Received.")
+        removeobject(1)
+        setflag(FLAG_UNUSED_0x020)
+    }
+    else{
+    	msgbox("no room.")
+    }
+    releaseall
+}
