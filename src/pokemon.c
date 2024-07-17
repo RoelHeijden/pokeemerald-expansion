@@ -6577,55 +6577,55 @@ const u8 *GetMoveName(u16 moveId)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-extern u8 CalculatePPWithBonus(u16 move, u8 bonus, u8 moveIndex);
+// extern u8 CalculatePPWithBonus(u16 move, u8 bonus, u8 moveIndex);
 
 
-// CUSTOM METHOD
-void GivePokemonMoves(struct Pokemon *mon, u16 move1, u16 move2, u16 move3, u16 move4)
-{
-    u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
-    u8 pp;
-    int i;
+// // CUSTOM METHOD
+// void GivePokemonMoves(struct Pokemon *mon, u16 move1, u16 move2, u16 move3, u16 move4)
+// {
+//     u16 moves[MAX_MON_MOVES] = {move1, move2, move3, move4};
+//     u8 pp;
+//     int i;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        // set move
-        SetMonData(mon, MON_DATA_MOVE1 + i, &moves[i]);
+//     for (i = 0; i < MAX_MON_MOVES; i++)
+//     {
+//         // set move
+//         SetMonData(mon, MON_DATA_MOVE1 + i, &moves[i]);
 
-        // set the PP
-        pp = CalculatePPWithBonus(moves[i], 0, i); // 3 means max PP bonus, 0 is no bonus?
-        SetMonData(mon, MON_DATA_PP1 + i, &pp);
-    }
-}
+//         // set the PP
+//         pp = CalculatePPWithBonus(moves[i], 0, i); // 3 means max PP bonus, 0 is no bonus?
+//         SetMonData(mon, MON_DATA_PP1 + i, &pp);
+//     }
+// }
 
 
-// CUSTOM METHOD
-void GiveCustomMon(u16 species, u8 level, u16 item, u16 move1, u16 move2, u16 move3, u16 move4, u8 abilityNum, u8 nature, u8 *ivs, u8 *evs)
-{
-    // create Pokemon
-    struct Pokemon mon;
-    CreateMonWithNature(&mon, species, level, 32, nature);
+// // CUSTOM METHOD
+// void GiveCustomMon(u16 species, u8 level, u16 item, u16 move1, u16 move2, u16 move3, u16 move4, u8 abilityNum, u8 nature, u8 *ivs, u8 *evs)
+// {
+//     // create Pokemon
+//     struct Pokemon mon;
+//     CreateMonWithNature(&mon, species, level, 32, nature);
     
-    // set item
-    SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
+//     // set item
+//     SetMonData(&mon, MON_DATA_HELD_ITEM, &item);
     
-    // set moves
-    GivePokemonMoves(&mon, move1, move2, move3, move4);
+//     // set moves
+//     GivePokemonMoves(&mon, move1, move2, move3, move4);
 
-    // set ability
-    SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
+//     // set ability
+//     SetMonData(&mon, MON_DATA_ABILITY_NUM, &abilityNum);
     
-    // set IVs
-    u32 ivsPacked = (ivs[0] & 0x1F) | ((ivs[1] & 0x1F) << 5) | ((ivs[2] & 0x1F) << 10) |
-                    ((ivs[3] & 0x1F) << 15) | ((ivs[4] & 0x1F) << 20) | ((ivs[5] & 0x1F) << 25);
-    SetMonData(&mon, MON_DATA_IVS, &ivsPacked);
+//     // set IVs
+//     u32 ivsPacked = (ivs[0] & 0x1F) | ((ivs[1] & 0x1F) << 5) | ((ivs[2] & 0x1F) << 10) |
+//                     ((ivs[3] & 0x1F) << 15) | ((ivs[4] & 0x1F) << 20) | ((ivs[5] & 0x1F) << 25);
+//     SetMonData(&mon, MON_DATA_IVS, &ivsPacked);
 
-    // set EVs
-    for (int i = 0; i < NUM_STATS; i++) {
-        SetMonData(&mon, sGetMonDataEVConstants[i], &evs[i]);
-    }
-    CalculateMonStats(&mon);
+//     // set EVs
+//     for (int i = 0; i < NUM_STATS; i++) {
+//         SetMonData(&mon, sGetMonDataEVConstants[i], &evs[i]);
+//     }
+//     CalculateMonStats(&mon);
     
-    // give to player
-    GiveMonToPlayer(&mon);
-}
+//     // give to player
+//     GiveMonToPlayer(&mon);
+// }
