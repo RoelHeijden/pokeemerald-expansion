@@ -125,37 +125,32 @@ EscapeRoom_EventScript_DoubleBattle1::
 
 StartMessage::
 # 131 "data/maps/EscapeRoom/scripts.pory"
-	.string "We're no strangers to love\n"
-	.string "You know the rules and so do I\p"
-	.string "A full commitment's what I'm\n"
-	.string "thinking of\p"
-	.string "You wouldn't get this from any\n"
-	.string "other guy$"
+	.string "Good luck lad.$"
 
 SignMessage1::
-# 138 "data/maps/EscapeRoom/scripts.pory"
-	.string "Fock off.$"
+# 135 "data/maps/EscapeRoom/scripts.pory"
+	.string "Fock off mate.$"
 
 SmeargleObtainedMsg::
-# 142 "data/maps/EscapeRoom/scripts.pory"
+# 139 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh shit it's a Smeargle.$"
 
 NoRoomMsg::
-# 146 "data/maps/EscapeRoom/scripts.pory"
+# 143 "data/maps/EscapeRoom/scripts.pory"
 	.string "no room.$"
 
 Double1Puzzle_NotEnoughMons::
-# 150 "data/maps/EscapeRoom/scripts.pory"
-	.string "You should get a second Pokemon first$"
+# 147 "data/maps/EscapeRoom/scripts.pory"
+	.string "You first should get a second Pokemon$"
 
 Double1Puzzle_Intro::
-# 154 "data/maps/EscapeRoom/scripts.pory"
-	.string "Good luck have fun.$"
+# 151 "data/maps/EscapeRoom/scripts.pory"
+	.string "Good luck have no fun.$"
 
 Double1Puzzle_Outro::
-# 158 "data/maps/EscapeRoom/scripts.pory"
-	.string "Fuck. Well played.$"
+# 155 "data/maps/EscapeRoom/scripts.pory"
+	.string "Fuck.$"
 
 Double1Puzzle_PostBattle::
-# 162 "data/maps/EscapeRoom/scripts.pory"
+# 159 "data/maps/EscapeRoom/scripts.pory"
 	.string "We're done now.$"
