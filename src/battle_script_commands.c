@@ -1762,9 +1762,17 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
     return calc;
 }
 
+
 static void Cmd_accuracycheck(void)
 {
     CMD_ARGS(const u8 *failInstr, u16 move);
+
+    // ADDED MYSELF
+    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE)
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
 
     u32 type, move = cmd->move;
     u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
@@ -1956,6 +1964,10 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
         critChance = -1;
     }
 
+    // ADDED MYSELF
+    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE){
+        critChance = -1;
+    }
     return critChance;
 }
 
@@ -10930,6 +10942,17 @@ static void TryResetProtectUseCounter(u32 battler)
 static void Cmd_setprotectlike(void)
 {
     CMD_ARGS();
+
+    // ADDED MYSELF
+    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE &&
+        gDisableStructs[gBattlerAttacker].protectUses > 0)
+    {
+        gDisableStructs[gBattlerAttacker].protectUses = 0;
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_PROTECT_FAILED;
+        gMoveResultFlags |= MOVE_RESULT_MISSED;
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
 
     bool32 fail = TRUE;
     bool32 notLastTurn = TRUE;

@@ -215,6 +215,7 @@ void NewGameInitData(void)
     // added these
     SetDefaultOptions();
     FlagSet(FLAG_SYS_B_DASH);
+    FlagSet(FLAG_DISABLE_BATTLE_RNG);
 }
 
 static void ResetMiniGamesRecords(void)
