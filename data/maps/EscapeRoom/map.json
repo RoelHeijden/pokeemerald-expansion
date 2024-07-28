@@ -2,7 +2,7 @@
   "id": "MAP_ESCAPE_ROOM",
   "name": "EscapeRoom",
   "layout": "LAYOUT_ESCAPE_ROOM",
-  "music": "MUS_RG_VS_DEOXYS",
+  "music": "MUS_VS_REGI",
   "region_map_section": "MAPSEC_ESCAPE_ROOM_OUTDOOR",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
