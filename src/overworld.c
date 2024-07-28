@@ -367,7 +367,6 @@ void DoWhiteOut(void)
 
     // HARD CODED THE WARP DESTINATION ON WHITEOUT
     SetWarpDestination(MAP_GROUP(ESCAPE_ROOM), MAP_NUM(ESCAPE_ROOM), WARP_ID_NONE, 4, 6);
-    
     WarpIntoMap();
 }
 
