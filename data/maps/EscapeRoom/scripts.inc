@@ -87,70 +87,70 @@ EscapeRoom_EventScript_GetPokemon::
 # 82 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 83 "data/maps/EscapeRoom/scripts.pory"
-	givemon SPECIES_SMEARGLE, 19, ITEM_IRON_BALL, abilityNum = 0, nature = 5, move1 = MOVE_PERISH_SONG, move2 = MOVE_PROTECT, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 4, defEv = 252, hpIv = 0, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 104 "data/maps/EscapeRoom/scripts.pory"
+	givemon SPECIES_SMEARGLE, 20, ITEM_IRON_BALL, abilityNum = 0, nature = 5, move1 = MOVE_PERISH_SONG, move2 = MOVE_PROTECT, move3 = MOVE_NONE, move4 = MOVE_NONE, defEv = 252, hpIv = 22, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+# 103 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PARTY
 	goto_if_eq EscapeRoom_EventScript_GetPokemon_2
-# 104 "data/maps/EscapeRoom/scripts.pory"
+# 103 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PC
 	goto_if_eq EscapeRoom_EventScript_GetPokemon_2
-# 111 "data/maps/EscapeRoom/scripts.pory"
+# 110 "data/maps/EscapeRoom/scripts.pory"
 	msgbox NoRoomMsg
 EscapeRoom_EventScript_GetPokemon_1:
-# 113 "data/maps/EscapeRoom/scripts.pory"
+# 112 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_GetPokemon_2:
-# 105 "data/maps/EscapeRoom/scripts.pory"
+# 104 "data/maps/EscapeRoom/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 106 "data/maps/EscapeRoom/scripts.pory"
+# 105 "data/maps/EscapeRoom/scripts.pory"
 	msgbox SmeargleObtainedMsg
-# 107 "data/maps/EscapeRoom/scripts.pory"
+# 106 "data/maps/EscapeRoom/scripts.pory"
 	removeobject 1
-# 108 "data/maps/EscapeRoom/scripts.pory"
+# 107 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_SMEARGLE_OBTAINED
 	goto EscapeRoom_EventScript_GetPokemon_1
 
 
 EscapeRoom_EventScript_DoubleBattle1::
-# 117 "data/maps/EscapeRoom/scripts.pory"
+# 116 "data/maps/EscapeRoom/scripts.pory"
 	trainerbattle_double TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, Double1Puzzle_Intro, Double1Puzzle_Outro, Double1Puzzle_NotEnoughMons
-# 123 "data/maps/EscapeRoom/scripts.pory"
+# 122 "data/maps/EscapeRoom/scripts.pory"
 	msgbox Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE
-# 124 "data/maps/EscapeRoom/scripts.pory"
+# 123 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	end
 
 
 StartMessage::
-# 131 "data/maps/EscapeRoom/scripts.pory"
-	.string "Good luck lad.$"
+# 130 "data/maps/EscapeRoom/scripts.pory"
+	.string "Good luck.$"
 
 SignMessage1::
-# 135 "data/maps/EscapeRoom/scripts.pory"
+# 134 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fock off mate.$"
 
 SmeargleObtainedMsg::
-# 139 "data/maps/EscapeRoom/scripts.pory"
+# 138 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh shit it's a Smeargle.$"
 
 NoRoomMsg::
-# 143 "data/maps/EscapeRoom/scripts.pory"
+# 142 "data/maps/EscapeRoom/scripts.pory"
 	.string "no room.$"
 
 Double1Puzzle_NotEnoughMons::
-# 147 "data/maps/EscapeRoom/scripts.pory"
+# 146 "data/maps/EscapeRoom/scripts.pory"
 	.string "You first should get a second Pokemon$"
 
 Double1Puzzle_Intro::
-# 151 "data/maps/EscapeRoom/scripts.pory"
+# 150 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck have no fun.$"
 
 Double1Puzzle_Outro::
-# 155 "data/maps/EscapeRoom/scripts.pory"
+# 154 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fuck.$"
 
 Double1Puzzle_PostBattle::
-# 159 "data/maps/EscapeRoom/scripts.pory"
+# 158 "data/maps/EscapeRoom/scripts.pory"
 	.string "We're done now.$"

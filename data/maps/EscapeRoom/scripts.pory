@@ -82,7 +82,7 @@ script EscapeRoom_EventScript_GetPokemon {
     lockall
     givemon(
         SPECIES_SMEARGLE, 
-        19, 
+        20, 
         ITEM_IRON_BALL, 
         abilityNum=0,
         nature=5, // Bold 
@@ -91,10 +91,9 @@ script EscapeRoom_EventScript_GetPokemon {
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
-        hpEv=4,
         defEv=252,
         // IVS:
-        hpIv=0,
+        hpIv=22,
         atkIv=0,
         defIv=31,
         speedIv=31,
@@ -129,7 +128,7 @@ script EscapeRoom_EventScript_DoubleBattle1{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    "Good luck lad."
+    "Good luck."
 }
 
 text SignMessage1{

@@ -11811,7 +11811,7 @@ static const struct TrainerMon sParty_CustomDouble1[] = {
    {
     .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
     .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
-    .lvl = 18,
+    .lvl = 17,
     .species = SPECIES_SCRAFTY,
     .heldItem = ITEM_NONE,
     .moves = {MOVE_BRICK_BREAK, MOVE_DRAIN_PUNCH, MOVE_NONE, MOVE_NONE},
