@@ -4635,7 +4635,10 @@ static void HandleTurnActionSelectionState(void)
                     // gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
 
                     // ADDED THESE
-                    gBattleCommunication[battler]++;
+                    gSelectionBattleScripts[battler] = BattleScript_AskIfWantsToForfeitMatch;
+                    gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
+
+                    // gBattleCommunication[battler]++;
                     gBattleOutcome = B_OUTCOME_LOST;
                     return;
                 }
