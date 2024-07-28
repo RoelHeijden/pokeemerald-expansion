@@ -4635,14 +4635,13 @@ static void HandleTurnActionSelectionState(void)
                     // gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
 
                     // ADDED THESE
+                    // yes/no forfeit option
                     gSelectionBattleScripts[battler] = BattleScript_AskIfWantsToForfeitMatch;
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
-
-                    // gBattleCommunication[battler]++;
                     gBattleOutcome = B_OUTCOME_LOST;
                     return;
                 }
-                if (IsRunningFromBattleImpossible(battler) != BATTLE_RUN_SUCCESS
+                else if (IsRunningFromBattleImpossible(battler) != BATTLE_RUN_SUCCESS
                          && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
                     gSelectionBattleScripts[battler] = BattleScript_PrintCantEscapeFromBattle;
