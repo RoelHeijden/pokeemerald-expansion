@@ -294,16 +294,18 @@ static u8 CheckTrainer(u8 objectEventId)
         if (GetHillTrainerFlag(objectEventId))
             return 0;
     }
-    else
-    {
-        if (GetTrainerFlagFromScriptPointer(scriptPtr))
-            return 0;
-    }
+    // else
+    // {
+    //     if (GetTrainerFlagFromScriptPointer(scriptPtr))
+    //         return 0;
+    // }
 
     approachDistance = GetTrainerApproachDistance(&gObjectEvents[objectEventId]);
 
     if (approachDistance != 0)
     {
+        if (GetTrainerFlagFromScriptPointer(scriptPtr))
+            return 0;
         if (scriptPtr[1] == TRAINER_BATTLE_DOUBLE
             || scriptPtr[1] == TRAINER_BATTLE_REMATCH_DOUBLE
             || scriptPtr[1] == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)

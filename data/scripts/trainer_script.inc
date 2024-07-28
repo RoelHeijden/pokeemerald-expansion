@@ -11,8 +11,10 @@ Std_RegisteredInMatchCall::
 	return
 
 EventScript_TryGetTrainerScript::
+	goto_if_set FLAG_RAN_FROM_TRAINER, EventScript_TryGetTrainerScript_Cont
 	special ShouldTryGetTrainerScript
 	goto_if_eq VAR_RESULT, TRUE, EventScript_GotoTrainerScript
+EventScript_TryGetTrainerScript_Cont:
 	releaseall
 	end
 
