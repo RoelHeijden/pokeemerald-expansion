@@ -112,7 +112,6 @@ EWRAM_DATA static u8 *sTrainerABattleScriptRetAddr = NULL;
 EWRAM_DATA static u8 *sTrainerBBattleScriptRetAddr = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
-EWRAM_DATA static u32 sPrevTrainerSeeing = 0;
 
 // The first transition is used if the enemy Pokémon are lower level than our Pokémon.
 // Otherwise, the second transition is used.
@@ -1270,13 +1269,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
-    // return FlagGet(TRAINER_FLAGS_START + flag);
-    bool8 trainerFlagValue = FlagGet(TRAINER_FLAGS_START + flag);
-    if (flag != sPrevTrainerSeeing && !trainerFlagValue){
-        sPrevTrainerSeeing = flag;
-        FlagClear(FLAG_RAN_FROM_TRAINER);
-    }
-    return (trainerFlagValue || FlagGet(FLAG_RAN_FROM_TRAINER));
+    return FlagGet(TRAINER_FLAGS_START + flag);
 }
 
 // Set trainer's movement type so they stop and remain facing that direction
@@ -1443,17 +1436,8 @@ static void CB2_EndTrainerBattle(void)
         DowngradeBadPoison();
         if (!InBattlePyramid() && !InTrainerHillChallenge())
         {
-            // RegisterTrainerInMatchCall();
-            // SetBattledTrainersFlags();
-            if (gBattleOutcome == B_OUTCOME_RAN){
-                FlagSet(FLAG_RAN_FROM_TRAINER);
-            }
-            else
-            {
-                FlagClear(FLAG_RAN_FROM_TRAINER);
-                RegisterTrainerInMatchCall();
-                SetBattledTrainersFlags();
-            }
+            RegisterTrainerInMatchCall();
+            SetBattledTrainersFlags();
         }
     }
 }
@@ -1523,8 +1507,6 @@ const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
 
 const u8 *BattleSetup_GetTrainerPostBattleScript(void)
 {
-    if (FlagGet(FLAG_RAN_FROM_TRAINER))
-        return EventScript_TryGetTrainerScript;  // Stops things like registering to Pokenav after the battle ends
     if (sShouldCheckTrainerBScript)
     {
         sShouldCheckTrainerBScript = FALSE;
