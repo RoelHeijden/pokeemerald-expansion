@@ -4638,6 +4638,10 @@ static void HandleTurnActionSelectionState(void)
                     // yes/no forfeit option
                     gSelectionBattleScripts[battler] = BattleScript_AskIfWantsToForfeitMatch;
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
+                    
+                    *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
+                    *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_BEFORE_ACTION_CHOSEN;
+
                     gBattleOutcome = B_OUTCOME_LOST;
                     return;
                 }
