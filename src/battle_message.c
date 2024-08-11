@@ -847,7 +847,7 @@ static const u8 sText_TidyingUpComplete[] = _("Tidying up complete!");
 
 
 // added these
-static const u8 sText_PlayerForfeitToTrainer[] = _("{B_PLAYER_NAME} forfeited\nthe match!{PAUSE_UNTIL_PRESS}");
+static const u8 sText_PlayerForfeitToTrainer[] = _("{B_PLAYER_NAME} lost\nthe match!{PAUSE_UNTIL_PRESS}");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
