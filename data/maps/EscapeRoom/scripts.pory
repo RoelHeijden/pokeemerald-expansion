@@ -86,12 +86,10 @@ script EscapeRoom_EventScript_TestSign {
 
 script EscapeRoom_Nurse_Heal_Pokemon{
     lockall
-    msgbox(Nurse_Heal)
-    // fadescreen FADE_TO_BLACK
-	// playfanfare MUS_HEAL
-	// waitfanfare
+    fadescreen(FADE_TO_BLACK)
 	special(HealPlayerParty)
-	// fadescreen FADE_FROM_BLACK
+	fadescreen(FADE_FROM_BLACK)
+    msgbox(Nurse_Heal_End)
     releaseall
 }
 
@@ -179,6 +177,6 @@ text Double1Puzzle_PostBattle{
     "We're done now."
 }
 
-text Nurse_Heal{
-    "Let me heal your Pokemon."
+text Nurse_Heal_End{
+    "I healed your Pokemon!"
 }
