@@ -4631,14 +4631,11 @@ static void HandleTurnActionSelectionState(void)
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
                          && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
-                    // BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
-                    // gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
-
                     // ADDED THESE
                     // yes/no forfeit option
                     gSelectionBattleScripts[battler] = BattleScript_AskIfWantsToForfeitMatch;
                     gBattleCommunication[battler] = STATE_SELECTION_SCRIPT_MAY_RUN;
-                    
+
                     *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_BEFORE_ACTION_CHOSEN;
 
