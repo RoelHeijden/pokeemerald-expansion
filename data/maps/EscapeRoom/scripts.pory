@@ -6,6 +6,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScripts_PlayStartMessage
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
     ] 
 }
 
@@ -66,6 +67,12 @@ script EscapeRoom_MapScripts_GetBadges{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3)
     end
 }
+
+script EscapeRoom_MapScripts_SetRespawn{
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4)
+}
+
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////

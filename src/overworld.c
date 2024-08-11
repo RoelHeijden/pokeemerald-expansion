@@ -363,11 +363,7 @@ void DoWhiteOut(void)
         SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
-    // SetWarpDestinationToLastHealLocation();   
-
-    // HARD CODED THE WARP DESTINATION ON WHITEOUT
-    // todo: maybe use a flag untill first heal
-    SetWarpDestination(MAP_GROUP(ESCAPE_ROOM), MAP_NUM(ESCAPE_ROOM), WARP_ID_NONE, 4, 6);
+    SetWarpDestinationToLastHealLocation();   
     WarpIntoMap();
 }
 
