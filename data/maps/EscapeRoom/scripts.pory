@@ -84,6 +84,17 @@ script EscapeRoom_EventScript_TestSign {
     releaseall
 }
 
+script EscapeRoom_Nurse_Heal_Pokemon{
+    lockall
+    msgbox(Nurse_Heal)
+    // fadescreen FADE_TO_BLACK
+	// playfanfare MUS_HEAL
+	// waitfanfare
+	special(HealPlayerParty)
+	// fadescreen FADE_FROM_BLACK
+    releaseall
+}
+
 
 script EscapeRoom_EventScript_GetPokemon {
     lockall
@@ -134,6 +145,8 @@ script EscapeRoom_EventScript_DoubleBattle1{
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
+// use format("my text") to auto format long text messages
+
 text StartMessage{
     "Good luck."
 }
@@ -151,7 +164,7 @@ text NoRoomMsg{
 }
 
 text Double1Puzzle_NotEnoughMons{
-    "You first should get a second Pokemon"
+    "You first should get a second Pokemon."
 }
 
 text Double1Puzzle_Intro{
@@ -164,4 +177,8 @@ text Double1Puzzle_Outro{
 
 text Double1Puzzle_PostBattle{
     "We're done now."
+}
+
+text Nurse_Heal{
+    "Let me heal your Pokemon."
 }
