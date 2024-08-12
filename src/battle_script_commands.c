@@ -10943,8 +10943,16 @@ static void Cmd_setprotectlike(void)
 {
     CMD_ARGS();
 
+    bool32 fail = TRUE;
+    bool32 notLastTurn = TRUE;
+
+    TryResetProtectUseCounter(gBattlerAttacker);
+    if (gCurrentTurnActionNumber == (gBattlersCount - 1))
+        notLastTurn = FALSE;
+
     // ADDED MYSELF
-    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE &&
+    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE && 
+        notLastTurn &&
         gDisableStructs[gBattlerAttacker].protectUses > 0)
     {
         gDisableStructs[gBattlerAttacker].protectUses = 0;
@@ -10953,13 +10961,6 @@ static void Cmd_setprotectlike(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
-
-    bool32 fail = TRUE;
-    bool32 notLastTurn = TRUE;
-
-    TryResetProtectUseCounter(gBattlerAttacker);
-    if (gCurrentTurnActionNumber == (gBattlersCount - 1))
-        notLastTurn = FALSE;
 
     if ((sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random() && notLastTurn)
         || (gCurrentMove == MOVE_WIDE_GUARD && B_WIDE_GUARD != GEN_5)
