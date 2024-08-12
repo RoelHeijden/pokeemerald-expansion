@@ -4196,6 +4196,7 @@ BattleScript_EffectPerishSong::
 	waitanimation
 	printstring STRINGID_FAINTINTHREE
 	waitmessage B_WAIT_TIME_LONG
+	copybyte gBattlerTargetBackup, gBattlerTarget
 	setbyte gBattlerTarget, 0
 BattleScript_PerishSongLoop::
 	jumpifability BS_TARGET, ABILITY_SOUNDPROOF, BattleScript_PerishSongBlocked
@@ -4203,6 +4204,7 @@ BattleScript_PerishSongLoop::
 BattleScript_PerishSongLoopIncrement::
 	addbyte gBattlerTarget, 1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_PerishSongLoop
+	copybyte gBattlerTarget, gBattlerTargetBackup
 	goto BattleScript_MoveEnd
 
 BattleScript_PerishSongBlocked::
