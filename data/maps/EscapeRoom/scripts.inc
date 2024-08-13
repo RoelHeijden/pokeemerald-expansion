@@ -97,96 +97,106 @@ EscapeRoom_Nurse_Heal_Pokemon::
 # 88 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 89 "data/maps/EscapeRoom/scripts.pory"
-	msgbox Nurse_Heal_Start
-# 90 "data/maps/EscapeRoom/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 93 "data/maps/EscapeRoom/scripts.pory"
+# 90 "data/maps/EscapeRoom/scripts.pory"
 	special HealPlayerParty
-# 94 "data/maps/EscapeRoom/scripts.pory"
+# 91 "data/maps/EscapeRoom/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 95 "data/maps/EscapeRoom/scripts.pory"
+# 92 "data/maps/EscapeRoom/scripts.pory"
 	msgbox Nurse_Heal_End
-# 96 "data/maps/EscapeRoom/scripts.pory"
+# 93 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_GetPokemon::
-# 101 "data/maps/EscapeRoom/scripts.pory"
+# 97 "data/maps/EscapeRoom/scripts.pory"
 	lockall
-# 102 "data/maps/EscapeRoom/scripts.pory"
+# 98 "data/maps/EscapeRoom/scripts.pory"
 	givemon SPECIES_SMEARGLE, 20, ITEM_IRON_BALL, abilityNum = 0, nature = 5, move1 = MOVE_PERISH_SONG, move2 = MOVE_PROTECT, move3 = MOVE_NONE, move4 = MOVE_NONE, defEv = 252, hpIv = 22, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 122 "data/maps/EscapeRoom/scripts.pory"
+# 118 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PARTY
 	goto_if_eq EscapeRoom_EventScript_GetPokemon_2
-# 122 "data/maps/EscapeRoom/scripts.pory"
+# 118 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PC
 	goto_if_eq EscapeRoom_EventScript_GetPokemon_2
-# 129 "data/maps/EscapeRoom/scripts.pory"
+# 125 "data/maps/EscapeRoom/scripts.pory"
 	msgbox NoRoomMsg
 EscapeRoom_EventScript_GetPokemon_1:
-# 131 "data/maps/EscapeRoom/scripts.pory"
+# 127 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_GetPokemon_2:
-# 123 "data/maps/EscapeRoom/scripts.pory"
+# 119 "data/maps/EscapeRoom/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
-# 124 "data/maps/EscapeRoom/scripts.pory"
+# 120 "data/maps/EscapeRoom/scripts.pory"
 	msgbox SmeargleObtainedMsg
-# 125 "data/maps/EscapeRoom/scripts.pory"
+# 121 "data/maps/EscapeRoom/scripts.pory"
 	removeobject 1
-# 126 "data/maps/EscapeRoom/scripts.pory"
+# 122 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_SMEARGLE_OBTAINED
 	goto EscapeRoom_EventScript_GetPokemon_1
 
 
 EscapeRoom_EventScript_DoubleBattle1::
-# 135 "data/maps/EscapeRoom/scripts.pory"
-	trainerbattle_double TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, Double1Puzzle_Intro, Double1Puzzle_Outro, Double1Puzzle_NotEnoughMons
-# 141 "data/maps/EscapeRoom/scripts.pory"
+# 131 "data/maps/EscapeRoom/scripts.pory"
+	trainerbattle_double TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, Double1Puzzle_Intro, Double1Puzzle_Outro, Double1Puzzle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostDouble1Heal
+# 138 "data/maps/EscapeRoom/scripts.pory"
 	msgbox Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE
-# 142 "data/maps/EscapeRoom/scripts.pory"
+# 139 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	end
 
 
+EscapeRoom_EventScript_PostDouble1Heal::
+# 144 "data/maps/EscapeRoom/scripts.pory"
+	msgbox Double1Puzzle_Heal, MSGBOX_AUTOCLOSE
+# 145 "data/maps/EscapeRoom/scripts.pory"
+	fadescreen FADE_TO_BLACK
+# 146 "data/maps/EscapeRoom/scripts.pory"
+	special HealPlayerParty
+# 147 "data/maps/EscapeRoom/scripts.pory"
+	fadescreen FADE_FROM_BLACK
+	return
+
+
 StartMessage::
-# 151 "data/maps/EscapeRoom/scripts.pory"
+# 155 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck.$"
 
 SignMessage1::
-# 155 "data/maps/EscapeRoom/scripts.pory"
+# 159 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fock off mate.$"
 
 SmeargleObtainedMsg::
-# 159 "data/maps/EscapeRoom/scripts.pory"
+# 163 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh shit it's a Smeargle.$"
 
 NoRoomMsg::
-# 163 "data/maps/EscapeRoom/scripts.pory"
+# 167 "data/maps/EscapeRoom/scripts.pory"
 	.string "no room.$"
 
 Double1Puzzle_NotEnoughMons::
-# 167 "data/maps/EscapeRoom/scripts.pory"
+# 171 "data/maps/EscapeRoom/scripts.pory"
 	.string "You first should get a second Pokemon.$"
 
 Double1Puzzle_Intro::
-# 171 "data/maps/EscapeRoom/scripts.pory"
+# 175 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck have no fun.$"
 
 Double1Puzzle_Outro::
-# 175 "data/maps/EscapeRoom/scripts.pory"
+# 179 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fuck.$"
 
 Double1Puzzle_PostBattle::
-# 179 "data/maps/EscapeRoom/scripts.pory"
-	.string "We're done now.$"
-
-Nurse_Heal_Start::
 # 183 "data/maps/EscapeRoom/scripts.pory"
-	.string "Allow me.$"
+	.string "We're done now.$"
 
 Nurse_Heal_End::
 # 187 "data/maps/EscapeRoom/scripts.pory"
 	.string "I healed your Pokemon!$"
+
+Double1Puzzle_Heal::
+# 191 "data/maps/EscapeRoom/scripts.pory"
+	.string "Let us heal your Pokemon.$"

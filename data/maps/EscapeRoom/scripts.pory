@@ -93,7 +93,6 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     releaseall
 }
 
-
 script EscapeRoom_EventScript_GetPokemon {
     lockall
     givemon(
@@ -133,11 +132,19 @@ script EscapeRoom_EventScript_DoubleBattle1{
         TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
         Double1Puzzle_Intro, 
         Double1Puzzle_Outro, 
-        Double1Puzzle_NotEnoughMons
+        Double1Puzzle_NotEnoughMons,
+        event_script=EscapeRoom_EventScript_PostDouble1Heal,
     )
     msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
+}
+
+script EscapeRoom_EventScript_PostDouble1Heal{
+    msgbox(Double1Puzzle_Heal, MSGBOX_AUTOCLOSE)
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
 }
 
 
@@ -179,4 +186,8 @@ text Double1Puzzle_PostBattle{
 
 text Nurse_Heal_End{
     "I healed your Pokemon!"
+}
+
+text Double1Puzzle_Heal{
+    "Let us heal your Pokemon."
 }
