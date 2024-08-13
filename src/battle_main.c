@@ -163,6 +163,7 @@ EWRAM_DATA u16 gLastUsedAbility = 0;
 EWRAM_DATA u8 gBattlerAttacker = 0;
 EWRAM_DATA u8 gBattlerTarget = 0;
 EWRAM_DATA u8 gBattlerTargetBackup = 0; // ADDED THIS
+EWRAM_DATA u8 gPerishLastToFaint = 0;  // ADDED THIS
 EWRAM_DATA u8 gBattlerFainted = 0;
 EWRAM_DATA u8 gEffectBattler = 0;
 EWRAM_DATA u8 gPotentialItemEffectBattler = 0;

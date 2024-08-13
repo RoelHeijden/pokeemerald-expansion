@@ -6280,6 +6280,7 @@ BattleScript_PerishSongTakesLife::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
+	copybyte gPerishLastToFaint, gBattlerAttacker
 	end2
 
 BattleScript_PerishBodyActivates::

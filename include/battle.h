@@ -1038,6 +1038,7 @@ extern u16 gLastUsedAbility;
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
 extern u8 gBattlerTargetBackup;  // ADDED THIS
+extern u8 gPerishLastToFaint;  // ADDED THIS
 extern u8 gBattlerFainted;
 extern u8 gEffectBattler;
 extern u8 gPotentialItemEffectBattler;

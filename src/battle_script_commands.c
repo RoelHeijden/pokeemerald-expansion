@@ -4661,6 +4661,16 @@ static void Cmd_checkteamslost(void)
     if (NoAliveMonsForOpponent())
         gBattleOutcome |= B_OUTCOME_WON;
 
+
+    // ADDED THIS: Perish tie breaker
+    if (NoAliveMonsForOpponent() && NoAliveMonsForPlayer()){
+        if (gPerishLastToFaint == 0 || gPerishLastToFaint == 2)
+            gBattleOutcome = B_OUTCOME_WON;
+        else
+            gBattleOutcome = B_OUTCOME_LOST;
+    }
+
+
     // Fair switching - everyone has to switch in most at the same time, without knowing which pokemon the other trainer selected.
     // In vanilla Emerald this was only used for link battles, in expansion it's also used for regular trainer battles.
     // For battles that haven't ended, count number of empty battler spots
