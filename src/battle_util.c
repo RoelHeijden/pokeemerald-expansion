@@ -3019,9 +3019,27 @@ bool32 HandleWishPerishSongOnTurnEnd(void)
         gBattleStruct->wishPerishSongBattlerId = 0;
         // fall through
     case 1:
+
+        // ADDED THIS
+        // calculate turn order by speed alone (including effects, items, ...)
+        s32 i;
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            gBattlerBySpeedOrder[i] = i;
+        }
+        for (i = 0; i < gBattlersCount - 1; i++)
+        {
+            s32 j;
+            for (j = i + 1; j < gBattlersCount; j++)
+            {
+                if (GetWhichBattlerFasterNoPriority(gBattlerBySpeedOrder[i], gBattlerBySpeedOrder[j], FALSE) == -1)
+                    SwapSpeedOrder(i, j);
+            }
+        }
+
         while (gBattleStruct->wishPerishSongBattlerId < gBattlersCount)
         {
-            battler = gBattlerAttacker = gBattlerByTurnOrder[gBattleStruct->wishPerishSongBattlerId];
+            battler = gBattlerAttacker = gBattlerBySpeedOrder[gBattleStruct->wishPerishSongBattlerId];  // CHANGED TO speed order
             if (gAbsentBattlerFlags & gBitTable[battler])
             {
                 gBattleStruct->wishPerishSongBattlerId++;

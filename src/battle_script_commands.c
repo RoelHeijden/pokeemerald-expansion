@@ -4663,6 +4663,7 @@ static void Cmd_checkteamslost(void)
 
 
     // ADDED THIS: Perish tie breaker
+    // note: currently, non perish tiebreakers result in a win -- maybe fix at some point
     if (NoAliveMonsForOpponent() && NoAliveMonsForPlayer()){
         if (gPerishLastToFaint == 0 || gPerishLastToFaint == 2)
             gBattleOutcome = B_OUTCOME_WON;
