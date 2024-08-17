@@ -180,6 +180,7 @@ EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
 EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
 EWRAM_DATA u16 gLastPrintedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastMoves[MAX_BATTLERS_COUNT] = {0};
+EWRAM_DATA u8 gProtectSuccessLastTurn[MAX_BATTLERS_COUNT] = {0};  // ADDED THIS
 EWRAM_DATA u16 gLastLandedMoves[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastHitByType[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastResultingMoves[MAX_BATTLERS_COUNT] = {0};
@@ -4405,6 +4406,7 @@ static void HandleTurnActionSelectionState(void)
 
             // ADDED
             gPlayerMovesChosen = 0;  // reset counter at start of turn
+            gBattleStruct->chosenMovePositions[battler] = MOVE_NONE;  // reset chosenMove
 
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4690,7 +4692,9 @@ static void HandleTurnActionSelectionState(void)
             {   
                 // ADDED
                 gPlayerMovesChosen++; 
-                
+
+                DebugPrintf("n moves chosen: %d", gPlayerMovesChosen);
+
                 switch (gChosenActionByBattler[battler])
                 {
                 case B_ACTION_USE_MOVE:
@@ -4851,6 +4855,18 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CONFIRMED:
+
+            // ADDED THIS
+            // didnt know where else to put this but as long as it works.. lol
+            if (battler == (gBattlersCount - 1))
+            {
+                u8 b_temp = 0;
+                for (b_temp = 0; b_temp < gBattlersCount; b_temp++)
+                {
+                    gProtectSuccessLastTurn[b_temp] = 0;  // reset succesful protect check
+                }
+            }
+
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {
                 gBattleCommunication[ACTIONS_CONFIRMED_COUNT]++;

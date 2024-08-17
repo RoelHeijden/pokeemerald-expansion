@@ -5317,21 +5317,26 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     if (move == MOVE_DRAIN_PUNCH)
         if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3) 
             if (gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
-                score = 201;
+                score = 150;
 
     // BRICK BREAK
     if (move == MOVE_BRICK_BREAK)
         if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3)
             if (gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-                score = 202; 
+                score = 150; 
 
     // SUPER FANG
     if (move == MOVE_SUPER_FANG)
     {
         if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3)
-            score = 203; 
-        if (targetUsedProtect)
-            score = 81;
+        {
+            score = 150;
+            if (targetUsedProtect && !gProtectSuccessLastTurn[battlerDef])
+                score = 81;
+
+            // elif !(TRICK_ROOM) && (SUPER_FANG + DRAIN_PUNCH) KOs smeargle
+                // score = 160
+        }
     }
 
     // PERISH SONG

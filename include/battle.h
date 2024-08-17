@@ -1053,6 +1053,7 @@ extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
 extern const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
 extern u16 gLastPrintedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastMoves[MAX_BATTLERS_COUNT];
+extern u8 gProtectSuccessLastTurn[MAX_BATTLERS_COUNT];  // ADDED THIS
 extern u16 gLastLandedMoves[MAX_BATTLERS_COUNT];
 extern u16 gLastHitByType[MAX_BATTLERS_COUNT];
 extern u16 gLastResultingMoves[MAX_BATTLERS_COUNT];

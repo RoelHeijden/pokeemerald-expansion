@@ -10972,6 +10972,11 @@ static void Cmd_setprotectlike(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
         return;
     }
+    else
+        gProtectSuccessLastTurn[gBattlerAttacker] = 1;
+
+        
+
 
     if ((sProtectSuccessRates[gDisableStructs[gBattlerAttacker].protectUses] >= Random() && notLastTurn)
         || (gCurrentMove == MOVE_WIDE_GUARD && B_WIDE_GUARD != GEN_5)
