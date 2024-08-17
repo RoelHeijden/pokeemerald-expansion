@@ -54,6 +54,9 @@ static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_PowerfulStatus(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
+// ADDED
+static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
 {
@@ -76,7 +79,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [16] = NULL,                     // Unused
     [17] = NULL,                     // Unused
     [18] = NULL,                     // Unused
-    [19] = NULL,                     // Unused
+    [19] = AI_Double1_Logic,         // AI_FLAG_DOUBLE1
     [20] = NULL,                     // Unused
     [21] = NULL,                     // Unused
     [22] = NULL,                     // Unused
@@ -5296,6 +5299,44 @@ static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     if (AI_DATA->hpPercents[battlerDef] <= 20)
         AI_Flee();
+
+    return score;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+// Double battle 1 logic
+
+static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
+{
+    int targetUsedProtect = (gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]] == MOVE_PROTECT);
+
+    // DRAIN PUNCH
+    if (move == MOVE_DRAIN_PUNCH)
+        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3) 
+            if (gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
+                score = 201;
+
+    // BRICK BREAK
+    if (move == MOVE_BRICK_BREAK)
+        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3)
+            if (gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
+                score = 202; 
+
+    // SUPER FANG
+    if (move == MOVE_SUPER_FANG)
+    {
+        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3)
+            score = 203; 
+        if (targetUsedProtect)
+            score = 81;
+    }
+
+    // PERISH SONG
+    if (move == MOVE_PERISH_SONG)
+        score = 5;  // avoid using this until Super Fang is simply not available
 
     return score;
 }
