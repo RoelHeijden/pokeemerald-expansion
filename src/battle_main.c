@@ -67,6 +67,7 @@
 #include "cable_club.h"
 
 #include "gba/isagbprint.h"
+
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
 
@@ -143,6 +144,7 @@ EWRAM_DATA u8 *gBattleAnimBgTileBuffer = NULL;
 EWRAM_DATA u8 *gBattleAnimBgTilemapBuffer = NULL;
 EWRAM_DATA u32 gBattleControllerExecFlags = 0;
 EWRAM_DATA u8 gBattlersCount = 0;
+EWRAM_DATA u8 gPlayerMovesChosen = 0;
 EWRAM_DATA u16 gBattlerPartyIndexes[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gBattlerPositions[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u8 gActionsByTurnOrder[MAX_BATTLERS_COUNT] = {0};
@@ -4400,6 +4402,10 @@ static void HandleTurnActionSelectionState(void)
         switch (gBattleCommunication[battler])
         {
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
+
+            // ADDED
+            gPlayerMovesChosen = 0;  // reset counter at start of turn
+
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
 
@@ -4411,7 +4417,8 @@ static void HandleTurnActionSelectionState(void)
                 gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
             }
             // fallthrough
-        case STATE_BEFORE_ACTION_CHOSEN: // Choose an action.
+        case STATE_BEFORE_ACTION_CHOSEN: // Choose an action. 
+
             *(gBattleStruct->monToSwitchIntoId + battler) = PARTY_SIZE;
             if (gBattleTypeFlags & BATTLE_TYPE_MULTI
                 || (position & BIT_FLANK) == B_FLANK_LEFT
@@ -4453,7 +4460,23 @@ static void HandleTurnActionSelectionState(void)
                 }
             }
             break;
-        case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.
+        case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.  e.g. run/fight/pokemon/bag
+            
+            // wait for player to select it's moves. Only then the AI gets to move
+            // recalculate AI scores
+            if (battler == 1 || battler == 3)
+            {
+                if (gPlayerMovesChosen < (gBattlersCount / 2))
+                    break;
+                else
+                    if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
+                    && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
+                    {
+                        AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
+                        gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
+                    }
+            } 
+
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {
                 RecordedBattle_SetBattlerAction(battler, gBattleResources->bufferB[battler][1]);
@@ -4661,9 +4684,13 @@ static void HandleTurnActionSelectionState(void)
                 }
             }
             break;
-        case STATE_WAIT_ACTION_CASE_CHOSEN:
+        case STATE_WAIT_ACTION_CASE_CHOSEN:     // THIS IS WHERE A MOVE IS CONFIRMED
+            
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
-            {
+            {   
+                // ADDED
+                gPlayerMovesChosen++; 
+                
                 switch (gChosenActionByBattler[battler])
                 {
                 case B_ACTION_USE_MOVE:
@@ -4725,6 +4752,7 @@ static void HandleTurnActionSelectionState(void)
                                 gBattleStruct->dynamax.baseMove[battler] = gBattleMons[battler].moves[gBattleStruct->chosenMovePositions[battler]];
                                 gBattleStruct->dynamax.usingMaxMove[battler] = TRUE;
                             }
+
                             gBattleCommunication[battler]++;
 
                             if (gTestRunnerEnabled)
