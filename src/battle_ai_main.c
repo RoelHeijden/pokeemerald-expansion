@@ -5311,37 +5311,84 @@ static s32 AI_FirstBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
 static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    int targetUsedProtect = (gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]] == MOVE_PROTECT);
-
-    // DRAIN PUNCH
-    if (move == MOVE_DRAIN_PUNCH)
-        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3) 
-            if (gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
-                score = 150;
-
-    // BRICK BREAK
-    if (move == MOVE_BRICK_BREAK)
-        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3)
-            if (gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-                score = 150; 
-
-    // SUPER FANG
-    if (move == MOVE_SUPER_FANG)
+    // don't target the partner
+    if (battlerDef == 3)
     {
-        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && battlerDef != 3)
-        {
-            score = 150;
-            if (targetUsedProtect && !gProtectSuccessLastTurn[battlerDef])
-                score = 81;
-
-            // elif !(TRICK_ROOM) && (SUPER_FANG + DRAIN_PUNCH) KOs smeargle
-                // score = 160
-        }
+        score = 1;
+        return score;
     }
 
-    // PERISH SONG
-    if (move == MOVE_PERISH_SONG)
-        score = 5;  // avoid using this until Super Fang is simply not available
+    int battlerPartner = 2 - battlerDef;
+    int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
+    int moveDefPartner = gBattleMons[battlerPartner].moves[gBattleStruct->chosenMovePositions[battlerPartner]];
 
+    int targetProtectingItself = (moveDefender == MOVE_PROTECT && !gProtectSuccessLastTurn[battlerDef]);
+    int opposingSelfPainSplit = ((moveDefPartner == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerPartner] == battlerDef)
+                                || (moveDefender == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerDef] == battlerPartner));
+   
+    // calc Scrafty Drain Punch damage
+    // s32 dmg = 0;
+    // u8 effectiveness = AI_EFFECTIVENESS_x0;
+    // dmg = AI_CalcDamage(MOVE_DRAIN_PUNCH, 1, battlerDef, &effectiveness, FALSE, B_WEATHER_NONE);
+    
+    // DebugPrintf("Scrafty damage: %d", dmg);
+    
+    switch (move)
+    {
+        case MOVE_DRAIN_PUNCH:
+            // target smeargle, alternate with brick break
+            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH) 
+                score = 155;
+            break;
+
+        case MOVE_BRICK_BREAK:
+            // target smeargle, alternate with drain punch
+            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
+                score = 155; 
+            break;
+
+        case MOVE_PERISH_SONG:
+            // avoid using this until Super Fang is simply not available
+            score = 5;  
+            break;
+
+        case MOVE_SUPER_FANG:
+            // avoid hitting into Protect
+            if (targetProtectingItself)
+            {
+                score = 81;
+                return score;
+            }
+
+            // in Trick Room:
+            if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
+
+                // TODO:
+                // - calc drain punch damage: 
+
+                // target mon with highest hp 
+                if ((gBattleMons[0].hp > gBattleMons[2].hp) && battlerDef == 0)
+                    score = 150;
+                if ((gBattleMons[0].hp < gBattleMons[2].hp) && battlerDef == 2)
+                    score = 150;
+
+                // target Smeargle if self pain splitting
+                if (opposingSelfPainSplit && gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
+                    score = 160;
+
+            }
+            // out of Trick Room:
+            else 
+            {
+                // target Smeargle
+                if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
+                    score = 150;
+
+                // target Gardevois if self pain splitting
+                if (opposingSelfPainSplit && gBattleMons[battlerDef].species == SPECIES_GARDEVOIR)
+                    score = 160;
+            }
+            break;
+    }
     return score;
 }
