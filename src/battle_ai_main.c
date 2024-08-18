@@ -5318,20 +5318,25 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         return score;
     }
 
-    int battlerPartner = 2 - battlerDef;
+    int battlerGardy = (gBattleMons[2].species == SPECIES_GARDEVOIR) * 2;
+    int battlerSmeargle = (gBattleMons[2].species == SPECIES_SMEARGLE) * 2;
+
+    int moveGardy = gBattleMons[battlerGardy].moves[gBattleStruct->chosenMovePositions[battlerGardy]];
+    int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
     int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
-    int moveDefPartner = gBattleMons[battlerPartner].moves[gBattleStruct->chosenMovePositions[battlerPartner]];
 
     int targetProtectingItself = (moveDefender == MOVE_PROTECT && !gProtectSuccessLastTurn[battlerDef]);
-    int opposingSelfPainSplit = ((moveDefPartner == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerPartner] == battlerDef)
-                                || (moveDefender == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerDef] == battlerPartner));
+    int opposingSelfPainSplit = (moveGardy == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerGardy] == battlerSmeargle);
    
     // calc Scrafty Drain Punch damage
-    // s32 dmg = 0;
-    // u8 effectiveness = AI_EFFECTIVENESS_x0;
-    // dmg = AI_CalcDamage(MOVE_DRAIN_PUNCH, 1, battlerDef, &effectiveness, FALSE, B_WEATHER_NONE);
-    
-    // DebugPrintf("Scrafty damage: %d", dmg);
+    // u32 move_drainpunch = gBattleMons[1].moves[0];
+    // uq4_12_t effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move_drainpunch, moveType, 1, battlerSmeargle, ABILITY_NONE, FALSE);
+    // s32 scrafty_dmg = CalculateMoveDamageVars(move, battlerAtk, battlerDef, moveType, fixedBasePower,
+    //                                          effectivenessMultiplier, weather, FALSE,
+    //                                          AI_DATA->holdEffects[battlerAtk], AI_DATA->holdEffects[battlerDef],
+    //                                          AI_DATA->abilities[battlerAtk], AI_DATA->abilities[battlerDef]);
+    // DebugPrintf("Drain punch: %d", move_drainpunch);
+    // DebugPrintf("Scrafty damage vs %d: %d", battlerSmeargle, scrafty_dmg);
     
     switch (move)
     {
@@ -5363,10 +5368,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // in Trick Room:
             if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
 
-                // TODO:
-                // - calc drain punch damage: 
-
-                // target mon with highest hp 
+                // target mon with highest hp after drain punch
                 if ((gBattleMons[0].hp > gBattleMons[2].hp) && battlerDef == 0)
                     score = 150;
                 if ((gBattleMons[0].hp < gBattleMons[2].hp) && battlerDef == 2)
@@ -5384,9 +5386,15 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
                     score = 150;
 
-                // target Gardevois if self pain splitting
-                if (opposingSelfPainSplit && gBattleMons[battlerDef].species == SPECIES_GARDEVOIR)
-                    score = 160;
+                // target mon with highest if opp is self pain splitting
+                if (opposingSelfPainSplit)
+                {
+                    if ((gBattleMons[0].hp > gBattleMons[2].hp) && battlerDef == 0)
+                        score = 160;
+                    if ((gBattleMons[0].hp < gBattleMons[2].hp) && battlerDef == 2)
+                        score = 160;
+                }
+
             }
             break;
     }
