@@ -128,6 +128,9 @@ script EscapeRoom_EventScript_GetPokemon {
 }
 
 script EscapeRoom_EventScript_DoubleBattle1{
+    if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
     trainerbattle_double(
         TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
         Double1Puzzle_Intro, 
@@ -141,6 +144,7 @@ script EscapeRoom_EventScript_DoubleBattle1{
 }
 
 script EscapeRoom_EventScript_PostDouble1Heal{
+    setflag(FLAG_TOGGLE_BAG_USE)
     msgbox(Double1Puzzle_Heal, MSGBOX_AUTOCLOSE)
     fadescreen(FADE_TO_BLACK)
     special(HealPlayerParty)
