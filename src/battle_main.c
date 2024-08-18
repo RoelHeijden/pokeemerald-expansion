@@ -4463,12 +4463,22 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.  e.g. run/fight/pokemon/bag
-            
+            // ADDED
+            // calc the amount of fainted mons from the user
+            u8 playerMonsFainted = 0;
+            u8 b_temp = 0;
+            for (b_temp = 0; b_temp < gBattlersCount; b_temp++)
+            {
+                if (gBattleMons[b_temp].hp == 0 && (b_temp == 0 || b_temp == 2))
+                    playerMonsFainted++;
+            }
+
+            // ADDED
             // wait for player to select it's moves. Only then the AI gets to move
             // recalculate AI scores
             if (battler == 1 || battler == 3)
             {
-                if (gPlayerMovesChosen < (gBattlersCount / 2))
+                if (gPlayerMovesChosen < (gBattlersCount / 2 - playerMonsFainted))  // minus n_fainted pokemon from player
                     break;
                 else
                     if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
@@ -4855,7 +4865,6 @@ static void HandleTurnActionSelectionState(void)
             }
             break;
         case STATE_WAIT_ACTION_CONFIRMED:
-
             // ADDED THIS
             // didnt know where else to put this but as long as it works.. lol
             if (battler == (gBattlersCount - 1))
