@@ -110,6 +110,9 @@ EventScript_ResetAllBerries::
 
 	@ Mirage Island
 	setberrytree BERRY_TREE_ROUTE_130_LIECHI, ITEM_TO_BERRY(ITEM_LIECHI_BERRY), BERRY_STAGE_BERRIES
+
+	@ Escape Room
+	setberrytree BERRY_TREE_ESCAPE_ROOM_SITRUS, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
 	return
 
 EventScript_ResetAllMapFlags::
