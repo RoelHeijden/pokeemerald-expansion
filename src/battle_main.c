@@ -4397,6 +4397,7 @@ static void HandleTurnActionSelectionState(void)
     s32 i, battler;
 
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
+
     for (battler = 0; battler < gBattlersCount; battler++)
     {
         u32 position = GetBattlerPosition(battler);
@@ -4405,7 +4406,7 @@ static void HandleTurnActionSelectionState(void)
         case STATE_TURN_START_RECORD: // Recorded battle related action on start of every turn.
 
             // ADDED
-            gPlayerMovesChosen = 0;  // reset counter at start of turn
+            gPlayerMovesChosen = 0; // reset flag
             gBattleStruct->chosenMovePositions[battler] = MOVE_NONE;  // reset chosenMove
 
             RecordedBattle_CopyBattlerMoves(battler);
@@ -4464,29 +4465,20 @@ static void HandleTurnActionSelectionState(void)
             break;
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.  e.g. run/fight/pokemon/bag
             // ADDED
-            // calc the amount of fainted mons from the user
-            u8 playerMonsFainted = 0;
-            u8 b_temp = 0;
-            for (b_temp = 0; b_temp < gBattlersCount; b_temp++)
-            {
-                if (gBattleMons[b_temp].hp == 0 && (b_temp == 0 || b_temp == 2))
-                    playerMonsFainted++;
-            }
-
-            // ADDED
             // wait for player to select it's moves. Only then the AI gets to move
             // recalculate AI scores
-            if (battler == 1 || battler == 3)
+            if (battler == 1 || battler == 3) // if AI's pokemon
             {
-                if (gPlayerMovesChosen < (gBattlersCount / 2 - playerMonsFainted))  // minus n_fainted pokemon from player
+                if (!gPlayerMovesChosen)  // break if player has not yet chosen all their moves
                     break;
-                else
+                {
                     if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
                     && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
                     {
                         AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
                         gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
                     }
+                }
             } 
 
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
@@ -4700,11 +4692,6 @@ static void HandleTurnActionSelectionState(void)
             
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {   
-                // ADDED
-                gPlayerMovesChosen++; 
-
-                DebugPrintf("n moves chosen: %d", gPlayerMovesChosen);
-
                 switch (gChosenActionByBattler[battler])
                 {
                 case B_ACTION_USE_MOVE:
@@ -4875,6 +4862,19 @@ static void HandleTurnActionSelectionState(void)
                     gProtectSuccessLastTurn[b_temp] = 0;  // reset succesful protect check
                 }
             }
+
+            // ADDED
+            // calc the amount of fainted mons from the user
+            u8 playerMonsFainted = 0;
+            u8 b_temp = 0;
+            for (b_temp = 0; b_temp < gBattlersCount; b_temp++)
+            {
+                if (gBattleMons[b_temp].hp == 0 && (b_temp == 0 || b_temp == 2))
+                    playerMonsFainted++;
+            }
+            // check if player finished move selection
+            if (battler == ((gBattlersCount - 2) - (playerMonsFainted * 2)))
+                gPlayerMovesChosen = 1;
 
             if (!(gBattleControllerExecFlags & ((gBitTable[battler]) | (0xF << 28) | (gBitTable[battler] << 4) | (gBitTable[battler] << 8) | (gBitTable[battler] << 12))))
             {
