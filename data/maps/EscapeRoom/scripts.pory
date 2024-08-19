@@ -23,13 +23,12 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_GARDEVOIR, 
         30, 
-        ITEM_SITRUS_BERRY, 
         abilityNum=0,
         nature=5, // Bold 
         move1=MOVE_DISABLE,
         move2=MOVE_SKILL_SWAP, 
         move3=MOVE_PAIN_SPLIT, 
-        move4=MOVE_TRICK_ROOM,
+        move4=MOVE_NONE,
         // EVS:
         hpEv=132,
         defEv=252,
@@ -75,6 +74,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 
 
+
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
@@ -98,11 +98,11 @@ script EscapeRoom_EventScript_GetPokemon {
     givemon(
         SPECIES_SMEARGLE, 
         20, 
-        ITEM_IRON_BALL, 
+        ITEM_TM51, 
         abilityNum=0,
         nature=5, // Bold 
-        move1=MOVE_PERISH_SONG,
-        move2=MOVE_PROTECT, 
+        move1=MOVE_SKETCH,
+        move2=MOVE_NONE, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
@@ -152,6 +152,13 @@ script EscapeRoom_EventScript_PostDouble1Heal{
 }
 
 script EscapeRoom_EventScript_FindRareCandy{
+    lockall
+    giveitem(ITEM_RARE_CANDY)
+    removeobject(1)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
+    releaseall
+}
+
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 

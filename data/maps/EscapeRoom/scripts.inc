@@ -29,56 +29,56 @@ EscapeRoom_MapScripts_PlayStartMessage::
 
 EscapeRoom_MapScripts_GetFirstPokemon::
 # 23 "data/maps/EscapeRoom/scripts.pory"
-	givemon SPECIES_GARDEVOIR, 30, ITEM_SITRUS_BERRY, abilityNum = 0, nature = 5, move1 = MOVE_DISABLE, move2 = MOVE_SKILL_SWAP, move3 = MOVE_PAIN_SPLIT, move4 = MOVE_TRICK_ROOM, hpEv = 132, defEv = 252, speedEv = 24, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 45 "data/maps/EscapeRoom/scripts.pory"
+	givemon SPECIES_GARDEVOIR, 30, abilityNum = 0, nature = 5, move1 = MOVE_DISABLE, move2 = MOVE_SKILL_SWAP, move3 = MOVE_PAIN_SPLIT, move4 = MOVE_NONE, hpEv = 132, defEv = 252, speedEv = 24, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+# 44 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
-# 46 "data/maps/EscapeRoom/scripts.pory"
+# 45 "data/maps/EscapeRoom/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2
 	return
 
 
 EscapeRoom_MapScripts_GetBadges::
-# 50 "data/maps/EscapeRoom/scripts.pory"
+# 49 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
-# 51 "data/maps/EscapeRoom/scripts.pory"
+# 50 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE01_GET
-# 52 "data/maps/EscapeRoom/scripts.pory"
+# 51 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_DEWFORD_GYM
-# 53 "data/maps/EscapeRoom/scripts.pory"
+# 52 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE02_GET
-# 54 "data/maps/EscapeRoom/scripts.pory"
+# 53 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
-# 55 "data/maps/EscapeRoom/scripts.pory"
+# 54 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE03_GET
-# 56 "data/maps/EscapeRoom/scripts.pory"
+# 55 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
-# 57 "data/maps/EscapeRoom/scripts.pory"
+# 56 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE04_GET
-# 58 "data/maps/EscapeRoom/scripts.pory"
+# 57 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_PETALBURG_GYM
-# 59 "data/maps/EscapeRoom/scripts.pory"
+# 58 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE05_GET
-# 60 "data/maps/EscapeRoom/scripts.pory"
+# 59 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_FORTREE_GYM
-# 61 "data/maps/EscapeRoom/scripts.pory"
+# 60 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE06_GET
-# 62 "data/maps/EscapeRoom/scripts.pory"
+# 61 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
-# 63 "data/maps/EscapeRoom/scripts.pory"
+# 62 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE07_GET
-# 64 "data/maps/EscapeRoom/scripts.pory"
+# 63 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-# 65 "data/maps/EscapeRoom/scripts.pory"
+# 64 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_BADGE08_GET
-# 67 "data/maps/EscapeRoom/scripts.pory"
+# 66 "data/maps/EscapeRoom/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3
 	end
 
 
 EscapeRoom_MapScripts_SetRespawn::
-# 72 "data/maps/EscapeRoom/scripts.pory"
+# 71 "data/maps/EscapeRoom/scripts.pory"
 	setrespawn HEAL_LOCATION_ESCAPE_ROOM_NURSE
-# 73 "data/maps/EscapeRoom/scripts.pory"
+# 72 "data/maps/EscapeRoom/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4
 	return
 
@@ -113,7 +113,7 @@ EscapeRoom_EventScript_GetPokemon::
 # 97 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 98 "data/maps/EscapeRoom/scripts.pory"
-	givemon SPECIES_SMEARGLE, 20, ITEM_IRON_BALL, abilityNum = 0, nature = 5, move1 = MOVE_PERISH_SONG, move2 = MOVE_PROTECT, move3 = MOVE_NONE, move4 = MOVE_NONE, defEv = 252, hpIv = 22, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_SMEARGLE, 20, ITEM_TM51, abilityNum = 0, nature = 5, move1 = MOVE_SKETCH, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, defEv = 252, hpIv = 22, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 118 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PARTY
 	goto_if_eq EscapeRoom_EventScript_GetPokemon_2
@@ -171,42 +171,56 @@ EscapeRoom_EventScript_PostDouble1Heal::
 	return
 
 
-StartMessage::
+EscapeRoom_EventScript_FindProtect::
+# 155 "data/maps/EscapeRoom/scripts.pory"
+	lockall
+# 156 "data/maps/EscapeRoom/scripts.pory"
+	giveitem ITEM_TM_PROTECT
+# 157 "data/maps/EscapeRoom/scripts.pory"
+	removeobject 1
+# 158 "data/maps/EscapeRoom/scripts.pory"
+	setflag FLAG_PROTECT_OBTAINED
 # 159 "data/maps/EscapeRoom/scripts.pory"
+	releaseall
+	return
+
+
+StartMessage::
+# 167 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck.$"
 
 SignMessage1::
-# 163 "data/maps/EscapeRoom/scripts.pory"
+# 171 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fock off mate.$"
 
 SmeargleObtainedMsg::
-# 167 "data/maps/EscapeRoom/scripts.pory"
+# 175 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh shit it's a Smeargle.$"
 
 NoRoomMsg::
-# 171 "data/maps/EscapeRoom/scripts.pory"
+# 179 "data/maps/EscapeRoom/scripts.pory"
 	.string "no room.$"
 
 Double1Puzzle_NotEnoughMons::
-# 175 "data/maps/EscapeRoom/scripts.pory"
+# 183 "data/maps/EscapeRoom/scripts.pory"
 	.string "You first should get a second Pokemon.$"
 
 Double1Puzzle_Intro::
-# 179 "data/maps/EscapeRoom/scripts.pory"
+# 187 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck have no fun.$"
 
 Double1Puzzle_Outro::
-# 183 "data/maps/EscapeRoom/scripts.pory"
+# 191 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fuck.$"
 
 Double1Puzzle_PostBattle::
-# 187 "data/maps/EscapeRoom/scripts.pory"
+# 195 "data/maps/EscapeRoom/scripts.pory"
 	.string "We're done now.$"
 
 Nurse_Heal_End::
-# 191 "data/maps/EscapeRoom/scripts.pory"
+# 199 "data/maps/EscapeRoom/scripts.pory"
 	.string "I healed your Pokemon!$"
 
 Double1Puzzle_Heal::
-# 195 "data/maps/EscapeRoom/scripts.pory"
+# 203 "data/maps/EscapeRoom/scripts.pory"
 	.string "Let us heal your Pokemon.$"
