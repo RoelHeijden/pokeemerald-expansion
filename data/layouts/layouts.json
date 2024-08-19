@@ -4424,10 +4424,10 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_INDOOR",
       "name": "EscapeRoom_Indoor_Layout",
-      "width": 10,
-      "height": 8,
+      "width": 6,
+      "height": 6,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_GenericBuilding",
+      "secondary_tileset": "gTileset_Shop",
       "border_filepath": "data/layouts/EscapeRoom_Indoor/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_Indoor/map.bin"
     }
