@@ -151,6 +151,7 @@ script EscapeRoom_EventScript_PostDouble1Heal{
     fadescreen(FADE_FROM_BLACK)
 }
 
+script EscapeRoom_EventScript_FindRareCandy{
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
