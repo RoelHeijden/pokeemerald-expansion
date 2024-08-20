@@ -98,7 +98,7 @@ script EscapeRoom_EventScript_GetPokemon {
     givemon(
         SPECIES_SMEARGLE, 
         20, 
-        ITEM_TM51, 
+        ITEM_TM_TRICK_ROOM, 
         abilityNum=0,
         nature=5, // Bold 
         move1=MOVE_SKETCH,

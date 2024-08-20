@@ -113,7 +113,7 @@ EscapeRoom_EventScript_GetPokemon::
 # 97 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 98 "data/maps/EscapeRoom/scripts.pory"
-	givemon SPECIES_SMEARGLE, 20, ITEM_TM51, abilityNum = 0, nature = 5, move1 = MOVE_SKETCH, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, defEv = 252, hpIv = 22, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_SMEARGLE, 20, ITEM_TM_TRICK_ROOM, abilityNum = 0, nature = 5, move1 = MOVE_SKETCH, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, defEv = 252, hpIv = 22, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 118 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, MON_GIVEN_TO_PARTY
 	goto_if_eq EscapeRoom_EventScript_GetPokemon_2
@@ -171,15 +171,15 @@ EscapeRoom_EventScript_PostDouble1Heal::
 	return
 
 
-EscapeRoom_EventScript_FindProtect::
+EscapeRoom_EventScript_FindRareCandy::
 # 155 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 156 "data/maps/EscapeRoom/scripts.pory"
-	giveitem ITEM_TM_PROTECT
+	giveitem ITEM_RARE_CANDY
 # 157 "data/maps/EscapeRoom/scripts.pory"
 	removeobject 1
 # 158 "data/maps/EscapeRoom/scripts.pory"
-	setflag FLAG_PROTECT_OBTAINED
+	setflag FLAG_RARE_CANDY_OBTAINED
 # 159 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return

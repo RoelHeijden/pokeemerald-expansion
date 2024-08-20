@@ -9985,13 +9985,14 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_OVERHEAT,
     },
 
-    [ITEM_TM51] =
+    [ITEM_TM_TRICK_ROOM] =
     {
         .name = _("TM51"),
         .price = 3000,
         .description = COMPOUND_STRING(
-            "It's like a trick\n"
-            "but for a room."),
+            "Slower Pokémon get\n"
+            "to move first for\n"
+            "5 turns."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
