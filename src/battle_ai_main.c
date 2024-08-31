@@ -5322,7 +5322,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     int battlerSmeargle = (gBattleMons[2].species == SPECIES_SMEARGLE) * 2;
 
     int moveGardy = gBattleMons[battlerGardy].moves[gBattleStruct->chosenMovePositions[battlerGardy]];
-    int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
+    // int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
     int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
 
     int targetProtectingItself = (moveDefender == MOVE_PROTECT && !gProtectSuccessLastTurn[battlerDef]);
