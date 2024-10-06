@@ -42183,48 +42183,72 @@ F_TRAINER_FEMALE |
             },
         },
     },
-
-
-
-//     /////////////////////////////////////////////////////////////
-
-//     [TRAINER_MY_CUSTOM_DOUBLE_BATTLE1] =
-//     {
-//         .trainerClass = TRAINER_CLASS_INTERVIEWER,
-//         .encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_INTENSE,
-//         .trainerPic = TRAINER_PIC_INTERVIEWER,
-//         .trainerName = _("Ur and Mom"),
-//         .items = {},
-//         .doubleBattle = TRUE,
-//         .aiFlags = AI_FLAG_DOUBLE1,
-//         .party = TRAINER_PARTY(sParty_CustomDouble1),
-//     },
-// };
-
-
-// FROM THE trainer_parties.h FILE:
-
-// static const struct TrainerMon sParty_CustomDouble1[] = {
-//    {
-//     .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
-//     .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
-//     .lvl = 17,
-//     .species = SPECIES_SCRAFTY,
-//     .heldItem = ITEM_NONE,
-//     .moves = {MOVE_BRICK_BREAK, MOVE_DRAIN_PUNCH, MOVE_NONE, MOVE_NONE},
-//     .ability = ABILITY_INTIMIDATE,
-//     .nature = NATURE_BOLD,
-//     .nickname = COMPOUND_STRING("Evil Scrafty")
-//     },
-//     {
-//     .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
-//     .ev = TRAINER_PARTY_EVS(0, 0, 252, 252, 0, 0),
-//     .lvl = 23,
-//     .species = SPECIES_SMEARGLE,
-//     .heldItem = ITEM_MENTAL_HERB,
-//     .moves = {MOVE_SUPER_FANG, MOVE_PERISH_SONG, MOVE_NONE, MOVE_NONE},
-//     .ability = ABILITY_OWN_TEMPO,
-//     .nature = NATURE_TIMID,
-//     .nickname = COMPOUND_STRING("Evil Smeargle")
-//     },
-// };
+#line 16877
+    [TRAINER_MY_CUSTOM_DOUBLE_BATTLE1] =
+    {
+#line 16878
+        .trainerName = _("Ur & Mom"),
+#line 16879
+        .trainerClass = TRAINER_CLASS_INTERVIEWER,
+#line 16880
+        .trainerPic = TRAINER_PIC_INTERVIEWER,
+        .encounterMusic_gender = 
+#line 16882
+            TRAINER_ENCOUNTER_MUSIC_INTERVIEWER,
+#line 16883
+        .doubleBattle = TRUE,
+#line 16884
+        .aiFlags = AI_FLAG_DOUBLE1,
+        .partySize = 2,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16886
+            .nickname = COMPOUND_STRING("Evil Scraf"),
+#line 16886
+            .species = SPECIES_SCRAFTY,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16889
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
+#line 16891
+            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+#line 16887
+            .ability = ABILITY_INTIMIDATE,
+#line 16888
+            .lvl = 17,
+#line 16890
+            .nature = NATURE_BOLD,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16892
+                MOVE_DRAIN_PUNCH,
+                MOVE_BRICK_BREAK,
+            },
+            },
+            {
+#line 16895
+            .nickname = COMPOUND_STRING("Evil Smear"),
+#line 16895
+            .species = SPECIES_SMEARGLE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16895
+            .heldItem = ITEM_MENTAL_HERB,
+#line 16898
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 252, 4, 0),
+#line 16900
+            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+#line 16896
+            .ability = ABILITY_TECHNICIAN,
+#line 16897
+            .lvl = 23,
+#line 16899
+            .nature = NATURE_TIMID,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16901
+                MOVE_SUPER_FANG,
+                MOVE_PERISH_SONG,
+            },
+            },
+        },
+    },

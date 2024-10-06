@@ -16873,3 +16873,30 @@ Double Battle: No
 Kyogre
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_MY_CUSTOM_DOUBLE_BATTLE1 ===
+Name: Ur & Mom
+Class: Interviewer
+Pic: Interviewer
+Gender: Male
+Music: Interviewer
+Double Battle: Yes
+AI: AI_FLAG_DOUBLE1
+
+Evil Scraf (Scrafty)  
+Ability: Intimidate  
+Level: 17  
+EVs: 252 Def  
+Bold Nature  
+IVs: 0 HP / 0 Atk  
+- Drain Punch  
+- Brick Break
+
+Evil Smear (Smeargle) @ Mental Herb  
+Ability: Technician  
+Level: 23  
+EVs: 252 Def / 4 SpA / 252 Spe  
+Timid Nature  
+IVs: 0 HP / 0 Atk  
+- Super Fang  
+- Perish Song
