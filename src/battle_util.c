@@ -3167,7 +3167,8 @@ bool32 HandleFaintedMonActions(void)
                  && !(gBattleStruct->givenExpMons & gBitTable[gBattlerPartyIndexes[gBattleStruct->faintedActionsBattlerId]])
                  && !(gAbsentBattlerFlags & gBitTable[gBattleStruct->faintedActionsBattlerId]))
                 {
-                    BattleScriptExecute(BattleScript_GiveExp);
+                    //ADDED (REMOVED) THIS -- no exp
+                    // BattleScriptExecute(BattleScript_GiveExp);
                     gBattleStruct->faintedActionsState = 2;
                     return TRUE;
                 }
