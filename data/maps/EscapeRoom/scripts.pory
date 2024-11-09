@@ -93,12 +93,13 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     releaseall
 }
 
-script EscapeRoom_EventScript_GetPokemon {
-    lockall
-    givemon(
-        SPECIES_SMEARGLE, 
-        20, 
-        ITEM_TM_TRICK_ROOM, 
+script EscapeRoom_Wild_Smeargle{
+    createmon(
+        side=1,
+        slot=0,
+        species=SPECIES_SMEARGLE,
+        level=19,
+        item=ITEM_TM_TRICK_ROOM, 
         abilityNum=0,
         nature=5, // Bold 
         move1=MOVE_SKETCH,
@@ -114,17 +115,23 @@ script EscapeRoom_EventScript_GetPokemon {
         speedIv=31,
         spAtkIv=31,
         spDefIv=31,
-        )
-    if(var(VAR_RESULT) == MON_GIVEN_TO_PARTY || var(VAR_RESULT) == MON_GIVEN_TO_PC){
-    	playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(SmeargleObtainedMsg)
-        removeobject(1)
-        setflag(FLAG_SMEARGLE_OBTAINED)
-    }
-    else{
-    	msgbox(NoRoomMsg)
-    }
-    releaseall
+    )
+    dowildbattle
+}
+
+script EscapeRoom_Wild_Shedinja{
+    createmon(
+        side=1,
+        slot=0,
+        species=SPECIES_SHEDINJA,
+        level=12,
+        item=ITEM_FLAME_ORB, 
+        move1=MOVE_PROTECT,
+        move2=MOVE_NONE, 
+        move3=MOVE_NONE, 
+        move4=MOVE_NONE,
+    )
+    dowildbattle
 }
 
 script EscapeRoom_EventScript_DoubleBattle1{
