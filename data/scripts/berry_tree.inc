@@ -22,6 +22,11 @@ BerryTree_EventScript_Sparkling::
 
 BerryTree_EventScript_CheckSoil::
 	lock
+	release
+	end
+
+BerryTree_EventScript_CheckSoil_BackUp::
+	lock
 	faceplayer
 	specialvar VAR_RESULT, PlayerHasBerries
 	goto_if_eq VAR_RESULT, TRUE, BerryTree_EventScript_WantToPlant
