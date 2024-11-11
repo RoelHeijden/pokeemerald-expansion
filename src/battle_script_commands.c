@@ -1711,33 +1711,8 @@ u32 GetTotalAccuracy(u32 battlerAtk, u32 battlerDef, u32 move, u32 atkAbility, u
 }
 
 
-// REMOVE THIS WHEN CODE WORKS
-
-// static void Cmd_accuracycheck(void)
-// {
-//     CMD_ARGS(const u8 *failInstr, u16 move);
-
-//     // ADDED MYSELF
-//     if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE)
-//     {
-//         gBattlescriptCurrInstr = cmd->nextInstr;
-//         return;
-//     }
-
-//     u32 type, move = cmd->move;
-//     ...
-
-
 static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u8 *failInstr, u16 move)
 {
-
-    // ADDED MYSELF
-    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE)
-    {
-        gBattlescriptCurrInstr = nextInstr;
-        return;
-    }
-
     u32 type;
     u32 moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, move);
     u32 abilityAtk = GetBattlerAbility(gBattlerAttacker);
@@ -1746,6 +1721,13 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
 
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
+
+    // ADDED MYSELF
+    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE && !IsBattlerProtected(gBattlerAttacker, gBattlerTarget, gCurrentMove))
+    {
+        gBattlescriptCurrInstr = nextInstr;
+        return;
+    }
 
     if (move == NO_ACC_CALC_CHECK_LOCK_ON)
     {
