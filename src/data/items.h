@@ -11168,16 +11168,19 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_TRICK_ROOM, 
     },
 
-    [ITEM_TM52] =
+    [ITEM_TM_PAIN_SPLIT] = 
     {
-        .name = _("TM52"),
+        .name = _("TM202"),
         .price = 3000,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "Adds the user and\n"
+            "foe's HP, then\n" 
+            "shares it equally."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_NONE, // Todo
+        .secondaryId = MOVE_PAIN_SPLIT, 
     },
 
     [ITEM_TM53] =
@@ -11755,24 +11758,6 @@ const struct Item gItemsInfo[] =
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
         .secondaryId = MOVE_NONE, // Todo
     },
-    [ITEM_TM_PAIN_SPLIT] = 
-    {
-        .name = _("TM202"),
-        .price = 3000,
-        .description = COMPOUND_STRING(
-            "Adds the user and\n"
-            "foe's HP, then\n" 
-            "shares it equally."
-        )
-            // "Slower Pokémon get\n"
-            // "to move first for\n"
-            // "5 turns."),
-        .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
-        .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_PAIN_SPLIT, 
-    }
 
     [ITEM_HM_CUT] =
     {

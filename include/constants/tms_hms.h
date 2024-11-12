@@ -52,7 +52,8 @@
     F(SKILL_SWAP) \
     F(SNATCH) \
     F(OVERHEAT) \
-    F(TRICK_ROOM)
+    F(TRICK_ROOM) \
+    F(PAIN_SPLIT)
 
 #define FOREACH_HM(F) \
     F(CUT) \
