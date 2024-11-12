@@ -173,10 +173,15 @@ script EscapeRoom_EventScript_FindRareCandy{
 
 script EscapeRoom_EventScript_GoodSmeargle_NPC{
     lockall
+    if (flag(FLAG_OBTAINED_PAIN_SPLIT)){
+        msgbox(SmeargleMessageCompleted)
+        releaseall
+        end
+    }
     
     # check amount of pokemon
     getpartysize
-    if (var(VAR_RESULT) == 2)  # smeargle/shedinja obtained
+    if (var(VAR_RESULT) >= 2)  # smeargle/shedinja obtained
     {
         checkpartymove(MOVE_HARDEN)
         if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SHEDINJA){  # Shedinja is caught
@@ -189,20 +194,28 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
             checkpartymove(MOVE_SKETCH)
             if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
 
-                if (!flag(FLAG_RARE_CANDY_OBTAINED)){  # rare candy hasnt been used (EDIT: CURRENTLY CHECKS IF OBTAINED)
-                    msgbox(SmeargleMessageGood)
-                    releaseall
-                    end
-                }
                 checkpartymove(MOVE_PROTECT)
                 if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect as well
-                    msgbox(SmeargleMessageGood)
+                    msgbox(SmeargleMessagePerfect)
+                    EscapeRoom_EventScript_GetPainSplit
                     releaseall
                     end
                 }
                 checkpartymove(MOVE_PERISH_SONG)
                 if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
+                    msgbox(SmeargleMessageConfusedButGood)
+                    EscapeRoom_EventScript_GetPainSplit
+                    releaseall
+                    end
+                }
+                if (!flag(FLAG_RARE_CANDY_USED)){  # rare candy hasnt been used yet
                     msgbox(SmeargleMessageGood)
+                    EscapeRoom_EventScript_GetPainSplit
+                    releaseall
+                    end
+                }
+                else{  # rare candy has already been used
+                    msgbox(SmeargleMessageUnsaveable)
                     releaseall
                     end
                 }
@@ -211,21 +224,26 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
             checkpartymove(MOVE_PROTECT)
             if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
 
-                if (!flag(FLAG_RARE_CANDY_OBTAINED)){  # rare candy hasnt been used (EDIT: CURRENTLY CHECKS IF OBTAINED)
-                    msgbox(SmeargleMessageGood)
-                    releaseall
-                    end
-                }
                 checkpartymove(MOVE_PERISH_SONG)
                 if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
-                    msgbox(SmeargleMessageGood)
+                    msgbox(SmeargleMessagePerfect)
+                    EscapeRoom_EventScript_GetPainSplit
                     releaseall
                     end
                 }  
-                
+                if (!flag(FLAG_RARE_CANDY_USED)){  # rare candy hasnt been used yet
+                    msgbox(SmeargleMessageGood)
+                    EscapeRoom_EventScript_GetPainSplit
+                    releaseall
+                    end
+                }
+                else{  # rare candy has already been used
+                    msgbox(SmeargleMessageUnsaveable)
+                    releaseall
+                    end
+                }
             }
-
-            # Smeargle is caught but has none of the good moves
+            # Smeargle was caught but has none of the good moves
             msgbox(SmeargleMessageBad)
             releaseall
             end 
@@ -237,6 +255,14 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
     releaseall
     end
 }
+
+script EscapeRoom_EventScript_GetPainSplit{
+    giveitem(ITEM_TM_PAIN_SPLIT)
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox("Recieved TM202!")
+    setflag(FLAG_OBTAINED_PAIN_SPLIT)
+}
+
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
@@ -288,10 +314,25 @@ text SmeargleMessageInitial{
 }
 
 text SmeargleMessageGood{
-    format("That is it! That is a perfect Smeargle!")
+    format("That is a great looking Smeargle!")
+}
+
+text SmeargleMessagePerfect{
+    format("That is it! That is the perfect Smeargle!")
 }
 
 text SmeargleMessageBad{
-    format("Ew no. That Smeargle is awful.")
+    format("Ew no, that Smeargle looks horrible. I asked for the perfect Smeargle.")
 }
 
+text SmeargleMessageUnsaveable{
+    format("That Smeargle is mighty fine, but I do not think it has the potential to be perfect anymore. I am sorry.")
+}
+
+text SmeargleMessageConfusedButGood{
+    format("I do not know how you managed to obtain this Smeargle already.")
+}
+
+text SmeargleMessageCompleted{
+    format("You have brightened my day. Thank you.")
+}

@@ -46,7 +46,7 @@
 #define FLAG_DOUBLE_BATTLE1       0x21 // Unused Flag
 #define FLAG_RARE_CANDY_OBTAINED    0x22 // Unused Flag
 #define FLAG_RARE_CANDY_USED    0x23 // Unused Flag
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
+#define FLAG_OBTAINED_PAIN_SPLIT    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
