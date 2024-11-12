@@ -86,6 +86,7 @@ script EscapeRoom_MapScripts_GetIronBall{
 script EscapeRoom_EventScript_TestSign {
     lockall
     msgbox(SignMessage1)
+    waitmessage
     releaseall
 }
 
@@ -95,6 +96,7 @@ script EscapeRoom_Nurse_Heal_Pokemon{
 	special(HealPlayerParty)
 	fadescreen(FADE_FROM_BLACK)
     msgbox(Nurse_Heal_End)
+    waitmessage
     releaseall
 }
 
@@ -173,8 +175,10 @@ script EscapeRoom_EventScript_FindRareCandy{
 
 script EscapeRoom_EventScript_GoodSmeargle_NPC{
     lockall
+    faceplayer
     if (flag(FLAG_OBTAINED_PAIN_SPLIT)){
         msgbox(SmeargleMessageCompleted)
+        waitmessage
         releaseall
         end
     }
@@ -186,6 +190,7 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
         checkpartymove(MOVE_HARDEN)
         if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SHEDINJA){  # Shedinja is caught
             msgbox(SmeargleMessageInitial)
+            waitmessage
             releaseall
             end
         }
@@ -197,25 +202,29 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
                 checkpartymove(MOVE_PROTECT)
                 if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect as well
                     msgbox(SmeargleMessagePerfect)
-                    EscapeRoom_EventScript_GetPainSplit
+                    waitmessage
+                    call(EscapeRoom_EventScript_GetPainSplit)
                     releaseall
                     end
                 }
                 checkpartymove(MOVE_PERISH_SONG)
                 if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
                     msgbox(SmeargleMessageConfusedButGood)
-                    EscapeRoom_EventScript_GetPainSplit
+                    waitmessage
+                    call(EscapeRoom_EventScript_GetPainSplit)
                     releaseall
                     end
                 }
                 if (!flag(FLAG_RARE_CANDY_USED)){  # rare candy hasnt been used yet
                     msgbox(SmeargleMessageGood)
-                    EscapeRoom_EventScript_GetPainSplit
+                    waitmessage
+                    call(EscapeRoom_EventScript_GetPainSplit)
                     releaseall
                     end
                 }
                 else{  # rare candy has already been used
                     msgbox(SmeargleMessageUnsaveable)
+                    waitmessage
                     releaseall
                     end
                 }
@@ -227,30 +236,35 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
                 checkpartymove(MOVE_PERISH_SONG)
                 if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
                     msgbox(SmeargleMessagePerfect)
-                    EscapeRoom_EventScript_GetPainSplit
+                    waitmessage
+                    call(EscapeRoom_EventScript_GetPainSplit)
                     releaseall
                     end
                 }  
                 if (!flag(FLAG_RARE_CANDY_USED)){  # rare candy hasnt been used yet
                     msgbox(SmeargleMessageGood)
-                    EscapeRoom_EventScript_GetPainSplit
+                    waitmessage
+                    call(EscapeRoom_EventScript_GetPainSplit)
                     releaseall
                     end
                 }
                 else{  # rare candy has already been used
                     msgbox(SmeargleMessageUnsaveable)
+                    waitmessage
                     releaseall
                     end
                 }
             }
             # Smeargle was caught but has none of the good moves
             msgbox(SmeargleMessageBad)
+            waitmessage
             releaseall
             end 
         }
     }
     else{  # no extra pokemon was caught
         msgbox(SmeargleMessageInitial)
+        waitmessage
     }
     releaseall
     end
@@ -258,11 +272,16 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
 
 script EscapeRoom_EventScript_GetPainSplit{
     giveitem(ITEM_TM_PAIN_SPLIT)
-    playfanfare(MUS_OBTAIN_ITEM)
-    msgbox("Recieved TM202!")
     setflag(FLAG_OBTAINED_PAIN_SPLIT)
 }
 
+script EscapeRoom_EventScript_PerishExplain_NPC{
+    lockall
+    faceplayer
+    msgbox(PerishNPCexplain)
+    waitmessage
+    releaseall
+}
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
@@ -326,7 +345,7 @@ text SmeargleMessageBad{
 }
 
 text SmeargleMessageUnsaveable{
-    format("That Smeargle is mighty fine, but I do not think it has the potential to be perfect anymore. I am sorry.")
+    format("That is a great looking Smeargle, but I believe you no longer have the ability to make it perfect. I am sorry.")
 }
 
 text SmeargleMessageConfusedButGood{
@@ -335,4 +354,8 @@ text SmeargleMessageConfusedButGood{
 
 text SmeargleMessageCompleted{
     format("You have brightened my day. Thank you.")
+}
+
+text PerishNPCexplain{
+    format("Did you know? In competitive battles, if both players are down to their final Pokémon and Perish Song is used, the Pokémon to faint last is declared the winner! Isn’t that fun?")
 }
