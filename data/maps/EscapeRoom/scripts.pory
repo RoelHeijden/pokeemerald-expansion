@@ -7,6 +7,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetIronBall
     ] 
 }
 
@@ -27,12 +28,12 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         nature=5, // Bold 
         move1=MOVE_DISABLE,
         move2=MOVE_SKILL_SWAP, 
-        move3=MOVE_PAIN_SPLIT, 
+        move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
         hpEv=132,
         defEv=252,
-        speedEv=24,
+        speedEv=52,
         // IVS:
         hpIv=31,
         atkIv=0,
@@ -72,6 +73,10 @@ script EscapeRoom_MapScripts_SetRespawn{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4)
 }
 
+script EscapeRoom_MapScripts_GetIronBall{
+    additem(ITEM_IRON_BALL)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
+}
 
 
 
@@ -98,21 +103,21 @@ script EscapeRoom_Wild_Smeargle{
         side=1,
         slot=0,
         species=SPECIES_SMEARGLE,
-        level=19,
+        level=20,
         item=ITEM_TM_TRICK_ROOM, 
         abilityNum=0,
-        nature=5, // Bold 
+        nature=7, // Bold 
         move1=MOVE_SKETCH,
         move2=MOVE_NONE, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
-        defEv=252,
+        defEv=208,
         // IVS:
-        hpIv=22,
+        hpIv=11,
         atkIv=0,
         defIv=31,
-        speedIv=31,
+        speedIv=9,
         spAtkIv=31,
         spDefIv=31,
     )
@@ -127,7 +132,7 @@ script EscapeRoom_Wild_Shedinja{
         level=12,
         item=ITEM_FLAME_ORB, 
         move1=MOVE_PROTECT,
-        move2=MOVE_NONE, 
+        move2=MOVE_HARDEN, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
     )
@@ -164,6 +169,73 @@ script EscapeRoom_EventScript_FindRareCandy{
     removeobject(1)
     setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
+}
+
+script EscapeRoom_EventScript_GoodSmeargle_NPC{
+    lockall
+    
+    # check amount of pokemon
+    getpartysize
+    if (var(VAR_RESULT) == 2)  # smeargle/shedinja obtained
+    {
+        checkpartymove(MOVE_HARDEN)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SHEDINJA){  # Shedinja is caught
+            msgbox(SmeargleMessageInitial)
+            releaseall
+            end
+        }
+        else{  # Smeargle is caught
+
+            checkpartymove(MOVE_SKETCH)
+            if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
+
+                if (!flag(FLAG_RARE_CANDY_OBTAINED)){  # rare candy hasnt been used (EDIT: CURRENTLY CHECKS IF OBTAINED)
+                    msgbox(SmeargleMessageGood)
+                    releaseall
+                    end
+                }
+                checkpartymove(MOVE_PROTECT)
+                if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect as well
+                    msgbox(SmeargleMessageGood)
+                    releaseall
+                    end
+                }
+                checkpartymove(MOVE_PERISH_SONG)
+                if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
+                    msgbox(SmeargleMessageGood)
+                    releaseall
+                    end
+                }
+
+            }
+            checkpartymove(MOVE_PROTECT)
+            if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
+
+                if (!flag(FLAG_RARE_CANDY_OBTAINED)){  # rare candy hasnt been used (EDIT: CURRENTLY CHECKS IF OBTAINED)
+                    msgbox(SmeargleMessageGood)
+                    releaseall
+                    end
+                }
+                checkpartymove(MOVE_PERISH_SONG)
+                if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
+                    msgbox(SmeargleMessageGood)
+                    releaseall
+                    end
+                }  
+                
+            }
+
+            # Smeargle is caught but has none of the good moves
+            msgbox(SmeargleMessageBad)
+            releaseall
+            end 
+        }
+    }
+    else{  # no extra pokemon was caught
+        msgbox(SmeargleMessageInitial)
+    }
+    releaseall
+    end
 }
 
 
@@ -210,3 +282,16 @@ text Nurse_Heal_End{
 text Double1Puzzle_Heal{
     "Let us heal your Pokemon."
 }
+
+text SmeargleMessageInitial{
+    format("I love Smeargle. Show me the perfect Smeargle.")
+}
+
+text SmeargleMessageGood{
+    format("That is it! That is a perfect Smeargle!")
+}
+
+text SmeargleMessageBad{
+    format("Ew no. That Smeargle is awful.")
+}
+
