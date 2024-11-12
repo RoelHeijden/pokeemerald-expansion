@@ -919,8 +919,12 @@ static void GetItemName(u8 *dest, u16 itemId)
         }
         else
         {
-            // Get TM number
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
+            // ADDED
+            // comvert tm painsplit to tm 202 visually
+            if (itemId == ITEM_TM202)
+                ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 151, STR_CONV_MODE_LEADING_ZEROS, 3);
+            else  // Get TM number
+                ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2);
             StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         }
         break;
