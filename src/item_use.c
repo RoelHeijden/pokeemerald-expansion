@@ -724,16 +724,17 @@ void ItemUseOutOfBattle_Berry(u8 taskId)
 {
     // REMOVED THIS
     // if (IsPlayerFacingEmptyBerryTreePatch() == TRUE)
-    // {
-    //     sItemUseOnFieldCB = ItemUseOnFieldCB_Berry;
-    //     gFieldCallback = FieldCB_UseItemOnField;
-    //     gBagMenu->newScreenCallback = CB2_ReturnToField;
-    //     Task_FadeAndCloseBagMenu(taskId);
-    // }
-    // else
-    // {
+    if (FALSE)
+    {
+        sItemUseOnFieldCB = ItemUseOnFieldCB_Berry;
+        gFieldCallback = FieldCB_UseItemOnField;
+        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
     ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
-    // }
+    }
 }
 
 static void ItemUseOnFieldCB_Berry(u8 taskId)
