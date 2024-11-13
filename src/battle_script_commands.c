@@ -1722,13 +1722,6 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
     if (move == ACC_CURR_MOVE)
         move = gCurrentMove;
 
-    // ADDED MYSELF
-    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE && !IsBattlerProtected(gBattlerAttacker, gBattlerTarget, gCurrentMove))
-    {
-        gBattlescriptCurrInstr = nextInstr;
-        return;
-    }
-
     if (move == NO_ACC_CALC_CHECK_LOCK_ON)
     {
         if (gStatuses3[gBattlerTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBattlerTarget].battlerWithSureHit == gBattlerAttacker)
@@ -1772,6 +1765,11 @@ static void AccuracyCheck(bool32 recalcDragonDarts, const u8 *nextInstr, const u
             holdEffectAtk,
             GetBattlerHoldEffect(gBattlerTarget, TRUE)
         );
+
+        // ADDED MYSELF
+        // disable accuracy when RNG is disabled
+        if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE && accuracy < 100)
+            accuracy = 100;
 
         if (!RandomPercentage(RNG_ACCURACY, accuracy))
         {
