@@ -44,10 +44,10 @@
 
 #define FLAG_SMEARGLE_OBTAINED    0x20 // Unused Flag  
 #define FLAG_DOUBLE_BATTLE1       0x21 // Unused Flag
-#define FLAG_RARE_CANDY_OBTAINED    0x22 // Unused Flag
+#define FLAG_PAIN_SPLIT_OBTAINED    0x22 // Unused Flag
 #define FLAG_RARE_CANDY_USED    0x23 // Unused Flag
-#define FLAG_OBTAINED_PAIN_SPLIT    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
+#define FLAG_OBTAINED_PERFECT_SMEARGLE    0x24 // Unused Flag
+#define FLAG_SINGLE_BATTLE1    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag

@@ -32,7 +32,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move4=MOVE_NONE,
         // EVS:
         hpEv=132,
-        defEv=252,
+        defEv=212,
         speedEv=52,
         // IVS:
         hpIv=31,
@@ -106,8 +106,8 @@ script EscapeRoom_Wild_Smeargle{
         slot=0,
         species=SPECIES_SMEARGLE,
         level=20,
-        item=ITEM_TM_TRICK_ROOM, 
         abilityNum=0,
+        item=ITEM_TM_TRICK_ROOM,
         nature=7, // Bold 
         move1=MOVE_SKETCH,
         move2=MOVE_NONE, 
@@ -134,7 +134,7 @@ script EscapeRoom_Wild_Shedinja{
         level=12,
         item=ITEM_FLAME_ORB, 
         move1=MOVE_PROTECT,
-        move2=MOVE_HARDEN, 
+        move2=MOVE_WILL_O_WISP, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
     )
@@ -165,116 +165,66 @@ script EscapeRoom_EventScript_PostDouble1Heal{
     fadescreen(FADE_FROM_BLACK)
 }
 
-script EscapeRoom_EventScript_FindRareCandy{
+script EscapeRoom_EventScript_FindPainSplit{
     lockall
-    giveitem(ITEM_RARE_CANDY)
+    giveitem(ITEM_TM_PAIN_SPLIT)
     removeobject(1)
-    setflag(FLAG_RARE_CANDY_OBTAINED)
+    setflag(FLAG_PAIN_SPLIT_OBTAINED)
     releaseall
 }
 
 script EscapeRoom_EventScript_GoodSmeargle_NPC{
     lockall
     faceplayer
-    if (flag(FLAG_OBTAINED_PAIN_SPLIT)){
+    if (flag(FLAG_OBTAINED_PERFECT_SMEARGLE)){
         msgbox(SmeargleMessageCompleted)
         waitmessage
         releaseall
         end
     }
-    
-    # check amount of pokemon
+
     getpartysize
-    if (var(VAR_RESULT) >= 2)  # smeargle/shedinja obtained
-    {
-        checkpartymove(MOVE_HARDEN)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SHEDINJA){  # Shedinja is caught
-            msgbox(SmeargleMessageInitial)
-            waitmessage
-            releaseall
-            end
-        }
-        else{  # Smeargle is caught
-
-            checkpartymove(MOVE_SKETCH)
-            if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
-
-                checkpartymove(MOVE_PROTECT)
-                if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect as well
-                    msgbox(SmeargleMessagePerfect)
-                    waitmessage
-                    call(EscapeRoom_EventScript_GetPainSplit)
-                    releaseall
-                    end
-                }
-                checkpartymove(MOVE_PERISH_SONG)
-                if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
-                    msgbox(SmeargleMessageConfusedButGood)
-                    waitmessage
-                    call(EscapeRoom_EventScript_GetPainSplit)
-                    releaseall
-                    end
-                }
-                if (!flag(FLAG_RARE_CANDY_USED)){  # rare candy hasnt been used yet
-                    msgbox(SmeargleMessageGood)
-                    waitmessage
-                    call(EscapeRoom_EventScript_GetPainSplit)
-                    releaseall
-                    end
-                }
-                else{  # rare candy has already been used
-                    msgbox(SmeargleMessageUnsaveable)
-                    waitmessage
-                    releaseall
-                    end
-                }
-
-            }
-            checkpartymove(MOVE_PROTECT)
-            if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
-
-                checkpartymove(MOVE_PERISH_SONG)
-                if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish Song as well
-                    msgbox(SmeargleMessagePerfect)
-                    waitmessage
-                    call(EscapeRoom_EventScript_GetPainSplit)
-                    releaseall
-                    end
-                }  
-                if (!flag(FLAG_RARE_CANDY_USED)){  # rare candy hasnt been used yet
-                    msgbox(SmeargleMessageGood)
-                    waitmessage
-                    call(EscapeRoom_EventScript_GetPainSplit)
-                    releaseall
-                    end
-                }
-                else{  # rare candy has already been used
-                    msgbox(SmeargleMessageUnsaveable)
-                    waitmessage
-                    releaseall
-                    end
-                }
-            }
-            # Smeargle was caught but has none of the good moves
-            msgbox(SmeargleMessageBad)
-            waitmessage
-            releaseall
-            end 
-        }
-    }
-    else{  # no extra pokemon was caught
+    if (var(VAR_RESULT) < 2){ # no extra pokemon was caught
         msgbox(SmeargleMessageInitial)
         waitmessage
+        releaseall
+        end
     }
+
+    checkpartymove(MOVE_SKETCH)
+    if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
+        msgbox(SmeargleMessagePerfect)
+        waitmessage
+        giveitem(ITEM_RARE_CANDY)
+        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
+        releaseall
+        end
+    }
+    checkpartymove(MOVE_PROTECT)
+    if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
+        msgbox(SmeargleMessagePerfect)
+        waitmessage
+        giveitem(ITEM_RARE_CANDY)
+        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
+        releaseall
+        end
+    }
+    checkpartymove(MOVE_PERISH_SONG)
+    if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish song
+        msgbox(SmeargleMessageConfusedButGood)
+        waitmessage
+        giveitem(ITEM_RARE_CANDY)
+        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
+        releaseall
+        end
+    }
+
+    msgbox(SmeargleMessageBad)
+    waitmessage
     releaseall
-    end
+    end 
 }
-
-script EscapeRoom_EventScript_GetPainSplit{
-    giveitem(ITEM_TM_PAIN_SPLIT)
-    setflag(FLAG_OBTAINED_PAIN_SPLIT)
-}
-
+    
 script EscapeRoom_EventScript_PerishExplain_NPC{
     lockall
     faceplayer
@@ -283,6 +233,25 @@ script EscapeRoom_EventScript_PerishExplain_NPC{
     releaseall
 }
 
+script EscapeRoom_EventScript_SingleBattle1{
+    faceplayer
+    if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+    trainerbattle_single(
+        TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
+        Single1Puzzle_Intro, 
+        Single1Puzzle_Outro, 
+        event_script=EscapeRoom_EventScript_GetSitrusBerries,
+    )
+    msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_GetSitrusBerries{
+    giveitem(ITEM_SITRUS_BERRY, 99)
+}
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -305,7 +274,7 @@ text NoRoomMsg{
 }
 
 text Double1Puzzle_NotEnoughMons{
-    "You first should get a second Pokemon."
+    format("Want to battle? You should first get a second Pokemon.")
 }
 
 text Double1Puzzle_Intro{
@@ -332,20 +301,12 @@ text SmeargleMessageInitial{
     format("I love Smeargle. Show me the perfect Smeargle.")
 }
 
-text SmeargleMessageGood{
-    format("That is a great looking Smeargle!")
-}
-
 text SmeargleMessagePerfect{
     format("That is it! That is the perfect Smeargle!")
 }
 
 text SmeargleMessageBad{
     format("Ew no, that Smeargle looks horrible. I asked for the perfect Smeargle.")
-}
-
-text SmeargleMessageUnsaveable{
-    format("That is a great looking Smeargle, but I believe you no longer have the ability to make it perfect. I am sorry.")
 }
 
 text SmeargleMessageConfusedButGood{
@@ -357,5 +318,22 @@ text SmeargleMessageCompleted{
 }
 
 text PerishNPCexplain{
-    format("Did you know? In competitive battles, if both players are down to their final Pokémon and Perish Song is used, the Pokémon to faint last is declared the winner! Isn’t that fun?")
+    format("Did you know? In competitive battles, if both players are down to their final Pokémon and Perish Song counts down, the Pokémon to faint last is declared the winner! Isn’t that fun?")
 }
+
+text Single1Puzzle_Intro{
+    format("Did you fight against the duo already? I think one of their Pokémon is hiding something.")
+}
+
+text Single1Puzzle_Outro{
+    "Here, this should help you beat the duo."
+}
+
+text Single1Puzzle_PostBattle{
+    "You can beat them. I believe in you!"
+}
+
+
+
+
+

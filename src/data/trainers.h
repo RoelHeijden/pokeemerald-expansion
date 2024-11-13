@@ -42252,3 +42252,91 @@ F_TRAINER_FEMALE |
             },
         },
     },
+#line 16904
+    [TRAINER_MY_CUSTOM_SINGLE_BATTLE1] =
+    {
+#line 16905
+        .trainerName = _("Donald"),
+#line 16906
+        .trainerClass = TRAINER_CLASS_EXPERT,
+#line 16907
+        .trainerPic = TRAINER_PIC_EXPERT_M,
+        .encounterMusic_gender = 
+#line 16909
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 16910
+        .doubleBattle = FALSE,
+#line 16911
+        .aiFlags = AI_FLAG_SINGLE1 | AI_FLAG_SMART_SWITCHING,
+        .partySize = 3,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16913
+            .species = SPECIES_LUNATONE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16913
+            .heldItem = ITEM_CHOICE_BAND,
+#line 16916
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 16918
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16914
+            .ability = ABILITY_LEVITATE,
+#line 16915
+            .lvl = 35,
+#line 16917
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16918
+                MOVE_EXPLOSION,
+            },
+            },
+            {
+#line 16920
+            .species = SPECIES_GLISCOR,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16920
+            .heldItem = ITEM_TOXIC_ORB,
+#line 16923
+            .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 0),
+#line 16925
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16921
+            .ability = ABILITY_POISON_HEAL,
+#line 16922
+            .lvl = 39,
+#line 16924
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16925
+                MOVE_DIG,
+            },
+            },
+            {
+#line 16927
+            .species = SPECIES_DUSCLOPS,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16927
+            .heldItem = ITEM_LEFTOVERS,
+#line 16930
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 16932
+            .iv = TRAINER_PARTY_IVS(0, 31, 31, 0, 31, 31),
+#line 16928
+            .ability = ABILITY_PRESSURE,
+#line 16929
+            .lvl = 22,
+#line 16931
+            .nature = NATURE_BRAVE,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16933
+                MOVE_FOCUS_PUNCH,
+                MOVE_SHADOW_SNEAK,
+            },
+            },
+        },
+    },

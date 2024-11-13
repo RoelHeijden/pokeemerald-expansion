@@ -48,8 +48,9 @@
 #define AI_FLAG_CONSERVATIVE          (1 << 18)  // AI assumes all moves will low roll damage
 #define AI_FLAG_SEQUENCE_SWITCHING    (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle
 #define AI_FLAG_DOUBLE1               (1 << 20)  // AI for double battle1 (smeargle scrafty)
+#define AI_FLAG_SINGLE1               (1 << 21)  // AI for single battle1 (lunatone gliscor dusclops)
 
-#define AI_FLAG_COUNT                       21
+#define AI_FLAG_COUNT                       22
 
 // 'other' ai logic flags
 #define AI_FLAG_DYNAMIC_FUNC          (1 << 28)  // Create custom AI functions for specific battles via "setdynamicaifunc" cmd

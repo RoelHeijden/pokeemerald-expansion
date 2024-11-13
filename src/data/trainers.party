@@ -16900,3 +16900,36 @@ Timid Nature
 IVs: 0 HP / 0 Atk  
 - Super Fang  
 - Perish Song
+
+=== TRAINER_MY_CUSTOM_SINGLE_BATTLE1 ===
+Name: Donald
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: AI_FLAG_SINGLE1 / AI_FLAG_SMART_SWITCHING
+
+Lunatone @ Choice Band  
+Ability: Levitate  
+Level: 35  
+EVs: 252 Atk  
+Adamant Nature  
+- Explosion  
+
+Gliscor @ Toxic Orb  
+Ability: Poison Heal  
+Level: 39  
+EVs: 252 HP / 252 Atk  
+Adamant Nature  
+- Dig  
+
+Dusclops @ Leftovers  
+Ability: Pressure  
+Level: 22  
+EVs: 252 Atk  
+Brave Nature  
+IVs: 0 HP / 0 Spe  
+- Focus Punch  
+- Shadow Sneak
+

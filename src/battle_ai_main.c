@@ -60,6 +60,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 // ADDED
 static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -85,7 +86,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [18] = NULL,                     // Unused
     [19] = NULL,                     // Unused
     [20] = AI_Double1_Logic,         // AI_FLAG_DOUBLE1
-    [21] = NULL,                     // Unused
+    [21] = AI_Single1_Logic,         // AI_FLAG_SINGLE1
     [22] = NULL,                     // Unused
     [23] = NULL,                     // Unused
     [24] = NULL,                     // Unused
@@ -5520,3 +5521,13 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
+static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    if (gBattleMons[battlerAtk].species == SPECIES_DUSCLOPS)
+    {
+        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && move == MOVE_FOCUS_PUNCH) 
+            score = 120;
+        if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR && move == MOVE_SHADOW_SNEAK) 
+            score = 120;
+    }
+    return score;
+}
