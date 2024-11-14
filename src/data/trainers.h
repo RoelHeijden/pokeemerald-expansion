@@ -42278,7 +42278,7 @@ F_TRAINER_FEMALE |
 #line 16913
             .heldItem = ITEM_CHOICE_BAND,
 #line 16916
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 4, 0, 0),
 #line 16918
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16914
