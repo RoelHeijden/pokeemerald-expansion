@@ -7,7 +7,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
-        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetIronBall
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetPainSplit
     ] 
 }
 
@@ -21,23 +21,43 @@ script EscapeRoom_MapScripts_PlayStartMessage{
 script EscapeRoom_MapScripts_GetFirstPokemon{
     // givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
     // hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
+    // givemon(
+    //     SPECIES_GARDEVOIR, 
+    //     30, 
+    //     abilityNum=0,
+    //     nature=5, // Bold 
+    //     move1=MOVE_DISABLE,
+    //     move2=MOVE_SKILL_SWAP, 
+    //     move3=MOVE_NONE, 
+    //     move4=MOVE_NONE,
+    //     // EVS:
+    //     hpEv=132,
+    //     defEv=212,
+    //     speedEv=52,
+    //     // IVS:
+    //     hpIv=31,
+    //     atkIv=0,
+    //     defIv=31,
+    //     speedIv=31,
+    //     spAtkIv=31,
+    //     spDefIv=31,
+    // )
     givemon(
-        SPECIES_GARDEVOIR, 
+        SPECIES_GOTHITA, 
         30, 
-        abilityNum=0,
-        nature=5, // Bold 
-        move1=MOVE_DISABLE,
-        move2=MOVE_SKILL_SWAP, 
+        item=ITEM_IRON_BALL,
+        abilityNum=2,
+        nature=11, // Hasty 
+        move1=MOVE_THIEF,
+        move2=MOVE_HELPING_HAND, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
-        hpEv=132,
-        defEv=212,
-        speedEv=52,
+        speedEv=236,
         // IVS:
-        hpIv=31,
-        atkIv=0,
-        defIv=31,
+        hpIv=0,
+        atkIv=31,
+        defIv=0,
         speedIv=31,
         spAtkIv=31,
         spDefIv=31,
@@ -73,8 +93,8 @@ script EscapeRoom_MapScripts_SetRespawn{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4)
 }
 
-script EscapeRoom_MapScripts_GetIronBall{
-    additem(ITEM_IRON_BALL)
+script EscapeRoom_MapScripts_GetPainSplit{
+    additem(ITEM_TM_PAIN_SPLIT)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
@@ -131,10 +151,10 @@ script EscapeRoom_Wild_Shedinja{
         side=1,
         slot=0,
         species=SPECIES_SHEDINJA,
-        level=12,
+        level=10,
         item=ITEM_FLAME_ORB, 
         move1=MOVE_PROTECT,
-        move2=MOVE_WILL_O_WISP, 
+        move2=MOVE_NONE, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
     )
