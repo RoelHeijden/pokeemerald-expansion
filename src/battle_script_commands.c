@@ -13500,6 +13500,7 @@ static void Cmd_trysetperishsong(void)
     for (i = 0; i < gBattlersCount; i++)
     {
         if (gStatuses3[i] & STATUS3_PERISH_SONG
+            || gStatuses3[i] & STATUS3_SEMI_INVULNERABLE  // ADDED THIS -- make perish fail vs dig/fly/etc...
             || GetBattlerAbility(i) == ABILITY_SOUNDPROOF
             || BlocksPrankster(gCurrentMove, gBattlerAttacker, i, TRUE))
         {
@@ -17387,6 +17388,21 @@ void BS_JumpIfBlockedBySoundproof(void)
         gBattlescriptCurrInstr = cmd->jumpInstr;
         RecordAbilityBattle(battler, gLastUsedAbility);
         gBattlerAbility = battler;
+    }
+    else
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+    }
+}
+
+void BS_JumpIfPerishSemiInvulnerable(void)
+{
+    NATIVE_ARGS(u8 battler, const u8 *jumpInstr);
+    u32 battler = GetBattlerForBattleScript(cmd->battler);
+
+    if (gStatuses3[battler] & STATUS3_SEMI_INVULNERABLE)
+    {
+        gBattlescriptCurrInstr = cmd->jumpInstr;
     }
     else
     {
