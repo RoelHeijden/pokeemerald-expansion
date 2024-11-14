@@ -11015,10 +11015,6 @@
               }
             ]
           }
-        },
-        {
-          "map": "MAP_ESCAPE_ROOM",
-          "base_label": "gEscapeRoom0"
         }
       ]
     },
