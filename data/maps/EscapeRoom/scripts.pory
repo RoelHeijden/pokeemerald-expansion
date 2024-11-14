@@ -119,7 +119,7 @@ script EscapeRoom_Wild_Smeargle{
         hpIv=11,
         atkIv=0,
         defIv=31,
-        speedIv=9,
+        speedIv=0,
         spAtkIv=31,
         spDefIv=31,
     )
