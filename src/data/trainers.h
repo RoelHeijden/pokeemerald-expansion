@@ -42300,40 +42300,40 @@ F_TRAINER_FEMALE |
 #line 16920
             .heldItem = ITEM_TOXIC_ORB,
 #line 16923
-            .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(60, 0, 0, 0, 0, 0),
 #line 16925
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(31, 14, 31, 31, 31, 31),
 #line 16921
             .ability = ABILITY_POISON_HEAL,
 #line 16922
-            .lvl = 39,
+            .lvl = 48,
 #line 16924
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_SERIOUS,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16925
+#line 16926
                 MOVE_DIG,
             },
             },
             {
-#line 16927
+#line 16928
             .species = SPECIES_DUSCLOPS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 16927
-            .heldItem = ITEM_LEFTOVERS,
-#line 16930
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
-#line 16932
-            .iv = TRAINER_PARTY_IVS(0, 31, 31, 0, 31, 31),
 #line 16928
-            .ability = ABILITY_PRESSURE,
-#line 16929
-            .lvl = 22,
+            .heldItem = ITEM_LEFTOVERS,
 #line 16931
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 16933
+            .iv = TRAINER_PARTY_IVS(0, 31, 31, 0, 31, 31),
+#line 16929
+            .ability = ABILITY_PRESSURE,
+#line 16930
+            .lvl = 25,
+#line 16932
             .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16933
+#line 16934
                 MOVE_FOCUS_PUNCH,
                 MOVE_SHADOW_SNEAK,
             },

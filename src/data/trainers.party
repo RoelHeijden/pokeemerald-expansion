@@ -16919,17 +16919,20 @@ Adamant Nature
 
 Gliscor @ Toxic Orb  
 Ability: Poison Heal  
-Level: 39  
-EVs: 252 HP / 252 Atk  
-Adamant Nature  
+Level: 48  
+EVs: 60 HP  
+Serious Nature  
+IVs: 14 Atk  
 - Dig  
 
 Dusclops @ Leftovers  
 Ability: Pressure  
-Level: 22  
+Level: 25  
 EVs: 252 Atk  
 Brave Nature  
 IVs: 0 HP / 0 Spe  
 - Focus Punch  
-- Shadow Sneak
+- Shadow Sneak  
+
+
 
