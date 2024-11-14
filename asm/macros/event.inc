@@ -2321,3 +2321,11 @@
 	.macro togglefakertc
 	callnative Script_ToggleFakeRtc
 	.endm
+
+	@ Sets VAR_RESULT to TRUE if the Pokemon has learnt exactly n moves,
+	@ or to FALSE otherwise.
+	.macro nmoveslearnt slot:req n:req
+	callnative Script_nMovesLearnt
+	.2byte \slot
+	.2byte \n
+	.endm

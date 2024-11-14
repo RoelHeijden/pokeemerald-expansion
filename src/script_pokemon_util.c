@@ -561,3 +561,12 @@ void Script_SetStatus1(struct ScriptContext *ctx)
         SetMonData(&gPlayerParty[slot], MON_DATA_STATUS, &status1);
     }
 }
+
+// ADDED
+void Script_nMovesLearnt(struct ScriptContext *ctx)
+{
+    u32 slot = VarGet(ScriptReadHalfword(ctx));
+    u32 n = VarGet(ScriptReadHalfword(ctx));
+
+
+}
