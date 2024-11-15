@@ -44,7 +44,7 @@
 
 #define FLAG_SMEARGLE_OBTAINED    0x20 // Unused Flag  
 #define FLAG_DOUBLE_BATTLE1       0x21 // Unused Flag
-#define FLAG_PAIN_SPLIT_OBTAINED    0x22 // Unused Flag
+#define FLAG_RAIN_DANCE_OBTAINED    0x22 // Unused Flag
 #define FLAG_RARE_CANDY_USED    0x23 // Unused Flag
 #define FLAG_OBTAINED_PERFECT_SMEARGLE    0x24 // Unused Flag
 #define FLAG_SINGLE_BATTLE1    0x25 // Unused Flag

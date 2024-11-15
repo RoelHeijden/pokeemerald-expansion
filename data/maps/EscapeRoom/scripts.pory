@@ -127,7 +127,6 @@ script EscapeRoom_Wild_Smeargle{
         species=SPECIES_SMEARGLE,
         level=20,
         abilityNum=0,
-        item=ITEM_TM_TRICK_ROOM,
         nature=7, // Bold 
         move1=MOVE_SKETCH,
         move2=MOVE_NONE, 
@@ -187,9 +186,9 @@ script EscapeRoom_EventScript_PostDouble1Heal{
 
 script EscapeRoom_EventScript_FindPainSplit{
     lockall
-    giveitem(ITEM_TM_PAIN_SPLIT)
+    giveitem(ITEM_TM_RAIN_DANCE)
     removeobject(1)
-    setflag(FLAG_PAIN_SPLIT_OBTAINED)
+    setflag(FLAG_RAIN_DANCE_OBTAINED)
     releaseall
 }
 

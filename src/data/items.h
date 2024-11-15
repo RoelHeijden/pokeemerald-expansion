@@ -11183,16 +11183,19 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_PAIN_SPLIT, 
     },
 
-    [ITEM_TM53] =
+    [ITEM_TM_MAGIC_ROOM] =
     {
         .name = _("TM53"),
         .price = 3000,
-        .description = sQuestionMarksDesc, // Todo
+        .description = COMPOUND_STRING(
+            "All item effects\n"
+            "are suppressed for\n"
+            "5 turns."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_NONE, // Todo
+        .secondaryId = MOVE_MAGIC_ROOM,
     },
 
     [ITEM_TM54] =

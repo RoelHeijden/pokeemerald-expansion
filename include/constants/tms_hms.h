@@ -53,7 +53,8 @@
     F(SNATCH) \
     F(OVERHEAT) \
     F(TRICK_ROOM) \
-    F(PAIN_SPLIT)
+    F(PAIN_SPLIT) \
+    F(MAGIC_ROOM)
 
 #define FOREACH_HM(F) \
     F(CUT) \
