@@ -7,7 +7,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
-        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetPainSplit
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetIronBall
     ] 
 }
 
@@ -26,7 +26,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     //     30, 
     //     abilityNum=0,
     //     nature=5, // Bold 
-    //     move1=MOVE_DISABLE,
+    //     move1=MOVE_PAIN_SPLIT,
     //     move2=MOVE_SKILL_SWAP, 
     //     move3=MOVE_NONE, 
     //     move4=MOVE_NONE,
@@ -45,7 +45,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_GOTHITA, 
         30, 
-        item=ITEM_IRON_BALL,
+        item=ITEM_HEART_SCALE,
         abilityNum=2,
         nature=11, // Hasty 
         move1=MOVE_THIEF,
@@ -93,8 +93,8 @@ script EscapeRoom_MapScripts_SetRespawn{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4)
 }
 
-script EscapeRoom_MapScripts_GetPainSplit{
-    additem(ITEM_TM_PAIN_SPLIT)
+script EscapeRoom_MapScripts_GetIronBall{
+    additem(ITEM_IRON_BALL)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
