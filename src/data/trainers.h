@@ -42267,7 +42267,7 @@ F_TRAINER_FEMALE |
 #line 16910
         .doubleBattle = FALSE,
 #line 16911
-        .aiFlags = AI_FLAG_SINGLE1 | AI_FLAG_SMART_SWITCHING,
+        .aiFlags = AI_FLAG_SINGLE1 | AI_FLAG_SEQUENCE_SWITCHING,
         .partySize = 3,
         .party = (const struct TrainerMon[])
         {
@@ -42297,8 +42297,6 @@ F_TRAINER_FEMALE |
 #line 16920
             .species = SPECIES_GLISCOR,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 16920
-            .heldItem = ITEM_TOXIC_ORB,
 #line 16923
             .ev = TRAINER_PARTY_EVS(60, 0, 0, 0, 0, 0),
 #line 16925
