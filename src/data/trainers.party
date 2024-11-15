@@ -16908,7 +16908,7 @@ Pic: Expert M
 Gender: Male
 Music: Intense
 Double Battle: No
-AI: AI_FLAG_SINGLE1 / AI_FLAG_SMART_SWITCHING
+AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
 Lunatone @ Choice Band  
 Ability: Levitate  
