@@ -319,12 +319,6 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     u8 i;
     u16 totalQuantity = 0;
 
-
-    // ADDED THIS
-    if (itemId == ITEM_RARE_CANDY)
-        if (FlagGet(FLAG_RARE_CANDY_USED) == FALSE)
-            FlagSet(FLAG_RARE_CANDY_USED);
-
     if (ItemId_GetPocket(itemId) == POCKET_NONE || itemId == ITEM_NONE)
         return FALSE;
 
