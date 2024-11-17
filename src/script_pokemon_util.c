@@ -562,11 +562,3 @@ void Script_SetStatus1(struct ScriptContext *ctx)
     }
 }
 
-// ADDED
-void Script_nMovesLearnt(struct ScriptContext *ctx)
-{
-    u32 slot = VarGet(ScriptReadHalfword(ctx));
-    u32 n = VarGet(ScriptReadHalfword(ctx));
-
-
-}
