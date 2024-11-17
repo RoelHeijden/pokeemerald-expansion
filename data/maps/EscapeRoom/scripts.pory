@@ -193,6 +193,14 @@ script EscapeRoom_EventScript_FindRainDance{
     releaseall
 }
 
+script EscapeRoom_EventScript_FindRareCandy{
+    lockall
+    giveitem(ITEM_RARE_CANDY)
+    removeobject(1)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
+    releaseall
+}
+
 script EscapeRoom_EventScript_GoodSmeargle_NPC{
     lockall
     faceplayer
