@@ -42297,6 +42297,8 @@ F_TRAINER_FEMALE |
 #line 16920
             .species = SPECIES_GLISCOR,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16920
+            .heldItem = ITEM_TOXIC_ORB,
 #line 16923
             .ev = TRAINER_PARTY_EVS(60, 0, 0, 0, 0, 0),
 #line 16925

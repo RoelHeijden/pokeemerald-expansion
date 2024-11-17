@@ -7,7 +7,7 @@
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_NONE",
-  "allow_cycling": false,
+  "allow_cycling": true,
   "allow_escaping": false,
   "allow_running": true,
   "show_map_name": true,
@@ -15,24 +15,11 @@
   "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
-      "x": 1,
-      "y": 4,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_Wild_Smeargle",
-      "flag": "FLAG_SMEARGLE_OBTAINED"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_REPORTER_F",
-      "x": 0,
-      "y": 2,
+      "x": 9,
+      "y": 6,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -42,10 +29,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
-      "x": 1,
-      "y": 2,
+      "x": 9,
+      "y": 5,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -55,8 +42,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
-      "x": 5,
-      "y": 5,
+      "x": 16,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -67,22 +54,22 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 8,
-      "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
+      "x": 15,
+      "y": 15,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ESCAPE_ROOM_LUM",
-      "script": "BerryTreeScript",
-      "flag": "0"
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_SingleBattle1",
+      "flag": "FLAG_SINGLE_BATTLE1"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
-      "x": 1,
-      "y": 4,
+      "x": 17,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -90,12 +77,12 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_Wild_Smeargle",
-      "flag": "FLAG_SMEARGLE_OBTAINED"
+      "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 8,
-      "y": 4,
+      "graphics_id": "OBJ_EVENT_GFX_POKE_BALL",
+      "x": 18,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -107,35 +94,35 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 8,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_PerishExplain_NPC",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
-      "x": 6,
-      "y": 2,
+      "x": 16,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_SingleBattle1",
-      "flag": "FLAG_SINGLE_BATTLE1"
+      "script": "EscapeRoom_EventScript_PerishExplain_NPC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
+      "x": 12,
+      "y": 15,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "BERRY_TREE_ESCAPE_ROOM_LUM",
+      "script": "BerryTreeScript",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
-      "x": 4,
-      "y": 4,
+      "x": 18,
+      "y": 12,
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_INDOOR",
       "dest_warp_id": "0"
@@ -147,8 +134,8 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 6,
-      "y": 4,
+      "x": 19,
+      "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TestSign"

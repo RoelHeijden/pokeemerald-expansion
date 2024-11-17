@@ -184,7 +184,7 @@ script EscapeRoom_EventScript_PostDouble1Heal{
     fadescreen(FADE_FROM_BLACK)
 }
 
-script EscapeRoom_EventScript_FindPainSplit{
+script EscapeRoom_EventScript_FindRainDance{
     lockall
     giveitem(ITEM_TM_RAIN_DANCE)
     removeobject(1)
