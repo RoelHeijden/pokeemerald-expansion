@@ -4424,12 +4424,22 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_INDOOR",
       "name": "EscapeRoom_Indoor_Layout",
-      "width": 6,
-      "height": 6,
+      "width": 11,
+      "height": 16,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_Shop",
+      "secondary_tileset": "gTileset_BattleFactory",
       "border_filepath": "data/layouts/EscapeRoom_Indoor/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_Indoor/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM_ICE_PUZZLE",
+      "name": "EscapeRoom_IcePuzzle_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_MirageTower",
+      "border_filepath": "data/layouts/EscapeRoom_IcePuzzle/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoom_IcePuzzle/map.bin"
     }
   ]
 }

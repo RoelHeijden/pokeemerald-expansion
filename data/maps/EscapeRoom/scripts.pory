@@ -7,7 +7,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
-        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetIronBall
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetItems
     ] 
 }
 
@@ -93,8 +93,9 @@ script EscapeRoom_MapScripts_SetRespawn{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4)
 }
 
-script EscapeRoom_MapScripts_GetIronBall{
+script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_IRON_BALL)
+    additem(ITEM_MACH_BIKE)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
