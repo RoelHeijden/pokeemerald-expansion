@@ -10,7 +10,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetItems
-        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_ToggleBagUse
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_TurnOfBagUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
     ] 
@@ -36,27 +36,27 @@ script EscapeRoom_MapScripts_PlayStartMessage{
 script EscapeRoom_MapScripts_GetFirstPokemon{
     // givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
     // hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
-    // givemon(
-    //     SPECIES_GARDEVOIR, 
-    //     30, 
-    //     abilityNum=0,
-    //     nature=5, // Bold 
-    //     move1=MOVE_PAIN_SPLIT,
-    //     move2=MOVE_SKILL_SWAP, 
-    //     move3=MOVE_NONE, 
-    //     move4=MOVE_NONE,
-    //     // EVS:
-    //     hpEv=132,
-    //     defEv=212,
-    //     speedEv=52,
-    //     // IVS:
-    //     hpIv=31,
-    //     atkIv=0,
-    //     defIv=31,
-    //     speedIv=31,
-    //     spAtkIv=31,
-    //     spDefIv=31,
-    // )
+    givemon(
+        SPECIES_GARDEVOIR, 
+        30, 
+        abilityNum=0,
+        nature=5, // Bold 
+        move1=MOVE_PAIN_SPLIT,
+        move2=MOVE_SKILL_SWAP, 
+        move3=MOVE_DISABLE, 
+        move4=MOVE_TRICK_ROOM,
+        // EVS:
+        hpEv=132,
+        defEv=212,
+        speedEv=52,
+        // IVS:
+        hpIv=31,
+        atkIv=0,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31,
+    )
     givemon(
         SPECIES_GOTHITA, 
         30, 
@@ -114,7 +114,7 @@ script EscapeRoom_MapScripts_GetItems{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
-script EscapeRoom_MapScripts_ToggleBagUse{
+script EscapeRoom_MapScripts_TurnOfBagUse{
     if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
     }
@@ -144,7 +144,7 @@ script EscapeRoom_Nurse_Heal_Pokemon{
 
 script EscapeRoom_Wild_Smeargle{
     if (flag(FLAG_TOGGLE_BAG_USE) == TRUE){
-        setflag(FLAG_TOGGLE_BAG_USE)
+        clearflag(FLAG_TOGGLE_BAG_USE)
     }
     createmon(
         side=1,
@@ -173,7 +173,7 @@ script EscapeRoom_Wild_Smeargle{
 
 script EscapeRoom_Wild_Shedinja{
     if (flag(FLAG_TOGGLE_BAG_USE) == TRUE){
-        setflag(FLAG_TOGGLE_BAG_USE)
+        clearflag(FLAG_TOGGLE_BAG_USE)
     }
     createmon(
         side=1,
@@ -224,6 +224,14 @@ script EscapeRoom_EventScript_FindRareCandy{
     giveitem(ITEM_RARE_CANDY)
     removeobject(1)
     setflag(FLAG_RARE_CANDY_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindNugget{
+    lockall
+    giveitem(ITEM_NUGGET)
+    removeobject(1)
+    setflag(FLAG_NUGGET2_OBTAINED)
     releaseall
 }
 
@@ -304,6 +312,16 @@ script EscapeRoom_EventScript_GetSitrusBerries{
     giveitem(ITEM_SITRUS_BERRY, 99)
 }
 
+script EscapeRoom_EventScript_SingleBattle2{
+    trainerbattle_single(
+        TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
+        Single2Puzzle_Intro, 
+        Single2Puzzle_Outro, 
+    )
+    msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -374,18 +392,26 @@ text PerishNPCexplain{
 }
 
 text Single1Puzzle_Intro{
-    format("Did you fight against the duo already? I think one of their Pokémon is hiding something.")
+    format("Did you try to fight the duo at the exit already? I think one of their Pokémon is hiding something.")
 }
 
 text Single1Puzzle_Outro{
-    "Here, this should help you beat the duo."
+    "Here, this should help you beat the final duo."
 }
 
 text Single1Puzzle_PostBattle{
     "You can beat them. I believe in you!"
 }
 
+text Single2Puzzle_Intro{
+    format("You think you better than me?")
+}
 
+text Single2Puzzle_Outro{
+    "Okay. I'm impressed."
+}
 
-
+text Single2Puzzle_PostBattle{
+    "Good luck getting out!"
+}
 
