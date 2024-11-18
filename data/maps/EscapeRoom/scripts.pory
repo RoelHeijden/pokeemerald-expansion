@@ -10,7 +10,8 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2: EscapeRoom_MapScripts_GetBadges
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 3: EscapeRoom_MapScripts_SetRespawn
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 4: EscapeRoom_MapScripts_GetItems
-        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_FixCrackedGround
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_ToggleBagUse
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
     ] 
 }
@@ -22,9 +23,8 @@ script EscapeRoom_MapScripts_SetHoleWarp{
 
 script EscapeRoom_MapScripts_FixCrackedGround{
     setvar(VAR_ICE_STEP_COUNT, 1)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 7)
 }
-
 
 script EscapeRoom_MapScripts_PlayStartMessage{
     lockall
@@ -114,6 +114,12 @@ script EscapeRoom_MapScripts_GetItems{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
+script EscapeRoom_MapScripts_ToggleBagUse{
+    if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6)
+}
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
@@ -137,6 +143,9 @@ script EscapeRoom_Nurse_Heal_Pokemon{
 }
 
 script EscapeRoom_Wild_Smeargle{
+    if (flag(FLAG_TOGGLE_BAG_USE) == TRUE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
     createmon(
         side=1,
         slot=0,
@@ -159,9 +168,13 @@ script EscapeRoom_Wild_Smeargle{
         spDefIv=31,
     )
     dowildbattle
+    setflag(FLAG_TOGGLE_BAG_USE)
 }
 
 script EscapeRoom_Wild_Shedinja{
+    if (flag(FLAG_TOGGLE_BAG_USE) == TRUE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
     createmon(
         side=1,
         slot=0,
@@ -174,12 +187,10 @@ script EscapeRoom_Wild_Shedinja{
         move4=MOVE_NONE,
     )
     dowildbattle
+    setflag(FLAG_TOGGLE_BAG_USE)
 }
 
 script EscapeRoom_EventScript_DoubleBattle1{
-    if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
-        setflag(FLAG_TOGGLE_BAG_USE)
-    }
     trainerbattle_double(
         TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
         Double1Puzzle_Intro, 
@@ -278,9 +289,6 @@ script EscapeRoom_EventScript_PerishExplain_NPC{
 
 script EscapeRoom_EventScript_SingleBattle1{
     faceplayer
-    if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
-        setflag(FLAG_TOGGLE_BAG_USE)
-    }
     trainerbattle_single(
         TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
         Single1Puzzle_Intro, 
