@@ -16934,5 +16934,25 @@ IVs: 0 HP / 0 Spe
 - Focus Punch  
 - Shadow Sneak  
 
+=== TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
+Name: Tim
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: AI_FLAG_SEQUENCE_SWITCHING
 
+Slaking @ Flame Orb  
+Ability: Truant  
+EVs: 4 HP / 252 Atk / 252 Spe  
+Adamant Nature  
+- Facade
 
+Steenee @ Life Orb  
+Ability: Oblivious  
+Level: 46  
+EVs: 4 HP / 252 SpA / 252 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Solar Beam

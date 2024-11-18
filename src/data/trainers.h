@@ -42340,3 +42340,68 @@ F_TRAINER_FEMALE |
             },
         },
     },
+#line 16937
+    [TRAINER_MY_CUSTOM_SINGLE_BATTLE2] =
+    {
+#line 16938
+        .trainerName = _("Tim"),
+#line 16939
+        .trainerClass = TRAINER_CLASS_EXPERT,
+#line 16940
+        .trainerPic = TRAINER_PIC_EXPERT_M,
+        .encounterMusic_gender = 
+#line 16942
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 16943
+        .doubleBattle = FALSE,
+#line 16944
+        .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
+        .partySize = 2,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16946
+            .species = SPECIES_SLAKING,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16946
+            .heldItem = ITEM_FLAME_ORB,
+#line 16948
+            .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
+#line 16950
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16947
+            .ability = ABILITY_TRUANT,
+#line 16950
+            .lvl = 100,
+#line 16949
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16950
+                MOVE_FACADE,
+            },
+            },
+            {
+#line 16952
+            .species = SPECIES_STEENEE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16952
+            .heldItem = ITEM_LIFE_ORB,
+#line 16955
+            .ev = TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0),
+#line 16957
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+#line 16953
+            .ability = ABILITY_OBLIVIOUS,
+#line 16954
+            .lvl = 46,
+#line 16956
+            .nature = NATURE_MODEST,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16958
+                MOVE_SOLAR_BEAM,
+            },
+            },
+        },
+    },
