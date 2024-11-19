@@ -4414,7 +4414,7 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM",
       "name": "EscapeRoom_Layout",
-      "width": 45,
+      "width": 42,
       "height": 32,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_MirageTower",

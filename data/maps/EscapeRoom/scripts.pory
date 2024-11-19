@@ -204,8 +204,14 @@ script EscapeRoom_EventScript_DoubleBattle1{
 }
 
 script EscapeRoom_EventScript_PostDouble1Heal{
-    setflag(FLAG_TOGGLE_BAG_USE)
     msgbox(Double1Puzzle_Heal, MSGBOX_AUTOCLOSE)
+    fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    fadescreen(FADE_FROM_BLACK)
+}
+
+script EscapeRoom_EventScript_PostSingle2Heal{
+    msgbox(Single2Puzzle_Heal, MSGBOX_AUTOCLOSE)
     fadescreen(FADE_TO_BLACK)
     special(HealPlayerParty)
     fadescreen(FADE_FROM_BLACK)
@@ -317,6 +323,7 @@ script EscapeRoom_EventScript_SingleBattle2{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
         Single2Puzzle_Intro, 
         Single2Puzzle_Outro, 
+        event_script=EscapeRoom_EventScript_PostSingle2Heal,
     )
     msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -344,7 +351,7 @@ text NoRoomMsg{
 }
 
 text Double1Puzzle_NotEnoughMons{
-    format("Want to battle? You should first get a second Pokemon.")
+    format("Want to battle? You should first get a second Pokémon.")
 }
 
 text Double1Puzzle_Intro{
@@ -360,11 +367,11 @@ text Double1Puzzle_PostBattle{
 }
 
 text Nurse_Heal_End{
-    "I healed your Pokemon!"
+    "I healed your Pokémon!"
 }
 
 text Double1Puzzle_Heal{
-    "Let us heal your Pokemon."
+    "Let us heal your Pokémon."
 }
 
 text SmeargleMessageInitial{
@@ -415,3 +422,6 @@ text Single2Puzzle_PostBattle{
     "Good luck getting out!"
 }
 
+text Single2Puzzle_Heal{
+    "Let me heal your Pokémon"
+}

@@ -42365,42 +42365,42 @@ F_TRAINER_FEMALE |
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16946
             .heldItem = ITEM_FLAME_ORB,
-#line 16948
-            .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
-#line 16950
+#line 16949
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 240, 0, 0),
+#line 16951
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16947
             .ability = ABILITY_TRUANT,
+#line 16948
+            .lvl = 64,
 #line 16950
-            .lvl = 100,
-#line 16949
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16950
+#line 16951
                 MOVE_FACADE,
             },
             },
             {
-#line 16952
-            .species = SPECIES_STEENEE,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 16952
-            .heldItem = ITEM_LIFE_ORB,
-#line 16955
-            .ev = TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0),
-#line 16957
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 16953
-            .ability = ABILITY_OBLIVIOUS,
-#line 16954
-            .lvl = 46,
+            .species = SPECIES_CURSOLA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16953
+            .heldItem = ITEM_MENTAL_HERB,
 #line 16956
-            .nature = NATURE_MODEST,
+            .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 0),
+#line 16958
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 0, 31, 31),
+#line 16954
+            .ability = ABILITY_PERISH_BODY,
+#line 16955
+            .lvl = 35,
+#line 16957
+            .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16958
-                MOVE_SOLAR_BEAM,
+#line 16959
+                MOVE_TACKLE,
             },
             },
         },

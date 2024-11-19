@@ -16945,14 +16945,15 @@ AI: AI_FLAG_SEQUENCE_SWITCHING
 
 Slaking @ Flame Orb  
 Ability: Truant  
-EVs: 4 HP / 252 Atk / 252 Spe  
+Level: 64  
+EVs: 252 Atk / 240 Spe 
 Adamant Nature  
-- Facade
+- Facade  
 
-Steenee @ Life Orb  
-Ability: Oblivious  
-Level: 46  
-EVs: 4 HP / 252 SpA / 252 Spe  
-Modest Nature  
-IVs: 0 Atk  
-- Solar Beam
+Cursola @ Mental Herb  
+Ability: Perish Body  
+Level: 35  
+EVs: 252 HP / 252 Atk  
+Adamant Nature  
+IVs: 0 Spe  
+- Tackle
