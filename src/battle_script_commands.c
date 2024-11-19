@@ -5942,7 +5942,10 @@ static void Cmd_moveend(void)
                 }
                 else
                 {
-                    gLastMoves[gBattlerAttacker] = MOVE_UNAVAILABLE;
+                    // ADDED dont reset lastmove if truant activated
+                    if ((GetBattlerAbility(gBattlerAttacker) != ABILITY_TRUANT) || (gDisableStructs[gBattlerAttacker].truantCounter == 0))
+                        gLastMoves[gBattlerAttacker] = MOVE_UNAVAILABLE;
+
                     gLastResultingMoves[gBattlerAttacker] = MOVE_UNAVAILABLE;
                     gLastUsedMoveType[gBattlerAttacker] = 0;
                 }
@@ -6044,6 +6047,7 @@ static void Cmd_moveend(void)
                 gHitMarker &= ~HITMARKER_NO_PPDEDUCT;
             }
             RecordLastUsedMoveBy(gBattlerAttacker, gCurrentMove);
+
             gBattleScripting.moveendState++;
             break;
         }
