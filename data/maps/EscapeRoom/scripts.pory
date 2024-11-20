@@ -34,29 +34,6 @@ script EscapeRoom_MapScripts_PlayStartMessage{
 }
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
-    // givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
-    // hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
-    // givemon(
-    //     SPECIES_GARDEVOIR, 
-    //     30, 
-    //     abilityNum=0,
-    //     nature=5, // Bold 
-    //     move1=MOVE_TRICK_ROOM,
-    //     move2=MOVE_SKILL_SWAP, 
-    //     move3=MOVE_NONE, 
-    //     move4=MOVE_NONE,
-    //     // EVS:
-    //     hpEv=132,
-    //     defEv=212,
-    //     speedEv=52,
-    //     // IVS:
-    //     hpIv=31,
-    //     atkIv=0,
-    //     defIv=31,
-    //     speedIv=31,
-    //     spAtkIv=31,
-    //     spDefIv=31,
-    // )
     givemon(
         SPECIES_GOTHITA, 
         30, 
@@ -111,6 +88,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_IRON_BALL)
     additem(ITEM_MACH_BIKE)
+    additem(ITEM_NUGGET, 14)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
@@ -250,47 +228,129 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
         releaseall
         end
     }
-
     getpartysize
-    if (var(VAR_RESULT) < 2){ # no extra pokemon was caught
-        msgbox(SmeargleMessageInitial)
-        waitmessage
-        releaseall
-        end
+    if (var(VAR_RESULT) < 2){  # no extra pokemon was caught
+        checkpartymove(MOVE_THIEF)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_GOTHITA){  // mon is Gothita
+            msgbox(SmeargleMessageInitial)
+            waitmessage
+            releaseall
+            end
+        }
+        checkpartymove(MOVE_PROTECT)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SHEDINJA){  // mon is Shedinja
+            msgbox(SmeargleMessageInitial)
+            waitmessage
+            releaseall
+            end
+        }
+        checkpartymove(MOVE_SKETCH)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){   # Smeargle has Sketch
+            msgbox(SmeargleMessagePerfectButGothitaInBox)
+            waitmessage
+            releaseall
+            end
+        }
+        checkpartymove(MOVE_PROTECT)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
+            msgbox(SmeargleMessagePerfectButGothitaInBox)
+            waitmessage
+            releaseall
+            end
+        }
     }
-
-    checkpartymove(MOVE_SKETCH)
-    if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
-        msgbox(SmeargleMessagePerfect)
-        waitmessage
-        giveitem(ITEM_RARE_CANDY)
-        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
-        releaseall
-        end
+    else{  // user has a second pokemon
+        checkpartymove(MOVE_SKETCH)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
+            msgbox(SmeargleMessagePerfect, MSGBOX_YESNO)
+            waitmessage
+            call(EscapeRoom_EventScript_IniitializeGardevoirTrade)
+            releaseall
+            end
+        }
+        checkpartymove(MOVE_PROTECT)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
+            msgbox(SmeargleMessagePerfect, MSGBOX_YESNO)
+            waitmessage
+            call(EscapeRoom_EventScript_IniitializeGardevoirTrade)
+            releaseall
+            end
+        }
     }
-    checkpartymove(MOVE_PROTECT)
-    if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
-        msgbox(SmeargleMessagePerfect)
-        waitmessage
-        giveitem(ITEM_RARE_CANDY)
-        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
-        releaseall
-        end
-    }
-    checkpartymove(MOVE_PERISH_SONG)
-    if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Perish song
-        msgbox(SmeargleMessageConfusedButGood)
-        waitmessage
-        giveitem(ITEM_RARE_CANDY)
-        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
-        releaseall
-        end
-    }
-
     msgbox(SmeargleMessageBad)
     waitmessage
     releaseall
     end 
+}
+
+script EscapeRoom_EventScript_IniitializeGardevoirTrade{
+    if(var(VAR_RESULT) == YES){
+        checkpartymove(MOVE_HELPING_HAND)
+        if (var(VAR_RESULT) == 0){
+            createmon(
+                0, // side
+                0, // slot
+                SPECIES_GARDEVOIR, 
+                30, 
+                abilityNum=0,
+                item=ITEM_NUGGET
+                nature=5, // Bold 
+                move1=MOVE_TRICK_ROOM,
+                move2=MOVE_SKILL_SWAP, 
+                move3=MOVE_NONE, 
+                move4=MOVE_NONE,
+                // EVS:
+                hpEv=132,
+                defEv=212,
+                speedEv=52,
+                // IVS:
+                hpIv=31,
+                atkIv=0,
+                defIv=31,
+                speedIv=31,
+                spAtkIv=31,
+                spDefIv=31,
+            )
+        }
+        elif (var(VAR_RESULT) == 1){
+            createmon(
+                0, // side
+                1, // slot
+                SPECIES_GARDEVOIR, 
+                30, 
+                abilityNum=0,
+                item=ITEM_NUGGET
+                nature=5, // Bold 
+                move1=MOVE_TRICK_ROOM,
+                move2=MOVE_SKILL_SWAP, 
+                move3=MOVE_NONE, 
+                move4=MOVE_NONE,
+                // EVS:
+                hpEv=132,
+                defEv=212,
+                speedEv=52,
+                // IVS:
+                hpIv=31,
+                atkIv=0,
+                defIv=31,
+                speedIv=31,
+                spAtkIv=31,
+                spDefIv=31,
+            )
+        }
+        else{
+            msgbox("something has gone wrong")
+            end
+        }
+
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox("Received Gardevoir") // REPLACE
+        msgbox(TradeAcceptedMessage)
+        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
+    }
+    else{
+        msgbox(TradeDeclinedMessage)
+    }
 }
     
 script EscapeRoom_EventScript_PerishExplain_NPC{
@@ -390,20 +450,36 @@ text SmeargleMessageInitial{
     format("I love Smeargle. Show me the perfect Smeargle.")
 }
 
-text SmeargleMessagePerfect{
-    format("That is it! That is the perfect Smeargle!")
-}
-
 text SmeargleMessageBad{
     format("Ew no, that Smeargle looks horrible. I asked for the perfect Smeargle.")
 }
 
-text SmeargleMessageConfusedButGood{
-    format("I do not know how you managed to obtain this Smeargle already.")
+text SmeargleMessagePerfect{
+    "That is it! That is the perfect\n"
+    "Smeargle!\p"
+    "To show my gratitude, I'll let you trade\n"
+    "your shitty Gothita for my Gardevoir.\p"
+    "Do you want to trade?"
+}
+
+text SmeargleMessagePerfectButGothitaInBox{
+    "That is it! That is the perfect\n"
+    "Smeargle!\p"
+    "To show my gratitude, I'll let you trade\n"
+    "your shitty Gothita for my Gardevoir.\p"
+    "Oh, where did it go?"
+}
+
+text TradeAcceptedMessage{
+    "There you go. Good luck!"
+}
+
+text TradeDeclinedMessage{
+    "Alright, your loss."
 }
 
 text SmeargleMessageCompleted{
-    format("You have brightened my day. Thank you.")
+    format("I don't think I like this Gothita...")
 }
 
 text PerishNPCexplain{
