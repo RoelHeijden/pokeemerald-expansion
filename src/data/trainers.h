@@ -42405,3 +42405,48 @@ F_TRAINER_FEMALE |
             },
         },
     },
+#line 16961
+    [TRAINER_MY_CUSTOM_SINGLE_BATTLE3] =
+    {
+#line 16962
+        .trainerName = _("Oomf"),
+#line 16963
+        .trainerClass = TRAINER_CLASS_HEX_MANIAC,
+#line 16964
+        .trainerPic = TRAINER_PIC_HEX_MANIAC,
+        .encounterMusic_gender = 
+#line 16965
+F_TRAINER_FEMALE | 
+#line 16966
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 16967
+        .doubleBattle = FALSE,
+#line 16968
+        .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16970
+            .species = SPECIES_QWILFISH,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16970
+            .heldItem = ITEM_GREAT_BALL,
+#line 16973
+            .ev = TRAINER_PARTY_EVS(0, 236, 64, 0, 0, 0),
+#line 16975
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16971
+            .ability = ABILITY_INTIMIDATE,
+#line 16972
+            .lvl = 6,
+#line 16974
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16975
+                MOVE_DOUBLE_EDGE,
+            },
+            },
+        },
+    },

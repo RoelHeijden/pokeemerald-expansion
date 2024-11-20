@@ -36,27 +36,27 @@ script EscapeRoom_MapScripts_PlayStartMessage{
 script EscapeRoom_MapScripts_GetFirstPokemon{
     // givemon species:req, level:req, item, ball, nature, abilityNum, gender, hpEv, atkEv, defEv, speedEv, spAtkEv, spDefEv, 
     // hpIv, atkIv, defIv, speedIv, spAtkIv, spDefIv, move1, move2, move3, move4, isShiny, ggMaxFactor, teraType
-    givemon(
-        SPECIES_GARDEVOIR, 
-        30, 
-        abilityNum=0,
-        nature=5, // Bold 
-        move1=MOVE_PAIN_SPLIT,
-        move2=MOVE_SKILL_SWAP, 
-        move3=MOVE_DISABLE, 
-        move4=MOVE_TRICK_ROOM,
-        // EVS:
-        hpEv=132,
-        defEv=212,
-        speedEv=52,
-        // IVS:
-        hpIv=31,
-        atkIv=0,
-        defIv=31,
-        speedIv=31,
-        spAtkIv=31,
-        spDefIv=31,
-    )
+    // givemon(
+    //     SPECIES_GARDEVOIR, 
+    //     30, 
+    //     abilityNum=0,
+    //     nature=5, // Bold 
+    //     move1=MOVE_TRICK_ROOM,
+    //     move2=MOVE_SKILL_SWAP, 
+    //     move3=MOVE_NONE, 
+    //     move4=MOVE_NONE,
+    //     // EVS:
+    //     hpEv=132,
+    //     defEv=212,
+    //     speedEv=52,
+    //     // IVS:
+    //     hpIv=31,
+    //     atkIv=0,
+    //     defIv=31,
+    //     speedIv=31,
+    //     spAtkIv=31,
+    //     spDefIv=31,
+    // )
     givemon(
         SPECIES_GOTHITA, 
         30, 
@@ -217,14 +217,6 @@ script EscapeRoom_EventScript_PostSingle2Heal{
     fadescreen(FADE_FROM_BLACK)
 }
 
-script EscapeRoom_EventScript_FindRainDance{
-    lockall
-    giveitem(ITEM_TM_RAIN_DANCE)
-    removeobject(1)
-    setflag(FLAG_RAIN_DANCE_OBTAINED)
-    releaseall
-}
-
 script EscapeRoom_EventScript_FindRareCandy{
     lockall
     giveitem(ITEM_RARE_CANDY)
@@ -233,11 +225,19 @@ script EscapeRoom_EventScript_FindRareCandy{
     releaseall
 }
 
-script EscapeRoom_EventScript_FindNugget{
+script EscapeRoom_EventScript_FindNugget2{
     lockall
     giveitem(ITEM_NUGGET)
     removeobject(1)
     setflag(FLAG_NUGGET2_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindNugget3{
+    lockall
+    giveitem(ITEM_NUGGET)
+    removeobject(1)
+    setflag(FLAG_NUGGET3_OBTAINED)
     releaseall
 }
 
@@ -326,6 +326,18 @@ script EscapeRoom_EventScript_SingleBattle2{
         event_script=EscapeRoom_EventScript_PostSingle2Heal,
     )
     msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_SingleBattle3{
+    faceplayer
+    trainerbattle_single(
+        TRAINER_MY_CUSTOM_SINGLE_BATTLE3, 
+        Single3Puzzle_Intro, 
+        Single3Puzzle_Outro, 
+    )
+    msgbox(Single3Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
@@ -424,4 +436,16 @@ text Single2Puzzle_PostBattle{
 
 text Single2Puzzle_Heal{
     "Let me heal your Pokémon"
+}
+
+text Single3Puzzle_Intro{
+    format("You can run but you can't hide.")
+}
+
+text Single3Puzzle_Outro{
+    "I'm not sure you wanted to do that."
+}
+
+text Single3Puzzle_PostBattle{
+    "Sooo..."
 }

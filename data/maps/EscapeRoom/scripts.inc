@@ -56,8 +56,6 @@ EscapeRoom_MapScripts_PlayStartMessage::
 
 
 EscapeRoom_MapScripts_GetFirstPokemon::
-# 39 "data/maps/EscapeRoom/scripts.pory"
-	givemon SPECIES_GARDEVOIR, 30, abilityNum = 0, nature = 5, move1 = MOVE_PAIN_SPLIT, move2 = MOVE_SKILL_SWAP, move3 = MOVE_DISABLE, move4 = MOVE_TRICK_ROOM, hpEv = 132, defEv = 212, speedEv = 52, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 60 "data/maps/EscapeRoom/scripts.pory"
 	givemon SPECIES_GOTHITA, 30, item = ITEM_HEART_SCALE, abilityNum = 2, nature = 11, move1 = MOVE_THIEF, move2 = MOVE_HELPING_HAND, move3 = MOVE_NONE, move4 = MOVE_NONE, speedEv = 236, hpIv = 0, atkIv = 31, defIv = 0, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 80 "data/maps/EscapeRoom/scripts.pory"
@@ -237,35 +235,35 @@ EscapeRoom_EventScript_PostSingle2Heal::
 	return
 
 
-EscapeRoom_EventScript_FindRainDance::
+EscapeRoom_EventScript_FindRareCandy::
 # 221 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 222 "data/maps/EscapeRoom/scripts.pory"
-	giveitem ITEM_TM_RAIN_DANCE
+	giveitem ITEM_RARE_CANDY
 # 223 "data/maps/EscapeRoom/scripts.pory"
 	removeobject 1
 # 224 "data/maps/EscapeRoom/scripts.pory"
-	setflag FLAG_RAIN_DANCE_OBTAINED
+	setflag FLAG_RARE_CANDY_OBTAINED
 # 225 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
 
 
-EscapeRoom_EventScript_FindRareCandy::
+EscapeRoom_EventScript_FindNugget2::
 # 229 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 230 "data/maps/EscapeRoom/scripts.pory"
-	giveitem ITEM_RARE_CANDY
+	giveitem ITEM_NUGGET
 # 231 "data/maps/EscapeRoom/scripts.pory"
 	removeobject 1
 # 232 "data/maps/EscapeRoom/scripts.pory"
-	setflag FLAG_RARE_CANDY_OBTAINED
+	setflag FLAG_NUGGET2_OBTAINED
 # 233 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
 
 
-EscapeRoom_EventScript_FindNugget::
+EscapeRoom_EventScript_FindNugget3::
 # 237 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 238 "data/maps/EscapeRoom/scripts.pory"
@@ -273,7 +271,7 @@ EscapeRoom_EventScript_FindNugget::
 # 239 "data/maps/EscapeRoom/scripts.pory"
 	removeobject 1
 # 240 "data/maps/EscapeRoom/scripts.pory"
-	setflag FLAG_NUGGET2_OBTAINED
+	setflag FLAG_NUGGET3_OBTAINED
 # 241 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
@@ -435,73 +433,85 @@ EscapeRoom_EventScript_SingleBattle2::
 	end
 
 
+EscapeRoom_EventScript_SingleBattle3::
+# 334 "data/maps/EscapeRoom/scripts.pory"
+	faceplayer
+# 335 "data/maps/EscapeRoom/scripts.pory"
+	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE3, Single3Puzzle_Intro, Single3Puzzle_Outro
+# 340 "data/maps/EscapeRoom/scripts.pory"
+	msgbox Single3Puzzle_PostBattle, MSGBOX_AUTOCLOSE
+# 341 "data/maps/EscapeRoom/scripts.pory"
+	waitmessage
+	end
+
+
 StartMessage::
-# 337 "data/maps/EscapeRoom/scripts.pory"
+# 349 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck.$"
 
 SignMessage1::
-# 341 "data/maps/EscapeRoom/scripts.pory"
+# 353 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fock off mate.$"
 
 SmeargleObtainedMsg::
-# 345 "data/maps/EscapeRoom/scripts.pory"
+# 357 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh shit it's a Smeargle.$"
 
 NoRoomMsg::
-# 349 "data/maps/EscapeRoom/scripts.pory"
+# 361 "data/maps/EscapeRoom/scripts.pory"
 	.string "no room.$"
 
 Double1Puzzle_NotEnoughMons::
-# 353 "data/maps/EscapeRoom/scripts.pory"
+# 365 "data/maps/EscapeRoom/scripts.pory"
 	.string "Want to battle? You should first get a\n"
 	.string "second Pokémon.$"
 
 Double1Puzzle_Intro::
-# 357 "data/maps/EscapeRoom/scripts.pory"
+# 369 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck have no fun.$"
 
 Double1Puzzle_Outro::
-# 361 "data/maps/EscapeRoom/scripts.pory"
+# 373 "data/maps/EscapeRoom/scripts.pory"
 	.string "Fuck.$"
 
 Double1Puzzle_PostBattle::
-# 365 "data/maps/EscapeRoom/scripts.pory"
+# 377 "data/maps/EscapeRoom/scripts.pory"
 	.string "We're done now.$"
 
 Nurse_Heal_End::
-# 369 "data/maps/EscapeRoom/scripts.pory"
+# 381 "data/maps/EscapeRoom/scripts.pory"
 	.string "I healed your Pokémon!$"
 
 Double1Puzzle_Heal::
-# 373 "data/maps/EscapeRoom/scripts.pory"
+# 385 "data/maps/EscapeRoom/scripts.pory"
 	.string "Let us heal your Pokémon.$"
 
 SmeargleMessageInitial::
-# 377 "data/maps/EscapeRoom/scripts.pory"
+# 389 "data/maps/EscapeRoom/scripts.pory"
 	.string "I love Smeargle. Show me the perfect\n"
 	.string "Smeargle.$"
 
 SmeargleMessagePerfect::
-# 381 "data/maps/EscapeRoom/scripts.pory"
+# 393 "data/maps/EscapeRoom/scripts.pory"
 	.string "That is it! That is the perfect\n"
 	.string "Smeargle!$"
 
 SmeargleMessageBad::
-# 385 "data/maps/EscapeRoom/scripts.pory"
+# 397 "data/maps/EscapeRoom/scripts.pory"
 	.string "Ew no, that Smeargle looks horrible. I\n"
 	.string "asked for the perfect Smeargle.$"
 
 SmeargleMessageConfusedButGood::
-# 389 "data/maps/EscapeRoom/scripts.pory"
+# 401 "data/maps/EscapeRoom/scripts.pory"
 	.string "I do not know how you managed to obtain\n"
 	.string "this Smeargle already.$"
 
 SmeargleMessageCompleted::
-# 393 "data/maps/EscapeRoom/scripts.pory"
+# 405 "data/maps/EscapeRoom/scripts.pory"
 	.string "You have brightened my day. Thank you.$"
 
 PerishNPCexplain::
-# 397 "data/maps/EscapeRoom/scripts.pory"
+# 409 "data/maps/EscapeRoom/scripts.pory"
 	.string "Did you know? In competitive battles,\n"
 	.string "if both players are down to their final\l"
 	.string "Pokémon and Perish Song counts down,\l"
@@ -509,31 +519,43 @@ PerishNPCexplain::
 	.string "the winner! Isn’t that fun?$"
 
 Single1Puzzle_Intro::
-# 401 "data/maps/EscapeRoom/scripts.pory"
+# 413 "data/maps/EscapeRoom/scripts.pory"
 	.string "Did you try to fight the duo at the exit\n"
 	.string "already? I think one of their Pokémon\l"
 	.string "is hiding something.$"
 
 Single1Puzzle_Outro::
-# 405 "data/maps/EscapeRoom/scripts.pory"
+# 417 "data/maps/EscapeRoom/scripts.pory"
 	.string "Here, this should help you beat the final duo.$"
 
 Single1Puzzle_PostBattle::
-# 409 "data/maps/EscapeRoom/scripts.pory"
+# 421 "data/maps/EscapeRoom/scripts.pory"
 	.string "You can beat them. I believe in you!$"
 
 Single2Puzzle_Intro::
-# 413 "data/maps/EscapeRoom/scripts.pory"
+# 425 "data/maps/EscapeRoom/scripts.pory"
 	.string "You think you better than me?$"
 
 Single2Puzzle_Outro::
-# 417 "data/maps/EscapeRoom/scripts.pory"
+# 429 "data/maps/EscapeRoom/scripts.pory"
 	.string "Okay. I'm impressed.$"
 
 Single2Puzzle_PostBattle::
-# 421 "data/maps/EscapeRoom/scripts.pory"
+# 433 "data/maps/EscapeRoom/scripts.pory"
 	.string "Good luck getting out!$"
 
 Single2Puzzle_Heal::
-# 425 "data/maps/EscapeRoom/scripts.pory"
+# 437 "data/maps/EscapeRoom/scripts.pory"
 	.string "Let me heal your Pokémon$"
+
+Single3Puzzle_Intro::
+# 441 "data/maps/EscapeRoom/scripts.pory"
+	.string "You can run but you can't hide.$"
+
+Single3Puzzle_Outro::
+# 445 "data/maps/EscapeRoom/scripts.pory"
+	.string "I'm not sure you wanted to do that.$"
+
+Single3Puzzle_PostBattle::
+# 449 "data/maps/EscapeRoom/scripts.pory"
+	.string "Sooo...$"

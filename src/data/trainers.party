@@ -16957,3 +16957,19 @@ EVs: 252 HP / 252 Atk
 Adamant Nature  
 IVs: 0 Spe  
 - Tackle
+
+=== TRAINER_MY_CUSTOM_SINGLE_BATTLE3 ===
+Name: Oomf
+Class: Hex Maniac
+Pic: Hex Maniac
+Gender: Female
+Music: Intense
+Double Battle: No
+AI: AI_FLAG_SEQUENCE_SWITCHING
+
+Qwilfish @ ITEM_GREAT_BALL
+Ability: Swift Swim
+Level: 6  
+EVs: 236 Atk / 64 Def  
+Adamant Nature  
+- Double-Edge
