@@ -42433,13 +42433,13 @@ F_TRAINER_FEMALE |
 #line 16970
             .heldItem = ITEM_GREAT_BALL,
 #line 16973
-            .ev = TRAINER_PARTY_EVS(0, 236, 64, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(100, 236, 64, 0, 0, 0),
 #line 16975
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16971
-            .ability = ABILITY_INTIMIDATE,
+            .ability = ABILITY_SWIFT_SWIM,
 #line 16972
-            .lvl = 6,
+            .lvl = 8,
 #line 16974
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

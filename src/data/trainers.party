@@ -16967,9 +16967,9 @@ Music: Intense
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Qwilfish @ ITEM_GREAT_BALL
-Ability: Swift Swim
-Level: 6  
-EVs: 236 Atk / 64 Def  
+Qwilfish @ Great Ball  
+Ability: Swift Swim  
+Level: 8  
+EVs: 100 HP / 236 Atk / 64 Def  
 Adamant Nature  
 - Double-Edge
