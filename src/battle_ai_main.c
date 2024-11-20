@@ -37,6 +37,8 @@ static u32 ChooseMoveOrAction_Doubles(u32 battlerAi);
 static inline void BattleAI_DoAIProcessing(struct AI_ThinkingStruct *aiThink, u32 battlerAi, u32 battlerDef);
 static bool32 IsPinchBerryItemEffect(u32 holdEffect);
 
+static bool32 noValidMovesBackup[MAX_BATTLERS_COUNT];
+
 // ewram
 EWRAM_DATA const u8 *gAIScriptPtr = NULL;   // Still used in contests
 EWRAM_DATA u8 sBattler_AI = 0;
@@ -284,9 +286,23 @@ u32 BattleAI_ChooseMoveOrAction(void)
     else
         ret = ChooseMoveOrAction_Doubles(sBattler_AI);
 
+    // ADDED
+    // backup the noValidMoves flags
+    s32 i;
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        noValidMovesBackup[i] = gProtectStructs[i].noValidMoves;
+
     // Clear protect structures, some flags may be set during AI calcs
     // e.g. pranksterElevated from GetMovePriority
     memset(&gProtectStructs, 0, MAX_BATTLERS_COUNT * sizeof(struct ProtectStruct));
+
+    // ADDED
+    // restore the noValidMoves flags
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+        gProtectStructs[i].noValidMoves = noValidMovesBackup[i];
+
+
+
     #if TESTING
     TestRunner_Battle_CheckAiMoveScores(sBattler_AI);
     #endif // TESTING

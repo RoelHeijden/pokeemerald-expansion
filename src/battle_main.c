@@ -4258,8 +4258,7 @@ static void HandleTurnActionSelectionState(void)
             break;
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.  e.g. run/fight/pokemon/bag
             // ADDED
-            // wait for player to select it's moves. Only then the AI gets to move
-            // recalculate AI scores
+            // wait for player to select it's moves. Only then the AI gets to move recalculate AI scores
             if (battler == 1 || battler == 3) // if AI's pokemon
             {
                 if (!gPlayerMovesChosen)  // break if player has not yet chosen all their moves
