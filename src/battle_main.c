@@ -4197,7 +4197,10 @@ static void HandleTurnActionSelectionState(void)
 
             // ADDED
             gPlayerMovesChosen = 0; // reset flag
-            gBattleStruct->chosenMovePositions[battler] = MOVE_NONE;  // reset chosenMove
+
+            // this was for the protect targeting bugfix
+            // caused the Dig bug, and removing this does not seem to bring back the protect targeting bug, so...
+            // gBattleStruct->chosenMovePositions[battler] = MOVE_NONE;  // reset chosenMove
 
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4258,7 +4261,8 @@ static void HandleTurnActionSelectionState(void)
             break;
         case STATE_WAIT_ACTION_CHOSEN: // Try to perform an action.  e.g. run/fight/pokemon/bag
             // ADDED
-            // wait for player to select it's moves. Only then the AI gets to move recalculate AI scores
+            // wait for player to select it's moves. Only then the AI gets to move 
+            // recalculate AI scores
             if (battler == 1 || battler == 3) // if AI's pokemon
             {
                 if (!gPlayerMovesChosen)  // break if player has not yet chosen all their moves
