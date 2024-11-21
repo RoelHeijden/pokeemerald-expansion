@@ -2,7 +2,7 @@
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: CaveHole_FixCrackedGround
+    MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
     MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScripts_SetHoleWarp
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScripts_PlayStartMessage
@@ -14,6 +14,18 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
     ] 
+}
+
+script EscapeRoom_MapScript_OnTransitionScripts{
+    call(EscapeRoom_MapScript_KeepDouble1Moved)
+    call(CaveHole_FixCrackedGround)
+}
+
+script EscapeRoom_MapScript_KeepDouble1Moved {
+    if(flag(FLAG_DOUBLE1_COMPLETED)){
+        setobjectxyperm(1, 6, 11)
+        setobjectxyperm(2, 6, 10)
+    }
 }
 
 script EscapeRoom_MapScripts_SetHoleWarp{
@@ -164,25 +176,6 @@ script EscapeRoom_Wild_Shedinja{
     )
     dowildbattle
     setflag(FLAG_TOGGLE_BAG_USE)
-}
-
-script EscapeRoom_EventScript_DoubleBattle1{
-    trainerbattle_double(
-        TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
-        Double1Puzzle_Intro, 
-        Double1Puzzle_Outro, 
-        Double1Puzzle_NotEnoughMons,
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
-    )
-    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
-    waitmessage
-    end
-}
-
-script EscapeRoom_EventScript_PostMatchHeal{
-    // fadescreen(FADE_TO_BLACK)
-    special(HealPlayerParty)
-    // fadescreen(FADE_FROM_BLACK)
 }
 
 script EscapeRoom_EventScript_FindRareCandy{
@@ -364,11 +357,6 @@ script EscapeRoom_EventScript_SingleBattle1{
     end
 }
 
-script EscapeRoom_EventScript_GetSitrusBerriesAndHeal{
-    call(EscapeRoom_EventScript_PostMatchHeal)
-    giveitem(ITEM_SITRUS_BERRY, 99)
-}
-
 script EscapeRoom_EventScript_SingleBattle2{
     trainerbattle_single(
         TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
@@ -392,6 +380,50 @@ script EscapeRoom_EventScript_SingleBattle3{
     msgbox(Single3Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
+}
+
+script EscapeRoom_EventScript_DoubleBattle1{
+    trainerbattle_double(
+        TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
+        Double1Puzzle_Intro, 
+        Double1Puzzle_Outro, 
+        Double1Puzzle_NotEnoughMons,
+        event_script=EscapeRoom_EventScript_Double1WalkAwayAndHeal,
+    )
+    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Double1WalkAwayAndHeal{
+    lockall
+    msgbox(Double1Finalwords)
+    waitmessage
+    applymovement(1, EscapeRoom_Movement_Double1End)
+    applymovement(2, EscapeRoom_Movement_Double1End)
+    waitmovement(0)
+    copyobjectxytoperm(1)
+    copyobjectxytoperm(2)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+    setflag(FLAG_DOUBLE1_COMPLETED)
+    releaseall
+    end
+}
+
+movement EscapeRoom_Movement_Double1End{
+    walk_left * 3
+    face_right
+}
+
+script EscapeRoom_EventScript_PostMatchHeal{
+    // fadescreen(FADE_TO_BLACK)
+    special(HealPlayerParty)
+    // fadescreen(FADE_FROM_BLACK)
+}
+
+script EscapeRoom_EventScript_GetSitrusBerriesAndHeal{
+    call(EscapeRoom_EventScript_PostMatchHeal)
+    giveitem(ITEM_SITRUS_BERRY, 99)
 }
 
 script EscapeRoom_EventScript_BikeShop{
@@ -477,6 +509,22 @@ script EscapeRoom_EventScript_PerishExplain_NPC{
     releaseall
 }
 
+script EscapeRoom_EventScript_EndEscapeRoomSign{
+    lockall
+    if(!flag(FLAG_END_ESCAPE_ROOM)){
+        setflag(FLAG_END_ESCAPE_ROOM)
+        playfanfare(MUS_OBTAIN_BADGE)
+        msgbox(EscapeRoomEndCongratz)
+        waitfanfare
+    }
+    else{
+        msgbox(EscapeRoomEndCongratz)
+        waitmessage
+    }
+    msgbox(EndEscapeRoomSignMessage)
+    waitmessage
+    releaseall
+}
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -498,6 +546,10 @@ text Double1Puzzle_Intro{
 
 text Double1Puzzle_Outro{
     "Fuck."
+}
+
+text Double1Finalwords{
+    "Congratulations! You've done it."
 }
 
 text Double1Puzzle_PostBattle{
@@ -614,14 +666,29 @@ text GardevoirLearntDisable{
     "Gardevoir learned Disable!"
 }
 
-text SilentNPCMessage{
-    "..."
-}
-
 text BikeShopHelloMessage{
     "Hi, how can I help you?"
 }
 
 text BikeShoptGoodbyeMessage{
     "Please come again!" 
+}
+
+text SilentNPCMessage{
+    "..."
+}
+
+text NuggetNPCmessage{
+    "Have you seen my nuggets?"
+}
+
+text missdirectNPCmessage{
+    "I love a good misdirection."
+}
+text EscapeRoomEndCongratz{
+    "Congratulations!"
+}
+
+text EndEscapeRoomSignMessage{
+    "You have beaten the escape room!"
 }

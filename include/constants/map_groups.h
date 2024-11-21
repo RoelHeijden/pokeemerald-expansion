@@ -66,6 +66,7 @@
 #define MAP_ESCAPE_ROOM            (57 | (0 << 8))
 #define MAP_ESCAPE_ROOM_INDOOR     (58 | (0 << 8))
 #define MAP_ESCAPE_ROOM_ICE_PUZZLE (59 | (0 << 8))
+#define MAP_ESCAPE_ROOM_OUTDOOR    (60 | (0 << 8))
 
 // gMapGroup_IndoorLittleroot
 #define MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_1F    (0 | (1 << 8))

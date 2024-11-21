@@ -95,7 +95,8 @@
     "Underwater_Route125",
     "EscapeRoom",
     "EscapeRoom_Indoor",
-    "EscapeRoom_IcePuzzle"
+    "EscapeRoom_IcePuzzle",
+    "EscapeRoomOutdoor"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

@@ -52,8 +52,8 @@
 #define FLAG_SINGLE_BATTLE3             0x27
 #define FLAG_PAIN_SPLIT_OBTAINED        0x28
 #define FLAG_DISABLE_TAUGHT             0x29
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
-#define FLAG_UNUSED_0x02B    0x2B // Unused Flag
+#define FLAG_DOUBLE1_COMPLETED          0x2A
+#define FLAG_END_ESCAPE_ROOM            0x2B
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag

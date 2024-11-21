@@ -4440,6 +4440,16 @@
       "secondary_tileset": "gTileset_MirageTower",
       "border_filepath": "data/layouts/EscapeRoom_IcePuzzle/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_IcePuzzle/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM_OUTDOOR",
+      "name": "EscapeRoomOutdoor_Layout",
+      "width": 11,
+      "height": 11,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Slateport",
+      "border_filepath": "data/layouts/EscapeRoomOutdoor/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoomOutdoor/map.bin"
     }
   ]
 }
