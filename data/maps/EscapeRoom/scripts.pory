@@ -87,8 +87,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_IRON_BALL)
-    additem(ITEM_MACH_BIKE)
-    additem(ITEM_NUGGET, 14)
+    additem(ITEM_NUGGET, 13)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
@@ -101,7 +100,6 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
-
 
 script EscapeRoom_EventScript_TestSign {
     lockall
@@ -174,31 +172,23 @@ script EscapeRoom_EventScript_DoubleBattle1{
         Double1Puzzle_Intro, 
         Double1Puzzle_Outro, 
         Double1Puzzle_NotEnoughMons,
-        event_script=EscapeRoom_EventScript_PostDouble1Heal,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
 
-script EscapeRoom_EventScript_PostDouble1Heal{
-    msgbox(Double1Puzzle_Heal, MSGBOX_AUTOCLOSE)
-    fadescreen(FADE_TO_BLACK)
+script EscapeRoom_EventScript_PostMatchHeal{
+    // fadescreen(FADE_TO_BLACK)
     special(HealPlayerParty)
-    fadescreen(FADE_FROM_BLACK)
-}
-
-script EscapeRoom_EventScript_PostSingle2Heal{
-    msgbox(Single2Puzzle_Heal, MSGBOX_AUTOCLOSE)
-    fadescreen(FADE_TO_BLACK)
-    special(HealPlayerParty)
-    fadescreen(FADE_FROM_BLACK)
+    // fadescreen(FADE_FROM_BLACK)
 }
 
 script EscapeRoom_EventScript_FindRareCandy{
     lockall
     giveitem(ITEM_RARE_CANDY)
-    removeobject(1)
+    removeobject(2)
     setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
 }
@@ -206,7 +196,7 @@ script EscapeRoom_EventScript_FindRareCandy{
 script EscapeRoom_EventScript_FindNugget2{
     lockall
     giveitem(ITEM_NUGGET)
-    removeobject(1)
+    removeobject(9)
     setflag(FLAG_NUGGET2_OBTAINED)
     releaseall
 }
@@ -216,6 +206,14 @@ script EscapeRoom_EventScript_FindNugget3{
     giveitem(ITEM_NUGGET)
     removeobject(1)
     setflag(FLAG_NUGGET3_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindPainSplit{
+    lockall
+    giveitem(ITEM_TM_PAIN_SPLIT)
+    removeobject(13)
+    setflag(FLAG_PAIN_SPLIT_OBTAINED)
     releaseall
 }
 
@@ -352,14 +350,6 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
         msgbox(TradeDeclinedMessage)
     }
 }
-    
-script EscapeRoom_EventScript_PerishExplain_NPC{
-    lockall
-    faceplayer
-    msgbox(PerishNPCexplain)
-    waitmessage
-    releaseall
-}
 
 script EscapeRoom_EventScript_SingleBattle1{
     faceplayer
@@ -367,14 +357,15 @@ script EscapeRoom_EventScript_SingleBattle1{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
         Single1Puzzle_Intro, 
         Single1Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_GetSitrusBerries,
+        event_script=EscapeRoom_EventScript_GetSitrusBerriesAndHeal,
     )
     msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
 
-script EscapeRoom_EventScript_GetSitrusBerries{
+script EscapeRoom_EventScript_GetSitrusBerriesAndHeal{
+    call(EscapeRoom_EventScript_PostMatchHeal)
     giveitem(ITEM_SITRUS_BERRY, 99)
 }
 
@@ -383,7 +374,7 @@ script EscapeRoom_EventScript_SingleBattle2{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
         Single2Puzzle_Intro, 
         Single2Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostSingle2Heal,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -396,15 +387,98 @@ script EscapeRoom_EventScript_SingleBattle3{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE3, 
         Single3Puzzle_Intro, 
         Single3Puzzle_Outro, 
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single3Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
 
-////////////////////////////////////////// TEXT //////////////////////////////////////////
+script EscapeRoom_EventScript_BikeShop{
+    lockall
+    faceplayer
+    msgbox(BikeShopHelloMessage)
+    waitmessage
+    pokemart(EscapeRoom_Mart_BikeShop)
+    msgbox(BikeShoptGoodbyeMessage)
+    waitmessage
+    releaseall
+    end
+}
 
-// use format("my text") to auto format long text messages
+mart EscapeRoom_Mart_BikeShop{
+    ITEM_MACH_BIKE
+}
+
+script EscapeRoom_EventScript_HeartscaleTutor{
+    lockall
+    faceplayer
+    msgbox(MoveTutorStartMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    checkitem(ITEM_HEART_SCALE)
+    if(var(VAR_RESULT) == FALSE){
+        msgbox(MoveTutorNoHeartScales, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        checkpartymove(MOVE_TRICK_ROOM)
+        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_GARDEVOIR){  // player has Gardevoir
+            msgbox(AskTeachGardevoirDisable, MSGBOX_YESNO)
+            waitmessage
+            if (var(VAR_RESULT) == YES){  // TEACH DISABLE
+                checkpartymove(MOVE_TRICK_ROOM)
+                if (var(VAR_RESULT) == 0){
+                    setmonmove(0, 2, MOVE_DISABLE)
+                }
+                elif (var(VAR_RESULT) == 1){
+                    setmonmove(1, 2, MOVE_DISABLE)
+                }
+                else{
+                    msgbox("something went wrong.")
+                    releaseall
+                    end
+                }
+                removeitem(ITEM_HEART_SCALE, 1)
+                playfanfare(MUS_LEVEL_UP)
+                msgbox(GardevoirLearntDisable)
+                waitmessage
+
+                setflag(FLAG_DISABLE_TAUGHT)
+                msgbox(MoveTutorTaughtDisable, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            else{
+                msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+        else{  // player has no Gardevoir
+            msgbox(MoveTutorNoSuitablePokemonMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_CreepySilentNPC{
+    lock
+    faceplayer
+    msgbox(SilentNPCMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_PerishExplain_NPC{
+    lockall
+    faceplayer
+    msgbox(PerishNPCexplain)
+    waitmessage
+    releaseall
+}
+
+
+////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
     "Good luck."
@@ -414,16 +488,8 @@ text SignMessage1{
     "Fock off mate."
 }
 
-text SmeargleObtainedMsg{
-    "Oh shit it's a Smeargle."
-}
-
-text NoRoomMsg{
-    "no room."
-}
-
 text Double1Puzzle_NotEnoughMons{
-    format("Want to battle? You should first get a second Pokémon.")
+    format("Want to battle? You should first get a second POKéMON.")
 }
 
 text Double1Puzzle_Intro{
@@ -439,34 +505,30 @@ text Double1Puzzle_PostBattle{
 }
 
 text Nurse_Heal_End{
-    "I healed your Pokémon!"
-}
-
-text Double1Puzzle_Heal{
-    "Let us heal your Pokémon."
+    "I healed your POKéMON!"
 }
 
 text SmeargleMessageInitial{
-    format("I love Smeargle. Show me the perfect Smeargle.")
+    format("I love SMEARGLE. Show me the perfect SMEARGLE.")
 }
 
 text SmeargleMessageBad{
-    format("Ew no, that Smeargle looks horrible. I asked for the perfect Smeargle.")
+    format("Ew no, that SMEARGLE looks horrible. I asked for the perfect SMEARGLE.")
 }
 
 text SmeargleMessagePerfect{
     "That is it! That is the perfect\n"
-    "Smeargle!\p"
+    "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty Gothita for my Gardevoir.\p"
+    "your shitty GOTHITA for my GARDEVOIR.\p"
     "Do you want to trade?"
 }
 
 text SmeargleMessagePerfectButGothitaInBox{
     "That is it! That is the perfect\n"
-    "Smeargle!\p"
+    "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty Gothita for my Gardevoir.\p"
+    "your shitty GotGOTHITAhita for my GARDEVOIR.\p"
     "Oh, where did it go?"
 }
 
@@ -479,15 +541,15 @@ text TradeDeclinedMessage{
 }
 
 text SmeargleMessageCompleted{
-    format("I don't think I like this Gothita...")
+    format("I don't think I like this GOTHITA...")
 }
 
 text PerishNPCexplain{
-    format("Did you know? In competitive battles, if both players are down to their final Pokémon and Perish Song counts down, the Pokémon to faint last is declared the winner! Isn’t that fun?")
+    format("Did you know? In competitive battles, if both players are down to their final POKéMON and PERISH SONG counts down, the POKéMON to faint last is declared the winner! Isn’t that fun?")
 }
 
 text Single1Puzzle_Intro{
-    format("Did you try to fight the duo at the exit already? I think one of their Pokémon is hiding something.")
+    format("Did you try to fight the duo at the exit already? I think one of their POKéMON is hiding something.")
 }
 
 text Single1Puzzle_Outro{
@@ -510,18 +572,56 @@ text Single2Puzzle_PostBattle{
     "Good luck getting out!"
 }
 
-text Single2Puzzle_Heal{
-    "Let me heal your Pokémon"
-}
-
 text Single3Puzzle_Intro{
     format("You can run but you can't hide.")
 }
 
 text Single3Puzzle_Outro{
-    "I'm not sure you wanted to do that."
+    format("I'm not sure if you wanted to do that.")
 }
 
 text Single3Puzzle_PostBattle{
     "Sooo..."
+}
+
+text MoveTutorNoHeartScales{
+    "Oh you don't have any."
+}
+
+text MoveTutorStartMessage{
+    "Can I have your HEART SCALES?\n"
+    "I can teach your POKéMON a new move\l"
+    "if you'd like."
+}
+
+text AskTeachGardevoirDisable{
+    format("Do you want me to teach DISABLE to your GARDEVOIR?")
+}
+
+text MoveTutorNoSuitablePokemonMessage{
+    format("Sorry, none of your POKéMON can learn the moves I teach.")
+}
+
+text MoveTutorTaughtDisable{
+    "Good choice."
+}
+
+text MoveTutorTradeDeclined{
+    format("Come back if you change your mind.")
+}
+
+text GardevoirLearntDisable{
+    "Gardevoir learned Disable!"
+}
+
+text SilentNPCMessage{
+    "..."
+}
+
+text BikeShopHelloMessage{
+    "Hi, how can I help you?"
+}
+
+text BikeShoptGoodbyeMessage{
+    "Please come again!" 
 }

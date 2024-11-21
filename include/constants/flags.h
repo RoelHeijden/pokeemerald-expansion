@@ -50,8 +50,8 @@
 #define FLAG_SINGLE_BATTLE1             0x25
 #define FLAG_SINGLE_BATTLE2             0x26 
 #define FLAG_SINGLE_BATTLE3             0x27
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
+#define FLAG_PAIN_SPLIT_OBTAINED        0x28
+#define FLAG_DISABLE_TAUGHT             0x29
 #define FLAG_UNUSED_0x02A    0x2A // Unused Flag
 #define FLAG_UNUSED_0x02B    0x2B // Unused Flag
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag

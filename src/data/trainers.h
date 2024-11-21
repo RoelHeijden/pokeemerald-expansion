@@ -42431,7 +42431,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_QWILFISH,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16970
-            .heldItem = ITEM_GREAT_BALL,
+            .heldItem = ITEM_TM18,
 #line 16973
             .ev = TRAINER_PARTY_EVS(100, 236, 64, 0, 0, 0),
 #line 16975
