@@ -10208,6 +10208,17 @@ static inline s32 DoMoveDamageCalcVars(u32 move, u32 battlerAtk, u32 battlerDef,
         dmg /= 100;
     }
 
+    // ADDED
+    // return 1 damage if Scrafty punches into Gardevoir
+    // for some reason it doesn't reflect the gen 9 dmg calc for this roll
+    if ((move == MOVE_DRAIN_PUNCH) || (move == MOVE_BRICK_BREAK)){
+        if ((gBattleMons[battlerDef].species == SPECIES_GARDEVOIR) && (gBattleMons[battlerAtk].species == SPECIES_SCRAFTY)){
+            dmg = 1;
+            return dmg;
+        }   
+    }
+
+
     if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
         DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(battlerAtk, moveType));
     else

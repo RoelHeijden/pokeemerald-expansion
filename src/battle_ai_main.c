@@ -5477,15 +5477,25 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     switch (move)
     {
         case MOVE_DRAIN_PUNCH:
+            // TEST: avoid protect
+            if (targetProtectingItself){
+                score = 69;
+                return score;
+            }
             // target smeargle, alternate with brick break
-            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH) 
+            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
                 score = 155;
             break;
 
         case MOVE_BRICK_BREAK:
+            // TEST: avoid protect
+            if (targetProtectingItself){
+                score = 69;
+                return score;
+            }
             // target smeargle, alternate with drain punch
             if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-                score = 155; 
+                score = 155;
             break;
 
         case MOVE_PERISH_SONG:
