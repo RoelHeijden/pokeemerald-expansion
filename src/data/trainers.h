@@ -42324,7 +42324,7 @@ F_TRAINER_FEMALE |
 #line 16931
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
 #line 16933
-            .iv = TRAINER_PARTY_IVS(0, 31, 31, 0, 31, 31),
+            .iv = TRAINER_PARTY_IVS(24, 31, 31, 0, 31, 31),
 #line 16929
             .ability = ABILITY_PRESSURE,
 #line 16930
