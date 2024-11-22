@@ -1139,6 +1139,29 @@
 	.2byte \move
 	.endm
 
+    @ Checks if the Pokemon in the specified party slot is holding an item. 
+    @ If so, VAR_RESULT is set to 1, otherwise it is set to 0.
+    @ VAR_0x8004 is also set to the ID of the held item if an item is held.
+	.macro checkpartyitem slot:req
+	.byte 0xe5
+	.byte \slot
+	.endm
+
+	@ Removes the held item of a Pokémon in the given party slot. 
+	@ VAR_RESULT is set to 1 if successful, 0 otherwise.
+	.macro removepartyitem slot:req
+	.byte 0xe6
+	.byte \slot
+	.endm
+
+	@ Checks which moveslot a move is learned given a party slot and move.
+	@ VAR_RESULT is set to the moveslot idx.
+	.macro checkpartymoveslot slot:req, move:req
+    .byte 0xe7
+    .2byte \slot
+    .2byte \move
+	.endm
+
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
 	@ If given anything else it will output it directly.
 	@ Note: Because the STR_VAR_# arguments given to this macro are not part of a processed string they are not

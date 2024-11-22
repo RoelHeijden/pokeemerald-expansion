@@ -1869,6 +1869,87 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+// get moveslot of learned move
+bool8 ScrCmd_checkpartymoveslot(struct ScriptContext *ctx)
+{
+    u16 i;
+    u8 slot = ScriptReadByte(ctx);
+    u16 moveId = ScriptReadHalfword(ctx); 
+
+    gSpecialVar_Result = PARTY_SIZE;
+
+    if (slot < PARTY_SIZE)
+    {
+        u16 species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES, NULL);
+        if (species && !GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
+        {
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + i) == moveId)
+                    gSpecialVar_Result = i;
+            }
+        }
+    }
+    return FALSE;
+}
+
+// ADDED
+// check what item is held by a pokemon
+bool8 ScrCmd_checkpartyitem(struct ScriptContext *ctx)
+{
+    u8 slot = ScriptReadByte(ctx); 
+    u16 item;
+
+    gSpecialVar_Result = 0; 
+    if (slot < PARTY_SIZE)
+    {
+        u16 species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES, NULL);
+        if (species && !GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
+        {
+            item = GetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM, NULL);
+            if (item != ITEM_NONE) 
+            {
+                gSpecialVar_Result = 1; 
+                gSpecialVar_0x8004 = item; 
+            }
+        }
+    }
+    return FALSE;
+}
+
+// ADDED
+// removes the held item of a Pokémon in the specified party slot
+bool8 ScrCmd_removepartyitem(struct ScriptContext *ctx)
+{
+    u8 slot = ScriptReadByte(ctx);
+    gSpecialVar_Result = 0; // Default to failure
+    
+    if (slot < PARTY_SIZE)
+    {
+        u16 species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES, NULL);
+        if (species && !GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
+        {
+            u16 item = GetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM, NULL);
+            if (item != ITEM_NONE)
+            {
+                SetMonData(&gPlayerParty[slot], MON_DATA_HELD_ITEM, &gSpecialVar_Result); // set held item to ITEM_NONE
+                gSpecialVar_Result = 1;
+            }
+        }
+    }
+    return FALSE;
+}
+
+
+
+
+
+
+
+
+
+
 bool8 ScrCmd_addmoney(struct ScriptContext *ctx)
 {
     u32 amount = ScriptReadWord(ctx);

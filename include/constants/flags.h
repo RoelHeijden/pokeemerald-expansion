@@ -54,7 +54,7 @@
 #define FLAG_DISABLE_TAUGHT             0x29
 #define FLAG_DOUBLE1_COMPLETED          0x2A
 #define FLAG_END_ESCAPE_ROOM            0x2B
-#define FLAG_UNUSED_0x02C    0x2C // Unused Flag
+#define FLAG_TM_18_STOLEN               0x2C 
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
