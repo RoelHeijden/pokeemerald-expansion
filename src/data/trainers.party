@@ -16906,7 +16906,7 @@ Name: Roel
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
-Music: Rich
+Music: Intense
 Double Battle: No
 AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
@@ -16935,7 +16935,7 @@ IVs: 24 HP / 0 Spe
 - Shadow Sneak  
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
-Name: Sable
+Name: Tect
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
@@ -16963,7 +16963,7 @@ Name: Rose Un
 Class: Triathlete
 Pic: Running Triathlete F
 Gender: Female
-Music: Female
+Music: Suspicious
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 

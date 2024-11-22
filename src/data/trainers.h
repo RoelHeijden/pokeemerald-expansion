@@ -42263,7 +42263,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_RICH_BOY,
         .encounterMusic_gender = 
 #line 16909
-            TRAINER_ENCOUNTER_MUSIC_RICH,
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 16910
         .doubleBattle = FALSE,
 #line 16911
@@ -42351,7 +42351,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender = 
 #line 16942
-            TRAINER_ENCOUNTER_MUSIC_COOL,
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 16943
         .doubleBattle = FALSE,
 #line 16944
@@ -42418,7 +42418,7 @@ F_TRAINER_FEMALE |
 #line 16965
 F_TRAINER_FEMALE | 
 #line 16966
-            TRAINER_ENCOUNTER_MUSIC_FEMALE,
+            TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
 #line 16967
         .doubleBattle = FALSE,
 #line 16968

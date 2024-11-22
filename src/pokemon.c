@@ -5751,6 +5751,12 @@ u16 GetBattleBGM(void)
         case TRAINER_CLASS_PIKE_QUEEN:
         case TRAINER_CLASS_PYRAMID_KING:
             return MUS_VS_FRONTIER_BRAIN;
+
+        // ADDED
+        // custom music for final double battle
+        case TRAINER_CLASS_SR_AND_JR:
+            return MUS_VS_ELITE_FOUR;
+
         default:
             return MUS_VS_TRAINER;
         }
