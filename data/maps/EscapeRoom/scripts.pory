@@ -3,7 +3,7 @@
 
 mapscripts EscapeRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
-    MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScripts_SetHoleWarp
+    MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScripts_OnResumeScripts
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_setNPCfacing
     ]
@@ -24,6 +24,27 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     call(CaveHole_FixCrackedGround)
 }
 
+script EscapeRoom_MapScripts_OnResumeScripts{
+    call(EscapeRoom_MapScripts_SetHoleWarp)
+
+}
+
+script EscapeRoom_MapScripts_FindGreatBallAferUse{
+    // flag for great ball used
+    // flag for pokemon caught
+
+    // if flag used && !pokemon caught
+    // get new great ball
+
+    end
+}
+
+
+script EscapeRoom_MapScripts_SetHoleWarp{
+    setstepcallback(STEP_CB_CRACKED_FLOOR)
+    setholewarp(MAP_ESCAPE_ROOM_ICE_PUZZLE)
+}
+
 script EscapeRoom_MapScript_setNPCfacing{
     turnobject(7, DIR_SOUTH)
     turnobject(11, DIR_EAST)
@@ -42,11 +63,6 @@ script EscapeRoom_MapScript_KeepDouble1Moved {
         setobjectxyperm(1, 6, 11)
         setobjectxyperm(2, 6, 10)
     }
-}
-
-script EscapeRoom_MapScripts_SetHoleWarp{
-    setstepcallback(STEP_CB_CRACKED_FLOOR)
-    setholewarp(MAP_ESCAPE_ROOM_ICE_PUZZLE)
 }
 
 script EscapeRoom_MapScripts_FixCrackedGround{
@@ -426,6 +442,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         warpteleport(MAP_ESCAPE_ROOM, 10, 26)
 
         // TBD: return money
+        removemoney(78999)
 
         // reset trainer flag
         cleartrainerflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3)
