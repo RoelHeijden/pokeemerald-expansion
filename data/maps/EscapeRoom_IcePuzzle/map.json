@@ -2,7 +2,7 @@
   "id": "MAP_ESCAPE_ROOM_ICE_PUZZLE",
   "name": "EscapeRoom_IcePuzzle",
   "layout": "LAYOUT_ESCAPE_ROOM_ICE_PUZZLE",
-  "music": "MUS_MT_PYRE_EXTERIOR",
+  "music": "MUS_ABNORMAL_WEATHER",
   "region_map_section": "MAPSEC_ESCAPE_ROOM_ICE_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

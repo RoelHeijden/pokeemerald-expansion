@@ -42344,14 +42344,14 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE2] =
     {
 #line 16938
-        .trainerName = _("Sable"),
+        .trainerName = _("Tect"),
 #line 16939
         .trainerClass = TRAINER_CLASS_COOLTRAINER,
 #line 16940
         .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender = 
 #line 16942
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_COOL,
 #line 16943
         .doubleBattle = FALSE,
 #line 16944
