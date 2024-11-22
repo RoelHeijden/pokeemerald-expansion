@@ -42189,12 +42189,12 @@ F_TRAINER_FEMALE |
 #line 16878
         .trainerName = _("Ur & Mom"),
 #line 16879
-        .trainerClass = TRAINER_CLASS_INTERVIEWER,
+        .trainerClass = TRAINER_CLASS_SR_AND_JR,
 #line 16880
-        .trainerPic = TRAINER_PIC_INTERVIEWER,
+        .trainerPic = TRAINER_PIC_SR_AND_JR,
         .encounterMusic_gender = 
 #line 16882
-            TRAINER_ENCOUNTER_MUSIC_INTERVIEWER,
+            TRAINER_ENCOUNTER_MUSIC_TWINS,
 #line 16883
         .doubleBattle = TRUE,
 #line 16884
@@ -42256,14 +42256,14 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE1] =
     {
 #line 16905
-        .trainerName = _("Donald"),
+        .trainerName = _("Roel"),
 #line 16906
-        .trainerClass = TRAINER_CLASS_EXPERT,
+        .trainerClass = TRAINER_CLASS_RICH_BOY,
 #line 16907
-        .trainerPic = TRAINER_PIC_EXPERT_M,
+        .trainerPic = TRAINER_PIC_RICH_BOY,
         .encounterMusic_gender = 
 #line 16909
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_RICH,
 #line 16910
         .doubleBattle = FALSE,
 #line 16911
@@ -42344,14 +42344,14 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE2] =
     {
 #line 16938
-        .trainerName = _("Tim"),
+        .trainerName = _("Sable"),
 #line 16939
-        .trainerClass = TRAINER_CLASS_EXPERT,
+        .trainerClass = TRAINER_CLASS_COOLTRAINER,
 #line 16940
-        .trainerPic = TRAINER_PIC_EXPERT_M,
+        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
         .encounterMusic_gender = 
 #line 16942
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_COOL,
 #line 16943
         .doubleBattle = FALSE,
 #line 16944
@@ -42409,16 +42409,16 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE3] =
     {
 #line 16962
-        .trainerName = _("Oomf"),
+        .trainerName = _("Rose Un"),
 #line 16963
-        .trainerClass = TRAINER_CLASS_HEX_MANIAC,
+        .trainerClass = TRAINER_CLASS_TRIATHLETE,
 #line 16964
-        .trainerPic = TRAINER_PIC_HEX_MANIAC,
+        .trainerPic = TRAINER_PIC_RUNNING_TRIATHLETE_F,
         .encounterMusic_gender = 
 #line 16965
 F_TRAINER_FEMALE | 
 #line 16966
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_FEMALE,
 #line 16967
         .doubleBattle = FALSE,
 #line 16968

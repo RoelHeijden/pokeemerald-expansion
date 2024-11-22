@@ -1712,8 +1712,8 @@
       "height": 1
     },
     {
-      "map_section": "MAPSEC_ESCAPE_ROOM_OUTDOOR",
-      "name": "TBD",
+      "map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
+      "name": "CAVE OF HAPPINESS",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1721,7 +1721,23 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_INDOOR",
-      "name": "TBD",
+      "name": "PLANTS?",
+      "x": 8,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "map_section": "MAPSEC_ESCAPE_ROOM_ICE_CAVE",
+      "name": "CAVE OF HAPPINESS",
+      "x": 8,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "map_section": "MAPSEC_ESCAPE_ROOM_OUTDOOR",
+      "name": "FREEDOM",
       "x": 8,
       "y": 4,
       "width": 1,

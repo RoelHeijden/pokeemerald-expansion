@@ -4,6 +4,9 @@
 mapscripts EscapeRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
     MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScripts_SetHoleWarp
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_setNPCfacing
+    ]
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScripts_PlayStartMessage
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
@@ -19,6 +22,19 @@ mapscripts EscapeRoom_MapScripts {
 script EscapeRoom_MapScript_OnTransitionScripts{
     call(EscapeRoom_MapScript_KeepDouble1Moved)
     call(CaveHole_FixCrackedGround)
+}
+
+script EscapeRoom_MapScript_setNPCfacing{
+    turnobject(7, DIR_SOUTH)
+    turnobject(11, DIR_EAST)
+    turnobject(12, DIR_NORTH)
+    turnobject(15, DIR_WEST)
+    turnobject(16, DIR_SOUTH)
+    turnobject(17, DIR_EAST)
+    turnobject(18, DIR_NORTH)
+    turnobject(19, DIR_WEST)
+    turnobject(20, DIR_SOUTH)
+    end
 }
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
@@ -432,7 +448,7 @@ script EscapeRoom_EventScript_BikeShop{
     msgbox(BikeShopHelloMessage)
     waitmessage
     pokemart(EscapeRoom_Mart_BikeShop)
-    msgbox(BikeShoptGoodbyeMessage)
+    msgbox(BikeShoptGoodbyeMessage, MSGBOX_AUTOCLOSE)
     waitmessage
     releaseall
     end
@@ -446,7 +462,6 @@ script EscapeRoom_EventScript_HeartscaleTutor{
     lockall
     faceplayer
     msgbox(MoveTutorStartMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
     checkitem(ITEM_HEART_SCALE)
     if(var(VAR_RESULT) == FALSE){
         msgbox(MoveTutorNoHeartScales, MSGBOX_AUTOCLOSE)
@@ -494,19 +509,75 @@ script EscapeRoom_EventScript_HeartscaleTutor{
 }
 
 script EscapeRoom_EventScript_CreepySilentNPC{
-    lock
+    lockall
     faceplayer
     msgbox(SilentNPCMessage, MSGBOX_AUTOCLOSE)
     waitmessage
+    releaseall
     end
 }
 
 script EscapeRoom_EventScript_PerishExplain_NPC{
     lockall
     faceplayer
-    msgbox(PerishNPCexplain)
+    msgbox(PerishNPCexplain, MSGBOX_AUTOCLOSE)
     waitmessage
     releaseall
+    end
+}
+
+script EscapeRoom_EventScript_someoneLockedUsUpNPC{
+    lockall
+    faceplayer
+    msgbox(someoneLockedUsUpNPCmessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_itemHintNPC{
+    lockall
+    faceplayer
+    msgbox(itemHintNPCmessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_NuggetNPC{
+    lockall
+    faceplayer
+    msgbox(NuggetNPCmessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_perfectSmeargleHintNPC{
+    lockall
+    faceplayer
+    msgbox(perfectSmeargleHintNPCmessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_icePuzzleHintNPC{
+    lockall
+    faceplayer
+    msgbox(icePuzzleHintNPCmessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_getOutOfHereNPC{
+    lockall
+    faceplayer
+    msgbox(getOutOfHereNPCmessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+    end
 }
 
 script EscapeRoom_EventScript_EndEscapeRoomSign{
@@ -526,51 +597,57 @@ script EscapeRoom_EventScript_EndEscapeRoomSign{
     releaseall
 }
 
+
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    "Good luck."
+    "TBD"
 }
 
 text SignMessage1{
-    "Fock off mate."
+    "TBD"
 }
 
 text Double1Puzzle_NotEnoughMons{
-    format("Want to battle? You should first get a second POKéMON.")
+    "Want to battle?\n"
+    "You should bring a second POKéMON."
 }
 
 text Double1Puzzle_Intro{
-    "Good luck have no fun."
+    "Sharing is caring. Didn't you know?\n"
+    "It's not as painful as it seems.\p"
+    "Everyone wins!"
 }
 
 text Double1Puzzle_Outro{
-    "Fuck."
+    "Oh...\n"
+    "How did you figure that out?"
 }
 
 text Double1Finalwords{
-    "Congratulations! You've done it."
+    "You've done it!"
 }
 
 text Double1Puzzle_PostBattle{
-    "We're done now."
+    "Alright, go on now."
 }
 
 text Nurse_Heal_End{
-    "I healed your POKéMON!"
+    "As good as new!"
 }
 
 text SmeargleMessageInitial{
-    format("I love SMEARGLE. Show me the perfect SMEARGLE.")
+    "I'm looking for the perfect SMEARGLE.\p"
+    "Have you got one??"
 }
 
 text SmeargleMessageBad{
-    format("Ew no, that SMEARGLE looks horrible. I asked for the perfect SMEARGLE.")
+    "Ew no, that SMEARGLE looks horrible.\n"
+    "I asked for the perfect SMEARGLE."
 }
 
 text SmeargleMessagePerfect{
-    "That is it! That is the perfect\n"
-    "SMEARGLE!\p"
+    "That is it! That's the perfect SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
     "your shitty GOTHITA for my GARDEVOIR.\p"
     "Do you want to trade?"
@@ -580,7 +657,7 @@ text SmeargleMessagePerfectButGothitaInBox{
     "That is it! That is the perfect\n"
     "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty GotGOTHITAhita for my GARDEVOIR.\p"
+    "your shitty GOTHITA for my GARDEVOIR.\p"
     "Oh, where did it go?"
 }
 
@@ -593,19 +670,29 @@ text TradeDeclinedMessage{
 }
 
 text SmeargleMessageCompleted{
-    format("I don't think I like this GOTHITA...")
+    "I don't think I like this GOTHITA very\n"
+    "much..."
 }
 
 text PerishNPCexplain{
-    format("Did you know? In competitive battles, if both players are down to their final POKéMON and PERISH SONG counts down, the POKéMON to faint last is declared the winner! Isn’t that fun?")
+    "Did you know?\p"
+    "In competitive battles, if both players\n"
+    "are at their final POKéMON when PERISH\l"
+    "counts to zero, the POKéMON to faint\l"
+    "last is declared the winner.\p"
+    "Isn’t that fun?"
 }
 
 text Single1Puzzle_Intro{
-    format("Did you try to fight the duo at the exit already? I think one of their POKéMON is hiding something.")
+    "Did you try to fight the duo at the exit\n"
+    "already?\p"
+    "I think one of their POKéMON is hiding\n"
+    "something..."
 }
 
 text Single1Puzzle_Outro{
-    "Here, this should help you beat the final duo."
+    "Here, this should help you beat that\n"
+    "final duo."
 }
 
 text Single1Puzzle_PostBattle{
@@ -613,23 +700,25 @@ text Single1Puzzle_PostBattle{
 }
 
 text Single2Puzzle_Intro{
-    format("You think you better than me?")
+    "Are you a skill trader?\n"
+    "You should probably invest more time\l"
+    "learning battle strategy!" 
 }
 
 text Single2Puzzle_Outro{
-    "Okay. I'm impressed."
+    "Okay, you've impressed me."
 }
 
 text Single2Puzzle_PostBattle{
-    "Good luck getting out!"
+    "You should probably get out of here."
 }
 
 text Single3Puzzle_Intro{
-    format("You can run but you can't hide.")
+    "You can run but you can't hide."
 }
 
 text Single3Puzzle_Outro{
-    format("I'm not sure if you wanted to do that.")
+    "I'm not sure I would've done that."
 }
 
 text Single3Puzzle_PostBattle{
@@ -642,8 +731,8 @@ text MoveTutorNoHeartScales{
 
 text MoveTutorStartMessage{
     "Can I have your HEART SCALES?\n"
-    "I can teach your POKéMON a new move\l"
-    "if you'd like."
+    "I can teach your POKéMON a new move if\l"
+    "you'd like."
 }
 
 text AskTeachGardevoirDisable{
@@ -674,21 +763,46 @@ text BikeShoptGoodbyeMessage{
     "Please come again!" 
 }
 
+text EscapeRoomEndCongratz{
+    "Congratulations!\n"
+    "You have beaten the escape room!"
+}
+
+text EndEscapeRoomSignMessage{
+    "TBD"
+}
+
 text SilentNPCMessage{
     "..."
 }
 
 text NuggetNPCmessage{
-    "Have you seen my nuggets?"
+    "Have you seen my NUGGETS?"
 }
 
-text missdirectNPCmessage{
-    "I love a good misdirection."
-}
-text EscapeRoomEndCongratz{
-    "Congratulations!"
+text itemHintNPCmessage{
+    "Unfortunately, items can’t be used in\n"
+    "trainer battles.\p"
+    "Maybe they have their uses elsewhere."
 }
 
-text EndEscapeRoomSignMessage{
-    "You have beaten the escape room!"
+text someoneLockedUsUpNPCmessage{
+    "Someone locked us in this cave for some\n"
+    "stupid puzzles or whatever.\p"
+    "What an asshole."
+}
+
+text perfectSmeargleHintNPCmessage{
+    "The perfect SMEARGLE?\n"
+    "That's gotta be a moveset thing right?"
+}
+
+text icePuzzleHintNPCmessage{
+    "I heard there's an ice puzzle in the cave\n"
+    "beneath us.\p"
+    "Don't expect to solve it right away."
+}
+
+text getOutOfHereNPCmessage{
+    "Please get us out of here..."
 }

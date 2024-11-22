@@ -16876,10 +16876,10 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MY_CUSTOM_DOUBLE_BATTLE1 ===
 Name: Ur & Mom
-Class: Interviewer
-Pic: Interviewer
+Class: Sr And Jr
+Pic: Sr And Jr
 Gender: Male
-Music: Interviewer
+Music: Twins
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
@@ -16902,11 +16902,11 @@ IVs: 0 HP / 0 Atk
 - Perish Song
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE1 ===
-Name: Donald
-Class: Expert
-Pic: Expert M
+Name: Roel
+Class: Rich Boy
+Pic: Rich Boy
 Gender: Male
-Music: Intense
+Music: Rich
 Double Battle: No
 AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
@@ -16935,11 +16935,11 @@ IVs: 24 HP / 0 Spe
 - Shadow Sneak  
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
-Name: Tim
-Class: Expert
-Pic: Expert M
+Name: Sable
+Class: Cooltrainer
+Pic: Cooltrainer M
 Gender: Male
-Music: Intense
+Music: Cool
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
@@ -16959,11 +16959,11 @@ IVs: 0 Spe
 - Tackle
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE3 ===
-Name: Oomf
-Class: Hex Maniac
-Pic: Hex Maniac
+Name: Rose Un
+Class: Triathlete
+Pic: Running Triathlete F
 Gender: Female
-Music: Intense
+Music: Female
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
