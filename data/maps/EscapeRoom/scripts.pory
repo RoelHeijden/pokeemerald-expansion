@@ -428,7 +428,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         // TBD: return money
 
         // reset trainer flag
-        clearflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3 + FLAG_TRAINER_FLAG_START)
+        cleartrainerflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3)
 
         // if item was stolen
         if(flag(FLAG_TM_18_STOLEN) == TRUE){
