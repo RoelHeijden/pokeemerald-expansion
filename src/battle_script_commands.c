@@ -7799,6 +7799,14 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
             moneyReward = 4 * lastMonLevel * gBattleStruct->moneyMultiplier * trainerMoney;
     }
 
+    // ADDED
+    // 0 money reward, except for snigle3
+    moneyReward = 0;
+    if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE3){
+        moneyReward = 78999;
+    }
+    DebugPrintf("trainedId: %d", trainerId);
+
     return moneyReward;
 }
 
