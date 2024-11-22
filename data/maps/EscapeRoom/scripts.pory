@@ -428,7 +428,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         // TBD: return money
 
         // reset trainer flag
-        clearflag(FLAG_SINGLE_BATTLE3)
+        clearflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3 + FLAG_TRAINER_FLAG_START)
 
         // if item was stolen
         if(flag(FLAG_TM_18_STOLEN) == TRUE){
@@ -447,19 +447,16 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
             checkpartymove(MOVE_RAIN_DANCE)
             if (var(VAR_RESULT) != PARTY_SIZE){ // move is learnt
                 if(var(VAR_RESULT) == 0){
-                    // checkpartymoveslot(0, MOVE_RAIN_DANCE)
-                    // copyvar(VAR_TEMP_1, VAR_RESULT)  
-                    // setmonmove(0, VAR_TEMP_1, MOVE_NONE)
                     setmonmove(0, 0, MOVE_THIEF)
                     setmonmove(0, 1, MOVE_HELPING_HAND)
                     setmonmove(0, 2, MOVE_NONE)
                     setmonmove(0, 3, MOVE_NONE)
                 }
                 elif(var(VAR_RESULT) == 1){
-                    setmonmove(0, 0, MOVE_THIEF)
-                    setmonmove(0, 1, MOVE_HELPING_HAND)
-                    setmonmove(0, 2, MOVE_NONE)
-                    setmonmove(0, 3, MOVE_NONE)
+                    setmonmove(1, 0, MOVE_THIEF)
+                    setmonmove(1, 1, MOVE_HELPING_HAND)
+                    setmonmove(1, 2, MOVE_NONE)
+                    setmonmove(1, 3, MOVE_NONE)
                 }
             }
             // reset item stolen flag
