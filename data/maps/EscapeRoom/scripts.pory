@@ -196,7 +196,7 @@ script EscapeRoom_Wild_Shedinja{
 
 script EscapeRoom_EventScript_FindRareCandy{
     lockall
-    giveitem(ITEM_RARE_CANDY)
+    finditem(ITEM_RARE_CANDY)
     removeobject(2)
     setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
@@ -204,7 +204,7 @@ script EscapeRoom_EventScript_FindRareCandy{
 
 script EscapeRoom_EventScript_FindNugget2{
     lockall
-    giveitem(ITEM_NUGGET)
+    finditem(ITEM_NUGGET)
     removeobject(9)
     setflag(FLAG_NUGGET2_OBTAINED)
     releaseall
@@ -212,7 +212,7 @@ script EscapeRoom_EventScript_FindNugget2{
 
 script EscapeRoom_EventScript_FindNugget3{
     lockall
-    giveitem(ITEM_NUGGET)
+    finditem(ITEM_NUGGET)
     removeobject(1)
     setflag(FLAG_NUGGET3_OBTAINED)
     releaseall
@@ -220,7 +220,7 @@ script EscapeRoom_EventScript_FindNugget3{
 
 script EscapeRoom_EventScript_FindPainSplit{
     lockall
-    giveitem(ITEM_TM_PAIN_SPLIT)
+    finditem(ITEM_TM_PAIN_SPLIT)
     removeobject(13)
     setflag(FLAG_PAIN_SPLIT_OBTAINED)
     releaseall
@@ -292,6 +292,13 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
 
 script EscapeRoom_EventScript_IniitializeGardevoirTrade{
     if(var(VAR_RESULT) == YES){
+
+        # REMOVE GOTHITA ITEM
+        // checkpartymove(MOVE_HELPING_HAND)
+        //checkitem
+        //additem
+
+
         checkpartymove(MOVE_HELPING_HAND)
         if (var(VAR_RESULT) == 0){
             createmon(
@@ -367,6 +374,7 @@ script EscapeRoom_EventScript_SingleBattle1{
         Single1Puzzle_Intro, 
         Single1Puzzle_Outro, 
         event_script=EscapeRoom_EventScript_GetSitrusBerriesAndHeal,
+        music=FALSE,
     )
     msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -405,6 +413,7 @@ script EscapeRoom_EventScript_DoubleBattle1{
         Double1Puzzle_Outro, 
         Double1Puzzle_NotEnoughMons,
         event_script=EscapeRoom_EventScript_Double1WalkAwayAndHeal,
+        // music=FALSE,
     )
     msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -461,15 +470,17 @@ mart EscapeRoom_Mart_BikeShop{
 script EscapeRoom_EventScript_HeartscaleTutor{
     lockall
     faceplayer
-    msgbox(MoveTutorStartMessage, MSGBOX_AUTOCLOSE)
+    // msgbox(MoveTutorStartMessage, MSGBOX_AUTOCLOSE)
     checkitem(ITEM_HEART_SCALE)
     if(var(VAR_RESULT) == FALSE){
+        msgbox(MoveTutorStartMessage)
         msgbox(MoveTutorNoHeartScales, MSGBOX_AUTOCLOSE)
         waitmessage
     }
     else{
         checkpartymove(MOVE_TRICK_ROOM)
         if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_GARDEVOIR){  // player has Gardevoir
+            msgbox(MoveTutorStartMessage)
             msgbox(AskTeachGardevoirDisable, MSGBOX_YESNO)
             waitmessage
             if (var(VAR_RESULT) == YES){  // TEACH DISABLE
@@ -500,6 +511,7 @@ script EscapeRoom_EventScript_HeartscaleTutor{
             }
         }
         else{  // player has no Gardevoir
+            msgbox(MoveTutorStartMessage)
             msgbox(MoveTutorNoSuitablePokemonMessage, MSGBOX_AUTOCLOSE)
             waitmessage
         }
