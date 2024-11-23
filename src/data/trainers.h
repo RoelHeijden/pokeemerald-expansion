@@ -42189,9 +42189,9 @@ F_TRAINER_FEMALE |
 #line 16878
         .trainerName = _("Ur & Mom"),
 #line 16879
-        .trainerClass = TRAINER_CLASS_SR_AND_JR,
+        .trainerClass = TRAINER_CLASS_OLD_COUPLE,
 #line 16880
-        .trainerPic = TRAINER_PIC_SR_AND_JR,
+        .trainerPic = TRAINER_PIC_OLD_COUPLE,
         .encounterMusic_gender = 
 #line 16882
             TRAINER_ENCOUNTER_MUSIC_TWINS,
@@ -42203,8 +42203,6 @@ F_TRAINER_FEMALE |
         .party = (const struct TrainerMon[])
         {
             {
-#line 16886
-            .nickname = COMPOUND_STRING("Evil Scraf"),
 #line 16886
             .species = SPECIES_SCRAFTY,
             .gender = TRAINER_MON_RANDOM_GENDER,
@@ -42226,8 +42224,6 @@ F_TRAINER_FEMALE |
             },
             },
             {
-#line 16895
-            .nickname = COMPOUND_STRING("Evil Smear"),
 #line 16895
             .species = SPECIES_SMEARGLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
