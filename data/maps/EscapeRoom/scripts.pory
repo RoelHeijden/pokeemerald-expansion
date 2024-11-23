@@ -314,88 +314,42 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
             end
         }
     }
-    msgbox(SmeargleMessageBad)
-    waitmessage
+    msgbox(SmeargleMessageBad, MSGBOX_YESNO)
+    if (var(VAR_RESULT) == YES){
+        removemon(SPECIES_SMEARGLE)
+        giveitem(ITEM_GREAT_BALL)
+        msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
     releaseall
     end 
 }
 
 script EscapeRoom_EventScript_IniitializeGardevoirTrade{
     if(var(VAR_RESULT) == YES){
-        // get gothita party slot
-        checkpartymove(MOVE_HELPING_HAND)
-
-        // slot 0
-        if(var(VAR_RESULT) == 0){  
-            // add held item to inventory
-            checkpartyitem(0)
-            if (var(VAR_RESULT) == 1) {  
-                copyvar(VAR_TEMP_1, VAR_0x8004) // VAR_TEMP_1 = item
-                additem(VAR_TEMP_1, 1) 
-            }
-            // override with new Pokemon
-            createmon(
-                0, // side
-                0, // slot
-                SPECIES_GARDEVOIR, 
-                30, 
-                abilityNum=0,
-                item=ITEM_NUGGET
-                nature=5, // Bold 
-                move1=MOVE_TRICK_ROOM,
-                move2=MOVE_SKILL_SWAP, 
-                move3=MOVE_NONE, 
-                move4=MOVE_NONE,
-                // EVS:
-                hpEv=132,
-                defEv=212,
-                speedEv=52,
-                // IVS:
-                hpIv=31,
-                atkIv=0,
-                defIv=31,
-                speedIv=31,
-                spAtkIv=31,
-                spDefIv=31,
-            )
-        }
-        // slot 1
-        else{
-            // add held item to inventory
-            checkpartyitem(1)
-            if (var(VAR_RESULT) == 1) {  
-                copyvar(VAR_TEMP_1, VAR_0x8004) // VAR_TEMP_1 = item
-                additem(VAR_TEMP_1, 1) 
-            }
-            // override with new Pokemon
-            createmon(
-                0, // side
-                1, // slot
-                SPECIES_GARDEVOIR, 
-                30, 
-                abilityNum=0,
-                item=ITEM_NUGGET
-                nature=5, // Bold 
-                move1=MOVE_TRICK_ROOM,
-                move2=MOVE_SKILL_SWAP, 
-                move3=MOVE_NONE, 
-                move4=MOVE_NONE,
-                // EVS:
-                hpEv=132,
-                defEv=212,
-                speedEv=52,
-                // IVS:
-                hpIv=31,
-                atkIv=0,
-                defIv=31,
-                speedIv=31,
-                spAtkIv=31,
-                spDefIv=31,
-            )
-        }
-        playfanfare(MUS_OBTAIN_ITEM)
-        msgbox(GardevoirObtainedMessage)
-        waitfanfare
+        removemon(SPECIES_GOTHITA)
+        givemon(
+            SPECIES_GARDEVOIR, 
+            30, 
+            abilityNum=0,
+            item=ITEM_NUGGET
+            nature=5, // Bold 
+            move1=MOVE_TRICK_ROOM,
+            move2=MOVE_SKILL_SWAP, 
+            move3=MOVE_NONE, 
+            move4=MOVE_NONE,
+            // EVS:
+            hpEv=132,
+            defEv=212,
+            speedEv=52,
+            // IVS:
+            hpIv=31,
+            atkIv=0,
+            defIv=31,
+            speedIv=31,
+            spAtkIv=31,
+            spDefIv=31,
+        )
         msgbox(TradeAcceptedMessage, MSGBOX_AUTOCLOSE)
         setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
     }
@@ -749,7 +703,9 @@ text SmeargleMessageInitial{
 
 text SmeargleMessageBad{
     "Ew no, that SMEARGLE looks horrible.\n"
-    "I asked for the perfect SMEARGLE."
+    "I asked for the perfect SMEARGLE.\p"
+    "Do you want to release this SMEARGLE\n"
+    "and get your ball back?"
 }
 
 text SmeargleMessagePerfect{
@@ -940,3 +896,6 @@ text NewGreatBallMessage{
     "You recover the Great Ball"
 }
 
+text ReleaseSmeargleMessage{
+    "Bye-bye Smeargle."
+}

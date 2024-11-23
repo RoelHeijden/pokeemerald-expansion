@@ -562,3 +562,31 @@ void Script_SetStatus1(struct ScriptContext *ctx)
     }
 }
 
+
+// ADDED
+bool8 ScrCmd_removemon(struct ScriptContext *ctx)
+{
+    u16 speciesToRemove = VarGet(ScriptReadHalfword(ctx)); // read species to remove
+    s32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (species == speciesToRemove)
+        {
+            // held item to bag
+            u16 heldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, NULL);
+            if (heldItem != ITEM_NONE)
+                AddBagItem(heldItem, 1);
+
+            ZeroMonData(&gPlayerParty[i]);  // remove the pokemon
+            CompactPartySlots();            // reorder the party to fill the empty slot
+            gSpecialVar_Result = TRUE; 
+            return FALSE;
+        }
+    }
+    gSpecialVar_Result = FALSE; // No Pokémon matched the given species
+    return FALSE;
+}
+
+

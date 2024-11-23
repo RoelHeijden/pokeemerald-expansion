@@ -1114,6 +1114,13 @@
 	.ifnb \teraType; .2byte \teraType; .endif
 	.endm
 
+	@ Removes the first Pokémon matching the given species from the player's party.
+	@ VAR_RESULT is set to 1 if successful, or 0 if no Pokémon matched.
+	.macro removemon species:req
+	.byte 0xe8 
+	.2byte \species
+	.endm
+
 	@ Gives the player an Egg of the specified species.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro giveegg species:req
