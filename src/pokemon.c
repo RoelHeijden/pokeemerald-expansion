@@ -5754,8 +5754,8 @@ u16 GetBattleBGM(void)
 
         // ADDED
         // custom music for final double battle
-        case TRAINER_CLASS_SR_AND_JR:
-            return MUS_VS_ELITE_FOUR;
+        case TRAINER_CLASS_OLD_COUPLE:
+            return MUS_VS_CHAMPION;
 
         default:
             return MUS_VS_TRAINER;

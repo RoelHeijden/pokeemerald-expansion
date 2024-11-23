@@ -170,6 +170,8 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     lockall
     fadescreen(FADE_TO_BLACK)
 	special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
 	fadescreen(FADE_FROM_BLACK)
     msgbox(Nurse_Heal_End)
     waitmessage
@@ -266,7 +268,7 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
         end
     }
     getpartysize
-    if (var(VAR_RESULT) < 2){  # no extra pokemon was caught
+    if (var(VAR_RESULT) < 2){  # no extra pokemon in party
         checkpartymove(MOVE_THIEF)
         if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_GOTHITA){  // mon is Gothita
             msgbox(SmeargleMessageInitial)
@@ -316,9 +318,29 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
     }
     msgbox(SmeargleMessageBad, MSGBOX_YESNO)
     if (var(VAR_RESULT) == YES){
-        removemon(SPECIES_SMEARGLE)
-        giveitem(ITEM_GREAT_BALL)
-        msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
+        getpartysize
+        if (var(VAR_RESULT) >= 2){
+            partymonhasfainted
+            if (var(VAR_0x8004) == SPECIES_GOTHITA){
+                msgbox(SmeargleReleaseHealSecondMonMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            else{
+                removemon(SPECIES_SMEARGLE)
+                clearflag(FLAG_POKEMON_CAUGHT)
+                clearflag(FLAG_GREAT_BALL_USED)
+                giveitem(ITEM_GREAT_BALL)
+                msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+        else{
+            msgbox(SmeargleReleaseGetSecondMonMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    else{
+        msgbox(SmeargleReleaseDeclinedMessage, MSGBOX_AUTOCLOSE)
         waitmessage
     }
     releaseall
@@ -350,6 +372,9 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             spAtkIv=31,
             spDefIv=31,
         )
+        playfanfare(MUS_OBTAIN_ITEM)
+        msgbox(GardevoirObtainedMessage, MSGBOX_AUTOCLOSE)
+        waitfanfare
         msgbox(TradeAcceptedMessage, MSGBOX_AUTOCLOSE)
         setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
     }
@@ -708,8 +733,25 @@ text SmeargleMessageBad{
     "and get your ball back?"
 }
 
+text SmeargleReleaseHealSecondMonMessage{
+    format("You might want to heal your POKéMON first")
+}
+
+text SmeargleReleaseGetSecondMonMessage{
+    "That's your last POKéMON!"
+}
+
+text ReleaseSmeargleMessage{
+    "Bye-bye Smeargle."
+}
+
+text SmeargleReleaseDeclinedMessage{
+    "Okay, good luck." 
+}
+
 text SmeargleMessagePerfect{
-    "That is it! That's the perfect SMEARGLE!\p"
+    "That is it! That's the perfect\n"
+    "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
     "your shitty GOTHITA for my GARDEVOIR.\p"
     "Do you want to trade?"
@@ -720,7 +762,7 @@ text SmeargleMessagePerfectButGothitaInBox{
     "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
     "your shitty GOTHITA for my GARDEVOIR.\p"
-    "Oh, where did GOTHITA go?"
+    "Oh, where did your GOTHITA go?"
 }
 
 text TradeAcceptedMessage{
@@ -728,7 +770,7 @@ text TradeAcceptedMessage{
 }
 
 text GardevoirObtainedMessage{
-    "You received a Gardevoir!"
+    "Player received a Gardevoir!"
 }
 
 text TradeDeclinedMessage{
@@ -750,8 +792,8 @@ text PerishNPCexplain{
 }
 
 text Single1Puzzle_Intro{
-    "Did you try to fight the duo at the exit\n"
-    "already?\p"
+    "Did you try to fight the old couple at\n"
+    "the exit already?\p"
     "I think one of their POKéMON is hiding\n"
     "something..."
 }
@@ -789,21 +831,21 @@ text Single3Puzzle_Outro{
 
 text Single3Puzzle_PostBattleStolen{
     "Sooo...\p"
-    "If you give back my money and item,\n"
-    "I'll throw you back over the ledge.\p"
+    "If you return my money and item, I'll\n"
+    "throw you back over the ledge.\p"
     "Deal?"
 }
 
 text Single3Puzzle_PostBattleNotStolen{
     "Sooo...\p"
-    "If you give me back my money,\n"
-    "I'll throw you back over the ledge.\p"
+    "If you return my money, I'll throw you\n"
+    "back over the ledge.\p"
     "Deal?"
 }
 
 text YesTeleportOutMessage {
-    "Cool! Come back whenever you want to\n"
-    "battle again."
+    "Cool cool! Come back again whenever you\n"
+    "want to battle."
 }
 
 text NoTeleportPleaseMessage{
@@ -829,7 +871,7 @@ text MoveTutorNoSuitablePokemonMessage{
 }
 
 text MoveTutorTaughtDisable{
-    "Good choice."
+    "Pleasure doing business."
 }
 
 text MoveTutorTradeDeclined{
@@ -893,9 +935,6 @@ text getOutOfHereNPCmessage{
 }
 
 text NewGreatBallMessage{
-    "You recover the Great Ball"
+    "You recover the Great Ball."
 }
 
-text ReleaseSmeargleMessage{
-    "Bye-bye Smeargle."
-}

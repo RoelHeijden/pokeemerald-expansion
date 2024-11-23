@@ -1941,6 +1941,32 @@ bool8 ScrCmd_removepartyitem(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)
+{
+    s32 i;
+
+    gSpecialVar_Result = PARTY_SIZE; 
+    gSpecialVar_0x8004 = SPECIES_NONE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
+        {
+            u8 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
+            if (hp == 0) 
+            {
+                gSpecialVar_Result = i; 
+                gSpecialVar_0x8004 = species; 
+                break;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
 
 
 
