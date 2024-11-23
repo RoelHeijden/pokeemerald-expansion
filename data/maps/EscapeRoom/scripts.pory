@@ -937,6 +937,6 @@ text getOutOfHereNPCmessage{
 }
 
 text NewGreatBallMessage{
-    "You retrieve your Great Ball"
+    "You recover the Great Ball"
 }
 
