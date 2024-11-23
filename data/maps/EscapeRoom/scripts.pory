@@ -3,7 +3,7 @@
 
 mapscripts EscapeRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
-    MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScripts_OnResumeScripts
+    MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScript_OnResumeScripts
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_setNPCfacing
     ]
@@ -16,6 +16,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_TurnOfBagUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattle
     ] 
 }
 
@@ -24,25 +25,43 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     call(CaveHole_FixCrackedGround)
 }
 
-script EscapeRoom_MapScripts_OnResumeScripts{
+script EscapeRoom_MapScript_OnResumeScripts{
     call(EscapeRoom_MapScripts_SetHoleWarp)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
+} 
 
+script EscapeRoom_MapScripts_CheckAfterBattle{
+    call(EscapeRoom_MapScripts_CheckIfMonCaught)
+    call(EscapeRoom_MapScripts_FindGreatBallAferUse)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
+}
+
+script EscapeRoom_MapScripts_CheckIfMonCaught{
+    getpartysize
+    if (var(VAR_RESULT) >= 2){
+        setflag(FLAG_POKEMON_CAUGHT)
+    }
 }
 
 script EscapeRoom_MapScripts_FindGreatBallAferUse{
-    // flag for great ball used
-    // flag for pokemon caught
-
-    // if flag used && !pokemon caught
-    // get new great ball
-
-    end
+    if(flag(FLAG_GREAT_BALL_USED) && !flag(FLAG_POKEMON_CAUGHT)){
+        lockall
+        additem(ITEM_GREAT_BALL)
+        clearflag(FLAG_GREAT_BALL_USED)
+        msgbox(NewGreatBallMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+    }
 }
-
 
 script EscapeRoom_MapScripts_SetHoleWarp{
     setstepcallback(STEP_CB_CRACKED_FLOOR)
     setholewarp(MAP_ESCAPE_ROOM_ICE_PUZZLE)
+}
+
+script EscapeRoom_MapScripts_FixCrackedGround{
+    setvar(VAR_ICE_STEP_COUNT, 1)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 7)
 }
 
 script EscapeRoom_MapScript_setNPCfacing{
@@ -63,11 +82,6 @@ script EscapeRoom_MapScript_KeepDouble1Moved {
         setobjectxyperm(1, 6, 11)
         setobjectxyperm(2, 6, 10)
     }
-}
-
-script EscapeRoom_MapScripts_FixCrackedGround{
-    setvar(VAR_ICE_STEP_COUNT, 1)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 7)
 }
 
 script EscapeRoom_MapScripts_PlayStartMessage{
@@ -920,5 +934,9 @@ text icePuzzleHintNPCmessage{
 
 text getOutOfHereNPCmessage{
     "Please get us out of here..."
+}
+
+text NewGreatBallMessage{
+    "You retrieve your Great Ball"
 }
 

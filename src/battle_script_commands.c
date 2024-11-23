@@ -15258,6 +15258,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_GREAT_BALL:
                 ballMultiplier = 150;
+                FlagSet(FLAG_GREAT_BALL_USED); // ADDED
                 break;
             case ITEM_SAFARI_BALL:
                 if (B_SAFARI_BALL_MODIFIER <= GEN_7)
