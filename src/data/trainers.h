@@ -42187,7 +42187,7 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_DOUBLE_BATTLE1] =
     {
 #line 16878
-        .trainerName = _("Ur & Mom"),
+        .trainerName = _("Jan & Nan"),
 #line 16879
         .trainerClass = TRAINER_CLASS_OLD_COUPLE,
 #line 16880
@@ -42340,7 +42340,7 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE2] =
     {
 #line 16938
-        .trainerName = _("Tect"),
+        .trainerName = _("Sable"),
 #line 16939
         .trainerClass = TRAINER_CLASS_COOLTRAINER,
 #line 16940

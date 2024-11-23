@@ -56,7 +56,7 @@ EscapeRoom_MapScript_OnResumeScripts::
 
 EscapeRoom_MapScripts_CheckSpawnSitrusTree::
 # 36 "data/maps/EscapeRoom/scripts.pory"
-	checkitem ITEM_SITRUS_BERRY, 5
+	checkitem ITEM_SITRUS_BERRY, 4
 # 37 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, FALSE
 	goto_if_eq EscapeRoom_MapScripts_CheckSpawnSitrusTree_1
@@ -183,7 +183,7 @@ EscapeRoom_MapScripts_PlayStartMessage::
 
 EscapeRoom_MapScripts_GetFirstPokemon::
 # 104 "data/maps/EscapeRoom/scripts.pory"
-	givemon SPECIES_GOTHITA, 30, item = ITEM_IRON_BALL, abilityNum = 2, nature = 11, move1 = MOVE_THIEF, move2 = MOVE_HELPING_HAND, move3 = MOVE_NONE, move4 = MOVE_NONE, speedEv = 236, hpIv = 0, atkIv = 31, defIv = 0, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_GOTHITA, 30, item = ITEM_HEART_SCALE, abilityNum = 2, nature = 11, move1 = MOVE_THIEF, move2 = MOVE_HELPING_HAND, move3 = MOVE_NONE, move4 = MOVE_NONE, speedEv = 236, hpIv = 0, atkIv = 31, defIv = 0, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 124 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
 # 125 "data/maps/EscapeRoom/scripts.pory"
@@ -239,7 +239,7 @@ EscapeRoom_MapScripts_SetRespawn::
 
 EscapeRoom_MapScripts_GetItems::
 # 156 "data/maps/EscapeRoom/scripts.pory"
-	additem ITEM_HEART_SCALE
+	additem ITEM_IRON_BALL
 # 157 "data/maps/EscapeRoom/scripts.pory"
 	additem ITEM_NUGGET, 13
 # 158 "data/maps/EscapeRoom/scripts.pory"
@@ -1227,15 +1227,15 @@ PerishNPCexplain::
 
 Single1Puzzle_Intro::
 # 841 "data/maps/EscapeRoom/scripts.pory"
-	.string "Did you try to fight the old couple at\n"
-	.string "the exit already?\p"
+	.string "Did you already battle against the\n"
+	.string "elderly couple near the exit?\p"
 	.string "I think one of their POKéMON is hiding\n"
 	.string "something...$"
 
 Single1Puzzle_Outro::
 # 848 "data/maps/EscapeRoom/scripts.pory"
-	.string "You should be able to beat the old\n"
-	.string "couple and get out of here!$"
+	.string "You should be able to defeat the\n"
+	.string "elderly couple and get out of here!$"
 
 Single1Puzzle_PostBattle::
 # 852 "data/maps/EscapeRoom/scripts.pory"
