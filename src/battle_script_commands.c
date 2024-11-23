@@ -7805,7 +7805,6 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE3){
         moneyReward = 78999;
     }
-    DebugPrintf("trainedId: %d", trainerId);
 
     return moneyReward;
 }
