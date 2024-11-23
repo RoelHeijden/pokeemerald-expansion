@@ -234,6 +234,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkpartymoveslot                @ 0xe7
 	.4byte ScrCmd_removemon	          			    @ 0xe8
 	.4byte ScrCmd_partymonhasfainted				@ 0xe9
+	.4byte ScrCmd_checkpartymon						@ 0xea
 	
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

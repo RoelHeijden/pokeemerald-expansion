@@ -1967,9 +1967,25 @@ bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+bool8 ScrCmd_checkpartymon(struct ScriptContext *ctx)
+{
+    u16 species = VarGet(ScriptReadHalfword(ctx)); 
+    u8 i;
 
+    gSpecialVar_Result = PARTY_SIZE; 
 
-
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 monSpecies = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (monSpecies == species)
+        {
+            gSpecialVar_Result = i; // set the slot where species is found
+            break; 
+        }
+    }
+    return FALSE;
+}
 
 
 

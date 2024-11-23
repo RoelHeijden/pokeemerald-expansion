@@ -27,8 +27,17 @@ script EscapeRoom_MapScript_OnTransitionScripts{
 
 script EscapeRoom_MapScript_OnResumeScripts{
     call(EscapeRoom_MapScripts_SetHoleWarp)
+    call(EscapeRoom_MapScripts_CheckSpawnSitrusTree)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
 } 
+
+script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
+    // spawn berry tree if below n berries
+    checkitem(ITEM_SITRUS_BERRY, 4)
+    if(var(VAR_RESULT) == FALSE){
+        setberrytree(BERRY_TREE_ESCAPE_ROOM_SITRUS, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES)
+    }
+}
 
 script EscapeRoom_MapScripts_CheckAfterBattle{
     call(EscapeRoom_MapScripts_CheckIfMonCaught)
@@ -95,7 +104,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_GOTHITA, 
         30, 
-        item=ITEM_IRON_BALL,
+        item=ITEM_HEART_SCALE,
         abilityNum=2,
         nature=11, // Hasty 
         move1=MOVE_THIEF,
@@ -144,7 +153,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 }
 
 script EscapeRoom_MapScripts_GetItems{
-    additem(ITEM_HEART_SCALE)
+    additem(ITEM_IRON_BALL)
     additem(ITEM_NUGGET, 13)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
@@ -250,11 +259,11 @@ script EscapeRoom_EventScript_FindNugget3{
     releaseall
 }
 
-script EscapeRoom_EventScript_FindPainSplit{
+script EscapeRoom_EventScript_FindHeartScale{
     lockall
-    finditem(ITEM_TM_PAIN_SPLIT)
+    finditem(ITEM_HEART_SCALE)
     removeobject(13)
-    setflag(FLAG_PAIN_SPLIT_OBTAINED)
+    setflag(FLAG_HEART_SCALE2_OBTAINED)
     releaseall
 }
 
@@ -384,13 +393,11 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
 }
 
 script EscapeRoom_EventScript_SingleBattle1{
-    faceplayer
     trainerbattle_single(
         TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
         Single1Puzzle_Intro, 
         Single1Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_GetSitrusBerriesAndHeal,
-        music=FALSE,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -519,11 +526,6 @@ script EscapeRoom_EventScript_PostMatchHeal{
     // fadescreen(FADE_FROM_BLACK)
 }
 
-script EscapeRoom_EventScript_GetSitrusBerriesAndHeal{
-    call(EscapeRoom_EventScript_PostMatchHeal)
-    giveitem(ITEM_SITRUS_BERRY, 99)
-}
-
 script EscapeRoom_EventScript_BikeShop{
     lockall
     faceplayer
@@ -540,51 +542,96 @@ mart EscapeRoom_Mart_BikeShop{
     ITEM_MACH_BIKE
 }
 
+
 script EscapeRoom_EventScript_HeartscaleTutor{
     lockall
     faceplayer
-    // msgbox(MoveTutorStartMessage, MSGBOX_AUTOCLOSE)
     checkitem(ITEM_HEART_SCALE)
-    if(var(VAR_RESULT) == FALSE){
+
+    // no heart scales
+    if(var(VAR_RESULT) == FALSE && !flag(FLAG_TUTOR_MOVE_LEARNED)){
         msgbox(MoveTutorStartMessage)
         msgbox(MoveTutorNoHeartScales, MSGBOX_AUTOCLOSE)
         waitmessage
     }
-    else{
-        checkpartymove(MOVE_TRICK_ROOM)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_GARDEVOIR){  // player has Gardevoir
-            msgbox(MoveTutorStartMessage)
-            msgbox(AskTeachGardevoirDisable, MSGBOX_YESNO)
-            waitmessage
-            if (var(VAR_RESULT) == YES){  // TEACH DISABLE
-                checkpartymove(MOVE_TRICK_ROOM)
-                if (var(VAR_RESULT) == 0){
-                    setmonmove(0, 2, MOVE_DISABLE)
-                }
-                elif (var(VAR_RESULT) == 1){
-                    setmonmove(1, 2, MOVE_DISABLE)
-                }
-                else{
-                    msgbox("something went wrong.")
-                    releaseall
-                    end
-                }
-                removeitem(ITEM_HEART_SCALE, 1)
-                playfanfare(MUS_LEVEL_UP)
-                msgbox(GardevoirLearntDisable)
-                waitmessage
+    // no heart scales but already learned a tutor move
+    elif(var(VAR_RESULT) == FALSE && flag(FLAG_TUTOR_MOVE_LEARNED)){
+        msgbox(MoveTutorReplaceMove, MSGBOX_YESNO)
+        waitmessage
+        if (var(VAR_RESULT) == YES){
 
-                setflag(FLAG_DISABLE_TAUGHT)
-                msgbox(MoveTutorTaughtDisable, MSGBOX_AUTOCLOSE)
+            // check if player has Gardevoir
+            checkpartymon(SPECIES_GARDEVOIR)
+            if (var(VAR_RESULT) != PARTY_SIZE){
+                copyvar(VAR_0x8004, VAR_RESULT) // set pokemon slot
+
+                // TODO: choose move
+
+                // TODO: remove move
+
+                special(TeachMoveRelearnerMove)
+                waitstate
+                lockall
+
+                // declined
+                if(var(VAR_0x8004) == 0){
+                    msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
+                    waitmessage 
+
+                    // TODO: add move back
+
+                }
+                // accepted
+                else{
+                    msgbox(MoveTutorTaughtMove, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                }
+            }
+            else{
+                msgbox(MoveTutorBringReplaceMonMessage, MSGBOX_AUTOCLOSE)
                 waitmessage
             }
+        }
+        else{
+            msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    else{
+        msgbox(MoveTutorStartMessage)
+        // check if player has Gardevoir
+        checkpartymon(SPECIES_GARDEVOIR)
+        if (var(VAR_RESULT) != PARTY_SIZE){
+            copyvar(VAR_0x8004, VAR_RESULT) // set pokemon slot
+            msgbox(AskTeachGardevoirDisable, MSGBOX_YESNO)
+
+            // learn move
+            if (var(VAR_RESULT) == YES){
+                special(TeachMoveRelearnerMove)
+                waitstate
+                lockall
+
+                // declined
+                if(var(VAR_0x8004) == 0){
+                    msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
+                    waitmessage 
+                }
+                // accepted
+                else{
+                    msgbox(MoveTutorTaughtMove, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                    removeitem(ITEM_HEART_SCALE, 1)
+                    setflag(FLAG_TUTOR_MOVE_LEARNED)
+                }
+            }
+            // declined
             else{
                 msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
                 waitmessage
             }
         }
-        else{  // player has no Gardevoir
-            msgbox(MoveTutorStartMessage)
+        // player has no Gardevoir
+        else{  
             msgbox(MoveTutorNoSuitablePokemonMessage, MSGBOX_AUTOCLOSE)
             waitmessage
         }
@@ -792,19 +839,19 @@ text PerishNPCexplain{
 }
 
 text Single1Puzzle_Intro{
-    "Did you try to fight the old couple at\n"
-    "the exit already?\p"
+    "Did you already battle against the\n"
+    "elderly couple near the exit?\p"
     "I think one of their POKéMON is hiding\n"
     "something..."
 }
 
 text Single1Puzzle_Outro{
-    "Here, this should help you beat that\n"
-    "final duo."
+    format("You should be able to defeat the elderly couple and get out of here!")
 }
 
 text Single1Puzzle_PostBattle{
-    "You can beat them. I believe in you!"
+    "It might be worth it to revisit your\n"
+    "items and tutor moves again." 
 }
 
 text Single2Puzzle_Intro{
@@ -852,9 +899,9 @@ text NoTeleportPleaseMessage{
     "Uhuh, you sure?"
 }
 
-text MoveTutorNoHeartScales{
-    "Oh you don't have any."
-}
+
+
+
 
 text MoveTutorStartMessage{
     "Can I have your HEART SCALES?\n"
@@ -862,28 +909,45 @@ text MoveTutorStartMessage{
     "you'd like."
 }
 
+text MoveTutorNoHeartScales{
+    "Oh you don't have any."
+}
+
 text AskTeachGardevoirDisable{
-    format("Do you want me to teach DISABLE to your GARDEVOIR?")
+    format("Do you want me to teach your GARDEVOIR a new move?")
 }
 
 text MoveTutorNoSuitablePokemonMessage{
-    format("Sorry, none of your POKéMON can learn the moves I teach.")
-}
-
-text MoveTutorTaughtDisable{
-    "Pleasure doing business."
+    format("Sorry, I can only teach moves to very a specific POKéMON.")
 }
 
 text MoveTutorTradeDeclined{
     format("Come back if you change your mind.")
 }
 
-text GardevoirLearntDisable{
-    "Gardevoir learned Disable!"
+text MoveTutorTaughtMove{
+    "Feel free to come back if you want it\n"
+    "changed.\p"
+    "I will replace the move free of charge!"
 }
 
+text MoveTutorReplaceMove{
+    "You don't have any HEART SCALES left,\n"
+    "but do you want to replace a move I\l"
+    "taught previously?"
+}
+
+text MoveTutorBringReplaceMonMessage{
+    "" 
+}
+
+
+
+
+
 text BikeShopHelloMessage{
-    "Hi, how can I help you?"
+    "Yes, I'm still working...\n"
+    "How can I help you?"
 }
 
 text BikeShoptGoodbyeMessage{
@@ -938,3 +1002,7 @@ text NewGreatBallMessage{
     "You recover the Great Ball."
 }
 
+text HandOverHeartScale{
+    "{PLAYER} handed over one HEART SCALE\n"
+	"in exchange.$"
+}

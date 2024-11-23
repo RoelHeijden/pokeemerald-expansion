@@ -1176,6 +1176,12 @@
     .byte 0xe9
 	.endm
 
+	@ Check if a species exists in the party and return its first slot
+	@ VAR_RESULT: Slot number where the species is found. PARTY_SIZE if not found.
+	.macro checkpartymon species:req
+	.byte 0xea
+	.2byte \species
+	.endm
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
 	@ If given anything else it will output it directly.

@@ -50,8 +50,8 @@
 #define FLAG_SINGLE_BATTLE1             0x25
 #define FLAG_SINGLE_BATTLE2             0x26 
 #define FLAG_SINGLE_BATTLE3             0x27
-#define FLAG_PAIN_SPLIT_OBTAINED        0x28
-#define FLAG_DISABLE_TAUGHT             0x29
+#define FLAG_HEART_SCALE2_OBTAINED      0x28
+#define FLAG_TUTOR_MOVE_LEARNED         0x29
 #define FLAG_DOUBLE1_COMPLETED          0x2A
 #define FLAG_END_ESCAPE_ROOM            0x2B
 #define FLAG_TM_18_STOLEN               0x2C 
