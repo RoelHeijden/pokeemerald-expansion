@@ -963,6 +963,7 @@ static bool8 PrintAllOnCardBack(void)
         break;
     case 3:
         PrintTradesStringOnCard();
+        PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textNumLinkContests, sTrainerCardStatColors);
         break;
     case 4:
         PrintBerryCrushStringOnCard();
@@ -1196,16 +1197,17 @@ static void BufferHofDebutTime(void)
 static void PrintStatOnBackOfCard(u8 top, const u8 *statName, u8 *stat, const u8 *color)
 {
     static const u8 xOffsets[] = {8, 16};
-    static const u8 widths[] = {216, 216};
+    // static const u8 widths[] = {216, 216};
 
     AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, xOffsets[sData->isHoenn], top * 16 + 33, sTrainerCardTextColors, TEXT_SKIP_DRAW, statName);
-    AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, widths[sData->isHoenn]), top * 16 + 33, color, TEXT_SKIP_DRAW, stat);
+    // REMOVED
+    // AddTextPrinterParameterized3(WIN_CARD_TEXT, FONT_NORMAL, GetStringRightAlignXOffset(FONT_NORMAL, stat, widths[sData->isHoenn]), top * 16 + 33, color, TEXT_SKIP_DRAW, stat);
 }
 
 static void PrintHofDebutTimeOnCard(void)
 {
     if (sData->hasHofResult)
-        PrintStatOnBackOfCard(0, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
 }
 
 static const u8 *const sLinkBattleTexts[] =
