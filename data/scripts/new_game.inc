@@ -113,6 +113,7 @@ EventScript_ResetAllBerries::
 
 	@ Escape Room
 	setberrytree BERRY_TREE_ESCAPE_ROOM_LUM, ITEM_TO_BERRY(ITEM_LUM_BERRY), BERRY_STAGE_BERRIES
+	setberrytree BERRY_TREE_ESCAPE_ROOM_SITRUS, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES
 	return
 
 EventScript_ResetAllMapFlags::
