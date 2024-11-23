@@ -16875,7 +16875,7 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MY_CUSTOM_DOUBLE_BATTLE1 ===
-Name: Ur & Mom
+Name: Jan & Nan
 Class: Old Couple
 Pic: Old Couple
 Gender: Male
@@ -16935,7 +16935,7 @@ IVs: 24 HP / 0 Spe
 - Shadow Sneak  
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
-Name: Tect
+Name: Sable
 Class: Cooltrainer
 Pic: Cooltrainer M
 Gender: Male
