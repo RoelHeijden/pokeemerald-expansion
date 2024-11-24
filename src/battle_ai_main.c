@@ -5473,6 +5473,29 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     //                                          AI_DATA->abilities[battlerAtk], AI_DATA->abilities[battlerDef]);
     // DebugPrintf("Drain punch: %d", move_drainpunch);
     // DebugPrintf("Scrafty damage vs %d: %d", battlerSmeargle, scrafty_dmg);
+
+
+
+    // DebugPrintf("Move Smeargle: %d", moveSmeargle);
+
+    // NORMAL:
+    // if Dig:
+    // - super fang and opposingSelfPainSplit: HIGHEST HP MON
+    // - super fang: SMEARGLE
+    // - drain punch: GARDEVOIR
+    // if dig and semi-invulnerable:
+    // - super fang: GARDEVOIR
+    // - drain punch: SMEARGLE
+
+    // IN TRICK ROOM:
+    // if Dig:
+    // - super fang: GARDEVOIR
+    // - drain punch: SMEARGLE
+    // if dig and semi-invulnerable:
+    // - super fang and opposingSelfPainSplit: SMEARGLE
+    // - super fang: SMEARGLE
+    // - drain punch: GARDEVOIR
+
     
     switch (move)
     {

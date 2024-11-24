@@ -1399,7 +1399,7 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
     }
 }
 
-
+// ADDED
 bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
