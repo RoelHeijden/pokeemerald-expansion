@@ -1399,6 +1399,40 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
     }
 }
 
+
+bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
+
+    // TODO: dynamically determine multichoiceId
+    u8 multichoiceId = 0;
+
+    u16 move1 = VarGet(VAR_0x800A);
+    u16 move2 = VarGet(VAR_0x800B);
+
+    if(move1 == MOVE_DISABLE && move2 == MOVE_PAIN_SPLIT)
+        multichoiceId = MULTI_DISABLE_SPLIT;
+    if(move1 == MOVE_DISABLE && move2 == MOVE_DESTINY_BOND)
+        multichoiceId = MULTI_DISABLE_BOND;
+    if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_DESTINY_BOND)
+        multichoiceId = MULTI_SPLIT_BOND;
+
+    if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    {
+        ScriptContext_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+
+
+
 static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count)
 {
     u32 i,j;
@@ -2038,7 +2072,7 @@ bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
 }
 
 // ADDED
-// remove a move from a party Pokémon
+// remove a move from a party Pokémon, with VARs as arguments
 bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
 {
     u8 partyIndex = VarGet(ScriptReadHalfword(ctx));

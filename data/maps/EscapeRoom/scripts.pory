@@ -569,8 +569,22 @@ script EscapeRoom_EventScript_HeartscaleTutor{
                 copyvar(VAR_0x800A, VAR_RESULT)
                 copyvar(VAR_0x800B, VAR_0x8004)
 
-                // TODO: choose move
-                // VAR_0x800A now set as chosen move
+                // choose move if two tutor moves learned
+                if(var(VAR_0x800B) != MOVE_NONE){
+                    msgbox(MoveTutorWhichMoveReplaceMessage, MSGBOX_REPLACEMOVE)
+                    if(var(VAR_RESULT) == 0){ // top option
+                        copyvar(VAR_0x800A, VAR_0x800A) // set VAR_0x800A as chosen move -- so it's excluded in TeachMoveRelearnerMove script
+                    }
+                    elif(var(VAR_RESULT) == 1){ // bottom option
+                        copyvar(VAR_0x800A, VAR_0x800B) // set VAR_0x800A as chosen move -- so it's excluded in TeachMoveRelearnerMove script
+                    }
+                    elif(var(VAR_RESULT) == 127){ // B pressed
+                        msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
+                        waitmessage
+                        releaseall
+                        end
+                    }
+                }
 
                 // remove move
                 setvar(VAR_TEMP_1, MOVE_NONE)
@@ -951,6 +965,9 @@ text MoveTutorBringReplaceMonMessage{
     "POKéMON with you." 
 }
 
+text MoveTutorWhichMoveReplaceMessage{
+    "Which move would you like to replace?" 
+}
 
 
 

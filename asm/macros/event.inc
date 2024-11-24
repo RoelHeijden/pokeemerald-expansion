@@ -896,6 +896,14 @@
 	.byte \y
 	.endm
 
+	@ Displays a multichoicebox for the replace move move tutor script.
+	.macro replacemovebox x:req, y:req, ignoreBPress:req
+	.byte 0xed
+	.byte \x
+	.byte \y
+	.byte \ignoreBPress
+	.endm
+
 	@ Displays a multichoice box from which the user can choose a selection, and blocks script execution until a selection is made.
 	@ Lists of options are predefined (sMultichoiceLists) and the one to be used is specified with multichoiceId.
 	@ If ignoreBPress is set to a non-zero value, then the user will not be allowed to back out of the multichoice with the B button.
@@ -2093,6 +2101,7 @@
 	MSGBOX_AUTOCLOSE = 6
 	MSGBOX_GETPOINTS = 9
 	MSGBOX_POKENAV = 10
+	MSGBOX_REPLACEMOVE = 11
 
 	YES = 1
 	NO  = 0

@@ -3046,4 +3046,9 @@ extern const u8 gText_PlantBerry[];
 extern const u8 gText_AM[];
 extern const u8 gText_PM[];
 
+// ADDED
+extern const u8 gText_Disable[];
+extern const u8 gText_PainSplit[];
+extern const u8 gText_DestinyBond[];
+
 #endif // GUARD_STRINGS_H
