@@ -235,6 +235,10 @@ gScriptCmdTable::
 	.4byte ScrCmd_removemon	          			    @ 0xe8
 	.4byte ScrCmd_partymonhasfainted				@ 0xe9
 	.4byte ScrCmd_checkpartymon						@ 0xea
+	.4byte ScrCmd_checktutormoveslearned		    @ 0xeb
+	.4byte ScrCmd_replacemove		 			    @ 0xec
+
+	
 	
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

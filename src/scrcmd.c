@@ -1869,6 +1869,8 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
     return FALSE;
 }
 
+
+
 // ADDED
 // get moveslot of learned move
 bool8 ScrCmd_checkpartymoveslot(struct ScriptContext *ctx)
@@ -1987,8 +1989,85 @@ bool8 ScrCmd_checkpartymon(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
+{
+    // tutor moves
+    u16 tutorMoves[] = {
+        MOVE_DISABLE, 
+        MOVE_PAIN_SPLIT, 
+        MOVE_DESTINY_BOND
+        };
 
+    u16 species = VarGet(ScriptReadHalfword(ctx)); 
+    size_t numMoves = ARRAY_COUNT(tutorMoves);
+    u16 learnedMoves[2] = {MOVE_NONE, MOVE_NONE}; // init with no moves found
+    u8 i, j, k;
 
+    // iterate through the party to find the specified species
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == species)
+        {
+            // get the mon's moves
+            u16 moves[MAX_MON_MOVES];
+            for (j = 0; j < MAX_MON_MOVES; j++)
+                moves[j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, NULL);
+
+            // compare mon's moves with tutor moves
+            for (j = 0; j < numMoves; j++)
+            {
+                for (k = 0; k < MAX_MON_MOVES; k++)
+                {
+                    if (moves[k] == tutorMoves[j])
+                    {
+                        if (learnedMoves[0] == MOVE_NONE)
+                            learnedMoves[0] = tutorMoves[j];
+                        else if (learnedMoves[1] == MOVE_NONE)
+                            learnedMoves[1] = tutorMoves[j];
+                    }
+                }
+            }
+            break; 
+        }
+    }
+    gSpecialVar_Result = learnedMoves[0]; 
+    gSpecialVar_0x8004 = learnedMoves[1];
+
+    return FALSE; 
+}
+
+// ADDED
+// remove a move from a party Pokémon
+bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
+{
+    u8 partyIndex = VarGet(ScriptReadHalfword(ctx));
+    u16 moveId_old = VarGet(ScriptReadHalfword(ctx));
+    u16 moveId_new = VarGet(ScriptReadHalfword(ctx));
+    u8 slot;
+
+    gSpecialVar_Result = MAX_MON_MOVES;
+
+    if (partyIndex < PARTY_SIZE)
+    {
+        struct Pokemon *mon = &gPlayerParty[partyIndex];
+        u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
+        if (species && !GetMonData(mon, MON_DATA_IS_EGG))
+        {
+            for (slot = 0; slot < MAX_MON_MOVES; slot++)
+            {
+                if (GetMonData(mon, MON_DATA_MOVE1 + slot) == moveId_old)
+                {
+                    ScriptSetMonMoveSlot(partyIndex, moveId_new, slot);
+                    gSpecialVar_Result = slot; 
+                    break;
+                }
+            }
+        }
+    }
+    return FALSE; 
+}
 
 
 

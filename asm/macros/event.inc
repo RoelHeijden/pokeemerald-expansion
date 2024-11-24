@@ -1165,8 +1165,17 @@
 	@ VAR_RESULT is set to the moveslot idx.
 	.macro checkpartymoveslot slot:req, move:req
     .byte 0xe7
-    .2byte \slot
+    .byte \slot
     .2byte \move
+	.endm
+
+	@ Replace a given move from a party pokemon via party slot.
+	@ VAR_RESULT is set to the replaced moveslot.
+	.macro replacemove slot:req, move_old:req, move_new:req
+    .byte 0xec
+    .2byte \slot
+    .2byte \move_old
+    .2byte \move_new
 	.endm
 
 	@ Checks if party contains a fainted pokemon.
@@ -1182,6 +1191,16 @@
 	.byte 0xea
 	.2byte \species
 	.endm
+
+	@ Check which ofo the tutor moves a species the party has learned.
+	@ VAR_RESULT: moveId of the first tutor move.
+	@ VAR_0x8004: moveId of the secod tutor move.
+	.macro checktutormoveslearned species:req
+	.byte 0xeb
+	.2byte \species
+	.endm
+
+
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
 	@ If given anything else it will output it directly.

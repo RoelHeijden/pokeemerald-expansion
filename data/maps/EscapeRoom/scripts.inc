@@ -834,169 +834,169 @@ EscapeRoom_Mart_BikeShop:
 	.2byte ITEM_NONE
 
 EscapeRoom_EventScript_HeartscaleTutor::
-# 547 "data/maps/EscapeRoom/scripts.pory"
+# 546 "data/maps/EscapeRoom/scripts.pory"
 	lockall
-# 548 "data/maps/EscapeRoom/scripts.pory"
+# 547 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
-# 549 "data/maps/EscapeRoom/scripts.pory"
+# 548 "data/maps/EscapeRoom/scripts.pory"
 	checkitem ITEM_HEART_SCALE
-# 552 "data/maps/EscapeRoom/scripts.pory"
+# 551 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, FALSE
 	goto_if_eq EscapeRoom_EventScript_HeartscaleTutor_8
 EscapeRoom_EventScript_HeartscaleTutor_6:
-# 558 "data/maps/EscapeRoom/scripts.pory"
+# 557 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, FALSE
 	goto_if_eq EscapeRoom_EventScript_HeartscaleTutor_5
 EscapeRoom_EventScript_HeartscaleTutor_4:
-# 601 "data/maps/EscapeRoom/scripts.pory"
+# 610 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorStartMessage
-# 603 "data/maps/EscapeRoom/scripts.pory"
+# 612 "data/maps/EscapeRoom/scripts.pory"
 	checkpartymon SPECIES_GARDEVOIR
-# 604 "data/maps/EscapeRoom/scripts.pory"
+# 613 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_HeartscaleTutor_14
-# 635 "data/maps/EscapeRoom/scripts.pory"
+# 644 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorNoSuitablePokemonMessage, MSGBOX_AUTOCLOSE
-# 636 "data/maps/EscapeRoom/scripts.pory"
+# 645 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_HeartscaleTutor_1:
-# 639 "data/maps/EscapeRoom/scripts.pory"
+# 648 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_HeartscaleTutor_2:
-# 553 "data/maps/EscapeRoom/scripts.pory"
+# 552 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorStartMessage
-# 554 "data/maps/EscapeRoom/scripts.pory"
+# 553 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorNoHeartScales, MSGBOX_AUTOCLOSE
-# 555 "data/maps/EscapeRoom/scripts.pory"
+# 554 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_3:
-# 559 "data/maps/EscapeRoom/scripts.pory"
+# 558 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorReplaceMove, MSGBOX_YESNO
-# 560 "data/maps/EscapeRoom/scripts.pory"
+# 559 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
-# 561 "data/maps/EscapeRoom/scripts.pory"
+# 560 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_HeartscaleTutor_11
-# 596 "data/maps/EscapeRoom/scripts.pory"
+# 605 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE
-# 597 "data/maps/EscapeRoom/scripts.pory"
+# 606 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_5:
-# 558 "data/maps/EscapeRoom/scripts.pory"
+# 557 "data/maps/EscapeRoom/scripts.pory"
 	goto_if_set FLAG_TUTOR_MOVE_LEARNED, EscapeRoom_EventScript_HeartscaleTutor_3
 	goto EscapeRoom_EventScript_HeartscaleTutor_4
 
 EscapeRoom_EventScript_HeartscaleTutor_8:
-# 552 "data/maps/EscapeRoom/scripts.pory"
+# 551 "data/maps/EscapeRoom/scripts.pory"
 	goto_if_unset FLAG_TUTOR_MOVE_LEARNED, EscapeRoom_EventScript_HeartscaleTutor_2
 	goto EscapeRoom_EventScript_HeartscaleTutor_6
 
 EscapeRoom_EventScript_HeartscaleTutor_11:
-# 564 "data/maps/EscapeRoom/scripts.pory"
+# 563 "data/maps/EscapeRoom/scripts.pory"
 	checkpartymon SPECIES_GARDEVOIR
+# 564 "data/maps/EscapeRoom/scripts.pory"
+	copyvar VAR_TEMP_0, VAR_RESULT
 # 565 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_HeartscaleTutor_17
-# 591 "data/maps/EscapeRoom/scripts.pory"
+# 600 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorBringReplaceMonMessage, MSGBOX_AUTOCLOSE
-# 592 "data/maps/EscapeRoom/scripts.pory"
+# 601 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_14:
-# 605 "data/maps/EscapeRoom/scripts.pory"
+# 614 "data/maps/EscapeRoom/scripts.pory"
 	copyvar VAR_0x8004, VAR_RESULT
-# 606 "data/maps/EscapeRoom/scripts.pory"
+# 615 "data/maps/EscapeRoom/scripts.pory"
 	msgbox AskTeachGardevoirDisable, MSGBOX_YESNO
-# 609 "data/maps/EscapeRoom/scripts.pory"
+# 618 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_HeartscaleTutor_20
-# 629 "data/maps/EscapeRoom/scripts.pory"
+# 638 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE
-# 630 "data/maps/EscapeRoom/scripts.pory"
+# 639 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_17:
-# 566 "data/maps/EscapeRoom/scripts.pory"
-	copyvar VAR_0x8004, VAR_RESULT
-# 572 "data/maps/EscapeRoom/scripts.pory"
+# 568 "data/maps/EscapeRoom/scripts.pory"
+	checktutormoveslearned SPECIES_GARDEVOIR
+# 569 "data/maps/EscapeRoom/scripts.pory"
+	copyvar VAR_0x800A, VAR_RESULT
+# 570 "data/maps/EscapeRoom/scripts.pory"
+	copyvar VAR_0x800B, VAR_0x8004
+# 575 "data/maps/EscapeRoom/scripts.pory"
+	setvar VAR_TEMP_1, MOVE_NONE
+# 576 "data/maps/EscapeRoom/scripts.pory"
+	replacemove VAR_TEMP_0, VAR_0x800A, VAR_TEMP_1
+# 579 "data/maps/EscapeRoom/scripts.pory"
+	copyvar VAR_0x8004, VAR_TEMP_0
+# 580 "data/maps/EscapeRoom/scripts.pory"
 	special TeachMoveRelearnerMove
-# 573 "data/maps/EscapeRoom/scripts.pory"
+# 581 "data/maps/EscapeRoom/scripts.pory"
 	waitstate
-# 574 "data/maps/EscapeRoom/scripts.pory"
+# 582 "data/maps/EscapeRoom/scripts.pory"
 	lockall
-# 577 "data/maps/EscapeRoom/scripts.pory"
+# 585 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_0x8004, 0
 	goto_if_eq EscapeRoom_EventScript_HeartscaleTutor_23
-# 586 "data/maps/EscapeRoom/scripts.pory"
+# 595 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorTaughtMove, MSGBOX_AUTOCLOSE
-# 587 "data/maps/EscapeRoom/scripts.pory"
+# 596 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_20:
-# 610 "data/maps/EscapeRoom/scripts.pory"
+# 619 "data/maps/EscapeRoom/scripts.pory"
 	special TeachMoveRelearnerMove
-# 611 "data/maps/EscapeRoom/scripts.pory"
+# 620 "data/maps/EscapeRoom/scripts.pory"
 	waitstate
-# 612 "data/maps/EscapeRoom/scripts.pory"
+# 621 "data/maps/EscapeRoom/scripts.pory"
 	lockall
-# 615 "data/maps/EscapeRoom/scripts.pory"
+# 624 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_0x8004, 0
 	goto_if_eq EscapeRoom_EventScript_HeartscaleTutor_26
-# 621 "data/maps/EscapeRoom/scripts.pory"
+# 630 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorTaughtMove, MSGBOX_AUTOCLOSE
-# 622 "data/maps/EscapeRoom/scripts.pory"
+# 631 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
-# 623 "data/maps/EscapeRoom/scripts.pory"
+# 632 "data/maps/EscapeRoom/scripts.pory"
 	removeitem ITEM_HEART_SCALE, 1
-# 624 "data/maps/EscapeRoom/scripts.pory"
+# 633 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_TUTOR_MOVE_LEARNED
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_23:
-# 578 "data/maps/EscapeRoom/scripts.pory"
+# 586 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE
-# 579 "data/maps/EscapeRoom/scripts.pory"
+# 587 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
+# 590 "data/maps/EscapeRoom/scripts.pory"
+	replacemove VAR_TEMP_0, VAR_TEMP_1, VAR_0x800A
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 EscapeRoom_EventScript_HeartscaleTutor_26:
-# 616 "data/maps/EscapeRoom/scripts.pory"
+# 625 "data/maps/EscapeRoom/scripts.pory"
 	msgbox MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE
-# 617 "data/maps/EscapeRoom/scripts.pory"
+# 626 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_HeartscaleTutor_1
 
 
 EscapeRoom_EventScript_CreepySilentNPC::
-# 644 "data/maps/EscapeRoom/scripts.pory"
-	lockall
-# 645 "data/maps/EscapeRoom/scripts.pory"
-	faceplayer
-# 646 "data/maps/EscapeRoom/scripts.pory"
-	msgbox SilentNPCMessage, MSGBOX_AUTOCLOSE
-# 647 "data/maps/EscapeRoom/scripts.pory"
-	waitmessage
-# 648 "data/maps/EscapeRoom/scripts.pory"
-	releaseall
-	end
-
-
-EscapeRoom_EventScript_PerishExplain_NPC::
 # 653 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 654 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 655 "data/maps/EscapeRoom/scripts.pory"
-	msgbox PerishNPCexplain, MSGBOX_AUTOCLOSE
+	msgbox SilentNPCMessage, MSGBOX_AUTOCLOSE
 # 656 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 657 "data/maps/EscapeRoom/scripts.pory"
@@ -1004,13 +1004,13 @@ EscapeRoom_EventScript_PerishExplain_NPC::
 	end
 
 
-EscapeRoom_EventScript_someoneLockedUsUpNPC::
+EscapeRoom_EventScript_PerishExplain_NPC::
 # 662 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 663 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 664 "data/maps/EscapeRoom/scripts.pory"
-	msgbox someoneLockedUsUpNPCmessage, MSGBOX_AUTOCLOSE
+	msgbox PerishNPCexplain, MSGBOX_AUTOCLOSE
 # 665 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 666 "data/maps/EscapeRoom/scripts.pory"
@@ -1018,13 +1018,13 @@ EscapeRoom_EventScript_someoneLockedUsUpNPC::
 	end
 
 
-EscapeRoom_EventScript_itemHintNPC::
+EscapeRoom_EventScript_someoneLockedUsUpNPC::
 # 671 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 672 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 673 "data/maps/EscapeRoom/scripts.pory"
-	msgbox itemHintNPCmessage, MSGBOX_AUTOCLOSE
+	msgbox someoneLockedUsUpNPCmessage, MSGBOX_AUTOCLOSE
 # 674 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 675 "data/maps/EscapeRoom/scripts.pory"
@@ -1032,13 +1032,13 @@ EscapeRoom_EventScript_itemHintNPC::
 	end
 
 
-EscapeRoom_EventScript_NuggetNPC::
+EscapeRoom_EventScript_itemHintNPC::
 # 680 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 681 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 682 "data/maps/EscapeRoom/scripts.pory"
-	msgbox NuggetNPCmessage, MSGBOX_AUTOCLOSE
+	msgbox itemHintNPCmessage, MSGBOX_AUTOCLOSE
 # 683 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 684 "data/maps/EscapeRoom/scripts.pory"
@@ -1046,13 +1046,13 @@ EscapeRoom_EventScript_NuggetNPC::
 	end
 
 
-EscapeRoom_EventScript_perfectSmeargleHintNPC::
+EscapeRoom_EventScript_NuggetNPC::
 # 689 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 690 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 691 "data/maps/EscapeRoom/scripts.pory"
-	msgbox perfectSmeargleHintNPCmessage, MSGBOX_AUTOCLOSE
+	msgbox NuggetNPCmessage, MSGBOX_AUTOCLOSE
 # 692 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 693 "data/maps/EscapeRoom/scripts.pory"
@@ -1060,13 +1060,13 @@ EscapeRoom_EventScript_perfectSmeargleHintNPC::
 	end
 
 
-EscapeRoom_EventScript_icePuzzleHintNPC::
+EscapeRoom_EventScript_perfectSmeargleHintNPC::
 # 698 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 699 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 700 "data/maps/EscapeRoom/scripts.pory"
-	msgbox icePuzzleHintNPCmessage, MSGBOX_AUTOCLOSE
+	msgbox perfectSmeargleHintNPCmessage, MSGBOX_AUTOCLOSE
 # 701 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 702 "data/maps/EscapeRoom/scripts.pory"
@@ -1074,13 +1074,13 @@ EscapeRoom_EventScript_icePuzzleHintNPC::
 	end
 
 
-EscapeRoom_EventScript_getOutOfHereNPC::
+EscapeRoom_EventScript_icePuzzleHintNPC::
 # 707 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 708 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 709 "data/maps/EscapeRoom/scripts.pory"
-	msgbox getOutOfHereNPCmessage, MSGBOX_AUTOCLOSE
+	msgbox icePuzzleHintNPCmessage, MSGBOX_AUTOCLOSE
 # 710 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 711 "data/maps/EscapeRoom/scripts.pory"
@@ -1088,103 +1088,117 @@ EscapeRoom_EventScript_getOutOfHereNPC::
 	end
 
 
-EscapeRoom_EventScript_EndEscapeRoomSign::
+EscapeRoom_EventScript_getOutOfHereNPC::
 # 716 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 717 "data/maps/EscapeRoom/scripts.pory"
-	goto_if_unset FLAG_END_ESCAPE_ROOM, EscapeRoom_EventScript_EndEscapeRoomSign_2
-# 724 "data/maps/EscapeRoom/scripts.pory"
-	msgbox EscapeRoomEndCongratz
+	faceplayer
+# 718 "data/maps/EscapeRoom/scripts.pory"
+	msgbox getOutOfHereNPCmessage, MSGBOX_AUTOCLOSE
+# 719 "data/maps/EscapeRoom/scripts.pory"
+	waitmessage
+# 720 "data/maps/EscapeRoom/scripts.pory"
+	releaseall
+	end
+
+
+EscapeRoom_EventScript_EndEscapeRoomSign::
 # 725 "data/maps/EscapeRoom/scripts.pory"
+	lockall
+# 726 "data/maps/EscapeRoom/scripts.pory"
+	goto_if_unset FLAG_END_ESCAPE_ROOM, EscapeRoom_EventScript_EndEscapeRoomSign_2
+# 733 "data/maps/EscapeRoom/scripts.pory"
+	msgbox EscapeRoomEndCongratz
+# 734 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_EndEscapeRoomSign_1:
-# 727 "data/maps/EscapeRoom/scripts.pory"
+# 736 "data/maps/EscapeRoom/scripts.pory"
 	msgbox EndEscapeRoomSignMessage
-# 728 "data/maps/EscapeRoom/scripts.pory"
+# 737 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
-# 729 "data/maps/EscapeRoom/scripts.pory"
+# 738 "data/maps/EscapeRoom/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_EndEscapeRoomSign_2:
-# 718 "data/maps/EscapeRoom/scripts.pory"
+# 727 "data/maps/EscapeRoom/scripts.pory"
 	setflag FLAG_END_ESCAPE_ROOM
-# 719 "data/maps/EscapeRoom/scripts.pory"
+# 728 "data/maps/EscapeRoom/scripts.pory"
 	playfanfare MUS_OBTAIN_BADGE
-# 720 "data/maps/EscapeRoom/scripts.pory"
+# 729 "data/maps/EscapeRoom/scripts.pory"
 	msgbox EscapeRoomEndCongratz
-# 721 "data/maps/EscapeRoom/scripts.pory"
+# 730 "data/maps/EscapeRoom/scripts.pory"
 	waitfanfare
 	goto EscapeRoom_EventScript_EndEscapeRoomSign_1
 
 
 StartMessage::
-# 735 "data/maps/EscapeRoom/scripts.pory"
+# 744 "data/maps/EscapeRoom/scripts.pory"
 	.string "TBD$"
 
 SignMessage1::
-# 739 "data/maps/EscapeRoom/scripts.pory"
+# 748 "data/maps/EscapeRoom/scripts.pory"
 	.string "TBD$"
 
 Double1Puzzle_NotEnoughMons::
-# 743 "data/maps/EscapeRoom/scripts.pory"
+# 752 "data/maps/EscapeRoom/scripts.pory"
 	.string "Want to battle?\n"
 	.string "You should bring a second POKéMON.$"
 
 Double1Puzzle_Intro::
-# 748 "data/maps/EscapeRoom/scripts.pory"
+# 757 "data/maps/EscapeRoom/scripts.pory"
 	.string "Sharing is caring. Didn't you know?\n"
 	.string "It's not as painful as it seems.\p"
 	.string "Everyone wins!$"
 
 Double1Puzzle_Outro::
-# 754 "data/maps/EscapeRoom/scripts.pory"
+# 763 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh...\n"
 	.string "How did you figure that out?$"
 
 Double1Finalwords::
-# 759 "data/maps/EscapeRoom/scripts.pory"
+# 768 "data/maps/EscapeRoom/scripts.pory"
 	.string "You've done it!$"
 
 Double1Puzzle_PostBattle::
-# 763 "data/maps/EscapeRoom/scripts.pory"
+# 772 "data/maps/EscapeRoom/scripts.pory"
 	.string "Alright, go on now.$"
 
 Nurse_Heal_End::
-# 767 "data/maps/EscapeRoom/scripts.pory"
+# 776 "data/maps/EscapeRoom/scripts.pory"
 	.string "As good as new!$"
 
 SmeargleMessageInitial::
-# 771 "data/maps/EscapeRoom/scripts.pory"
+# 780 "data/maps/EscapeRoom/scripts.pory"
 	.string "I'm looking for the perfect SMEARGLE.\p"
 	.string "Have you got one??$"
 
 SmeargleMessageBad::
-# 776 "data/maps/EscapeRoom/scripts.pory"
+# 785 "data/maps/EscapeRoom/scripts.pory"
 	.string "Ew no, that SMEARGLE looks horrible.\n"
 	.string "I asked for the perfect SMEARGLE.\p"
 	.string "Do you want to release this SMEARGLE\n"
 	.string "and get your ball back?$"
 
 SmeargleReleaseHealSecondMonMessage::
-# 783 "data/maps/EscapeRoom/scripts.pory"
+# 792 "data/maps/EscapeRoom/scripts.pory"
 	.string "You might want to heal your POKéMON\n"
 	.string "first$"
 
 SmeargleReleaseGetSecondMonMessage::
-# 787 "data/maps/EscapeRoom/scripts.pory"
+# 796 "data/maps/EscapeRoom/scripts.pory"
 	.string "That's your last POKéMON!$"
 
 ReleaseSmeargleMessage::
-# 791 "data/maps/EscapeRoom/scripts.pory"
+# 800 "data/maps/EscapeRoom/scripts.pory"
 	.string "Bye-bye Smeargle.$"
 
 SmeargleReleaseDeclinedMessage::
-# 795 "data/maps/EscapeRoom/scripts.pory"
+# 804 "data/maps/EscapeRoom/scripts.pory"
 	.string "Okay, good luck.$"
 
 SmeargleMessagePerfect::
-# 799 "data/maps/EscapeRoom/scripts.pory"
+# 808 "data/maps/EscapeRoom/scripts.pory"
 	.string "That is it! That's the perfect\n"
 	.string "SMEARGLE!\p"
 	.string "To show my gratitude, I'll let you trade\n"
@@ -1192,7 +1206,7 @@ SmeargleMessagePerfect::
 	.string "Do you want to trade?$"
 
 SmeargleMessagePerfectButGothitaInBox::
-# 807 "data/maps/EscapeRoom/scripts.pory"
+# 816 "data/maps/EscapeRoom/scripts.pory"
 	.string "That is it! That is the perfect\n"
 	.string "SMEARGLE!\p"
 	.string "To show my gratitude, I'll let you trade\n"
@@ -1200,24 +1214,24 @@ SmeargleMessagePerfectButGothitaInBox::
 	.string "Oh, where did your GOTHITA go?$"
 
 TradeAcceptedMessage::
-# 815 "data/maps/EscapeRoom/scripts.pory"
+# 824 "data/maps/EscapeRoom/scripts.pory"
 	.string "There you go. Good luck!$"
 
 GardevoirObtainedMessage::
-# 819 "data/maps/EscapeRoom/scripts.pory"
+# 828 "data/maps/EscapeRoom/scripts.pory"
 	.string "Player received a Gardevoir!$"
 
 TradeDeclinedMessage::
-# 823 "data/maps/EscapeRoom/scripts.pory"
+# 832 "data/maps/EscapeRoom/scripts.pory"
 	.string "Alright, your loss.$"
 
 SmeargleMessageCompleted::
-# 827 "data/maps/EscapeRoom/scripts.pory"
+# 836 "data/maps/EscapeRoom/scripts.pory"
 	.string "I don't think I like this GOTHITA very\n"
 	.string "much...$"
 
 PerishNPCexplain::
-# 832 "data/maps/EscapeRoom/scripts.pory"
+# 841 "data/maps/EscapeRoom/scripts.pory"
 	.string "Did you know?\p"
 	.string "In competitive battles, if both players\n"
 	.string "are at their final POKéMON when PERISH\l"
@@ -1226,165 +1240,166 @@ PerishNPCexplain::
 	.string "Isn’t that fun?$"
 
 Single1Puzzle_Intro::
-# 841 "data/maps/EscapeRoom/scripts.pory"
+# 850 "data/maps/EscapeRoom/scripts.pory"
 	.string "Did you already battle against the\n"
 	.string "elderly couple near the exit?\p"
 	.string "I think one of their POKéMON is hiding\n"
 	.string "something...$"
 
 Single1Puzzle_Outro::
-# 848 "data/maps/EscapeRoom/scripts.pory"
-	.string "You should be able to defeat the\n"
+# 857 "data/maps/EscapeRoom/scripts.pory"
+	.string "You should be able to defeat that\n"
 	.string "elderly couple and get out of here!$"
 
 Single1Puzzle_PostBattle::
-# 852 "data/maps/EscapeRoom/scripts.pory"
+# 861 "data/maps/EscapeRoom/scripts.pory"
 	.string "It might be worth it to revisit your\n"
-	.string "items and tutor moves again.$"
+	.string "items and tutor moves.$"
 
 Single2Puzzle_Intro::
-# 857 "data/maps/EscapeRoom/scripts.pory"
+# 866 "data/maps/EscapeRoom/scripts.pory"
 	.string "Are you a skill trader?\n"
 	.string "You should probably invest more time\l"
 	.string "learning battle strategy!$"
 
 Single2Puzzle_Outro::
-# 863 "data/maps/EscapeRoom/scripts.pory"
+# 872 "data/maps/EscapeRoom/scripts.pory"
 	.string "Okay, you've impressed me.$"
 
 Single2Puzzle_PostBattle::
-# 867 "data/maps/EscapeRoom/scripts.pory"
+# 876 "data/maps/EscapeRoom/scripts.pory"
 	.string "You should probably get out of here.$"
 
 Single3Puzzle_Intro::
-# 871 "data/maps/EscapeRoom/scripts.pory"
+# 880 "data/maps/EscapeRoom/scripts.pory"
 	.string "You can run but you can't hide.$"
 
 Single3Puzzle_Outro::
-# 875 "data/maps/EscapeRoom/scripts.pory"
+# 884 "data/maps/EscapeRoom/scripts.pory"
 	.string "I'm not sure I would've done that.$"
 
 Single3Puzzle_PostBattleStolen::
-# 879 "data/maps/EscapeRoom/scripts.pory"
+# 888 "data/maps/EscapeRoom/scripts.pory"
 	.string "Sooo...\p"
 	.string "If you return my money and item, I'll\n"
 	.string "throw you back over the ledge.\p"
 	.string "Deal?$"
 
 Single3Puzzle_PostBattleNotStolen::
-# 886 "data/maps/EscapeRoom/scripts.pory"
+# 895 "data/maps/EscapeRoom/scripts.pory"
 	.string "Sooo...\p"
 	.string "If you return my money, I'll throw you\n"
 	.string "back over the ledge.\p"
 	.string "Deal?$"
 
 YesTeleportOutMessage::
-# 893 "data/maps/EscapeRoom/scripts.pory"
+# 902 "data/maps/EscapeRoom/scripts.pory"
 	.string "Cool cool! Come back again whenever you\n"
 	.string "want to battle.$"
 
 NoTeleportPleaseMessage::
-# 898 "data/maps/EscapeRoom/scripts.pory"
+# 907 "data/maps/EscapeRoom/scripts.pory"
 	.string "Uhuh, you sure?$"
 
 MoveTutorStartMessage::
-# 906 "data/maps/EscapeRoom/scripts.pory"
+# 915 "data/maps/EscapeRoom/scripts.pory"
 	.string "Can I have your HEART SCALES?\n"
 	.string "I can teach your POKéMON a new move if\l"
 	.string "you'd like.$"
 
 MoveTutorNoHeartScales::
-# 912 "data/maps/EscapeRoom/scripts.pory"
+# 921 "data/maps/EscapeRoom/scripts.pory"
 	.string "Oh you don't have any.$"
 
 AskTeachGardevoirDisable::
-# 916 "data/maps/EscapeRoom/scripts.pory"
+# 925 "data/maps/EscapeRoom/scripts.pory"
 	.string "Do you want me to teach your GARDEVOIR\n"
 	.string "a new move?$"
 
 MoveTutorNoSuitablePokemonMessage::
-# 920 "data/maps/EscapeRoom/scripts.pory"
+# 929 "data/maps/EscapeRoom/scripts.pory"
 	.string "Sorry, I can only teach moves to very a\n"
 	.string "specific POKéMON.$"
 
 MoveTutorTradeDeclined::
-# 924 "data/maps/EscapeRoom/scripts.pory"
+# 933 "data/maps/EscapeRoom/scripts.pory"
 	.string "Come back if you change your mind.$"
 
 MoveTutorTaughtMove::
-# 928 "data/maps/EscapeRoom/scripts.pory"
+# 937 "data/maps/EscapeRoom/scripts.pory"
 	.string "Feel free to come back if you want it\n"
 	.string "changed.\p"
 	.string "I will replace the move free of charge!$"
 
 MoveTutorReplaceMove::
-# 934 "data/maps/EscapeRoom/scripts.pory"
-	.string "You don't have any HEART SCALES left,\n"
-	.string "but do you want to replace a move I\l"
+# 943 "data/maps/EscapeRoom/scripts.pory"
+	.string "You don't have any HEART SCALES left.\n"
+	.string "Should I replace one of the moves I\l"
 	.string "taught previously?$"
 
 MoveTutorBringReplaceMonMessage::
-# 940 "data/maps/EscapeRoom/scripts.pory"
-	.string "$"
+# 949 "data/maps/EscapeRoom/scripts.pory"
+	.string "You don't seem to have the right\n"
+	.string "POKéMON with you.$"
 
 BikeShopHelloMessage::
-# 948 "data/maps/EscapeRoom/scripts.pory"
+# 958 "data/maps/EscapeRoom/scripts.pory"
 	.string "Yes, I'm still working...\n"
 	.string "How can I help you?$"
 
 BikeShoptGoodbyeMessage::
-# 953 "data/maps/EscapeRoom/scripts.pory"
+# 963 "data/maps/EscapeRoom/scripts.pory"
 	.string "Please come again!$"
 
 EscapeRoomEndCongratz::
-# 957 "data/maps/EscapeRoom/scripts.pory"
+# 967 "data/maps/EscapeRoom/scripts.pory"
 	.string "Congratulations!\n"
 	.string "You have beaten the escape room!$"
 
 EndEscapeRoomSignMessage::
-# 962 "data/maps/EscapeRoom/scripts.pory"
+# 972 "data/maps/EscapeRoom/scripts.pory"
 	.string "TBD$"
 
 SilentNPCMessage::
-# 966 "data/maps/EscapeRoom/scripts.pory"
+# 976 "data/maps/EscapeRoom/scripts.pory"
 	.string "...$"
 
 NuggetNPCmessage::
-# 970 "data/maps/EscapeRoom/scripts.pory"
+# 980 "data/maps/EscapeRoom/scripts.pory"
 	.string "Have you seen my NUGGETS?$"
 
 itemHintNPCmessage::
-# 974 "data/maps/EscapeRoom/scripts.pory"
+# 984 "data/maps/EscapeRoom/scripts.pory"
 	.string "Unfortunately, items can’t be used in\n"
 	.string "trainer battles.\p"
 	.string "Maybe they have their uses elsewhere.$"
 
 someoneLockedUsUpNPCmessage::
-# 980 "data/maps/EscapeRoom/scripts.pory"
+# 990 "data/maps/EscapeRoom/scripts.pory"
 	.string "Someone locked us in this cave for some\n"
 	.string "stupid puzzle or whatever.\p"
 	.string "What an asshole.$"
 
 perfectSmeargleHintNPCmessage::
-# 986 "data/maps/EscapeRoom/scripts.pory"
+# 996 "data/maps/EscapeRoom/scripts.pory"
 	.string "The perfect SMEARGLE?\n"
 	.string "That's gotta be a moveset thing right?$"
 
 icePuzzleHintNPCmessage::
-# 991 "data/maps/EscapeRoom/scripts.pory"
+# 1001 "data/maps/EscapeRoom/scripts.pory"
 	.string "I heard there's an ice puzzle in the cave\n"
 	.string "beneath us.\p"
 	.string "Don't expect to solve it right away.$"
 
 getOutOfHereNPCmessage::
-# 997 "data/maps/EscapeRoom/scripts.pory"
+# 1007 "data/maps/EscapeRoom/scripts.pory"
 	.string "Please get us out of here...$"
 
 NewGreatBallMessage::
-# 1001 "data/maps/EscapeRoom/scripts.pory"
+# 1011 "data/maps/EscapeRoom/scripts.pory"
 	.string "You recover the Great Ball.$"
 
 HandOverHeartScale::
-# 1005 "data/maps/EscapeRoom/scripts.pory"
+# 1015 "data/maps/EscapeRoom/scripts.pory"
 	.string "{PLAYER} handed over one HEART SCALE\n"
 	.string "in exchange.$"
