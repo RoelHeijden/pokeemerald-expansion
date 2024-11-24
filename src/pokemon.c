@@ -5577,7 +5577,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
         MOVE_PAIN_SPLIT, 
         MOVE_DESTINY_BOND,
         };
-
+    u16 previousMove = VarGet(VAR_0x800A);
     u16 learnedMoves[MAX_MON_MOVES];
     u8 numMoves = 0;
     int i, j;
@@ -5598,9 +5598,8 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
                 break;
             }
         }
-
         // if not known, add to the relearnable moves list
-        if (!knowsMove)
+        if (!knowsMove && !(previousMove == targetMoves[i]))
             moves[numMoves++] = targetMoves[i];
     }
     return numMoves;
