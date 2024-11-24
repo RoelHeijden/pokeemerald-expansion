@@ -585,7 +585,6 @@ script EscapeRoom_EventScript_HeartscaleTutor{
                         end
                     }
                 }
-
                 // remove move
                 setvar(VAR_TEMP_1, MOVE_NONE)
                 replacemove(VAR_TEMP_0, VAR_0x800A, VAR_TEMP_1)
@@ -630,6 +629,7 @@ script EscapeRoom_EventScript_HeartscaleTutor{
 
             // learn move
             if (var(VAR_RESULT) == YES){
+                setvar(VAR_0x800A, MOVE_NONE) // this var gets the previously learned move in the no-heart-scale script above
                 special(TeachMoveRelearnerMove)
                 waitstate
                 lockall
