@@ -928,6 +928,10 @@ u8 ItemId_GetType(u16 itemId)
 
 ItemUseFunc ItemId_GetFieldFunc(u16 itemId)
 {
+    // ADDED
+    if(itemId == ITEM_LUM_BERRY)
+        FlagSet(FLAG_LUM_BERRY_USED);
+        
     return gItemsInfo[SanitizeItemId(itemId)].fieldUseFunc;
 }
 

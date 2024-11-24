@@ -733,7 +733,7 @@ void ItemUseOutOfBattle_Berry(u8 taskId)
     }
     else
     {
-    ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
+        ItemId_GetFieldFunc(gSpecialVar_ItemId)(taskId);
     }
 }
 

@@ -441,6 +441,11 @@ void HandleAction_UseItem(void)
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
     gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem) - 1];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+    
+    // ADDED
+    if(gLastUsedItem == ITEM_LUM_BERRY){
+        FlagSet(FLAG_LUM_BERRY_USED);
+    }
 }
 
 bool32 TryRunFromBattle(u32 battler)

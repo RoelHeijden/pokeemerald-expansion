@@ -16,7 +16,8 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_TurnOfBagUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattle
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM,  0: EscapeRoom_MapScripts_CheckAfterBattleLum
     ] 
 }
 
@@ -29,6 +30,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
     call(EscapeRoom_MapScripts_SetHoleWarp)
     call(EscapeRoom_MapScripts_CheckSpawnSitrusTree)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM, 0)
 } 
 
 script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
@@ -39,10 +41,29 @@ script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
     }
 }
 
-script EscapeRoom_MapScripts_CheckAfterBattle{
+script EscapeRoom_MapScripts_CheckAfterBattleGreatBall{
     call(EscapeRoom_MapScripts_CheckIfMonCaught)
     call(EscapeRoom_MapScripts_FindGreatBallAferUse)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
+}
+
+script EscapeRoom_MapScripts_CheckAfterBattleLum{
+    call(EscapeRoom_MapScripts_CheckIfMonCaught)
+    call(EscapeRoom_MapScripts_FindLumBerryAferUse)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM, 1)
+}
+
+script EscapeRoom_MapScripts_FindLumBerryAferUse{
+    if(flag(FLAG_LUM_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
+        lockall
+        msgbox(NewLumBerryMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        finditem(ITEM_LUM_BERRY)
+        clearflag(FLAG_LUM_BERRY_USED)
+        msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+    }
 }
 
 script EscapeRoom_MapScripts_CheckIfMonCaught{
@@ -55,10 +76,10 @@ script EscapeRoom_MapScripts_CheckIfMonCaught{
 script EscapeRoom_MapScripts_FindGreatBallAferUse{
     if(flag(FLAG_GREAT_BALL_USED) && !flag(FLAG_POKEMON_CAUGHT)){
         lockall
-        additem(ITEM_GREAT_BALL)
-        clearflag(FLAG_GREAT_BALL_USED)
         msgbox(NewGreatBallMessage, MSGBOX_AUTOCLOSE)
         waitmessage
+        finditem(ITEM_GREAT_BALL)
+        clearflag(FLAG_GREAT_BALL_USED)
         releaseall
     }
 }
@@ -664,75 +685,35 @@ script EscapeRoom_EventScript_HeartscaleTutor{
 }
 
 script EscapeRoom_EventScript_CreepySilentNPC{
-    lockall
-    faceplayer
-    msgbox(SilentNPCMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(SilentNPCMessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_PerishExplain_NPC{
-    lockall
-    faceplayer
-    msgbox(PerishNPCexplain, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(PerishNPCexplain, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_someoneLockedUsUpNPC{
-    lockall
-    faceplayer
-    msgbox(someoneLockedUsUpNPCmessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(someoneLockedUsUpNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_itemHintNPC{
-    lockall
-    faceplayer
-    msgbox(itemHintNPCmessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(itemHintNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_NuggetNPC{
-    lockall
-    faceplayer
-    msgbox(NuggetNPCmessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(NuggetNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_perfectSmeargleHintNPC{
-    lockall
-    faceplayer
-    msgbox(perfectSmeargleHintNPCmessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(perfectSmeargleHintNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_icePuzzleHintNPC{
-    lockall
-    faceplayer
-    msgbox(icePuzzleHintNPCmessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(icePuzzleHintNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_getOutOfHereNPC{
-    lockall
-    faceplayer
-    msgbox(getOutOfHereNPCmessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-    end
+    msgbox(getOutOfHereNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_EndEscapeRoomSign{
@@ -1032,4 +1013,13 @@ text NewGreatBallMessage{
 text HandOverHeartScale{
     "{PLAYER} handed over one HEART SCALE\n"
 	"in exchange.$"
+}
+
+text NewLumBerryMessage{
+    "You suddenly find another Lum Berry in\n"
+    "your pocket." 
+}
+
+text ThanksMomMessage{
+    "How did that get there?"
 }
