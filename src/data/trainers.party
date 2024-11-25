@@ -16888,7 +16888,7 @@ Ability: Intimidate
 Level: 17  
 EVs: 252 Def  
 Bold Nature  
-IVs: 0 HP / 0 Atk  
+IVs: 0 HP / 0 Atk / 0 Spe
 - Drain Punch  
 - Brick Break
 
@@ -16903,28 +16903,36 @@ IVs: 0 HP / 0 Atk
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE1 ===
 Name: Roel
-Class: Rich Boy
-Pic: Rich Boy
+Class: Expert
+Pic: Factory Head Noland
 Gender: Male
-Music: Intense
+Music: Male
 Double Battle: No
 AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
-Togedemaru  
+Togedemaru @ Choice Scarf
 Ability: Lightning Rod  
-Level: 20  
+Level: 17  
 EVs: 252 Spe  
 Jolly Nature  
 IVs: 0 HP / 0 Atk / 0 SpA  
-- Steel Beam
+- Steel Beam  
 
 Tapu Bulu @ Life Orb  
 Ability: Grassy Surge  
-Level: 40  
-Tera Type: Grass  
+Level: 69  
 EVs: 252 Atk / 248 Spe  
-Serious Nature  
-- Wood Hammer   
+Adamant Nature  
+- Horn Leech  
+
+Persian-Alola @ Room Service  
+Ability: Fur Coat  
+Level: 20  
+EVs: 236 HP / 236 Def  
+Relaxed Nature  
+IVs: 0 Spe  
+- Knock Off 
+- Feint Attack
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
 Name: Sable
@@ -16947,7 +16955,8 @@ Ability: Perish Body
 Level: 35  
 EVs: 252 HP / 252 Atk  
 Adamant Nature  
-IVs: 0 Spe  
+Brave Nature  
+IVs: 3 Spe  
 - Tackle
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE3 ===

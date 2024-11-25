@@ -5802,8 +5802,10 @@ u16 GetBattleBGM(void)
             return MUS_VS_FRONTIER_BRAIN;
 
         // ADDED
-        // custom music for final double battle
-        case TRAINER_CLASS_OLD_COUPLE:
+        // custom music for the last battles
+        // case TRAINER_CLASS_EXPERT:  // single1
+        //     return MUS_VS_FRONTIER_BRAIN;
+        case TRAINER_CLASS_OLD_COUPLE:  // double1
             return MUS_VS_AQUA_MAGMA_LEADER;
 
         default:
