@@ -356,7 +356,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             30, 
             abilityNum=0,
             item=ITEM_NUGGET
-            nature=5, // Bold 
+            nature=7, // Relaxed 
             move1=MOVE_TRICK_ROOM,
             move2=MOVE_SKILL_SWAP, 
             move3=MOVE_NONE, 
@@ -364,12 +364,12 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             // EVS:
             hpEv=132,
             defEv=212,
-            speedEv=52,
+            spDefEv=164,
             // IVS:
             hpIv=31,
             atkIv=0,
             defIv=31,
-            speedIv=31,
+            speedIv=10,
             spAtkIv=31,
             spDefIv=31,
         )
