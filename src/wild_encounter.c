@@ -24,6 +24,9 @@
 #include "constants/layouts.h"
 #include "constants/weather.h"
 
+// ADDED
+#include "constants/moves.h"
+
 extern const u8 EventScript_SprayWoreOff[];
 
 #define MAX_ENCOUNTER_RATE 2880
@@ -451,7 +454,112 @@ static void CreateWildMon(u16 species, u8 level)
         return;
     }
 
-    CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    // ADDED
+    // custom pokemon encounters for Escape room maps: main and ice puzzle
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
+    {
+        u16 species = SPECIES_SMEARGLE;
+        u8 level = 20;
+        u8 abilityNum = 0;
+        u16 move1 = MOVE_SKETCH;
+        u16 move2 = MOVE_NONE;
+        u16 move3 = MOVE_NONE;
+        u16 move4 = MOVE_NONE;
+        u8 defEv = 208;
+        u8 hpIv = 11;
+        u8 atkIv = 0;
+        u8 defIv = 31;
+        u8 speedIv = 0;
+        u8 spAtkIv = 31; 
+        u8 spDefIv = 31;
+
+        // Create a blank Pokémon
+        ZeroMonData(&gEnemyParty[0]);
+
+        // Relaxed nature = 7, so: (personality % 25) == 7
+        u32 personality = (Random32() / 25) * 25 + 7;
+
+        // Initialize the Pokémon
+        CreateBoxMon(&gEnemyParty[0].box, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
+
+        // Set level and ability
+        SetMonData(&gEnemyParty[0], MON_DATA_LEVEL, &level);
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
+
+        // Set EVs
+        SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &defEv);
+
+        // Set IVs
+        SetMonData(&gEnemyParty[0], MON_DATA_HP_IV, &hpIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_ATK_IV, &atkIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_DEF_IV, &defIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPEED_IV, &speedIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPATK_IV, &spAtkIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPDEF_IV, &spDefIv);
+
+        // Set moves
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE1, &move1);
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE2, &move2);
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE3, &move3);
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE4, &move4);
+
+        // Recalculate stats after modifications
+        CalculateMonStats(&gEnemyParty[0]);
+    }
+    else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
+    {
+        u16 species = SPECIES_SHEDINJA;
+        u8 level = 10;
+        u8 abilityNum = 0;
+        u16 move1 = MOVE_PROTECT;
+        u16 move2 = MOVE_NONE;
+        u16 move3 = MOVE_NONE;
+        u16 move4 = MOVE_NONE;
+        u8 hpIv = 31;
+        u8 atkIv = 31;
+        u8 defIv = 31;
+        u8 speedIv = 31;
+        u8 spAtkIv = 31; 
+        u8 spDefIv = 31;
+        u16 heldItem = ITEM_FLAME_ORB;
+
+        // Create a blank Pokémon
+        ZeroMonData(&gEnemyParty[0]);
+
+        // Hardy nature = 0, so: (personality % 25) == 0
+        u32 personality = (Random32() / 25) * 25;
+
+        // Initialize the Pokémon
+        CreateBoxMon(&gEnemyParty[0].box, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
+
+        // Set level and ability
+        SetMonData(&gEnemyParty[0], MON_DATA_LEVEL, &level);
+        SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
+
+        // Set IVs
+        SetMonData(&gEnemyParty[0], MON_DATA_HP_IV, &hpIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_ATK_IV, &atkIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_DEF_IV, &defIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPEED_IV, &speedIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPATK_IV, &spAtkIv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPDEF_IV, &spDefIv);
+
+        // Set moves
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE1, &move1);
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE2, &move2);
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE3, &move3);
+        SetMonData(&gEnemyParty[0], MON_DATA_MOVE4, &move4);
+
+        // Set held item
+        SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &heldItem);
+
+        // Recalculate stats after modifications
+        CalculateMonStats(&gEnemyParty[0]);
+    }
+    else{
+        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    }
 }
 #ifdef BUGFIX
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)

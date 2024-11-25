@@ -16910,29 +16910,21 @@ Music: Intense
 Double Battle: No
 AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
-Lunatone @ Choice Band  
-Ability: Levitate  
-Level: 35  
-EVs: 252 Atk / 4 Spe  
-Adamant Nature  
-- Explosion  
+Togedemaru  
+Ability: Lightning Rod  
+Level: 20  
+EVs: 252 Spe  
+Jolly Nature  
+IVs: 0 HP / 0 Atk / 0 SpA  
+- Steel Beam
 
-Gliscor @ Toxic Orb  
-Ability: Poison Heal  
-Level: 48  
-EVs: 60 HP  
+Tapu Bulu @ Life Orb  
+Ability: Grassy Surge  
+Level: 40  
+Tera Type: Grass  
+EVs: 252 Atk / 248 Spe  
 Serious Nature  
-IVs: 14 Atk  
-- Dig  
-
-Dusclops @ Leftovers  
-Ability: Pressure  
-Level: 25  
-EVs: 252 Atk  
-Brave Nature  
-IVs: 24 HP / 0 Spe  
-- Focus Punch  
-- Shadow Sneak  
+- Wood Hammer   
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
 Name: Sable

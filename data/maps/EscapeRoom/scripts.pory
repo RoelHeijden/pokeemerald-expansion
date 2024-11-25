@@ -95,15 +95,15 @@ script EscapeRoom_MapScripts_FixCrackedGround{
 }
 
 script EscapeRoom_MapScript_setNPCfacing{
-    turnobject(7, DIR_SOUTH)
-    turnobject(11, DIR_EAST)
-    turnobject(12, DIR_NORTH)
-    turnobject(15, DIR_WEST)
-    turnobject(16, DIR_SOUTH)
-    turnobject(17, DIR_EAST)
-    turnobject(18, DIR_NORTH)
-    turnobject(19, DIR_WEST)
-    turnobject(20, DIR_SOUTH)
+    turnobject(5, DIR_SOUTH)
+    turnobject(9, DIR_SOUTH) // mart npc
+    turnobject(10, DIR_NORTH)
+    turnobject(13, DIR_WEST)
+    turnobject(14, DIR_SOUTH)
+    turnobject(15, DIR_EAST)
+    turnobject(16, DIR_NORTH)
+    turnobject(17, DIR_WEST)
+    turnobject(18, DIR_SOUTH)
     end
 }
 
@@ -206,35 +206,6 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     msgbox(Nurse_Heal_End)
     waitmessage
     releaseall
-}
-
-script EscapeRoom_Wild_Smeargle{
-    if (flag(FLAG_TOGGLE_BAG_USE) == TRUE){
-        clearflag(FLAG_TOGGLE_BAG_USE)
-    }
-    createmon(
-        side=1,
-        slot=0,
-        species=SPECIES_SMEARGLE,
-        level=20,
-        abilityNum=0,
-        nature=7, // Bold 
-        move1=MOVE_SKETCH,
-        move2=MOVE_NONE, 
-        move3=MOVE_NONE, 
-        move4=MOVE_NONE,
-        // EVS:
-        defEv=208,
-        // IVS:
-        hpIv=11,
-        atkIv=0,
-        defIv=31,
-        speedIv=0,
-        spAtkIv=31,
-        spDefIv=31,
-    )
-    dowildbattle
-    setflag(FLAG_TOGGLE_BAG_USE)
 }
 
 script EscapeRoom_Wild_Shedinja{
@@ -548,14 +519,13 @@ script EscapeRoom_EventScript_PostMatchHeal{
 }
 
 script EscapeRoom_EventScript_BikeShop{
-    lockall
+    lock
     faceplayer
     msgbox(BikeShopHelloMessage)
     waitmessage
     pokemart(EscapeRoom_Mart_BikeShop)
-    msgbox(BikeShoptGoodbyeMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
+    msgbox(BikeShoptGoodbyeMessage, MSGBOX_DEFAULT)
+    release
     end
 }
 
@@ -576,7 +546,14 @@ script EscapeRoom_EventScript_HeartscaleTutor{
     }
     // no heart scales but already learned a tutor move
     elif(var(VAR_RESULT) == FALSE && flag(FLAG_TUTOR_MOVE_LEARNED)){
-        msgbox(MoveTutorReplaceMove, MSGBOX_YESNO)
+
+        checktutormoveslearned(SPECIES_GARDEVOIR)
+        if(var(VAR_0x8004) == MOVE_NONE && var(VAR_RESULT) != MOVE_NONE){  // Gardevoir in party with exactly one tutor move
+            msgbox(MoveTutorReplaceSingleMove, MSGBOX_YESNO)
+        }
+        else{
+            msgbox(MoveTutorReplaceMove, MSGBOX_YESNO)
+        }
         waitmessage
         if (var(VAR_RESULT) == YES){
 
@@ -861,7 +838,7 @@ text Single1Puzzle_PostBattle{
 text Single2Puzzle_Intro{
     "Are you a skill trader?\n"
     "You should probably invest more time\l"
-    "learning battle strategy!" 
+    "into learning battle strategy!" 
 }
 
 text Single2Puzzle_Outro{
@@ -873,7 +850,7 @@ text Single2Puzzle_PostBattle{
 }
 
 text Single3Puzzle_Intro{
-    "You can run but you can't hide."
+    "You can run but you can't hide!"
 }
 
 text Single3Puzzle_Outro{
@@ -903,10 +880,6 @@ text NoTeleportPleaseMessage{
     "Uhuh, you sure?"
 }
 
-
-
-
-
 text MoveTutorStartMessage{
     "Can I have your HEART SCALES?\n"
     "I can teach your POKéMON a new move if\l"
@@ -918,7 +891,10 @@ text MoveTutorNoHeartScales{
 }
 
 text AskTeachGardevoirDisable{
-    format("Do you want me to teach your GARDEVOIR a new move?")
+    "Once learned, you can always come back\n"
+    "to have it replaced, free of charge.\p"
+    "Do you want your GARDEVOIR to learn a\n"
+    "new move?"
 }
 
 text MoveTutorNoSuitablePokemonMessage{
@@ -931,14 +907,19 @@ text MoveTutorTradeDeclined{
 
 text MoveTutorTaughtMove{
     "Feel free to come back if you want it\n"
-    "changed.\p"
-    "I will replace the move free of charge!"
+    "changed."
 }
 
 text MoveTutorReplaceMove{
     "You don't have any HEART SCALES left.\n"
     "Should I replace one of the moves I\l"
     "taught previously?"
+}
+
+text MoveTutorReplaceSingleMove{
+    "You don't have any HEART SCALES left.\n"
+    "Should I replace the move I taught\l"
+    "previously?"
 }
 
 text MoveTutorBringReplaceMonMessage{
@@ -949,9 +930,6 @@ text MoveTutorBringReplaceMonMessage{
 text MoveTutorWhichMoveReplaceMessage{
     "Which move would you like to replace?" 
 }
-
-
-
 
 text BikeShopHelloMessage{
     "Yes, I'm still working...\n"
