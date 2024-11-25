@@ -208,25 +208,6 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     releaseall
 }
 
-script EscapeRoom_Wild_Shedinja{
-    if (flag(FLAG_TOGGLE_BAG_USE) == TRUE){
-        clearflag(FLAG_TOGGLE_BAG_USE)
-    }
-    createmon(
-        side=1,
-        slot=0,
-        species=SPECIES_SHEDINJA,
-        level=10,
-        item=ITEM_FLAME_ORB, 
-        move1=MOVE_PROTECT,
-        move2=MOVE_NONE, 
-        move3=MOVE_NONE, 
-        move4=MOVE_NONE,
-    )
-    dowildbattle
-    setflag(FLAG_TOGGLE_BAG_USE)
-}
-
 script EscapeRoom_EventScript_FindRareCandy{
     lockall
     finditem(ITEM_RARE_CANDY)
