@@ -617,6 +617,12 @@ static bool8 TryGenerateWildMon(const struct WildPokemonInfo *wildMonInfo, u8 ar
     if (gMapHeader.mapLayoutId != LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS && flags & WILD_CHECK_KEEN_EYE && !IsAbilityAllowingEncounter(level))
         return FALSE;
 
+
+    // ADDED
+    // set 'no item use' flag to false -- allow items in wild battles
+    if(FlagGet(FLAG_TOGGLE_BAG_USE) == TRUE)
+        FlagClear(FLAG_TOGGLE_BAG_USE);
+
     CreateWildMon(wildMonInfo->wildPokemon[wildMonIndex].species, level);
     return TRUE;
 }

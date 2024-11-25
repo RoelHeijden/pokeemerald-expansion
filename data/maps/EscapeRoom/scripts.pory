@@ -27,10 +27,20 @@ script EscapeRoom_MapScript_OnTransitionScripts{
 }
 
 script EscapeRoom_MapScript_OnResumeScripts{
+    // set cracked hole map location
     call(EscapeRoom_MapScripts_SetHoleWarp)
+
+    // respawn sitrus tree if low on berries
     call(EscapeRoom_MapScripts_CheckSpawnSitrusTree)
+
+    // set retrieval vars (reset has to be in this script)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM, 0)
+
+    // disable bag use 
+    if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
 } 
 
 script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
@@ -755,7 +765,7 @@ text ReleaseSmeargleMessage{
 }
 
 text SmeargleReleaseDeclinedMessage{
-    "Okay, good luck." 
+    "Okay." 
 }
 
 text SmeargleMessagePerfect{
@@ -775,7 +785,7 @@ text SmeargleMessagePerfectButGothitaInBox{
 }
 
 text TradeAcceptedMessage{
-    "There you go. Good luck!"
+    "There you go. Take care!"
 }
 
 text GardevoirObtainedMessage{
@@ -808,12 +818,14 @@ text Single1Puzzle_Intro{
 }
 
 text Single1Puzzle_Outro{
-    format("You should be able to defeat that elderly couple and get out of here!")
+    format("Fuck.")
 }
 
 text Single1Puzzle_PostBattle{
+    "...\p"
     "It might be worth it to revisit your\n"
-    "items and tutor moves." 
+    "items and tutor moves.\p"
+    "Good luck." 
 }
 
 text Single2Puzzle_Intro{
