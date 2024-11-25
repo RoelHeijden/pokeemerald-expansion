@@ -16912,7 +16912,7 @@ AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
 Togedemaru @ Choice Scarf
 Ability: Lightning Rod  
-Level: 17  
+Level: 15  
 EVs: 252 Spe  
 Jolly Nature  
 IVs: 0 HP / 0 Atk / 0 SpA  
@@ -16954,7 +16954,6 @@ Cursola @ Mental Herb
 Ability: Perish Body  
 Level: 35  
 EVs: 252 HP / 252 Atk  
-Adamant Nature  
 Brave Nature  
 IVs: 3 Spe  
 - Tackle

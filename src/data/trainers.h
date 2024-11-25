@@ -42209,7 +42209,7 @@ F_TRAINER_FEMALE |
 #line 16889
             .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
 #line 16891
-            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(0, 0, 31, 0, 31, 31),
 #line 16887
             .ability = ABILITY_INTIMIDATE,
 #line 16888
@@ -42280,7 +42280,7 @@ F_TRAINER_FEMALE |
 #line 16914
             .ability = ABILITY_LIGHTNING_ROD,
 #line 16915
-            .lvl = 16,
+            .lvl = 17,
 #line 16917
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -42386,13 +42386,13 @@ F_TRAINER_FEMALE |
 #line 16956
             .ev = TRAINER_PARTY_EVS(252, 252, 0, 0, 0, 0),
 #line 16958
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 0, 31, 31),
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 3, 31, 31),
 #line 16954
             .ability = ABILITY_PERISH_BODY,
 #line 16955
             .lvl = 35,
 #line 16957
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16959
