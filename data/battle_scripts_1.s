@@ -6233,6 +6233,7 @@ BattleScript_DestinyBondTakesLife::
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
+	copybyte gPerishLastToFaint, gBattlerAttacker
 	return
 
 BattleScript_DmgHazardsOnAttacker::
