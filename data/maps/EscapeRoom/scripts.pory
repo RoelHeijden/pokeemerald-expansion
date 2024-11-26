@@ -952,7 +952,7 @@ text NuggetNPCmessage{
 
 text itemHintNPCmessage{
     "Unfortunately, items can’t be used in\n"
-    "trainer battles.\p"
+    "TRAINER battles.\p"
     "Maybe they have their uses elsewhere."
 }
 
