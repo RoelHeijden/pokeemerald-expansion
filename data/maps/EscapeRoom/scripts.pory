@@ -719,8 +719,7 @@ text Double1Puzzle_NotEnoughMons{
 
 text Double1Puzzle_Intro{
     "Sharing is caring. Didn't you know?\n"
-    "It's not as painful as it seems.\p"
-    "Everyone wins!"
+    "You can even share pain!"
 }
 
 text Double1Puzzle_Outro{
@@ -807,6 +806,7 @@ text PerishNPCexplain{
     "are at their final POKéMON when PERISH\l"
     "counts to zero, the POKéMON to faint\l"
     "last is declared the winner.\p"
+    "It's based on the POKéMON's speed!\n"
     "Isn’t that fun?"
 }
 
