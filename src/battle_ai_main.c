@@ -5447,60 +5447,119 @@ void ResetDynamicAiFunc(void)
 
 static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    // don't target the partner
-    if (battlerDef == 3)
+    int battlerGardy = (gBattleMons[2].species == SPECIES_GARDEVOIR) * 2;
+    int battlerSmeargle = (gBattleMons[2].species == SPECIES_SMEARGLE) * 2;
+
+    int oppSmeargle = (gBattleMons[3].species == SPECIES_SMEARGLE) * 2 + 1;
+    // int oppScrafty = (gBattleMons[3].species == SPECIES_SCRAFTY) * 2 + 1;
+
+    int moveGardy = gBattleMons[battlerGardy].moves[gBattleStruct->chosenMovePositions[battlerGardy]];
+    int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
+    int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
+
+    int targetProtectingItself = (moveDefender == MOVE_PROTECT && !gProtectSuccessLastTurn[battlerDef]);
+    int opposingSelfPainSplit = (moveGardy == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerGardy] == battlerSmeargle);
+
+    int gardyHp = gBattleMons[battlerGardy].hp;
+    int smeargleHp = gBattleMons[battlerSmeargle].hp;
+
+    bool8 smeargleHasIronBall = (gBattleMons[battlerSmeargle].item == ITEM_IRON_BALL);
+    bool8 smeargleHasDestinyBond = TRUE;
+    bool8 mentalHerbIntact = gBattleMons[oppSmeargle].item == ITEM_MENTAL_HERB;
+
+
+    // UNIQUE CASE AGAINST DESTINY BOND LINE
+    // self KO partner Smeargle to prevent Perish song
+    if (smeargleHasDestinyBond 
+        && smeargleHasIronBall 
+        && (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) 
+        && !mentalHerbIntact 
+        && ((moveGardy == MOVE_DISABLE && gBattleStruct->moveTarget[battlerGardy] == oppSmeargle) 
+            || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG))
+    {
+        // only self hit if first 4 turns of TR or Super fang is already disabled
+        if(gFieldTimers.trickRoomTimer > 1 || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG)
+        {
+            // if attacking battler is Scrafty: self target smeargle !
+            if ((battlerDef == 1 || battlerDef == 3) && (move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK)) 
+            {
+                if (move == MOVE_DRAIN_PUNCH && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
+                    score = 130;
+                else if (move == MOVE_BRICK_BREAK && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
+                    score = 130;
+                return score;
+            }
+        }
+    }
+
+    // DONT TARGET PARTNER 
+    if (battlerDef == oppSmeargle)  // || battlerDef == oppScrafty)
     {
         score = 1;
         return score;
     }
 
-    int battlerGardy = (gBattleMons[2].species == SPECIES_GARDEVOIR) * 2;
-    int battlerSmeargle = (gBattleMons[2].species == SPECIES_SMEARGLE) * 2;
+    // DESTINY BOND SMEARGLE
+    if(moveSmeargle == MOVE_DESTINY_BOND && gBattleMons[battlerDef].species == SPECIES_SMEARGLE && move != MOVE_PERISH_SONG){
+        // Scrafy
+        if(move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK){
+            // in Trick Room:
+            if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
+                if(smeargleHasIronBall){
+                    if(smeargleHp > 32)
+                        score = 155;
+                    else
+                        score = 70; 
+                }
+                else
+                    score = 155; 
+            }
+            // out of Trick Room
+            else{
+                if(smeargleHasIronBall)
+                    score = 155;
+                else
+                    if(smeargleHasIronBall){
+                        if(smeargleHp > 32)
+                            score = 155;
+                        else
+                            score = 70; 
+                }
+            }
+        }
+        // Smeargle
+        if(move == MOVE_SUPER_FANG){
+            // in Trick Room:
+            if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
 
-    int moveGardy = gBattleMons[battlerGardy].moves[gBattleStruct->chosenMovePositions[battlerGardy]];
-    // int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
-    int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
-
-    int targetProtectingItself = (moveDefender == MOVE_PROTECT && !gProtectSuccessLastTurn[battlerDef]);
-    int opposingSelfPainSplit = (moveGardy == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerGardy] == battlerSmeargle);
-   
-    // calc Scrafty Drain Punch damage
-    // u32 move_drainpunch = gBattleMons[1].moves[0];
-    // uq4_12_t effectivenessMultiplier = CalcTypeEffectivenessMultiplier(move_drainpunch, moveType, 1, battlerSmeargle, ABILITY_NONE, FALSE);
-    // s32 scrafty_dmg = CalculateMoveDamageVars(move, battlerAtk, battlerDef, moveType, fixedBasePower,
-    //                                          effectivenessMultiplier, weather, FALSE,
-    //                                          AI_DATA->holdEffects[battlerAtk], AI_DATA->holdEffects[battlerDef],
-    //                                          AI_DATA->abilities[battlerAtk], AI_DATA->abilities[battlerDef]);
-    // DebugPrintf("Drain punch: %d", move_drainpunch);
-    // DebugPrintf("Scrafty damage vs %d: %d", battlerSmeargle, scrafty_dmg);
-
-
-
-    // DebugPrintf("Move Smeargle: %d", moveSmeargle);
-
-    // NORMAL:
-    // if Dig:
-    // - super fang and opposingSelfPainSplit: HIGHEST HP MON
-    // - super fang: SMEARGLE
-    // - drain punch: GARDEVOIR
-    // if dig and semi-invulnerable:
-    // - super fang: GARDEVOIR
-    // - drain punch: SMEARGLE
-
-    // IN TRICK ROOM:
-    // if Dig:
-    // - super fang: GARDEVOIR
-    // - drain punch: SMEARGLE
-    // if dig and semi-invulnerable:
-    // - super fang and opposingSelfPainSplit: SMEARGLE
-    // - super fang: SMEARGLE
-    // - drain punch: GARDEVOIR
-
+                // target highest hp after scrafty damage (if scrafy will attack it)
+                if ((smeargleHp - 32) > 0)
+                {
+                    if ((smeargleHp - 24) >= gardyHp && battlerDef == battlerSmeargle)
+                        score = 152;  // target smeargle
+                }
+                else 
+                {
+                    if (smeargleHp >= gardyHp && battlerDef == battlerSmeargle)
+                        score = 152;  // target smeargle
+                }
+            }
+            // out of Trick Room
+            else{
+                if(smeargleHasIronBall)
+                    score = 150; 
+                else
+                    score = 82;
+            }
+        }
+        return score; 
+    }
     
+    // NORMAL SCENARIOS
     switch (move)
     {
         case MOVE_DRAIN_PUNCH:
-            // TEST: avoid protect
+            // avoid protect
             if (targetProtectingItself){
                 score = 69;
                 return score;
@@ -5511,7 +5570,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
 
         case MOVE_BRICK_BREAK:
-            // TEST: avoid protect
+            // avoid protect
             if (targetProtectingItself){
                 score = 69;
                 return score;
@@ -5537,16 +5596,15 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // in Trick Room:
             if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
 
-                // target mon with highest hp after drain punch
-                if ((gBattleMons[0].hp > gBattleMons[2].hp) && battlerDef == 0)
+                // target mon with highest hp after -1 scrafty dmg
+                if (((smeargleHp - 24) >= gardyHp) && battlerDef == battlerSmeargle)
                     score = 150;
-                if ((gBattleMons[0].hp < gBattleMons[2].hp) && battlerDef == 2)
+                if ((gardyHp > (smeargleHp - 24)) && battlerDef == battlerGardy)
                     score = 150;
 
                 // target Smeargle if self pain splitting
                 if (opposingSelfPainSplit && gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
                     score = 160;
-
             }
             // out of Trick Room:
             else 
@@ -5558,12 +5616,11 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 // target mon with highest if opp is self pain splitting
                 if (opposingSelfPainSplit)
                 {
-                    if ((gBattleMons[0].hp > gBattleMons[2].hp) && battlerDef == 0)
+                    if ((smeargleHp >= gardyHp) && battlerDef == battlerSmeargle)
                         score = 160;
-                    if ((gBattleMons[0].hp < gBattleMons[2].hp) && battlerDef == 2)
+                    if ((gardyHp > smeargleHp) && battlerDef == battlerGardy)
                         score = 160;
                 }
-
             }
             break;
     }

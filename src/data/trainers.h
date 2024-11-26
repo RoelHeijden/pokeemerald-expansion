@@ -42206,6 +42206,8 @@ F_TRAINER_FEMALE |
 #line 16886
             .species = SPECIES_SCRAFTY,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16886
+            .heldItem = ITEM_LEFTOVERS,
 #line 16889
             .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
 #line 16891
@@ -42230,7 +42232,7 @@ F_TRAINER_FEMALE |
 #line 16895
             .heldItem = ITEM_MENTAL_HERB,
 #line 16898
-            .ev = TRAINER_PARTY_EVS(0, 0, 252, 252, 4, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 32, 252, 0, 0),
 #line 16900
             .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
 #line 16896
@@ -42280,7 +42282,7 @@ F_TRAINER_FEMALE |
 #line 16914
             .ability = ABILITY_LIGHTNING_ROD,
 #line 16915
-            .lvl = 17,
+            .lvl = 15,
 #line 16917
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

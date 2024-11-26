@@ -16883,7 +16883,7 @@ Music: Twins
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
-Scrafty
+Scrafty @ Leftovers
 Ability: Intimidate  
 Level: 17  
 EVs: 252 Def  
@@ -16895,7 +16895,7 @@ IVs: 0 HP / 0 Atk / 0 Spe
 Smeargle @ Mental Herb  
 Ability: Technician  
 Level: 23  
-EVs: 252 Def / 4 SpA / 252 Spe  
+EVs: 32 Def / 252 Spe  
 Timid Nature  
 IVs: 0 HP / 0 Atk  
 - Super Fang  
