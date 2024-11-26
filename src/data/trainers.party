@@ -16910,13 +16910,13 @@ Music: Male
 Double Battle: No
 AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
-Togedemaru @ Choice Scarf
+Togedemaru @ Assault Vest  
 Ability: Lightning Rod  
-Level: 15  
-EVs: 252 Spe  
+Level: 16  
+EVs: 252 Atk / 252 Spe  
 Jolly Nature  
-IVs: 0 HP / 0 Atk / 0 SpA  
-- Steel Beam  
+IVs: 0 HP / 0 SpA  
+- Steel Beam
 
 Tapu Bulu @ Life Orb  
 Ability: Grassy Surge  
@@ -16927,9 +16927,9 @@ Adamant Nature
 
 Persian-Alola @ Room Service  
 Ability: Fur Coat  
-Level: 20  
-EVs: 236 HP / 236 Def  
-Relaxed Nature  
+Level: 21  
+EVs: 252 HP / 252 Atk / 4 Def   
+Brave Nature  
 IVs: 0 Spe  
 - Knock Off 
 - Feint Attack

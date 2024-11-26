@@ -1389,7 +1389,7 @@ NuggetNPCmessage::
 itemHintNPCmessage::
 # 953 "data/maps/EscapeRoom/scripts.pory"
 	.string "Unfortunately, items can’t be used in\n"
-	.string "trainer battles.\p"
+	.string "TRAINER battles.\p"
 	.string "Maybe they have their uses elsewhere.$"
 
 someoneLockedUsUpNPCmessage::

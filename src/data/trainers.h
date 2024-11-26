@@ -42274,15 +42274,15 @@ F_TRAINER_FEMALE |
             .species = SPECIES_TOGEDEMARU,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16913
-            .heldItem = ITEM_CHOICE_SCARF,
+            .heldItem = ITEM_ASSAULT_VEST,
 #line 16916
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16918
-            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 0, 31),
+            .iv = TRAINER_PARTY_IVS(0, 31, 31, 31, 0, 31),
 #line 16914
             .ability = ABILITY_LIGHTNING_ROD,
 #line 16915
-            .lvl = 15,
+            .lvl = 16,
 #line 16917
             .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -42320,15 +42320,15 @@ F_TRAINER_FEMALE |
 #line 16928
             .heldItem = ITEM_ROOM_SERVICE,
 #line 16931
-            .ev = TRAINER_PARTY_EVS(236, 0, 236, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(252, 252, 4, 0, 0, 0),
 #line 16933
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 0, 31, 31),
 #line 16929
             .ability = ABILITY_FUR_COAT,
 #line 16930
-            .lvl = 20,
+            .lvl = 21,
 #line 16932
-            .nature = NATURE_RELAXED,
+            .nature = NATURE_BRAVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16934
