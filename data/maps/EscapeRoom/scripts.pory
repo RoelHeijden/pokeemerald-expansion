@@ -718,8 +718,11 @@ text Double1Puzzle_NotEnoughMons{
 }
 
 text Double1Puzzle_Intro{
-    "Sharing is caring. Didn't you know?\n"
-    "You can even share pain!"
+    "We've seen it all before.\n"
+    "We know exactly what you'll do.\p"
+    "Some think it's cheating.\n"
+    "We call it wisdom.\p"
+    "Do you have the skill to find a way?"
 }
 
 text Double1Puzzle_Outro{
