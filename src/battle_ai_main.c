@@ -5470,27 +5470,27 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
     // UNIQUE CASE AGAINST DESTINY BOND LINE
     // self KO partner Smeargle to prevent Perish song
-    if (smeargleHasDestinyBond 
-        && smeargleHasIronBall 
-        && (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) 
-        && !mentalHerbIntact 
-        && ((moveGardy == MOVE_DISABLE && gBattleStruct->moveTarget[battlerGardy] == oppSmeargle) 
-            || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG))
-    {
-        // only self hit if first 4 turns of TR or Super fang is already disabled
-        if(gFieldTimers.trickRoomTimer > 1 || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG)
-        {
-            // if attacking battler is Scrafty: self target smeargle !
-            if ((battlerDef == 1 || battlerDef == 3) && (move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK)) 
-            {
-                if (move == MOVE_DRAIN_PUNCH && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
-                    score = 130;
-                else if (move == MOVE_BRICK_BREAK && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-                    score = 130;
-                return score;
-            }
-        }
-    }
+    // if (smeargleHasDestinyBond 
+    //     && smeargleHasIronBall 
+    //     && (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) 
+    //     && !mentalHerbIntact 
+    //     && ((moveGardy == MOVE_DISABLE && gBattleStruct->moveTarget[battlerGardy] == oppSmeargle) 
+    //         || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG))
+    // {
+    //     // only self hit if first 4 turns of TR or Super fang is already disabled
+    //     if(gFieldTimers.trickRoomTimer > 1 || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG)
+    //     {
+    //         // if attacking battler is Scrafty: self target smeargle !
+    //         if ((battlerDef == 1 || battlerDef == 3) && (move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK)) 
+    //         {
+    //             if (move == MOVE_DRAIN_PUNCH && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
+    //                 score = 130;
+    //             else if (move == MOVE_BRICK_BREAK && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
+    //                 score = 130;
+    //             return score;
+    //         }
+    //     }
+    // }
 
     // DONT TARGET PARTNER 
     if (battlerDef == oppSmeargle)  // || battlerDef == oppScrafty)

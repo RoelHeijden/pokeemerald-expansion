@@ -7805,6 +7805,15 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE3){
         moneyReward = 78999;
     }
+    if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE2){
+        moneyReward = 3998;
+    }
+    if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE1){
+        moneyReward = 5;
+    }
+    if(trainerId == TRAINER_MY_CUSTOM_DOUBLE_BATTLE1){
+        moneyReward = 20000;
+    }
 
     return moneyReward;
 }

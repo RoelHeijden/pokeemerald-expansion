@@ -58,7 +58,7 @@
 #define FLAG_GREAT_BALL_USED            0x2D
 #define FLAG_POKEMON_CAUGHT             0x2E
 #define FLAG_LUM_BERRY_USED             0x2F
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
+#define FLAG_IRON_BALL_OBTAINED         0x30
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag

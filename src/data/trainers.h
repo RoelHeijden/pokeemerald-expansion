@@ -42204,10 +42204,10 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16886
+            .nickname = COMPOUND_STRING("Evil Scraf"),
+#line 16886
             .species = SPECIES_SCRAFTY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 16886
-            .heldItem = ITEM_LEFTOVERS,
 #line 16889
             .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 0, 0),
 #line 16891
@@ -42232,13 +42232,13 @@ F_TRAINER_FEMALE |
 #line 16895
             .heldItem = ITEM_MENTAL_HERB,
 #line 16898
-            .ev = TRAINER_PARTY_EVS(0, 0, 32, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 244, 252, 0, 0),
 #line 16900
             .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
 #line 16896
-            .ability = ABILITY_TECHNICIAN,
+            .ability = ABILITY_OWN_TEMPO,
 #line 16897
-            .lvl = 23,
+            .lvl = 18,
 #line 16899
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
@@ -42344,12 +42344,12 @@ F_TRAINER_FEMALE |
 #line 16938
         .trainerName = _("Sable"),
 #line 16939
-        .trainerClass = TRAINER_CLASS_COOLTRAINER,
+        .trainerClass = TRAINER_CLASS_RICH_BOY,
 #line 16940
-        .trainerPic = TRAINER_PIC_COOLTRAINER_M,
+        .trainerPic = TRAINER_PIC_RICH_BOY,
         .encounterMusic_gender = 
 #line 16942
-            TRAINER_ENCOUNTER_MUSIC_COOL,
+            TRAINER_ENCOUNTER_MUSIC_RICH,
 #line 16943
         .doubleBattle = FALSE,
 #line 16944

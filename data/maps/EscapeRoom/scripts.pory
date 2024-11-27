@@ -105,15 +105,15 @@ script EscapeRoom_MapScripts_FixCrackedGround{
 }
 
 script EscapeRoom_MapScript_setNPCfacing{
-    turnobject(5, DIR_SOUTH)
+    turnobject(5, DIR_EAST)
     turnobject(9, DIR_SOUTH) // mart npc
     turnobject(10, DIR_NORTH)
+    turnobject(12, DIR_WEST)
     turnobject(13, DIR_WEST)
-    turnobject(14, DIR_SOUTH)
+    turnobject(14, DIR_NORTH)
     turnobject(15, DIR_EAST)
-    turnobject(16, DIR_NORTH)
-    turnobject(17, DIR_WEST)
-    turnobject(18, DIR_SOUTH)
+    turnobject(16, DIR_SOUTH)
+    turnobject(17, DIR_NORTH)
     end
 }
 
@@ -184,8 +184,8 @@ script EscapeRoom_MapScripts_SetRespawn{
 }
 
 script EscapeRoom_MapScripts_GetItems{
-    additem(ITEM_IRON_BALL)
-    additem(ITEM_NUGGET, 13)
+    // additem(ITEM_IRON_BALL)
+    additem(ITEM_NUGGET, 14)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
 
@@ -226,14 +226,6 @@ script EscapeRoom_EventScript_FindRareCandy{
     releaseall
 }
 
-script EscapeRoom_EventScript_FindNugget2{
-    lockall
-    finditem(ITEM_NUGGET)
-    removeobject(9)
-    setflag(FLAG_NUGGET2_OBTAINED)
-    releaseall
-}
-
 script EscapeRoom_EventScript_FindNugget3{
     lockall
     finditem(ITEM_NUGGET)
@@ -245,7 +237,7 @@ script EscapeRoom_EventScript_FindNugget3{
 script EscapeRoom_EventScript_FindHeartScale{
     lockall
     finditem(ITEM_HEART_SCALE)
-    removeobject(13)
+    removeobject(7)
     setflag(FLAG_HEART_SCALE2_OBTAINED)
     releaseall
 }
@@ -346,7 +338,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             SPECIES_GARDEVOIR, 
             30, 
             abilityNum=0,
-            item=ITEM_NUGGET
+            // item=ITEM_NUGGET
             nature=7, // Relaxed 
             move1=MOVE_TRICK_ROOM,
             move2=MOVE_SKILL_SWAP, 
@@ -701,6 +693,14 @@ script EscapeRoom_EventScript_EndEscapeRoomSign{
     releaseall
 }
 
+script EscapeRoom_EventScript_FindIronBall{
+    lockall
+    finditem(ITEM_IRON_BALL)
+    removeobject(19)
+    setflag(FLAG_IRON_BALL_OBTAINED)
+    releaseall
+}
+
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -826,8 +826,6 @@ text Single1Puzzle_Outro{
 
 text Single1Puzzle_PostBattle{
     "...\p"
-    "It might be worth it to revisit your\n"
-    "items and tutor moves.\p"
     "Good luck." 
 }
 
@@ -855,8 +853,8 @@ text Single3Puzzle_Outro{
 
 text Single3Puzzle_PostBattleStolen{
     "Sooo...\p"
-    "If you return my money and item, I'll\n"
-    "throw you back over the ledge.\p"
+    "If you return my money and TM, I'll throw\n"
+    "you back over the ledge.\p"
     "Deal?"
 }
 
@@ -950,7 +948,7 @@ text SilentNPCMessage{
 }
 
 text NuggetNPCmessage{
-    "Have you seen my NUGGETS?"
+    "Have you seen my NUGGET?"
 }
 
 text itemHintNPCmessage{
