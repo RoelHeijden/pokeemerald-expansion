@@ -919,12 +919,8 @@ static void GetItemName(u8 *dest, u16 itemId)
         }
         else
         {
-            // ADDED
-            // convert tm painsplit to tm 202 visually
-            if (itemId == ITEM_TM202)
-                itemId += 150;
             // Get TM number
-            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 3);  // CHANGED DEFAULT TO 3 digits
+            ConvertIntToDecimalStringN(gStringVar1, itemId - ITEM_TM01 + 1, STR_CONV_MODE_LEADING_ZEROS, 2); 
             StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
         }
         break;
