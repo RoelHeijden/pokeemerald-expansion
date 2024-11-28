@@ -42426,24 +42426,24 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16970
-            .species = SPECIES_QWILFISH,
+            .species = SPECIES_DRIFLOON,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16970
-            .heldItem = ITEM_TM18,
+            .heldItem = ITEM_FLAME_ORB,
 #line 16973
-            .ev = TRAINER_PARTY_EVS(100, 236, 64, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(252, 0, 252, 4, 0, 0),
 #line 16975
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 16971
-            .ability = ABILITY_SWIFT_SWIM,
+            .ability = ABILITY_FLARE_BOOST,
 #line 16972
-            .lvl = 8,
+            .lvl = 45,
 #line 16974
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16975
-                MOVE_DOUBLE_EDGE,
+#line 16976
+                MOVE_MEMENTO,
             },
             },
         },

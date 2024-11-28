@@ -77,15 +77,15 @@ script EscapeRoom_MapScripts_FindRawstBerryAferUse{
             if(var(VAR_0x8004) != ITEM_RAWST_BERRY) {
 
                 // return rawst berry
-        lockall
+                lockall
                 msgbox(NewRawstBerryMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
+                waitmessage
                 finditem(ITEM_RAWST_BERRY)
-        msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        releaseall
-    }
-}
+                msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+            }
+        }
     }
 }
 
@@ -146,21 +146,21 @@ script EscapeRoom_MapScripts_PlayStartMessage{
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
-        SPECIES_GOTHITA, 
-        30, 
+        SPECIES_SWOOBAT, 
+        64, 
         item=ITEM_HEART_SCALE,
-        abilityNum=2,
-        nature=11, // Hasty 
+        abilityNum=1,
+        nature=1, // Lonely 
         move1=MOVE_THIEF,
-        move2=MOVE_HELPING_HAND, 
+        move2=MOVE_PSYCHO_SHIFT, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
-        speedEv=236,
+        atkEv=252,
         // IVS:
-        hpIv=0,
+        hpIv=31,
         atkIv=31,
-        defIv=0,
+        defIv=31,
         speedIv=31,
         spAtkIv=31,
         spDefIv=31,
@@ -418,7 +418,7 @@ script EscapeRoom_EventScript_SingleBattle3{
 
 script EscapeRoom_EventScript_TeleportBackOverLedge{
     // check if item stolen
-    if(flag(FLAG_TM_18_STOLEN) == TRUE){
+    if(flag(FLAG_FLAME_ORB_STOLEN) == TRUE){
         msgbox(Single3Puzzle_PostBattleStolen, MSGBOX_YESNO)
     }
     else{
@@ -427,7 +427,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
     if(var(VAR_RESULT) == YES){
         msgbox(YesTeleportOutMessage, MSGBOX_AUTOCLOSE)
         waitmessage
-        warpteleport(MAP_ESCAPE_ROOM, 10, 26)
+        warpteleport(MAP_ESCAPE_ROOM, 11, 26)
 
         // TBD: return money
         removemoney(78999)
@@ -436,36 +436,20 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         cleartrainerflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3)
 
         // if item was stolen
-        if(flag(FLAG_TM_18_STOLEN) == TRUE){
+        if(flag(FLAG_FLAME_ORB_STOLEN) == TRUE){
             // locate and return item    
             checkpartyitem(0)
-            if(var(VAR_0x8004) == ITEM_TM18) {  // if item in party slot 0
+            if(var(VAR_0x8004) == ITEM_FLAME_ORB) {  // if item in party slot 0
                 removepartyitem(0)
             }
             checkpartyitem(1)
-            if(var(VAR_0x8004) == ITEM_TM18) {  // if item in party slot 1
+            if(var(VAR_0x8004) == ITEM_FLAME_ORB) {  // if item in party slot 1
                 removepartyitem(1)
             }
-            removeitem(ITEM_TM18)
+            removeitem(ITEM_FLAME_ORB)
 
-            // unlearn move if learnt
-            checkpartymove(MOVE_RAIN_DANCE)
-            if (var(VAR_RESULT) != PARTY_SIZE){ // move is learnt
-                if(var(VAR_RESULT) == 0){
-                    setmonmove(0, 0, MOVE_THIEF)
-                    setmonmove(0, 1, MOVE_HELPING_HAND)
-                    setmonmove(0, 2, MOVE_NONE)
-                    setmonmove(0, 3, MOVE_NONE)
-                }
-                elif(var(VAR_RESULT) == 1){
-                    setmonmove(1, 0, MOVE_THIEF)
-                    setmonmove(1, 1, MOVE_HELPING_HAND)
-                    setmonmove(1, 2, MOVE_NONE)
-                    setmonmove(1, 3, MOVE_NONE)
-                }
-            }
             // reset item stolen flag
-            clearflag(FLAG_TM_18_STOLEN)
+            clearflag(FLAG_FLAME_ORB_STOLEN)
         }
     }
     else{
@@ -879,8 +863,9 @@ text Single3Puzzle_PostBattleNotStolen{
 }
 
 text YesTeleportOutMessage {
-    "Cool cool! Come back again whenever you\n"
-    "want to battle."
+    "Cool cool cool.\n"
+    "Let's battle again when you're ready!\p"
+    "YEET!!"
 }
 
 text NoTeleportPleaseMessage{

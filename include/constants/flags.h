@@ -54,7 +54,7 @@
 #define FLAG_TUTOR_MOVE_LEARNED         0x29
 #define FLAG_DOUBLE1_COMPLETED          0x2A
 #define FLAG_END_ESCAPE_ROOM            0x2B
-#define FLAG_TM_18_STOLEN               0x2C 
+#define FLAG_FLAME_ORB_STOLEN           0x2C 
 #define FLAG_GREAT_BALL_USED            0x2D
 #define FLAG_POKEMON_CAUGHT             0x2E
 #define FLAG_RAWST_BERRY_USED           0x2F

@@ -3456,11 +3456,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
                         RecordAbilityBattle(gBattlerTarget, gLastUsedAbility);
                     }
-                    // ADDED
-                    // prevent taking a second TM in single3
-                    else if(FlagGet(FLAG_TM_18_STOLEN) == TRUE && gLastUsedItem == ITEM_TM18){
-                        gBattlescriptCurrInstr++;
-                    }
                     else
                     {
                         StealTargetItem(gBattlerAttacker, gBattlerTarget);  // Attacker steals target item
@@ -3470,8 +3465,8 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
                         // ADDED
-                        if (gLastUsedItem == ITEM_TM18);
-                            FlagSet(FLAG_TM_18_STOLEN);
+                        if (gLastUsedItem == ITEM_FLAME_ORB);
+                            FlagSet(FLAG_FLAME_ORB_STOLEN);
                     }
                 }
                 break;
@@ -15425,7 +15420,7 @@ static void Cmd_handleballthrow(void)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
         // ADDED THIS
-        if (odds > 53)  // catching threshold
+        if (odds >= 43)  // catching threshold
             odds = 255;
         else
             odds = 1;
