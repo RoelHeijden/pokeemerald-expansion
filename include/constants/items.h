@@ -775,7 +775,7 @@
 #define ITEM_TM49 630
 #define ITEM_TM50 631
 #define ITEM_TM51 632
-#define ITEM_TM202 633 // CHANGED
+#define ITEM_TM52 633
 #define ITEM_TM53 634 
 #define ITEM_TM54 635
 #define ITEM_TM55 636

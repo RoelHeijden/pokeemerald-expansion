@@ -28,7 +28,7 @@
     F(THUNDERBOLT) \
     F(THUNDER) \
     F(EARTHQUAKE) \
-    F(RETURN) \
+    F(SLEEP_TALK) \
     F(DIG) \
     F(PSYCHIC) \
     F(SHADOW_BALL) \
@@ -54,7 +54,8 @@
     F(OVERHEAT) \
     F(TRICK_ROOM) \
     F(PAIN_SPLIT) \
-    F(MAGIC_ROOM)
+    F(MAGIC_ROOM) \
+    F(RETURN) 
 
 #define FOREACH_HM(F) \
     F(CUT) \

@@ -9201,7 +9201,8 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Rawst Berry"),
         .pluralName = _("Rawst Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        // .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 0,
         .holdEffect = HOLD_EFFECT_CURE_BRN,
         .description = COMPOUND_STRING(
             "A hold item that\n"
@@ -10801,19 +10802,35 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_EARTHQUAKE,
     },
 
-    [ITEM_TM_RETURN] =
+    // [ITEM_TM_RETURN] =
+    // {
+    //     .name = _("TM27"),
+    //     .price = 1000,
+    //     .description = COMPOUND_STRING(
+    //         "The more the user\n"
+    //         "likes you, the more\n"
+    //         "powerful this move."),
+    //     .importance = I_REUSABLE_TMS,
+    //     .pocket = POCKET_TM_HM,
+    //     .type = ITEM_USE_PARTY_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+    //     .secondaryId = MOVE_RETURN,
+    // },
+
+    [ITEM_TM_SLEEP_TALK] = 
     {
         .name = _("TM27"),
-        .price = 1000,
+        // .price = 3000,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "The more the user\n"
-            "likes you, the more\n"
-            "powerful this move."),
+            "User performs one\n"
+            "of its own moves\n" 
+            "while sleeping."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_RETURN,
+        .secondaryId = MOVE_SLEEP_TALK, 
     },
 
     [ITEM_TM_DIG] =
@@ -11178,13 +11195,13 @@ const struct Item gItemsInfo[] =
 
     [ITEM_TM_PAIN_SPLIT] = 
     {
-        .name = _("TM202"),
+        .name = _("TM52"),
         // .price = 3000,
         .price = 0,
         .description = COMPOUND_STRING(
-            "Adds the user and\n"
-            "foe's HP, then\n" 
-            "shares it equally."),
+            "...\n"
+            "...\n" 
+            "..."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
@@ -11207,16 +11224,19 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_MAGIC_ROOM,
     },
 
-    [ITEM_TM54] =
+    [ITEM_TM_RETURN] =
     {
         .name = _("TM54"),
-        .price = 3000,
-        .description = sQuestionMarksDesc, // Todo
+        .price = 1000,
+        .description = COMPOUND_STRING(
+            "The more the user\n"
+            "likes you, the more\n"
+            "powerful this move."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_NONE, // Todo
+        .secondaryId = MOVE_RETURN,
     },
 
     [ITEM_TM55] =
