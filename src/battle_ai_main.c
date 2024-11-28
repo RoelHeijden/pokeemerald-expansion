@@ -5464,8 +5464,8 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     int smeargleHp = gBattleMons[battlerSmeargle].hp;
 
     bool8 smeargleHasIronBall = (gBattleMons[battlerSmeargle].item == ITEM_IRON_BALL);
-    bool8 smeargleHasDestinyBond = TRUE;
-    bool8 mentalHerbIntact = gBattleMons[oppSmeargle].item == ITEM_MENTAL_HERB;
+    // bool8 smeargleHasDestinyBond = TRUE;
+    // bool8 mentalHerbIntact = gBattleMons[oppSmeargle].item == ITEM_MENTAL_HERB;
 
 
     // UNIQUE CASE AGAINST DESTINY BOND LINE
