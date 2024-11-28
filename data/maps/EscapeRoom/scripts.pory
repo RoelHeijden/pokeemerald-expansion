@@ -17,7 +17,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM,  0: EscapeRoom_MapScripts_CheckAfterBattleLum
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST,  0: EscapeRoom_MapScripts_CheckAfterBattleRawst
     ] 
 }
 
@@ -35,7 +35,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
 
     // set retrieval vars (reset has to be in this script)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM, 0)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 0)
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
@@ -57,22 +57,35 @@ script EscapeRoom_MapScripts_CheckAfterBattleGreatBall{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
 }
 
-script EscapeRoom_MapScripts_CheckAfterBattleLum{
+script EscapeRoom_MapScripts_CheckAfterBattleRawst{
     call(EscapeRoom_MapScripts_CheckIfMonCaught)
-    call(EscapeRoom_MapScripts_FindLumBerryAferUse)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_LUM, 1)
+    call(EscapeRoom_MapScripts_FindRawstBerryAferUse)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 1)
 }
 
-script EscapeRoom_MapScripts_FindLumBerryAferUse{
-    if(flag(FLAG_LUM_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
+script EscapeRoom_MapScripts_FindRawstBerryAferUse{
+    // check if berry 'use' was clicked
+    if(flag(FLAG_RAWST_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
+        clearflag(FLAG_RAWST_BERRY_USED)
+
+        // check if berry in bag
+        checkitem(ITEM_RAWST_BERRY)
+        if(var(VAR_RESULT) == FALSE) {
+
+            // check if berry carried by pokemon in slot 0
+            checkpartyitem(0)
+            if(var(VAR_0x8004) != ITEM_RAWST_BERRY) {
+
+                // return rawst berry
         lockall
-        msgbox(NewLumBerryMessage, MSGBOX_AUTOCLOSE)
+                msgbox(NewRawstBerryMessage, MSGBOX_AUTOCLOSE)
         waitmessage
-        finditem(ITEM_LUM_BERRY)
-        clearflag(FLAG_LUM_BERRY_USED)
+                finditem(ITEM_RAWST_BERRY)
         msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
         waitmessage
         releaseall
+    }
+}
     }
 }
 
@@ -987,9 +1000,9 @@ text HandOverHeartScale{
 	"in exchange.$"
 }
 
-text NewLumBerryMessage{
-    "You suddenly find another Lum Berry in\n"
-    "your pocket." 
+text NewRawstBerryMessage{
+    "You suddenly find another berry in your\n"
+    "pocket." 
 }
 
 text ThanksMomMessage{
