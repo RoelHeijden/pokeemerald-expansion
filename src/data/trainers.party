@@ -16967,9 +16967,10 @@ Music: Suspicious
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Qwilfish @ ITEM_TM18
-Ability: Swift Swim  
-Level: 8  
-EVs: 100 HP / 236 Atk / 64 Def  
-Adamant Nature  
-- Double-Edge
+Drifloon @ Flame Orb  
+Ability: Flare Boost  
+Level: 45  
+EVs: 252 HP / 252 Def / 4 Spe  
+Bold Nature  
+IVs: 0 Atk  
+- Memento
