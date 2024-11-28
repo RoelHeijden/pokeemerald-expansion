@@ -484,8 +484,6 @@ static void CreateWildMon(u16 species, u8 level)
         x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
         y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
-        DebugPrintf("x, y: %d, %d", x, y);
-
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
             if (y == 38 && x >= 15 && x <= 19) {  // 15-19, 38
