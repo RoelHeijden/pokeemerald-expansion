@@ -484,8 +484,6 @@ static void CreateWildMon(u16 species, u8 level)
         x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
         y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
-        DebugPrintf("x, y: %d %d", x, y);
-
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
             if (y <= 36 && y >= 35 && x >= 16 && x <= 19) {  // 16-19, 15-36
@@ -514,8 +512,11 @@ static void CreateWildMon(u16 species, u8 level)
             level = 15;
             abilityNum = 1;
             move1 = MOVE_PROTECT;
-            move2 = MOVE_EXPLOSION;
             heldItem = ITEM_TM27;
+            
+            if(FlagGet(FLAG_TM_27_STOLEN)){
+                heldItem = ITEM_NONE;
+            }
         }
 
         // create new Pokémon

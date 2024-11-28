@@ -3465,8 +3465,10 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
                         // ADDED
-                        if (gLastUsedItem == ITEM_FLAME_ORB);
-                            FlagSet(FLAG_FLAME_ORB_STOLEN);
+                        if (gLastUsedItem == ITEM_TOXIC_ORB);
+                            FlagSet(FLAG_TOXIC_ORB_STOLEN);
+                        if (gLastUsedItem == ITEM_TM27);
+                            FlagSet(FLAG_TM_27_STOLEN);
                     }
                 }
                 break;
