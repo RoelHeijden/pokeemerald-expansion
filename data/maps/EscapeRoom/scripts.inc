@@ -34,7 +34,7 @@ EscapeRoom_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 # 19 "data/maps/EscapeRoom/scripts.pory"
 	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0, EscapeRoom_MapScripts_CheckAfterBattleGreatBall
 # 20 "data/maps/EscapeRoom/scripts.pory"
-	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 0, EscapeRoom_MapScripts_CheckAfterBattleRawst
+	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0, EscapeRoom_MapScripts_CheckAfterBattlePecha
 	.2byte 0
 
 
@@ -54,7 +54,7 @@ EscapeRoom_MapScript_OnResumeScripts::
 # 37 "data/maps/EscapeRoom/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0
 # 38 "data/maps/EscapeRoom/scripts.pory"
-	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 0
+	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0
 # 41 "data/maps/EscapeRoom/scripts.pory"
 	goto_if_unset FLAG_TOGGLE_BAG_USE, EscapeRoom_MapScript_OnResumeScripts_1
 	return
@@ -89,53 +89,53 @@ EscapeRoom_MapScripts_CheckAfterBattleGreatBall::
 	return
 
 
-EscapeRoom_MapScripts_CheckAfterBattleRawst::
+EscapeRoom_MapScripts_CheckAfterBattlePecha::
 # 61 "data/maps/EscapeRoom/scripts.pory"
 	call EscapeRoom_MapScripts_CheckIfMonCaught
 # 62 "data/maps/EscapeRoom/scripts.pory"
-	call EscapeRoom_MapScripts_FindRawstBerryAferUse
+	call EscapeRoom_MapScripts_FindPechaBerryAferUse
 # 63 "data/maps/EscapeRoom/scripts.pory"
-	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 1
+	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1
 	return
 
 
-EscapeRoom_MapScripts_FindRawstBerryAferUse::
+EscapeRoom_MapScripts_FindPechaBerryAferUse::
 # 68 "data/maps/EscapeRoom/scripts.pory"
-	goto_if_set FLAG_RAWST_BERRY_USED, EscapeRoom_MapScripts_FindRawstBerryAferUse_2
+	goto_if_set FLAG_PECHA_BERRY_USED, EscapeRoom_MapScripts_FindPechaBerryAferUse_2
 	return
 
-EscapeRoom_MapScripts_FindRawstBerryAferUse_1:
+EscapeRoom_MapScripts_FindPechaBerryAferUse_1:
 # 69 "data/maps/EscapeRoom/scripts.pory"
-	clearflag FLAG_RAWST_BERRY_USED
+	clearflag FLAG_PECHA_BERRY_USED
 # 72 "data/maps/EscapeRoom/scripts.pory"
-	checkitem ITEM_RAWST_BERRY
+	checkitem ITEM_PECHA_BERRY
 # 73 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, FALSE
-	goto_if_eq EscapeRoom_MapScripts_FindRawstBerryAferUse_5
+	goto_if_eq EscapeRoom_MapScripts_FindPechaBerryAferUse_5
 	return
 
-EscapeRoom_MapScripts_FindRawstBerryAferUse_2:
+EscapeRoom_MapScripts_FindPechaBerryAferUse_2:
 # 68 "data/maps/EscapeRoom/scripts.pory"
-	goto_if_unset FLAG_POKEMON_CAUGHT, EscapeRoom_MapScripts_FindRawstBerryAferUse_1
+	goto_if_unset FLAG_POKEMON_CAUGHT, EscapeRoom_MapScripts_FindPechaBerryAferUse_1
 	return
 
-EscapeRoom_MapScripts_FindRawstBerryAferUse_5:
+EscapeRoom_MapScripts_FindPechaBerryAferUse_5:
 # 76 "data/maps/EscapeRoom/scripts.pory"
 	checkpartyitem 0
 # 77 "data/maps/EscapeRoom/scripts.pory"
-	compare VAR_0x8004, ITEM_RAWST_BERRY
-	goto_if_ne EscapeRoom_MapScripts_FindRawstBerryAferUse_7
+	compare VAR_0x8004, ITEM_PECHA_BERRY
+	goto_if_ne EscapeRoom_MapScripts_FindPechaBerryAferUse_7
 	return
 
-EscapeRoom_MapScripts_FindRawstBerryAferUse_7:
+EscapeRoom_MapScripts_FindPechaBerryAferUse_7:
 # 80 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 81 "data/maps/EscapeRoom/scripts.pory"
-	msgbox NewRawstBerryMessage, MSGBOX_AUTOCLOSE
+	msgbox NewPechaBerryMessage, MSGBOX_AUTOCLOSE
 # 82 "data/maps/EscapeRoom/scripts.pory"
 	waitmessage
 # 83 "data/maps/EscapeRoom/scripts.pory"
-	finditem ITEM_RAWST_BERRY
+	finditem ITEM_PECHA_BERRY
 # 84 "data/maps/EscapeRoom/scripts.pory"
 	msgbox ThanksMomMessage, MSGBOX_AUTOCLOSE
 # 85 "data/maps/EscapeRoom/scripts.pory"
@@ -669,7 +669,7 @@ EscapeRoom_EventScript_TeleportBackOverLedge::
 # 420 "data/maps/EscapeRoom/scripts.pory"
 	lockall
 # 421 "data/maps/EscapeRoom/scripts.pory"
-	goto_if_set FLAG_FLAME_ORB_STOLEN, EscapeRoom_EventScript_TeleportBackOverLedge_2
+	goto_if_set FLAG_TOXIC_ORB_STOLEN, EscapeRoom_EventScript_TeleportBackOverLedge_2
 # 425 "data/maps/EscapeRoom/scripts.pory"
 	msgbox Single3Puzzle_PostBattleNotStolen, MSGBOX_YESNO
 EscapeRoom_EventScript_TeleportBackOverLedge_1:
@@ -716,26 +716,26 @@ EscapeRoom_EventScript_TeleportBackOverLedge_6:
 # 447 "data/maps/EscapeRoom/scripts.pory"
 	cleartrainerflag TRAINER_MY_CUSTOM_SINGLE_BATTLE3
 # 450 "data/maps/EscapeRoom/scripts.pory"
-	goto_if_set FLAG_FLAME_ORB_STOLEN, EscapeRoom_EventScript_TeleportBackOverLedge_9
+	goto_if_set FLAG_TOXIC_ORB_STOLEN, EscapeRoom_EventScript_TeleportBackOverLedge_9
 	goto EscapeRoom_EventScript_TeleportBackOverLedge_5
 
 EscapeRoom_EventScript_TeleportBackOverLedge_9:
 # 452 "data/maps/EscapeRoom/scripts.pory"
 	checkpartyitem 0
 # 453 "data/maps/EscapeRoom/scripts.pory"
-	compare VAR_0x8004, ITEM_FLAME_ORB
+	compare VAR_0x8004, ITEM_TOXIC_ORB
 	goto_if_eq EscapeRoom_EventScript_TeleportBackOverLedge_12
 EscapeRoom_EventScript_TeleportBackOverLedge_11:
 # 456 "data/maps/EscapeRoom/scripts.pory"
 	checkpartyitem 1
 # 457 "data/maps/EscapeRoom/scripts.pory"
-	compare VAR_0x8004, ITEM_FLAME_ORB
+	compare VAR_0x8004, ITEM_TOXIC_ORB
 	goto_if_eq EscapeRoom_EventScript_TeleportBackOverLedge_15
 EscapeRoom_EventScript_TeleportBackOverLedge_14:
 # 460 "data/maps/EscapeRoom/scripts.pory"
-	removeitem ITEM_FLAME_ORB
+	removeitem ITEM_TOXIC_ORB
 # 463 "data/maps/EscapeRoom/scripts.pory"
-	clearflag FLAG_FLAME_ORB_STOLEN
+	clearflag FLAG_TOXIC_ORB_STOLEN
 	goto EscapeRoom_EventScript_TeleportBackOverLedge_5
 
 EscapeRoom_EventScript_TeleportBackOverLedge_12:
@@ -1285,15 +1285,15 @@ Single3Puzzle_Outro::
 Single3Puzzle_PostBattleStolen::
 # 863 "data/maps/EscapeRoom/scripts.pory"
 	.string "Sooo...\p"
-	.string "If you give back my money and TM, I'll\n"
+	.string "In return for my money and item, I'll\n"
 	.string "throw you back down.\p"
 	.string "Deal?$"
 
 Single3Puzzle_PostBattleNotStolen::
 # 870 "data/maps/EscapeRoom/scripts.pory"
 	.string "Sooo...\p"
-	.string "If you give back my money, I'll throw\n"
-	.string "you back down.\p"
+	.string "In return for my money, I'll throw you\n"
+	.string "back down.\p"
 	.string "Deal?$"
 
 YesTeleportFirstHealMessage::
@@ -1423,7 +1423,7 @@ HandOverHeartScale::
 	.string "{PLAYER} handed over one HEART SCALE\n"
 	.string "in exchange.$"
 
-NewRawstBerryMessage::
+NewPechaBerryMessage::
 # 1003 "data/maps/EscapeRoom/scripts.pory"
 	.string "You suddenly find another berry in your\n"
 	.string "pocket.$"

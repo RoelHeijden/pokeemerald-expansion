@@ -42426,24 +42426,21 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16970
-            .species = SPECIES_DRIFLOON,
+            .species = SPECIES_PROBOPASS,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16970
-            .heldItem = ITEM_FLAME_ORB,
+            .heldItem = ITEM_TOXIC_ORB,
 #line 16973
-            .ev = TRAINER_PARTY_EVS(252, 0, 252, 4, 0, 0),
-#line 16975
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16971
-            .ability = ABILITY_FLARE_BOOST,
+            .ability = ABILITY_MAGNET_PULL,
 #line 16972
-            .lvl = 45,
-#line 16974
-            .nature = NATURE_BOLD,
+            .lvl = 42,
+            .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16976
-                MOVE_MEMENTO,
+#line 16973
+                MOVE_SELF_DESTRUCT,
             },
             },
         },

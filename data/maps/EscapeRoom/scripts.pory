@@ -17,7 +17,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST,  0: EscapeRoom_MapScripts_CheckAfterBattleRawst
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA,  0: EscapeRoom_MapScripts_CheckAfterBattlePecha
     ] 
 }
 
@@ -35,7 +35,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
 
     // set retrieval vars (reset has to be in this script)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 0)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0)
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
@@ -57,30 +57,30 @@ script EscapeRoom_MapScripts_CheckAfterBattleGreatBall{
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
 }
 
-script EscapeRoom_MapScripts_CheckAfterBattleRawst{
+script EscapeRoom_MapScripts_CheckAfterBattlePecha{
     call(EscapeRoom_MapScripts_CheckIfMonCaught)
-    call(EscapeRoom_MapScripts_FindRawstBerryAferUse)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_RAWST, 1)
+    call(EscapeRoom_MapScripts_FindPechaBerryAferUse)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1)
 }
 
-script EscapeRoom_MapScripts_FindRawstBerryAferUse{
+script EscapeRoom_MapScripts_FindPechaBerryAferUse{
     // check if berry 'use' was clicked
-    if(flag(FLAG_RAWST_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
-        clearflag(FLAG_RAWST_BERRY_USED)
+    if(flag(FLAG_PECHA_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
+        clearflag(FLAG_PECHA_BERRY_USED)
 
         // check if berry in bag
-        checkitem(ITEM_RAWST_BERRY)
+        checkitem(ITEM_PECHA_BERRY)
         if(var(VAR_RESULT) == FALSE) {
 
             // check if berry carried by pokemon in slot 0
             checkpartyitem(0)
-            if(var(VAR_0x8004) != ITEM_RAWST_BERRY) {
+            if(var(VAR_0x8004) != ITEM_PECHA_BERRY) {
 
-                // return rawst berry
+                // return Pecha berry
                 lockall
-                msgbox(NewRawstBerryMessage, MSGBOX_AUTOCLOSE)
+                msgbox(NewPechaBerryMessage, MSGBOX_AUTOCLOSE)
                 waitmessage
-                finditem(ITEM_RAWST_BERRY)
+                finditem(ITEM_PECHA_BERRY)
                 msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
                 waitmessage
                 releaseall
@@ -418,7 +418,7 @@ script EscapeRoom_EventScript_SingleBattle3{
 script EscapeRoom_EventScript_TeleportBackOverLedge{
     // check if item stolen
     lockall
-    if(flag(FLAG_FLAME_ORB_STOLEN) == TRUE){
+    if(flag(FLAG_TOXIC_ORB_STOLEN) == TRUE){
         msgbox(Single3Puzzle_PostBattleStolen, MSGBOX_YESNO)
     }
     else{
@@ -447,20 +447,20 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         cleartrainerflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3)
 
         // if item was stolen
-        if(flag(FLAG_FLAME_ORB_STOLEN) == TRUE){
+        if(flag(FLAG_TOXIC_ORB_STOLEN) == TRUE){
             // locate and return item    
             checkpartyitem(0)
-            if(var(VAR_0x8004) == ITEM_FLAME_ORB) {  // if item in party slot 0
+            if(var(VAR_0x8004) == ITEM_TOXIC_ORB) {  // if item in party slot 0
                 removepartyitem(0)
             }
             checkpartyitem(1)
-            if(var(VAR_0x8004) == ITEM_FLAME_ORB) {  // if item in party slot 1
+            if(var(VAR_0x8004) == ITEM_TOXIC_ORB) {  // if item in party slot 1
                 removepartyitem(1)
             }
-            removeitem(ITEM_FLAME_ORB)
+            removeitem(ITEM_TOXIC_ORB)
 
             // reset item stolen flag
-            clearflag(FLAG_FLAME_ORB_STOLEN)
+            clearflag(FLAG_TOXIC_ORB_STOLEN)
         }
     }
     else{
@@ -862,15 +862,15 @@ text Single3Puzzle_Outro{
 
 text Single3Puzzle_PostBattleStolen{
     "Sooo...\p"
-    "If you give back my money and TM, I'll\n"
+    "In return for my money and item, I'll\n"
     "throw you back down.\p"
     "Deal?"
 }
 
 text Single3Puzzle_PostBattleNotStolen{
     "Sooo...\p"
-    "If you give back my money, I'll throw\n"
-    "you back down.\p"
+    "In return for my money, I'll throw you\n"
+    "back down.\p"
     "Deal?"
 }
 
@@ -1000,7 +1000,7 @@ text HandOverHeartScale{
 	"in exchange.$"
 }
 
-text NewRawstBerryMessage{
+text NewPechaBerryMessage{
     "You suddenly find another berry in your\n"
     "pocket." 
 }

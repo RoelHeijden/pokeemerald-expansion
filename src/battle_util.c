@@ -443,8 +443,8 @@ void HandleAction_UseItem(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
     
     // ADDED
-    if(gLastUsedItem == ITEM_RAWST_BERRY){
-        FlagSet(FLAG_RAWST_BERRY_USED);
+    if(gLastUsedItem == ITEM_PECHA_BERRY){
+        FlagSet(FLAG_PECHA_BERRY_USED);
     }
 }
 
