@@ -484,9 +484,11 @@ static void CreateWildMon(u16 species, u8 level)
         x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
         y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
+        DebugPrintf("x, y: %d %d", x, y);
+
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
-            if (y == 38 && x >= 15 && x <= 19) {  // 15-19, 38
+            if (y <= 36 && y >= 35 && x >= 16 && x <= 19) {  // 16-19, 15-36
                 species = SPECIES_DARKRAI;
                 level = 5;
                 abilityNum = 0;
