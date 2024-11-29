@@ -42421,26 +42421,48 @@ F_TRAINER_FEMALE |
         .doubleBattle = FALSE,
 #line 16968
         .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
-        .partySize = 1,
+        .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
 #line 16970
-            .species = SPECIES_PROBOPASS,
+            .species = SPECIES_KECLEON,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 16970
-            .heldItem = ITEM_TOXIC_ORB,
 #line 16973
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 252, 0),
+#line 16975
+            .iv = TRAINER_PARTY_IVS(31, 31, 30, 31, 31, 30),
 #line 16971
-            .ability = ABILITY_MAGNET_PULL,
+            .ability = ABILITY_COLOR_CHANGE,
 #line 16972
+            .lvl = 55,
+#line 16974
+            .nature = NATURE_MODEST,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16976
+                MOVE_MIMIC,
+            },
+            },
+            {
+#line 16978
+            .species = SPECIES_ZANGOOSE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16978
+            .heldItem = ITEM_TOXIC_ORB,
+#line 16981
+            .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 100),
+#line 16982
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16979
+            .ability = ABILITY_TOXIC_BOOST,
+#line 16980
             .lvl = 42,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16973
-                MOVE_SELF_DESTRUCT,
+#line 16982
+                MOVE_FINAL_GAMBIT,
             },
             },
         },

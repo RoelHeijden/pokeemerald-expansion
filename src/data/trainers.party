@@ -16967,7 +16967,16 @@ Music: Suspicious
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Probopass @ Toxic Orb  
-Ability: Magnet Pull  
-Level: 42
-- Self-Destruct
+Kecleon
+Ability: Color Change  
+Level: 55   
+EVs: 252 SpA  
+Modest Nature  
+IVs: 30 Def / 30 SpD  
+- Mimic  
+
+Zangoose @ Toxic Orb  
+Ability: Toxic Boost  
+Level: 42  
+EVs: 252 HP / 100 SpD  
+- Final Gambit  
