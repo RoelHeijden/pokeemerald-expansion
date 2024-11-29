@@ -480,41 +480,34 @@ static void CreateWildMon(u16 species, u8 level)
         // Hardy nature = 0, so: (personality % 25) == 0
         u32 personality = (Random32() / 25) * 25;
 
-        s16 x, y;
-        x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
-        y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+        // s16 x, y;
+        // x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+        // y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
-            if (y <= 36 && y >= 35 && x >= 16 && x <= 19) {  // 16-19, 15-36
-                species = SPECIES_DARKRAI;
-                level = 5;
-                abilityNum = 0;
-                move1 = MOVE_DARK_VOID;
-            }
-            else{
-                species = SPECIES_SMEARGLE;
-                level = 20;
-                abilityNum = 0;
-                move1 = MOVE_SKETCH;
-                defEv = 208;
-                hpIv = 11;
-                atkIv = 0;
-                speedIv = 0;
+            species = SPECIES_SMEARGLE;
+            level = 20;
+            abilityNum = 0;
+            move1 = MOVE_SKETCH;
+            defEv = 208;
+            hpIv = 11;
+            atkIv = 0;
+            speedIv = 0;
 
-                // Relaxed nature = 7, so: (personality % 25) == 7
-                personality = (Random32() / 25) * 25 + 7;
-            }
+            // Relaxed nature == 7, so: (personality % 25) == 7
+            personality = (Random32() / 25) * 25 + 7;
+
         }
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
         {
-            species = SPECIES_WEEZING_GALARIAN;
-            level = 15;
-            abilityNum = 1;
+            species = SPECIES_SALAZZLE;
+            level = 13;
+            abilityNum = 0;
             move1 = MOVE_PROTECT;
-            heldItem = ITEM_TM27;
+            heldItem = ITEM_TM10;
             
-            if(FlagGet(FLAG_TM_27_STOLEN)){
+            if(FlagGet(FLAG_TM_10_STOLEN)){
                 heldItem = ITEM_NONE;
             }
         }
@@ -549,6 +542,14 @@ static void CreateWildMon(u16 species, u8 level)
 
         // Recalculate stats after modifications
         CalculateMonStats(&gEnemyParty[0]);
+
+        // make sure Protect pp is set properly
+        u8 pp;
+        if (move1 == MOVE_PROTECT)
+        {
+            pp = 10;
+            SetMonData(&gEnemyParty[0], MON_DATA_PP1, &pp);
+        }
     }
 }
 #ifdef BUGFIX
