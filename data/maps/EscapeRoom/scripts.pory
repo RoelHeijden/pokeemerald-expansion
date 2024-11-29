@@ -426,16 +426,6 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         msgbox(Single3Puzzle_PostBattleNotStolen, MSGBOX_YESNO)
     }
     if(var(VAR_RESULT) == YES){
-
-        // heal pokemon
-        msgbox(YesTeleportFirstHealMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        fadescreen(FADE_TO_BLACK)
-        special(HealPlayerParty)
-        playfanfare(MUS_HEAL)
-        waitfanfare
-        fadescreen(FADE_FROM_BLACK)
-
         // teleport out
         msgbox(YesTeleportOutMessage, MSGBOX_AUTOCLOSE)
         waitmessage
