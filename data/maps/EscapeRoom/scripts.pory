@@ -441,6 +441,9 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         waitmessage
         warpteleport(MAP_ESCAPE_ROOM, 11, 25)
 
+        // heal party
+        special(HealPlayerParty)
+
         // return money
         removemoney(78999)
 
@@ -862,25 +865,24 @@ text Single3Puzzle_Outro{
 }
 
 text Single3Puzzle_PostBattleStolen{
-    "Sooo...\p"
-    "In return for my money and item, I'll\n"
-    "throw you back down.\p"
+    "Sooo...\n"
+    "It looks like you're softlocked.\p"
+    "I'll throw you back down in return for\n"
+    "my item and money.\p"
     "Deal?"
 }
 
 text Single3Puzzle_PostBattleNotStolen{
     "Sooo...\p"
-    "In return for my money, I'll throw you\n"
-    "back down.\p"
+    "It looks like you're softlocked.\p"
+    "I'll throw you back down in return for\n"
+    "my money.\p"
     "Deal?"
 }
 
-text YesTeleportFirstHealMessage{
-    "Great, let me take care of your POKéMON\n"
-    "first."
-}
-
 text YesTeleportOutMessage {  
+    "Please come back whenever you want\n"
+    "another battle.\p"
     "YEET!"
 }
 
