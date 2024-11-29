@@ -146,24 +146,25 @@ script EscapeRoom_MapScripts_PlayStartMessage{
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
-        SPECIES_SWOOBAT, 
-        64, 
+        SPECIES_TOXICROAK, 
+        53, 
         item=ITEM_HEART_SCALE,
         abilityNum=1,
-        nature=1, // Lonely 
+        nature=4, // naughty 
         move1=MOVE_THIEF,
-        move2=MOVE_PSYCHO_SHIFT, 
+        move2=MOVE_ROLE_PLAY, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE,
         // EVS:
         atkEv=252,
+        spAtkEv=160,
         // IVS:
         hpIv=31,
         atkIv=31,
-        defIv=31,
-        speedIv=31,
-        spAtkIv=31,
-        spDefIv=31,
+        defIv=30,
+        speedIv=30,
+        spAtkIv=30,
+        spDefIv=0,
         )
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
