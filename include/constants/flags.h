@@ -59,7 +59,7 @@
 #define FLAG_POKEMON_CAUGHT             0x2E
 #define FLAG_PECHA_BERRY_USED           0x2F
 #define FLAG_IRON_BALL_OBTAINED         0x30
-#define FLAG_TM_27_STOLEN               0x31 
+#define FLAG_TM_10_STOLEN               0x31 
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag
 #define FLAG_UNUSED_0x034    0x34 // Unused Flag
