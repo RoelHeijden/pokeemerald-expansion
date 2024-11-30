@@ -4461,7 +4461,7 @@ static void HandleTurnActionSelectionState(void)
                     *(gBattleStruct->selectionScriptFinished + battler) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + battler) = STATE_BEFORE_ACTION_CHOSEN;
 
-                    gBattleOutcome = B_OUTCOME_LOST;
+                    // gBattleOutcome = B_OUTCOME_LOST;
                     return;
                 }
                 else if (IsRunningFromBattleImpossible(battler) != BATTLE_RUN_SUCCESS
@@ -5560,7 +5560,16 @@ static void HandleEndTurn_RanFromBattle(void)
 {
     gCurrentActionFuncId = 0;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    // ADDED
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        // gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
+        gBattlescriptCurrInstr = BattleScript_LocalBattleLostPrintWhiteOut;
+        // sText_PlayerForfeitToTrainer
+        gBattleOutcome = B_OUTCOME_LOST;
+    }
+    // CHANGED to else if
+    else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
         gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
         gBattleOutcome = B_OUTCOME_FORFEITED;
