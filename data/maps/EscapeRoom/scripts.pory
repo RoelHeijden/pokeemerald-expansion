@@ -335,6 +335,13 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
                     clearflag(FLAG_POKEMON_CAUGHT)
                     clearflag(FLAG_GREAT_BALL_USED)
                     giveitem(ITEM_GREAT_BALL)
+
+                    checkpartyitem(0)
+                    if(var(VAR_0x8004) == ITEM_FLAME_ORB) {
+                        removepartyitem(0)
+                    }
+                    removeitem(ITEM_FLAME_ORB)
+
                     msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
                     waitmessage
                 }
