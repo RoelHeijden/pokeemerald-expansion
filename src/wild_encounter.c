@@ -469,6 +469,7 @@ static void CreateWildMon(u16 species, u8 level)
         u16 move2 = MOVE_NONE;
         u16 move3 = MOVE_NONE;
         u16 move4 = MOVE_NONE;
+        u8 atkEv = 0;
         u8 defEv = 0;
         u8 hpIv = 31; 
         u8 atkIv = 31; 
@@ -505,7 +506,10 @@ static void CreateWildMon(u16 species, u8 level)
             level = 13;
             abilityNum = 0;
             move1 = MOVE_PROTECT;
+            hpIv = 21;
+            atkEv = 252;
             heldItem = ITEM_TM10;
+            personality = (Random32() / 25) * 25 + 3; // Adamant
             
             if(FlagGet(FLAG_TM_10_STOLEN)){
                 heldItem = ITEM_NONE;
@@ -522,6 +526,7 @@ static void CreateWildMon(u16 species, u8 level)
 
         // Set EVs
         SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &defEv);
+        SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &atkEv);
 
         // Set IVs
         SetMonData(&gEnemyParty[0], MON_DATA_HP_IV, &hpIv);
