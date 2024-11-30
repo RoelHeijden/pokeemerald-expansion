@@ -802,8 +802,7 @@ text EscapeRoomEndCongratz{
 }
 
 text EndEscapeRoomSignMessage{
-    "You really are the best.\n"
-    "Thanks for playing.\l"
+    "Thanks for playing.\n"
     " - Roel"
 }
 
