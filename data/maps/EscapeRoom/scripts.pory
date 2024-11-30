@@ -736,11 +736,64 @@ script EscapeRoom_EventScript_FindIronBall{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    "TBD"
+    "Welcome to the Escape Room!\p"
+    "Solve puzzles, navigate tough battles,\n"
+    "and find creative solutions in order to\l"
+    "progress through the map.\p"
+
+    "WHAT YOU NEED TO KNOW:\p"
+
+    "1) The game's battle mechanics are\n"
+    "based on GEN 9.\l"
+    "However, match tiebreakers will mirror\l"
+    "competitive battling rules.\p"
+    
+    "2) Battle RNG is disabled.\n"
+    "Catch rates, accuracy, damage, and move\l"
+    "effects are now deterministic.\l"
+    "Generally, the most intuitive outcome\l"
+    "is set to happen.\p"
+
+    "3) There is no need for grinding of any\n"
+    "kind.\p"
+
+    "4) Every item found directly on the map\n"
+    "will be inside an item ball.\p"
+
+    "5) Trainer battles have a forfeit option\n"
+    "(Run), which counts as a regular loss.\p"
+
+    "6) It is possible to softlock yourself\n"
+    "during play, so using save states is\l"
+    "highly recommended.\p"
+
+    "Good luck!"
 }
 
 text SignMessage1{
-    "TBD"
+    "1) The game's battle mechanics are\n"
+    "based on GEN 9.\l"
+    "However, match tiebreakers will mirror\l"
+    "competitive battling rules.\p"
+    
+    "2) Battle RNG is disabled.\n"
+    "Catch rates, accuracy, damage, and move\l"
+    "effects are now deterministic.\l"
+    "Generally, the most intuitive outcome\l"
+    "is set to happen.\p"
+
+    "3) There is no need for grinding of any\n"
+    "kind.\p"
+
+    "4) Every item found directly on the map\n"
+    "will be inside an item ball.\p"
+
+    "5) Trainer battles have a forfeit option\n"
+    "(Run), which counts as a regular loss.\p"
+
+    "6) It is possible to softlock yourself\n"
+    "during play, so using save states is\l"
+    "highly recommended.\p"
 }
 
 text EscapeRoomEndCongratz{
@@ -749,7 +802,9 @@ text EscapeRoomEndCongratz{
 }
 
 text EndEscapeRoomSignMessage{
-    "TBD"
+    "You really are the best.\n"
+    "Thanks for playing.\l"
+    " - Roel"
 }
 
 text Double1Puzzle_NotEnoughMons{
