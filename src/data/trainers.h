@@ -42204,8 +42204,6 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16886
-            .nickname = COMPOUND_STRING("Evil Scraf"),
-#line 16886
             .species = SPECIES_SCRAFTY,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16889
