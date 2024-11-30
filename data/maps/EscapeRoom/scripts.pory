@@ -452,6 +452,22 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         // reset trainer flag
         cleartrainerflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE3)
 
+        // set smeargle final gambit to sketch if it has the move
+        checkpartymove(MOVE_FINAL_GAMBIT)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_TEMP_0, MOVE_FINAL_GAMBIT)
+            setvar(VAR_TEMP_1, MOVE_SKETCH)
+            replacemove(VAR_RESULT, VAR_TEMP_0, VAR_TEMP_1)
+        }
+
+        // set smeargle mimic to sketch if it has the move
+        checkpartymove(MOVE_MIMIC)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_TEMP_0, MOVE_MIMIC)
+            setvar(VAR_TEMP_1, MOVE_SKETCH)
+            replacemove(VAR_RESULT, VAR_TEMP_0, VAR_TEMP_1)
+        }
+
         // if item was stolen
         if(flag(FLAG_TOXIC_ORB_STOLEN) == TRUE){
             // locate and return item    
