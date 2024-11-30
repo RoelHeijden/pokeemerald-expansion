@@ -5518,12 +5518,12 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             else{
                 if(smeargleHasIronBall)
                     score = 155;
-                else
-                    if(smeargleHasIronBall){
-                        if(smeargleHp > 32)
-                            score = 155;
-                        else
-                            score = 70; 
+                else{
+                    // if(smeargleHasIronBall){
+                    if(smeargleHp > 32)
+                        score = 155;
+                    else
+                        score = 70; 
                 }
             }
         }
