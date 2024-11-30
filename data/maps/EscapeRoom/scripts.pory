@@ -736,16 +736,13 @@ script EscapeRoom_EventScript_FindIronBall{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    // "Welcome to the Escape Room!\p"
-    // "Solve puzzles, navigate tough battles,\n"
-    // "and find creative solutions in order to\l"
-    // "progress through the map.\p"
-    // "What you need to know:\p"
+    "Welcome to the Escape Room!\p"
 
-    "Hello trainer,\n"
-    "welcome to the Escape Room!\p"
-    
-    "Here's what you need to know:\p"
+    "You'll have to navigate tough battles\n"
+    "and find creative solutions in order to\l"
+    "progress through the map.\p"
+
+    "What you need to know:\p"
 
     "1) The game's battle mechanics are\n"
     "based on GEN 9.\l"
@@ -793,7 +790,7 @@ text SignMessage1{
 
     "6) It is possible to softlock yourself\n"
     "during play, so using save states is\l"
-    "highly recommended.\p"
+    "highly recommended."
 }
 
 text EscapeRoomEndCongratz{
