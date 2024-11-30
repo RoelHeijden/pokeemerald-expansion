@@ -1713,7 +1713,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
-      "name": "HAPPY CAVE",
+      "name": "BIG CAVE",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1721,7 +1721,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_INDOOR",
-      "name": "BEHIND PLANT",
+      "name": "SEARCH",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1729,7 +1729,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_ICE_CAVE",
-      "name": "HAPPY CAVE",
+      "name": "BIG CAVE",
       "x": 8,
       "y": 4,
       "width": 1,
