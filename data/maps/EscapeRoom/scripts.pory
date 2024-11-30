@@ -334,14 +334,27 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
                     removemon(SPECIES_SMEARGLE)
                     clearflag(FLAG_POKEMON_CAUGHT)
                     clearflag(FLAG_GREAT_BALL_USED)
-                    giveitem(ITEM_GREAT_BALL)
-
-                    checkpartyitem(0)
+                    
+                    // check flameorb and add dialogue
+                    setvar(VAR_TEMP_0, 0)
+                    checkitem(ITEM_FLAME_ORB) // remove from bag
+                    if(var(VAR_RESULT) == TRUE){
+                        setvar(VAR_TEMP_0, 1)
+                        removeitem(ITEM_FLAME_ORB)
+                    }
+                    checkpartyitem(0) // remove from pokemon
                     if(var(VAR_0x8004) == ITEM_FLAME_ORB) {
+                        setvar(VAR_TEMP_0, 1)
                         removepartyitem(0)
                     }
-                    removeitem(ITEM_FLAME_ORB)
 
+                    // extra dialogue if orb was taken.
+                    if(var(VAR_TEMP_0) == 1){
+                        msgbox(TakeFlameOrbMessage, MSGBOX_AUTOCLOSE)
+                        waitmessage
+                    }
+
+                    giveitem(ITEM_GREAT_BALL)
                     msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
                     waitmessage
                 }
@@ -423,6 +436,7 @@ script EscapeRoom_EventScript_SingleBattle3{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE3, 
         Single3Puzzle_Intro, 
         Single3Puzzle_Outro, 
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     call(EscapeRoom_EventScript_TeleportBackOverLedge)
     end
@@ -527,9 +541,9 @@ movement EscapeRoom_Movement_Double1End{
 }
 
 script EscapeRoom_EventScript_PostMatchHeal{
-    // fadescreen(FADE_TO_BLACK)
+
     special(HealPlayerParty)
-    // fadescreen(FADE_FROM_BLACK)
+
 }
 
 script EscapeRoom_EventScript_BikeShop{
@@ -841,8 +855,17 @@ text SmeargleMessageInitial{
 text SmeargleMessageBad{
     "Ew no, that SMEARGLE looks horrible.\n"
     "I asked for the perfect SMEARGLE.\p"
-    "Do you want to release this SMEARGLE\n"
-    "and get your ball back?"
+    "I assume you never intended to get\n"
+    "softlocked like this, so do you want me\l"
+    "to release this SMEARGLE and return\l"
+    "your GREAT BALL?"
+    // "Do you want to release this SMEARGLE\n"
+    // "and get your ball back?"
+}
+
+text TakeFlameOrbMessage{
+    "I'll take that FLAME ORB as well.\p"
+    "(You don't need it)"
 }
 
 text SmeargleReleaseHealSecondMonMessage{
