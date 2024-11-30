@@ -736,29 +736,31 @@ script EscapeRoom_EventScript_FindIronBall{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    "Welcome to the Escape Room!\p"
-    "Solve puzzles, navigate tough battles,\n"
-    "and find creative solutions in order to\l"
-    "progress through the map.\p"
+    // "Welcome to the Escape Room!\p"
+    // "Solve puzzles, navigate tough battles,\n"
+    // "and find creative solutions in order to\l"
+    // "progress through the map.\p"
+    // "What you need to know:\p"
 
-    "WHAT YOU NEED TO KNOW:\p"
+    "Hello trainer,\n"
+    "welcome to the Escape Room!\p"
+    
+    "Here's what you need to know:\p"
 
     "1) The game's battle mechanics are\n"
     "based on GEN 9.\l"
-    "However, match tiebreakers will mirror\l"
+    "However, match tiebreakers will follow\l"
     "competitive battling rules.\p"
     
     "2) Battle RNG is disabled.\n"
-    "Catch rates, accuracy, damage, and move\l"
-    "effects are now deterministic.\l"
-    "Generally, the most intuitive outcome\l"
-    "is set to happen.\p"
+    "Catch rates, move effects, accuracy,\l"
+    "and damage are now deterministic.\p"
 
     "3) There is no need for grinding of any\n"
     "kind.\p"
 
-    "4) Every item found directly on the map\n"
-    "will be inside an item ball.\p"
+    "4) Any item you can find on the map\n"
+    "directly will be inside an item ball.\p"
 
     "5) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
@@ -773,20 +775,18 @@ text StartMessage{
 text SignMessage1{
     "1) The game's battle mechanics are\n"
     "based on GEN 9.\l"
-    "However, match tiebreakers will mirror\l"
+    "However, match tiebreakers will follow\l"
     "competitive battling rules.\p"
     
     "2) Battle RNG is disabled.\n"
-    "Catch rates, accuracy, damage, and move\l"
-    "effects are now deterministic.\l"
-    "Generally, the most intuitive outcome\l"
-    "is set to happen.\p"
+    "Catch rates, move effects, accuracy,\l"
+    "and damage are now deterministic.\p"
 
     "3) There is no need for grinding of any\n"
     "kind.\p"
 
-    "4) Every item found directly on the map\n"
-    "will be inside an item ball.\p"
+    "4) Any item you can find on the map\n"
+    "directly will be inside an item ball.\p"
 
     "5) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
