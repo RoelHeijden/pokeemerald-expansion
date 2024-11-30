@@ -265,89 +265,94 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
         releaseall
         end
     }
-    getpartysize
-    if (var(VAR_RESULT) < 2){  # no extra pokemon in party
-        checkpartymove(MOVE_THIEF)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_GOTHITA){  // mon is Gothita
-            msgbox(SmeargleMessageInitial)
-            waitmessage
-            releaseall
-            end
-        }
-        checkpartymove(MOVE_PROTECT)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SHEDINJA){  // mon is Shedinja
-            msgbox(SmeargleMessageInitial)
-            waitmessage
-            releaseall
-            end
-        }
-        checkpartymove(MOVE_SKETCH)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){   # Smeargle has Sketch
-            msgbox(SmeargleMessagePerfectButGothitaInBox)
-            waitmessage
-            releaseall
-            end
-        }
-        checkpartymove(MOVE_PROTECT)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
-            msgbox(SmeargleMessagePerfectButGothitaInBox)
-            waitmessage
-            releaseall
-            end
-        }
-    }
-    else{  // user has a second pokemon
-        checkpartymove(MOVE_SKETCH)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Sketch
-            msgbox(SmeargleMessagePerfect, MSGBOX_YESNO)
-            waitmessage
-            call(EscapeRoom_EventScript_IniitializeGardevoirTrade)
-            releaseall
-            end
-        }
-        checkpartymove(MOVE_PROTECT)
-        if (var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){  # Smeargle has Protect
-            msgbox(SmeargleMessagePerfect, MSGBOX_YESNO)
-            waitmessage
-            call(EscapeRoom_EventScript_IniitializeGardevoirTrade)
-            releaseall
-            end
-        }
-    }
-    msgbox(SmeargleMessageBad, MSGBOX_YESNO)
-    if (var(VAR_RESULT) == YES){
-        getpartysize
-        if (var(VAR_RESULT) >= 2){
-            partymonhasfainted
-            if (var(VAR_0x8004) == SPECIES_GOTHITA){
-                msgbox(SmeargleReleaseHealSecondMonMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-            else{
-                removemon(SPECIES_SMEARGLE)
-                clearflag(FLAG_POKEMON_CAUGHT)
-                clearflag(FLAG_GREAT_BALL_USED)
-                giveitem(ITEM_GREAT_BALL)
-                msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-        }
-        else{
-            msgbox(SmeargleReleaseGetSecondMonMessage, MSGBOX_AUTOCLOSE)
-            waitmessage
-        }
-    }
-    else{
-        msgbox(SmeargleReleaseDeclinedMessage, MSGBOX_AUTOCLOSE)
+
+    // no smeargle in party
+    checkpartymon(SPECIES_SMEARGLE)
+    if(var(VAR_RESULT) == PARTY_SIZE){
+        msgbox(SmeargleMessageInitial)
         waitmessage
+        releaseall
+        end
     }
-    releaseall
-    end 
+    // a smeargle caught
+    else{
+        // set var to 1 if perfect smeargle caught
+        checkpartymove(MOVE_SKETCH)
+        setvar(VAR_0x8001, 0)
+        if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){
+            setvar(VAR_0x8001, 1)
+        }
+        checkpartymove(MOVE_PROTECT)
+        if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_SMEARGLE){
+            setvar(VAR_0x8001, 1)
+        }
+
+        // set var to 1 if no second pokemon in party
+        getpartysize
+        setvar(VAR_0x8000, 0)
+        if(var(VAR_RESULT) < 2){ 
+            setvar(VAR_0x8000, 1)
+        }
+
+        // perfect smeargle
+        if(var(VAR_0x8001) == 1 && var(VAR_0x8000) == 0){
+            msgbox(SmeargleMessagePerfect, MSGBOX_YESNO)
+            waitmessage
+            call(EscapeRoom_EventScript_IniitializeGardevoirTrade)
+            releaseall
+            end
+        }
+
+        // perfect smeargle, but starter pokemon in box
+        if(var(VAR_0x8001) == 1 && var(VAR_0x8000) == 1){
+            msgbox(SmeargleMessagePerfectButToxicroakInBox)
+            waitmessage
+            releaseall
+            end
+        }
+
+        // bad smeargle
+        if(var(VAR_0x8001) == 0){
+            msgbox(SmeargleMessageBad, MSGBOX_YESNO)
+
+            // trade accepted
+            if (var(VAR_RESULT) == YES){
+
+                // if starter has fainted
+                partymonhasfainted
+                if (var(VAR_0x8004) == SPECIES_TOXICROAK){
+                    msgbox(SmeargleReleaseHealSecondMonMessage, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                }
+                // if starter in box
+                elif(var(VAR_0x8000) == 1){
+                    msgbox(SmeargleReleaseGetSecondMonMessage, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                }
+                // release smeargle
+                else{
+                    removemon(SPECIES_SMEARGLE)
+                    clearflag(FLAG_POKEMON_CAUGHT)
+                    clearflag(FLAG_GREAT_BALL_USED)
+                    giveitem(ITEM_GREAT_BALL)
+                    msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                }
+            }
+            // trade declined
+            else{
+                msgbox(SmeargleReleaseDeclinedMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+        releaseall
+        end
+    }
 }
 
 script EscapeRoom_EventScript_IniitializeGardevoirTrade{
     if(var(VAR_RESULT) == YES){
-        removemon(SPECIES_GOTHITA)
+        removemon(SPECIES_TOXICROAK)
         givemon(
             SPECIES_GARDEVOIR, 
             30, 
@@ -659,8 +664,8 @@ script EscapeRoom_EventScript_someoneLockedUsUpNPC{
     msgbox(someoneLockedUsUpNPCmessage, MSGBOX_NPC)
 }
 
-script EscapeRoom_EventScript_itemHintNPC{
-    msgbox(itemHintNPCmessage, MSGBOX_NPC)
+script EscapeRoom_EventScript_HiddenPowerHintNPC{
+    msgbox(hiddenPowerHintNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_NuggetNPC{
@@ -675,8 +680,8 @@ script EscapeRoom_EventScript_icePuzzleHintNPC{
     msgbox(icePuzzleHintNPCmessage, MSGBOX_NPC)
 }
 
-script EscapeRoom_EventScript_getOutOfHereNPC{
-    msgbox(getOutOfHereNPCmessage, MSGBOX_NPC)
+script EscapeRoom_EventScript_StopWinningNPC{
+    msgbox(StopWinningNPCmessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_EndEscapeRoomSign{
@@ -712,6 +717,15 @@ text StartMessage{
 }
 
 text SignMessage1{
+    "TBD"
+}
+
+text EscapeRoomEndCongratz{
+    "Congratulations!\n"
+    "You have beaten the escape room!"
+}
+
+text EndEscapeRoomSignMessage{
     "TBD"
 }
 
@@ -777,16 +791,17 @@ text SmeargleMessagePerfect{
     "That is it! That's the perfect\n"
     "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty GOTHITA for my GARDEVOIR.\p"
+    "your shitty TOXICROAK for my amazing\n"
+    "GARDEVOIR."
     "Do you want to trade?"
 }
 
-text SmeargleMessagePerfectButGothitaInBox{
+text SmeargleMessagePerfectButToxicroakInBox{
     "That is it! That is the perfect\n"
     "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty GOTHITA for my GARDEVOIR.\p"
-    "Oh, where did your GOTHITA go?"
+    "your shitty TOXICROAK for my GARDEVOIR.\p"
+    "Oh, where did your TOXICROAK go?"
 }
 
 text TradeAcceptedMessage{
@@ -794,7 +809,7 @@ text TradeAcceptedMessage{
 }
 
 text GardevoirObtainedMessage{
-    "Player received a Gardevoir!"
+    "{PLAYER} received a Gardevoir!"
 }
 
 text TradeDeclinedMessage{
@@ -802,8 +817,8 @@ text TradeDeclinedMessage{
 }
 
 text SmeargleMessageCompleted{
-    "I don't think I like this GOTHITA very\n"
-    "much..."
+    "I don't think I like this TOXICROAK\n"
+    "very much..."
 }
 
 text PerishNPCexplain{
@@ -940,27 +955,18 @@ text BikeShoptGoodbyeMessage{
     "Please come again!" 
 }
 
-text EscapeRoomEndCongratz{
-    "Congratulations!\n"
-    "You have beaten the escape room!"
-}
-
-text EndEscapeRoomSignMessage{
-    "TBD"
-}
-
 text SilentNPCMessage{
-    "..."
+    "Do not strike, do not flee,\n"
+    "One quiet turn could set you free."
 }
 
 text NuggetNPCmessage{
     "Have you seen my NUGGET?"
 }
 
-text itemHintNPCmessage{
-    "Unfortunately, items can’t be used in\n"
-    "TRAINER battles.\p"
-    "Maybe they have their uses elsewhere."
+text hiddenPowerHintNPCmessage{
+    "Even copied moves can hold surprises.\n"
+    "Sometimes they just feel... different."
 }
 
 text someoneLockedUsUpNPCmessage{
@@ -977,11 +983,13 @@ text perfectSmeargleHintNPCmessage{
 text icePuzzleHintNPCmessage{
     "I heard there's an ice puzzle in the cave\n"
     "beneath us.\p"
-    "Don't expect to solve it right away."
+    "Don't expect to fully solve it on your\n"
+    "first try."
 }
 
-text getOutOfHereNPCmessage{
-    "Please get us out of here..."
+text StopWinningNPCmessage{
+    "Aren't you tired of winning?\n"
+    "Try losing instead!"
 }
 
 text NewGreatBallMessage{

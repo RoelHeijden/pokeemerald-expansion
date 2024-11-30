@@ -167,7 +167,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_perfectSmeargleHintNPC",
+      "script": "EscapeRoom_EventScript_StopWinningNPC",
       "flag": "0"
     },
     {
@@ -180,7 +180,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_itemHintNPC",
+      "script": "EscapeRoom_EventScript_HiddenPowerHintNPC",
       "flag": "0"
     },
     {
@@ -193,7 +193,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_someoneLockedUsUpNPC",
+      "script": "EscapeRoom_EventScript_perfectSmeargleHintNPC",
       "flag": "0"
     },
     {
@@ -232,7 +232,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_getOutOfHereNPC",
+      "script": "EscapeRoom_EventScript_someoneLockedUsUpNPC",
       "flag": "0"
     },
     {
