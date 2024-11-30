@@ -798,8 +798,8 @@ text SmeargleMessagePerfect{
     "That is it! That's the perfect\n"
     "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty TOXICROAK for my amazing\n"
-    "GARDEVOIR."
+    "your shitty TOXICROAK for my amazing\l"
+    "GARDEVOIR.\p"
     "Do you want to trade?"
 }
 
@@ -807,7 +807,8 @@ text SmeargleMessagePerfectButToxicroakInBox{
     "That is it! That is the perfect\n"
     "SMEARGLE!\p"
     "To show my gratitude, I'll let you trade\n"
-    "your shitty TOXICROAK for my GARDEVOIR.\p"
+    "your shitty TOXICROAK for my amazing\l"
+    "GARDEVOIR.\p"
     "Oh, where did your TOXICROAK go?"
 }
 
