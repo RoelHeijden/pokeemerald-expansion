@@ -1814,6 +1814,7 @@ BattleScript_EffectFinalGambit::
 	setadditionaleffects
 	tryfaintmon BS_ATTACKER
 	tryfaintmon BS_TARGET
+	copybyte gPerishLastToFaint, gBattlerTarget
 	jumpifmovehadnoeffect BattleScript_MoveEnd
 	goto BattleScript_MoveEnd
 
