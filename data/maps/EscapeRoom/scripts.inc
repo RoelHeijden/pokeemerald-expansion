@@ -667,7 +667,7 @@ EscapeRoom_EventScript_IniitializeGardevoirTrade_1:
 
 EscapeRoom_EventScript_SingleBattle1::
 # 422 "data/maps/EscapeRoom/scripts.pory"
-	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE1, Single1Puzzle_Intro, Single1Puzzle_Outro
+	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE1, Single1Puzzle_Intro, Single1Puzzle_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
 # 428 "data/maps/EscapeRoom/scripts.pory"
 	msgbox Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE
 # 429 "data/maps/EscapeRoom/scripts.pory"
@@ -677,7 +677,7 @@ EscapeRoom_EventScript_SingleBattle1::
 
 EscapeRoom_EventScript_SingleBattle2::
 # 434 "data/maps/EscapeRoom/scripts.pory"
-	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE2, Single2Puzzle_Intro, Single2Puzzle_Outro
+	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE2, Single2Puzzle_Intro, Single2Puzzle_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
 # 440 "data/maps/EscapeRoom/scripts.pory"
 	msgbox Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE
 # 441 "data/maps/EscapeRoom/scripts.pory"
@@ -1483,8 +1483,8 @@ NuggetNPCmessage::
 
 hiddenPowerHintNPCmessage::
 # 1073 "data/maps/EscapeRoom/scripts.pory"
-	.string "Even copied moves can hold surprises.\n"
-	.string "Sometimes they just feel... different.$"
+	.string "Even borrowed moves can hold surprises.\n"
+	.string "Sometimes they are just... different.$"
 
 someoneLockedUsUpNPCmessage::
 # 1078 "data/maps/EscapeRoom/scripts.pory"
@@ -1506,7 +1506,7 @@ icePuzzleHintNPCmessage::
 StopWinningNPCmessage::
 # 1095 "data/maps/EscapeRoom/scripts.pory"
 	.string "Aren't you tired of winning?\n"
-	.string "Try losing instead!$"
+	.string "Try giving up instead!$"
 
 NewGreatBallMessage::
 # 1100 "data/maps/EscapeRoom/scripts.pory"

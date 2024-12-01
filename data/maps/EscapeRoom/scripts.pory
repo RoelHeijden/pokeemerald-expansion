@@ -423,7 +423,7 @@ script EscapeRoom_EventScript_SingleBattle1{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
         Single1Puzzle_Intro, 
         Single1Puzzle_Outro, 
-        // event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -435,7 +435,7 @@ script EscapeRoom_EventScript_SingleBattle2{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
         Single2Puzzle_Intro, 
         Single2Puzzle_Outro, 
-        // event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -1094,7 +1094,7 @@ text icePuzzleHintNPCmessage{
 
 text StopWinningNPCmessage{
     "Aren't you tired of winning?\n"
-    "Try losing instead!"
+    "Try giving up instead!"
 }
 
 text NewGreatBallMessage{
