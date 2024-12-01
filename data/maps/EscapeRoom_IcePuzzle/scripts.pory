@@ -6,6 +6,7 @@ mapscripts EscapeRoom_IcePuzzle_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0: EscapeRoom_MapScripts_CheckAfterBattlePecha
+        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0: EscapeRoom_MapScripts_CheckAfterBattleHeal
     ] 
 }
 
@@ -13,6 +14,7 @@ script EscapeRoom_IcePuzzle_MapScript_OnResumeScripts{
     // set retrieval vars (reset has to be in this script)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0)
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){

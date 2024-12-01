@@ -18,6 +18,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA,  0: EscapeRoom_MapScripts_CheckAfterBattlePecha
+        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0: EscapeRoom_MapScripts_CheckAfterBattleHeal
     ] 
 }
 
@@ -36,6 +37,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // set retrieval vars (reset has to be in this script)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0)
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
@@ -49,6 +51,16 @@ script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
     if(var(VAR_RESULT) == FALSE){
         setberrytree(BERRY_TREE_ESCAPE_ROOM_SITRUS, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES)
     }
+}
+
+script EscapeRoom_MapScripts_CheckAfterBattleHeal{
+    // check if all pokemon fainted
+    checkentirepartyfainted
+    if(var(VAR_RESULT) == TRUE){
+        // heal to 1 hp
+        setparty1hp
+    }
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1)
 }
 
 script EscapeRoom_MapScripts_CheckAfterBattleGreatBall{
@@ -411,7 +423,7 @@ script EscapeRoom_EventScript_SingleBattle1{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
         Single1Puzzle_Intro, 
         Single1Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        // event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -423,7 +435,7 @@ script EscapeRoom_EventScript_SingleBattle2{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
         Single2Puzzle_Intro, 
         Single2Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        // event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -436,7 +448,7 @@ script EscapeRoom_EventScript_SingleBattle3{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE3, 
         Single3Puzzle_Intro, 
         Single3Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        // event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     call(EscapeRoom_EventScript_TeleportBackOverLedge)
     end
@@ -541,9 +553,7 @@ movement EscapeRoom_Movement_Double1End{
 }
 
 script EscapeRoom_EventScript_PostMatchHeal{
-
     special(HealPlayerParty)
-
 }
 
 script EscapeRoom_EventScript_BikeShop{
@@ -857,10 +867,8 @@ text SmeargleMessageBad{
     "I asked for the perfect SMEARGLE.\p"
     "I assume you never intended to get\n"
     "softlocked like this, so do you want me\l"
-    "to release this SMEARGLE and return\l"
+    "to release this SMEARGLE and give back\l"
     "your GREAT BALL?"
-    // "Do you want to release this SMEARGLE\n"
-    // "and get your ball back?"
 }
 
 text TakeFlameOrbMessage{
@@ -1063,8 +1071,8 @@ text NuggetNPCmessage{
 }
 
 text hiddenPowerHintNPCmessage{
-    "Even copied moves can hold surprises.\n"
-    "Sometimes they just feel... different."
+    "Even borrowed moves can hold surprises.\n"
+    "Sometimes they are just... different."
 }
 
 text someoneLockedUsUpNPCmessage{
@@ -1081,8 +1089,7 @@ text perfectSmeargleHintNPCmessage{
 text icePuzzleHintNPCmessage{
     "I heard there's an ice puzzle in the cave\n"
     "beneath us.\p"
-    "Don't expect to fully solve it on your\n"
-    "first try."
+    "Don't expect to solve it right away."
 }
 
 text StopWinningNPCmessage{

@@ -1208,6 +1208,17 @@
 	.2byte \species
 	.endm
 
+	@ Checks if the entire player party has fainted or not.
+	@ VAR_RESULT: True if enire party has fainted, False otherwise.
+	.macro checkentirepartyfainted
+	.byte 0xee
+	.endm
+
+	@ Sets the HP of the first party pokemon to 1 hp.
+	.macro setparty1hp
+	.byte 0xef
+	.endm
+
 
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).

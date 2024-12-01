@@ -2103,6 +2103,44 @@ bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
     return FALSE; 
 }
 
+// ADDED
+bool8 ScrCmd_checkentirepartyfainted(struct ScriptContext *ctx)
+{
+    s32 i;
+    bool8 allFainted = TRUE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
+        {
+            u8 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
+            if (hp > 0)
+            {
+                allFainted = FALSE;
+                break;
+            }
+        }
+    }
+    gSpecialVar_Result = allFainted;
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_setparty1hp(struct ScriptContext *ctx)
+{
+    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
+    if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG, NULL))
+    {
+        u16 hp = 1;
+        SetMonData(&gPlayerParty[0], MON_DATA_HP, &hp);
+    }
+    return FALSE;
+}
+
+
+
+
 
 
 bool8 ScrCmd_addmoney(struct ScriptContext *ctx)

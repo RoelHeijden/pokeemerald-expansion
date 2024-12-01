@@ -268,7 +268,7 @@
 #define VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER           0x40F8
 #define VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL          0x40F9
 #define VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA         0x40FA
-#define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
+#define VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED    0x40FB  
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
 #define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
