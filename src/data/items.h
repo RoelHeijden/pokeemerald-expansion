@@ -7926,7 +7926,7 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Toxic Orb"),
         // .price = (I_PRICE >= GEN_9) ? 15000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
-        .price = 5,
+        .price = 0,
         .holdEffect = HOLD_EFFECT_TOXIC_ORB,
         .description = COMPOUND_STRING(
             "A bizarre orb that\n"

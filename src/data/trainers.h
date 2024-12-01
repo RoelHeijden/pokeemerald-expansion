@@ -42362,7 +42362,7 @@ F_TRAINER_FEMALE |
 #line 16946
             .heldItem = ITEM_FLAME_ORB,
 #line 16949
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 240, 0, 0),
+            .ev = TRAINER_PARTY_EVS(8, 252, 4, 0, 0, 244),
 #line 16951
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16947

@@ -16946,9 +16946,9 @@ AI: AI_FLAG_SEQUENCE_SWITCHING
 Slaking @ Flame Orb  
 Ability: Truant  
 Level: 64  
-EVs: 252 Atk / 240 Spe 
+EVs: 8 HP / 252 Atk / 4 Def / 244 SpD  
 Adamant Nature  
-- Facade  
+- Facade
 
 Cursola @ Mental Herb  
 Ability: Perish Body  
