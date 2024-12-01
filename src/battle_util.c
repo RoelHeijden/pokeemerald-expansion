@@ -455,6 +455,13 @@ bool32 TryRunFromBattle(u32 battler)
     u8 pyramidMultiplier;
     u8 speedVar;
 
+    // ADDED
+    // always success when trying to run
+    gCurrentTurnActionNumber = gBattlersCount;
+    gBattleOutcome = B_OUTCOME_RAN;
+    return TRUE;
+
+
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
         holdEffect = gEnigmaBerries[battler].holdEffect;
     else
