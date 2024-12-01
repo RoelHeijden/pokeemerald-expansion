@@ -1067,7 +1067,9 @@ text SilentNPCMessage{
 }
 
 text NuggetNPCmessage{
-    "Have you seen my NUGGET?"
+    "Have you seen my NUGGET?\p"
+    "I guess not...\n"
+    "I'll leaf it be."
 }
 
 text hiddenPowerHintNPCmessage{
