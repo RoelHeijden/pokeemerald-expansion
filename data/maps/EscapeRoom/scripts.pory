@@ -458,10 +458,10 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
     // check if item stolen
     lockall
     if(flag(FLAG_TOXIC_ORB_STOLEN) == TRUE){
-        msgbox(Single3Puzzle_PostBattleStolen, MSGBOX_YESNO)
+        msgbox(Single3Puzzle_PostBattle, MSGBOX_YESNO)
     }
     else{
-        msgbox(Single3Puzzle_PostBattleNotStolen, MSGBOX_YESNO)
+        msgbox(Single3Puzzle_PostBattle, MSGBOX_YESNO)
     }
     if(var(VAR_RESULT) == YES){
         // teleport out
@@ -858,8 +858,9 @@ text Nurse_Heal_End{
 }
 
 text SmeargleMessageInitial{
-    "I'm looking for the perfect SMEARGLE.\p"
-    "Have you got one??"
+    "I'm looking for the perfect SMEARGLE.\n"
+    "Have you got one?\l"
+    "Come to me when you do!"
 }
 
 text SmeargleMessageBad{
@@ -975,19 +976,12 @@ text Single3Puzzle_Outro{
     "I'm not sure I would've done that."
 }
 
-text Single3Puzzle_PostBattleStolen{
+text Single3Puzzle_PostBattle{
     "Sooo...\n"
     "It looks like you're softlocked.\p"
-    "I'll throw you back down in return for\n"
-    "my item and money.\p"
-    "Deal?"
-}
-
-text Single3Puzzle_PostBattleNotStolen{
-    "Sooo...\p"
-    "It looks like you're softlocked.\p"
-    "I'll throw you back down in return for\n"
-    "my money.\p"
+    "I can throw you back down, but I'll have\n"
+    "to set a few things back to how they\l"
+    "were before.\p"
     "Deal?"
 }
 
@@ -1019,7 +1013,7 @@ text AskTeachGardevoirDisable{
 }
 
 text MoveTutorNoSuitablePokemonMessage{
-    format("Sorry, I can only teach moves to very a specific POKéMON.")
+    format("Sorry, I only teach moves a GARDEVOIR could learn.")
 }
 
 text MoveTutorTradeDeclined{
