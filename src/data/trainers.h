@@ -42252,7 +42252,7 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE1] =
     {
 #line 16905
-        .trainerName = _("Roel"),
+        .trainerName = _("Ketch"),
 #line 16906
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 16907
