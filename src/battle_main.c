@@ -443,6 +443,11 @@ const u8 *const gStatusConditionStringsTable[][2] =
 
 void CB2_InitBattle(void)
 {
+
+    // ADDED
+    // set perish var to 1. This sets default tiebreaker to a loss
+    gPerishLastToFaint = 1;
+
     if (!gTestRunnerEnabled)
         MoveSaveBlocks_ResetHeap();
     AllocateBattleResources();
