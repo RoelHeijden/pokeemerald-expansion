@@ -526,7 +526,7 @@ static void CreateWildMon(u16 species, u8 level)
 
         // Set EVs
         SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &defEv);
-        SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &atkEv);
+        SetMonData(&gEnemyParty[0], MON_DATA_ATK_EV, &atkEv);
 
         // Set IVs
         SetMonData(&gEnemyParty[0], MON_DATA_HP_IV, &hpIv);
