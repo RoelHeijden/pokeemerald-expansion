@@ -120,7 +120,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
-      "x": 17,
+      "x": 16,
       "y": 22,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -172,7 +172,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CAMERAMAN",
-      "x": 17,
+      "x": 16,
       "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -224,7 +224,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
-      "x": 15,
+      "x": 14,
       "y": 21,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -286,6 +286,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_FindToxicOrb",
       "flag": "FLAG_TOXIC_ORB_OBTAINED"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
+      "x": 18,
+      "y": 20,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_catchSalazzleNPC",
+      "flag": "0"
     }
   ],
   "warp_events": [
