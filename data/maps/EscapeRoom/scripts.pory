@@ -805,14 +805,14 @@ text StartMessage{
     "and find creative solutions in order to\l"
     "progress through the map.\p"
 
-    "What you need to know:\p"
+    "READ CAREFULLY\p"
 
     "1) The game's battle mechanics are\n"
     "based on GEN 9.\l"
     "However, match tiebreakers will follow\l"
     "competitive battling rules.\p"
     
-    "2) Battle RNG is disabled.\n"
+    "2) Battle RNG has been disabled.\n"
     "Catch rates, move effects, accuracy,\l"
     "and damage are now deterministic.\p"
 
@@ -838,7 +838,7 @@ text SignMessage1{
     "However, match tiebreakers will follow\l"
     "competitive battling rules.\p"
     
-    "2) Battle RNG is disabled.\n"
+    "2) Battle RNG has been disabled.\n"
     "Catch rates, move effects, accuracy,\l"
     "and damage are now deterministic.\p"
 
