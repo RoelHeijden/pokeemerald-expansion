@@ -1713,7 +1713,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
-      "name": "BIG CAVE",
+      "name": "A LARGE CAVE",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1729,7 +1729,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_ICE_CAVE",
-      "name": "BIG CAVE",
+      "name": "A LARGE CAVE",
       "x": 8,
       "y": 4,
       "width": 1,
