@@ -7800,7 +7800,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     }
 
     // ADDED
-    // 0 money reward, except for snigle3
+    // 0 money reward, except for:
     moneyReward = 0;
     if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE3){
         moneyReward = 78999;
@@ -7812,7 +7812,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         moneyReward = 7;
     }
     if(trainerId == TRAINER_MY_CUSTOM_DOUBLE_BATTLE1){
-        moneyReward = 20000;
+        moneyReward = 41993;
     }
 
     return moneyReward;
