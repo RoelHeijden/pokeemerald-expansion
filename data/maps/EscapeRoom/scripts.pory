@@ -180,7 +180,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         nature=4, // naughty 
         move1=MOVE_THIEF,
         move2=MOVE_ROLE_PLAY, 
-        move3=MOVE_CELEBRATE, 
+        move3=MOVE_SUNNY_DAY, 
         move4=MOVE_NONE,
         // EVS:
         atkEv=252,
