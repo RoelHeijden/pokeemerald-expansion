@@ -155,6 +155,7 @@ script EscapeRoom_MapScript_setNPCfacing{
     turnobject(15, DIR_EAST)
     turnobject(16, DIR_SOUTH)
     turnobject(17, DIR_NORTH)
+    turnobject(22, DIR_EAST)
 }
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
@@ -756,6 +757,11 @@ script EscapeRoom_EventScript_StopWinningNPC{
     msgbox(StopWinningNPCmessage, MSGBOX_NPC)
 }
 
+script EscapeRoom_EventScript_catchSalazzleNPC{
+    msgbox(SalazzleCatchingHint, MSGBOX_NPC)
+}
+
+
 script EscapeRoom_EventScript_EndEscapeRoomSign{
     lockall
     if(!flag(FLAG_END_ESCAPE_ROOM)){
@@ -1110,9 +1116,11 @@ text misdirectionHintMessage{
 //     "Sometimes they are just... different."
 // }
 
-// text SalazzleCatchingHint{
-//     ""
-// }
+text SalazzleCatchingHint{
+    "Every time I've tried to catch SALAZZLE\n"
+    "it managed to escape.\p"
+    "That's some ability, huh?"
+}
 
 
 text someoneLockedUsUpNPCmessage{
