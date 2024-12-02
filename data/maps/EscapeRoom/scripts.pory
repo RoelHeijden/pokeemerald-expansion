@@ -471,7 +471,7 @@ script EscapeRoom_EventScript_SingleBattle3{
 
 script EscapeRoom_EventScript_TeleportBackOverLedge{
     lockall
-        msgbox(Single3Puzzle_PostBattle, MSGBOX_YESNO)
+    msgbox(Single3Puzzle_PostBattle, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES)
     {
         msgbox(YesTeleportOutMessage, MSGBOX_AUTOCLOSE)
@@ -530,7 +530,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
             }
         } 
 
-            // reset item stolen flag
+        // reset item stolen flag
         clearflag(FLAG_HM_STRENGTH_STOLEN)
 
         // teleport out
@@ -736,8 +736,8 @@ script EscapeRoom_EventScript_someoneLockedUsUpNPC{
     msgbox(someoneLockedUsUpNPCmessage, MSGBOX_NPC)
 }
 
-script EscapeRoom_EventScript_HiddenPowerHintNPC{
-    msgbox(hiddenPowerHintNPCmessage, MSGBOX_NPC)
+script EscapeRoom_EventScript_misdirectionHintNPC{
+    msgbox(misdirectionHintMessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_NuggetNPC{
@@ -1002,7 +1002,8 @@ text Single2Puzzle_PostBattle{
 }
 
 text Single3Puzzle_Intro{
-    "You can run but you can't hide!"
+    "It looks like you're stuck!\p"
+    "A real thief would've known when to run."
 }
 
 text Single3Puzzle_Outro{
@@ -1013,7 +1014,7 @@ text Single3Puzzle_PostBattle{
     "Sooo...\n"
     "It looks like you're softlocked.\p"
     "I can throw you back down, but I'll have\n"
-    "to set a few things back to how they\l"
+    "to set a few things back to the way they\l"
     "were before.\p"
     "Deal?"
 }
@@ -1099,10 +1100,20 @@ text NuggetNPCmessage{
     "I'll leaf it be."
 }
 
-text hiddenPowerHintNPCmessage{
-    "Even borrowed moves can hold surprises.\n"
-    "Sometimes they are just... different."
+
+text misdirectionHintMessage{
+    "I love a good misdirection!"
 }
+
+// text hiddenPowerHintNPCmessage{
+//     "Even borrowed moves can hold surprises.\n"
+//     "Sometimes they are just... different."
+// }
+
+// text SalazzleCatchingHint{
+//     ""
+// }
+
 
 text someoneLockedUsUpNPCmessage{
     "Someone locked us in this cave for some\n"
