@@ -4,9 +4,11 @@
 mapscripts EscapeRoom_MapScripts {
     MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
     MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScript_OnResumeScripts
+
     MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
-        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_setNPCfacing
+        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_OnWarpIntoScripts
     ]
+
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScripts_PlayStartMessage
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1: EscapeRoom_MapScripts_GetFirstPokemon
@@ -44,6 +46,20 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setflag(FLAG_TOGGLE_BAG_USE)
     }
 } 
+
+script EscapeRoom_MapScript_OnWarpIntoScripts{
+    // set NPC facing
+    call(EscapeRoom_MapScript_setNPCfacing)
+
+    // check for HM strengh stolen
+    call(EscapeRoom_MapScript_checkHMStrength)
+}
+
+script EscapeRoom_MapScript_checkHMStrength{
+    if(flag(FLAG_HM_STRENGTH_STOLEN) == TRUE){
+        setflag(FLAG_HM04_STEAL_SUCCES)
+    }
+}
 
 script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
     // spawn berry tree if below n berries
@@ -139,7 +155,6 @@ script EscapeRoom_MapScript_setNPCfacing{
     turnobject(15, DIR_EAST)
     turnobject(16, DIR_SOUTH)
     turnobject(17, DIR_NORTH)
-    end
 }
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
@@ -455,19 +470,12 @@ script EscapeRoom_EventScript_SingleBattle3{
 }
 
 script EscapeRoom_EventScript_TeleportBackOverLedge{
-    // check if item stolen
     lockall
-    if(flag(FLAG_TOXIC_ORB_STOLEN) == TRUE){
         msgbox(Single3Puzzle_PostBattle, MSGBOX_YESNO)
-    }
-    else{
-        msgbox(Single3Puzzle_PostBattle, MSGBOX_YESNO)
-    }
-    if(var(VAR_RESULT) == YES){
-        // teleport out
+    if(var(VAR_RESULT) == YES)
+    {
         msgbox(YesTeleportOutMessage, MSGBOX_AUTOCLOSE)
         waitmessage
-        warpteleport(MAP_ESCAPE_ROOM, 11, 25)
 
         // heal party
         special(HealPlayerParty)
@@ -494,22 +502,39 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
             replacemove(VAR_RESULT, VAR_TEMP_0, VAR_TEMP_1)
         }
 
-        // if item was stolen
-        if(flag(FLAG_TOXIC_ORB_STOLEN) == TRUE){
+        // return HM Strength if not yet stolen outside of the softlock
+        if(flag(FLAG_HM04_STEAL_SUCCES) == FALSE){
             // locate and return item    
             checkpartyitem(0)
-            if(var(VAR_0x8004) == ITEM_TOXIC_ORB) {  // if item in party slot 0
+            if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 0
                 removepartyitem(0)
             }
             checkpartyitem(1)
-            if(var(VAR_0x8004) == ITEM_TOXIC_ORB) {  // if item in party slot 1
+            if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 1
                 removepartyitem(1)
             }
-            removeitem(ITEM_TOXIC_ORB)
+            removeitem(ITEM_HM04)
+        }
+        // remove duplicate held item TM if already succesfully stolen before
+        else{
+            checkitem(ITEM_HM04)
+            if(var(VAR_RESULT) == TRUE){
+                checkpartyitem(0)
+                if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 0
+                    removepartyitem(0)
+                }
+                checkpartyitem(1)
+                if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 1
+                    removepartyitem(1)
+                }
+            }
+        } 
 
             // reset item stolen flag
-            clearflag(FLAG_TOXIC_ORB_STOLEN)
-        }
+        clearflag(FLAG_HM_STRENGTH_STOLEN)
+
+        // teleport out
+        warpteleport(MAP_ESCAPE_ROOM, 11, 25)
     }
     else{
         msgbox(NoTeleportPleaseMessage, MSGBOX_AUTOCLOSE)
@@ -753,6 +778,14 @@ script EscapeRoom_EventScript_FindIronBall{
     finditem(ITEM_IRON_BALL)
     removeobject(19)
     setflag(FLAG_IRON_BALL_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindToxicOrb{
+    lockall
+    finditem(ITEM_TOXIC_ORB)
+    removeobject(21)
+    setflag(FLAG_TOXIC_ORB_OBTAINED)
     releaseall
 }
 
