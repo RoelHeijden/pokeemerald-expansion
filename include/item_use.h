@@ -37,6 +37,7 @@ void ItemUseOutOfBattle_ZygardeCube(u8);
 void ItemUseOutOfBattle_Fusion(u8);
 void ItemUseOutOfBattle_Honey(u8);
 void ItemUseOutOfBattle_CannotUse(u8);
+void ItemUseOutOfBattle_CannotUse2(u8); // ADDED
 void ItemUseOutOfBattle_ExpShare(u8);
 void ItemUseInBattle_BagMenu(u8 taskId);
 void ItemUseInBattle_PartyMenu(u8 taskId);

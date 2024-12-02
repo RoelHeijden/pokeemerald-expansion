@@ -11848,7 +11848,7 @@ const struct Item gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse2,
         .secondaryId = MOVE_STRENGTH,
     },
 
