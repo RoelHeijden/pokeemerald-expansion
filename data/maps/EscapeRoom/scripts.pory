@@ -52,12 +52,12 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
     call(EscapeRoom_MapScript_setNPCfacing)
 
     // check for HM strengh stolen
-    call(EscapeRoom_MapScript_checkHMStrength)
+    call(EscapeRoom_MapScript_checkHMRockSmash)
 }
 
-script EscapeRoom_MapScript_checkHMStrength{
-    if(flag(FLAG_HM_STRENGTH_STOLEN) == TRUE){
-        setflag(FLAG_HM04_STEAL_SUCCES)
+script EscapeRoom_MapScript_checkHMRockSmash{
+    if(flag(FLAG_HM_ROCK_SMASH_STOLEN) == TRUE){
+        setflag(FLAG_HM06_STEAL_SUCCES)
     }
 }
 
@@ -155,7 +155,7 @@ script EscapeRoom_MapScript_setNPCfacing{
     turnobject(15, DIR_EAST)
     turnobject(16, DIR_SOUTH)
     turnobject(17, DIR_NORTH)
-    turnobject(22, DIR_EAST)
+    turnobject(20, DIR_EAST)
 }
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
@@ -226,7 +226,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 }
 
 script EscapeRoom_MapScripts_GetItems{
-    // additem(ITEM_IRON_BALL)
+    additem(ITEM_HM04)
     additem(ITEM_NUGGET, 14)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5)
 }
@@ -503,36 +503,36 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
             replacemove(VAR_RESULT, VAR_TEMP_0, VAR_TEMP_1)
         }
 
-        // return HM Strength if not yet stolen outside of the softlock
-        if(flag(FLAG_HM04_STEAL_SUCCES) == FALSE){
+        // return HM if not yet stolen outside of the softlock
+        if(flag(FLAG_HM06_STEAL_SUCCES) == FALSE){
             // locate and return item    
             checkpartyitem(0)
-            if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 0
+            if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 0
                 removepartyitem(0)
             }
             checkpartyitem(1)
-            if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 1
+            if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 1
                 removepartyitem(1)
             }
-            removeitem(ITEM_HM04)
+            removeitem(ITEM_HM06)
         }
         // remove duplicate held item TM if already succesfully stolen before
         else{
-            checkitem(ITEM_HM04)
+            checkitem(ITEM_HM06)
             if(var(VAR_RESULT) == TRUE){
                 checkpartyitem(0)
-                if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 0
+                if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 0
                     removepartyitem(0)
                 }
                 checkpartyitem(1)
-                if(var(VAR_0x8004) == ITEM_HM04) {  // if item in party slot 1
+                if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 1
                     removepartyitem(1)
                 }
             }
         } 
 
         // reset item stolen flag
-        clearflag(FLAG_HM_STRENGTH_STOLEN)
+        clearflag(FLAG_HM_ROCK_SMASH_STOLEN)
 
         // teleport out
         warpteleport(MAP_ESCAPE_ROOM, 11, 25)
@@ -761,7 +761,6 @@ script EscapeRoom_EventScript_catchSalazzleNPC{
     msgbox(SalazzleCatchingHint, MSGBOX_NPC)
 }
 
-
 script EscapeRoom_EventScript_EndEscapeRoomSign{
     lockall
     if(!flag(FLAG_END_ESCAPE_ROOM)){
@@ -790,11 +789,21 @@ script EscapeRoom_EventScript_FindIronBall{
 script EscapeRoom_EventScript_FindToxicOrb{
     lockall
     finditem(ITEM_TOXIC_ORB)
-    removeobject(21)
+    removeobject(1)
     setflag(FLAG_TOXIC_ORB_OBTAINED)
     releaseall
 }
 
+
+// script EscapeRoom_EventScript_RocksResetSign{
+//     lockall
+//     msgbox(ResetRocksMessage, MSGBOX_YESNO)
+//     if(var(VAR_RESULT) == YES){
+//         setholewarp(MAP_ESCAPE_ROOM_ROCK_PUZZLE)
+//         call(EventScript_FallDownHole)
+//     }
+//     releaseall
+// }
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -1106,18 +1115,12 @@ text NuggetNPCmessage{
     "I'll leaf it be."
 }
 
-
 text misdirectionHintMessage{
     "I love a good misdirection!"
 }
 
-// text hiddenPowerHintNPCmessage{
-//     "Even borrowed moves can hold surprises.\n"
-//     "Sometimes they are just... different."
-// }
-
 text SalazzleCatchingHint{
-    "Every time I've tried to catch SALAZZLE\n"
+    "Everytime I've tried to catch SALAZZLE\n"
     "it managed to escape.\p"
     "That's some ability, huh?"
 }
@@ -1161,4 +1164,8 @@ text NewPechaBerryMessage{
 
 text ThanksMomMessage{
     "How did that get there?"
+}
+
+text ResetRocksMessage{
+    "Do you want to reset the boulders?"
 }

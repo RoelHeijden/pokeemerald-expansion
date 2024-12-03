@@ -1083,3 +1083,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/EscapeRoom_IcePuzzle/scripts.inc"
 
 	.include "data/maps/EscapeRoomOutdoor/scripts.inc"
+
+	.include "data/maps/EscapeRoom_RockPuzzle/scripts.inc"

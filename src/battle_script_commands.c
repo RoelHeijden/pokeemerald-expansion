@@ -3465,8 +3465,8 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
 
                         // ADDED
-                        if (gLastUsedItem == ITEM_HM04){
-                            FlagSet(FLAG_HM_STRENGTH_STOLEN);
+                        if (gLastUsedItem == ITEM_HM06){
+                            FlagSet(FLAG_HM_ROCK_SMASH_STOLEN);
                         }
                         if (gLastUsedItem == ITEM_TM10){
                             FlagSet(FLAG_TM_10_STOLEN);

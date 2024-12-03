@@ -96,7 +96,8 @@
     "EscapeRoom",
     "EscapeRoom_Indoor",
     "EscapeRoom_IcePuzzle",
-    "EscapeRoomOutdoor"
+    "EscapeRoomOutdoor",
+    "EscapeRoom_RockPuzzle"
   ],
   "gMapGroup_IndoorLittleroot": [
     "LittlerootTown_BrendansHouse_1F",

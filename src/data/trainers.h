@@ -42447,7 +42447,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_ZANGOOSE,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16978
-            .heldItem = ITEM_HM04,
+            .heldItem = ITEM_HM06,
 #line 16981
             .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 100),
 #line 16982
