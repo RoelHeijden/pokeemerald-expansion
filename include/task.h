@@ -6,7 +6,8 @@
 #define TASK_NONE TAIL_SENTINEL
 
 #define NUM_TASKS 16
-#define NUM_TASK_DATA 16
+// #define NUM_TASK_DATA 16
+#define NUM_TASK_DATA 40  // CHANGED
 
 typedef void (*TaskFunc)(u8 taskId);
 
