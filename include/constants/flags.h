@@ -62,7 +62,7 @@
 #define FLAG_TM_10_STOLEN               0x31 
 #define FLAG_TOXIC_ORB_OBTAINED         0x32
 #define FLAG_HM06_STEAL_SUCCES          0x33 
-#define FLAG_UNUSED_0x034    0x34
+#define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT 0x34
 #define FLAG_UNUSED_0x035    0x35 // Unused Flag
 #define FLAG_UNUSED_0x036    0x36 // Unused Flag
 #define FLAG_UNUSED_0x037    0x37 // Unused Flag

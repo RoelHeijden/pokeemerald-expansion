@@ -1,0 +1,15 @@
+    
+////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
+
+mapscripts EscapeRoom_RockPuzzle_MapScripts {
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_setObjectUnloadFlag
+    ]
+}
+    
+    
+script EscapeRoom_MapScript_setObjectUnloadFlag {
+    setflag(FLAG_DONT_REMOVE_OFFSCREEN_OBJECT)
+}
+    
+    
