@@ -3,21 +3,30 @@
 
 mapscripts EscapeRoom_IcePuzzle_MapScripts {
     MAP_SCRIPT_ON_RESUME: EscapeRoom_IcePuzzle_MapScript_OnResumeScripts
+
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0: EscapeRoom_MapScripts_CheckAfterBattlePecha
-        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0: EscapeRoom_MapScripts_CheckAfterBattleHeal
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindGreatBallAferUse
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA,  1: EscapeRoom_MapScripts_FindPechaBerryAferUse
+        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
     ] 
 }
 
 script EscapeRoom_IcePuzzle_MapScript_OnResumeScripts{
-    // set retrieval vars (reset has to be in this script)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0)
+    // check if pokemon caught -- sets flag if true
+    call(EscapeRoom_MapScripts_CheckIfMonCaught)
+
+    // check for great ball return
+    call(EscapeRoom_MapScripts_CheckAfterBattleGreatBall)
+
+    // check for berry return
+    call(EscapeRoom_MapScripts_CheckAfterBattlePecha)
+
+    // check for party heal
+    call(EscapeRoom_MapScripts_CheckAfterBattleHeal)
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
     }
 } 
+

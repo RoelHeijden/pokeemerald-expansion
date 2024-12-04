@@ -18,11 +18,12 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 5: EscapeRoom_MapScripts_TurnOfBagUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 6: EscapeRoom_MapScripts_FixCrackedGround
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0: EscapeRoom_MapScripts_CheckAfterBattleGreatBall
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA,  0: EscapeRoom_MapScripts_CheckAfterBattlePecha
-        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0: EscapeRoom_MapScripts_CheckAfterBattleHeal
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindGreatBallAferUse
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1: EscapeRoom_MapScripts_FindPechaBerryAferUse
+        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
     ] 
 }
+
 
 script EscapeRoom_MapScript_OnTransitionScripts{
     call(EscapeRoom_MapScript_KeepDouble1Moved)
@@ -33,13 +34,20 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // set cracked hole map location
     call(EscapeRoom_MapScripts_SetHoleWarp)
 
+    // check if pokemon caught -- sets flag if true
+    call(EscapeRoom_MapScripts_CheckIfMonCaught)
+
+    // check for great ball return
+    call(EscapeRoom_MapScripts_CheckAfterBattleGreatBall)
+
+    // check for berry return
+    call(EscapeRoom_MapScripts_CheckAfterBattlePecha)
+
+    // check for party heal
+    call(EscapeRoom_MapScripts_CheckAfterBattleHeal)
+
     // respawn sitrus tree if low on berries
     call(EscapeRoom_MapScripts_CheckSpawnSitrusTree)
-
-    // set retrieval vars (reset has to be in this script)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0)
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
@@ -76,47 +84,7 @@ script EscapeRoom_MapScripts_CheckAfterBattleHeal{
     // check if all pokemon fainted
     checkentirepartyfainted
     if(var(VAR_RESULT) == TRUE){
-        // heal to 1 hp
-        setparty1hp
-    }
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1)
-}
-
-script EscapeRoom_MapScripts_CheckAfterBattleGreatBall{
-    call(EscapeRoom_MapScripts_CheckIfMonCaught)
-    call(EscapeRoom_MapScripts_FindGreatBallAferUse)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
-}
-
-script EscapeRoom_MapScripts_CheckAfterBattlePecha{
-    call(EscapeRoom_MapScripts_CheckIfMonCaught)
-    call(EscapeRoom_MapScripts_FindPechaBerryAferUse)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1)
-}
-
-script EscapeRoom_MapScripts_FindPechaBerryAferUse{
-    // check if berry 'use' was clicked
-    if(flag(FLAG_PECHA_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
-        clearflag(FLAG_PECHA_BERRY_USED)
-
-        // check if berry in bag
-        checkitem(ITEM_PECHA_BERRY)
-        if(var(VAR_RESULT) == FALSE) {
-
-            // check if berry carried by pokemon in slot 0
-            checkpartyitem(0)
-            if(var(VAR_0x8004) != ITEM_PECHA_BERRY) {
-
-                // return Pecha berry
-                lockall
-                msgbox(NewPechaBerryMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-                finditem(ITEM_PECHA_BERRY)
-                msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-                releaseall
-            }
-        }
+        setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1)
     }
 }
 
@@ -127,15 +95,54 @@ script EscapeRoom_MapScripts_CheckIfMonCaught{
     }
 }
 
-script EscapeRoom_MapScripts_FindGreatBallAferUse{
+script EscapeRoom_MapScripts_CheckAfterBattleGreatBall{
     if(flag(FLAG_GREAT_BALL_USED) && !flag(FLAG_POKEMON_CAUGHT)){
-        lockall
-        msgbox(NewGreatBallMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        finditem(ITEM_GREAT_BALL)
-        clearflag(FLAG_GREAT_BALL_USED)
-        releaseall
+        // set var to retrieve great ball
+        setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
     }
+}
+
+script EscapeRoom_MapScripts_CheckAfterBattlePecha{
+    // check if berry 'use' was clicked
+    if(flag(FLAG_PECHA_BERRY_USED) && !flag(FLAG_POKEMON_CAUGHT)){
+        // check if berry in bag
+        checkitem(ITEM_PECHA_BERRY)
+        if(var(VAR_RESULT) == FALSE) {
+            // check if berry carried by pokemon in slot 0
+            checkpartyitem(0)
+            if(var(VAR_0x8004) != ITEM_PECHA_BERRY) {
+                // set var to retrieve pecha
+                setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1)
+            }
+        }
+    }
+}
+
+script EscapeRoom_MapScripts_FindPechaBerryAferUse{
+    lockall
+    msgbox(NewPechaBerryMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    finditem(ITEM_PECHA_BERRY)
+    clearflag(FLAG_PECHA_BERRY_USED)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 0)
+    msgbox(ThanksMomMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_MapScripts_FindGreatBallAferUse{
+    lockall
+    msgbox(NewGreatBallMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    finditem(ITEM_GREAT_BALL)
+    clearflag(FLAG_GREAT_BALL_USED)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
+    releaseall
+}
+
+script EscapeRoom_MapScripts_HealTo1hp{
+    setparty1hp
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0)
 }
 
 script EscapeRoom_MapScripts_SetHoleWarp{
@@ -907,9 +914,8 @@ text SmeargleMessageInitial{
 text SmeargleMessageBad{
     "Ew no, that SMEARGLE looks horrible.\n"
     "I asked for the perfect SMEARGLE.\p"
-    "I assume you never intended to get\n"
-    "softlocked like this, so do you want me\l"
-    "to release this SMEARGLE and give back\l"
+    "To avoid getting softlocked, should I\n"
+    "release this SMEARGLE and give back\l"
     "your GREAT BALL?"
 }
 
@@ -1099,7 +1105,7 @@ text BikeShoptGoodbyeMessage{
 
 text SilentNPCMessage{
     "Do not strike, do not flee,\n"
-    "One quiet turn could set you free."
+    "one quiet turn could set you free."
 }
 
 text NuggetNPCmessage{
