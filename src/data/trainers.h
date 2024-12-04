@@ -42450,16 +42450,17 @@ F_TRAINER_FEMALE |
             .heldItem = ITEM_HM06,
 #line 16981
             .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 100),
-#line 16982
+#line 16983
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16979
             .ability = ABILITY_TOXIC_BOOST,
 #line 16980
             .lvl = 42,
-            .nature = NATURE_HARDY,
+#line 16982
+            .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16982
+#line 16983
                 MOVE_FINAL_GAMBIT,
             },
             },
