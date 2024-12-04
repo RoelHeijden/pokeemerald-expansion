@@ -5451,7 +5451,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     int battlerSmeargle = (gBattleMons[2].species == SPECIES_SMEARGLE) * 2;
 
     int oppSmeargle = (gBattleMons[3].species == SPECIES_SMEARGLE) * 2 + 1;
-    // int oppScrafty = (gBattleMons[3].species == SPECIES_SCRAFTY) * 2 + 1;
+    int oppScrafty = (gBattleMons[3].species == SPECIES_SCRAFTY) * 2 + 1;
 
     int moveGardy = gBattleMons[battlerGardy].moves[gBattleStruct->chosenMovePositions[battlerGardy]];
     int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
@@ -5492,8 +5492,15 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     //     }
     // }
 
+
+    // DebugPrintf("Gardy: %d", battlerGardy);
+    // DebugPrintf("Smeargle: %d", battlerSmeargle);
+    // DebugPrintf("opp smear: %d", oppSmeargle);
+    // DebugPrintf("opp scraf: %d", oppScrafty);
+
+
     // DONT TARGET PARTNER 
-    if (battlerDef == oppSmeargle)  // || battlerDef == oppScrafty)
+    if (battlerDef == oppSmeargle || battlerDef == oppScrafty)
     {
         score = 1;
         return score;
@@ -5556,9 +5563,12 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     }
     
     // NORMAL SCENARIOS
-    switch (move)
+    switch (move)  
     {
         case MOVE_DRAIN_PUNCH:
+            
+            // DebugPrintf("MOVE_DRAIN_PUNCH score start: %d", score);
+
             // avoid protect
             if (targetProtectingItself){
                 score = 69;
