@@ -111,12 +111,17 @@ EscapeRoom_MapScripts_CheckAfterBattleHeal::
 	checkentirepartyfainted
 # 86 "data/maps/EscapeRoom/scripts.pory"
 	compare VAR_RESULT, TRUE
-	goto_if_eq EscapeRoom_MapScripts_CheckAfterBattleHeal_1
+	goto_if_eq EscapeRoom_MapScripts_CheckAfterBattleHeal_2
 	return
 
 EscapeRoom_MapScripts_CheckAfterBattleHeal_1:
 # 87 "data/maps/EscapeRoom/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1
+	return
+
+EscapeRoom_MapScripts_CheckAfterBattleHeal_2:
+# 86 "data/maps/EscapeRoom/scripts.pory"
+	goto_if_set FLAG_SYS_POKEMON_GET, EscapeRoom_MapScripts_CheckAfterBattleHeal_1
 	return
 
 
