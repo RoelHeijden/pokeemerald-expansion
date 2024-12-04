@@ -4454,8 +4454,8 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_ROCK_PUZZLE",
       "name": "EscapeRoom_RockPuzzle_Layout",
-      "width": 18,
-      "height": 15,
+      "width": 22,
+      "height": 16,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_MirageTower",
       "border_filepath": "data/layouts/EscapeRoom_RockPuzzle/border.bin",

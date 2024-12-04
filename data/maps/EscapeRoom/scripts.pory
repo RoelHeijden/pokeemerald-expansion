@@ -53,6 +53,9 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
 
     // check for HM strengh stolen
     call(EscapeRoom_MapScript_checkHMRockSmash)
+
+    // clear offscreen object unload flag
+    clearflag(FLAG_DONT_REMOVE_OFFSCREEN_OBJECT)
 }
 
 script EscapeRoom_MapScript_checkHMRockSmash{
@@ -795,16 +798,6 @@ script EscapeRoom_EventScript_FindToxicOrb{
 }
 
 
-// script EscapeRoom_EventScript_RocksResetSign{
-//     lockall
-//     msgbox(ResetRocksMessage, MSGBOX_YESNO)
-//     if(var(VAR_RESULT) == YES){
-//         setholewarp(MAP_ESCAPE_ROOM_ROCK_PUZZLE)
-//         call(EventScript_FallDownHole)
-//     }
-//     releaseall
-// }
-
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
@@ -922,7 +915,7 @@ text SmeargleMessageBad{
 
 text TakeFlameOrbMessage{
     "I'll take that FLAME ORB as well.\p"
-    "(You don't need it)"
+    "(You don't need it anywhere)"
 }
 
 text SmeargleReleaseHealSecondMonMessage{
@@ -1029,8 +1022,8 @@ text Single3Puzzle_PostBattle{
     "Sooo...\n"
     "It looks like you're softlocked.\p"
     "I can throw you back down, but I'll have\n"
-    "to set a few things back to the way they\l"
-    "were before.\p"
+    "to set a few things back to the way\l"
+    "they were before.\p"
     "Deal?"
 }
 
