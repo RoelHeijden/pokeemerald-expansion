@@ -42457,7 +42457,7 @@ F_TRAINER_FEMALE |
 #line 16980
             .lvl = 42,
 #line 16982
-            .nature = NATURE_LONELY,
+            .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16983
