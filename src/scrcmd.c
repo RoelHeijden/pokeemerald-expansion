@@ -2080,10 +2080,6 @@ bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
     gSpecialVar_Result = learnedMoves[0]; 
     gSpecialVar_0x8004 = learnedMoves[1];
 
-    // REMOVE
-    DebugPrintf("move1: %d", gSpecialVar_Result);
-    DebugPrintf("move2: %d", gSpecialVar_0x8004);
-
     return FALSE; 
 }
 
