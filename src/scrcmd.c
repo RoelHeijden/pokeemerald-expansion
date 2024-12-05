@@ -1425,8 +1425,6 @@ bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
     if(move1 == MOVE_DESTINY_BOND && move2 == MOVE_THIEF)
         multichoiceId = MULTI_BOND_THIEF;
 
-    DebugPrintf("chosen ID: %d", multichoiceId);
-
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext_Stop();
