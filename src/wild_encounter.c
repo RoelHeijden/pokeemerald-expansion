@@ -503,13 +503,15 @@ static void CreateWildMon(u16 species, u8 level)
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
         {
             species = SPECIES_SALAZZLE;
-            level = 13;
+            level = 26;
             abilityNum = 0;
             move1 = MOVE_PROTECT;
-            hpIv = 21;
+            // hpIv = 21;
+            hpIv = 0;
+            defIv = 0;
             atkEv = 252;
             heldItem = ITEM_TM10;
-            personality = (Random32() / 25) * 25 + 3; // Adamant
+            personality = (Random32() / 25) * 25 + 1; // Lonely
             
             if(FlagGet(FLAG_TM_10_STOLEN)){
                 heldItem = ITEM_NONE;

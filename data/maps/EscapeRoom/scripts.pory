@@ -194,12 +194,13 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move3=MOVE_SUNNY_DAY, 
         move4=MOVE_NONE,
         // EVS:
+        hpEv=8,
         atkEv=252,
         spAtkEv=160,
         // IVS:
         hpIv=31,
         atkIv=31,
-        defIv=30,
+        defIv=0,
         speedIv=30,
         spAtkIv=30,
         spDefIv=0,
@@ -1121,9 +1122,9 @@ text misdirectionHintMessage{
 text SalazzleCatchingHint{
     "Everytime I've tried to catch SALAZZLE\n"
     "it managed to escape.\p"
-    "That's some ability, huh?"
+    "That's some ability, huh?\n"
+    "It's like it can't be done." 
 }
-
 
 text someoneLockedUsUpNPCmessage{
     "Someone locked us in this cave for some\n"
