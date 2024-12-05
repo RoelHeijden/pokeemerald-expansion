@@ -835,10 +835,15 @@ text StartMessage{
     "5) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
 
-    "6) It is possible to softlock yourself\n"
-    "during play, so using save states is\l"
-    "highly recommended.\p"
+    "6) The game has safeguards to prevent\n"
+    "some softlocks but it's still possible,\l"
+    "so using save states is recommended.\p"
 
+    "7) Try to avoid using speed up.\n"
+    "There are many clues, like NPC dialogue,\l"
+    "that you might otherwise miss.\p" 
+
+    "That's all.\n"
     "Good luck!"
 }
 
@@ -861,9 +866,13 @@ text SignMessage1{
     "5) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
 
-    "6) It is possible to softlock yourself\n"
-    "during play, so using save states is\l"
-    "highly recommended."
+    "6) The game has safeguards to prevent\n"
+    "some softlocks but it's still possible,\l"
+    "so using save states is recommended.\p"
+
+    "7) Try to avoid using speed up.\n"
+    "There are many clues, like NPC dialogue,\l"
+    "that you might otherwise miss.\p" 
 }
 
 text EscapeRoomEndCongratz{
