@@ -46,9 +46,6 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // check for party heal
     call(EscapeRoom_MapScripts_CheckAfterBattleHeal)
 
-    // respawn sitrus tree if low on berries
-    call(EscapeRoom_MapScripts_CheckSpawnSitrusTree)
-
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
@@ -69,14 +66,6 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
 script EscapeRoom_MapScript_checkHMRockSmash{
     if(flag(FLAG_HM_ROCK_SMASH_STOLEN) == TRUE){
         setflag(FLAG_HM06_STEAL_SUCCES)
-    }
-}
-
-script EscapeRoom_MapScripts_CheckSpawnSitrusTree{
-    // spawn berry tree if below n berries
-    checkitem(ITEM_SITRUS_BERRY, 4)
-    if(var(VAR_RESULT) == FALSE){
-        setberrytree(BERRY_TREE_ESCAPE_ROOM_SITRUS, ITEM_TO_BERRY(ITEM_SITRUS_BERRY), BERRY_STAGE_BERRIES)
     }
 }
 
@@ -165,7 +154,7 @@ script EscapeRoom_MapScript_setNPCfacing{
     turnobject(15, DIR_EAST)
     turnobject(16, DIR_SOUTH)
     turnobject(17, DIR_NORTH)
-    turnobject(20, DIR_EAST)
+    turnobject(19, DIR_EAST)
 }
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
@@ -792,7 +781,7 @@ script EscapeRoom_EventScript_EndEscapeRoomSign{
 script EscapeRoom_EventScript_FindIronBall{
     lockall
     finditem(ITEM_IRON_BALL)
-    removeobject(19)
+    removeobject(18)
     setflag(FLAG_IRON_BALL_OBTAINED)
     releaseall
 }
