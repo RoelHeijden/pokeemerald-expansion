@@ -777,6 +777,7 @@ static const struct MenuAction MultichoiceList_BerryPlot[] =
     {gText_PlantBerry},
 };
 
+// ADDED
 static const struct MenuAction MultichoiceList_DisableSplit[] =
 {
     {gText_Disable},
@@ -793,6 +794,24 @@ static const struct MenuAction MultichoiceList_SplitBond[] =
 {
     {gText_PainSplit},
     {gText_DestinyBond},
+};
+
+static const struct MenuAction MultichoiceList_DisableThief[] =
+{
+    {gText_Disable},
+    {gText_Thief},
+};
+
+static const struct MenuAction MultichoiceList_SplitThief[] =
+{
+    {gText_PainSplit},
+    {gText_Thief},
+};
+
+static const struct MenuAction MultichoiceList_BondThief[] =
+{
+    {gText_DestinyBond},
+    {gText_Thief},
 };
 
 
@@ -927,6 +946,9 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_DISABLE_SPLIT]              = MULTICHOICE(MultichoiceList_DisableSplit),
     [MULTI_DISABLE_BOND]               = MULTICHOICE(MultichoiceList_DisableBond),
     [MULTI_SPLIT_BOND]                 = MULTICHOICE(MultichoiceList_SplitBond),
+    [MULTI_DISABLE_THIEF]              = MULTICHOICE(MultichoiceList_DisableThief),
+    [MULTI_SPLIT_THIEF]                = MULTICHOICE(MultichoiceList_SplitThief),
+    [MULTI_BOND_THIEF]                 = MULTICHOICE(MultichoiceList_BondThief),
 };
 
 const u8 *const gStdStrings[] =

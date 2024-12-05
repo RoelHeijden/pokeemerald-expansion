@@ -126,6 +126,9 @@
 #define MULTI_DISABLE_SPLIT                115
 #define MULTI_DISABLE_BOND                 116
 #define MULTI_SPLIT_BOND                   117
+#define MULTI_DISABLE_THIEF                118
+#define MULTI_SPLIT_THIEF                  119
+#define MULTI_BOND_THIEF                   120
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0

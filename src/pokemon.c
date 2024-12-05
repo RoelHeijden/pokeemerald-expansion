@@ -5582,6 +5582,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
         MOVE_DISABLE, 
         MOVE_PAIN_SPLIT, 
         MOVE_DESTINY_BOND,
+        MOVE_THIEF,
         };
     u16 previousMove = VarGet(VAR_0x800A);
     u16 learnedMoves[MAX_MON_MOVES];

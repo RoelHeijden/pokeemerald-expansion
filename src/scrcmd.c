@@ -1406,7 +1406,6 @@ bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
     u8 top = ScriptReadByte(ctx);
     bool8 ignoreBPress = ScriptReadByte(ctx);
 
-    // TODO: dynamically determine multichoiceId
     u8 multichoiceId = 0;
 
     u16 move1 = VarGet(VAR_0x800A);
@@ -1418,6 +1417,15 @@ bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
         multichoiceId = MULTI_DISABLE_BOND;
     if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_DESTINY_BOND)
         multichoiceId = MULTI_SPLIT_BOND;
+
+    if(move1 == MOVE_DISABLE && move2 == MOVE_THIEF)
+        multichoiceId = MULTI_DISABLE_THIEF;
+    if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_THIEF)
+        multichoiceId = MULTI_SPLIT_THIEF;
+    if(move1 == MOVE_DESTINY_BOND && move2 == MOVE_THIEF)
+        multichoiceId = MULTI_BOND_THIEF;
+
+    DebugPrintf("chosen ID: %d", multichoiceId);
 
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
@@ -2035,7 +2043,8 @@ bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
     u16 tutorMoves[] = {
         MOVE_DISABLE, 
         MOVE_PAIN_SPLIT, 
-        MOVE_DESTINY_BOND
+        MOVE_DESTINY_BOND,
+        MOVE_THIEF
         };
 
     u16 species = VarGet(ScriptReadHalfword(ctx)); 
@@ -2072,6 +2081,10 @@ bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
     }
     gSpecialVar_Result = learnedMoves[0]; 
     gSpecialVar_0x8004 = learnedMoves[1];
+
+    // REMOVE
+    DebugPrintf("move1: %d", gSpecialVar_Result);
+    DebugPrintf("move2: %d", gSpecialVar_0x8004);
 
     return FALSE; 
 }
