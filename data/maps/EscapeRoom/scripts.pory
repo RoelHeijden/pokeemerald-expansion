@@ -20,7 +20,7 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindGreatBallAferUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1: EscapeRoom_MapScripts_FindPechaBerryAferUse
-        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
+        // VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
     ] 
 }
 
@@ -475,7 +475,7 @@ script EscapeRoom_EventScript_SingleBattle3{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE3, 
         Single3Puzzle_Intro, 
         Single3Puzzle_Outro, 
-        // event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     call(EscapeRoom_EventScript_TeleportBackOverLedge)
     end

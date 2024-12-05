@@ -7,7 +7,7 @@ mapscripts EscapeRoom_IcePuzzle_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindGreatBallAferUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA,  1: EscapeRoom_MapScripts_FindPechaBerryAferUse
-        VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
+        // VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
     ] 
 }
 

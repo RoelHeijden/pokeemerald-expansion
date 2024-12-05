@@ -35,8 +35,6 @@ EscapeRoom_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1, EscapeRoom_MapScripts_FindGreatBallAferUse
 # 22 "data/maps/EscapeRoom/scripts.pory"
 	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1, EscapeRoom_MapScripts_FindPechaBerryAferUse
-# 23 "data/maps/EscapeRoom/scripts.pory"
-	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1, EscapeRoom_MapScripts_HealTo1hp
 	.2byte 0
 
 
@@ -722,7 +720,7 @@ EscapeRoom_EventScript_SingleBattle3::
 # 473 "data/maps/EscapeRoom/scripts.pory"
 	faceplayer
 # 474 "data/maps/EscapeRoom/scripts.pory"
-	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE3, Single3Puzzle_Intro, Single3Puzzle_Outro
+	trainerbattle_single TRAINER_MY_CUSTOM_SINGLE_BATTLE3, Single3Puzzle_Intro, Single3Puzzle_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
 # 480 "data/maps/EscapeRoom/scripts.pory"
 	call EscapeRoom_EventScript_TeleportBackOverLedge
 	end
@@ -1301,8 +1299,8 @@ SignMessage1::
 	.string "directly will be inside an item ball.\p"
 	.string "5) Trainer battles have a forfeit option\n"
 	.string "(Run), which counts as a regular loss.\p"
-	.string "6) The game has a few safeguards to\n"
-	.string "prevent softlocks, but it's still possible\l"
+	.string "6) The game has safeguards to prevent\n"
+	.string "some softlocks but it's still possible,\l"
 	.string "so using save states is recommended.\p"
 	.string "7) Try to avoid using speed up.\n"
 	.string "There are many clues, like NPC dialogue,\l"

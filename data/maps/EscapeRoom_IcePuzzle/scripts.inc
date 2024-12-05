@@ -10,8 +10,6 @@ EscapeRoom_IcePuzzle_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1, EscapeRoom_MapScripts_FindGreatBallAferUse
 # 9 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1, EscapeRoom_MapScripts_FindPechaBerryAferUse
-# 10 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
-	map_script_2 VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1, EscapeRoom_MapScripts_HealTo1hp
 	.2byte 0
 
 
