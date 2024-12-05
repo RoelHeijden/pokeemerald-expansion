@@ -469,6 +469,7 @@ static void CreateWildMon(u16 species, u8 level)
         u16 move2 = MOVE_NONE;
         u16 move3 = MOVE_NONE;
         u16 move4 = MOVE_NONE;
+        u8 hpEv = 0;
         u8 atkEv = 0;
         u8 defEv = 0;
         u8 hpIv = 31; 
@@ -503,15 +504,15 @@ static void CreateWildMon(u16 species, u8 level)
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
         {
             species = SPECIES_SALAZZLE;
-            level = 26;
+            level = 100;
             abilityNum = 0;
             move1 = MOVE_PROTECT;
-            // hpIv = 21;
-            hpIv = 0;
-            defIv = 0;
-            atkEv = 252;
+            hpEv = 216;
+            defEv = 252;
+            atkEv = 40;
+
             heldItem = ITEM_TM10;
-            personality = (Random32() / 25) * 25 + 1; // Lonely
+            personality = (Random32() / 25) * 25 + 8; // Impish
             
             if(FlagGet(FLAG_TM_10_STOLEN)){
                 heldItem = ITEM_NONE;
@@ -527,6 +528,7 @@ static void CreateWildMon(u16 species, u8 level)
         SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
 
         // Set EVs
+        SetMonData(&gEnemyParty[0], MON_DATA_HP_EV, &hpEv);
         SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &defEv);
         SetMonData(&gEnemyParty[0], MON_DATA_ATK_EV, &atkEv);
 
