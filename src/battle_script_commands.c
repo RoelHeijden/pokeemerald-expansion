@@ -15425,7 +15425,6 @@ static void Cmd_handleballthrow(void)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
         // ADDED THIS
-        DebugPrintf("ODDS: %d", odds);
         if (odds >= 43)  // catching threshold
             odds = 255;
         else
