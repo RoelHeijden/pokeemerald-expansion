@@ -463,7 +463,7 @@ static void CreateWildMon(u16 species, u8 level)
     else{
         u16 species;
         u8 level;
-        u8 abilityNum = 0;
+        u8 abilityNum = 1;
         u16 heldItem = ITEM_NONE;
         u16 move1 = MOVE_NONE;
         u16 move2 = MOVE_NONE;
@@ -482,23 +482,34 @@ static void CreateWildMon(u16 species, u8 level)
         // Hardy nature = 0, so: (personality % 25) == 0
         u32 personality = (Random32() / 25) * 25;
 
-        // s16 x, y;
+        s16 y;
+        // s16 x;
         // x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
-        // y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+        y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
-            species = SPECIES_SMEARGLE;
-            level = 20;
-            abilityNum = 0;
-            move1 = MOVE_SKETCH;
-            defEv = 208;
-            hpIv = 11;
-            atkIv = 0;
-            speedIv = 0;
+            if(y <= 15){
+                species = SPECIES_DELPHOX;
+                level = 30;
+                abilityNum = 1;
+                move1 = MOVE_SUBSTITUTE;
+                heldItem = ITEM_SITRUS_BERRY;
+            }
+            else{
+                species = SPECIES_SMEARGLE;
+                level = 20;
+                abilityNum = 0;
+                move1 = MOVE_SKETCH;
+                defEv = 208;
+                hpIv = 11;
+                atkIv = 0;
+                speedIv = 0;
 
-            // Relaxed nature == 7, so: (personality % 25) == 7
-            personality = (Random32() / 25) * 25 + 7;
+                // Relaxed nature == 7, so: (personality % 25) == 7
+                personality = (Random32() / 25) * 25 + 7; 
+            }
+
 
         }
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)

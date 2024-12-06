@@ -825,7 +825,7 @@ text StartMessage{
     "(Run), which counts as a regular loss.\p"
 
     "6) The game has safeguards to prevent\n"
-    "some softlocks but it's still possible,\l"
+    "some softlocks, but it's still possible\l"
     "so using save states is recommended.\p"
 
     "7) Try to avoid using speed up.\n"
@@ -856,12 +856,12 @@ text SignMessage1{
     "(Run), which counts as a regular loss.\p"
 
     "6) The game has safeguards to prevent\n"
-    "some softlocks but it's still possible,\l"
+    "some softlocks, but it's still possible\l"
     "so using save states is recommended.\p"
 
     "7) Try to avoid using speed up.\n"
     "There are many clues, like NPC dialogue,\l"
-    "that you might otherwise miss.\p" 
+    "that you might otherwise miss." 
 }
 
 text EscapeRoomEndCongratz{

@@ -42230,15 +42230,15 @@ F_TRAINER_FEMALE |
 #line 16895
             .heldItem = ITEM_MENTAL_HERB,
 #line 16898
-            .ev = TRAINER_PARTY_EVS(0, 0, 244, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 252, 252, 0, 0),
 #line 16900
             .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
 #line 16896
             .ability = ABILITY_OWN_TEMPO,
 #line 16897
-            .lvl = 18,
+            .lvl = 30,
 #line 16899
-            .nature = NATURE_TIMID,
+            .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16901
@@ -42252,7 +42252,7 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE1] =
     {
 #line 16905
-        .trainerName = _("Ketch"),
+        .trainerName = _("Roel"),
 #line 16906
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 16907
@@ -42294,7 +42294,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_TAPU_BULU,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16921
-            .heldItem = ITEM_LIFE_ORB,
+            .heldItem = ITEM_CHOICE_BAND,
 #line 16924
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 248, 0, 0),
 #line 16926
