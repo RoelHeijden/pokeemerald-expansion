@@ -793,6 +793,10 @@ script EscapeRoom_EventScript_FindToxicOrb{
     releaseall
 }
 
+script EscapeRoom_EventScript_HintsNPC{
+    msgbox(HintsIntroMessage, MSGBOX_NPC)
+}
+
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -801,7 +805,8 @@ text StartMessage{
 
     "You'll have to navigate tough battles\n"
     "and find creative solutions in order to\l"
-    "progress through the map.\p"
+    "progress through the map, with the\l"
+    "ultimate goal of escaping this cave.\p"
 
     "READ CAREFULLY\p"
 
@@ -1166,3 +1171,12 @@ text ThanksMomMessage{
 text ResetRocksMessage{
     "Do you want to reset the boulders?"
 }
+
+text HintsIntroMessage{
+    "You can come to me for hints,\n"
+    "but not yet because Roel still has to\l"
+    "implement my script."
+}
+
+
+
