@@ -3051,6 +3051,6 @@ extern const u8 gText_PM[];
 extern const u8 gText_Disable[];
 extern const u8 gText_PainSplit[];
 extern const u8 gText_DestinyBond[];
-extern const u8 gText_Thief[];
+extern const u8 gText_ShadowSneak[];
 
 #endif // GUARD_STRINGS_H
