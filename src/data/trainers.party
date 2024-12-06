@@ -16894,9 +16894,9 @@ IVs: 0 HP / 0 Atk / 0 Spe
 
 Smeargle @ Mental Herb  
 Ability: Own Tempo  
-Level: 18  
-EVs: 244 Def / 252 Spe  
-Timid Nature  
+Level: 30   
+EVs: 252 Def / 252 Spe  
+Bold Nature  
 IVs: 0 HP / 0 Atk  
 - Super Fang  
 - Perish Song
@@ -16918,7 +16918,7 @@ Jolly Nature
 IVs: 0 HP / 0 SpA  
 - Steel Beam
 
-Tapu Bulu @ Life Orb  
+Tapu Bulu @ Choice Band
 Ability: Grassy Surge  
 Level: 69  
 EVs: 252 Atk / 248 Spe  
