@@ -491,7 +491,7 @@ static void CreateWildMon(u16 species, u8 level)
         {
             if(y <= 15){
                 species = SPECIES_SHROODLE;
-                level = 20;
+                level = 10;
                 abilityNum = 1;
                 move1 = MOVE_COPYCAT;
                 heldItem = ITEM_SITRUS_BERRY;
@@ -499,7 +499,7 @@ static void CreateWildMon(u16 species, u8 level)
             else{
                 species = SPECIES_SMEARGLE;
                 level = 20;
-                abilityNum = 0;
+                abilityNum = 1;
                 move1 = MOVE_SKETCH;
                 defEv = 208;
                 hpIv = 11;

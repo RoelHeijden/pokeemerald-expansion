@@ -42232,11 +42232,11 @@ F_TRAINER_FEMALE |
 #line 16898
             .ev = TRAINER_PARTY_EVS(0, 0, 252, 252, 0, 0),
 #line 16900
-            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(6, 0, 31, 31, 31, 31),
 #line 16896
             .ability = ABILITY_OWN_TEMPO,
 #line 16897
-            .lvl = 30,
+            .lvl = 19,
 #line 16899
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
