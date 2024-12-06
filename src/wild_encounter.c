@@ -490,10 +490,10 @@ static void CreateWildMon(u16 species, u8 level)
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
             if(y <= 15){
-                species = SPECIES_DELPHOX;
-                level = 30;
+                species = SPECIES_SHROODLE;
+                level = 20;
                 abilityNum = 1;
-                move1 = MOVE_SUBSTITUTE;
+                move1 = MOVE_COPYCAT;
                 heldItem = ITEM_SITRUS_BERRY;
             }
             else{
