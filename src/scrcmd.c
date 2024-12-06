@@ -1418,12 +1418,12 @@ bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
     if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_DESTINY_BOND)
         multichoiceId = MULTI_SPLIT_BOND;
 
-    if(move1 == MOVE_DISABLE && move2 == MOVE_THIEF)
-        multichoiceId = MULTI_DISABLE_THIEF;
-    if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_THIEF)
-        multichoiceId = MULTI_SPLIT_THIEF;
-    if(move1 == MOVE_DESTINY_BOND && move2 == MOVE_THIEF)
-        multichoiceId = MULTI_BOND_THIEF;
+    if(move1 == MOVE_DISABLE && move2 == MOVE_SHADOW_SNEAK)
+        multichoiceId = MULTI_DISABLE_SNEAK;
+    if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_SHADOW_SNEAK)
+        multichoiceId = MULTI_SPLIT_SNEAK;
+    if(move1 == MOVE_DESTINY_BOND && move2 == MOVE_SHADOW_SNEAK)
+        multichoiceId = MULTI_BOND_SNEAK;
 
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
@@ -2042,7 +2042,7 @@ bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
         MOVE_DISABLE, 
         MOVE_PAIN_SPLIT, 
         MOVE_DESTINY_BOND,
-        MOVE_THIEF
+        MOVE_SHADOW_SNEAK
         };
 
     u16 species = VarGet(ScriptReadHalfword(ctx)); 

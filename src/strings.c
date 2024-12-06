@@ -1838,4 +1838,4 @@ const u8 gText_PM[] = _("PM");
 const u8 gText_Disable[] = _("Disable");
 const u8 gText_PainSplit[] = _("Pain Split");
 const u8 gText_DestinyBond[] = _("Destiny Bond");
-const u8 gText_Thief[] = _("Thief");
+const u8 gText_ShadowSneak[] = _("Shadow Sneak");

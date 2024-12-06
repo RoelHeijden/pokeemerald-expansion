@@ -796,22 +796,22 @@ static const struct MenuAction MultichoiceList_SplitBond[] =
     {gText_DestinyBond},
 };
 
-static const struct MenuAction MultichoiceList_DisableThief[] =
+static const struct MenuAction MultichoiceList_DisableSneak[] =
 {
     {gText_Disable},
-    {gText_Thief},
+    {gText_ShadowSneak},
 };
 
-static const struct MenuAction MultichoiceList_SplitThief[] =
+static const struct MenuAction MultichoiceList_SplitSneak[] =
 {
     {gText_PainSplit},
-    {gText_Thief},
+    {gText_ShadowSneak},
 };
 
-static const struct MenuAction MultichoiceList_BondThief[] =
+static const struct MenuAction MultichoiceList_BondSneak[] =
 {
     {gText_DestinyBond},
-    {gText_Thief},
+    {gText_ShadowSneak},
 };
 
 
@@ -946,9 +946,9 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_DISABLE_SPLIT]              = MULTICHOICE(MultichoiceList_DisableSplit),
     [MULTI_DISABLE_BOND]               = MULTICHOICE(MultichoiceList_DisableBond),
     [MULTI_SPLIT_BOND]                 = MULTICHOICE(MultichoiceList_SplitBond),
-    [MULTI_DISABLE_THIEF]              = MULTICHOICE(MultichoiceList_DisableThief),
-    [MULTI_SPLIT_THIEF]                = MULTICHOICE(MultichoiceList_SplitThief),
-    [MULTI_BOND_THIEF]                 = MULTICHOICE(MultichoiceList_BondThief),
+    [MULTI_DISABLE_SNEAK]              = MULTICHOICE(MultichoiceList_DisableSneak),
+    [MULTI_SPLIT_SNEAK]                = MULTICHOICE(MultichoiceList_SplitSneak),
+    [MULTI_BOND_SNEAK]                 = MULTICHOICE(MultichoiceList_BondSneak),
 };
 
 const u8 *const gStdStrings[] =
