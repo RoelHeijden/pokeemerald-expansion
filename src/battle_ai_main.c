@@ -63,6 +63,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 // ADDED
 static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -89,7 +90,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [19] = NULL,                     // Unused
     [20] = AI_Double1_Logic,         // AI_FLAG_DOUBLE1
     [21] = AI_Single1_Logic,         // AI_FLAG_SINGLE1
-    [22] = NULL,                     // Unused
+    [22] = AI_Single4_Logic,         // AI_FLAG_SINGLE4
     [23] = NULL,                     // Unused
     [24] = NULL,                     // Unused
     [25] = NULL,                     // Unused
@@ -5642,6 +5643,34 @@ static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     {
         if (move == MOVE_KNOCK_OFF) 
             score = 120;
+    }
+    return score;
+}
+
+static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+
+    // klefki move selecion
+    if (gBattleMons[battlerAtk].species == SPECIES_KLEFKI){
+
+        // if target is gardevoir
+        if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR){
+
+            // if Tormented
+            if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
+                if (move == MOVE_TOXIC) 
+                    score = 140;
+            }
+            // if not Tormented yet
+            else{
+                if (move == MOVE_TORMENT) 
+                    score = 140;
+            }
+        }
+        // if target is Smeargle
+        else{
+            if (move == MOVE_MISTY_EXPLOSION)
+                score = 140;
+        }
     }
     return score;
 }

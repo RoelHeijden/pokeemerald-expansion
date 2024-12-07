@@ -405,7 +405,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             SPECIES_GARDEVOIR, 
             30, 
             abilityNum=0,
-            nature=5, // Bold 
+            nature=8, // Impish 
             move1=MOVE_TRICK_ROOM,
             move2=MOVE_SKILL_SWAP, 
             move3=MOVE_NONE, 
@@ -416,7 +416,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             spDefEv=164,
             // IVS:
             hpIv=31,
-            atkIv=0,
+            atkIv=31,
             defIv=31,
             speedIv=0,
             spAtkIv=31,
@@ -466,6 +466,17 @@ script EscapeRoom_EventScript_SingleBattle3{
         event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
     call(EscapeRoom_EventScript_TeleportBackOverLedge)
+    end
+}
+
+script EscapeRoom_EventScript_SingleBattle4{
+    trainerbattle_single(
+        TRAINER_MY_CUSTOM_SINGLE_BATTLE4, 
+        "tbd", 
+        "tbd", 
+        // event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox("hi", MSGBOX_NPC)
     end
 }
 
@@ -801,7 +812,7 @@ script EscapeRoom_EventScript_HintsNPC{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    "Welcome to the Escape Room!\p"
+    "Welcome to Pokémon Cave Escape!\p"
 
     "You'll have to navigate tough battles\n"
     "and find creative solutions in order to\l"
@@ -874,7 +885,7 @@ text EscapeRoomEndCongratz{
 }
 
 text EndEscapeRoomSignMessage{
-    "Thanks for playing.\n"
+    "Thank you for playing <3\n"
     " - Roel"
 }
 

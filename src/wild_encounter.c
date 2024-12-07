@@ -482,33 +482,34 @@ static void CreateWildMon(u16 species, u8 level)
         // Hardy nature = 0, so: (personality % 25) == 0
         u32 personality = (Random32() / 25) * 25;
 
-        s16 y;
+        // s16 y;
         // s16 x;
         // x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
-        y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
+        // y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
-            if(y <= 15){
-                species = SPECIES_SHROODLE;
-                level = 10;
-                abilityNum = 1;
-                move1 = MOVE_COPYCAT;
-                heldItem = ITEM_SITRUS_BERRY;
-            }
-            else{
-                species = SPECIES_SMEARGLE;
-                level = 20;
-                abilityNum = 1;
-                move1 = MOVE_SKETCH;
-                defEv = 208;
-                hpIv = 11;
-                atkIv = 0;
-                speedIv = 0;
+            // if(y <= 15){
+            //     species = SPECIES_DELPHOX;
+            //     level = 30;
+            //     abilityNum = 2;
+            //     move1 = MOVE_SUBSTITUTE;
+            //     heldItem = ITEM_SITRUS_BERRY;
+            //     // hpEv = 36;
+            // }
+            // else{
+            species = SPECIES_SMEARGLE;
+            level = 20;
+            abilityNum = 1;
+            move1 = MOVE_SKETCH;
+            defEv = 208;
+            hpIv = 11;
+            atkIv = 0;
+            speedIv = 0;
 
-                // Relaxed nature == 7, so: (personality % 25) == 7
-                personality = (Random32() / 25) * 25 + 7; 
-            }
+            // Relaxed nature == 7, so: (personality % 25) == 7
+            personality = (Random32() / 25) * 25 + 7; 
+            // }
 
 
         }
@@ -518,9 +519,10 @@ static void CreateWildMon(u16 species, u8 level)
             level = 100;
             abilityNum = 0;
             move1 = MOVE_PROTECT;
-            hpEv = 216;
+            hpEv = 160;
             defEv = 252;
-            atkEv = 40;
+            // atkEv = 96;
+            atkEv = 36;
 
             heldItem = ITEM_TM10;
             personality = (Random32() / 25) * 25 + 8; // Impish
