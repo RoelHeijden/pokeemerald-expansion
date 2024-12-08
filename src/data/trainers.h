@@ -42382,7 +42382,8 @@ F_TRAINER_FEMALE |
             {
 #line 16953
             .species = SPECIES_CURSOLA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16953
+            .gender = TRAINER_MON_FEMALE,
 #line 16953
             .heldItem = ITEM_MENTAL_HERB,
 #line 16956
@@ -42508,27 +42509,28 @@ F_TRAINER_FEMALE |
 #line 17000
                 MOVE_TORMENT,
                 MOVE_STEEL_BEAM,
+                MOVE_FLASH_CANNON,
             },
             },
             {
-#line 17003
+#line 17004
             .species = SPECIES_SCORBUNNY,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 17003
-            .heldItem = ITEM_SITRUS_BERRY,
-#line 17006
-            .ev = TRAINER_PARTY_EVS(252, 8, 0, 0, 0, 0),
-#line 17008
-            .iv = TRAINER_PARTY_IVS(31, 31, 17, 31, 31, 31),
 #line 17004
-            .ability = ABILITY_LIBERO,
-#line 17005
-            .lvl = 24,
+            .heldItem = ITEM_SITRUS_BERRY,
 #line 17007
+            .ev = TRAINER_PARTY_EVS(252, 60, 0, 0, 0, 0),
+#line 17009
+            .iv = TRAINER_PARTY_IVS(31, 31, 17, 31, 31, 31),
+#line 17005
+            .ability = ABILITY_LIBERO,
+#line 17006
+            .lvl = 24,
+#line 17008
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17009
+#line 17010
                 MOVE_DOUBLE_EDGE,
             },
             },
