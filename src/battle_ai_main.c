@@ -5572,7 +5572,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
             // avoid protect
             if (targetProtectingItself){
-                score = 69;
+                score = 68;
                 return score;
             }
             // target smeargle, alternate with brick break
@@ -5588,7 +5588,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             // target smeargle, alternate with drain punch
             if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-                score = 155;
+                score = 156;
             break;
 
         case MOVE_PERISH_SONG:
@@ -5657,8 +5657,8 @@ static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
             // if Tormented
             if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
-                if (move == MOVE_TOXIC) 
-                    score = 140;
+                if (move == MOVE_STEEL_BEAM) 
+                    score = 139;
             }
             // if not Tormented yet
             else{
@@ -5668,8 +5668,8 @@ static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         }
         // if target is Smeargle
         else{
-            if (move == MOVE_MISTY_EXPLOSION)
-                score = 140;
+            if (move == MOVE_STEEL_BEAM)
+                score = 139;
         }
     }
     return score;

@@ -5928,6 +5928,9 @@ static void Cmd_moveend(void)
                 gBattleStruct->lastMoveTarget[gBattlerAttacker] = gBattlerTarget;
                 if (gHitMarker & HITMARKER_ATTACKSTRING_PRINTED)
                 {
+                    // remove
+                    // DebugPrintf("check - mon: %d, move: %d", gBattlerAttacker, gChosenMove);
+
                     gLastPrintedMoves[gBattlerAttacker] = gChosenMove;
                     gLastUsedMove = gCurrentMove;
                     if (IsMaxMove(gCurrentMove))

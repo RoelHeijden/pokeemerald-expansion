@@ -405,7 +405,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             SPECIES_GARDEVOIR, 
             30, 
             abilityNum=0,
-            nature=8, // Impish 
+            nature=5, // Bold 
             move1=MOVE_TRICK_ROOM,
             move2=MOVE_SKILL_SWAP, 
             move3=MOVE_NONE, 
@@ -413,10 +413,10 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             // EVS:
             hpEv=132,
             defEv=212,
-            spDefEv=164,
+            spDefEv=24,
             // IVS:
             hpIv=31,
-            atkIv=31,
+            atkIv=0,
             defIv=31,
             speedIv=0,
             spAtkIv=31,
@@ -470,14 +470,18 @@ script EscapeRoom_EventScript_SingleBattle3{
 }
 
 script EscapeRoom_EventScript_SingleBattle4{
+    faceplayer
     trainerbattle_single(
         TRAINER_MY_CUSTOM_SINGLE_BATTLE4, 
-        "tbd", 
-        "tbd", 
-        // event_script=EscapeRoom_EventScript_PostMatchHeal,
+        Single4IntroMessage, 
+        Single4OutroMessage, 
+        event_script=EscapeRoom_EventScript_SetSingle4Rematch,
     )
-    msgbox("hi", MSGBOX_NPC)
-    end
+}
+
+script EscapeRoom_EventScript_SetSingle4Rematch{
+    cleartrainerflag(TRAINER_MY_CUSTOM_SINGLE_BATTLE4)
+    msgbox(single4PostMatchMessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_TeleportBackOverLedge{
@@ -808,6 +812,29 @@ script EscapeRoom_EventScript_HintsNPC{
     msgbox(HintsIntroMessage, MSGBOX_NPC)
 }
 
+script EscapeRoom_EventScript_PressStartSign{
+    lockall
+    msgbox(PressStartSignMessage)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_ExitCloseNPC{
+    msgbox(ExitCloseNPCMessage, MSGBOX_NPC)
+}
+
+script EscapeRoom_EventScript_PainSplitHintNPC{
+    msgbox(PainSplitHintNPCMessage, MSGBOX_NPC)
+}
+
+script EscapeRoom_EventScript_BerryTreeHintNPC{
+    msgbox(BerryTreeHintNPCMessage, MSGBOX_NPC)
+}
+
+script EscapeRoom_EventScript_TormentHintNPC{
+    msgbox(TormentHintNPCMessage, MSGBOX_NPC)
+}
+
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -1010,11 +1037,6 @@ text Single1Puzzle_Outro{
     format("Fuck.")
 }
 
-text Single1Puzzle_PostBattle{
-    "...\p"
-    "Good luck." 
-}
-
 text Single2Puzzle_Intro{
     "Are you a skill trader?\n"
     "You should probably invest more time\l"
@@ -1022,11 +1044,7 @@ text Single2Puzzle_Intro{
 }
 
 text Single2Puzzle_Outro{
-    "Okay, you've impressed me."
-}
-
-text Single2Puzzle_PostBattle{
-    "You should probably get out of here."
+    "Shut up and take my money."
 }
 
 text Single3Puzzle_Intro{
@@ -1179,15 +1197,59 @@ text ThanksMomMessage{
     "How did that get there?"
 }
 
-text ResetRocksMessage{
-    "Do you want to reset the boulders?"
-}
-
 text HintsIntroMessage{
     "You can come to me for hints,\n"
     "but not yet because Roel still has to\l"
     "implement my script."
 }
 
+text PressStartSignMessage{
+    "Press START during a double battle to\n"
+    "view your POKéMON's exact HP."
+}
 
+text Single4IntroMessage{
+    "Oh, did I pluck the last berries?"
+}
 
+text Single4OutroMessage{
+    "Did you really win?"
+}
+
+text single4PostMatchMessage{
+    "I'm ready for a rematch whenever you\n"
+    "want!"
+}
+
+text Single2Puzzle_PostBattle{
+    "CURSOLA is a great singer, don't you\n"
+    "agree?\p"
+    "Maybe SMEARGLE should follow her lead."
+}
+
+text Single1Puzzle_PostBattle{ 
+    "Remember turning your POKéMON into a\n"
+    "GHOST type?\p"
+    "That was fun."
+}
+
+text ExitCloseNPCMessage{
+    format("We're so close, the exit is right there!")
+}
+
+text PainSplitHintNPCMessage{
+    "Time is not for sale, but generosity can\n"
+    "earn you a moment."
+}
+
+text BerryTreeHintNPCMessage{
+    "I wonder what happened to the berry\n"
+    "tree around the corner.\p"
+    "It could have been so useful."
+}
+
+text TormentHintNPCMessage{
+    "I used to be tormented by my brothers,\n"
+    "but after a while you just accept it and\l"
+    "move on."
+}

@@ -16883,7 +16883,7 @@ Music: Twins
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
-Scrafty
+Scrafty @ Leftovers
 Ability: Intimidate  
 Level: 17  
 EVs: 252 Def  
@@ -16950,7 +16950,7 @@ EVs: 8 HP / 252 Atk / 4 Def / 244 SpD
 Adamant Nature  
 - Facade
 
-Cursola @ Mental Herb  
+Cursola (F) @ Mental Herb  
 Ability: Perish Body  
 Level: 35  
 EVs: 252 HP / 252 Atk  
@@ -16983,7 +16983,7 @@ Hardy Nature
 - Final Gambit  
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE4 ===
-Name: S. Bery
+Name: C. Trish
 Class: Picnicker
 Pic: Picnicker
 Gender: Female
@@ -16993,21 +16993,18 @@ AI: AI_FLAG_SINGLE4 / AI_FLAG_SEQUENCE_SWITCHING
 
 Klefki  
 Ability: Magician  
-Level: 5  
-IVs: 0 Atk  
+Level: 8  
+EVs: 252 SpA  
+Mild Nature  
+IVs: 0 HP / 0 Atk / 0 Def  
 - Torment  
-- Misty Explosion  
-- Toxic
+- Steel Beam
 
 Scorbunny @ Sitrus Berry  
 Ability: Libero  
-Level: 28  
-EVs: 252 HP / 252 Atk  
-Adamant Nature  
+Level: 24  
+EVs: 252 HP / 8 Atk  
+Lonely Nature  
+IVs: 17 Def  
 - Double-Edge
 
-Diglett @ Choice Band  
-Ability: Arena Trap   
-EVs: 252 Atk  
-Adamant Nature  
-- Earthquake  
