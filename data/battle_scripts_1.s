@@ -9681,6 +9681,7 @@ BattleScript_NeutralizingGasExitsLoop:
 BattleScript_MagicianActivates::
 	call BattleScript_AbilityPopUp
 	call BattleScript_ItemSteal
+	activateitemeffects BS_ATTACKER
 	return
 
 BattleScript_SymbiosisActivates::
