@@ -1655,44 +1655,47 @@ PressStartSignMessage::
 
 Single4IntroMessage::
 # 1211 "data/maps/EscapeRoom/scripts.pory"
-	.string "Oh, did I pluck the last berries?$"
+	.string "Oh, did I pick the last berries...\n"
+	.string "Why don't you come and take them?$"
 
 Single4OutroMessage::
-# 1215 "data/maps/EscapeRoom/scripts.pory"
+# 1216 "data/maps/EscapeRoom/scripts.pory"
 	.string "Did you really win?$"
 
 single4PostMatchMessage::
-# 1219 "data/maps/EscapeRoom/scripts.pory"
+# 1220 "data/maps/EscapeRoom/scripts.pory"
 	.string "I'm ready for a rematch whenever you\n"
 	.string "want!$"
 
 Single2Puzzle_PostBattle::
-# 1224 "data/maps/EscapeRoom/scripts.pory"
-	.string "$"
+# 1225 "data/maps/EscapeRoom/scripts.pory"
+	.string "CURSOLA is a great singer, don't you\n"
+	.string "agree?\p"
+	.string "Maybe SMEARGLE should follow her lead.$"
 
 Single1Puzzle_PostBattle::
-# 1228 "data/maps/EscapeRoom/scripts.pory"
+# 1231 "data/maps/EscapeRoom/scripts.pory"
 	.string "Remember turning your POKéMON into a\n"
 	.string "GHOST type?\p"
 	.string "That was fun.$"
 
 ExitCloseNPCMessage::
-# 1234 "data/maps/EscapeRoom/scripts.pory"
+# 1237 "data/maps/EscapeRoom/scripts.pory"
 	.string "We're so close, the exit is right there!$"
 
 PainSplitHintNPCMessage::
-# 1238 "data/maps/EscapeRoom/scripts.pory"
+# 1241 "data/maps/EscapeRoom/scripts.pory"
 	.string "Time is not for sale, but generosity can\n"
 	.string "earn you a moment.$"
 
 BerryTreeHintNPCMessage::
-# 1243 "data/maps/EscapeRoom/scripts.pory"
-	.string "I wonder what happened to the berry\n"
-	.string "tree around the corner.\p"
-	.string "It could have been so useful.$"
+# 1246 "data/maps/EscapeRoom/scripts.pory"
+	.string "What happened to that berry tree?\n"
+	.string "Such a shame, it would've been very\l"
+	.string "useful against those old timers.$"
 
 TormentHintNPCMessage::
-# 1249 "data/maps/EscapeRoom/scripts.pory"
+# 1252 "data/maps/EscapeRoom/scripts.pory"
 	.string "I used to be tormented by my brothers,\n"
 	.string "but after a while you just accept it and\l"
 	.string "move on.$"

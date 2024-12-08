@@ -1209,7 +1209,8 @@ text PressStartSignMessage{
 }
 
 text Single4IntroMessage{
-    "Oh, did I pluck the last berries?"
+    "Oh, did I pick the last berries...\n"
+    "Why don't you come and take them?"
 }
 
 text Single4OutroMessage{
@@ -1243,9 +1244,9 @@ text PainSplitHintNPCMessage{
 }
 
 text BerryTreeHintNPCMessage{
-    "I wonder what happened to the berry\n"
-    "tree around the corner.\p"
-    "It could have been so useful."
+    "What happened to that berry tree?\n"
+    "Such a shame, it would've been very\l"
+    "useful against those old timers."
 }
 
 text TormentHintNPCMessage{
