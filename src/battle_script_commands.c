@@ -3903,15 +3903,20 @@ static void Cmd_setadditionaleffects(void)
             {
                 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), additionalEffect);
 
-                // Activate effect if it's primary (chance == 0) or if RNGesus says so
-                if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
+                // ADDED
+                // skip effects with a probability below 50%
+                if (percentChance >= 50 || percentChance == 0)
                 {
-                    gBattleScripting.moveEffect = additionalEffect->moveEffect | (MOVE_EFFECT_AFFECTS_USER * (additionalEffect->self));
+                    // Activate effect if it's primary (chance == 0) or if RNGesus says so
+                    if ((percentChance == 0) || RandomPercentage(RNG_SECONDARY_EFFECT + gBattleStruct->additionalEffectsCounter, percentChance))
+                    {
+                        gBattleScripting.moveEffect = additionalEffect->moveEffect | (MOVE_EFFECT_AFFECTS_USER * (additionalEffect->self));
 
-                    SetMoveEffect(
-                        percentChance == 0, // a primary effect
-                        percentChance >= 100 // certain to happen
-                    );
+                        SetMoveEffect(
+                            percentChance == 0, // a primary effect
+                            percentChance >= 100 // certain to happen
+                        );
+                    }
                 }
             }
 
