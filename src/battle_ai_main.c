@@ -5661,6 +5661,15 @@ static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
             // if Tormented
             if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
+
+                if (move == MOVE_FLASH_CANNON){
+                    // if smeargle KOd by Steel beam prior to this turn: use flash cannon
+                    if (gBattleMons[battlerAtk].hp <= 14 && gBattleMons[battlerDef].hp >= 89)
+                        score = 141;
+                    else
+                        score = 120;
+                }
+
                 if (move == MOVE_STEEL_BEAM) 
                     score = 139;
             }
@@ -5674,6 +5683,8 @@ static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         else{
             if (move == MOVE_STEEL_BEAM)
                 score = 139;
+            if (move == MOVE_FLASH_CANNON)
+                score = 120;
         }
     }
     return score;
