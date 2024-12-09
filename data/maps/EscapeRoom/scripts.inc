@@ -1391,9 +1391,9 @@ Nurse_Heal_End::
 
 SmeargleMessageInitial::
 # 949 "data/maps/EscapeRoom/scripts.pory"
-	.string "I'm looking for the perfect SMEARGLE.\n"
-	.string "Have you got one?\l"
-	.string "Come to me when you do!$"
+	.string "I'm looking for the perfect SMEARGLE!\p"
+	.string "Have you got one??\n"
+	.string "Come to me when you do.$"
 
 SmeargleMessageBad::
 # 955 "data/maps/EscapeRoom/scripts.pory"
@@ -1655,7 +1655,7 @@ PressStartSignMessage::
 
 Single4IntroMessage::
 # 1211 "data/maps/EscapeRoom/scripts.pory"
-	.string "Oh, did I pick the last berries...\n"
+	.string "Oops, I picked the last berries.\n"
 	.string "Why don't you come and take them?$"
 
 Single4OutroMessage::
@@ -1686,16 +1686,17 @@ ExitCloseNPCMessage::
 PainSplitHintNPCMessage::
 # 1241 "data/maps/EscapeRoom/scripts.pory"
 	.string "Time is not for sale, but generosity can\n"
-	.string "earn you a moment.$"
+	.string "earn you a moment.\p"
+	.string "Sharing is caring.$"
 
 BerryTreeHintNPCMessage::
-# 1246 "data/maps/EscapeRoom/scripts.pory"
-	.string "What happened to that berry tree?\n"
-	.string "Such a shame, it would've been very\l"
+# 1247 "data/maps/EscapeRoom/scripts.pory"
+	.string "What happened to that berry tree?\p"
+	.string "Such a shame, it could have been so\n"
 	.string "useful against those old timers.$"
 
 TormentHintNPCMessage::
-# 1252 "data/maps/EscapeRoom/scripts.pory"
+# 1253 "data/maps/EscapeRoom/scripts.pory"
 	.string "I used to be tormented by my brothers,\n"
 	.string "but after a while you just accept it and\l"
 	.string "move on.$"

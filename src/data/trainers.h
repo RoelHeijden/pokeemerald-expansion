@@ -42342,7 +42342,7 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_SINGLE_BATTLE2] =
     {
 #line 16938
-        .trainerName = _("DS Abel"),
+        .trainerName = _("DS. Abel"),
 #line 16939
         .trainerClass = TRAINER_CLASS_RICH_BOY,
 #line 16940

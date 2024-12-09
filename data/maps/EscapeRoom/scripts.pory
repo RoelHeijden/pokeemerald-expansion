@@ -947,9 +947,9 @@ text Nurse_Heal_End{
 }
 
 text SmeargleMessageInitial{
-    "I'm looking for the perfect SMEARGLE.\n"
-    "Have you got one?\l"
-    "Come to me when you do!"
+    "I'm looking for the perfect SMEARGLE!\p"
+    "Have you got one??\n"
+    "Come to me when you do."
 }
 
 text SmeargleMessageBad{
@@ -1209,7 +1209,7 @@ text PressStartSignMessage{
 }
 
 text Single4IntroMessage{
-    "Oh, did I pick the last berries...\n"
+    "Oops, I picked the last berries.\n"
     "Why don't you come and take them?"
 }
 
@@ -1240,12 +1240,13 @@ text ExitCloseNPCMessage{
 
 text PainSplitHintNPCMessage{
     "Time is not for sale, but generosity can\n"
-    "earn you a moment."
+    "earn you a moment.\p"
+    "Sharing is caring."
 }
 
 text BerryTreeHintNPCMessage{
-    "What happened to that berry tree?\n"
-    "Such a shame, it would've been very\l"
+    "What happened to that berry tree?\p"
+    "Such a shame, it could have been so\n"
     "useful against those old timers."
 }
 
