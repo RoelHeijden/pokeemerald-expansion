@@ -489,15 +489,6 @@ static void CreateWildMon(u16 species, u8 level)
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
         {
-            // if(y <= 15){
-            //     species = SPECIES_DELPHOX;
-            //     level = 30;
-            //     abilityNum = 2;
-            //     move1 = MOVE_SUBSTITUTE;
-            //     heldItem = ITEM_SITRUS_BERRY;
-            //     // hpEv = 36;
-            // }
-            // else{
             species = SPECIES_SMEARGLE;
             level = 20;
             abilityNum = 1;
@@ -505,13 +496,9 @@ static void CreateWildMon(u16 species, u8 level)
             defEv = 208;
             hpIv = 11;
             atkIv = 0;
+            spAtkIv = 0;
             speedIv = 0;
-
-            // Relaxed nature == 7, so: (personality % 25) == 7
-            personality = (Random32() / 25) * 25 + 7; 
-            // }
-
-
+            personality = (Random32() / 25) * 25 + 5; // bold
         }
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
         {

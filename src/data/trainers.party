@@ -16927,15 +16927,15 @@ Adamant Nature
 
 Persian-Alola @ Room Service  
 Ability: Fur Coat  
-Level: 21  
-EVs: 252 HP / 252 Atk / 4 Def   
-Brave Nature  
+Level: 23  
+EVs: 160 Atk / 112 Def / 236 SpA  
+Quiet Nature  
 IVs: 0 Spe  
-- Knock Off 
-- Feint Attack
+- Knock Off  
+- Shadow Ball
 
 === TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
-Name: DS Abel
+Name: DS. Abel
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male

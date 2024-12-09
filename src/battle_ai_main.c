@@ -5641,8 +5641,12 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
     if (gBattleMons[battlerAtk].species == SPECIES_PERSIAN_ALOLAN)
     {
-        if (move == MOVE_KNOCK_OFF) 
-            score = 120;
+        if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR)
+            if (move == MOVE_SHADOW_BALL) 
+                score = 120;
+        if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
+            if (move == MOVE_KNOCK_OFF) 
+                score = 121;
     }
     return score;
 }
