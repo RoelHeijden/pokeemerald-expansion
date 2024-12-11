@@ -5204,8 +5204,10 @@ BattleScript_EffectSkillSwap::
 	printstring STRINGID_PKMNSWAPPEDABILITIES
 	waitmessage B_WAIT_TIME_LONG
 .if B_SKILL_SWAP >= GEN_4
+	copybyte gBattlerHoldmyBeer, gBattlerAttacker 
 	switchinabilities BS_ATTACKER
 	switchinabilities BS_TARGET
+	copybyte gBattlerAttacker, gBattlerHoldmyBeer
 .endif
 	goto BattleScript_MoveEnd
 
