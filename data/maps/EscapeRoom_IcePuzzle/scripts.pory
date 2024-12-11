@@ -4,6 +4,10 @@
 mapscripts EscapeRoom_IcePuzzle_MapScripts {
     MAP_SCRIPT_ON_RESUME: EscapeRoom_IcePuzzle_MapScript_OnResumeScripts
 
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_IcePuzzle_MapScript_OnWarpIntoScripts
+    ]
+
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindGreatBallAferUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA,  1: EscapeRoom_MapScripts_FindPechaBerryAferUse
@@ -30,3 +34,12 @@ script EscapeRoom_IcePuzzle_MapScript_OnResumeScripts{
     }
 } 
 
+script EscapeRoom_IcePuzzle_MapScript_OnWarpIntoScripts{
+    // set NPC facing
+    call(EscapeRoom_IcePuzzle_MapScript_setNPCfacing)
+}
+
+script EscapeRoom_IcePuzzle_MapScript_setNPCfacing{
+    turnobject(3, DIR_EAST)
+    turnobject(4, DIR_SOUTH)
+}

@@ -16,8 +16,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 30,
-      "y": 2,
+      "x": 39,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
       "movement_range_x": 0,
@@ -29,8 +29,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 21,
-      "y": 17,
+      "x": 15,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -39,12 +39,38 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_FindRareCandy",
       "flag": "FLAG_RARE_CANDY_OBTAINED"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 17,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_PerishExplain_NPC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 15,
+      "y": 17,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_StopWinningNPC",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
       "x": 13,
-      "y": 14,
+      "y": 20,
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM",
       "dest_warp_id": "1"

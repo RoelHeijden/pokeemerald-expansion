@@ -145,16 +145,14 @@ script EscapeRoom_MapScripts_FixCrackedGround{
 }
 
 script EscapeRoom_MapScript_setNPCfacing{
-    turnobject(5, DIR_EAST)
-    turnobject(9, DIR_SOUTH) // mart npc
-    turnobject(10, DIR_NORTH)
-    turnobject(12, DIR_WEST)
-    turnobject(13, DIR_WEST)
-    turnobject(14, DIR_NORTH)
-    turnobject(15, DIR_EAST)
-    turnobject(16, DIR_SOUTH)
-    turnobject(17, DIR_NORTH)
-    turnobject(19, DIR_EAST)
+    turnobject(8, DIR_SOUTH) // mart npc
+    turnobject(9, DIR_EAST) // tutor
+    turnobject(10, DIR_NORTH) // misdirection
+    turnobject(11, DIR_SOUTH) // perf smeargle
+    turnobject(12, DIR_WEST) // nugget
+    turnobject(13, DIR_WEST) // ice cave
+    turnobject(14, DIR_EAST) // asshole
+    turnobject(16, DIR_SOUTH) // salazzle
 }
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
@@ -178,6 +176,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         item=ITEM_HEART_SCALE,
         abilityNum=1,
         nature=4, // naughty 
+        gender=0,
         move1=MOVE_THIEF,
         move2=MOVE_ROLE_PLAY, 
         move3=MOVE_SUNNY_DAY, 
@@ -279,7 +278,7 @@ script EscapeRoom_EventScript_FindNugget3{
 script EscapeRoom_EventScript_FindHeartScale{
     lockall
     finditem(ITEM_HEART_SCALE)
-    removeobject(7)
+    removeobject(6)
     setflag(FLAG_HEART_SCALE2_OBTAINED)
     releaseall
 }
@@ -406,6 +405,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
             30, 
             abilityNum=0,
             nature=5, // Bold 
+            gender=1,
             move1=MOVE_TRICK_ROOM,
             move2=MOVE_SKILL_SWAP, 
             move3=MOVE_NONE, 
@@ -549,7 +549,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         clearflag(FLAG_HM_ROCK_SMASH_STOLEN)
 
         // teleport out
-        warpteleport(MAP_ESCAPE_ROOM, 11, 25)
+        warpteleport(MAP_ESCAPE_ROOM, 11, 26)
     }
     else{
         msgbox(NoTeleportPleaseMessage, MSGBOX_AUTOCLOSE)
@@ -795,7 +795,7 @@ script EscapeRoom_EventScript_EndEscapeRoomSign{
 script EscapeRoom_EventScript_FindIronBall{
     lockall
     finditem(ITEM_IRON_BALL)
-    removeobject(18)
+    removeobject(15)
     setflag(FLAG_IRON_BALL_OBTAINED)
     releaseall
 }
@@ -835,6 +835,91 @@ script EscapeRoom_EventScript_TormentHintNPC{
     msgbox(TormentHintNPCMessage, MSGBOX_NPC)
 }
 
+script EscapeRoom_EventScript_Question1Sign{
+    lockall
+    msgbox(Question1Message)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_Question2Sign{
+    lockall
+    msgbox(Question2Message)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_Question3Sign{
+    lockall
+    msgbox(Question3Message)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_TTTSign{
+    lockall
+    msgbox("TTT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_TTFSign{
+    lockall
+    msgbox("TTF")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_TFTSign{
+    lockall
+    msgbox("TFT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_TFFSign{
+    lockall
+    msgbox("TFF")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FTTSign{
+    lockall
+    msgbox("FTT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FTFSign{
+    lockall
+    msgbox("FTF")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FFTSign{
+    lockall
+    msgbox("FFT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FFFSign{
+    lockall
+    msgbox("FFF")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_Answer9{
+    lockall
+    msgbox(alternativeAnswerMessage)
+    waitmessage
+    releaseall
+}
+
+
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -858,7 +943,7 @@ text StartMessage{
     "and damage are now deterministic.\p"
 
     "3) There is no need for grinding of any\n"
-    "kind.\p"
+    "kind. You won't gain EXP from battling.\p"
 
     "4) Any item you can find on the map\n"
     "directly will be inside an item ball.\p"
@@ -889,7 +974,7 @@ text SignMessage1{
     "and damage are now deterministic.\p"
 
     "3) There is no need for grinding of any\n"
-    "kind.\p"
+    "kind. You won't gain EXP from battling.\p"
 
     "4) Any item you can find on the map\n"
     "directly will be inside an item ball.\p"
@@ -947,9 +1032,10 @@ text Nurse_Heal_End{
 }
 
 text SmeargleMessageInitial{
-    "I'm looking for the perfect SMEARGLE!\p"
-    "Have you got one??\n"
-    "Come to me when you do."
+    "I'm looking for the perfect SMEARGLE.\n"
+    "Have you got one??\p"
+    "Come to me when you do and I might offer\n"
+    "you my GARDEVOIR."
 }
 
 text SmeargleMessageBad{
@@ -1141,7 +1227,7 @@ text SilentNPCMessage{
 }
 
 text NuggetNPCmessage{
-    "Have you seen my NUGGET?\p"
+    "Have you seen my NUGGET???\p"
     "I guess not...\n"
     "I'll leaf it be."
 }
@@ -1153,8 +1239,8 @@ text misdirectionHintMessage{
 text SalazzleCatchingHint{
     "Everytime I've tried to catch SALAZZLE\n"
     "it managed to escape.\p"
-    "That's some ability, huh?\n"
     "It's like it can't be done." 
+    // "That's some ability, huh?\n"
 }
 
 text someoneLockedUsUpNPCmessage{
@@ -1165,7 +1251,7 @@ text someoneLockedUsUpNPCmessage{
 
 text perfectSmeargleHintNPCmessage{
     "The perfect SMEARGLE?\n"
-    "That's gotta be a moveset thing right?"
+    "That's gotta be a moveset thing, right?"
 }
 
 text icePuzzleHintNPCmessage{
@@ -1247,11 +1333,27 @@ text PainSplitHintNPCMessage{
 text BerryTreeHintNPCMessage{
     "What happened to that berry tree?\p"
     "Such a shame, it could have been so\n"
-    "useful against those old timers."
+    "useful against the old timers."
 }
 
 text TormentHintNPCMessage{
-    "I used to be tormented by my brothers,\n"
+    "I used to get tormented by my brothers,\n"
     "but after a while you just accept it and\l"
     "move on."
+}
+
+text Question1Message{
+    "The Mach Bike cost 79.999."
+}
+
+text Question2Message{
+    "Togedemaru is holding a Choice Scarf."
+}
+
+text Question3Message{
+    "Cursola is level 34."
+}
+
+text alternativeAnswerMessage{
+    "This sucks."
 }

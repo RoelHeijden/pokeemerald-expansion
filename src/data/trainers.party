@@ -16883,7 +16883,7 @@ Music: Twins
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
-Scrafty @ Leftovers
+Scrafty (F) @ Leftovers
 Ability: Intimidate  
 Level: 17  
 EVs: 252 Def  
@@ -16892,7 +16892,7 @@ IVs: 0 HP / 0 Atk / 0 Spe
 - Drain Punch  
 - Brick Break
 
-Smeargle @ Mental Herb  
+Smeargle (M) @ Mental Herb  
 Ability: Own Tempo  
 Level: 21  
 EVs: 252 Def / 252 Spe  
@@ -16910,7 +16910,7 @@ Music: Male
 Double Battle: No
 AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
 
-Togedemaru @ Assault Vest  
+Togedemaru (M) @ Assault Vest  
 Ability: Lightning Rod  
 Level: 16  
 EVs: 252 Atk / 252 Spe  
@@ -16925,7 +16925,7 @@ EVs: 252 Atk / 248 Spe
 Adamant Nature  
 - Horn Leech  
 
-Persian-Alola @ Room Service  
+Persian-Alola (M) @ Room Service  
 Ability: Fur Coat  
 Level: 23  
 EVs: 160 Atk / 112 Def / 236 SpA  
@@ -16943,7 +16943,7 @@ Music: Rich
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Slaking @ Flame Orb  
+Slaking (M) @ Flame Orb  
 Ability: Truant  
 Level: 64  
 EVs: 8 HP / 252 Atk / 4 Def / 244 SpD  
@@ -16967,7 +16967,7 @@ Music: Suspicious
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Kecleon
+Kecleon (F)
 Ability: Color Change  
 Level: 55   
 EVs: 252 SpA  
@@ -16975,7 +16975,7 @@ Modest Nature
 IVs: 30 Def / 30 SpD  
 - Mimic  
 
-Zangoose @ ITEM_HM06 
+Zangoose (F) @ ITEM_HM06 
 Ability: Toxic Boost  
 Level: 42  
 EVs: 252 HP / 100 SpD  
@@ -16991,7 +16991,7 @@ Music: Girl
 Double Battle: No
 AI: AI_FLAG_SINGLE4 / AI_FLAG_SEQUENCE_SWITCHING
 
-Klefki  
+Klefki (M) 
 Ability: Magician  
 Level: 8  
 EVs: 252 SpA  
@@ -17001,7 +17001,7 @@ IVs: 0 HP / 0 Atk / 0 Def
 - Steel Beam
 - Flash Cannon
 
-Scorbunny @ Sitrus Berry  
+Scorbunny (F) @ Sitrus Berry  
 Ability: Libero  
 Level: 24  
 EVs: 252 HP / 60 Atk  

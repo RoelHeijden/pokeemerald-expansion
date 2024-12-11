@@ -42205,7 +42205,8 @@ F_TRAINER_FEMALE |
             {
 #line 16886
             .species = SPECIES_SCRAFTY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16886
+            .gender = TRAINER_MON_FEMALE,
 #line 16886
             .heldItem = ITEM_LEFTOVERS,
 #line 16889
@@ -42228,7 +42229,8 @@ F_TRAINER_FEMALE |
             {
 #line 16895
             .species = SPECIES_SMEARGLE,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16895
+            .gender = TRAINER_MON_MALE,
 #line 16895
             .heldItem = ITEM_MENTAL_HERB,
 #line 16898
@@ -42272,7 +42274,8 @@ F_TRAINER_FEMALE |
             {
 #line 16913
             .species = SPECIES_TOGEDEMARU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16913
+            .gender = TRAINER_MON_MALE,
 #line 16913
             .heldItem = ITEM_ASSAULT_VEST,
 #line 16916
@@ -42316,24 +42319,25 @@ F_TRAINER_FEMALE |
             {
 #line 16928
             .species = SPECIES_PERSIAN_ALOLA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16928
+            .gender = TRAINER_MON_MALE,
 #line 16928
             .heldItem = ITEM_ROOM_SERVICE,
 #line 16931
-            .ev = TRAINER_PARTY_EVS(252, 252, 4, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 160, 112, 0, 236, 0),
 #line 16933
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 0, 31, 31),
 #line 16929
             .ability = ABILITY_FUR_COAT,
 #line 16930
-            .lvl = 21,
+            .lvl = 23,
 #line 16932
-            .nature = NATURE_BRAVE,
+            .nature = NATURE_QUIET,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16934
                 MOVE_KNOCK_OFF,
-                MOVE_FEINT_ATTACK,
+                MOVE_SHADOW_BALL,
             },
             },
         },
@@ -42360,7 +42364,8 @@ F_TRAINER_FEMALE |
             {
 #line 16946
             .species = SPECIES_SLAKING,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16946
+            .gender = TRAINER_MON_MALE,
 #line 16946
             .heldItem = ITEM_FLAME_ORB,
 #line 16949
@@ -42428,7 +42433,8 @@ F_TRAINER_FEMALE |
             {
 #line 16970
             .species = SPECIES_KECLEON,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16970
+            .gender = TRAINER_MON_FEMALE,
 #line 16973
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 252, 0),
 #line 16975
@@ -42448,7 +42454,8 @@ F_TRAINER_FEMALE |
             {
 #line 16978
             .species = SPECIES_ZANGOOSE,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16978
+            .gender = TRAINER_MON_FEMALE,
 #line 16978
             .heldItem = ITEM_HM06,
 #line 16981
@@ -42493,7 +42500,8 @@ F_TRAINER_FEMALE |
             {
 #line 16994
             .species = SPECIES_KLEFKI,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16994
+            .gender = TRAINER_MON_MALE,
 #line 16997
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 252, 0),
 #line 16999
@@ -42515,7 +42523,8 @@ F_TRAINER_FEMALE |
             {
 #line 17004
             .species = SPECIES_SCORBUNNY,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17004
+            .gender = TRAINER_MON_FEMALE,
 #line 17004
             .heldItem = ITEM_SITRUS_BERRY,
 #line 17007
