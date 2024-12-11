@@ -478,9 +478,9 @@ static void CreateWildMon(u16 species, u8 level)
         u8 speedIv = 31; 
         u8 spAtkIv = 31; 
         u8 spDefIv = 31; 
-
-        // Hardy nature = 0, so: (personality % 25) == 0
-        u32 personality = (Random32() / 25) * 25;
+        u8 gender = 0;
+        u8 nature = 0;
+        // u32 personality = (Random32() / 25) * 25; // Hardy
 
         // s16 y;
         // s16 x;
@@ -492,32 +492,42 @@ static void CreateWildMon(u16 species, u8 level)
             species = SPECIES_SMEARGLE;
             level = 20;
             abilityNum = 1;
+            gender = MON_MALE;
+            nature = NATURE_BOLD;
             move1 = MOVE_SKETCH;
             defEv = 208;
             hpIv = 11;
             atkIv = 0;
             spAtkIv = 0;
             speedIv = 0;
-            personality = (Random32() / 25) * 25 + 5; // bold
+            // personality = (Random32() / 25) * 25 + 5; // bold
         }
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
         {
             species = SPECIES_SALAZZLE;
             level = 100;
             abilityNum = 0;
+            gender = MON_FEMALE;
+            nature = NATURE_IMPISH;
             move1 = MOVE_PROTECT;
             hpEv = 160;
             defEv = 252;
-            // atkEv = 96;
-            atkEv = 36;
+            atkEv = 96;
+            // personality = (Random32() / 25) * 25 + 8; // Impish
 
             heldItem = ITEM_TM10;
-            personality = (Random32() / 25) * 25 + 8; // Impish
-            
             if(FlagGet(FLAG_TM_10_STOLEN)){
                 heldItem = ITEM_NONE;
             }
         }
+
+        // set nature and gender
+        u32 personality;
+        do{
+            personality = Random32();
+        }
+        while (nature != GetNatureFromPersonality(personality)
+            || gender != GetGenderFromSpeciesAndPersonality(species, personality));
 
         // create new Pokémon
         ZeroMonData(&gEnemyParty[0]);
