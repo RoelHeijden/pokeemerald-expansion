@@ -286,7 +286,7 @@ script EscapeRoom_EventScript_FindHeartScale{
 script EscapeRoom_EventScript_GoodSmeargle_NPC{
     lockall
     faceplayer
-    if (flag(FLAG_OBTAINED_PERFECT_SMEARGLE)){
+    if (flag(FLAG_GARDEVOIR_TRADE_SUCCESS)){
         msgbox(SmeargleMessageCompleted)
         waitmessage
         releaseall
@@ -340,57 +340,7 @@ script EscapeRoom_EventScript_GoodSmeargle_NPC{
 
         // bad smeargle
         if(var(VAR_0x8001) == 0){
-            msgbox(SmeargleMessageBad, MSGBOX_YESNO)
-
-            // trade accepted
-            if (var(VAR_RESULT) == YES){
-
-                // if starter has fainted
-                partymonhasfainted
-                if (var(VAR_0x8004) == SPECIES_TOXICROAK){
-                    msgbox(SmeargleReleaseHealSecondMonMessage, MSGBOX_AUTOCLOSE)
-                    waitmessage
-                }
-                // if starter in box
-                elif(var(VAR_0x8000) == 1){
-                    msgbox(SmeargleReleaseGetSecondMonMessage, MSGBOX_AUTOCLOSE)
-                    waitmessage
-                }
-                // release smeargle
-                else{
-                    removemon(SPECIES_SMEARGLE)
-                    clearflag(FLAG_POKEMON_CAUGHT)
-                    clearflag(FLAG_GREAT_BALL_USED)
-                    
-                    // check flameorb and add dialogue
-                    setvar(VAR_TEMP_0, 0)
-                    checkitem(ITEM_FLAME_ORB) // remove from bag
-                    if(var(VAR_RESULT) == TRUE){
-                        setvar(VAR_TEMP_0, 1)
-                        removeitem(ITEM_FLAME_ORB)
-                    }
-                    checkpartyitem(0) // remove from pokemon
-                    if(var(VAR_0x8004) == ITEM_FLAME_ORB) {
-                        setvar(VAR_TEMP_0, 1)
-                        removepartyitem(0)
-                    }
-
-                    // extra dialogue if orb was taken.
-                    if(var(VAR_TEMP_0) == 1){
-                        msgbox(TakeFlameOrbMessage, MSGBOX_AUTOCLOSE)
-                        waitmessage
-                    }
-
-                    giveitem(ITEM_GREAT_BALL)
-                    msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
-                    waitmessage
-                }
-            }
-            // trade declined
-            else{
-                msgbox(SmeargleReleaseDeclinedMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
+            msgbox(SmeargleMessageBad)
         }
         releaseall
         end
@@ -426,7 +376,7 @@ script EscapeRoom_EventScript_IniitializeGardevoirTrade{
         msgbox(GardevoirObtainedMessage, MSGBOX_AUTOCLOSE)
         waitfanfare
         msgbox(TradeAcceptedMessage, MSGBOX_AUTOCLOSE)
-        setflag(FLAG_OBTAINED_PERFECT_SMEARGLE)
+        setflag(FLAG_GARDEVOIR_TRADE_SUCCESS)
     }
     else{
         msgbox(TradeDeclinedMessage)
@@ -948,12 +898,19 @@ script EscapeRoom_EventScript_HintsNPC{
 }
 
 script EscapeRoom_EventScript_AntiSoftlockGuy{
-    // initial message
-    msgbox(AntiSoftlockIntroMessage, MSGBOX_NPC)
+    faceplayer
+    lockall
 
-    // check smeargle caught
-        // check Gardevoir trade happened
-        // ACTION: release Smeargle
+    // if pokemon caught
+    if(flag(FLAG_POKEMON_CAUGHT)){
+        // if Gardevoir trade happened
+        if(flag(FLAG_GARDEVOIR_TRADE_SUCCESS) == FALSE){
+            // ACTION: release Smeargle
+            call(EscapeRoom_EventScript_UndoSmeargleCatch)
+            releaseall
+            end
+        }
+    }
 
     // check rare candy used (item gone and pokemon level 31 or 21)
         // check trainer Roel defeated
@@ -969,11 +926,75 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
         // if moves == 2:
             // check move == perish song and trainer Roel defeated
             // ACTION: replace move with Sketch
-        
+    
+    // if no potential softlocks:
+    msgbox(AntiSoftlockIntroMessage)
+    msgbox(AntiSoftlockNoActionMessage)
+    releaseall
 }
 
 script EscapeRoom_EventScript_UndoSmeargleCatch{
-    
+    msgbox(AskReleaseSmeargleMessage, MSGBOX_YESNO)
+
+    // release accepted
+    if (var(VAR_RESULT) == YES){
+
+        // if smeargle in box
+        checkpartymon(SPECIES_SMEARGLE)
+        if(var(VAR_RESULT) == PARTY_SIZE){
+            msgbox(SmeargleReleaseBringSmeargleMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+            releaseall
+            end
+        }
+
+        // if starter has fainted
+        partymonhasfainted
+        if (var(VAR_0x8004) == SPECIES_TOXICROAK){
+            msgbox(SmeargleReleaseHealSecondMonMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // if starter in box
+        getpartysize
+        if(var(VAR_RESULT) < 2){ 
+            msgbox(SmeargleReleaseGetSecondMonMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // release smeargle
+        else{
+            removemon(SPECIES_SMEARGLE)
+            clearflag(FLAG_POKEMON_CAUGHT)
+            clearflag(FLAG_GREAT_BALL_USED)
+            
+            // check flameorb and add dialogue
+            setvar(VAR_TEMP_0, 0)
+            checkitem(ITEM_FLAME_ORB) // remove from bag
+            if(var(VAR_RESULT) == TRUE){
+                setvar(VAR_TEMP_0, 1)
+                removeitem(ITEM_FLAME_ORB)
+            }
+            checkpartyitem(0) // remove from pokemon
+            if(var(VAR_0x8004) == ITEM_FLAME_ORB) {
+                setvar(VAR_TEMP_0, 1)
+                removepartyitem(0)
+            }
+
+            // extra dialogue if orb was taken.
+            if(var(VAR_TEMP_0) == 1){
+                msgbox(TakeFlameOrbMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+
+            giveitem(ITEM_GREAT_BALL)
+            msgbox(ReleaseSmeargleMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    // trade declined
+    else{
+        msgbox(SmeargleReleaseDeclinedMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 }
 
 script EscapeRoom_EventScript_UndoRareCandy{
@@ -1111,9 +1132,8 @@ text SmeargleMessageInitial{
 text SmeargleMessageBad{
     "Ew no, that SMEARGLE looks horrible.\n"
     "I asked for the perfect SMEARGLE.\p"
-    "To avoid getting softlocked, should I\n"
-    "release this SMEARGLE and give back\l"
-    "your GREAT BALL?"
+    "You should probably have a chat with\n"
+    "the anti-softlock guy."
 }
 
 text TakeFlameOrbMessage{
@@ -1123,6 +1143,10 @@ text TakeFlameOrbMessage{
 
 text SmeargleReleaseHealSecondMonMessage{
     format("You might want to heal your POKéMON first")
+}
+
+text SmeargleReleaseBringSmeargleMessage{
+    format("Please come back with the SMEARGLE in your party.")
 }
 
 text SmeargleReleaseGetSecondMonMessage{
@@ -1429,6 +1453,22 @@ text HintsIntroMessage{
 }
 
 text AntiSoftlockIntroMessage{
-    "Softlock? More like softcock xdxd.\p"
-    "(this script is not implemented yet)"
+    "Hi, I'm your anti-softlock guy.\p"
+    "I can undo certain actions to get you\n"
+    "out of a potential softlock.\p"
+    "However, I will NOT specify whether you\n"
+    "are actually softlocked or not."
+}
+
+text AntiSoftlockNoActionMessage{
+    "There's nothing I can do for you right\n"
+    "now."
+}
+
+text AskReleaseSmeargleMessage{
+    "Hi, I'm your anti-softlock guy.\p"
+    "Catching a 'wrong' SMEARGLE would have\n"
+    "you softlocked.\p"
+    "Should I release this SMEARGLE and give\n"
+    "back your GREAT BALL?"
 }

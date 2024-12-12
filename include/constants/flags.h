@@ -45,7 +45,7 @@
 #define FLAG_RARE_CANDY_OBTAINED        0x20
 #define FLAG_NUGGET2_OBTAINED           0x21
 #define FLAG_NUGGET3_OBTAINED           0x22
-#define FLAG_OBTAINED_PERFECT_SMEARGLE  0x23 
+#define FLAG_GARDEVOIR_TRADE_SUCCESS    0x23 
 #define FLAG_DOUBLE_BATTLE1             0x24
 #define FLAG_SINGLE_BATTLE1             0x25
 #define FLAG_SINGLE_BATTLE2             0x26 
