@@ -108,7 +108,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 15,
-      "y": 23,
+      "y": 24,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -133,8 +133,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 16,
-      "y": 20,
+      "x": 17,
+      "y": 21,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -172,8 +172,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 22,
-      "y": 24,
+      "x": 24,
+      "y": 23,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -185,7 +185,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 18,
+      "x": 19,
       "y": 24,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -276,8 +276,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 24,
-      "y": 15,
+      "x": 36,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -302,8 +302,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 36,
-      "y": 10,
+      "x": 24,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -363,7 +363,7 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 23,
+      "x": 24,
       "y": 19,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -379,99 +379,131 @@
     },
     {
       "type": "sign",
-      "x": 31,
-      "y": 6,
+      "x": 30,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_Question1Sign"
     },
     {
       "type": "sign",
-      "x": 32,
-      "y": 6,
+      "x": 31,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_Question2Sign"
     },
     {
       "type": "sign",
-      "x": 33,
-      "y": 6,
+      "x": 32,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_Question3Sign"
     },
     {
       "type": "sign",
-      "x": 29,
-      "y": 8,
+      "x": 31,
+      "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_FFTSign"
+      "script": "EscapeRoom_EventScript_FTTFSign"
     },
     {
       "type": "sign",
-      "x": 36,
-      "y": 7,
+      "x": 33,
+      "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_Answer9"
+      "script": "EscapeRoom_EventScript_Question4Sign"
     },
     {
       "type": "sign",
-      "x": 32,
-      "y": 9,
+      "x": 35,
+      "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_FTFSign"
+      "script": "EscapeRoom_EventScript_FFTFSign"
     },
     {
       "type": "sign",
-      "x": 26,
-      "y": 9,
+      "x": 37,
+      "y": 14,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_TTFSign"
+      "script": "EscapeRoom_EventScript_FFFTSign"
     },
     {
       "type": "sign",
-      "x": 25,
+      "x": 38,
       "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_TFFSign"
+      "script": "EscapeRoom_EventScript_TTTFSign"
+    },
+    {
+      "type": "sign",
+      "x": 29,
+      "y": 7,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_TTFTSign"
+    },
+    {
+      "type": "sign",
+      "x": 27,
+      "y": 9,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_TTFFSign"
+    },
+    {
+      "type": "sign",
+      "x": 33,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_TFTTSign"
     },
     {
       "type": "sign",
       "x": 30,
-      "y": 11,
+      "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_TFTSign"
+      "script": "EscapeRoom_EventScript_FFTTSign"
     },
     {
       "type": "sign",
-      "x": 35,
-      "y": 11,
+      "x": 36,
+      "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_TTTSign"
+      "script": "EscapeRoom_EventScript_FTTTSign"
     },
     {
       "type": "sign",
       "x": 32,
-      "y": 13,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_FTTSign"
+      "script": "EscapeRoom_EventScript_FFFFSign"
     },
     {
       "type": "sign",
-      "x": 35,
-      "y": 14,
+      "x": 34,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_FFFSign"
+      "script": "EscapeRoom_EventScript_TFFFSign"
+    },
+    {
+      "type": "sign",
+      "x": 39,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_TTTTSign"
     }
   ]
 }

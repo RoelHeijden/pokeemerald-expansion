@@ -856,67 +856,136 @@ script EscapeRoom_EventScript_Question3Sign{
     releaseall
 }
 
-script EscapeRoom_EventScript_TTTSign{
+script EscapeRoom_EventScript_Question4Sign{
     lockall
-    msgbox("TTT")
+    msgbox(Question4Message)
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_TTFSign{
+script EscapeRoom_EventScript_FFTFSign{
     lockall
-    msgbox("TTF")
+    msgbox("FFTF")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_TFTSign{
+script EscapeRoom_EventScript_TTTFSign{
     lockall
-    msgbox("TFT")
+    msgbox("TTTF")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_TFFSign{
+script EscapeRoom_EventScript_TTFFSign{
     lockall
-    msgbox("TFF")
+    msgbox("TTFF")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_FTTSign{
+script EscapeRoom_EventScript_FTTFSign{
     lockall
-    msgbox("FTT")
+    msgbox("FTTF")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_FTFSign{
+script EscapeRoom_EventScript_TFFFSign{
     lockall
-    msgbox("FTF")
+    msgbox("TFFF")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_FFTSign{
+script EscapeRoom_EventScript_FFFFSign{
     lockall
-    msgbox("FFT")
+    msgbox("FFFF")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_FFFSign{
+script EscapeRoom_EventScript_TTTTSign{
     lockall
-    msgbox("FFF")
+    msgbox("TTTT")
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_Answer9{
+script EscapeRoom_EventScript_FTTTSign{
     lockall
-    msgbox(alternativeAnswerMessage)
+    msgbox("FTTT")
     waitmessage
     releaseall
+}
+
+script EscapeRoom_EventScript_TFTTSign{
+    lockall
+    msgbox("TFTT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_TTFTSign{
+    lockall
+    msgbox("TTFT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FFTTSign{
+    lockall
+    msgbox("FFTT")
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FFFTSign{
+    lockall
+    msgbox("FFFT")
+    waitmessage
+    releaseall
+}
+
+
+script EscapeRoom_EventScript_AntiSoftlockGuy{
+    // initial message
+
+    // check smeargle caught
+        // check Gardevoir trade happened
+        // ACTION: release Smeargle
+
+    // check rare candy used (item gone and pokemon level 31 or 21)
+        // check trainer Roel defeated
+        // ACTION: undo level
+        
+    // if smeargle moves does not contain sketch
+        // check n smeargle moves
+
+        // if moves == 1:
+            // check move == Protect and trainer DS. Abel defeated
+            // ACTION: replace move with Sketch
+
+        // if moves == 2:
+            // check move == perish song and trainer Roel defeated
+            // ACTION: replace move with Sketch
+        
+}
+
+script EscapeRoom_EventScript_UndoSmeargleCatch{
+    
+}
+
+script EscapeRoom_EventScript_UndoRareCandy{
+    
+}
+
+script EscapeRoom_EventScript_UndoSketch1{
+    
+}
+
+script EscapeRoom_EventScript_UndoSketch2{
+    
 }
 
 
@@ -1011,7 +1080,8 @@ text Double1Puzzle_Intro{
     "We know exactly what you'll do.\p"
     "Some think it's cheating.\n"
     "We call it wisdom.\p"
-    "Do you have the skill to find a way?"
+    "Only one path leads to victory.\n"
+    "Can you figure it out?"
 }
 
 text Double1Puzzle_Outro{
@@ -1261,8 +1331,10 @@ text icePuzzleHintNPCmessage{
 }
 
 text StopWinningNPCmessage{
-    "Aren't you tired of winning?\n"
-    "Try giving up instead!"
+    // "Aren't you tired of winning?\n"
+    // "Try giving up instead!"
+    "Who says things have to be completed?\n"
+    "Just give up!"
 }
 
 text NewGreatBallMessage{
@@ -1343,17 +1415,19 @@ text TormentHintNPCMessage{
 }
 
 text Question1Message{
-    "The Mach Bike cost 79.999."
+    "1. Exacly one of 2 and 4 is false."
 }
 
 text Question2Message{
-    "Togedemaru is holding a Choice Scarf."
+    "2. Both 1 and 3 are true."
 }
 
 text Question3Message{
-    "Cursola is level 34."
+    "3. At least two are false"
 }
 
-text alternativeAnswerMessage{
-    "This sucks."
+text Question4Message{
+    "4. The Mach Bike cost 79.999."
 }
+
+
