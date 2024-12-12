@@ -1219,6 +1219,20 @@
 	.byte 0xef
 	.endm
 
+	@ Checks if at least one Pokemon in the player's party is the specified level. If so, VAR_RESULT is set to the
+	@ (zero-indexed) slot number of the first Pokemon that has the level. If not, VAR_RESULT is set to PARTY_SIZE.
+	@ VAR_0x8004 is also set to this Pokemon's species.
+	.macro checkpartymonlevel level:req
+	.byte 0xf0
+	.2byte \level
+	.endm
+
+	@ Reduces the level of the specified species by 1.
+	@ VAR_RESULT is set to the partyslot, otherwise: PARTY_SIZE if no succesful.
+	.macro levelDownMon species:req
+	.byte 0xf1
+	.2byte \species
+	.endm
 
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).

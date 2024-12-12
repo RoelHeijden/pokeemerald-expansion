@@ -912,9 +912,27 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
         }
     }
 
-    // check rare candy used (item gone and pokemon level 31 or 21)
-        // check trainer Roel defeated
-        // ACTION: undo level
+    // if rare candy used
+    if(flag(FLAG_RARE_CANDY_USED) == TRUE){
+        setvar(VAR_TEMP_0, 0)
+
+        // check Smeargle
+        checkpartymove(MOVE_SKETCH)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_TEMP_0, 1) // Smeargle got rare candy and still has Sketch
+        }
+        // check Gardevoir
+        checkpartymonlevel(31)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_TEMP_0, 2) // Gardevoir got rare candy
+        }
+        // ACTION: undo Rare Candy
+        if(var(VAR_TEMP_0) == 1 || var(VAR_TEMP_0) == 2){
+            call(EscapeRoom_EventScript_UndoRareCandy)
+            releaseall
+            end
+        }
+    }
         
     // if smeargle moves does not contain sketch
         // check n smeargle moves
@@ -992,13 +1010,32 @@ script EscapeRoom_EventScript_UndoSmeargleCatch{
     }
     // trade declined
     else{
-        msgbox(SmeargleReleaseDeclinedMessage, MSGBOX_AUTOCLOSE)
+        msgbox(AntiSoftlockDeclinedMessage, MSGBOX_AUTOCLOSE)
         waitmessage
     }
 }
 
 script EscapeRoom_EventScript_UndoRareCandy{
-    
+    msgbox(UndoRareCandyMessage, MSGBOX_YESNO)
+
+    // undo accepted
+    if (var(VAR_RESULT) == YES){
+        if(var(VAR_TEMP_0) == 1){
+            levelDownMon(SPECIES_SMEARGLE)
+        }
+        elif(var(VAR_TEMP_0) == 2){
+            levelDownMon(SPECIES_GARDEVOIR)
+        }
+        clearflag(FLAG_RARE_CANDY_USED)
+        giveitem(ITEM_RARE_CANDY)
+        // msgbox(AntiSoftlockUndidCandyMessage, MSGBOX_AUTOCLOSE)
+        // waitmessage
+    }
+    // undo declined
+    else{
+        msgbox(AntiSoftlockDeclinedMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 }
 
 script EscapeRoom_EventScript_UndoSketch1{
@@ -1041,9 +1078,9 @@ text StartMessage{
     "5) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
 
-    "6) The game has safeguards to prevent\n"
-    "some softlocks, but it's still possible\l"
-    "so using save states is recommended.\p"
+    "6) You won't get softlocked unless you\n"
+    "toss away items, release Pokémon, or\l"
+    "REALLY mess up the strength puzzle.\p"
 
     "7) Try to avoid using speed up.\n"
     "There are many clues, like NPC dialogue,\l"
@@ -1072,9 +1109,9 @@ text SignMessage1{
     "5) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
 
-    "6) The game has safeguards to prevent\n"
-    "some softlocks, but it's still possible\l"
-    "so using save states is recommended.\p"
+    "6) You won't get softlocked unless you\n"
+    "toss away items, release Pokémon, or\l"
+    "REALLY mess up the strength puzzle.\p"
 
     "7) Try to avoid using speed up.\n"
     "There are many clues, like NPC dialogue,\l"
@@ -1155,10 +1192,6 @@ text SmeargleReleaseGetSecondMonMessage{
 
 text ReleaseSmeargleMessage{
     "Bye-bye Smeargle."
-}
-
-text SmeargleReleaseDeclinedMessage{
-    "Okay." 
 }
 
 text SmeargleMessagePerfect{
@@ -1453,7 +1486,7 @@ text HintsIntroMessage{
 }
 
 text AntiSoftlockIntroMessage{
-    "Hi, I'm your anti-softlock guy.\p"
+    "Hi, I'm the anti-softlock guy.\p"
     "I can undo certain actions to get you\n"
     "out of a potential softlock.\p"
     "However, I will NOT specify whether you\n"
@@ -1465,10 +1498,26 @@ text AntiSoftlockNoActionMessage{
     "now."
 }
 
+text AntiSoftlockDeclinedMessage{
+    "Alright." 
+}
+
+text AntiSoftlockUndidCandyMessage{
+    "There you go!" 
+}
+
 text AskReleaseSmeargleMessage{
-    "Hi, I'm your anti-softlock guy.\p"
-    "Catching a 'wrong' SMEARGLE would have\n"
+    "Hi, I'm the anti-softlock guy.\p"
+    "Catching a 'wrong' SMEARGLE would leave\n"
     "you softlocked.\p"
     "Should I release this SMEARGLE and give\n"
     "back your GREAT BALL?"
+}
+
+text UndoRareCandyMessage{
+    "Hi, I'm the anti-softlock guy.\p"
+    "Giving the RARE CANDY to the wrong\n"
+    "POKéMON would leave you softlocked.\p"
+    "Should I undo the level-up and give back\n"
+    "your RARE CANDY?"
 }

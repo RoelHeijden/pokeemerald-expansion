@@ -74,6 +74,10 @@ extern const u8 *gStdScripts_End[];
 static void CloseBrailleWindow(void);
 static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count);
 
+// ADDED
+static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom);
+
+
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
 void * const gNullScriptPtr = NULL;
@@ -2149,6 +2153,128 @@ bool8 ScrCmd_setparty1hp(struct ScriptContext *ctx)
     }
     return FALSE;
 }
+
+// ADDED
+bool8 ScrCmd_checkpartymonlevel(struct ScriptContext *ctx)
+{
+    u8 i;
+    u16 level = ScriptReadHalfword(ctx);
+
+    gSpecialVar_Result = PARTY_SIZE;  
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+        if (!species)
+            break;  
+        if (!GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG) && GetMonData(&gPlayerParty[i], MON_DATA_LEVEL, NULL) == level)
+        {
+            gSpecialVar_Result = i; 
+            gSpecialVar_0x8004 = species; 
+            break;
+        }
+    }
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_levelDownMon(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);  
+
+    gSpecialVar_Result = PARTY_SIZE;  
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
+        u8 currentLevel = GetMonData(mon, MON_DATA_LEVEL, NULL);
+
+        if (currentSpecies == SPECIES_NONE || currentSpecies == SPECIES_EGG) // skip invalid entries
+            continue;
+
+        if (currentSpecies == species)
+        {
+            if (currentLevel > 1)
+            {
+                u8 targetLevel = currentLevel - 1;
+                u8 growthRate = gSpeciesInfo[currentSpecies].growthRate;
+                u32 newExp = gExperienceTables[growthRate][targetLevel];
+
+                // set new exp amount
+                SetMonData(mon, MON_DATA_EXP, &newExp);
+
+                // recalculate stats for the Pokémon
+                CalculateMonStats(mon);
+
+                // // check if the Pokémon learned any move at the undone level
+                // const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+                // u16 moveLearned = MOVE_NONE;
+                // for (u8 j = 0; learnset[j].level != LEVEL_UP_MOVE_END; j++)
+                // {
+                //     if (learnset[j].level == currentLevel)
+                //         moveLearned = learnset[j].move; 
+                // }
+
+                // remove move Sketch
+                for (u8 j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    u16 move = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
+                    if (move == MOVE_SKETCH)
+                    {
+                        // remove the move
+                        SetMonMoveSlot(mon, MOVE_NONE, j);
+                        RemoveMonPPBonus(mon, j);
+
+                        // shift the remaining moves
+                        for (u8 k = j; k < MAX_MON_MOVES - 1; k++)
+                            ShiftMoveSlot(mon, k, k + 1);
+                        break;
+                    }
+                }
+
+                // set result to the party slot of the Pokémon
+                gSpecialVar_Result = i;
+            }
+            else
+            {
+                gSpecialVar_Result = PARTY_SIZE;
+            }
+            break;
+        }
+    }
+    return FALSE; 
+}
+
+// ADDED
+static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
+{
+    u16 moveFrom = GetMonData(mon, MON_DATA_MOVE1 + slotFrom, NULL);
+    u16 moveTo = GetMonData(mon, MON_DATA_MOVE1 + slotTo, NULL);
+    u8 ppFrom = GetMonData(mon, MON_DATA_PP1 + slotFrom, NULL);
+    u8 ppTo = GetMonData(mon, MON_DATA_PP1 + slotTo, NULL);
+    u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    
+    // shift PP bonuses
+    u8 ppBonusMaskFrom = gPPUpGetMask[slotFrom];
+    u8 ppBonusMaskTo = gPPUpGetMask[slotTo];
+    u8 ppBonusFrom = (ppBonuses & ppBonusMaskFrom) >> (slotFrom * 2);
+    u8 ppBonusTo = (ppBonuses & ppBonusMaskTo) >> (slotTo * 2);
+
+    ppBonuses &= ~ppBonusMaskTo;
+    ppBonuses &= ~ppBonusMaskFrom;
+    ppBonuses |= (ppBonusFrom << (slotTo * 2)) + (ppBonusTo << (slotFrom * 2));
+
+    // set new move and PP data
+    SetMonData(mon, MON_DATA_MOVE1 + slotTo, &moveFrom);
+    SetMonData(mon, MON_DATA_MOVE1 + slotFrom, &moveTo);
+    SetMonData(mon, MON_DATA_PP1 + slotTo, &ppFrom);
+    SetMonData(mon, MON_DATA_PP1 + slotFrom, &ppTo);
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
+}
+
+
+
+
 
 
 

@@ -64,7 +64,7 @@
 #define FLAG_HM06_STEAL_SUCCES          0x33 
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT 0x34
 #define FLAG_SINGLE_BATTLE4             0x35 
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
+#define FLAG_RARE_CANDY_USED            0x36 
 #define FLAG_UNUSED_0x037    0x37 // Unused Flag
 #define FLAG_UNUSED_0x038    0x38 // Unused Flag
 #define FLAG_UNUSED_0x039    0x39 // Unused Flag

@@ -240,7 +240,9 @@ gScriptCmdTable::
 	.4byte ScrCmd_replacemovebox		 			@ 0xed
 	.4byte ScrCmd_checkentirepartyfainted		 	@ 0xee
 	.4byte ScrCmd_setparty1hp		 			    @ 0xef
-
+	.4byte ScrCmd_checkpartymonlevel		 		@ 0xf0
+	.4byte ScrCmd_levelDownMon						@ 0xf1
 	
+
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop
