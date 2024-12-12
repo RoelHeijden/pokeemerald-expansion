@@ -808,10 +808,6 @@ script EscapeRoom_EventScript_FindToxicOrb{
     releaseall
 }
 
-script EscapeRoom_EventScript_HintsNPC{
-    msgbox(HintsIntroMessage, MSGBOX_NPC)
-}
-
 script EscapeRoom_EventScript_PressStartSign{
     lockall
     msgbox(PressStartSignMessage)
@@ -947,9 +943,13 @@ script EscapeRoom_EventScript_FFFTSign{
     releaseall
 }
 
+script EscapeRoom_EventScript_HintsNPC{
+    msgbox(HintsIntroMessage, MSGBOX_NPC)
+}
 
 script EscapeRoom_EventScript_AntiSoftlockGuy{
     // initial message
+    msgbox(AntiSoftlockIntroMessage, MSGBOX_NPC)
 
     // check smeargle caught
         // check Gardevoir trade happened
@@ -1303,14 +1303,14 @@ text NuggetNPCmessage{
 }
 
 text misdirectionHintMessage{
-    "I love a good misdirection!"
+    // "I love a good misdirection!"
+    "Please get us out of here..."
 }
 
 text SalazzleCatchingHint{
     "Everytime I've tried to catch SALAZZLE\n"
     "it managed to escape.\p"
-    "It's like it can't be done." 
-    // "That's some ability, huh?\n"
+    "It's like it can't be done."
 }
 
 text someoneLockedUsUpNPCmessage{
@@ -1331,8 +1331,6 @@ text icePuzzleHintNPCmessage{
 }
 
 text StopWinningNPCmessage{
-    // "Aren't you tired of winning?\n"
-    // "Try giving up instead!"
     "Who says things have to be completed?\n"
     "Just give up!"
 }
@@ -1353,12 +1351,6 @@ text NewPechaBerryMessage{
 
 text ThanksMomMessage{
     "How did that get there?"
-}
-
-text HintsIntroMessage{
-    "You can come to me for hints,\n"
-    "but not yet because Roel still has to\l"
-    "implement my script."
 }
 
 text PressStartSignMessage{
@@ -1388,7 +1380,7 @@ text Single2Puzzle_PostBattle{
 
 text Single1Puzzle_PostBattle{ 
     "Remember turning your POKéMON into a\n"
-    "GHOST type?\p"
+    "ghost type?\p"
     "That was fun."
 }
 
@@ -1409,25 +1401,34 @@ text BerryTreeHintNPCMessage{
 }
 
 text TormentHintNPCMessage{
-    "I used to get tormented by my brothers,\n"
-    "but after a while you just accept it and\l"
-    "move on."
+    "I used to get tormented by my brothers.\p"
+    "I tried to avoid it at first, but after a\n"
+    "while you just accept it and play along."
 }
 
 text Question1Message{
-    "1. Exacly one of 2 and 4 is false."
+    format("1. Exacly one of statement 2 and 4 is false.")
 }
 
 text Question2Message{
-    "2. Both 1 and 3 are true."
+    "2. Both statements 1 and 3 are true."
 }
 
 text Question3Message{
-    "3. At least two are false"
+    "3. At least two statements are false."
 }
 
 text Question4Message{
-    "4. The Mach Bike cost 79.999."
+    format("4. GARDEVOIR needs DISABLE in the battle against C. Trish.")
 }
 
+text HintsIntroMessage{
+    "You can come to me for hints,\n"
+    "but not yet because Roel still has to\l"
+    "implement my script."
+}
 
+text AntiSoftlockIntroMessage{
+    "Softlock? More like softcock xdxd.\p"
+    "(this script is not implemented yet)"
+}
