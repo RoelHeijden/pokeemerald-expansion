@@ -242,7 +242,9 @@ gScriptCmdTable::
 	.4byte ScrCmd_setparty1hp		 			    @ 0xef
 	.4byte ScrCmd_checkpartymonlevel		 		@ 0xf0
 	.4byte ScrCmd_levelDownMon						@ 0xf1
-	
+	.4byte ScrCmd_checkpartymonmoves				@ 0xf2
+	.4byte ScrCmd_getpartymonmove					@ 0xf3
+
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

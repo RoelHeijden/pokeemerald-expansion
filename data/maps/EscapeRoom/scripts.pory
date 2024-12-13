@@ -388,7 +388,7 @@ script EscapeRoom_EventScript_SingleBattle1{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE1, 
         Single1Puzzle_Intro, 
         Single1Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Single1PostMatch,
     )
     msgbox(Single1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -400,7 +400,7 @@ script EscapeRoom_EventScript_SingleBattle2{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE2, 
         Single2Puzzle_Intro, 
         Single2Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Single2PostMatch,
     )
     msgbox(Single2Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -413,7 +413,7 @@ script EscapeRoom_EventScript_SingleBattle3{
         TRAINER_MY_CUSTOM_SINGLE_BATTLE3, 
         Single3Puzzle_Intro, 
         Single3Puzzle_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Single3PostMatch,
     )
     call(EscapeRoom_EventScript_TeleportBackOverLedge)
     end
@@ -427,6 +427,23 @@ script EscapeRoom_EventScript_SingleBattle4{
         Single4OutroMessage, 
         event_script=EscapeRoom_EventScript_SetSingle4Rematch,
     )
+}
+
+script EscapeRoom_EventScript_Single1PostMatch{
+    setflag(FLAG_ROEL_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Single2PostMatch{
+    setflag(FLAG_DS_ABEL_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Single3PostMatch{
+    checkentirepartyfainted
+    if (var(VAR_RESULT) == TRUE){
+        call(EscapeRoom_EventScript_PostMatchHeal)
+    }
 }
 
 script EscapeRoom_EventScript_SetSingle4Rematch{
@@ -616,7 +633,7 @@ script EscapeRoom_EventScript_HeartscaleTutor{
                 replacemove(VAR_TEMP_0, VAR_0x800A, VAR_TEMP_1)
 
                 // learn new move
-                copyvar(VAR_0x8004, VAR_TEMP_0) // set pokemon slot i VAR_0x8004 for TeachMoveRelearnerMove script
+                copyvar(VAR_0x8004, VAR_TEMP_0) // set pokemon slot in VAR_0x8004 for TeachMoveRelearnerMove script
                 special(TeachMoveRelearnerMove)
                 waitstate
                 lockall
@@ -901,17 +918,18 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     faceplayer
     lockall
 
+    // SMEARGLE RELEASE
     // if pokemon caught
     if(flag(FLAG_POKEMON_CAUGHT)){
-        // if Gardevoir trade happened
+        // if Gardevoir trade has not happened
         if(flag(FLAG_GARDEVOIR_TRADE_SUCCESS) == FALSE){
-            // ACTION: release Smeargle
             call(EscapeRoom_EventScript_UndoSmeargleCatch)
             releaseall
             end
         }
     }
 
+    // RARE CANDY UNDO
     // if rare candy used
     if(flag(FLAG_RARE_CANDY_USED) == TRUE){
         setvar(VAR_TEMP_0, 0)
@@ -926,25 +944,48 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
         if(var(VAR_RESULT) != PARTY_SIZE){
             setvar(VAR_TEMP_0, 2) // Gardevoir got rare candy
         }
-        // ACTION: undo Rare Candy
+
         if(var(VAR_TEMP_0) == 1 || var(VAR_TEMP_0) == 2){
             call(EscapeRoom_EventScript_UndoRareCandy)
             releaseall
             end
         }
     }
-        
-    // if smeargle moves does not contain sketch
-        // check n smeargle moves
-
-        // if moves == 1:
-            // check move == Protect and trainer DS. Abel defeated
-            // ACTION: replace move with Sketch
-
-        // if moves == 2:
-            // check move == perish song and trainer Roel defeated
-            // ACTION: replace move with Sketch
     
+    // SKETCH REVERT
+    // if smeargle in party and game is post-Gardy trade
+    checkpartymon(SPECIES_SMEARGLE)
+    if(var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_GARDEVOIR_TRADE_SUCCESS) == TRUE){
+        copyvar(VAR_TEMP_0, VAR_RESULT) // store smeargle slot
+
+        // if smeargle does not have Sketch
+        checkpartymove(MOVE_SKETCH)
+        if(var(VAR_RESULT) == PARTY_SIZE){
+
+            // moves == 1
+            checkpartymonmoves(VAR_TEMP_0)
+            if(var(VAR_RESULT) == 1){ 
+
+                // check if DS. Abel defeated
+                if (flag(FLAG_DS_ABEL_DEFEATED) == FALSE){
+                    call(EscapeRoom_EventScript_UndoSketch1)
+                    releaseall
+                    end
+                }
+            }
+            // moves == 2
+            elif(var(VAR_RESULT) == 2){ 
+
+                // check if Roel defeated
+                if (flag(FLAG_ROEL_DEFEATED) == FALSE){
+                    call(EscapeRoom_EventScript_UndoSketch2)
+                    releaseall
+                    end
+                }
+            }
+        }
+    }
+
     // if no potential softlocks:
     msgbox(AntiSoftlockIntroMessage)
     msgbox(AntiSoftlockNoActionMessage)
@@ -1028,8 +1069,6 @@ script EscapeRoom_EventScript_UndoRareCandy{
         }
         clearflag(FLAG_RARE_CANDY_USED)
         giveitem(ITEM_RARE_CANDY)
-        // msgbox(AntiSoftlockUndidCandyMessage, MSGBOX_AUTOCLOSE)
-        // waitmessage
     }
     // undo declined
     else{
@@ -1039,11 +1078,58 @@ script EscapeRoom_EventScript_UndoRareCandy{
 }
 
 script EscapeRoom_EventScript_UndoSketch1{
-    
+    msgbox(UndoSketchMessage, MSGBOX_YESNO)
+
+    // revert Sketch
+    if (var(VAR_RESULT) == YES){
+        setvar(VAR_TEMP_1, 0)  // moveslot
+        getpartymonmove(VAR_TEMP_0, VAR_TEMP_1)
+
+        setvar(VAR_TEMP_2, MOVE_SKETCH)
+        replacemove(VAR_TEMP_0, VAR_RESULT, VAR_TEMP_2)
+
+        // msgbox(SmeargleForgotMove, MSGBOX_AUTOCLOSE)
+        // waitmessage
+        playfanfare(MUS_LEVEL_UP)
+        msgbox(SmeargleLearnedSketch)
+        waitfanfare
+    }
+    // undo declined
+    else{
+        msgbox(AntiSoftlockDeclinedMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 }
 
 script EscapeRoom_EventScript_UndoSketch2{
-    
+    msgbox(UndoSketchMessage, MSGBOX_YESNO)
+
+    // revert Sketch
+    if (var(VAR_RESULT) == YES){
+
+        setvar(VAR_TEMP_1, 0)  // moveslot
+        getpartymonmove(VAR_TEMP_0, VAR_TEMP_1)
+
+        // check other moveslot if move is Protect
+        if (var(VAR_RESULT) == MOVE_PROTECT){ 
+            setvar(VAR_TEMP_1, 1)
+            getpartymonmove(VAR_TEMP_0, VAR_TEMP_1)
+        }
+
+        setvar(VAR_TEMP_2, MOVE_SKETCH)
+        replacemove(VAR_TEMP_0, VAR_RESULT, VAR_TEMP_2)
+
+        // msgbox(SmeargleForgotMove, MSGBOX_AUTOCLOSE)
+        // waitmessage
+        playfanfare(MUS_LEVEL_UP)
+        msgbox(SmeargleLearnedSketch)
+        waitfanfare
+    }
+    // undo declined
+    else{
+        msgbox(AntiSoftlockDeclinedMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 }
 
 
@@ -1487,8 +1573,8 @@ text HintsIntroMessage{
 
 text AntiSoftlockIntroMessage{
     "Hi, I'm the anti-softlock guy.\p"
-    "I can undo certain actions to get you\n"
-    "out of a potential softlock.\p"
+    "I can roll back actions that have the\n"
+    "possibility to get you softlocked.\p"
     "However, I will NOT specify whether you\n"
     "are actually softlocked or not."
 }
@@ -1502,13 +1588,9 @@ text AntiSoftlockDeclinedMessage{
     "Alright." 
 }
 
-text AntiSoftlockUndidCandyMessage{
-    "There you go!" 
-}
-
 text AskReleaseSmeargleMessage{
     "Hi, I'm the anti-softlock guy.\p"
-    "Catching a 'wrong' SMEARGLE would leave\n"
+    "Catching a 'wrong' SMEARGLE could leave\n"
     "you softlocked.\p"
     "Should I release this SMEARGLE and give\n"
     "back your GREAT BALL?"
@@ -1517,7 +1599,22 @@ text AskReleaseSmeargleMessage{
 text UndoRareCandyMessage{
     "Hi, I'm the anti-softlock guy.\p"
     "Giving the RARE CANDY to the wrong\n"
-    "POKéMON would leave you softlocked.\p"
+    "POKéMON could leave you softlocked.\p"
     "Should I undo the level-up and give back\n"
     "your RARE CANDY?"
+}
+
+text UndoSketchMessage{
+    "Hi, I'm the anti-softlock guy.\p"
+    "Sketching the wrong move with SMEARGLE\n"
+    "could leave you softlocked.\p"
+    "Should I revert your latest Sketch?"
+}
+
+text SmeargleForgotMove{
+    "Smeargle forgot its latest move..."
+}
+
+text SmeargleLearnedSketch{
+    "Smeargle learned Sketch!"
 }

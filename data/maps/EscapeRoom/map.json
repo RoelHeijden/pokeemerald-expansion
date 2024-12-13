@@ -132,16 +132,16 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_LUCY",
-      "x": 17,
-      "y": 21,
+      "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
+      "x": 18,
+      "y": 24,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_misdirectionHintNPC",
+      "script": "EscapeRoom_EventScript_PerishExplain_NPC",
       "flag": "0"
     },
     {
@@ -185,8 +185,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
-      "x": 18,
-      "y": 24,
+      "x": 17,
+      "y": 21,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,

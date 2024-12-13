@@ -1234,6 +1234,24 @@
 	.2byte \species
 	.endm
 
+	@ Checks how many moves a pokemon has learned given a party slot.
+	@ VAR_RESULT is set to the amount of moves.
+	.macro checkpartymonmoves slot:req
+    .byte 0xf2
+    .2byte \slot
+	.endm
+
+	@ takes vars as inputs
+	@ Get the move in a specified move slot for a Pokémon in the party.
+    @ VAR_RESULT is set to the move ID in the specified move slot. MOVE_NONE if invalid or empty.
+    .macro getpartymonmove partyindex:req, moveslot:req
+    .byte 0xf3
+    .2byte \partyindex
+    .2byte \moveslot
+    .endm
+
+
+
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
 	@ If given anything else it will output it directly.

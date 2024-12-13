@@ -2272,11 +2272,68 @@ static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
 }
 
+// ADDED
+bool8 ScrCmd_checkpartymonmoves(struct ScriptContext *ctx)
+{
+    u8 slot = VarGet(ScriptReadHalfword(ctx));
+    struct Pokemon *mon;
+    u16 move;
+    u8 learnedMoves = 0;
 
+    if (slot >= PARTY_SIZE)
+    {
+        gSpecialVar_Result = 0; // invalid slot
+        return FALSE;
+    }
 
+    mon = &gPlayerParty[slot];
+    if (GetMonData(mon, MON_DATA_SPECIES, NULL) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG, NULL))
+    {
+        gSpecialVar_Result = 0; // no valid Pokémon in the slot
+        return FALSE;
+    }
 
+    // count the number of moves the Pokémon knows
+    for (u8 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        move = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
+        if (move != MOVE_NONE)
+            learnedMoves++;
+    }
 
+    gSpecialVar_Result = learnedMoves;
 
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_getpartymonmove(struct ScriptContext *ctx)
+{
+    u8 partyIndex = VarGet(ScriptReadHalfword(ctx)); 
+    u8 moveSlot = VarGet(ScriptReadHalfword(ctx)); 
+    struct Pokemon *mon;
+    u16 move = MOVE_NONE;
+
+    if (partyIndex >= PARTY_SIZE)
+    {
+        gSpecialVar_Result = MOVE_NONE; // invalid party index
+        return FALSE;
+    }
+
+    mon = &gPlayerParty[partyIndex];
+    if (GetMonData(mon, MON_DATA_SPECIES, NULL) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG, NULL))
+    {
+        gSpecialVar_Result = MOVE_NONE; // no valid Pokémon in the slot
+        return FALSE;
+    }
+
+    if (moveSlot < MAX_MON_MOVES)
+        move = GetMonData(mon, MON_DATA_MOVE1 + moveSlot, NULL);
+
+    gSpecialVar_Result = move;
+
+    return FALSE;
+}
 
 
 
