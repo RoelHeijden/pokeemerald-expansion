@@ -16993,12 +16993,11 @@ AI: AI_FLAG_SINGLE4 / AI_FLAG_SEQUENCE_SWITCHING
 
 Klefki (M) 
 Ability: Magician  
-Level: 8  
+Level: 5  
 EVs: 252 SpA  
 Mild Nature  
 IVs: 0 HP / 0 Atk / 0 Def  
 - Torment  
-- Steel Beam
 - Flash Cannon
 
 Scorbunny (F) @ Sitrus Berry  
@@ -17008,4 +17007,28 @@ EVs: 252 HP / 60 Atk
 Lonely Nature  
 IVs: 17 Def  
 - Double-Edge
+
+=== TRAINER_MY_CUSTOM_DOUBLE_BATTLE2 ===
+Name: Pee & Sea
+Class: Twins
+Pic: Twins
+Gender: Male
+Music: Twins
+Double Battle: Yes
+AI: AI_FLAG_SEQUENCE_SWITCHING
+
+Urshifu @ Choice Band  
+Ability: Unseen Fist  
+Level: 35  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+- Wicked Blow  
+
+Urshifu-Rapid-Strike @ Choice Band  
+Ability: Unseen Fist  
+Level: 35   
+EVs: 252 Atk / 232 Spe  
+Adamant Nature  
+- Surging Strikes  
+
 

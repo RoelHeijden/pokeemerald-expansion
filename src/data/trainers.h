@@ -42509,38 +42509,102 @@ F_TRAINER_FEMALE |
 #line 16995
             .ability = ABILITY_MAGICIAN,
 #line 16996
-            .lvl = 8,
+            .lvl = 5,
 #line 16998
             .nature = NATURE_MILD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17000
                 MOVE_TORMENT,
-                MOVE_STEEL_BEAM,
                 MOVE_FLASH_CANNON,
             },
             },
             {
-#line 17004
+#line 17003
             .species = SPECIES_SCORBUNNY,
-#line 17004
+#line 17003
             .gender = TRAINER_MON_FEMALE,
-#line 17004
+#line 17003
             .heldItem = ITEM_SITRUS_BERRY,
-#line 17007
-            .ev = TRAINER_PARTY_EVS(252, 60, 0, 0, 0, 0),
-#line 17009
-            .iv = TRAINER_PARTY_IVS(31, 31, 17, 31, 31, 31),
-#line 17005
-            .ability = ABILITY_LIBERO,
 #line 17006
-            .lvl = 24,
+            .ev = TRAINER_PARTY_EVS(252, 60, 0, 0, 0, 0),
 #line 17008
+            .iv = TRAINER_PARTY_IVS(31, 31, 17, 31, 31, 31),
+#line 17004
+            .ability = ABILITY_LIBERO,
+#line 17005
+            .lvl = 24,
+#line 17007
             .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17010
+#line 17009
                 MOVE_DOUBLE_EDGE,
+            },
+            },
+        },
+    },
+#line 17011
+    [TRAINER_MY_CUSTOM_DOUBLE_BATTLE2] =
+    {
+#line 17012
+        .trainerName = _("Pee & Sea"),
+#line 17013
+        .trainerClass = TRAINER_CLASS_TWINS,
+#line 17014
+        .trainerPic = TRAINER_PIC_TWINS,
+        .encounterMusic_gender = 
+#line 17016
+            TRAINER_ENCOUNTER_MUSIC_TWINS,
+#line 17017
+        .doubleBattle = TRUE,
+#line 17018
+        .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
+        .partySize = 2,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 17020
+            .species = SPECIES_URSHIFU,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17020
+            .heldItem = ITEM_CHOICE_BAND,
+#line 17023
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 17025
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17021
+            .ability = ABILITY_UNSEEN_FIST,
+#line 17022
+            .lvl = 35,
+#line 17024
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 17025
+                MOVE_WICKED_BLOW,
+            },
+            },
+            {
+#line 17027
+            .species = SPECIES_URSHIFU_RAPID_STRIKE,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17027
+            .heldItem = ITEM_CHOICE_BAND,
+#line 17030
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 232, 0, 0),
+#line 17032
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17028
+            .ability = ABILITY_UNSEEN_FIST,
+#line 17029
+            .lvl = 35,
+#line 17031
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 17032
+                MOVE_SURGING_STRIKES,
             },
             },
         },

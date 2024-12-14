@@ -5652,40 +5652,56 @@ static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 }
 
 static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
-
     // klefki move selecion
     if (gBattleMons[battlerAtk].species == SPECIES_KLEFKI){
 
-        // if target is gardevoir
-        if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR){
-
-            // if Tormented
-            if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
-
-                if (move == MOVE_FLASH_CANNON){
-                    // if smeargle KOd by Steel beam prior to this turn: use flash cannon
-                    if (gBattleMons[battlerAtk].hp <= 14 && gBattleMons[battlerDef].hp >= 89)
-                        score = 141;
-                    else
-                        score = 120;
-                }
-
-                if (move == MOVE_STEEL_BEAM) 
-                    score = 139;
-            }
-            // if not Tormented yet
-            else{
-                if (move == MOVE_TORMENT) 
-                    score = 140;
-            }
-        }
-        // if target is Smeargle
-        else{
-            if (move == MOVE_STEEL_BEAM)
-                score = 139;
+        // if Tormented
+        if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
             if (move == MOVE_FLASH_CANNON)
-                score = 120;
+                score = 140;
+        }
+        // if not Tormented yet
+        else{
+            if (move == MOVE_TORMENT)
+                score = 141;
         }
     }
     return score;
 }
+
+//     // klefki move selecion
+//     if (gBattleMons[battlerAtk].species == SPECIES_KLEFKI){
+
+//         // if target is gardevoir
+//         if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR){
+
+//             // if Tormented
+//             if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
+
+//                 if (move == MOVE_FLASH_CANNON){
+//                     // if smeargle KOd by Steel beam prior to this turn: use flash cannon
+//                     if (gBattleMons[battlerAtk].hp <= 14 && gBattleMons[battlerDef].hp >= 89)
+//                         score = 141;
+//                     else
+//                         score = 120;
+//                 }
+
+//                 if (move == MOVE_STEEL_BEAM) 
+//                     score = 139;
+//             }
+//             // if not Tormented yet
+//             else{
+//                 if (move == MOVE_TORMENT) 
+//                     score = 140;
+//             }
+//         }
+//         // if target is Smeargle
+//         else{
+//             if (move == MOVE_STEEL_BEAM)
+//                 score = 139;
+//             if (move == MOVE_FLASH_CANNON)
+//                 score = 120;
+//         }
+//     }
+//     return score;
+// }

@@ -55,7 +55,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_NOLAND",
-      "x": 20,
+      "x": 21,
       "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
@@ -108,7 +108,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
       "x": 15,
-      "y": 24,
+      "y": 25,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -121,7 +121,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
       "x": 21,
-      "y": 22,
+      "y": 23,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -160,7 +160,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_HIKER",
       "x": 12,
-      "y": 22,
+      "y": 23,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -171,7 +171,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_LASS",
+      "graphics_id": "OBJ_EVENT_GFX_LUCY",
       "x": 24,
       "y": 23,
       "elevation": 0,
@@ -180,12 +180,12 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_icePuzzleHintNPC",
+      "script": "EscapeRoom_EventScript_GetUsOutNPC",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
-      "x": 17,
+      "x": 16,
       "y": 21,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
@@ -219,7 +219,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_catchSalazzleNPC",
+      "script": "EscapeRoom_EventScript_StopWinningNPC",
       "flag": "0"
     },
     {
@@ -250,8 +250,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
-      "x": -2,
-      "y": 37,
+      "x": 42,
+      "y": 25,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -263,8 +263,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
-      "x": 22,
-      "y": 5,
+      "x": 15,
+      "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
@@ -276,8 +276,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 24,
-      "y": 14,
+      "x": 16,
+      "y": 6,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
@@ -289,28 +289,15 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 31,
-      "y": 10,
+      "x": 24,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_TormentHintNPC",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
-      "x": 36,
-      "y": 7,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_PainSplitHintNPC",
+      "script": "EscapeRoom_EventScript_SketchHintNPC",
       "flag": "0"
     },
     {
@@ -338,6 +325,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_AntiSoftlockGuy",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
+      "x": 20,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "EscapeRoom_EventScript_DoubleBattle2",
+      "flag": "FLAG_DOUBLE_BATTLE2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_TWIN",
+      "x": 19,
+      "y": 4,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NORMAL",
+      "trainer_sight_or_berry_tree_id": "1",
+      "script": "EscapeRoom_EventScript_DoubleBattle2",
+      "flag": "FLAG_DOUBLE_BATTLE2"
     }
   ],
   "warp_events": [
@@ -392,7 +405,7 @@
     },
     {
       "type": "sign",
-      "x": 30,
+      "x": 31,
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -400,7 +413,7 @@
     },
     {
       "type": "sign",
-      "x": 31,
+      "x": 32,
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -408,7 +421,7 @@
     },
     {
       "type": "sign",
-      "x": 32,
+      "x": 33,
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -417,14 +430,14 @@
     {
       "type": "sign",
       "x": 31,
-      "y": 6,
+      "y": 12,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_FTTFSign"
     },
     {
       "type": "sign",
-      "x": 33,
+      "x": 34,
       "y": 3,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
@@ -432,88 +445,88 @@
     },
     {
       "type": "sign",
-      "x": 35,
-      "y": 13,
+      "x": 38,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_FFTFSign"
     },
     {
       "type": "sign",
-      "x": 37,
-      "y": 14,
+      "x": 28,
+      "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_FFFTSign"
     },
     {
       "type": "sign",
-      "x": 38,
-      "y": 12,
+      "x": 41,
+      "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TTTFSign"
     },
     {
       "type": "sign",
-      "x": 29,
-      "y": 7,
+      "x": 30,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TTFTSign"
     },
     {
       "type": "sign",
-      "x": 27,
-      "y": 9,
+      "x": 32,
+      "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TTFFSign"
     },
     {
       "type": "sign",
-      "x": 33,
-      "y": 11,
+      "x": 34,
+      "y": 13,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TFTTSign"
     },
     {
       "type": "sign",
-      "x": 30,
-      "y": 12,
+      "x": 34,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_FFTTSign"
     },
     {
       "type": "sign",
-      "x": 36,
-      "y": 10,
+      "x": 39,
+      "y": 6,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_FTTTSign"
     },
     {
       "type": "sign",
-      "x": 32,
-      "y": 8,
+      "x": 35,
+      "y": 7,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_FFFFSign"
     },
     {
       "type": "sign",
-      "x": 34,
-      "y": 5,
+      "x": 37,
+      "y": 11,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TFFFSign"
     },
     {
       "type": "sign",
-      "x": 39,
-      "y": 8,
+      "x": 41,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_TTTTSign"
