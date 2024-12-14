@@ -1946,7 +1946,8 @@ s32 CalcCritChanceStageArgs(u32 battlerAtk, u32 battlerDef, u32 move, bool32 rec
     }
 
     // ADDED MYSELF
-    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE){
+    // remove crit, unless guaranteed crit (-2)
+    if (FlagGet(FLAG_DISABLE_BATTLE_RNG) == TRUE && critChance != -2){
         critChance = -1;
     }
     return critChance;
@@ -7811,7 +7812,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     // 0 money reward, except for:
     moneyReward = 0;
     if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE3){
-        moneyReward = 78999;
+        moneyReward = 99999;
     }
     if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE2){
         moneyReward = 4068;
