@@ -363,7 +363,7 @@
     },
     {
       "x": 13,
-      "y": 20,
+      "y": 21,
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_ICE_PUZZLE",
       "dest_warp_id": "0"

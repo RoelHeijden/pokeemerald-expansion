@@ -2233,40 +2233,39 @@ TormentHintNPCMessage::
 # 1564 "data/maps/EscapeRoom/scripts.pory"
 	.string "I used to get tormented by my brothers.\p"
 	.string "I tried to avoid it at first, but after a\n"
-	.string "while you just accept it and play along."
-	.string "$"
+	.string "while you just accept it and play along.$"
 
 SketchHintNPCMessage::
-# 1571 "data/maps/EscapeRoom/scripts.pory"
+# 1570 "data/maps/EscapeRoom/scripts.pory"
 	.string "You can learn so much by copying those\n"
 	.string "with experience.$"
 
 Question1Message::
-# 1575 "data/maps/EscapeRoom/scripts.pory"
+# 1574 "data/maps/EscapeRoom/scripts.pory"
 	.string "1. Exactly one of statement 2 and 4 is\n"
 	.string "false.$"
 
 Question2Message::
-# 1579 "data/maps/EscapeRoom/scripts.pory"
+# 1578 "data/maps/EscapeRoom/scripts.pory"
 	.string "2. Both statements 1 and 3 are true.$"
 
 Question3Message::
-# 1583 "data/maps/EscapeRoom/scripts.pory"
+# 1582 "data/maps/EscapeRoom/scripts.pory"
 	.string "3. At least two statements are false.$"
 
 Question4Message::
-# 1587 "data/maps/EscapeRoom/scripts.pory"
-	.string "4. GARDEVOIR has to use DISABLE to\n"
-	.string "beat Expert Roel.$"
+# 1586 "data/maps/EscapeRoom/scripts.pory"
+	.string "4. GARDEVOIR must use DISABLE to beat\n"
+	.string "Expert Roel.$"
 
 HintsIntroMessage::
-# 1592 "data/maps/EscapeRoom/scripts.pory"
+# 1591 "data/maps/EscapeRoom/scripts.pory"
 	.string "You can come to me for hints,\n"
 	.string "but not yet because Roel still has to\l"
 	.string "implement my script.$"
 
 AntiSoftlockIntroMessage::
-# 1598 "data/maps/EscapeRoom/scripts.pory"
+# 1597 "data/maps/EscapeRoom/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "I can roll back actions that have the\n"
 	.string "possibility to get you softlocked.\p"
@@ -2274,16 +2273,16 @@ AntiSoftlockIntroMessage::
 	.string "are actually softlocked or not.$"
 
 AntiSoftlockNoActionMessage::
-# 1606 "data/maps/EscapeRoom/scripts.pory"
+# 1605 "data/maps/EscapeRoom/scripts.pory"
 	.string "There's nothing I can do for you right\n"
 	.string "now.$"
 
 AntiSoftlockDeclinedMessage::
-# 1611 "data/maps/EscapeRoom/scripts.pory"
+# 1610 "data/maps/EscapeRoom/scripts.pory"
 	.string "Alright.$"
 
 AskReleaseSmeargleMessage::
-# 1615 "data/maps/EscapeRoom/scripts.pory"
+# 1614 "data/maps/EscapeRoom/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "Catching a 'wrong' SMEARGLE could leave\n"
 	.string "you softlocked.\p"
@@ -2291,7 +2290,7 @@ AskReleaseSmeargleMessage::
 	.string "back your GREAT BALL?$"
 
 UndoRareCandyMessage::
-# 1623 "data/maps/EscapeRoom/scripts.pory"
+# 1622 "data/maps/EscapeRoom/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "Giving the RARE CANDY to the wrong\n"
 	.string "POKéMON could leave you softlocked.\p"
@@ -2299,30 +2298,30 @@ UndoRareCandyMessage::
 	.string "your RARE CANDY?$"
 
 UndoSketchMessage::
-# 1631 "data/maps/EscapeRoom/scripts.pory"
+# 1630 "data/maps/EscapeRoom/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "Sketching the wrong move with SMEARGLE\n"
 	.string "could leave you softlocked.\p"
 	.string "Should I revert your latest SKETCH?$"
 
 SmeargleForgotMove::
-# 1638 "data/maps/EscapeRoom/scripts.pory"
+# 1637 "data/maps/EscapeRoom/scripts.pory"
 	.string "Smeargle forgot its latest move...$"
 
 SmeargleLearnedSketch::
-# 1642 "data/maps/EscapeRoom/scripts.pory"
+# 1641 "data/maps/EscapeRoom/scripts.pory"
 	.string "Smeargle learned Sketch!$"
 
 Double2IntroMessage::
-# 1646 "data/maps/EscapeRoom/scripts.pory"
+# 1645 "data/maps/EscapeRoom/scripts.pory"
 	.string "We really appreciate your out-of-the-\n"
 	.string "box approach.$"
 
 Double2OutroMessage::
-# 1652 "data/maps/EscapeRoom/scripts.pory"
+# 1651 "data/maps/EscapeRoom/scripts.pory"
 	.string "Ehhh... What.$"
 
 Double2PostMatchMessage::
-# 1656 "data/maps/EscapeRoom/scripts.pory"
+# 1655 "data/maps/EscapeRoom/scripts.pory"
 	.string "I don't think you were supposed to win\n"
 	.string "this battle.$"
