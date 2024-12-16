@@ -157,8 +157,8 @@ script EscapeRoom_MapScript_setNPCfacing{
 
 script EscapeRoom_MapScript_KeepDouble1Moved {
     if(flag(FLAG_DOUBLE1_COMPLETED)){
-        setobjectxyperm(1, 6, 11)
-        setobjectxyperm(2, 6, 10)
+        setobjectxyperm(1, 6, 12)
+        setobjectxyperm(2, 6, 11)
     }
 }
 
@@ -767,10 +767,51 @@ script EscapeRoom_EventScript_EndEscapeRoomSign{
         msgbox(EscapeRoomEndCongratz)
         waitmessage
     }
-    bufferplaytime
+    call(EscapeRoom_EventScript_CalcHintsUsed)
+    bufferplaytimeandhints
     msgbox(EndEscapeRoomSignMessage)
     waitmessage
     releaseall
+}
+
+script EscapeRoom_EventScript_CalcHintsUsed {
+    setvar(VAR_HINTS_USED_COUNTER, 0)
+    if (flag(FLAG_HINT_GREAT_BALL) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_NUGGET) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_ICE_PUZZLE) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_STRENGTH_PUZZLE) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_STATEMENTS_PUZZLE) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_CATCHING_SMEARGLE) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_TRAINER_ROSE_UN) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_TRAINER_DS_ABEL) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_TRAINER_ROEL) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_TRAINER_C_TRISH) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_TRAINERS_PEE_SEA) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if (flag(FLAG_HINT_TRAINERS_JAN_NAN) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
 }
 
 script EscapeRoom_EventScript_FindIronBall{
@@ -926,10 +967,6 @@ script EscapeRoom_EventScript_FFFTSign{
     msgbox("FFFT")
     waitmessage
     releaseall
-}
-
-script EscapeRoom_EventScript_HintsNPC{
-    msgbox(HintsIntroMessage, MSGBOX_NPC)
 }
 
 script EscapeRoom_EventScript_AntiSoftlockGuy{
@@ -1150,6 +1187,110 @@ script EscapeRoom_EventScript_UndoSketch2{
     }
 }
 
+script EscapeRoom_EventScript_HintsNPC{
+    faceplayer
+    lockall
+    msgbox(HintsIntroMessage, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){    
+        msgbox(HintsNPCWhatKindOfHintMessage)
+        call(EscapeRoom_EventScript_HintsNPC_part2)
+    }
+    else{
+        msgbox(HintsNPCNoHintMessage)
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_HintsNPC_part2{
+    dynmultichoice(20, 8, FALSE, 6, 0, 0, 
+    "Where should I be looking now?", 
+    "A hint for a specific step.")
+
+    if(var(VAR_RESULT) == 0){
+        call(EscapeRoom_EventScript_WhereToLookHint)
+    }
+    elif(var(VAR_RESULT) == 1){
+        call(EscapeRoom_EventScript_SpecificStepHint)
+    }
+    else{
+        msgbox(HintsNPCNoHintMessage)
+    }
+}
+
+script EscapeRoom_EventScript_WhereToLookHint{
+    msgbox("TBD")
+}
+
+script EscapeRoom_EventScript_SpecificStepHint{
+    dynmultichoice(20, 2, FALSE, 5, 0, 0,
+    "Get item: Great Ball.",
+    "Get item: The 15th Nugget.",
+    "Ice Puzzle",
+    "Strength Puzzle",
+    "Statements Puzzle",
+    "Catching the perfect Smeargle",
+    "Trainer: Rose Un (Kecleon)",
+    "Trainer: DS. Abel (Slaking)",
+    "Trainer: Roel (Togedemaru)",
+    "Trainer: C. Trish (Klefki)",
+    "Trainers: Pee & Sea (Urshifu, Urshifu)",
+    "Trainers: Jan & Nan (Smeargle, Scrafty)"
+    )
+
+    if (var(VAR_RESULT) == 0) {
+        msgbox(HintsNPC_GreatBall)
+        setflag(FLAG_HINT_GREAT_BALL)
+    } 
+    elif (var(VAR_RESULT) == 1) {
+        msgbox(HintsNPC_Nugget)
+        setflag(FLAG_HINT_NUGGET)
+    } 
+    elif (var(VAR_RESULT) == 2) {
+        msgbox(HintsNPC_IcePuzzle)
+        setflag(FLAG_HINT_ICE_PUZZLE)
+    } 
+    elif (var(VAR_RESULT) == 3) {
+        msgbox(HintsNPC_StrengthPuzzle)
+        setflag(FLAG_HINT_STRENGTH_PUZZLE)
+    } 
+    elif (var(VAR_RESULT) == 4) {
+        msgbox(HintsNPC_StatementsPuzzle)
+        setflag(FLAG_HINT_STATEMENTS_PUZZLE)
+    } 
+    elif (var(VAR_RESULT) == 5) {
+        msgbox(HintsNPC_CatchingSmeargle)
+        setflag(FLAG_HINT_CATCHING_SMEARGLE)
+    } 
+    elif (var(VAR_RESULT) == 6) {
+        msgbox(HintsNPC_TrainerRoseUn)
+        setflag(FLAG_HINT_TRAINER_ROSE_UN)
+    } 
+    elif (var(VAR_RESULT) == 7) {
+        msgbox(HintsNPC_TrainerDSAbel)
+        setflag(FLAG_HINT_TRAINER_DS_ABEL)
+    } 
+    elif (var(VAR_RESULT) == 8) {
+        msgbox(HintsNPC_TrainerRoel)
+        setflag(FLAG_HINT_TRAINER_ROEL)
+    } 
+    elif (var(VAR_RESULT) == 9) {
+        msgbox(HintsNPC_TrainerCTrish)
+        setflag(FLAG_HINT_TRAINER_C_TRISH)
+    } 
+    elif (var(VAR_RESULT) == 10) {
+        msgbox(HintsNPC_TrainersPeeSea)
+        setflag(FLAG_HINT_TRAINERS_PEE_SEA)
+    } 
+    elif (var(VAR_RESULT) == 11) {
+        msgbox(HintsNPC_TrainersJanNan)
+        setflag(FLAG_HINT_TRAINERS_JAN_NAN)
+    }
+    else{
+        call(EscapeRoom_EventScript_HintsNPC_part2)
+    }
+}
+
+
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
@@ -1229,7 +1370,7 @@ text EscapeRoomEndCongratz{
 
 text EndEscapeRoomSignMessage{
     "Final time: {STR_VAR_1}.\n"
-    "Hints used: 0.\p"
+    "Hints used: {STR_VAR_2}.\p"
     "Thank you for playing.\n"
     " - Roel"
 }
@@ -1244,7 +1385,7 @@ text Double1Puzzle_Intro{
     "We know exactly what you'll do.\p"
     "Some think it's cheating.\n"
     "We call it wisdom.\p"
-    "There's one path that always wins."
+    "There's one path that always wins.\n"
     "Can you figure it out?"
 }
 
@@ -1590,12 +1731,6 @@ text Question4Message{
     format("4. GARDEVOIR must use DISABLE to beat Expert Roel.")
 }
 
-text HintsIntroMessage{
-    "You can come to me for hints,\n"
-    "but not yet because Roel still has to\l"
-    "implement my script."
-}
-
 text AntiSoftlockIntroMessage{
     "Hi, I'm the anti-softlock guy.\p"
     "I can roll back actions that have the\n"
@@ -1656,4 +1791,113 @@ text Double2OutroMessage{
 
 text Double2PostMatchMessage{
     format("I don't think you were supposed to win this battle.")
+}
+
+text HintsIntroMessage{
+    "Hello, I'm the hintman.\n"
+    "You can come to me for hints whenever\l"
+    "you're stuck on any of the steps.\p"
+    "Do you want to get a hint right now?"
+}
+
+text HintsNPCNoHintMessage{
+    "I'll be here if you need me."
+}
+
+text HintsNPCWhatKindOfHintMessage{
+    "What kind of hint would you like?"
+}
+
+
+
+
+
+
+text HintsNPC_GreatBall{
+    "This item is accessible from the start.\p"
+    "You should further explore the room\n"
+    "with the plants."
+}
+
+text HintsNPC_Nugget{
+    "This item is accessible from the start.\p"
+    "You should further explore the room\n"
+    "with the plants."
+}
+
+text HintsNPC_IcePuzzle{
+    "At the beginning, only the berry tree is\n"
+    "accessible. The item ball is unreachable\l"
+    "until the MACH BIKE is obtained."
+}
+
+text HintsNPC_StrengthPuzzle{
+    "The puzzle revolves around breaking the\n"
+    "ROCK SMASH rocks in the correct order.\p"
+    "1. Break the two center rocks.\n"
+    "2. Break the two rocks south-west.\l"
+    "3. Break the last rock on the east."
+}
+
+text HintsNPC_StatementsPuzzle{
+    "Solve the puzzle in order to figure out\n"
+    "if the 4th statement is true or false,\l"
+    "not the other way around!\p"
+    "You'll find that only one answer remains\n"
+    "for statement 4."
+}
+
+text HintsNPC_CatchingSmeargle{
+    "The perfect SMEARGLE will have the move\n"
+    "SKETCH, which only has 1pp.\p"
+    "If you stall a turn by not attacking,\n"
+    "SMEARGLE will no longer be able to copy\l"
+    "the wrong move.\p"
+    "SALAZZLE might be part of the solution."
+}
+
+text HintsNPC_TrainerRoseUn{
+    "You have to find a way to take the item\n"
+    "without winning the battle.\p"
+    "Keep in mind that HIDDEN POWER's typing\n"
+    "may depend on the POKéMON using it.\p"
+    "It's okay to give up."
+}
+
+text HintsNPC_TrainerDSAbel{
+    "The right moves on SMEARGLE and\n"
+    "GARDEVOIR will help defeat the SLAKING.\p"
+    "However, CURSOLA will need to be given a\n"
+    "hindering ability to slow it down."
+}
+
+text HintsNPC_TrainerRoel{
+    "It's key for SMEARGLE to SKETCH the\n"
+    "correct move before this fight.\p"
+    "Consider exploring the old couple to see\n"
+    "what moves their POKéMON are hiding.\p"
+    "For the actual battle, you might want to\n"
+    "find a way to control TOGEDEMARU's HP."
+}
+
+text HintsNPC_TrainerCTrish{
+    "Can you steal her SITRUS BERRY?\p"
+    "SKILL SWAP is your friend, and perhaps\n"
+    "there's a way to render DOUBLE EDGE\l"
+    "completely useless.\p"
+    "Two ways actually."
+}
+
+text HintsNPC_TrainersPeeSea{
+    "This battle looks impossible to win.\n"
+    "Can you find a way to skip this battle?\p"
+    "Try thinking inside the box."
+}
+
+text HintsNPC_TrainersJanNan{
+    "PAIN SPLIT can be used to heal, and\n"
+    "SCRAFTY's ability can be used against\l"
+    "itself.\p"
+    "Remember the PERISH tiebreaker.\n"
+    "Is there an item you haven't used yet?"
 }

@@ -244,7 +244,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_levelDownMon						@ 0xf1
 	.4byte ScrCmd_checkpartymonmoves				@ 0xf2
 	.4byte ScrCmd_getpartymonmove					@ 0xf3
-	.4byte ScrCmd_bufferplaytime					@ 0xf4
+	.4byte ScrCmd_bufferplaytimeandhints			@ 0xf4
 
 
 gScriptCmdTableEnd::

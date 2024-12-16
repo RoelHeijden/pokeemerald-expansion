@@ -68,18 +68,20 @@
 #define FLAG_DS_ABEL_DEFEATED           0x37  
 #define FLAG_ROEL_DEFEATED              0x38  
 #define FLAG_DOUBLE_BATTLE2             0x39
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
-#define FLAG_UNUSED_0x03C    0x3C // Unused Flag
-#define FLAG_UNUSED_0x03D    0x3D // Unused Flag
-#define FLAG_UNUSED_0x03E    0x3E // Unused Flag
-#define FLAG_UNUSED_0x03F    0x3F // Unused Flag
-#define FLAG_UNUSED_0x040    0x40 // Unused Flag
-#define FLAG_UNUSED_0x041    0x41 // Unused Flag
-#define FLAG_UNUSED_0x042    0x42 // Unused Flag
-#define FLAG_UNUSED_0x043    0x43 // Unused Flag
-#define FLAG_UNUSED_0x044    0x44 // Unused Flag
-#define FLAG_UNUSED_0x045    0x45 // Unused Flag
+
+#define FLAG_HINT_GREAT_BALL            0x3A
+#define FLAG_HINT_NUGGET                0x3B 
+#define FLAG_HINT_ICE_PUZZLE            0x3C  
+#define FLAG_HINT_STRENGTH_PUZZLE       0x3D  
+#define FLAG_HINT_STATEMENTS_PUZZLE     0x3E  
+#define FLAG_HINT_CATCHING_SMEARGLE     0x3F  
+#define FLAG_HINT_TRAINER_ROSE_UN       0x40  
+#define FLAG_HINT_TRAINER_DS_ABEL       0x41  
+#define FLAG_HINT_TRAINER_ROEL          0x42  
+#define FLAG_HINT_TRAINER_C_TRISH       0x43  
+#define FLAG_HINT_TRAINERS_PEE_SEA      0x44  
+#define FLAG_HINT_TRAINERS_JAN_NAN      0x45
+
 #define FLAG_UNUSED_0x046    0x46 // Unused Flag
 #define FLAG_UNUSED_0x047    0x47 // Unused Flag
 #define FLAG_UNUSED_0x048    0x48 // Unused Flag
