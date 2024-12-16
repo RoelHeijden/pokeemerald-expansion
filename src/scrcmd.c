@@ -2335,6 +2335,24 @@ bool8 ScrCmd_getpartymonmove(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+bool8 ScrCmd_bufferplaytime(struct ScriptContext *ctx)
+{
+    u8 *dest = gStringVar1; 
+
+    // buffer the playtime hours, left-aligned with 3 digits max
+    dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
+
+    // add the colon separator
+    *(dest++) = CHAR_COLON;
+
+    // buffer the playtime minutes, with leading zeros and 2 digits
+    ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+    return FALSE;
+}
+
+
 
 
 

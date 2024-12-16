@@ -552,7 +552,6 @@ script EscapeRoom_EventScript_DoubleBattle2{
     end
 }
 
-
 script EscapeRoom_EventScript_Double1WalkAwayAndHeal{
     lockall
     msgbox(Double1Finalwords)
@@ -768,6 +767,7 @@ script EscapeRoom_EventScript_EndEscapeRoomSign{
         msgbox(EscapeRoomEndCongratz)
         waitmessage
     }
+    bufferplaytime
     msgbox(EndEscapeRoomSignMessage)
     waitmessage
     releaseall
@@ -1228,7 +1228,9 @@ text EscapeRoomEndCongratz{
 }
 
 text EndEscapeRoomSignMessage{
-    "Thank you for playing <3\n"
+    "Final time: {STR_VAR_1}.\n"
+    "Hints used: 0.\p"
+    "Thank you for playing.\n"
     " - Roel"
 }
 

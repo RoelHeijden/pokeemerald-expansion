@@ -1250,7 +1250,10 @@
     .2byte \moveslot
     .endm
 
-
+	@ buffers the current play time to STR_VAR_1
+	.macro bufferplaytime
+	.byte 0xf4
+	.endm
 
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
