@@ -43,7 +43,7 @@
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
 #define FLAG_RARE_CANDY_OBTAINED        0x20
-#define FLAG_NUGGET2_OBTAINED           0x21
+#define FLAG_DOUBLE2_BYPASSED           0x21
 #define FLAG_NUGGET3_OBTAINED           0x22
 #define FLAG_GARDEVOIR_TRADE_SUCCESS    0x23 
 #define FLAG_DOUBLE_BATTLE1             0x24
@@ -82,9 +82,9 @@
 #define FLAG_HINT_TRAINERS_PEE_SEA      0x44  
 #define FLAG_HINT_TRAINERS_JAN_NAN      0x45
 
-#define FLAG_UNUSED_0x046    0x46 // Unused Flag
-#define FLAG_UNUSED_0x047    0x47 // Unused Flag
-#define FLAG_UNUSED_0x048    0x48 // Unused Flag
+#define FLAG_GREAT_BALL_FOUND           0x46
+#define FLAG_PECHA_BERRY_FOUND          0x47  
+#define FLAG_SITRUS_STOLEN              0x48
 #define FLAG_UNUSED_0x049    0x49 // Unused Flag
 #define FLAG_UNUSED_0x04A    0x4A // Unused Flag
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
@@ -654,21 +654,21 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_TOGGLE_BAG_USE  0x264 // Unused Flag
-#define FLAG_UNUSED_0x265  0x265 // Unused Flag
-#define FLAG_UNUSED_0x266  0x266 // Unused Flag
-#define FLAG_UNUSED_0x267  0x267 // Unused Flag
-#define FLAG_UNUSED_0x268  0x268 // Unused Flag
-#define FLAG_UNUSED_0x269  0x269 // Unused Flag
-#define FLAG_UNUSED_0x26A  0x26A // Unused Flag
-#define FLAG_UNUSED_0x26B  0x26B // Unused Flag
-#define FLAG_UNUSED_0x26C  0x26C // Unused Flag
-#define FLAG_UNUSED_0x26D  0x26D // Unused Flag
-#define FLAG_UNUSED_0x26E  0x26E // Unused Flag
-#define FLAG_UNUSED_0x26F  0x26F // Unused Flag
-#define FLAG_UNUSED_0x270  0x270 // Unused Flag
-#define FLAG_UNUSED_0x271  0x271 // Unused Flag
-#define FLAG_UNUSED_0x272  0x272 // Unused Flag
+#define FLAG_TOGGLE_BAG_USE             0x264
+#define FLAG_HINT_SALAZZLE              0x265  
+#define FLAG_HINT_ROSE_UN               0x266  
+#define FLAG_HINT_PC_CHECK              0x267  
+#define FLAG_HINT_ICE_PUZZLE2            0x268  
+#define FLAG_HINT_STRENGTH_PUZZLE2       0x269  
+#define FLAG_HINT_SMEARGLE_CATCH        0x26A  
+#define FLAG_HINT_DS_ABEL               0x26B  
+#define FLAG_HINT_PLANT_CHECK           0x26C  
+#define FLAG_HINT_GET_HEART_SCALE       0x26D  
+#define FLAG_HINT_STATEMENT_PUZZLE      0x26E  
+#define FLAG_HINT_BEAT_ROEL             0x26F  
+#define FLAG_HINT_PEE_SEA               0x270  
+#define FLAG_HINT_STEAL_SITRUS          0x271  
+#define FLAG_HINT_BEAT_JAN_NAN          0x272  
 #define FLAG_UNUSED_0x273  0x273 // Unused Flag
 #define FLAG_UNUSED_0x274  0x274 // Unused Flag
 #define FLAG_UNUSED_0x275  0x275 // Unused Flag

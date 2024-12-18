@@ -20,7 +20,6 @@ mapscripts EscapeRoom_MapScripts {
         VAR_ICE_STEP_COUNT, 0: EventScript_FallDownHole
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindGreatBallAferUse
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1: EscapeRoom_MapScripts_FindPechaBerryAferUse
-        // VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 1: EscapeRoom_MapScripts_HealTo1hp
     ] 
 }
 
@@ -46,6 +45,9 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // check for party heal
     call(EscapeRoom_MapScripts_CheckAfterBattleHeal)
 
+    // set flags used for hints
+    call(EscapeRoom_MapScript_CheckHintFlags)
+
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
@@ -61,6 +63,46 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
 
     // clear offscreen object unload flag
     clearflag(FLAG_DONT_REMOVE_OFFSCREEN_OBJECT)
+}
+
+script EscapeRoom_MapScript_CheckHintFlags{
+    // PECHA BERRY
+    checkitem(ITEM_PECHA_BERRY)
+    if(var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_PECHA_BERRY_FOUND)
+    }
+    checkpartyitem(0)
+    if(var(VAR_0x8004) == ITEM_PECHA_BERRY) {
+        setflag(FLAG_PECHA_BERRY_FOUND)
+    }
+    checkpartyitem(1)
+    if(var(VAR_0x8004) == ITEM_PECHA_BERRY) {
+        setflag(FLAG_PECHA_BERRY_FOUND)
+    }
+
+    // GREAT BALL
+    checkitem(ITEM_GREAT_BALL)
+    if(var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_GREAT_BALL_FOUND)
+    }
+    checkpartyitem(0)
+    if(var(VAR_0x8004) == ITEM_GREAT_BALL) {
+        setflag(FLAG_GREAT_BALL_FOUND)
+    }
+
+    // SITRUS BERRY
+    checkitem(ITEM_SITRUS_BERRY)
+    if(var(VAR_RESULT) == TRUE) {
+        setflag(FLAG_SITRUS_STOLEN)
+    }
+    checkpartyitem(0)
+    if(var(VAR_0x8004) == ITEM_SITRUS_BERRY) {
+        setflag(FLAG_SITRUS_STOLEN)
+    }
+    checkpartyitem(1)
+    if(var(VAR_0x8004) == ITEM_SITRUS_BERRY) {
+        setflag(FLAG_SITRUS_STOLEN)
+    }
 }
 
 script EscapeRoom_MapScript_checkHMRockSmash{
@@ -127,11 +169,6 @@ script EscapeRoom_MapScripts_FindGreatBallAferUse{
     clearflag(FLAG_GREAT_BALL_USED)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
     releaseall
-}
-
-script EscapeRoom_MapScripts_HealTo1hp{
-    setparty1hp
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_HEAL_IF_ALL_FAINTED, 0)
 }
 
 script EscapeRoom_MapScripts_SetHoleWarp{
@@ -421,6 +458,7 @@ script EscapeRoom_EventScript_SingleBattle3{
 
 script EscapeRoom_EventScript_SingleBattle4{
     faceplayer
+    setflag(FLAG_DOUBLE2_BYPASSED)
     trainerbattle_single(
         TRAINER_MY_CUSTOM_SINGLE_BATTLE4, 
         Single4IntroMessage, 
@@ -810,6 +848,49 @@ script EscapeRoom_EventScript_CalcHintsUsed {
         addvar(VAR_HINTS_USED_COUNTER, 1)
     }
     if (flag(FLAG_HINT_TRAINERS_JAN_NAN) == TRUE) {
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+
+    if(flag(FLAG_HINT_SALAZZLE) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_ROSE_UN) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_PC_CHECK) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_ICE_PUZZLE2) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_STRENGTH_PUZZLE2) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_SMEARGLE_CATCH) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_DS_ABEL) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_PLANT_CHECK) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_GET_HEART_SCALE) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_STATEMENT_PUZZLE) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_BEAT_ROEL) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_PEE_SEA) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_STEAL_SITRUS) == TRUE){
+        addvar(VAR_HINTS_USED_COUNTER, 1)
+    }
+    if(flag(FLAG_HINT_BEAT_JAN_NAN) == TRUE){
         addvar(VAR_HINTS_USED_COUNTER, 1)
     }
 }
@@ -1204,7 +1285,7 @@ script EscapeRoom_EventScript_HintsNPC{
 script EscapeRoom_EventScript_HintsNPC_part2{
     dynmultichoice(20, 8, FALSE, 6, 0, 0, 
     "Where should I be looking now?", 
-    "A hint for a specific step.")
+    "Hint for a specific step.")
 
     if(var(VAR_RESULT) == 0){
         call(EscapeRoom_EventScript_WhereToLookHint)
@@ -1217,14 +1298,10 @@ script EscapeRoom_EventScript_HintsNPC_part2{
     }
 }
 
-script EscapeRoom_EventScript_WhereToLookHint{
-    msgbox("TBD")
-}
-
 script EscapeRoom_EventScript_SpecificStepHint{
     dynmultichoice(20, 2, FALSE, 5, 0, 0,
-    "Get item: Great Ball.",
-    "Get item: The 15th Nugget.",
+    "Getting the Great Ball",
+    "Getting the Nugget",
     "Ice Puzzle",
     "Strength Puzzle",
     "Statements Puzzle",
@@ -1290,7 +1367,67 @@ script EscapeRoom_EventScript_SpecificStepHint{
     }
 }
 
-
+script EscapeRoom_EventScript_WhereToLookHint{
+    if (flag(FLAG_TM_10_STOLEN) == FALSE) {
+        msgbox(HintsNPC_DoSalazzleThief)
+        setflag(FLAG_HINT_SALAZZLE)
+    } 
+    elif (flag(FLAG_HM06_STEAL_SUCCES) == FALSE) {
+        msgbox(HintsNPC_DoRoseUn)
+        setflag(FLAG_HINT_ROSE_UN)
+    } 
+    elif (flag(FLAG_GREAT_BALL_FOUND) == FALSE) {
+        msgbox(HintsNPC_DoPCCheck)
+        setflag(FLAG_HINT_PC_CHECK)
+    } 
+    elif (flag(FLAG_PECHA_BERRY_FOUND) == FALSE) {
+        msgbox(HintsNPC_DoIcePuzzle)
+        setflag(FLAG_HINT_ICE_PUZZLE2)
+    } 
+    elif (flag(FLAG_TOXIC_ORB_OBTAINED) == FALSE) {
+        msgbox(HintsNPC_DoStrengthPuzzle)
+        setflag(FLAG_HINT_STRENGTH_PUZZLE2)
+    } 
+    elif (flag(FLAG_GARDEVOIR_TRADE_SUCCESS) == FALSE) {
+        msgbox(HintsNPC_DoSmeargleCatch)
+        setflag(FLAG_HINT_SMEARGLE_CATCH)
+    } 
+    elif (flag(FLAG_DS_ABEL_DEFEATED) == FALSE) {
+        msgbox(HintsNPC_DoDSAbel)
+        setflag(FLAG_HINT_DS_ABEL)
+    } 
+    elif (flag(FLAG_NUGGET3_OBTAINED) == FALSE) {
+        msgbox(HintsNPC_DoPlantCheck)
+        setflag(FLAG_HINT_PLANT_CHECK)
+    } 
+    elif (flag(FLAG_HEART_SCALE2_OBTAINED) == FALSE) {
+        msgbox(HintsNPC_DoGetHeartScale)
+        setflag(FLAG_HINT_GET_HEART_SCALE)
+    } 
+    elif (flag(FLAG_RARE_CANDY_OBTAINED) == FALSE) {
+        msgbox(HintsNPC_DoStatementPuzzle)
+        setflag(FLAG_HINT_STATEMENT_PUZZLE)
+    } 
+    elif (flag(FLAG_ROEL_DEFEATED) == FALSE) {
+        msgbox(HintsNPC_DoBeatRoel)
+        setflag(FLAG_HINT_BEAT_ROEL)
+    } 
+    elif (flag(FLAG_DOUBLE2_BYPASSED) == FALSE) {
+        msgbox(HintsNPC_DoGePastPeeSea)
+        setflag(FLAG_HINT_PEE_SEA)
+    } 
+    elif (flag(FLAG_SITRUS_STOLEN) == FALSE) {
+        msgbox(HintsNPC_DoStealSitrus)
+        setflag(FLAG_HINT_STEAL_SITRUS)
+    } 
+    elif (flag(FLAG_DOUBLE1_COMPLETED) == FALSE) {
+        msgbox(HintsNPC_DoBeatJanNan)
+        setflag(FLAG_HINT_BEAT_JAN_NAN)
+    } 
+    else {
+        msgbox(HintsNPC_DoNothingUrDone)
+    }
+}
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
@@ -1727,8 +1864,8 @@ text Question3Message{
 }
 
 text Question4Message{
-    // format("4. GARDEVOIR needs DISABLE in the battle against C. Trish.")
     format("4. GARDEVOIR must use DISABLE to beat Expert Roel.")
+    // format("4. GARDEVOIR needs two tutor moves to beat the final battle against Old Couple Jan & Nan.")
 }
 
 text AntiSoftlockIntroMessage{
@@ -1782,7 +1919,6 @@ text SmeargleLearnedSketch{
 text Double2IntroMessage{
     "We really appreciate your out-of-the-\n"
     "box approach."
-    // format("We really appreciate your out-of-the-box approach.")
 }
 
 text Double2OutroMessage{
@@ -1808,11 +1944,6 @@ text HintsNPCWhatKindOfHintMessage{
     "What kind of hint would you like?"
 }
 
-
-
-
-
-
 text HintsNPC_GreatBall{
     "This item is accessible from the start.\p"
     "You should further explore the room\n"
@@ -1820,9 +1951,9 @@ text HintsNPC_GreatBall{
 }
 
 text HintsNPC_Nugget{
-    "This item is accessible from the start.\p"
-    "You should further explore the room\n"
-    "with the plants."
+    "It's inside an item ball, but the ball\n"
+    "itself may be hard to see.\p"
+    "Did the NUGGET guy mention leafs?"
 }
 
 text HintsNPC_IcePuzzle{
@@ -1834,17 +1965,19 @@ text HintsNPC_IcePuzzle{
 text HintsNPC_StrengthPuzzle{
     "The puzzle revolves around breaking the\n"
     "ROCK SMASH rocks in the correct order.\p"
-    "1. Break the two center rocks.\n"
-    "2. Break the two rocks south-west.\l"
-    "3. Break the last rock on the east."
+    "1. Break the two center rocks.\p"
+    "2. Break the two rocks south-west.\p"
+    "3. Break the last rock on the east.\p"
+    "Think about how you want to access this\n"
+    "last smashable rock on the east."
 }
 
 text HintsNPC_StatementsPuzzle{
     "Solve the puzzle in order to figure out\n"
     "if the 4th statement is true or false,\l"
     "not the other way around!\p"
-    "You'll find that only one answer remains\n"
-    "for statement 4."
+    "You'll find that statement 4 will have\n"
+    "only one possible answer."
 }
 
 text HintsNPC_CatchingSmeargle{
@@ -1853,12 +1986,15 @@ text HintsNPC_CatchingSmeargle{
     "If you stall a turn by not attacking,\n"
     "SMEARGLE will no longer be able to copy\l"
     "the wrong move.\p"
-    "SALAZZLE might be part of the solution."
+    "Consider first stopping by SALAZZLE\n"
+    "while carrying a certain item."
 }
 
 text HintsNPC_TrainerRoseUn{
     "You have to find a way to take the item\n"
     "without winning the battle.\p"
+    "In other words: try to avoid taking the\n"
+    "FINAL GAMBIT from ZANGOOSE.\p"
     "Keep in mind that HIDDEN POWER's typing\n"
     "may depend on the POKéMON using it.\p"
     "It's okay to give up."
@@ -1872,12 +2008,15 @@ text HintsNPC_TrainerDSAbel{
 }
 
 text HintsNPC_TrainerRoel{
-    "It's key for SMEARGLE to SKETCH the\n"
-    "correct move before this fight.\p"
-    "Consider exploring the old couple to see\n"
-    "what moves their POKéMON are hiding.\p"
-    "For the actual battle, you might want to\n"
-    "find a way to control TOGEDEMARU's HP."
+    "To beat Roel's last POKéMON, SMEARGLE\n"
+    "must first SKETCH the correct move.\l"
+    "Explore the old couple to see what\l"
+    "moves their POKéMON are hiding.\p"
+    "Also, there exists a clever way to\n"
+    "control the TOGEDEMARU's HP, which will\l"
+    "help align the TRICK ROOM turns.\p"
+    "...\p"
+    "Good luck!"
 }
 
 text HintsNPC_TrainerCTrish{
@@ -1895,9 +2034,104 @@ text HintsNPC_TrainersPeeSea{
 }
 
 text HintsNPC_TrainersJanNan{
-    "PAIN SPLIT can be used to heal, and\n"
-    "SCRAFTY's ability can be used against\l"
-    "itself.\p"
-    "Remember the PERISH tiebreaker.\n"
+    "PAIN SPLIT can be used against your own\n"
+    "POKéMON, and SCRAFTY's ability can be\l"
+    "turned against itself.\p"
+    "Don't forget the PERISH tiebreaker.\n"
     "Is there an item you haven't used yet?"
 }
+
+text HintsNPC_DoSalazzleThief{
+    "Check out the SALAZZLE in the cave\n"
+    "below!"
+}
+
+text HintsNPC_DoRoseUn{
+    "You should battle Rose Un, the KECLEON\n"
+    "trainer.\p"
+    "There may be something you can get from\n"
+    "that fight."
+}
+
+text HintsNPC_DoPCCheck{
+    "You've missed an item located around the\n"
+    "plant room."
+}
+
+text HintsNPC_DoIcePuzzle{
+    "There's a berry tree in the ice puzzle.\n"
+    "It might be a useful item when trying to\l"
+    "catch the perfect SMEARGLE."
+}
+
+text HintsNPC_DoStrengthPuzzle{
+    "The STRENGTH puzzle in the Tiny Cave\n"
+    "is still unsolved.\p"
+    "It could be worth trying."
+}
+
+text HintsNPC_DoSmeargleCatch{
+    "You are ready to catch the perfect\n"
+    "SMEARGLE.\p"
+    "Talk to the person in the plants room to\n"
+    "validate your catch.\p"
+    "Think about which move your SMEARGLE\n"
+    "should carry in the end."
+}
+
+text HintsNPC_DoDSAbel{
+    "You should look to beat DS. Abel, the\n"
+    "SLAKING trainer.\p"
+    "Find the right movesets for SMEARGLE\n"
+    "and GARDEVOIR to do so."
+}
+
+text HintsNPC_DoPlantCheck{
+    "Have you checked the plant room?\p"
+    "There might be another item hidden\n"
+    "somewhere around that room."
+}
+
+text HintsNPC_DoGetHeartScale{
+    "There's a bike obstacle near DS. ABEL,\n"
+    "the Slaking trainer you just defeated.\p"
+    "Did you already get the bike?"
+}
+
+text HintsNPC_DoStatementPuzzle{
+    "You can solve the statements puzzle!\p"
+    "It could help you reach the item ball in\n"
+    "the cave below us."
+}
+
+text HintsNPC_DoBeatRoel{
+    "You have to get past trainer Roel.\n"
+    "To do so, SMEARGLE must first SKETCH\l"
+    "the right move.\p"
+    "Did you find what the elderly couple's\n"
+    "POKéMON are hiding?"
+}
+
+text HintsNPC_DoGePastPeeSea{
+    "You have to find a way to get past the\n"
+    "Pee & Sea double battle."
+}
+
+text HintsNPC_DoStealSitrus{
+    "C. Trish's SCORBUNNY has a berry that'd\n"
+    "be quite helpful in the final battle.\p"
+    "Can you steal it?"
+}
+
+text HintsNPC_DoBeatJanNan{
+    "You are ready for the final battle!\p"
+    "Can GARDEVOIR keep SMEARGLE alive for\n"
+    "long enough?"
+}
+
+text HintsNPC_DoNothingUrDone{
+    "I don't think you need any additional\n"
+    "hints."
+}
+
+
