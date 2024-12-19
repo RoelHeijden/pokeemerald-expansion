@@ -5613,6 +5613,10 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 if ((gardyHp > (smeargleHp - 24)) && battlerDef == battlerGardy)
                     score = 150;
 
+                // edge case: target smeargle if -1 scrafty puts it to 1 hp
+                if (smeargleHp == 25 && battlerDef == battlerSmeargle)
+                    score = 150;
+
                 // target Smeargle if self pain splitting
                 if (opposingSelfPainSplit && gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
                     score = 160;
