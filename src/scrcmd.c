@@ -2355,6 +2355,30 @@ bool8 ScrCmd_bufferplaytimeandhints(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+bool8 ScrCmd_addgametime(struct ScriptContext *ctx)
+{
+    u16 time = ScriptReadHalfword(ctx); 
+
+    // Convert current play time to total minutes
+    u32 totalMinutes = (gSaveBlock2Ptr->playTimeHours * 60) + gSaveBlock2Ptr->playTimeMinutes;
+
+    // Add the provided time to the total minutes
+    totalMinutes += time;
+
+    // Recalculate hours and minutes from the new total
+    gSaveBlock2Ptr->playTimeHours = totalMinutes / 60;
+    gSaveBlock2Ptr->playTimeMinutes = totalMinutes % 60;
+
+    // Handle overflow: if playtime exceeds 999 hours, cap it
+    if (gSaveBlock2Ptr->playTimeHours > 999)
+    {
+        gSaveBlock2Ptr->playTimeHours = 999;
+        gSaveBlock2Ptr->playTimeMinutes = 59; // Cap at the max allowable time
+    }
+
+    return FALSE;
+}
 
 
 

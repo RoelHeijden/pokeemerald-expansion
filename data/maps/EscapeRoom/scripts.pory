@@ -1288,9 +1288,9 @@ script EscapeRoom_EventScript_HintsNPC{
 
 script EscapeRoom_EventScript_HintsNPC_part2{
     dynmultichoice(20, 8, FALSE, 6, 0, 0, 
-    "Where should I be looking now?", 
-    "Hint for a specific step.")
-
+    "Where should I look now? (10 min.)", 
+    "Hint for a specific step. (20 min.)")
+ 
     if(var(VAR_RESULT) == 0){
         call(EscapeRoom_EventScript_WhereToLookHint)
     }
@@ -1318,119 +1318,231 @@ script EscapeRoom_EventScript_SpecificStepHint{
     "Trainers: Jan & Nan (Smeargle, Scrafty)"
     )
 
+    setvar(VAR_TEMP_0, 0)
+
     if (var(VAR_RESULT) == 0) {
         msgbox(HintsNPC_GreatBall)
+        if(flag(FLAG_HINT_GREAT_BALL) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_GREAT_BALL)
     } 
     elif (var(VAR_RESULT) == 1) {
         msgbox(HintsNPC_Nugget)
+        if(flag(FLAG_HINT_NUGGET) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_NUGGET)
     } 
     elif (var(VAR_RESULT) == 2) {
         msgbox(HintsNPC_IcePuzzle)
+        if(flag(FLAG_HINT_ICE_PUZZLE) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_ICE_PUZZLE)
     } 
     elif (var(VAR_RESULT) == 3) {
         msgbox(HintsNPC_StrengthPuzzle)
+        if(flag(FLAG_HINT_STRENGTH_PUZZLE) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_STRENGTH_PUZZLE)
     } 
     elif (var(VAR_RESULT) == 4) {
         msgbox(HintsNPC_StatementsPuzzle)
+        if(flag(FLAG_HINT_STATEMENTS_PUZZLE) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_STATEMENTS_PUZZLE)
     } 
     elif (var(VAR_RESULT) == 5) {
         msgbox(HintsNPC_CatchingSmeargle)
+        if(flag(FLAG_HINT_CATCHING_SMEARGLE) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_CATCHING_SMEARGLE)
     } 
     elif (var(VAR_RESULT) == 6) {
         msgbox(HintsNPC_TrainerRoseUn)
+        if(flag(FLAG_HINT_TRAINER_ROSE_UN) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_TRAINER_ROSE_UN)
     } 
     elif (var(VAR_RESULT) == 7) {
         msgbox(HintsNPC_TrainerDSAbel)
+        if(flag(FLAG_HINT_TRAINER_DS_ABEL) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_TRAINER_DS_ABEL)
     } 
     elif (var(VAR_RESULT) == 8) {
         msgbox(HintsNPC_TrainerRoel)
+        if(flag(FLAG_HINT_TRAINER_ROEL) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_TRAINER_ROEL)
     } 
     elif (var(VAR_RESULT) == 9) {
         msgbox(HintsNPC_TrainerCTrish)
+        if(flag(FLAG_HINT_TRAINER_C_TRISH) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_TRAINER_C_TRISH)
     } 
     elif (var(VAR_RESULT) == 10) {
         msgbox(HintsNPC_TrainersPeeSea)
+        if(flag(FLAG_HINT_TRAINERS_PEE_SEA) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_TRAINERS_PEE_SEA)
     } 
     elif (var(VAR_RESULT) == 11) {
         msgbox(HintsNPC_TrainersJanNan)
+        if(flag(FLAG_HINT_TRAINERS_JAN_NAN) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_TRAINERS_JAN_NAN)
     }
     else{
         call(EscapeRoom_EventScript_HintsNPC_part2)
+        setvar(VAR_TEMP_0, 2)
     }
+
+    // game time added message
+    if(var(VAR_TEMP_0) == 1){
+        msgbox(HintsNPCNoTimeAddedMessage)
+        waitmessage
+    }
+    elif(var(VAR_TEMP_0) == 0){
+        addgametime(20)
+        playse(SE_SHOP)
+        msgbox(HintsNPC20minAddedMessage)
+        waitmessage
+    }
+    setvar(VAR_TEMP_0, 0)
 }
 
 script EscapeRoom_EventScript_WhereToLookHint{
+    setvar(VAR_TEMP_0, 0)
+
     if (flag(FLAG_TM_10_STOLEN) == FALSE) {
         msgbox(HintsNPC_DoSalazzleThief)
+        if(flag(FLAG_HINT_SALAZZLE) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_SALAZZLE)
     } 
     elif (flag(FLAG_HM06_STEAL_SUCCES) == FALSE) {
         msgbox(HintsNPC_DoRoseUn)
+        if(flag(FLAG_HINT_ROSE_UN) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_ROSE_UN)
     } 
     elif (flag(FLAG_GREAT_BALL_FOUND) == FALSE) {
         msgbox(HintsNPC_DoPCCheck)
+        if(flag(FLAG_HINT_PC_CHECK) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_PC_CHECK)
     } 
     elif (flag(FLAG_PECHA_BERRY_FOUND) == FALSE) {
         msgbox(HintsNPC_DoIcePuzzle)
+        if(flag(FLAG_HINT_ICE_PUZZLE2) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_ICE_PUZZLE2)
     } 
     elif (flag(FLAG_TOXIC_ORB_OBTAINED) == FALSE) {
         msgbox(HintsNPC_DoStrengthPuzzle)
+        if(flag(FLAG_HINT_STRENGTH_PUZZLE2) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_STRENGTH_PUZZLE2)
     } 
     elif (flag(FLAG_GARDEVOIR_TRADE_SUCCESS) == FALSE) {
         msgbox(HintsNPC_DoSmeargleCatch)
+        if(flag(FLAG_HINT_SMEARGLE_CATCH) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_SMEARGLE_CATCH)
     } 
     elif (flag(FLAG_DS_ABEL_DEFEATED) == FALSE) {
         msgbox(HintsNPC_DoDSAbel)
+        if(flag(FLAG_HINT_DS_ABEL) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_DS_ABEL)
     } 
     elif (flag(FLAG_NUGGET3_OBTAINED) == FALSE) {
         msgbox(HintsNPC_DoPlantCheck)
+        if(flag(FLAG_HINT_PLANT_CHECK) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_PLANT_CHECK)
     } 
     elif (flag(FLAG_HEART_SCALE2_OBTAINED) == FALSE) {
         msgbox(HintsNPC_DoGetHeartScale)
-        setflag(FLAG_HINT_GET_HEART_SCALE)
+        if(flag(FLAG_HINT_PLANT_CHECK) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
+        setflag(FLAG_HINT_PLANT_CHECK)
     } 
     elif (flag(FLAG_RARE_CANDY_OBTAINED) == FALSE) {
         msgbox(HintsNPC_DoStatementPuzzle)
+        if(flag(FLAG_HINT_STATEMENT_PUZZLE) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_STATEMENT_PUZZLE)
     } 
     elif (flag(FLAG_ROEL_DEFEATED) == FALSE) {
         msgbox(HintsNPC_DoBeatRoel)
+        if(flag(FLAG_HINT_BEAT_ROEL) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_BEAT_ROEL)
     } 
     elif (flag(FLAG_DOUBLE2_BYPASSED) == FALSE) {
         msgbox(HintsNPC_DoGePastPeeSea)
+        if(flag(FLAG_HINT_PEE_SEA) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_PEE_SEA)
     } 
     elif (flag(FLAG_SITRUS_STOLEN) == FALSE) {
         msgbox(HintsNPC_DoStealSitrus)
+        if(flag(FLAG_HINT_STEAL_SITRUS) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_STEAL_SITRUS)
     } 
     elif (flag(FLAG_DOUBLE1_COMPLETED) == FALSE) {
         msgbox(HintsNPC_DoBeatJanNan)
+        if(flag(FLAG_HINT_BEAT_JAN_NAN) == TRUE){
+            setvar(VAR_TEMP_0, 1)
+        }
         setflag(FLAG_HINT_BEAT_JAN_NAN)
     } 
     else {
         msgbox(HintsNPC_DoNothingUrDone)
+        waitmessage
+        releaseall
+        end
     }
+
+    // game time added message
+    if(var(VAR_TEMP_0) == 1){
+        msgbox(HintsNPCNoTimeAddedMessage)
+        waitmessage
+    }
+    else{
+        addgametime(10)
+        playse(SE_SHOP)
+        msgbox(HintsNPC10minAddedMessage)
+        waitmessage
+    }
+    setvar(VAR_TEMP_0, 0)
 }
 
 
@@ -1938,12 +2050,33 @@ text Double2PostMatchMessage{
     format("I don't think you were supposed to win this battle.")
 }
 
+
+////////////////////////////////////////////////////////
+
 text HintsIntroMessage{
-    "Hello, I'm the hintman.\n"
-    "You can come to me for hints whenever\l"
-    "you're stuck on any of the steps.\p"
+    "Need help? I can give you a hint at the\n"
+    "cost of getting time added to your\l"
+    "in-game clock.\p"
+    "The amount will depend on the type of\l"
+    "hint that you select.\p"
     "Do you want to get a hint right now?"
 }
+
+text HintsNPCNoTimeAddedMessage{
+    "You've already received this hint so\n"
+    "no time was added to your clock."
+}
+
+text HintsNPC20minAddedMessage{
+    "20 minutes were added to your clock."
+}
+
+text HintsNPC10minAddedMessage{
+    "10 minutes were added to your clock."
+}
+
+
+
 
 text HintsNPCNoHintMessage{
     "I'll be here if you need me."
@@ -1995,8 +2128,7 @@ text HintsNPC_CatchingSmeargle{
     "If you stall a turn by not attacking,\n"
     "SMEARGLE will no longer be able to copy\l"
     "the wrong move.\p"
-    "Consider first stopping by SALAZZLE\n"
-    "while carrying a certain item."
+    "Consider visiting SALAZZLE first."
 }
 
 text HintsNPC_TrainerRoseUn{
@@ -2064,7 +2196,7 @@ text HintsNPC_DoRoseUn{
 
 text HintsNPC_DoPCCheck{
     "You've missed an item located around the\n"
-    "plant room."
+    "plant room!"
 }
 
 text HintsNPC_DoIcePuzzle{
@@ -2117,7 +2249,7 @@ text HintsNPC_DoBeatRoel{
     "You have to get past trainer Roel.\n"
     "To do so, SMEARGLE must first SKETCH\l"
     "the right move.\p"
-    "Did you find what the elderly couple's\n"
+    "Did you find what the old couple's\n"
     "POKéMON are hiding?"
 }
 
