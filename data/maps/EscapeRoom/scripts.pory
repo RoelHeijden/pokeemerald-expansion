@@ -201,7 +201,7 @@ script EscapeRoom_MapScript_KeepDouble1Moved {
 
 script EscapeRoom_MapScripts_PlayStartMessage{
     lockall
-    msgbox(StartMessage)
+    // msgbox(StartMessage)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
     releaseall
 }
@@ -279,8 +279,12 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 
 script EscapeRoom_EventScript_TestSign {
     lockall
-    msgbox(SignMessage1)
-    waitmessage
+    msgbox(SignMessageReadInfoAgain, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES)
+    {
+        msgbox(SignMessage1)
+        waitmessage
+    }
     releaseall
 }
 
@@ -1438,7 +1442,7 @@ text StartMessage{
     "You'll have to navigate tough battles\n"
     "and find creative solutions in order to\l"
     "progress through the map, with the\l"
-    "ultimate goal of escaping this cave.\p"
+    "ultimate goal of escaping the cave.\p"
 
     "READ CAREFULLY\p"
 
@@ -1493,11 +1497,16 @@ text SignMessage1{
 
     "6) You won't get softlocked unless you\n"
     "toss away items, release Pokémon, or\l"
-    "REALLY mess up the strength puzzle.\p"
+    "REALLY mess up the Strength puzzle.\p"
 
     "7) Try to avoid using speed up.\n"
     "There are many clues, like NPC dialogue,\l"
     "that you might otherwise miss." 
+}
+
+text SignMessageReadInfoAgain{
+    "Do you want to read the important\n"
+    "information again?"
 }
 
 text EscapeRoomEndCongratz{
