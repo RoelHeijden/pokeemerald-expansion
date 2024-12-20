@@ -22,33 +22,41 @@ EscapeRoom_IcePuzzle_MapScripts_MAP_SCRIPT_ON_FRAME_TABLE:
 
 EscapeRoom_IcePuzzle_MapScript_OnResumeScripts::
 # 20 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+	goto_if_unset FLAG_TM_10_STOLEN, EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_2
+EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_1:
+# 25 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	call EscapeRoom_MapScripts_CheckIfMonCaught
-# 23 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+# 28 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	call EscapeRoom_MapScripts_CheckAfterBattleGreatBall
-# 26 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+# 31 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	call EscapeRoom_MapScripts_CheckAfterBattlePecha
-# 29 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+# 34 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	call EscapeRoom_MapScripts_CheckAfterBattleHeal
-# 32 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
-	goto_if_unset FLAG_TOGGLE_BAG_USE, EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_1
+# 37 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+	goto_if_unset FLAG_TOGGLE_BAG_USE, EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_4
 	return
 
-EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_1:
-# 33 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_2:
+# 21 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+	call EscapeRoom_MapScript_checkTM10stolen
+	goto EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_1
+
+EscapeRoom_IcePuzzle_MapScript_OnResumeScripts_4:
+# 38 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	setflag FLAG_TOGGLE_BAG_USE
 	return
 
 
 EscapeRoom_IcePuzzle_MapScript_OnWarpIntoScripts::
-# 39 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+# 44 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	call EscapeRoom_IcePuzzle_MapScript_setNPCfacing
 	return
 
 
 EscapeRoom_IcePuzzle_MapScript_setNPCfacing::
-# 43 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+# 48 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	turnobject 3, DIR_EAST
-# 44 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
+# 49 "data/maps/EscapeRoom_IcePuzzle/scripts.pory"
 	turnobject 4, DIR_SOUTH
 	return
 

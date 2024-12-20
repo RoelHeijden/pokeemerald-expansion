@@ -36,6 +36,10 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // check if pokemon caught -- sets flag if true
     call(EscapeRoom_MapScripts_CheckIfMonCaught)
 
+    // check if tm 10 succesfully stolen
+    if(flag(FLAG_TM_10_STOLEN) == FALSE){
+        call(EscapeRoom_MapScript_checkTM10stolen)
+    }
     // check for great ball return
     call(EscapeRoom_MapScripts_CheckAfterBattleGreatBall)
 
@@ -102,6 +106,17 @@ script EscapeRoom_MapScript_CheckHintFlags{
     checkpartyitem(1)
     if(var(VAR_0x8004) == ITEM_SITRUS_BERRY) {
         setflag(FLAG_SITRUS_STOLEN)
+    }
+}
+
+script EscapeRoom_MapScript_checkTM10stolen{
+    checkitem(ITEM_TM10) // in bag
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_TM_10_STOLEN)
+    }
+    checkpartyitem(0) // held by pokemon
+    if(var(VAR_0x8004) == ITEM_TM10) {
+        setflag(FLAG_TM_10_STOLEN)
     }
 }
 

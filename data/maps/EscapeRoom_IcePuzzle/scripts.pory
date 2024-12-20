@@ -16,6 +16,11 @@ mapscripts EscapeRoom_IcePuzzle_MapScripts {
 }
 
 script EscapeRoom_IcePuzzle_MapScript_OnResumeScripts{
+    // check if tm 10 succesfully stolen
+    if(flag(FLAG_TM_10_STOLEN) == FALSE){
+        call(EscapeRoom_MapScript_checkTM10stolen)
+    }
+
     // check if pokemon caught -- sets flag if true
     call(EscapeRoom_MapScripts_CheckIfMonCaught)
 
