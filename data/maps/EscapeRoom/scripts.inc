@@ -3270,52 +3270,53 @@ Double2PostMatchMessage::
 HintsIntroMessage::
 # 2056 "data/maps/EscapeRoom/scripts.pory"
 	.string "Need help? I can give you a hint at the\n"
-	.string "cost of getting time added to your clock.\l"
-	.string "The amount will depend on the type of\l"
+	.string "cost of getting time added to your\l"
+	.string "in-game clock.\p"
+	.string "The amount will depend on the type of\n"
 	.string "hint that you select.\p"
 	.string "Do you want to get a hint right now?$"
 
 HintsNPCNoTimeAddedMessage::
-# 2064 "data/maps/EscapeRoom/scripts.pory"
+# 2065 "data/maps/EscapeRoom/scripts.pory"
 	.string "You've already received this hint so\n"
 	.string "no time was added to your clock.$"
 
 HintsNPC20minAddedMessage::
-# 2069 "data/maps/EscapeRoom/scripts.pory"
+# 2070 "data/maps/EscapeRoom/scripts.pory"
 	.string "20 minutes were added to your clock.$"
 
 HintsNPC10minAddedMessage::
-# 2073 "data/maps/EscapeRoom/scripts.pory"
+# 2074 "data/maps/EscapeRoom/scripts.pory"
 	.string "10 minutes were added to your clock.$"
 
 HintsNPCNoHintMessage::
-# 2080 "data/maps/EscapeRoom/scripts.pory"
+# 2081 "data/maps/EscapeRoom/scripts.pory"
 	.string "I'll be here if you need me.$"
 
 HintsNPCWhatKindOfHintMessage::
-# 2084 "data/maps/EscapeRoom/scripts.pory"
+# 2085 "data/maps/EscapeRoom/scripts.pory"
 	.string "What kind of hint would you like?$"
 
 HintsNPC_GreatBall::
-# 2088 "data/maps/EscapeRoom/scripts.pory"
+# 2089 "data/maps/EscapeRoom/scripts.pory"
 	.string "This item is accessible from the start.\p"
 	.string "You should further explore the room\n"
 	.string "with the plants.$"
 
 HintsNPC_Nugget::
-# 2094 "data/maps/EscapeRoom/scripts.pory"
+# 2095 "data/maps/EscapeRoom/scripts.pory"
 	.string "It's inside an item ball, but the ball\n"
 	.string "itself may be hard to see.\p"
 	.string "Did the NUGGET guy mention leafs?$"
 
 HintsNPC_IcePuzzle::
-# 2100 "data/maps/EscapeRoom/scripts.pory"
+# 2101 "data/maps/EscapeRoom/scripts.pory"
 	.string "At the beginning, only the berry tree is\n"
 	.string "accessible. The item ball is unreachable\l"
 	.string "until the MACH BIKE is obtained.$"
 
 HintsNPC_StrengthPuzzle::
-# 2106 "data/maps/EscapeRoom/scripts.pory"
+# 2107 "data/maps/EscapeRoom/scripts.pory"
 	.string "The puzzle revolves around breaking the\n"
 	.string "ROCK SMASH rocks in the correct order.\p"
 	.string "1. Break the two center rocks.\p"
@@ -3325,7 +3326,7 @@ HintsNPC_StrengthPuzzle::
 	.string "last smashable rock on the east.$"
 
 HintsNPC_StatementsPuzzle::
-# 2116 "data/maps/EscapeRoom/scripts.pory"
+# 2117 "data/maps/EscapeRoom/scripts.pory"
 	.string "Solve the puzzle in order to figure out\n"
 	.string "if the 4th statement is true or false,\l"
 	.string "not the other way around!\p"
@@ -3333,7 +3334,7 @@ HintsNPC_StatementsPuzzle::
 	.string "only one possible answer.$"
 
 HintsNPC_CatchingSmeargle::
-# 2124 "data/maps/EscapeRoom/scripts.pory"
+# 2125 "data/maps/EscapeRoom/scripts.pory"
 	.string "The perfect SMEARGLE will have the move\n"
 	.string "SKETCH, which only has 1pp.\p"
 	.string "If you stall a turn by not attacking,\n"
@@ -3342,7 +3343,7 @@ HintsNPC_CatchingSmeargle::
 	.string "Consider visiting SALAZZLE first.$"
 
 HintsNPC_TrainerRoseUn::
-# 2133 "data/maps/EscapeRoom/scripts.pory"
+# 2134 "data/maps/EscapeRoom/scripts.pory"
 	.string "You have to find a way to take the item\n"
 	.string "without winning the battle.\p"
 	.string "In other words: try to avoid taking the\n"
@@ -3352,14 +3353,15 @@ HintsNPC_TrainerRoseUn::
 	.string "It's okay to give up.$"
 
 HintsNPC_TrainerDSAbel::
-# 2143 "data/maps/EscapeRoom/scripts.pory"
+# 2144 "data/maps/EscapeRoom/scripts.pory"
 	.string "The right moves on SMEARGLE and\n"
 	.string "GARDEVOIR will help defeat the SLAKING.\p"
 	.string "However, CURSOLA will need to be given a\n"
-	.string "hindering ability to slow it down.$"
+	.string "hindering ability to slow it down.\p"
+	.string "Are you a skill trader?$"
 
 HintsNPC_TrainerRoel::
-# 2150 "data/maps/EscapeRoom/scripts.pory"
+# 2152 "data/maps/EscapeRoom/scripts.pory"
 	.string "To beat Roel's last POKéMON, SMEARGLE\n"
 	.string "must first SKETCH the correct move.\l"
 	.string "Explore the old couple to see what\l"
@@ -3371,7 +3373,7 @@ HintsNPC_TrainerRoel::
 	.string "Good luck!$"
 
 HintsNPC_TrainerCTrish::
-# 2162 "data/maps/EscapeRoom/scripts.pory"
+# 2164 "data/maps/EscapeRoom/scripts.pory"
 	.string "Can you steal her SITRUS BERRY?\p"
 	.string "SKILL SWAP is your friend, and perhaps\n"
 	.string "there's a way to render DOUBLE EDGE\l"
@@ -3379,13 +3381,13 @@ HintsNPC_TrainerCTrish::
 	.string "Two ways actually.$"
 
 HintsNPC_TrainersPeeSea::
-# 2170 "data/maps/EscapeRoom/scripts.pory"
+# 2172 "data/maps/EscapeRoom/scripts.pory"
 	.string "This battle looks impossible to win.\n"
 	.string "Can you find a way to skip this battle?\p"
 	.string "Try thinking inside the box.$"
 
 HintsNPC_TrainersJanNan::
-# 2176 "data/maps/EscapeRoom/scripts.pory"
+# 2178 "data/maps/EscapeRoom/scripts.pory"
 	.string "PAIN SPLIT can be used against your own\n"
 	.string "POKéMON, and SCRAFTY's ability can be\l"
 	.string "turned against itself.\p"
@@ -3393,36 +3395,36 @@ HintsNPC_TrainersJanNan::
 	.string "Is there an item you haven't used yet?$"
 
 HintsNPC_DoSalazzleThief::
-# 2184 "data/maps/EscapeRoom/scripts.pory"
+# 2186 "data/maps/EscapeRoom/scripts.pory"
 	.string "Check out the SALAZZLE in the cave\n"
 	.string "below!$"
 
 HintsNPC_DoRoseUn::
-# 2189 "data/maps/EscapeRoom/scripts.pory"
+# 2191 "data/maps/EscapeRoom/scripts.pory"
 	.string "You should battle Rose Un, the KECLEON\n"
 	.string "trainer.\p"
 	.string "There may be something you can get from\n"
 	.string "that fight.$"
 
 HintsNPC_DoPCCheck::
-# 2196 "data/maps/EscapeRoom/scripts.pory"
+# 2198 "data/maps/EscapeRoom/scripts.pory"
 	.string "You've missed an item located around the\n"
 	.string "plant room!$"
 
 HintsNPC_DoIcePuzzle::
-# 2201 "data/maps/EscapeRoom/scripts.pory"
+# 2203 "data/maps/EscapeRoom/scripts.pory"
 	.string "There's a berry tree in the ice puzzle.\n"
 	.string "It might be a useful item when trying to\l"
 	.string "catch the perfect SMEARGLE.$"
 
 HintsNPC_DoStrengthPuzzle::
-# 2207 "data/maps/EscapeRoom/scripts.pory"
+# 2209 "data/maps/EscapeRoom/scripts.pory"
 	.string "The STRENGTH puzzle in the Tiny Cave\n"
-	.string "is still unsolved.\p"
+	.string "down south is still unsolved.\p"
 	.string "It could be worth trying.$"
 
 HintsNPC_DoSmeargleCatch::
-# 2213 "data/maps/EscapeRoom/scripts.pory"
+# 2215 "data/maps/EscapeRoom/scripts.pory"
 	.string "You are ready to catch the perfect\n"
 	.string "SMEARGLE.\p"
 	.string "Talk to the person in the plants room to\n"
@@ -3431,56 +3433,56 @@ HintsNPC_DoSmeargleCatch::
 	.string "should carry in the end.$"
 
 HintsNPC_DoDSAbel::
-# 2222 "data/maps/EscapeRoom/scripts.pory"
+# 2224 "data/maps/EscapeRoom/scripts.pory"
 	.string "You should look to beat DS. Abel, the\n"
 	.string "SLAKING trainer.\p"
 	.string "Find the right movesets for SMEARGLE\n"
 	.string "and GARDEVOIR to do so.$"
 
 HintsNPC_DoPlantCheck::
-# 2229 "data/maps/EscapeRoom/scripts.pory"
+# 2231 "data/maps/EscapeRoom/scripts.pory"
 	.string "Have you checked the plant room?\p"
 	.string "There might be another item hidden\n"
 	.string "somewhere around that room.$"
 
 HintsNPC_DoGetHeartScale::
-# 2235 "data/maps/EscapeRoom/scripts.pory"
+# 2237 "data/maps/EscapeRoom/scripts.pory"
 	.string "There's a bike obstacle near DS. ABEL,\n"
 	.string "the Slaking trainer you just defeated.\p"
 	.string "Did you already get the bike?$"
 
 HintsNPC_DoStatementPuzzle::
-# 2241 "data/maps/EscapeRoom/scripts.pory"
+# 2243 "data/maps/EscapeRoom/scripts.pory"
 	.string "You can solve the statements puzzle!\p"
 	.string "It could help you reach the item ball in\n"
 	.string "the cave below us.$"
 
 HintsNPC_DoBeatRoel::
-# 2247 "data/maps/EscapeRoom/scripts.pory"
+# 2249 "data/maps/EscapeRoom/scripts.pory"
 	.string "You have to get past trainer Roel.\n"
 	.string "To do so, SMEARGLE must first SKETCH\l"
 	.string "the right move.\p"
-	.string "Did you find what the elderly couple's\n"
+	.string "Did you find what the old couple's\n"
 	.string "POKéMON are hiding?$"
 
 HintsNPC_DoGePastPeeSea::
-# 2255 "data/maps/EscapeRoom/scripts.pory"
+# 2257 "data/maps/EscapeRoom/scripts.pory"
 	.string "You have to find a way to get past the\n"
 	.string "Pee & Sea double battle.$"
 
 HintsNPC_DoStealSitrus::
-# 2260 "data/maps/EscapeRoom/scripts.pory"
+# 2262 "data/maps/EscapeRoom/scripts.pory"
 	.string "C. Trish's SCORBUNNY has a berry that'd\n"
 	.string "be quite helpful in the final battle.\p"
 	.string "Can you steal it?$"
 
 HintsNPC_DoBeatJanNan::
-# 2266 "data/maps/EscapeRoom/scripts.pory"
+# 2268 "data/maps/EscapeRoom/scripts.pory"
 	.string "You are ready for the final battle!\p"
 	.string "Can GARDEVOIR keep SMEARGLE alive for\n"
 	.string "long enough?$"
 
 HintsNPC_DoNothingUrDone::
-# 2272 "data/maps/EscapeRoom/scripts.pory"
+# 2274 "data/maps/EscapeRoom/scripts.pory"
 	.string "I don't think you need any additional\n"
 	.string "hints.$"

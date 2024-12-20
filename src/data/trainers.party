@@ -16879,7 +16879,7 @@ Name: Jan & Nan
 Class: Old Couple
 Pic: Old Couple
 Gender: Male
-Music: Twins
+Music: Swimmer
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
@@ -17012,19 +17012,19 @@ IVs: 17 Def
 Name: Pee & Sea
 Class: Twins
 Pic: Twins
-Gender: Male
+Gender: Female
 Music: Twins
 Double Battle: Yes
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Urshifu @ Choice Band  
+Urshifu (F) @ Choice Band  
 Ability: Unseen Fist  
 Level: 35  
 EVs: 252 Atk / 252 Spe  
 Adamant Nature  
 - Wicked Blow  
 
-Urshifu-Rapid-Strike @ Choice Band  
+Urshifu-Rapid-Strike (F) @ Choice Band  
 Ability: Unseen Fist  
 Level: 35   
 EVs: 252 Atk / 232 Spe  

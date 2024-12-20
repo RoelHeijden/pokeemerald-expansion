@@ -42194,7 +42194,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_OLD_COUPLE,
         .encounterMusic_gender = 
 #line 16882
-            TRAINER_ENCOUNTER_MUSIC_TWINS,
+            TRAINER_ENCOUNTER_MUSIC_SWIMMER,
 #line 16883
         .doubleBattle = TRUE,
 #line 16884
@@ -42554,6 +42554,8 @@ F_TRAINER_FEMALE |
 #line 17014
         .trainerPic = TRAINER_PIC_TWINS,
         .encounterMusic_gender = 
+#line 17015
+F_TRAINER_FEMALE | 
 #line 17016
             TRAINER_ENCOUNTER_MUSIC_TWINS,
 #line 17017
@@ -42566,7 +42568,8 @@ F_TRAINER_FEMALE |
             {
 #line 17020
             .species = SPECIES_URSHIFU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17020
+            .gender = TRAINER_MON_FEMALE,
 #line 17020
             .heldItem = ITEM_CHOICE_BAND,
 #line 17023
@@ -42588,7 +42591,8 @@ F_TRAINER_FEMALE |
             {
 #line 17027
             .species = SPECIES_URSHIFU_RAPID_STRIKE,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17027
+            .gender = TRAINER_MON_FEMALE,
 #line 17027
             .heldItem = ITEM_CHOICE_BAND,
 #line 17030

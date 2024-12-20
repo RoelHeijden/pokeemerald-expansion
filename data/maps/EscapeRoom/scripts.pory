@@ -2057,7 +2057,7 @@ text HintsIntroMessage{
     "Need help? I can give you a hint at the\n"
     "cost of getting time added to your\l"
     "in-game clock.\p"
-    "The amount will depend on the type of\l"
+    "The amount will depend on the type of\n"
     "hint that you select.\p"
     "Do you want to get a hint right now?"
 }
@@ -2145,7 +2145,8 @@ text HintsNPC_TrainerDSAbel{
     "The right moves on SMEARGLE and\n"
     "GARDEVOIR will help defeat the SLAKING.\p"
     "However, CURSOLA will need to be given a\n"
-    "hindering ability to slow it down."
+    "hindering ability to slow it down.\p"
+    "Are you a skill trader?"
 }
 
 text HintsNPC_TrainerRoel{
@@ -2207,7 +2208,7 @@ text HintsNPC_DoIcePuzzle{
 
 text HintsNPC_DoStrengthPuzzle{
     "The STRENGTH puzzle in the Tiny Cave\n"
-    "is still unsolved.\p"
+    "down south is still unsolved.\p"
     "It could be worth trying."
 }
 

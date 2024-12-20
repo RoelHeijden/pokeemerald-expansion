@@ -1593,14 +1593,15 @@ void PlayTrainerEncounterMusic(void)
         case TRAINER_ENCOUNTER_MUSIC_MAGMA:
             music = MUS_ENCOUNTER_MAGMA;
             break;
-        case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
-            music = MUS_ENCOUNTER_SWIMMER;
-            break;
 
-        // CHANGED: no music on twins encounter
-        case TRAINER_ENCOUNTER_MUSIC_TWINS:
-            // music = MUS_ENCOUNTER_TWINS;
+        // CHANGED: no music on twins encounter. old_couple set to swimmer music
+        case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
+            // music = MUS_ENCOUNTER_SWIMMER;
             music = MUS_DUMMY;
+            break;
+            
+        case TRAINER_ENCOUNTER_MUSIC_TWINS:
+            music = MUS_ENCOUNTER_TWINS;
             break;
         case TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR:
             music = MUS_ENCOUNTER_ELITE_FOUR;
