@@ -42307,7 +42307,7 @@ F_TRAINER_FEMALE |
 #line 16922
             .ability = ABILITY_GRASSY_SURGE,
 #line 16923
-            .lvl = 69,
+            .lvl = 68,
 #line 16925
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

@@ -1564,71 +1564,38 @@ script EscapeRoom_EventScript_WhereToLookHint{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 text StartMessage{
-    "Welcome to Pokémon Cave Escape!\p"
-
-    "You'll have to navigate tough battles\n"
-    "and find creative solutions in order to\l"
-    "progress through the map, with the\l"
-    "ultimate goal of escaping the cave.\p"
-
-    "READ CAREFULLY\p"
-
-    "1) The game's battle mechanics are\n"
-    "based on GEN 9.\l"
-    "However, match tiebreakers will follow\l"
-    "competitive battling rules.\p"
-    
-    "2) Battle RNG has been disabled.\n"
-    "Catch rates, move effects, accuracy,\l"
-    "and damage are now deterministic.\p"
-
-    "3) There is no need for grinding of any\n"
-    "kind. You won't gain EXP from battling.\p"
-
-    "4) Any item you can find on the map\n"
-    "directly will be inside an item ball.\p"
-
-    "5) Trainer battles have a forfeit option\n"
-    "(Run), which counts as a regular loss.\p"
-
-    "6) You won't get softlocked unless you\n"
-    "toss away items, release Pokémon, or\l"
-    "REALLY mess up the strength puzzle.\p"
-
-    "7) Try to avoid using speed up.\n"
-    "There are many clues, like NPC dialogue,\l"
-    "that you might otherwise miss.\p" 
-
-    "That's all.\n"
-    "Good luck!"
+    ""
 }
 
 text SignMessage1{
-    "1) The game's battle mechanics are\n"
-    "based on GEN 9.\l"
-    "However, match tiebreakers will follow\l"
-    "competitive battling rules.\p"
-    
-    "2) Battle RNG has been disabled.\n"
+    "1) The game's learnsets and battle\n"
+    "mechanics are based on GEN 9.\p"
+
+    "2) Match tiebreakers will follow\n"
+    "competitive battling rules.\l"
+    "This means you could potentially win\l"
+    "despite losing your final Pokémon.\p"
+
+    "3) Battle RNG has been disabled.\n"
     "Catch rates, move effects, accuracy,\l"
     "and damage are now deterministic.\p"
 
-    "3) There is no need for grinding of any\n"
-    "kind. You won't gain EXP from battling.\p"
+    "4) There is no need for grinding of any\n"
+    "kind. You don't earn EXP from battles.\p"
 
-    "4) Any item you can find on the map\n"
+    "5) Any item you can find on the map\n"
     "directly will be inside an item ball.\p"
 
-    "5) Trainer battles have a forfeit option\n"
+    "6) Trainer battles have a forfeit option\n"
     "(Run), which counts as a regular loss.\p"
 
-    "6) You won't get softlocked unless you\n"
+    "7) You won't get softlocked unless you\n"
     "toss away items, release Pokémon, or\l"
     "REALLY mess up the Strength puzzle.\p"
 
-    "7) Try to avoid using speed up.\n"
-    "There are many clues, like NPC dialogue,\l"
-    "that you might otherwise miss." 
+    "8) Try to avoid using speed up.\n"
+    "You might miss important details like\l"
+    "NPC dialogue."
 }
 
 text SignMessageReadInfoAgain{
@@ -1902,10 +1869,8 @@ text perfectSmeargleHintNPCmessage{
 }
 
 text icePuzzleHintNPCmessage{
-    // "I heard there's an ice puzzle in the cave\n"
-    // "beneath us.\p"
     "That ice puzzle looks tough!\n"
-    "Don't expect to solve it right away."
+    "Don't expect to finish it right away."
 }
 
 text StopWinningNPCmessage{
@@ -2116,7 +2081,8 @@ text HintsNPC_Nugget{
 text HintsNPC_IcePuzzle{
     "At the beginning, only the berry tree is\n"
     "accessible. The item ball is unreachable\l"
-    "until the MACH BIKE is obtained."
+    "until the MACH BIKE is obtained.\p"
+    "Have you checked your trainer card?"
 }
 
 text HintsNPC_StrengthPuzzle{
@@ -2134,7 +2100,9 @@ text HintsNPC_StatementsPuzzle{
     "if the 4th statement is true or false,\l"
     "not the other way around!\p"
     "You'll find that statement 4 will have\n"
-    "only one possible answer."
+    "only one possible answer.\p"
+    "First four moves after dropping:\n"
+    "Left, down, right, down."
 }
 
 text HintsNPC_CatchingSmeargle{
@@ -2157,8 +2125,8 @@ text HintsNPC_TrainerRoseUn{
 }
 
 text HintsNPC_TrainerDSAbel{
-    "The right moves on SMEARGLE and\n"
-    "GARDEVOIR will help defeat the SLAKING.\p"
+    "PROTECT on SMEARGLE and DISABLE on\n"
+    "GARDEVOIR will get you past SLAKING.\p"
     "However, CURSOLA will need to be given a\n"
     "hindering ability to slow it down.\p"
     "Are you a skill trader?"
@@ -2179,9 +2147,10 @@ text HintsNPC_TrainerRoel{
 text HintsNPC_TrainerCTrish{
     "Can you steal her SITRUS BERRY?\p"
     "SKILL SWAP is your friend, and perhaps\n"
-    "there's a way to render DOUBLE EDGE\l"
+    "there's a way to render DOUBLE-EDGE\l"
     "completely useless.\p"
-    "Two ways actually."
+    "Two ways actually.\n"
+    "Does one involve DESTINY BOND?"
 }
 
 text HintsNPC_TrainersPeeSea{
