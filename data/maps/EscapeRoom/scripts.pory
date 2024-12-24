@@ -2125,7 +2125,7 @@ text HintsNPC_TrainerRoseUn{
 }
 
 text HintsNPC_TrainerDSAbel{
-    "PROTECT on SMEARGLE and DISABLE on\n"
+    "PROTECT SMEARGLE and the right move on\n"
     "GARDEVOIR will get you past SLAKING.\p"
     "However, CURSOLA will need to be given a\n"
     "hindering ability to slow it down.\p"

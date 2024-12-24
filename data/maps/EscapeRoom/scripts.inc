@@ -3366,7 +3366,7 @@ HintsNPC_TrainerRoseUn::
 
 HintsNPC_TrainerDSAbel::
 # 2127 "data/maps/EscapeRoom/scripts.pory"
-	.string "PROTECT on SMEARGLE and DISABLE on\n"
+	.string "PROTECT SMEARGLE and the right move on\n"
 	.string "GARDEVOIR will get you past SLAKING.\p"
 	.string "However, CURSOLA will need to be given a\n"
 	.string "hindering ability to slow it down.\p"

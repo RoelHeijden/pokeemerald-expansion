@@ -16918,12 +16918,13 @@ Jolly Nature
 IVs: 0 HP / 0 SpA  
 - Steel Beam
 
-Tapu Bulu @ Choice Band
+Tapu Bulu @ Miracle Seed  
 Ability: Grassy Surge  
 Level: 68  
-EVs: 252 Atk / 248 Spe  
-Adamant Nature  
+EVs: 252 Atk / 252 SpA / 4 Spe  
+Mild Nature  
 - Horn Leech  
+- Solar Beam
 
 Persian-Alola (M) @ Room Service  
 Ability: Fur Coat  

@@ -5643,6 +5643,29 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 }
 
 static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+
+
+    if (gBattleMons[battlerAtk].species == SPECIES_TAPU_BULU)
+    {
+        if (move == MOVE_SOLAR_BEAM) 
+            score = 120;
+        if (move == MOVE_HORN_LEECH)
+        {
+            // if Destiy bond still active
+            if (gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND)
+                score = 50;
+            else
+                score = 130;
+            
+            // // if not in Trick Room
+            // if (!(gFieldStatuses & STATUS_FIELD_TRICK_ROOM))
+            // {
+
+            // }
+        }
+    }
+
+
     if (gBattleMons[battlerAtk].species == SPECIES_PERSIAN_ALOLAN)
     {
         if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR)
