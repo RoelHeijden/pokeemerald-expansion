@@ -576,7 +576,7 @@ static void CB2_InitBattleInternal(void)
             CreateNPCTrainerParty(&gEnemyParty[0], gTrainerBattleOpponent_A, TRUE);
             if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
                 CreateNPCTrainerParty(&gEnemyParty[PARTY_SIZE / 2], gTrainerBattleOpponent_B, FALSE);
-            SetWildMonHeldItem();
+            // SetWildMonHeldItem();  // CHANGED -- no held item set
             CalculateEnemyPartyCount();
         }
     }
