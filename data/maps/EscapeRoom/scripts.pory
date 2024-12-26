@@ -76,11 +76,11 @@ script EscapeRoom_MapScript_CheckHintFlags{
         setflag(FLAG_PECHA_BERRY_FOUND)
     }
     checkpartyitem(0)
-    if(var(VAR_0x8004) == ITEM_PECHA_BERRY) {
+    if(var(VAR_0x8005) == ITEM_PECHA_BERRY) {
         setflag(FLAG_PECHA_BERRY_FOUND)
     }
     checkpartyitem(1)
-    if(var(VAR_0x8004) == ITEM_PECHA_BERRY) {
+    if(var(VAR_0x8005) == ITEM_PECHA_BERRY) {
         setflag(FLAG_PECHA_BERRY_FOUND)
     }
 
@@ -90,7 +90,7 @@ script EscapeRoom_MapScript_CheckHintFlags{
         setflag(FLAG_GREAT_BALL_FOUND)
     }
     checkpartyitem(0)
-    if(var(VAR_0x8004) == ITEM_GREAT_BALL) {
+    if(var(VAR_0x8005) == ITEM_GREAT_BALL) {
         setflag(FLAG_GREAT_BALL_FOUND)
     }
 
@@ -100,11 +100,11 @@ script EscapeRoom_MapScript_CheckHintFlags{
         setflag(FLAG_SITRUS_STOLEN)
     }
     checkpartyitem(0)
-    if(var(VAR_0x8004) == ITEM_SITRUS_BERRY) {
+    if(var(VAR_0x8005) == ITEM_SITRUS_BERRY) {
         setflag(FLAG_SITRUS_STOLEN)
     }
     checkpartyitem(1)
-    if(var(VAR_0x8004) == ITEM_SITRUS_BERRY) {
+    if(var(VAR_0x8005) == ITEM_SITRUS_BERRY) {
         setflag(FLAG_SITRUS_STOLEN)
     }
 }
@@ -115,7 +115,7 @@ script EscapeRoom_MapScript_checkTM10stolen{
         setflag(FLAG_TM_10_STOLEN)
     }
     checkpartyitem(0) // held by pokemon
-    if(var(VAR_0x8004) == ITEM_TM10) {
+    if(var(VAR_0x8005) == ITEM_TM10) {
         setflag(FLAG_TM_10_STOLEN)
     }
 }
@@ -156,7 +156,7 @@ script EscapeRoom_MapScripts_CheckAfterBattlePecha{
         if(var(VAR_RESULT) == FALSE) {
             // check if berry carried by pokemon in slot 0
             checkpartyitem(0)
-            if(var(VAR_0x8004) != ITEM_PECHA_BERRY) {
+            if(var(VAR_0x8005) != ITEM_PECHA_BERRY) {
                 // set var to retrieve pecha
                 setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_PECHA, 1)
             }
@@ -545,11 +545,11 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
         if(flag(FLAG_HM06_STEAL_SUCCES) == FALSE){
             // locate and return item    
             checkpartyitem(0)
-            if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 0
+            if(var(VAR_0x8005) == ITEM_HM06) {  // if item in party slot 0
                 removepartyitem(0)
             }
             checkpartyitem(1)
-            if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 1
+            if(var(VAR_0x8005) == ITEM_HM06) {  // if item in party slot 1
                 removepartyitem(1)
             }
             removeitem(ITEM_HM06)
@@ -559,11 +559,11 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
             checkitem(ITEM_HM06)
             if(var(VAR_RESULT) == TRUE){
                 checkpartyitem(0)
-                if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 0
+                if(var(VAR_0x8005) == ITEM_HM06) {  // if item in party slot 0
                     removepartyitem(0)
                 }
                 checkpartyitem(1)
-                if(var(VAR_0x8004) == ITEM_HM06) {  // if item in party slot 1
+                if(var(VAR_0x8005) == ITEM_HM06) {  // if item in party slot 1
                     removepartyitem(1)
                 }
             }
@@ -712,6 +712,12 @@ script EscapeRoom_EventScript_HeartscaleTutor{
                 if(var(VAR_0x8004) == 0){
                     msgbox(MoveTutorTradeDeclined, MSGBOX_AUTOCLOSE)
                     waitmessage 
+
+                    // find pokemon slot
+                    checkpartymon(SPECIES_GARDEVOIR)
+                    copyvar(VAR_TEMP_0, VAR_RESULT) // store pokemon slot
+                    setvar(VAR_TEMP_1, MOVE_NONE)
+
 
                     // add old move back
                     replacemove(VAR_TEMP_0, VAR_TEMP_1, VAR_0x800A)
@@ -1188,7 +1194,7 @@ script EscapeRoom_EventScript_UndoSmeargleCatch{
                 removeitem(ITEM_FLAME_ORB)
             }
             checkpartyitem(0) // remove from pokemon
-            if(var(VAR_0x8004) == ITEM_FLAME_ORB) {
+            if(var(VAR_0x8005) == ITEM_FLAME_ORB) {
                 setvar(VAR_TEMP_0, 1)
                 removepartyitem(0)
             }
@@ -1558,6 +1564,17 @@ script EscapeRoom_EventScript_WhereToLookHint{
         waitmessage
     }
     setvar(VAR_TEMP_0, 0)
+}
+
+script EscapeRoom_EventScript_FreeCameraNPC{
+    lockall
+    // msgbox("1", MSGBOX_AUTOCLOSE)
+    // showicemap
+    // waitbuttonpress
+    msgbox("TBD: display ice puzzle map", MSGBOX_AUTOCLOSE)
+    // hideicemap
+    // hidemonpic
+    releaseall
 }
 
 
@@ -2097,10 +2114,9 @@ text HintsNPC_StrengthPuzzle{
 
 text HintsNPC_StatementsPuzzle{
     "Solve the puzzle in order to figure out\n"
-    "if the 4th statement is true or false,\l"
-    "not the other way around!\p"
-    "You'll find that statement 4 will have\n"
-    "only one possible answer.\p"
+    "if the 4th statement is true or false.\p"
+    "You'll find that statement 4 must be\n"
+    "false to get a valid solution.\p"
     "First four moves after dropping:\n"
     "Left, down, right, down."
 }
@@ -2149,7 +2165,7 @@ text HintsNPC_TrainerCTrish{
     "SKILL SWAP is your friend, and perhaps\n"
     "there's a way to render DOUBLE-EDGE\l"
     "completely useless.\p"
-    "Two ways actually.\n"
+    "Two ways actually.\p"
     "Does one involve DESTINY BOND?"
 }
 
@@ -2259,5 +2275,7 @@ text HintsNPC_DoNothingUrDone{
     "I don't think you need any additional\n"
     "hints."
 }
+
+
 
 

@@ -4435,7 +4435,7 @@
       "id": "LAYOUT_ESCAPE_ROOM_ICE_PUZZLE",
       "name": "EscapeRoom_IcePuzzle_Layout",
       "width": 51,
-      "height": 70,
+      "height": 28,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_MirageTower",
       "border_filepath": "data/layouts/EscapeRoom_IcePuzzle/border.bin",

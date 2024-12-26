@@ -1953,6 +1953,8 @@ bool8 ScrCmd_checkpartyitem(struct ScriptContext *ctx)
     u16 item;
 
     gSpecialVar_Result = 0; 
+    gSpecialVar_0x8005 = 0; 
+
     if (slot < PARTY_SIZE)
     {
         u16 species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES, NULL);
@@ -1962,7 +1964,7 @@ bool8 ScrCmd_checkpartyitem(struct ScriptContext *ctx)
             if (item != ITEM_NONE) 
             {
                 gSpecialVar_Result = 1; 
-                gSpecialVar_0x8004 = item; 
+                gSpecialVar_0x8005 = item; 
             }
         }
     }

@@ -1156,7 +1156,7 @@
 
     @ Checks if the Pokemon in the specified party slot is holding an item. 
     @ If so, VAR_RESULT is set to 1, otherwise it is set to 0.
-    @ VAR_0x8004 is also set to the ID of the held item if an item is held.
+    @ VAR_0x8005 is also set to the ID of the held item if an item is held.
 	.macro checkpartyitem slot:req
 	.byte 0xe5
 	.byte \slot
