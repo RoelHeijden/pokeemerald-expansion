@@ -7910,10 +7910,14 @@ const struct Item gItemsInfo[] =
         // .price = (I_PRICE >= GEN_9) ? 15000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
         .price = 0,
         .holdEffect = HOLD_EFFECT_FLAME_ORB,
+        // .description = COMPOUND_STRING(
+        //     "A bizarre orb that\n"
+        //     "inflicts a burn on\n"
+        //     "holder in battle."),
         .description = COMPOUND_STRING(
-            "A bizarre orb that\n"
-            "inflicts a burn on\n"
-            "holder in battle."),
+            "HEADS UP\n"
+            "You do not need\n"
+            "this item."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
