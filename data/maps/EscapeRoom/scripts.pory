@@ -1566,7 +1566,7 @@ script EscapeRoom_EventScript_WhereToLookHint{
     setvar(VAR_TEMP_0, 0)
 }
 
-script EscapeRoom_EventScript_FreeCameraNPC{
+script EscapeRoom_EventScript_IceMapSign{
     lock
     showicemap
     waitbuttonpress
