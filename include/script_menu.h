@@ -47,4 +47,16 @@ int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width);
 bool16 ScriptMenu_CreatePCMultichoice(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
 
+// ADDED
+bool8 ScriptMenu_ShowCustomPic(u8 x, u8 y);
+bool8 (*ScriptMenu_HideCustomPic(void))(void);
+
+
+// ADDED
+extern const u32 gCustomPalette[];
+extern const u32 gCustomImage_topleft[];
+extern const u32 gCustomImage_topright[];
+extern const u32 gCustomImage_bottomleft[];
+extern const u32 gCustomImage_bottomright[];
+
 #endif //GUARD_SCRIPT_MENU_H

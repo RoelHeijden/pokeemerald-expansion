@@ -246,6 +246,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_getpartymonmove					@ 0xf3
 	.4byte ScrCmd_bufferplaytimeandhints			@ 0xf4
 	.4byte ScrCmd_addgametime						@ 0xf5
+	.4byte ScrCmd_showicemap						@ 0xf6
+	.4byte ScrCmd_hideicemap						@ 0xf7
 
 
 gScriptCmdTableEnd::

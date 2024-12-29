@@ -15,6 +15,9 @@
 #define PIC_SPRITE_SIZE max(MON_PIC_SIZE, TRAINER_PIC_SIZE)
 #define MAX_PIC_FRAMES  max(MAX_MON_PIC_FRAMES, MAX_TRAINER_PIC_FRAMES)
 
+// ADDED
+u16 CreatePicSpriteFromData(const u32* imageData, const u32* paletteData, s16 x, s16 y);
+
 struct PicData
 {
     u8 *frames;
@@ -118,6 +121,73 @@ static void AssignSpriteAnimsTable(bool8 isTrainer)
     else
         sCreatingSpriteTemplate.anims = sAnims_Trainer;
 }
+
+
+
+
+// ADDED
+u16 CreatePicSpriteFromData(const u32* imageData, const u32* paletteData, s16 x, s16 y)
+{
+    u8 i;
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+    int j;
+    u8 spriteId;
+
+    u16 paletteTag = SPECIES_NONE;
+    u8 paletteSlot = 0;
+    
+
+    for (i = 0; i < PICS_COUNT; i ++)
+    {
+        if (!sSpritePics[i].active)
+            break;
+    }
+    if (i == PICS_COUNT)
+        return 0xFFFF;
+
+    framePics = Alloc(PIC_SPRITE_SIZE * MAX_PIC_FRAMES);
+    if (!framePics)
+        return 0xFFFF;
+
+    images = Alloc(sizeof(struct SpriteFrameImage) * MAX_PIC_FRAMES);
+    if (!images)
+    {
+        Free(framePics);
+        return 0xFFFF;
+    }
+
+    LZ77UnCompWram(imageData, framePics);
+
+    for (j = 0; j < MAX_PIC_FRAMES; j ++)
+    {
+        images[j].data = framePics + PIC_SPRITE_SIZE * j;
+        images[j].size = PIC_SPRITE_SIZE;
+    }
+    sCreatingSpriteTemplate.tileTag = TAG_NONE;
+    sCreatingSpriteTemplate.oam = &sOamData_Normal;
+    AssignSpriteAnimsTable(FALSE);
+    sCreatingSpriteTemplate.images = images;
+    sCreatingSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+    sCreatingSpriteTemplate.callback = DummyPicSpriteCallback;
+
+    sCreatingSpriteTemplate.paletteTag = paletteTag;
+    LoadCompressedSpritePaletteWithTag(paletteData, paletteTag);
+
+    spriteId = CreateSprite(&sCreatingSpriteTemplate, x, y, 0);
+    if (paletteTag == TAG_NONE)
+        gSprites[spriteId].oam.paletteNum = paletteSlot;
+    sSpritePics[i].frames = framePics;
+    sSpritePics[i].images = images;
+    sSpritePics[i].paletteTag = paletteTag;
+    sSpritePics[i].spriteId = spriteId;
+    sSpritePics[i].active = TRUE;
+
+    return spriteId;
+}
+
+
+
 
 static u16 CreatePicSprite(u16 species, bool8 isShiny, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
 {

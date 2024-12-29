@@ -68,6 +68,20 @@ static void MultichoiceDynamicEventShowItem_OnInit(struct DynamicListMenuEventAr
 static void MultichoiceDynamicEventShowItem_OnSelectionChanged(struct DynamicListMenuEventArgs *eventArgs);
 static void MultichoiceDynamicEventShowItem_OnDestroy(struct DynamicListMenuEventArgs *eventArgs);
 
+// ADDED
+bool8 ScriptMenu_ShowCustomPic(u8 x, u8 y);
+bool8 (*ScriptMenu_HideCustomPic(void))(void);
+static bool8 IsCustomPicboxClosed(void);
+
+
+// ADDED
+const u32 gCustomPalette[] = INCBIN_U32("graphics/custom/icepuzzle128x128.gbapal.lz");
+const u32 gCustomImage_topleft[] = INCBIN_U32("graphics/custom/icepuzzle128x128_topleft.4bpp.lz");
+const u32 gCustomImage_topright[] = INCBIN_U32("graphics/custom/icepuzzle128x128_topright.4bpp.lz");
+const u32 gCustomImage_bottomleft[] = INCBIN_U32("graphics/custom/icepuzzle128x128_bottomleft.4bpp.lz");
+const u32 gCustomImage_bottomright[] = INCBIN_U32("graphics/custom/icepuzzle128x128_bottomright.4bpp.lz");
+
+
 static const struct DynamicListMenuEventCollection sDynamicListMenuEventCollections[] =
 {
     [DYN_MULTICHOICE_CB_DEBUG] =
@@ -934,6 +948,135 @@ void GetLilycoveSSTidalSelection(void)
 #define tWindowX     data[3]
 #define tWindowY     data[4]
 #define tWindowId    data[5]
+
+
+
+
+// ADDED
+static void Task_CustomPicWindow(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    switch (task->tState)
+    {
+    case 0:
+        task->tState++;
+        break;
+    case 1:
+        // Wait until state is advanced by ScriptMenu_HideCustomPic
+        break;
+    case 2:
+
+        FreeResourcesAndDestroySprite(&gSprites[task->data[1]], task->data[1]);
+        FreeResourcesAndDestroySprite(&gSprites[task->data[2]], task->data[2]);
+        FreeResourcesAndDestroySprite(&gSprites[task->data[3]], task->data[3]);
+        FreeResourcesAndDestroySprite(&gSprites[task->data[4]], task->data[4]);
+
+        task->tState++;
+        break;
+    case 3:
+        ClearToTransparentAndRemoveWindow(task->tWindowId);
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+// ADDED
+static bool8 IsCustomPicboxClosed(void)
+{
+    if (FindTaskIdByFunc(Task_CustomPicWindow) == TASK_NONE)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+
+// // ADDED
+// bool8 ScriptMenu_ShowCustomPic(u8 x, u8 y)
+// {
+//     u8 taskId;
+//     u8 spriteId;
+//     if (FindTaskIdByFunc(Task_CustomPicWindow) != TASK_NONE)
+//     {
+//         return FALSE;
+//     }
+//     else
+//     {
+//         spriteId = CreateCustomPicSprite(gCustomImage_topleft, gCustomPalette, x * 8 + 40, y * 8 + 40, 0);
+//         taskId = CreateTask(Task_CustomPicWindow, 0x50); 
+//         gTasks[taskId].tWindowId = CreateWindowFromRect(x, y, 8, 8); 
+//         gTasks[taskId].tState = 0;
+//         gTasks[taskId].tMonSpecies = SPECIES_NONE;
+//         gTasks[taskId].tMonSpriteId = spriteId;
+//         gSprites[spriteId].callback = SpriteCallbackDummy;
+//         gSprites[spriteId].oam.priority = 0;
+//         SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
+//         ScheduleBgCopyTilemapToVram(0);
+//         return TRUE;
+//     }
+// }
+
+
+// ADDED
+bool8 ScriptMenu_ShowCustomPic(u8 x, u8 y)
+{
+    u8 taskId;
+    u8 spriteIdTopLeft, spriteIdTopRight, spriteIdBottomLeft, spriteIdBottomRight;
+
+    if (FindTaskIdByFunc(Task_CustomPicWindow) != TASK_NONE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        // Create 4 sprites for each quadrant of the 128x128 image
+        spriteIdTopLeft = CreateCustomPicSprite(gCustomImage_topleft, gCustomPalette, (x - 3) * 16 + 40, y * 16 + 40, 0);           // Top-left
+        spriteIdTopRight = CreateCustomPicSprite(gCustomImage_topright, gCustomPalette, (x - 3) * 16 + 40 + 64, y * 16 + 40, 0);     // Top-right
+        spriteIdBottomLeft = CreateCustomPicSprite(gCustomImage_bottomleft, gCustomPalette, (x - 3) * 16 + 40, y * 16 + 40 + 64, 0);   // Bottom-left
+        spriteIdBottomRight = CreateCustomPicSprite(gCustomImage_bottomright, gCustomPalette, (x - 3) * 16 + 40 + 64, y * 16 + 40 + 64, 0); // Bottom-right
+
+        taskId = CreateTask(Task_CustomPicWindow, 0x50);
+        gTasks[taskId].tWindowId = CreateWindowFromRect(x, y, 16, 16);  // Create a 128x128 window (16x16 tiles)
+        gTasks[taskId].tState = 0;
+        gTasks[taskId].tMonSpecies = SPECIES_NONE;
+
+        // Store all sprite IDs in the task
+        gTasks[taskId].data[1] = spriteIdTopLeft;
+        gTasks[taskId].data[2] = spriteIdTopRight;
+        gTasks[taskId].data[3] = spriteIdBottomLeft;
+        gTasks[taskId].data[4] = spriteIdBottomRight;
+
+        // Disable sprite callbacks and set priorities
+        gSprites[spriteIdTopLeft].callback = SpriteCallbackDummy;
+        gSprites[spriteIdTopRight].callback = SpriteCallbackDummy;
+        gSprites[spriteIdBottomLeft].callback = SpriteCallbackDummy;
+        gSprites[spriteIdBottomRight].callback = SpriteCallbackDummy;
+
+        gSprites[spriteIdTopLeft].oam.priority = 0;
+        gSprites[spriteIdTopRight].oam.priority = 0;
+        gSprites[spriteIdBottomLeft].oam.priority = 0;
+        gSprites[spriteIdBottomRight].oam.priority = 0;
+
+        // Set window border and schedule background update
+        SetStandardWindowBorderStyle(gTasks[taskId].tWindowId, TRUE);
+        ScheduleBgCopyTilemapToVram(0);
+        
+        return TRUE;
+    }
+}
+
+
+// ADDED
+bool8 (*ScriptMenu_HideCustomPic(void))(void)
+{
+    u8 taskId = FindTaskIdByFunc(Task_CustomPicWindow);
+
+    if (taskId == TASK_NONE)
+        return NULL;
+    gTasks[taskId].tState++;
+
+    return IsCustomPicboxClosed;
+}
 
 static void Task_PokemonPicWindow(u8 taskId)
 {

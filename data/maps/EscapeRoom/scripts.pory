@@ -1567,14 +1567,11 @@ script EscapeRoom_EventScript_WhereToLookHint{
 }
 
 script EscapeRoom_EventScript_FreeCameraNPC{
-    lockall
-    // msgbox("1", MSGBOX_AUTOCLOSE)
-    // showicemap
-    // waitbuttonpress
-    msgbox("TBD: display ice puzzle map", MSGBOX_AUTOCLOSE)
-    // hideicemap
-    // hidemonpic
-    releaseall
+    lock
+    showicemap
+    waitbuttonpress
+    hideicemap
+    release
 }
 
 
@@ -2113,10 +2110,9 @@ text HintsNPC_StrengthPuzzle{
 }
 
 text HintsNPC_StatementsPuzzle{
-    "Solve the puzzle in order to figure out\n"
-    "if the 4th statement is true or false.\p"
-    "You'll find that statement 4 must be\n"
-    "false to get a valid solution.\p"
+    "When solving the four statements, you'll\n"
+    "find that the 4th statement must be\l"
+    "false in order to get a valid solution.\p"
     "First four moves after dropping:\n"
     "Left, down, right, down."
 }
@@ -2127,7 +2123,8 @@ text HintsNPC_CatchingSmeargle{
     "If you stall a turn by not attacking,\n"
     "SMEARGLE will no longer be able to copy\l"
     "the wrong move.\p"
-    "Consider visiting SALAZZLE first."
+    "Consider visiting SALAZZLE first.\n"
+    "Did you already use the TOXIC ORB?"
 }
 
 text HintsNPC_TrainerRoseUn{

@@ -2383,6 +2383,29 @@ bool8 ScrCmd_addgametime(struct ScriptContext *ctx)
 }
 
 
+// ADDED
+bool8 ScrCmd_showicemap(struct ScriptContext *ctx)
+{
+    u8 x = 6;
+    u8 y = 0;
+
+    ScriptMenu_ShowCustomPic(x, y);
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_hideicemap(struct ScriptContext *ctx)
+{
+    // The hide function returns a pointer to a function
+    // that returns true once all the pics are hidden
+    bool8 (*func)(void) = ScriptMenu_HideCustomPic();
+
+    if (func == NULL)
+        return FALSE;
+
+    SetupNativeScript(ctx, func);
+    return TRUE;
+}
 
 
 

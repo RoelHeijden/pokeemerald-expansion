@@ -9,6 +9,10 @@ extern s32 gFieldEffectArguments[8];
 extern void (*gPostMenuFieldCallback)(void);
 extern bool8 (*gFieldCallback2)(void);
 
+
+// ADDED
+u8 CreateCustomPicSprite(const u32* imageData, const u32* paletteData, s16 x, s16 y, u8 subpriority);
+
 u32 FieldEffectStart(u8);
 bool8 FieldEffectActiveListContains(u8 id);
 void FieldEffectActiveListClear(void);

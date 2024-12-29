@@ -40,6 +40,11 @@
 
 EWRAM_DATA s32 gFieldEffectArguments[8] = {0};
 
+// ADDED
+u8 CreateCustomPicSprite(const u32* imageData, const u32* paletteData, s16 x, s16 y, u8 subpriority);
+
+
+
 // Static type declarations
 
 static void Task_PokecenterHeal(u8 taskId);
@@ -918,6 +923,19 @@ u8 AddNewGameBirchObject(s16 x, s16 y, u8 subpriority)
     return CreateSprite(&sSpriteTemplate_NewGameBirch, x, y, subpriority);
 }
 
+
+
+// ADDED
+u8 CreateCustomPicSprite(const u32* imageData, const u32* paletteData, s16 x, s16 y, u8 subpriority)
+{
+    s32 spriteId = CreatePicSpriteFromData(imageData, paletteData, x, y);
+    if (spriteId == 0xFFFF)
+        return MAX_SPRITES;
+    else
+        return spriteId;
+}
+
+
 u8 CreateMonSprite_PicBox(u16 species, s16 x, s16 y, u8 subpriority)
 {
     s32 spriteId = CreateMonPicSprite(species, FALSE, 0x8000, TRUE, x, y, 0, species);
@@ -949,6 +967,21 @@ void FreeResourcesAndDestroySprite(struct Sprite *sprite, u8 spriteId)
     FreeAndDestroyMonPicSpriteNoPalette(spriteId);
     FieldEffectFreePaletteIfUnused(paletteNum); // Clear palette only if unused, in case follower is using it
 }
+
+
+// void FreeResourcesAndDestroyCustomSprite(struct Sprite *sprite, u8 spriteId)
+// {
+//     u8 paletteNum = sprite->oam.paletteNum;
+//     ResetPreservedPalettesInWeather();
+//     if (sprite->oam.affineMode != ST_OAM_AFFINE_OFF)
+//     {
+//         FreeOamMatrix(sprite->oam.matrixNum);
+//     }
+//     FreeAndDestroyMonPicSpriteNoPalette(spriteId);
+//     FieldEffectFreePaletteIfUnused(paletteNum); // Clear palette only if unused, in case follower is using it
+// }
+
+
 
 // r, g, b are between 0 and 16
 void MultiplyInvertedPaletteRGBComponents(u16 i, u8 r, u8 g, u8 b)
