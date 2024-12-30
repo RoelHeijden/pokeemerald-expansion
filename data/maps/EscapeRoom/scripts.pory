@@ -2176,7 +2176,8 @@ text HintsNPC_TrainersJanNan{
     "PAIN SPLIT can be used against your own\n"
     "POKéMON, and SCRAFTY's ability can be\l"
     "turned against itself.\p"
-    "Don't forget the PERISH tiebreaker.\n"
+    "Try to set TRICK ROOM at the start, and\n"
+    "don't forget the PERISH tiebreaker.\p"
     "Is there an item you haven't used yet?"
 }
 

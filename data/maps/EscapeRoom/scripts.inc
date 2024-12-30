@@ -3440,8 +3440,8 @@ HintsNPC_DoRoseUn::
 
 HintsNPC_DoPCCheck::
 # 2195 "data/maps/EscapeRoom/scripts.pory"
-	.string "You've missed an item located around the\n"
-	.string "plant room!$"
+	.string "You should have a good look at the PC in\n"
+	.string "the plants room!$"
 
 HintsNPC_DoIcePuzzle::
 # 2200 "data/maps/EscapeRoom/scripts.pory"
@@ -3473,7 +3473,7 @@ HintsNPC_DoDSAbel::
 
 HintsNPC_DoPlantCheck::
 # 2228 "data/maps/EscapeRoom/scripts.pory"
-	.string "Have you checked the plant room?\p"
+	.string "Have you checked the plants room?\p"
 	.string "There might be another item hidden\n"
 	.string "somewhere around that room.$"
 
