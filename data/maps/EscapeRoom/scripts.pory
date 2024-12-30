@@ -2193,8 +2193,8 @@ text HintsNPC_DoRoseUn{
 }
 
 text HintsNPC_DoPCCheck{
-    "You've missed an item located around the\n"
-    "plant room!"
+    "You should have a good look at the PC in\n"
+    "the plants room!"
 }
 
 text HintsNPC_DoIcePuzzle{
@@ -2226,7 +2226,7 @@ text HintsNPC_DoDSAbel{
 }
 
 text HintsNPC_DoPlantCheck{
-    "Have you checked the plant room?\p"
+    "Have you checked the plants room?\p"
     "There might be another item hidden\n"
     "somewhere around that room."
 }
