@@ -4192,6 +4192,8 @@ static void HandleTurnActionSelectionState(void)
 {
     s32 i, battler;
 
+    
+
     gBattleCommunication[ACTIONS_CONFIRMED_COUNT] = 0;
 
     for (battler = 0; battler < gBattlersCount; battler++)
@@ -4207,6 +4209,12 @@ static void HandleTurnActionSelectionState(void)
             // this was for the protect targeting bugfix
             // caused the Dig bug, and removing this does not seem to bring back the protect targeting bug, so...
             // gBattleStruct->chosenMovePositions[battler] = MOVE_NONE;  // reset chosenMove
+
+
+            // // REMOVE
+            // if (battler == 0)
+            //     DebugPrintf("------------------------\n");
+
 
             RecordedBattle_CopyBattlerMoves(battler);
             gBattleCommunication[battler] = STATE_BEFORE_ACTION_CHOSEN;
@@ -4277,6 +4285,11 @@ static void HandleTurnActionSelectionState(void)
                     if ((gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart())
                     && (BattlerHasAi(battler) && !(gBattleTypeFlags & BATTLE_TYPE_PALACE)))
                     {
+
+                        // // REMOVE
+                        // if (battler == 1)
+                        //     DebugPrintf("-- MAIN AI --");
+
                         AI_DATA->mostSuitableMonId[battler] = GetMostSuitableMonToSwitchInto(battler, FALSE);
                         gBattleStruct->aiMoveOrAction[battler] = ComputeBattleAiScores(battler);
                     }

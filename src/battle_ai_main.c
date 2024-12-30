@@ -5494,11 +5494,6 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     // }
 
 
-    // DebugPrintf("Gardy: %d", battlerGardy);
-    // DebugPrintf("Smeargle: %d", battlerSmeargle);
-    // DebugPrintf("opp smear: %d", oppSmeargle);
-    // DebugPrintf("opp scraf: %d", oppScrafty);
-
 
     // DONT TARGET PARTNER 
     if (battlerDef == oppSmeargle || battlerDef == oppScrafty)
@@ -5566,18 +5561,36 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     // NORMAL SCENARIOS
     switch (move)  
     {
-        case MOVE_DRAIN_PUNCH:
-            
-            // DebugPrintf("MOVE_DRAIN_PUNCH score start: %d", score);
 
+            // if (gDisableStructs[battlerAtk].disabledMove == MOVE_BRICK_BREAK) 
+            // if (gDisableStructs[battlerAtk].disabledMove == MOVE_DRAIN_PUNCH) 
+
+
+        case MOVE_DRAIN_PUNCH:
             // avoid protect
             if (targetProtectingItself){
-                score = 68;
+                score = 69;
                 return score;
             }
-            // target smeargle, alternate with brick break
-            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
+            // target Smeargle, alternate with brick break
+            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE 
+                && (gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH 
+                || gDisableStructs[battlerAtk].disabledMove == MOVE_BRICK_BREAK))
                 score = 155;
+
+            // if target Gardevoir, still alternate with brick break
+            if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR 
+                && (gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH 
+                || gDisableStructs[battlerAtk].disabledMove == MOVE_BRICK_BREAK))
+                score = 101;
+
+
+            // // REMOVE
+            // if (battlerDef == battlerGardy)
+            //     DebugPrintf("Gardy: DRAIN PUNCH score: %d", score);
+            // if (battlerDef == battlerSmeargle)
+            //     DebugPrintf("Smeargle: DRAIN PUNCH score: %d", score);
+
             break;
 
         case MOVE_BRICK_BREAK:
@@ -5586,9 +5599,26 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 score = 69;
                 return score;
             }
-            // target smeargle, alternate with drain punch
-            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-                score = 156;
+
+            // target Smeargle, alternate with drain punch
+            if (gBattleMons[battlerDef].species == SPECIES_SMEARGLE 
+                && (gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH 
+                || gDisableStructs[battlerAtk].disabledMove == MOVE_DRAIN_PUNCH))
+                score = 155;
+
+            // if target Gardevoir, still alternate with drain punch
+            if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR 
+                && (gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH 
+                || gDisableStructs[battlerAtk].disabledMove == MOVE_DRAIN_PUNCH))
+                score = 101;
+
+
+            // // REMOVE
+            // if (battlerDef == battlerGardy)
+            //     DebugPrintf("Gardy: BRICK BREAK score: %d", score);
+            // if (battlerDef == battlerSmeargle)
+            //     DebugPrintf("Smeargle: BRICk BREAK score: %d", score);
+
             break;
 
         case MOVE_PERISH_SONG:
