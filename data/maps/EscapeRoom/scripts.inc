@@ -3423,40 +3423,41 @@ HintsNPC_TrainersJanNan::
 	.string "PAIN SPLIT can be used against your own\n"
 	.string "POKéMON, and SCRAFTY's ability can be\l"
 	.string "turned against itself.\p"
-	.string "Don't forget the PERISH tiebreaker.\n"
+	.string "Try to set TRICK ROOM at the start, and\n"
+	.string "don't forget the PERISH tiebreaker.\p"
 	.string "Is there an item you haven't used yet?$"
 
 HintsNPC_DoSalazzleThief::
-# 2183 "data/maps/EscapeRoom/scripts.pory"
+# 2184 "data/maps/EscapeRoom/scripts.pory"
 	.string "Check out the SALAZZLE in the cave\n"
 	.string "below!$"
 
 HintsNPC_DoRoseUn::
-# 2188 "data/maps/EscapeRoom/scripts.pory"
+# 2189 "data/maps/EscapeRoom/scripts.pory"
 	.string "You should battle Rose Un, the KECLEON\n"
 	.string "trainer.\p"
 	.string "There may be something you can get from\n"
 	.string "that fight.$"
 
 HintsNPC_DoPCCheck::
-# 2195 "data/maps/EscapeRoom/scripts.pory"
+# 2196 "data/maps/EscapeRoom/scripts.pory"
 	.string "You should have a good look at the PC in\n"
 	.string "the plants room!$"
 
 HintsNPC_DoIcePuzzle::
-# 2200 "data/maps/EscapeRoom/scripts.pory"
+# 2201 "data/maps/EscapeRoom/scripts.pory"
 	.string "There's a berry tree in the ice puzzle.\n"
 	.string "It might be a useful item when trying to\l"
 	.string "catch the perfect SMEARGLE.$"
 
 HintsNPC_DoStrengthPuzzle::
-# 2206 "data/maps/EscapeRoom/scripts.pory"
+# 2207 "data/maps/EscapeRoom/scripts.pory"
 	.string "The STRENGTH puzzle in the Tiny Cave\n"
 	.string "down south is still unsolved.\p"
 	.string "It could be worth trying.$"
 
 HintsNPC_DoSmeargleCatch::
-# 2212 "data/maps/EscapeRoom/scripts.pory"
+# 2213 "data/maps/EscapeRoom/scripts.pory"
 	.string "You are ready to catch the perfect\n"
 	.string "SMEARGLE.\p"
 	.string "Talk to the person in the plants room to\n"
@@ -3465,32 +3466,32 @@ HintsNPC_DoSmeargleCatch::
 	.string "should carry in the end.$"
 
 HintsNPC_DoDSAbel::
-# 2221 "data/maps/EscapeRoom/scripts.pory"
+# 2222 "data/maps/EscapeRoom/scripts.pory"
 	.string "You should look to beat DS. Abel, the\n"
 	.string "SLAKING trainer.\p"
 	.string "Find the right movesets for SMEARGLE\n"
 	.string "and GARDEVOIR to do so.$"
 
 HintsNPC_DoPlantCheck::
-# 2228 "data/maps/EscapeRoom/scripts.pory"
+# 2229 "data/maps/EscapeRoom/scripts.pory"
 	.string "Have you checked the plants room?\p"
 	.string "There might be another item hidden\n"
 	.string "somewhere around that room.$"
 
 HintsNPC_DoGetHeartScale::
-# 2234 "data/maps/EscapeRoom/scripts.pory"
+# 2235 "data/maps/EscapeRoom/scripts.pory"
 	.string "There's a bike obstacle near DS. ABEL,\n"
 	.string "the Slaking trainer you just defeated.\p"
 	.string "Did you already get the bike?$"
 
 HintsNPC_DoStatementPuzzle::
-# 2240 "data/maps/EscapeRoom/scripts.pory"
+# 2241 "data/maps/EscapeRoom/scripts.pory"
 	.string "You can solve the statements puzzle!\p"
 	.string "It could help you reach the item ball in\n"
 	.string "the cave below us.$"
 
 HintsNPC_DoBeatRoel::
-# 2246 "data/maps/EscapeRoom/scripts.pory"
+# 2247 "data/maps/EscapeRoom/scripts.pory"
 	.string "You have to get past trainer Roel.\n"
 	.string "To do so, SMEARGLE must first SKETCH\l"
 	.string "the right move.\p"
@@ -3498,23 +3499,23 @@ HintsNPC_DoBeatRoel::
 	.string "POKéMON are hiding?$"
 
 HintsNPC_DoGePastPeeSea::
-# 2254 "data/maps/EscapeRoom/scripts.pory"
+# 2255 "data/maps/EscapeRoom/scripts.pory"
 	.string "You have to find a way to get past the\n"
 	.string "Pee & Sea double battle.$"
 
 HintsNPC_DoStealSitrus::
-# 2259 "data/maps/EscapeRoom/scripts.pory"
+# 2260 "data/maps/EscapeRoom/scripts.pory"
 	.string "C. Trish's SCORBUNNY has a berry that'd\n"
 	.string "be quite helpful in the final battle.\p"
 	.string "Can you steal it?$"
 
 HintsNPC_DoBeatJanNan::
-# 2265 "data/maps/EscapeRoom/scripts.pory"
+# 2266 "data/maps/EscapeRoom/scripts.pory"
 	.string "You are ready for the final battle!\p"
 	.string "Can GARDEVOIR keep SMEARGLE alive for\n"
 	.string "long enough?$"
 
 HintsNPC_DoNothingUrDone::
-# 2271 "data/maps/EscapeRoom/scripts.pory"
+# 2272 "data/maps/EscapeRoom/scripts.pory"
 	.string "I don't think you need any additional\n"
 	.string "hints.$"

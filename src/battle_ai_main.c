@@ -5562,10 +5562,6 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     switch (move)  
     {
 
-            // if (gDisableStructs[battlerAtk].disabledMove == MOVE_BRICK_BREAK) 
-            // if (gDisableStructs[battlerAtk].disabledMove == MOVE_DRAIN_PUNCH) 
-
-
         case MOVE_DRAIN_PUNCH:
             // avoid protect
             if (targetProtectingItself){
