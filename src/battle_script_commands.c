@@ -16699,6 +16699,11 @@ void BS_SetRemoveTerrain(void)
                 // No terrain to remove, jump to battle script pointer.
                 gBattlescriptCurrInstr = cmd->jumpInstr;
             }
+            else if(gBattleMons[gBattlerTarget].item == ITEM_RED_CARD)  // ADDED
+            {
+                // red card blocks ice spinner interaction
+                gBattlescriptCurrInstr = cmd->jumpInstr;
+            }
             else
             {
                 // Remove all terrains.

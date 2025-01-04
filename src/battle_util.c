@@ -10207,7 +10207,7 @@ static inline s32 DoMoveDamageCalcVars(u32 move, u32 battlerAtk, u32 battlerDef,
     DAMAGE_APPLY_MODIFIER(GetCriticalModifier(isCrit));
     DAMAGE_APPLY_MODIFIER(GetGlaiveRushModifier(battlerDef));
 
-    // ADDED MYSELF
+    // ADDED
     // Max damage returned if no RNG
     if (randomFactor && FlagGet(FLAG_DISABLE_BATTLE_RNG) == FALSE)
     {
