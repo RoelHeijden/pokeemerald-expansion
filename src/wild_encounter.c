@@ -457,7 +457,7 @@ static void CreateWildMon(u16 species, u8 level)
     // ADDED
     // custom pokemon encounters for Escape room maps: main and ice puzzle
     u16 headerId = GetCurrentMapWildMonHeaderId();
-    if(gWildMonHeaders[headerId].mapNum != MAP_ESCAPE_ROOM && gWildMonHeaders[headerId].mapNum != MAP_ESCAPE_ROOM_ICE_PUZZLE){
+    if(gWildMonHeaders[headerId].mapNum != MAP_ESCAPE_ROOM_MAIN){
         CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
     }
     else{
@@ -487,7 +487,7 @@ static void CreateWildMon(u16 species, u8 level)
         // x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
         // y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
-        if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM)
+        if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
         {
             species = SPECIES_SMEARGLE;
             level = 20;
@@ -500,25 +500,6 @@ static void CreateWildMon(u16 species, u8 level)
             atkIv = 0;
             spAtkIv = 0;
             speedIv = 0;
-            // personality = (Random32() / 25) * 25 + 5; // bold
-        }
-        else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_ICE_PUZZLE)
-        {
-            species = SPECIES_SALAZZLE;
-            level = 100;
-            abilityNum = 0;
-            gender = MON_FEMALE;
-            nature = NATURE_IMPISH;
-            move1 = MOVE_PROTECT;
-            hpEv = 160;
-            defEv = 252;
-            atkEv = 96;
-            // personality = (Random32() / 25) * 25 + 8; // Impish
-
-            heldItem = ITEM_TM10;
-            if(FlagGet(FLAG_TM_10_STOLEN)){
-                heldItem = ITEM_NONE;
-            }
         }
 
         // set nature and gender

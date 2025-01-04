@@ -1076,12 +1076,4 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 
-	.include "data/maps/EscapeRoom/scripts.inc"
-	
-	.include "data/maps/EscapeRoom_Indoor/scripts.inc"
-
-	.include "data/maps/EscapeRoom_IcePuzzle/scripts.inc"
-
-	.include "data/maps/EscapeRoomOutdoor/scripts.inc"
-
-	.include "data/maps/EscapeRoom_RockPuzzle/scripts.inc"
+	.include "data/maps/EscapeRoom_Main/scripts.inc"

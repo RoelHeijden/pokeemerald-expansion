@@ -1713,39 +1713,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
-      "name": "BIG CAVE",
-      "x": 8,
-      "y": 4,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "map_section": "MAPSEC_ESCAPE_ROOM_INDOOR",
-      "name": "PLANTS",
-      "x": 8,
-      "y": 4,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "map_section": "MAPSEC_ESCAPE_ROOM_ICE_CAVE",
-      "name": "BIG CAVE",
-      "x": 8,
-      "y": 4,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "map_section": "MAPSEC_ESCAPE_ROOM_OUTDOOR",
-      "name": "FREEDOM!",
-      "x": 8,
-      "y": 4,
-      "width": 1,
-      "height": 1
-    },
-    {
-      "map_section": "MAPSEC_ESCAPE_ROOM_ROCK_PUZZLE",
-      "name": "TINY CAVE",
+      "name": "Cool Map",
       "x": 8,
       "y": 4,
       "width": 1,

@@ -1,0 +1,290 @@
+
+////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
+
+mapscripts EscapeRoom_Main_MapScripts {
+    MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
+    MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScript_OnResumeScripts
+
+    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
+        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_MapScript_OnWarpIntoScripts
+    ]
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScript_GameStartScripts
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
+    ] 
+}
+
+
+script EscapeRoom_MapScript_OnTransitionScripts{
+    // keep double1 moved
+}
+
+script EscapeRoom_MapScript_OnResumeScripts{
+    // check if pokemon caught -- sets flag if true
+
+    // check for ball return -- sets var if true
+
+    // disable bag use 
+    if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+} 
+
+script EscapeRoom_MapScript_OnWarpIntoScripts{
+    // set NPC facing
+}
+
+script EscapeRoom_MapScripts_FindBallAferUse{
+    lockall
+    msgbox(NewGreatBallMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    finditem(ITEM_GREAT_BALL)  // TODO: setflag at right location -- currently after great ball use
+    clearflag(FLAG_BALL_USED)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
+    releaseall
+}
+
+script EscapeRoom_MapScript_GameStartScripts{
+    call(EscapeRoom_MapScripts_GetFirstPokemon)
+    call(EscapeRoom_MapScripts_GetBadges)
+    call(EscapeRoom_MapScripts_SetRespawn)
+    call(EscapeRoom_MapScripts_GetItems)
+    call(EscapeRoom_MapScripts_TurnOfBagUse)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
+}
+
+script EscapeRoom_MapScripts_GetFirstPokemon{
+    givemon(
+        SPECIES_TREVENANT, 
+        52, 
+        item=ITEM_NONE,
+        abilityNum=1, // frisk
+        nature=23, // careful 
+        gender=1, // female
+        move1=MOVE_FORESTS_CURSE,
+        move2=MOVE_NATURE_POWER, 
+        move3=MOVE_GRASSY_TERRAIN, 
+        move4=MOVE_NONE,
+        // EVS:
+        hpEv=252,
+        spDefEv=68,
+        speedEv=184,
+        // IVS:
+        hpIv=31,
+        atkIv=0,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=0,
+        spDefIv=31,
+    )
+    
+    givemon( 
+        SPECIES_ZERAORA, 
+        43, 
+        item=ITEM_NONE, 
+        abilityNum=0,  // volt absorb 
+        nature=20, // calm 
+        gender=0, 
+        move1=MOVE_PLASMA_FISTS, 
+        move2=MOVE_TOXIC, 
+        move3=MOVE_NONE, 
+        move4=MOVE_NONE, 
+        // EVs: 
+        hpEv=20,
+        spDefEv=144, 
+        // IVs: 
+        hpIv=31, 
+        atkIv=0, 
+        defIv=31, 
+        speedIv=31, 
+        spAtkIv=31, 
+        spDefIv=31 
+    )
+
+    givemon( 
+        SPECIES_MEW, 
+        31, 
+        item=ITEM_NONE, 
+        abilityNum=0,  // synchronize
+        nature=15, // modest 
+        gender=0, 
+        move1=MOVE_ICE_SPINNER, 
+        move2=MOVE_NONE, 
+        move3=MOVE_NONE, 
+        move4=MOVE_NONE, 
+        // EVs: 
+        hpEv=0, 
+        // IVs: 
+        hpIv=31, 
+        atkIv=0, 
+        defIv=31, 
+        speedIv=31, 
+        spAtkIv=31, 
+        spDefIv=31 
+    )
+
+
+    setflag(FLAG_SYS_POKEMON_GET)
+    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
+}
+
+script EscapeRoom_MapScripts_GetBadges{
+    setflag(FLAG_DEFEATED_RUSTBORO_GYM)
+    setflag(FLAG_BADGE01_GET)
+    setflag(FLAG_DEFEATED_DEWFORD_GYM)
+    setflag(FLAG_BADGE02_GET)
+    setflag(FLAG_DEFEATED_MAUVILLE_GYM)
+    setflag(FLAG_BADGE03_GET)
+    setflag(FLAG_DEFEATED_LAVARIDGE_GYM)
+    setflag(FLAG_BADGE04_GET)
+    setflag(FLAG_DEFEATED_PETALBURG_GYM)
+    setflag(FLAG_BADGE05_GET)
+    setflag(FLAG_DEFEATED_FORTREE_GYM)
+    setflag(FLAG_BADGE06_GET)
+    setflag(FLAG_DEFEATED_MOSSDEEP_GYM)
+    setflag(FLAG_BADGE07_GET)
+    setflag(FLAG_DEFEATED_SOOTOPOLIS_GYM)
+    setflag(FLAG_BADGE08_GET)
+}
+
+script EscapeRoom_MapScripts_SetRespawn{
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE)
+}
+
+script EscapeRoom_MapScripts_GetItems{
+    // additem(ITEM_HM04)
+}
+
+script EscapeRoom_MapScripts_TurnOfBagUse{
+    if (flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+}
+
+
+////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
+
+script EscapeRoom_Nurse_Heal_Pokemon{
+    lockall
+    fadescreen(FADE_TO_BLACK)
+	special(HealPlayerParty)
+    playfanfare(MUS_HEAL)
+    waitfanfare
+	fadescreen(FADE_FROM_BLACK)
+    msgbox(Nurse_Heal_End, MSGBOX_NPC)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_PostMatchHeal{
+    special(HealPlayerParty)
+}
+
+script EscapeRoom_EventScript_HintsNPC{
+    faceplayer
+    lockall
+    msgbox(HintsIntroMessage, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){    
+        msgbox(HintsNPCWhatKindOfHintMessage)
+        // TBD
+    }
+    else{
+        msgbox(HintsNPCNoHintMessage)
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_AntiSoftlockGuy{
+    faceplayer
+    lockall
+
+    // if no potential softlocks:
+    msgbox(AntiSoftlockIntroMessage)
+    msgbox(AntiSoftlockNoActionMessage)
+    releaseall
+}
+
+
+script EscapeRoom_EventScript_DoubleBattle1{
+    trainerbattle_double(
+        TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
+        Double1Puzzle_Intro, 
+        Double1Puzzle_Outro, 
+        Double1Puzzle_NotEnoughMons,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+
+
+////////////////////////////////////////// TEXT //////////////////////////////////////////
+
+text Nurse_Heal_End{
+    "I healed your POKéMON!"
+}
+
+text HintsIntroMessage{
+    "Need help? I can give you a hint at the\n"
+    "cost of getting time added to your\l"
+    "in-game clock.\p"
+    "The amount will depend on the type of\n"
+    "hint that you select.\p"
+    "Do you want to get a hint right now?"
+}
+
+text HintsNPCNoHintMessage{
+    "I'll be here if you need me."
+}
+
+text HintsNPCWhatKindOfHintMessage{
+    // "What kind of hint would you like?"
+    "TBD"
+}
+
+text AntiSoftlockIntroMessage{
+    "Hi, I'm the anti-softlock guy.\p"
+    "I can roll back actions that have the\n"
+    "possibility to get you softlocked.\p"
+    "However, I will NOT specify whether you\n"
+    "are actually softlocked or not."
+}
+
+text AntiSoftlockNoActionMessage{
+    "There's nothing I can do for you right\n"
+    "now."
+}
+
+
+text Double1Puzzle_NotEnoughMons{
+    "Want to battle?\n"
+    "You should bring a second POKéMON."
+}
+
+text Double1Puzzle_Intro{
+    "Let's go!"
+}
+
+text Double1Puzzle_Outro{
+    "You cheated."
+}
+
+text Double1Finalwords{
+    "Fock off."
+}
+
+text Double1Puzzle_PostBattle{
+    "Alright, go on now."
+}
+
+text NewGreatBallMessage{
+    "You recover the ball."
+}
+
+
+
+
+

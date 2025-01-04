@@ -3819,9 +3819,6 @@ bool8 PokemonUseItemEffects(struct Pokemon *mon, u16 item, u8 partyIndex, u8 mov
 
                 if (param == 0) // Rare Candy
                 {
-                    // ADDED
-                    FlagSet(FLAG_RARE_CANDY_USED);
-
                     dataUnsigned = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES, NULL)].growthRate][GetMonData(mon, MON_DATA_LEVEL, NULL) + 1];
                 }
                 else if (param - 1 < ARRAY_COUNT(sExpCandyExperienceTable)) // EXP Candies
@@ -5806,11 +5803,8 @@ u16 GetBattleBGM(void)
             return MUS_VS_FRONTIER_BRAIN;
 
         // ADDED
-        // custom music for the last battles
-        // case TRAINER_CLASS_EXPERT:  // single1
-        //     return MUS_VS_FRONTIER_BRAIN;
-        case TRAINER_CLASS_OLD_COUPLE:  // double1
-            return MUS_VS_AQUA_MAGMA_LEADER;
+        // case TRAINER_CLASS_OLD_COUPLE:
+        //     return MUS_VS_AQUA_MAGMA_LEADER;
 
         default:
             return MUS_VS_TRAINER;

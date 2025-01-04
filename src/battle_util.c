@@ -441,11 +441,6 @@ void HandleAction_UseItem(void)
     gLastUsedItem = gBattleResources->bufferB[gBattlerAttacker][1] | (gBattleResources->bufferB[gBattlerAttacker][2] << 8);
     gBattlescriptCurrInstr = gBattlescriptsForUsingItem[ItemId_GetBattleUsage(gLastUsedItem) - 1];
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
-    
-    // ADDED
-    if(gLastUsedItem == ITEM_PECHA_BERRY){
-        FlagSet(FLAG_PECHA_BERRY_USED);
-    }
 }
 
 bool32 TryRunFromBattle(u32 battler)
@@ -10219,17 +10214,6 @@ static inline s32 DoMoveDamageCalcVars(u32 move, u32 battlerAtk, u32 battlerDef,
         dmg *= DMG_ROLL_PERCENT_HI - RandomUniform(RNG_DAMAGE_MODIFIER, 0, DMG_ROLL_PERCENT_HI - DMG_ROLL_PERCENT_LO);
         dmg /= 100;
     }
-
-    // ADDED
-    // return 1 damage if Scrafty punches into Gardevoir
-    // for some reason it doesn't reflect the gen 9 dmg calc for this roll
-    if ((move == MOVE_DRAIN_PUNCH) || (move == MOVE_BRICK_BREAK)){
-        if ((gBattleMons[battlerDef].species == SPECIES_GARDEVOIR) && (gBattleMons[battlerAtk].species == SPECIES_SCRAFTY)){
-            dmg = 1;
-            return dmg;
-        }   
-    }
-
 
     if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
         DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(battlerAtk, moveType));

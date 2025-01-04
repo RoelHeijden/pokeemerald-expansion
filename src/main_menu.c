@@ -1066,8 +1066,8 @@ static void Task_HandleMainMenuAPressed(u8 taskId)
             default:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
                 gPlttBufferFaded[0] = RGB_BLACK;
-                gTasks[taskId].func = Task_NewGameBirchSpeech_Init;
-                // gTasks[taskId].func = Task_NoIntro_Init;
+                // gTasks[taskId].func = Task_NewGameBirchSpeech_Init;
+                gTasks[taskId].func = Task_NoIntro_Init;
                 break;
             case ACTION_CONTINUE:
                 gPlttBufferUnfaded[0] = RGB_BLACK;
@@ -2335,32 +2335,32 @@ static void Task_NewGameBirchSpeech_ReturnFromNamingScreenShowTextbox(u8 taskId)
 
 ////////////////////////////////////////////////////////////////////////
 
-// static void Task_NoIntro_Init(u8 taskId)
-// {   
-//     // from the init method
-//     // SetGpuReg(REG_OFFSET_DISPCNT, 0);
-//     // SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-//     // SetGpuReg(REG_OFFSET_WIN0H, 0);
-//     // SetGpuReg(REG_OFFSET_WIN0V, 0);
-//     // SetGpuReg(REG_OFFSET_WININ, 0);
-//     // SetGpuReg(REG_OFFSET_WINOUT, 0);
-//     // SetGpuReg(REG_OFFSET_BLDCNT, 0);
-//     // SetGpuReg(REG_OFFSET_BLDALPHA, 0);
-//     // SetGpuReg(REG_OFFSET_BLDY, 0);
-//     // ScanlineEffect_Stop();
-//     // ResetSpriteData();
-//     // FreeAllSpritePalettes();
-//     // ResetAllPicSprites();
-//     // gTasks[taskId].data[3] = 0xFF;
+static void Task_NoIntro_Init(u8 taskId)
+{   
+    // from the init method
+    // SetGpuReg(REG_OFFSET_DISPCNT, 0);
+    // SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+    // SetGpuReg(REG_OFFSET_WIN0H, 0);
+    // SetGpuReg(REG_OFFSET_WIN0V, 0);
+    // SetGpuReg(REG_OFFSET_WININ, 0);
+    // SetGpuReg(REG_OFFSET_WINOUT, 0);
+    // SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    // SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    // SetGpuReg(REG_OFFSET_BLDY, 0);
+    // ScanlineEffect_Stop();
+    // ResetSpriteData();
+    // FreeAllSpritePalettes();
+    // ResetAllPicSprites();
+    // gTasks[taskId].data[3] = 0xFF;
 
-//     // from the cleanup method
-//     // FreeAllWindowBuffers();
+    // from the cleanup method
+    // FreeAllWindowBuffers();
 
-//     // set default player name and gender
-//     NewGameBirchSpeech_SetDefaultPlayerName(0);  // male/female default names at 0 edited in strings.c
-//     gSaveBlock2Ptr->playerGender = MALE; 
+    // set default player name and gender
+    NewGameBirchSpeech_SetDefaultPlayerName(0);  // male/female default names at 0 edited in strings.c
+    gSaveBlock2Ptr->playerGender = MALE; 
 
-//     // directly jump to game 
-//     SetMainCallback2(CB2_NewGame);
-//     DestroyTask(taskId);
-// }
+    // directly jump to game 
+    SetMainCallback2(CB2_NewGame);
+    DestroyTask(taskId);
+}

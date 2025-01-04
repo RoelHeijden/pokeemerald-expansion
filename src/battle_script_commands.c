@@ -3464,15 +3464,6 @@ void SetMoveEffect(bool32 primary, bool32 certain)
                         gBattleStruct->changedItems[gBattlerAttacker] = gLastUsedItem; // Stolen item to be assigned later
                         BattleScriptPush(gBattlescriptCurrInstr + 1);
                         gBattlescriptCurrInstr = BattleScript_ItemSteal;
-
-                        // ADDED
-                        if (gLastUsedItem == ITEM_HM06){
-                            FlagSet(FLAG_HM_ROCK_SMASH_STOLEN);
-                        }
-                        // if (gLastUsedItem == ITEM_TM10){
-                        //     FlagSet(FLAG_TM_10_STOLEN);
-                        //     // DebugPrintf("FLAG SET: tm10 stolen");
-                        // }
                     }
                 }
                 break;
@@ -7811,17 +7802,9 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     // ADDED
     // 0 money reward, except for:
     moneyReward = 0;
-    if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE3){
-        moneyReward = 99999;
-    }
-    if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE2){
-        moneyReward = 4041;
-    }
-    if(trainerId == TRAINER_MY_CUSTOM_SINGLE_BATTLE1){
-        moneyReward = 28;
-    }
+
     if(trainerId == TRAINER_MY_CUSTOM_DOUBLE_BATTLE1){
-        moneyReward = 41999;
+        moneyReward = 69;
     }
 
     return moneyReward;
@@ -14196,7 +14179,7 @@ static void Cmd_callterrainattack(void)
 
     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
     gCurrentMove = GetNaturePowerMove(gBattlerAttacker);
-    gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE);
+    // gBattlerTarget = GetMoveTarget(gCurrentMove, NO_TARGET_OVERRIDE); // CHANGED
     BattleScriptPush(GET_MOVE_BATTLESCRIPT(gCurrentMove));
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
@@ -15275,7 +15258,7 @@ static void Cmd_handleballthrow(void)
                 break;
             case ITEM_GREAT_BALL:
                 ballMultiplier = 150;
-                FlagSet(FLAG_GREAT_BALL_USED); // ADDED
+                FlagSet(FLAG_BALL_USED); // ADDED
                 break;
             case ITEM_SAFARI_BALL:
                 if (B_SAFARI_BALL_MODIFIER <= GEN_7)

@@ -6784,13 +6784,14 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Nature Power"),
         .description = COMPOUND_STRING(
             "The type of attack varies\n"
-            "depending on the location."),
+            "depending on the terrain."), // changed
         .effect = EFFECT_NATURE_POWER,
         .power = 1,
         .type = TYPE_NORMAL,
         .accuracy = 0,
         .pp = 20,
-        .target = MOVE_TARGET_DEPENDS,
+        // .target = MOVE_TARGET_DEPENDS,
+        .target = MOVE_TARGET_SELECTED, // CHANGED
         .priority = 0,
         .category = DAMAGE_CATEGORY_STATUS,
         .metronomeBanned = B_UPDATED_MOVE_FLAGS >= GEN_4,

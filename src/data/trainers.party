@@ -16875,161 +16875,26 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MY_CUSTOM_DOUBLE_BATTLE1 ===
-Name: Jan & Nan
-Class: Old Couple
-Pic: Old Couple
+Name: Help
+Class: Expert
+Pic: Expert M
 Gender: Male
-Music: Swimmer
+Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
-Scrafty (F) @ Leftovers
-Ability: Intimidate  
-Level: 17  
-EVs: 252 Def  
-Bold Nature  
-IVs: 0 HP / 0 Atk / 0 Spe  
-- Drain Punch  
-- Brick Break
+Weezing-Galar (F) @ Misty Seed  
+Ability: Misty Surge  
+Level: 55  
+EVs: 252 HP / 148 Def / 108 SpD  
+Impish Nature  
+IVs: 0 Atk / 0 SpA  
+- Dazzling Gleam
 
-Smeargle (M) @ Mental Herb  
-Ability: Own Tempo  
-Level: 21  
-EVs: 252 Def / 252 Spe  
-Bold Nature  
-IVs: 0 HP / 0 Atk  
-- Super Fang  
-- Perish Song
-
-=== TRAINER_MY_CUSTOM_SINGLE_BATTLE1 ===
-Name: Roel
-Class: Expert
-Pic: Factory Head Noland
-Gender: Male
-Music: Male
-Double Battle: No
-AI: AI_FLAG_SINGLE1 / AI_FLAG_SEQUENCE_SWITCHING
-
-Togedemaru (M) @ Assault Vest  
-Ability: Lightning Rod  
-Level: 16  
-EVs: 252 Atk / 252 Spe  
-Jolly Nature  
-IVs: 0 HP / 0 SpA  
-- Steel Beam
-
-Tapu Bulu @ Miracle Seed  
-Ability: Grassy Surge  
-Level: 68  
-EVs: 252 Atk / 252 SpA / 4 Spe  
-Mild Nature  
-- Horn Leech  
-- Solar Beam
-
-Persian-Alola (M) @ Room Service  
-Ability: Fur Coat  
-Level: 23  
-EVs: 160 Atk / 112 Def / 236 SpA  
-Quiet Nature  
-IVs: 0 Spe  
-- Knock Off  
-- Shadow Ball
-
-=== TRAINER_MY_CUSTOM_SINGLE_BATTLE2 ===
-Name: DS. Abel
-Class: Rich Boy
-Pic: Rich Boy
-Gender: Male
-Music: Rich
-Double Battle: No
-AI: AI_FLAG_SEQUENCE_SWITCHING
-
-Slaking (M) @ Flame Orb  
-Ability: Truant  
-Level: 64  
-EVs: 8 HP / 252 Atk / 4 Def / 244 SpD  
+Toedscruel (M) @ Red Card  
+Ability: Mycelium Might  
+Level: 99   
+EVs: 248 HP / 252 Atk / 8 SpD  
 Adamant Nature  
-- Facade
-
-Cursola (F) @ Mental Herb  
-Ability: Perish Body  
-Level: 35  
-EVs: 252 HP / 252 Atk  
-Brave Nature  
-IVs: 3 Spe  
-- Tackle
-
-=== TRAINER_MY_CUSTOM_SINGLE_BATTLE3 ===
-Name: Rose Un
-Class: Triathlete
-Pic: Running Triathlete F
-Gender: Female
-Music: Suspicious
-Double Battle: No
-AI: AI_FLAG_SEQUENCE_SWITCHING
-
-Kecleon (F)
-Ability: Color Change  
-Level: 55   
-EVs: 252 SpA  
-Modest Nature  
-IVs: 30 Def / 30 SpD  
-- Mimic  
-
-Zangoose (F) @ ITEM_HM06 
-Ability: Toxic Boost  
-Level: 42  
-EVs: 252 HP / 100 SpD  
-Hardy Nature  
-- Final Gambit  
-
-=== TRAINER_MY_CUSTOM_SINGLE_BATTLE4 ===
-Name: C. Trish
-Class: Picnicker
-Pic: Picnicker
-Gender: Female
-Music: Girl
-Double Battle: No
-AI: AI_FLAG_SINGLE4 / AI_FLAG_SEQUENCE_SWITCHING
-
-Klefki (M) 
-Ability: Magician  
-Level: 5  
-EVs: 252 SpA  
-Mild Nature  
-IVs: 0 HP / 0 Atk / 0 Def  
-- Torment  
-- Flash Cannon
-
-Scorbunny (F) @ Sitrus Berry  
-Ability: Libero  
-Level: 24  
-EVs: 252 HP / 60 Atk  
-Lonely Nature  
-IVs: 17 Def  
-- Double-Edge
-
-=== TRAINER_MY_CUSTOM_DOUBLE_BATTLE2 ===
-Name: Pee & Sea
-Class: Twins
-Pic: Twins
-Gender: Female
-Music: Twins
-Double Battle: Yes
-AI: AI_FLAG_SEQUENCE_SWITCHING
-
-Urshifu (F) @ Choice Band  
-Ability: Unseen Fist  
-Level: 35  
-EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-- Wicked Blow  
-
-Urshifu-Rapid-Strike (F) @ Choice Band  
-Ability: Unseen Fist  
-Level: 35   
-EVs: 252 Atk / 232 Spe  
-Adamant Nature  
-- Surging Strikes  
-
-
+IVs: 0 Atk  
+- Rage Powder
