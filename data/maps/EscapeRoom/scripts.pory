@@ -29,6 +29,7 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     call(CaveHole_FixCrackedGround)
 }
 
+
 script EscapeRoom_MapScript_OnResumeScripts{
     // set cracked hole map location
     call(EscapeRoom_MapScripts_SetHoleWarp)
