@@ -16883,11 +16883,11 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE1
 
-Weezing-Galar (F) @ Misty Seed  
+Weezing-Galar (F) @ Assault Vest  
 Ability: Misty Surge  
-Level: 55  
-EVs: 252 HP / 148 Def / 108 SpD  
-Impish Nature  
+Level: 59  
+EVs: 252 HP / 4 Def / 252 SpD  
+Careful Nature  
 IVs: 0 Atk / 0 SpA  
 - Dazzling Gleam
 

@@ -68,8 +68,8 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move4=MOVE_NONE,
         // EVS:
         hpEv=252,
-        spDefEv=68,
-        speedEv=184,
+        spDefEv=252,
+        speedEv=0,
         // IVS:
         hpIv=31,
         atkIv=0,
@@ -91,11 +91,11 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move3=MOVE_NONE, 
         move4=MOVE_NONE, 
         // EVs: 
-        hpEv=20,
-        spDefEv=144, 
+        hpEv=132,
+        spDefEv=132, 
         // IVs: 
         hpIv=31, 
-        atkIv=0, 
+        atkIv=9, 
         defIv=31, 
         speedIv=31, 
         spAtkIv=31, 
@@ -104,24 +104,24 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
 
     givemon( 
         SPECIES_MEW, 
-        31, 
-        item=ITEM_NONE, 
+        22, 
+        item=ITEM_CHOICE_SCARF, 
         abilityNum=0,  // synchronize
-        nature=15, // modest 
+        nature=14, // naive 
         gender=0, 
         move1=MOVE_ICE_SPINNER, 
-        move2=MOVE_NONE, 
+        move2=MOVE_TOXIC_SPIKES, 
         move3=MOVE_NONE, 
         move4=MOVE_NONE, 
         // EVs: 
-        hpEv=0, 
+        speedEv=252, 
         // IVs: 
         hpIv=31, 
         atkIv=0, 
         defIv=31, 
         speedIv=31, 
         spAtkIv=31, 
-        spDefIv=31 
+        spDefIv=0 
     )
 
 

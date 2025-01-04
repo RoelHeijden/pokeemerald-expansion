@@ -77,11 +77,11 @@ EscapeRoom_MapScript_GameStartScripts::
 
 EscapeRoom_MapScripts_GetFirstPokemon::
 # 58 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_TREVENANT, 52, item = ITEM_NONE, abilityNum = 1, nature = 23, gender = 1, move1 = MOVE_FORESTS_CURSE, move2 = MOVE_NATURE_POWER, move3 = MOVE_GRASSY_TERRAIN, move4 = MOVE_NONE, hpEv = 252, spDefEv = 68, speedEv = 184, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 0, spDefIv = 31
+	givemon SPECIES_TREVENANT, 52, item = ITEM_NONE, abilityNum = 1, nature = 23, gender = 1, move1 = MOVE_FORESTS_CURSE, move2 = MOVE_NATURE_POWER, move3 = MOVE_GRASSY_TERRAIN, move4 = MOVE_NONE, hpEv = 252, spDefEv = 252, speedEv = 0, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 0, spDefIv = 31
 # 82 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_ZERAORA, 43, item = ITEM_NONE, abilityNum = 0, nature = 20, gender = 0, move1 = MOVE_PLASMA_FISTS, move2 = MOVE_TOXIC, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 20, spDefEv = 144, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_ZERAORA, 43, item = ITEM_NONE, abilityNum = 0, nature = 20, gender = 0, move1 = MOVE_PLASMA_FISTS, move2 = MOVE_TOXIC, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 132, spDefEv = 132, hpIv = 31, atkIv = 9, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 105 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_MEW, 31, item = ITEM_NONE, abilityNum = 0, nature = 15, gender = 0, move1 = MOVE_ICE_SPINNER, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 0, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_MEW, 22, item = ITEM_CHOICE_SCARF, abilityNum = 0, nature = 14, gender = 0, move1 = MOVE_ICE_SPINNER, move2 = MOVE_TOXIC_SPIKES, move3 = MOVE_NONE, move4 = MOVE_NONE, speedEv = 252, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 0
 # 128 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
 # 129 "data/maps/EscapeRoom_Main/scripts.pory"

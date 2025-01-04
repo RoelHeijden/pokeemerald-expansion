@@ -42208,17 +42208,17 @@ F_TRAINER_FEMALE |
 #line 16886
             .gender = TRAINER_MON_FEMALE,
 #line 16886
-            .heldItem = ITEM_MISTY_SEED,
+            .heldItem = ITEM_ASSAULT_VEST,
 #line 16889
-            .ev = TRAINER_PARTY_EVS(252, 0, 148, 0, 0, 108),
+            .ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252),
 #line 16891
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 0, 31),
 #line 16887
             .ability = ABILITY_MISTY_SURGE,
 #line 16888
-            .lvl = 55,
+            .lvl = 59,
 #line 16890
-            .nature = NATURE_IMPISH,
+            .nature = NATURE_CAREFUL,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16892
