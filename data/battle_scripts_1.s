@@ -945,6 +945,9 @@ BattleScript_HyperspaceFuryRemoveProtect::
 BattleScript_EffectPlasmaFists::
 	call BattleScript_EffectHit_Ret
 	tryfaintmon BS_TARGET
+
+	jumpiftype BS_TARGET, TYPE_GROUND, BattleScript_MoveEnd
+
 	orword gFieldStatuses, STATUS_FIELD_ION_DELUGE
 	printstring STRINGID_IONDELUGEON
 	waitmessage B_WAIT_TIME_LONG
