@@ -6049,10 +6049,35 @@ void SetTypeBeforeUsingMove(u32 move, u32 battlerAtk)
         gBattleStruct->dynamicMoveType = TYPE_DARK | F_DYNAMIC_TYPE_SET;
     }
 
+
     GET_MOVE_TYPE(move, moveType);
-    if ((gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TYPE_NORMAL)
-        || gStatuses4[battlerAtk] & STATUS4_ELECTRIFIED)
+    // ADDED
+    // dont convert if move is nature power and terrain is in effect
+    if (gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TYPE_NORMAL)
+    {
+        if ((!(gFieldStatuses & (STATUS_FIELD_MISTY_TERRAIN | 
+                                STATUS_FIELD_ELECTRIC_TERRAIN | 
+                                STATUS_FIELD_GRASSY_TERRAIN | 
+                                STATUS_FIELD_PSYCHIC_TERRAIN)) &&
+            (gBattleTerrain == BATTLE_TERRAIN_PLAIN ||
+            gBattleTerrain == BATTLE_TERRAIN_BUILDING)) ||
+            move != MOVE_NATURE_POWER)
+        {
+            gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
+        }
+    }
+
+    // CHANGED (separated)
+    if (gStatuses4[battlerAtk] & STATUS4_ELECTRIFIED)
         gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
+
+
+    // if ((gFieldStatuses & STATUS_FIELD_ION_DELUGE && moveType == TYPE_NORMAL)
+    //     || gStatuses4[battlerAtk] & STATUS4_ELECTRIFIED)
+    // {
+    //     gBattleStruct->dynamicMoveType = TYPE_ELECTRIC | F_DYNAMIC_TYPE_SET;
+    // }
+
 
     // Check if a gem should activate.
     GET_MOVE_TYPE(move, moveType);
