@@ -5502,6 +5502,46 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         return score;
     }
 
+
+    // DESTINY BOND GARDEVOR EDGE CASE
+    if((moveGardy == MOVE_DESTINY_BOND || (gBattleMons[battlerGardy].status2 & STATUS2_DESTINY_BOND)) && battlerGardy == battlerDef){
+
+        // scrafty
+        if(move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK){
+            // avoid at 2 hp in TR
+            if(gardyHp == 2){
+                if(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+                    score = 10;
+                else
+                    score = 20;
+                return score;
+            }
+            // avoid at 1 hp in general
+            if(gardyHp == 1){
+                score = 10;
+                return score;
+            }
+        }
+
+        // smeargle
+        if(move == MOVE_SUPER_FANG){
+            // avoid at 2 hp out of TR
+            if(gardyHp == 2){
+                if(gFieldStatuses & STATUS_FIELD_TRICK_ROOM)
+                    score = 20;
+                else
+                    score = 10;
+                return score;
+            }
+            // trade at 1 hp
+            if(gardyHp == 1){
+                score = 20;
+                return score;
+            }
+        }
+    }
+    
+
     // DESTINY BOND SMEARGLE
     if(moveSmeargle == MOVE_DESTINY_BOND && gBattleMons[battlerDef].species == SPECIES_SMEARGLE && move != MOVE_PERISH_SONG){
         // Scrafy
@@ -5512,7 +5552,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                     if(smeargleHp > 32)
                         score = 155;
                     else
-                        score = 70; 
+                        score = 15; 
                 }
                 else
                     score = 155; 
@@ -5522,11 +5562,10 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 if(smeargleHasIronBall)
                     score = 155;
                 else{
-                    // if(smeargleHasIronBall){
                     if(smeargleHp > 32)
                         score = 155;
                     else
-                        score = 70; 
+                        score = 15; 
                 }
             }
         }
@@ -5535,7 +5574,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // in Trick Room:
             if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
 
-                // target highest hp after scrafty damage (if scrafy will attack it)
+                // target highest hp after scrafty damage (if scrafty will attack it)
                 if ((smeargleHp - 32) > 0)
                 {
                     if ((smeargleHp - 24) >= gardyHp && battlerDef == battlerSmeargle)
@@ -5580,13 +5619,6 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 || gDisableStructs[battlerAtk].disabledMove == MOVE_BRICK_BREAK))
                 score = 101;
 
-
-            // // REMOVE
-            // if (battlerDef == battlerGardy)
-            //     DebugPrintf("Gardy: DRAIN PUNCH score: %d", score);
-            // if (battlerDef == battlerSmeargle)
-            //     DebugPrintf("Smeargle: DRAIN PUNCH score: %d", score);
-
             break;
 
         case MOVE_BRICK_BREAK:
@@ -5608,18 +5640,25 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 || gDisableStructs[battlerAtk].disabledMove == MOVE_DRAIN_PUNCH))
                 score = 101;
 
-
-            // // REMOVE
-            // if (battlerDef == battlerGardy)
-            //     DebugPrintf("Gardy: BRICK BREAK score: %d", score);
-            // if (battlerDef == battlerSmeargle)
-            //     DebugPrintf("Smeargle: BRICk BREAK score: %d", score);
-
             break;
 
         case MOVE_PERISH_SONG:
-            // avoid using this until Super Fang is simply not available
+            // avoid using this until Super Fang is not available/viable
             score = 5;  
+
+            // use perish song if super fang pp is at 3 or lower
+            int smeargleSuperFangPP = 10;
+            for (int i = 0; i < MAX_MON_MOVES; i++) 
+            {
+                if (gBattleMons[oppSmeargle].moves[i] == MOVE_SUPER_FANG)
+                {
+                    smeargleSuperFangPP = gBattleMons[oppSmeargle].pp[i];
+                    break;
+                }
+            }
+            if (smeargleSuperFangPP == 3)
+                score = 180;
+
             break;
 
         case MOVE_SUPER_FANG:
