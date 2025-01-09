@@ -569,7 +569,7 @@ script EscapeRoom_EventScript_TeleportBackOverLedge{
             }
         } 
 
-        // reset item stolen flag
+        // reset item stolen flag 
         clearflag(FLAG_HM_ROCK_SMASH_STOLEN)
 
         // teleport out
@@ -799,7 +799,12 @@ script EscapeRoom_EventScript_GetUsOutNPC{
 }
 
 script EscapeRoom_EventScript_NuggetNPC{
-    msgbox(NuggetNPCmessage, MSGBOX_NPC)
+    if(flag(FLAG_NUGGET3_OBTAINED) == FALSE){
+        msgbox(NuggetNPCmessage, MSGBOX_NPC)
+    }
+    else{
+        msgbox(NuggetNPCmessage2, MSGBOX_NPC)
+    }
 }
 
 script EscapeRoom_EventScript_perfectSmeargleHintNPC{
@@ -1639,7 +1644,7 @@ text Double1Puzzle_Intro{
     "We know exactly what you'll do.\p"
     "Some think it's cheating.\n"
     "We call it wisdom.\p"
-    "There's one path that always wins.\n"
+    "There's one path we cannot stop.\n"
     "Can you figure it out?"
 }
 
@@ -1763,7 +1768,7 @@ text Single2Puzzle_Outro{
 
 text Single3Puzzle_Intro{
     "It looks like you're stuck!\p"
-    "A real thief would've known when to run."
+    "A real thief would've known when to quit."
 }
 
 text Single3Puzzle_Outro{
@@ -1860,6 +1865,12 @@ text NuggetNPCmessage{
     "I'll leaf it be."
 }
 
+text NuggetNPCmessage2{
+    "Oh you've found my NUGGET!\p"
+    "You can keep it.\n"
+    "I didn't need it anyway."
+}
+
 text GetUsOutNPCMessage{
     "Please get us out of here..."
 }
@@ -1888,7 +1899,7 @@ text icePuzzleHintNPCmessage{
 }
 
 text StopWinningNPCmessage{
-    "Haha you suck. Just give up!"
+    "Just give up!"
 }
 
 text NewGreatBallMessage{
@@ -1935,9 +1946,7 @@ text Single2Puzzle_PostBattle{
 }
 
 text Single1Puzzle_PostBattle{ 
-    "Remember turning your POKéMON into a\n"
-    "ghost type?\p"
-    "That was fun."
+    "..."
 }
 
 text ExitCloseNPCMessage{
@@ -2134,15 +2143,17 @@ text HintsNPC_TrainerRoseUn{
     "FINAL GAMBIT from ZANGOOSE.\p"
     "Keep in mind that HIDDEN POWER's typing\n"
     "may depend on the POKéMON using it.\p"
-    "It's okay to give up."
+    "Just give up."
 }
 
 text HintsNPC_TrainerDSAbel{
     "PROTECT SMEARGLE and the right move on\n"
     "GARDEVOIR will get you past SLAKING.\p"
     "However, CURSOLA will need to be given a\n"
-    "hindering ability to slow it down.\p"
-    "Are you a skill trader?"
+    "hindering ability to slow it down.\l"
+    "Are you a skill trader?\p"
+    "You may have to stall a turn to get the\n"
+    "timing right."
 }
 
 text HintsNPC_TrainerRoel{
