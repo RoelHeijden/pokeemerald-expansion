@@ -11304,8 +11304,15 @@ void TryRestoreHeldItems(void)
         {
             u16 lostItem = gBattleStruct->itemLost[B_SIDE_PLAYER][i].originalItem;
 
-            // NEW: Remove the restriction that excludes berries from being restored
+            // CHANGED: Remove the restriction that excludes berries from being restored
             if (lostItem != ITEM_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == ITEM_NONE)
+            {
+                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
+            }
+
+            // ADDED
+            // overwrite HM06 to restore item
+            if (lostItem != ITEM_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == ITEM_HM06)
             {
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
             }
