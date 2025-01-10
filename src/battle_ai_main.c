@@ -61,7 +61,7 @@ static s32 AI_PowerfulStatus(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 // ADDED
-static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
@@ -87,7 +87,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [17] = NULL,                     // Unused
     [18] = NULL,                     // Unused
     [19] = NULL,                     // Unused
-    [20] = AI_Double1_Logic,         // AI_FLAG_DOUBLE1
+    [20] = AI_Double2_Logic,         // AI_FLAG_DOUBLE2
     [21] = AI_Single1_Logic,         // AI_FLAG_SINGLE1
     [22] = NULL,                     // Unused
     [23] = NULL,                     // Unused
@@ -5443,36 +5443,66 @@ void ResetDynamicAiFunc(void)
 
 ////////////////////////////////////////////////////////////////////////////
 
-// Double battle 1 logic
 
-static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
+// Double battle 2 logic
+static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    // int battlerGardy = (gBattleMons[2].species == SPECIES_GARDEVOIR) * 2;
-    // int battlerSmeargle = (gBattleMons[2].species == SPECIES_SMEARGLE) * 2;
+    // int battlerFlorges = (gBattleMons[2].species == SPECIES_FLORGES) * 2;
 
-    // int oppSmeargle = (gBattleMons[3].species == SPECIES_SMEARGLE) * 2 + 1;
-    // int oppScrafty = (gBattleMons[3].species == SPECIES_SCRAFTY) * 2 + 1;
+    int battlerDunsparce = (gBattleMons[2].species == SPECIES_DUNSPARCE) * 2;
+    int dunsparceHp = gBattleMons[battlerDunsparce].hp;  // max = 160
 
-    // int moveGardy = gBattleMons[battlerGardy].moves[gBattleStruct->chosenMovePositions[battlerGardy]];
-    // int moveSmeargle = gBattleMons[battlerSmeargle].moves[gBattleStruct->chosenMovePositions[battlerSmeargle]];
-    // int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
+    int battlerKomala = (gBattleMons[3].species == SPECIES_KOMALA) * 2 + 1;
+    int komalaHp = gBattleMons[battlerKomala].hp;  // max = 155
 
-    // int targetProtectingItself = (moveDefender == MOVE_PROTECT && !gProtectSuccessLastTurn[battlerDef]);
-    // int opposingSelfPainSplit = (moveGardy == MOVE_PAIN_SPLIT && gBattleStruct->moveTarget[battlerGardy] == battlerSmeargle);
+    int battlerTinkaton = (gBattleMons[3].species == SPECIES_TINKATON) * 2 + 1;
+    int tinkatonHp = gBattleMons[battlerTinkaton].hp;  // max = 109
 
-    // int gardyHp = gBattleMons[battlerGardy].hp;
-    // int smeargleHp = gBattleMons[battlerSmeargle].hp;
+    // used for Counter calcs
+    int bulldozeDmg = 19;
 
 
-    // // DONT TARGET PARTNER 
-    // if (battlerDef == oppSmeargle || battlerDef == oppScrafty)
-    // {
-    //     score = 1;
-    //     return score;
-    // }
+    // Komala Bulldoze
+    if(move == MOVE_BULLDOZE){
+        score = 110;
+
+        // always bulldoze if it KOs
+        if(dunsparceHp <= bulldozeDmg)
+            score = 150;
+    }
+
+    // Komala Wish
+    if(move == MOVE_WISH){
+        score = 50;
+
+        // use double wish (fail) if Bulldoze lets Counter KO
+        if (komalaHp <= (2 * bulldozeDmg) && !(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
+            score = 120;
+
+        // don't use wish if already in effect
+        if (gWishFutureKnock.wishCounter[battlerAtk] != 0)
+            return score;
+
+        // always use Wish if in range of: counter + 2x Trump Card in light screen
+        if(komalaHp <= 123 && !(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
+            score = 120;
+
+        // always use Wish if in range of: 3x Trump Card in light screen + grassy healing
+        if(komalaHp <= 98 && (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
+            score = 120;
+
+        // use wish when below 100% and Light screen ends next turn
+        if(komalaHp < gBattleMons[battlerKomala].maxHP && gSideTimers[GetBattlerSide(battlerAtk)].lightscreenTimer <= 2)
+            score = 120;
+
+        // alternate wish and TR when both light screen and tinkaton are gone
+        if(tinkatonHp == 0 && gSideTimers[GetBattlerSide(battlerAtk)].lightscreenTimer <= 1)
+            score = 120;
+    }
 
     return score;
 }
+
 
 static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
     return score;

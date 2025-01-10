@@ -472,6 +472,7 @@ static void CreateWildMon(u16 species, u8 level)
         u8 hpEv = 0;
         u8 atkEv = 0;
         u8 defEv = 0;
+        u8 speedEv = 0;
         u8 hpIv = 31; 
         u8 atkIv = 31; 
         u8 defIv = 31; 
@@ -489,17 +490,17 @@ static void CreateWildMon(u16 species, u8 level)
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
         {
-            species = SPECIES_SMEARGLE;
-            level = 20;
-            abilityNum = 1;
+            species = SPECIES_ANNIHILAPE;
+            heldItem = ITEM_NONE;
+            level = 100;
+            abilityNum = 2;
             gender = MON_MALE;
-            nature = NATURE_BOLD;
-            move1 = MOVE_SKETCH;
-            defEv = 208;
-            hpIv = 11;
-            atkIv = 0;
-            spAtkIv = 0;
-            speedIv = 0;
+            nature = NATURE_ADAMANT;
+            move1 = MOVE_MIMIC;
+            atkEv = 252;
+            speedEv = 252;
+            atkIv = 31;
+            speedIv = 31;
         }
 
         // set nature and gender
@@ -522,6 +523,7 @@ static void CreateWildMon(u16 species, u8 level)
         SetMonData(&gEnemyParty[0], MON_DATA_HP_EV, &hpEv);
         SetMonData(&gEnemyParty[0], MON_DATA_DEF_EV, &defEv);
         SetMonData(&gEnemyParty[0], MON_DATA_ATK_EV, &atkEv);
+        SetMonData(&gEnemyParty[0], MON_DATA_SPEED_EV, &speedEv);
 
         // Set IVs
         SetMonData(&gEnemyParty[0], MON_DATA_HP_IV, &hpIv);

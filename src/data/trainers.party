@@ -16875,26 +16875,55 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 === TRAINER_MY_CUSTOM_DOUBLE_BATTLE1 ===
-Name: Help
+Name: Help1
 Class: Expert
 Pic: Expert M
 Gender: Male
 Music: Intense
 Double Battle: Yes
-AI: AI_FLAG_DOUBLE1
 
-Weezing-Galar (F) @ Assault Vest  
-Ability: Misty Surge  
-Level: 59  
-EVs: 252 HP / 4 Def / 252 SpD  
-Careful Nature  
+Muk @ Black Sludge  
+Ability: Sticky Hold  
+Level: 81  
+EVs: 252 HP / 96 Def / 156 Spe  
+Impish Nature  
 IVs: 0 Atk / 0 SpA  
-- Dazzling Gleam
+- Swift  
 
-Toedscruel (M) @ Red Card  
+Toedscruel (M) @ Black Sludge
 Ability: Mycelium Might  
-Level: 99   
+Level: 100  
 EVs: 248 HP / 252 Atk / 8 SpD  
 Adamant Nature  
+- Rage Powder  
+
+
+=== TRAINER_MY_CUSTOM_DOUBLE_BATTLE2 ===
+Name: Help2
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: Yes
+AI: AI_FLAG_DOUBLE2
+
+Komala @ Air Balloon 
+Ability: Comatose  
+Level: 45  
+EVs: 252 HP / 252 Spe  
+Bold Nature  
+IVs: 0 Atk / 0 SpD  
+- Bulldoze  
+- Wish
+
+Tinkaton  
+Ability: Pickpocket  
+Level: 31  
+EVs: 252 SpD / 172 Spe  
+Serious Nature  
 IVs: 0 Atk  
-- Rage Powder
+- Light Screen
+
+
+
+

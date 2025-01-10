@@ -56,73 +56,98 @@ script EscapeRoom_MapScript_GameStartScripts{
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
-        SPECIES_TREVENANT, 
-        52, 
+        SPECIES_FLORGES,
+        22,
+        // item=ITEM_SAFETY_GOGGLES,
         item=ITEM_NONE,
-        abilityNum=1, // frisk
-        nature=23, // careful 
+        abilityNum=2, // symbiosis
+        nature=21, // gentle
         gender=1, // female
-        move1=MOVE_FORESTS_CURSE,
-        move2=MOVE_NATURE_POWER, 
-        move3=MOVE_GRASSY_TERRAIN, 
-        move4=MOVE_NONE,
-        // EVS:
+        move1=MOVE_NATURE_POWER,
+        move2=MOVE_CAMOUFLAGE,
+        move3=MOVE_GRASSY_TERRAIN,
+        move4=MOVE_SKILL_SWAP,
+        // EVs:
         hpEv=252,
         spDefEv=252,
-        speedEv=0,
-        // IVS:
+        // IVs:
         hpIv=31,
+        atkIv=31,
+        defIv=4,
+        speedIv=31,
+        spAtkIv=0,
+        spDefIv=31
+    )
+
+    // givemon(
+    //     SPECIES_ZERAORA,
+    //     43,
+    //     item=ITEM_MICLE_BERRY,
+    //     abilityNum=0, // volt absorb
+    //     nature=15, // modest
+    //     gender=0,
+    //     move1=MOVE_PLASMA_FISTS,
+    //     move2=MOVE_SNATCH,
+    //     move3=MOVE_NONE,
+    //     move4=MOVE_NONE,
+    //     // EVs:
+    //     hpEv=28,  
+    //     // IVs:
+    //     hpIv=31,
+    //     atkIv=0,
+    //     defIv=0,
+    //     speedIv=31,
+    //     spAtkIv=31,
+    //     spDefIv=31
+    // )
+
+    // givemon(
+    //     SPECIES_FERROTHORN,
+    //     31,
+    //     item=ITEM_CUSTAP_BERRY,
+    //     abilityNum=2, // anticipation
+    //     nature=3, // adamant
+    //     gender=0, 
+    //     move1=MOVE_STEEL_ROLLER,
+    //     move2=MOVE_BLOCK,
+    //     move3=MOVE_CONFIDE,
+    //     move4=MOVE_INGRAIN,
+    //     // EVs:
+    //     hpEv=0, 
+    //     atkEv=252,
+    //     // IVs:
+    //     hpIv=31,
+    //     atkIv=31,
+    //     defIv=31,
+    //     speedIv=31,
+    //     spAtkIv=31,
+    //     spDefIv=31
+    // )
+
+    givemon(
+        SPECIES_DUNSPARCE,
+        50,
+        item=ITEM_RING_TARGET,
+        abilityNum=2, // rattled
+        nature=8, // impish
+        gender=0, 
+        move1=MOVE_TRUMP_CARD,
+        move2=MOVE_AIR_SLASH,
+        // move2=MOVE_QUICK_ATTACK,
+        move3=MOVE_HEX,
+        move4=MOVE_COUNTER,
+        // EVs:
+        hpEv=0, 
+        defEv=252,
+        // IVs:
+        hpIv=0,
         atkIv=0,
         defIv=31,
         speedIv=31,
-        spAtkIv=0,
-        spDefIv=31,
-    )
-    
-    givemon( 
-        SPECIES_ZERAORA, 
-        43, 
-        item=ITEM_NONE, 
-        abilityNum=0,  // volt absorb 
-        nature=20, // calm 
-        gender=0, 
-        move1=MOVE_PLASMA_FISTS, 
-        move2=MOVE_TOXIC, 
-        move3=MOVE_NONE, 
-        move4=MOVE_NONE, 
-        // EVs: 
-        hpEv=132,
-        spDefEv=132, 
-        // IVs: 
-        hpIv=31, 
-        atkIv=9, 
-        defIv=31, 
-        speedIv=31, 
-        spAtkIv=31, 
-        spDefIv=31 
+        spAtkIv=10,
+        spDefIv=31
     )
 
-    givemon( 
-        SPECIES_MEW, 
-        22, 
-        item=ITEM_CHOICE_SCARF, 
-        abilityNum=0,  // synchronize
-        nature=14, // naive 
-        gender=0, 
-        move1=MOVE_ICE_SPINNER, 
-        move2=MOVE_TOXIC_SPIKES, 
-        move3=MOVE_NONE, 
-        move4=MOVE_NONE, 
-        // EVs: 
-        speedEv=252, 
-        // IVs: 
-        hpIv=31, 
-        atkIv=0, 
-        defIv=31, 
-        speedIv=31, 
-        spAtkIv=31, 
-        spDefIv=0 
-    )
 
 
     setflag(FLAG_SYS_POKEMON_GET)
@@ -153,7 +178,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 }
 
 script EscapeRoom_MapScripts_GetItems{
-    // additem(ITEM_HM04)
+    // additem(ITEM_CHOICE_SCARF)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -209,6 +234,19 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 script EscapeRoom_EventScript_DoubleBattle1{
     trainerbattle_double(
         TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
+        Double1Puzzle_Intro, 
+        Double1Puzzle_Outro, 
+        Double1Puzzle_NotEnoughMons,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_DoubleBattle2{
+    trainerbattle_double(
+        TRAINER_MY_CUSTOM_DOUBLE_BATTLE2, 
         Double1Puzzle_Intro, 
         Double1Puzzle_Outro, 
         Double1Puzzle_NotEnoughMons,

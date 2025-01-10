@@ -4414,10 +4414,10 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_MAIN",
       "name": "EscapeRoom_Main_Layout",
-      "width": 6,
-      "height": 6,
+      "width": 40,
+      "height": 30,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Petalburg",
+      "secondary_tileset": "gTileset_MirageTower",
       "border_filepath": "data/layouts/EscapeRoom_Main/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_Main/map.bin"
     }

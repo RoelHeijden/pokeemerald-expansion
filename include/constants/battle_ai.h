@@ -47,7 +47,7 @@
 #define AI_FLAG_SMART_MON_CHOICES     (1 << 17)  // AI will make smarter decisions when choosing which mon to send out mid-battle and after a KO, which are separate decisions. Automatically included by AI_FLAG_SMART_SWITCHING.
 #define AI_FLAG_CONSERVATIVE          (1 << 18)  // AI assumes all moves will low roll damage
 #define AI_FLAG_SEQUENCE_SWITCHING    (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle
-#define AI_FLAG_DOUBLE1               (1 << 20)  // AI for double battle1 (smeargle scrafty)
+#define AI_FLAG_DOUBLE2               (1 << 20)  // AI for double battle2 (komala tinkaton)
 #define AI_FLAG_SINGLE1               (1 << 21)  // AI for single battle1 (lunatone gliscor dusclops)
 #define AI_FLAG_SINGLE4               (1 << 22)  // AI for single battle4 (probably: magician/pickpocket sequence)
 

@@ -42187,7 +42187,7 @@ F_TRAINER_FEMALE |
     [TRAINER_MY_CUSTOM_DOUBLE_BATTLE1] =
     {
 #line 16878
-        .trainerName = _("Help"),
+        .trainerName = _("Help1"),
 #line 16879
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 16880
@@ -42197,55 +42197,116 @@ F_TRAINER_FEMALE |
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 16883
         .doubleBattle = TRUE,
-#line 16884
-        .aiFlags = AI_FLAG_DOUBLE1,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 16886
-            .species = SPECIES_WEEZING_GALAR,
-#line 16886
-            .gender = TRAINER_MON_FEMALE,
-#line 16886
-            .heldItem = ITEM_ASSAULT_VEST,
-#line 16889
-            .ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252),
-#line 16891
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 0, 31),
-#line 16887
-            .ability = ABILITY_MISTY_SURGE,
+#line 16885
+            .species = SPECIES_MUK,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16885
+            .heldItem = ITEM_BLACK_SLUDGE,
 #line 16888
-            .lvl = 59,
+            .ev = TRAINER_PARTY_EVS(252, 0, 96, 156, 0, 0),
 #line 16890
-            .nature = NATURE_CAREFUL,
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 0, 31),
+#line 16886
+            .ability = ABILITY_STICKY_HOLD,
+#line 16887
+            .lvl = 81,
+#line 16889
+            .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16892
-                MOVE_DAZZLING_GLEAM,
+#line 16891
+                MOVE_SWIFT,
             },
             },
             {
-#line 16894
+#line 16893
             .species = SPECIES_TOEDSCRUEL,
-#line 16894
+#line 16893
             .gender = TRAINER_MON_MALE,
-#line 16894
-            .heldItem = ITEM_RED_CARD,
-#line 16897
-            .ev = TRAINER_PARTY_EVS(248, 252, 0, 0, 0, 8),
-#line 16899
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 16895
-            .ability = ABILITY_MYCELIUM_MIGHT,
+#line 16893
+            .heldItem = ITEM_BLACK_SLUDGE,
 #line 16896
-            .lvl = 99,
+            .ev = TRAINER_PARTY_EVS(248, 252, 0, 0, 0, 8),
 #line 16898
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16894
+            .ability = ABILITY_MYCELIUM_MIGHT,
+#line 16895
+            .lvl = 100,
+#line 16897
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16900
+#line 16898
                 MOVE_RAGE_POWDER,
+            },
+            },
+        },
+    },
+#line 16901
+    [TRAINER_MY_CUSTOM_DOUBLE_BATTLE2] =
+    {
+#line 16902
+        .trainerName = _("Help2"),
+#line 16903
+        .trainerClass = TRAINER_CLASS_EXPERT,
+#line 16904
+        .trainerPic = TRAINER_PIC_EXPERT_M,
+        .encounterMusic_gender = 
+#line 16906
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 16907
+        .doubleBattle = TRUE,
+#line 16908
+        .aiFlags = AI_FLAG_DOUBLE2,
+        .partySize = 2,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16910
+            .species = SPECIES_KOMALA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16910
+            .heldItem = ITEM_AIR_BALLOON,
+#line 16913
+            .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 0, 0),
+#line 16915
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 0),
+#line 16911
+            .ability = ABILITY_COMATOSE,
+#line 16912
+            .lvl = 45,
+#line 16914
+            .nature = NATURE_BOLD,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16916
+                MOVE_BULLDOZE,
+                MOVE_WISH,
+            },
+            },
+            {
+#line 16919
+            .species = SPECIES_TINKATON,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16922
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 172, 0, 252),
+#line 16924
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+#line 16920
+            .ability = ABILITY_PICKPOCKET,
+#line 16921
+            .lvl = 31,
+#line 16923
+            .nature = NATURE_SERIOUS,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16925
+                MOVE_LIGHT_SCREEN,
             },
             },
         },

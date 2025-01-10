@@ -77,56 +77,54 @@ EscapeRoom_MapScript_GameStartScripts::
 
 EscapeRoom_MapScripts_GetFirstPokemon::
 # 58 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_TREVENANT, 52, item = ITEM_NONE, abilityNum = 1, nature = 23, gender = 1, move1 = MOVE_FORESTS_CURSE, move2 = MOVE_NATURE_POWER, move3 = MOVE_GRASSY_TERRAIN, move4 = MOVE_NONE, hpEv = 252, spDefEv = 252, speedEv = 0, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 0, spDefIv = 31
-# 82 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_ZERAORA, 43, item = ITEM_NONE, abilityNum = 0, nature = 20, gender = 0, move1 = MOVE_PLASMA_FISTS, move2 = MOVE_TOXIC, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 132, spDefEv = 132, hpIv = 31, atkIv = 9, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 105 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_MEW, 22, item = ITEM_CHOICE_SCARF, abilityNum = 0, nature = 14, gender = 0, move1 = MOVE_ICE_SPINNER, move2 = MOVE_TOXIC_SPIKES, move3 = MOVE_NONE, move4 = MOVE_NONE, speedEv = 252, hpIv = 31, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 0
-# 128 "data/maps/EscapeRoom_Main/scripts.pory"
+	givemon SPECIES_FLORGES, 22, item = ITEM_NONE, abilityNum = 2, nature = 21, gender = 1, move1 = MOVE_NATURE_POWER, move2 = MOVE_CAMOUFLAGE, move3 = MOVE_GRASSY_TERRAIN, move4 = MOVE_SKILL_SWAP, hpEv = 252, spDefEv = 252, hpIv = 31, atkIv = 31, defIv = 4, speedIv = 31, spAtkIv = 0, spDefIv = 31
+# 127 "data/maps/EscapeRoom_Main/scripts.pory"
+	givemon SPECIES_DUNSPARCE, 50, item = ITEM_RING_TARGET, abilityNum = 2, nature = 8, gender = 0, move1 = MOVE_TRUMP_CARD, move2 = MOVE_AIR_SLASH, move3 = MOVE_HEX, move4 = MOVE_COUNTER, hpEv = 0, defEv = 252, hpIv = 0, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 10, spDefIv = 31
+# 153 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_SYS_POKEMON_GET
-# 129 "data/maps/EscapeRoom_Main/scripts.pory"
+# 154 "data/maps/EscapeRoom_Main/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2
 	return
 
 
 EscapeRoom_MapScripts_GetBadges::
-# 133 "data/maps/EscapeRoom_Main/scripts.pory"
+# 158 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
-# 134 "data/maps/EscapeRoom_Main/scripts.pory"
+# 159 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE01_GET
-# 135 "data/maps/EscapeRoom_Main/scripts.pory"
+# 160 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_DEWFORD_GYM
-# 136 "data/maps/EscapeRoom_Main/scripts.pory"
+# 161 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE02_GET
-# 137 "data/maps/EscapeRoom_Main/scripts.pory"
+# 162 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
-# 138 "data/maps/EscapeRoom_Main/scripts.pory"
+# 163 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE03_GET
-# 139 "data/maps/EscapeRoom_Main/scripts.pory"
+# 164 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
-# 140 "data/maps/EscapeRoom_Main/scripts.pory"
+# 165 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE04_GET
-# 141 "data/maps/EscapeRoom_Main/scripts.pory"
+# 166 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_PETALBURG_GYM
-# 142 "data/maps/EscapeRoom_Main/scripts.pory"
+# 167 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE05_GET
-# 143 "data/maps/EscapeRoom_Main/scripts.pory"
+# 168 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_FORTREE_GYM
-# 144 "data/maps/EscapeRoom_Main/scripts.pory"
+# 169 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE06_GET
-# 145 "data/maps/EscapeRoom_Main/scripts.pory"
+# 170 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
-# 146 "data/maps/EscapeRoom_Main/scripts.pory"
+# 171 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE07_GET
-# 147 "data/maps/EscapeRoom_Main/scripts.pory"
+# 172 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-# 148 "data/maps/EscapeRoom_Main/scripts.pory"
+# 173 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_BADGE08_GET
 	return
 
 
 EscapeRoom_MapScripts_SetRespawn::
-# 152 "data/maps/EscapeRoom_Main/scripts.pory"
+# 177 "data/maps/EscapeRoom_Main/scripts.pory"
 	setrespawn HEAL_LOCATION_ESCAPE_ROOM_NURSE
 	return
 
@@ -136,97 +134,107 @@ EscapeRoom_MapScripts_GetItems::
 
 
 EscapeRoom_MapScripts_TurnOfBagUse::
-# 160 "data/maps/EscapeRoom_Main/scripts.pory"
+# 185 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_TOGGLE_BAG_USE, EscapeRoom_MapScripts_TurnOfBagUse_1
 	return
 
 EscapeRoom_MapScripts_TurnOfBagUse_1:
-# 161 "data/maps/EscapeRoom_Main/scripts.pory"
+# 186 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_TOGGLE_BAG_USE
 	return
 
 
 EscapeRoom_Nurse_Heal_Pokemon::
-# 169 "data/maps/EscapeRoom_Main/scripts.pory"
+# 194 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 170 "data/maps/EscapeRoom_Main/scripts.pory"
+# 195 "data/maps/EscapeRoom_Main/scripts.pory"
 	fadescreen FADE_TO_BLACK
-# 171 "data/maps/EscapeRoom_Main/scripts.pory"
+# 196 "data/maps/EscapeRoom_Main/scripts.pory"
 	special HealPlayerParty
-# 172 "data/maps/EscapeRoom_Main/scripts.pory"
+# 197 "data/maps/EscapeRoom_Main/scripts.pory"
 	playfanfare MUS_HEAL
-# 173 "data/maps/EscapeRoom_Main/scripts.pory"
+# 198 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitfanfare
-# 174 "data/maps/EscapeRoom_Main/scripts.pory"
+# 199 "data/maps/EscapeRoom_Main/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 175 "data/maps/EscapeRoom_Main/scripts.pory"
+# 200 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Nurse_Heal_End, MSGBOX_NPC
-# 176 "data/maps/EscapeRoom_Main/scripts.pory"
+# 201 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 177 "data/maps/EscapeRoom_Main/scripts.pory"
+# 202 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_PostMatchHeal::
-# 181 "data/maps/EscapeRoom_Main/scripts.pory"
+# 206 "data/maps/EscapeRoom_Main/scripts.pory"
 	special HealPlayerParty
 	return
 
 
 EscapeRoom_EventScript_HintsNPC::
-# 185 "data/maps/EscapeRoom_Main/scripts.pory"
+# 210 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 186 "data/maps/EscapeRoom_Main/scripts.pory"
+# 211 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 187 "data/maps/EscapeRoom_Main/scripts.pory"
+# 212 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox HintsIntroMessage, MSGBOX_YESNO
-# 188 "data/maps/EscapeRoom_Main/scripts.pory"
+# 213 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_HintsNPC_2
-# 193 "data/maps/EscapeRoom_Main/scripts.pory"
+# 218 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox HintsNPCNoHintMessage
 EscapeRoom_EventScript_HintsNPC_1:
-# 195 "data/maps/EscapeRoom_Main/scripts.pory"
+# 220 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_HintsNPC_2:
-# 189 "data/maps/EscapeRoom_Main/scripts.pory"
+# 214 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox HintsNPCWhatKindOfHintMessage
 	goto EscapeRoom_EventScript_HintsNPC_1
 
 
 EscapeRoom_EventScript_AntiSoftlockGuy::
-# 199 "data/maps/EscapeRoom_Main/scripts.pory"
+# 224 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 200 "data/maps/EscapeRoom_Main/scripts.pory"
+# 225 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 203 "data/maps/EscapeRoom_Main/scripts.pory"
+# 228 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AntiSoftlockIntroMessage
-# 204 "data/maps/EscapeRoom_Main/scripts.pory"
+# 229 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AntiSoftlockNoActionMessage
-# 205 "data/maps/EscapeRoom_Main/scripts.pory"
+# 230 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_DoubleBattle1::
-# 210 "data/maps/EscapeRoom_Main/scripts.pory"
+# 235 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_double TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, Double1Puzzle_Intro, Double1Puzzle_Outro, Double1Puzzle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 217 "data/maps/EscapeRoom_Main/scripts.pory"
+# 242 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE
-# 218 "data/maps/EscapeRoom_Main/scripts.pory"
+# 243 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+	end
+
+
+EscapeRoom_EventScript_DoubleBattle2::
+# 248 "data/maps/EscapeRoom_Main/scripts.pory"
+	trainerbattle_double TRAINER_MY_CUSTOM_DOUBLE_BATTLE2, Double1Puzzle_Intro, Double1Puzzle_Outro, Double1Puzzle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostMatchHeal
+# 255 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE
+# 256 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 Nurse_Heal_End::
-# 226 "data/maps/EscapeRoom_Main/scripts.pory"
+# 264 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I healed your POKéMON!$"
 
 HintsIntroMessage::
-# 230 "data/maps/EscapeRoom_Main/scripts.pory"
+# 268 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Need help? I can give you a hint at the\n"
 	.string "cost of getting time added to your\l"
 	.string "in-game clock.\p"
@@ -235,15 +243,15 @@ HintsIntroMessage::
 	.string "Do you want to get a hint right now?$"
 
 HintsNPCNoHintMessage::
-# 239 "data/maps/EscapeRoom_Main/scripts.pory"
+# 277 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'll be here if you need me.$"
 
 HintsNPCWhatKindOfHintMessage::
-# 243 "data/maps/EscapeRoom_Main/scripts.pory"
+# 281 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 AntiSoftlockIntroMessage::
-# 248 "data/maps/EscapeRoom_Main/scripts.pory"
+# 286 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "I can roll back actions that have the\n"
 	.string "possibility to get you softlocked.\p"
@@ -251,31 +259,31 @@ AntiSoftlockIntroMessage::
 	.string "are actually softlocked or not.$"
 
 AntiSoftlockNoActionMessage::
-# 256 "data/maps/EscapeRoom_Main/scripts.pory"
+# 294 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There's nothing I can do for you right\n"
 	.string "now.$"
 
 Double1Puzzle_NotEnoughMons::
-# 262 "data/maps/EscapeRoom_Main/scripts.pory"
+# 300 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to battle?\n"
 	.string "You should bring a second POKéMON.$"
 
 Double1Puzzle_Intro::
-# 267 "data/maps/EscapeRoom_Main/scripts.pory"
+# 305 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Double1Puzzle_Outro::
-# 271 "data/maps/EscapeRoom_Main/scripts.pory"
+# 309 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Double1Finalwords::
-# 275 "data/maps/EscapeRoom_Main/scripts.pory"
+# 313 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Double1Puzzle_PostBattle::
-# 279 "data/maps/EscapeRoom_Main/scripts.pory"
+# 317 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Alright, go on now.$"
 
 NewGreatBallMessage::
-# 283 "data/maps/EscapeRoom_Main/scripts.pory"
+# 321 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You recover the ball.$"
