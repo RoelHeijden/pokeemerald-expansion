@@ -215,6 +215,10 @@ void HandleAction_UseMove(void)
 
     moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
+
+
+
+
     // choose target
     side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
     if (IsAffectedByFollowMe(gBattlerAttacker, side, gCurrentMove)
@@ -224,7 +228,7 @@ void HandleAction_UseMove(void)
         gBattleStruct->moveTarget[gBattlerAttacker] = gBattlerTarget = gSideTimers[side].followmeTarget; // follow me moxie fix
     }
     else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
-           && gSideTimers[side].followmeTimer == 0
+        //    && gSideTimers[side].followmeTimer == 0  // REMOVED -- don't let unaffacted follow me override lightingrod
            && (gMovesInfo[gCurrentMove].power != 0 || (moveTarget != MOVE_TARGET_USER && moveTarget != MOVE_TARGET_ALL_BATTLERS))
            && ((GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
             || (GetBattlerAbility(*(gBattleStruct->moveTarget + gBattlerAttacker)) != ABILITY_STORM_DRAIN && moveType == TYPE_WATER)))
@@ -232,8 +236,8 @@ void HandleAction_UseMove(void)
         side = GetBattlerSide(gBattlerAttacker);
         for (battler = 0; battler < gBattlersCount; battler++)
         {
-            if (side != GetBattlerSide(battler)
-                && *(gBattleStruct->moveTarget + gBattlerAttacker) != battler
+            if (   //  side != GetBattlerSide(battler) &&     // REMOVED -- now it also checks for partners Lightingrod
+                *(gBattleStruct->moveTarget + gBattlerAttacker) != battler
                 && ((GetBattlerAbility(battler) == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
                  || (GetBattlerAbility(battler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
                 && GetBattlerTurnOrderNum(battler) < var
@@ -304,8 +308,10 @@ void HandleAction_UseMove(void)
                 gSpecialStatuses[battler].lightningRodRedirected = TRUE;
             else if (battlerAbility == ABILITY_STORM_DRAIN)
                 gSpecialStatuses[battler].stormDrainRedirected = TRUE;
+
             gBattlerTarget = battler;
         }
+
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE
           && moveTarget & MOVE_TARGET_RANDOM)
