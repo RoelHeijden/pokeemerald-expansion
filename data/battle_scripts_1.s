@@ -4108,6 +4108,11 @@ BattleScript_EffectMeanLook::
 	attackcanceler
 	attackstring
 	ppreduce
+
+	@ ADDED for Block Ion Deluge to work into Volt absorb
+	typecalc
+	jumpifelectricabilityaffected BS_TARGET, ABILITY_VOLT_ABSORB, BattleScript_VoltAbsorbHeal
+
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifstatus2 BS_TARGET, STATUS2_ESCAPE_PREVENTION, BattleScript_ButItFailed
 	jumpifsubstituteblocks BattleScript_ButItFailed
