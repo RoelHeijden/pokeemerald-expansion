@@ -1667,14 +1667,16 @@ text Nurse_Heal_End{
 
 text SmeargleMessageInitial{
     "I'm looking for the perfect SMEARGLE.\n"
-    "Have you got one??\p"
-    "Come to me when you do and I might offer\n"
-    "you my GARDEVOIR."
+    "Have you got one???\p"
+    "Just seeing one would make me so happy\n"
+    "I might give you my GARDEVOIR."
+    // "Come to me when you do and I might offer\n"
+    // "you my GARDEVOIR."
 }
 
 text SmeargleMessageBad{
-    "Ew no, that SMEARGLE looks horrible.\n"
-    "I asked for the perfect SMEARGLE.\p"
+    "Ew no, that moveset looks horrible.\n"
+    "I asked for the perfect SMEARGLE!\p"
     "You should probably have a chat with\n"
     "the anti-softlock guy."
 }
