@@ -5540,7 +5540,28 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
         }
     }
-    
+
+    // IF DESTINY BOND STILL IN EFFECT ON SMEARGLE
+    // assumes smeargle cannot have both iron ball and dbond in this game
+    if((gBattleMons[battlerSmeargle].status2 & STATUS2_DESTINY_BOND) && battlerSmeargle == battlerDef){
+        // Scrafty
+        if(move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK){
+            // in Trick Room:
+            if ((gFieldStatuses & STATUS_FIELD_TRICK_ROOM) && (smeargleHp <= 32)){
+                score = 15; 
+                return score;
+            }
+        }
+
+        // smeargle
+        if(move == MOVE_SUPER_FANG){
+            // avoid hitting smeargle if it's at 1 hp
+            if(smeargleHp == 1 && (gFieldStatuses & STATUS_FIELD_TRICK_ROOM)){
+                score = 14;
+                return score;
+            }
+        }
+    }
 
     // DESTINY BOND SMEARGLE
     if(moveSmeargle == MOVE_DESTINY_BOND && gBattleMons[battlerDef].species == SPECIES_SMEARGLE && move != MOVE_PERISH_SONG){
@@ -5574,6 +5595,12 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             // in Trick Room:
             if (gFieldStatuses & STATUS_FIELD_TRICK_ROOM){
 
+                // avoid hitting smeargle if could end up at 1 hp
+                if(smeargleHp == 33 || smeargleHp == 25 || smeargleHp == 19){
+                    score = 15;
+                    return score;
+                }
+                
                 // target highest hp after scrafty damage (if scrafty will attack it)
                 if ((smeargleHp - 32) > 0)
                 {
@@ -5588,7 +5615,8 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             }
             // out of Trick Room
             else{
-                if(smeargleHasIronBall)
+                // only target smeargle if the double up KOs (has iron ball), or Scrafy is avoiding it (hp <= 33)
+                if(smeargleHasIronBall || smeargleHp <= 32)
                     score = 150; 
                 else
                     score = 82;
@@ -5596,7 +5624,8 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         }
         return score; 
     }
-    
+
+
     // NORMAL SCENARIOS
     switch (move)  
     {
