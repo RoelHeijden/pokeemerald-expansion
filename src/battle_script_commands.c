@@ -7803,11 +7803,26 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     // 0 money reward, except for:
     moneyReward = 0;
 
-    if(trainerId == TRAINER_MY_CUSTOM_DOUBLE_BATTLE1){
-        moneyReward = 69;
+    if(trainerId == TRAINER_CUSTOM_TRAINER1){
+        moneyReward = 750;
     }
-    if(trainerId == TRAINER_MY_CUSTOM_DOUBLE_BATTLE2){
-        moneyReward = 69;
+    if(trainerId == TRAINER_CUSTOM_TRAINER2){
+        moneyReward = 1250;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER3){
+        moneyReward = 1250;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER4){
+        moneyReward = 1250;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER5){
+        moneyReward = 0;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER6){
+        moneyReward = 0;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER7){
+        moneyReward = 0;
     }
 
     return moneyReward;
@@ -8139,7 +8154,7 @@ static bool32 TrySymbiosis(u32 battler, u32 itemId)
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
         && (B_SYMBIOSIS_GEMS < GEN_7 || !(gSpecialStatuses[battler].gemBoost))
         && gCurrentMove != MOVE_FLING //Fling and damage-reducing berries are handled separately.
-        // && !gSpecialStatuses[battler].berryReduced  // CHANGED
+        // && !gSpecialStatuses[battler].berryReduced 
         && SYMBIOSIS_CHECK(battler, BATTLE_PARTNER(battler)))
     {
         BestowItem(BATTLE_PARTNER(battler), battler);
