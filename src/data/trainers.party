@@ -16874,7 +16874,8 @@ Kyogre
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_MY_CUSTOM_DOUBLE_BATTLE1 ===
+
+=== TRAINER_CUSTOM_TRAINER1 ===
 Name: Help1
 Class: Expert
 Pic: Expert M
@@ -16882,24 +16883,40 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 
-Muk @ Black Sludge  
-Ability: Sticky Hold  
-Level: 81  
-EVs: 252 HP / 96 Def / 156 Spe  
-Impish Nature  
-IVs: 0 Atk / 0 SpA  
-- Swift  
+Togedemaru @ Rocky Helmet  
+Ability: Lightning Rod  
+Level: 59  
+EVs: 196 HP / 4 Atk / 120 Def / 188 SpD  
+Careful Nature  
+IVs: 0 SpA  
+- Swift
 
-Toedscruel (M) @ Black Sludge
+Toedscruel @ Flame Orb  
 Ability: Mycelium Might  
-Level: 100  
-EVs: 248 HP / 252 Atk / 8 SpD  
-Adamant Nature  
-- Rage Powder  
+EVs: 204 HP / 252 Def / 52 SpD  
+Careful Nature  
+- Rage Powder
 
 
-=== TRAINER_MY_CUSTOM_DOUBLE_BATTLE2 ===
+=== TRAINER_CUSTOM_TRAINER2 ===
 Name: Help2
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Charizard  
+Ability: Solar Power  
+Level: 22  
+EVs: 252 SpA  
+Hardy Nature  
+IVs: 0 Atk  
+- Flamethrower
+
+
+=== TRAINER_CUSTOM_TRAINER3 ===
+Name: Help3
 Class: Expert
 Pic: Expert M
 Gender: Male
@@ -16924,6 +16941,85 @@ Serious Nature
 IVs: 0 Atk  
 - Light Screen
 
+
+=== TRAINER_CUSTOM_TRAINER4 ===
+Name: Help4
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Iron Valiant @ Booster Energy  
+Ability: Quark Drive  
+Level: 50  
+EVs: 252 SpA  
+Modest Nature  
+IVs: 0 Atk  
+- Focus Blast
+
+
+=== TRAINER_CUSTOM_TRAINER5 ===
+Name: Help5
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Rayquaza  
+Ability: Air Lock  
+EVs: 252 Atk / 252 Spe  
+- Dragon Ascent
+
+
+=== TRAINER_CUSTOM_TRAINER6 ===
+Name: Help6
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: Yes
+
+Lucario @ Focus Sash  
+Ability: Inner Focus  
+Level: 70  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+IVs: 0 Def  
+- Close Combat  
+
+Lucario @ Focus Sash  
+Ability: Inner Focus  
+Level: 70  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+IVs: 0 Def  
+- Close Combat  
+
+
+=== TRAINER_CUSTOM_TRAINER7 ===
+Name: Help7
+Class: Expert
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Toxicroak  
+Ability: Dry Skin  
+Level: 88  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+IVs: 0 SpA / 0 SpD  
+- Me First  
+
+Breloom  
+Ability: Technician  
+Level: 47  
+EVs: 252 Atk  
+Adamant Nature  
+- Drain Punch  
 
 
 
