@@ -58,97 +58,49 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_FLORGES,
         22,
-        // item=ITEM_SAFETY_GOGGLES,
-        item=ITEM_NONE,
         abilityNum=2, // symbiosis
         nature=21, // gentle
         gender=1, // female
         move1=MOVE_NATURE_POWER,
-        move2=MOVE_CAMOUFLAGE,
+        move2=MOVE_GRASS_KNOT,
         move3=MOVE_GRASSY_TERRAIN,
-        move4=MOVE_SKILL_SWAP,
+        move4=MOVE_CAMOUFLAGE,
         // EVs:
         hpEv=252,
         spDefEv=252,
         // IVs:
         hpIv=31,
-        atkIv=31,
-        defIv=4,
+        atkIv=1,
+        defIv=3,
         speedIv=31,
         spAtkIv=0,
-        spDefIv=31
+        spDefIv=30
     )
-
-    // givemon(
-    //     SPECIES_ZERAORA,
-    //     43,
-    //     item=ITEM_MICLE_BERRY,
-    //     abilityNum=0, // volt absorb
-    //     nature=15, // modest
-    //     gender=0,
-    //     move1=MOVE_PLASMA_FISTS,
-    //     move2=MOVE_SNATCH,
-    //     move3=MOVE_NONE,
-    //     move4=MOVE_NONE,
-    //     // EVs:
-    //     hpEv=28,  
-    //     // IVs:
-    //     hpIv=31,
-    //     atkIv=0,
-    //     defIv=0,
-    //     speedIv=31,
-    //     spAtkIv=31,
-    //     spDefIv=31
-    // )
-
-    // givemon(
-    //     SPECIES_FERROTHORN,
-    //     31,
-    //     item=ITEM_CUSTAP_BERRY,
-    //     abilityNum=2, // anticipation
-    //     nature=3, // adamant
-    //     gender=0, 
-    //     move1=MOVE_STEEL_ROLLER,
-    //     move2=MOVE_BLOCK,
-    //     move3=MOVE_CONFIDE,
-    //     move4=MOVE_INGRAIN,
-    //     // EVs:
-    //     hpEv=0, 
-    //     atkEv=252,
-    //     // IVs:
-    //     hpIv=31,
-    //     atkIv=31,
-    //     defIv=31,
-    //     speedIv=31,
-    //     spAtkIv=31,
-    //     spDefIv=31
-    // )
 
     givemon(
-        SPECIES_DUNSPARCE,
-        50,
-        item=ITEM_RING_TARGET,
-        abilityNum=2, // rattled
-        nature=8, // impish
+        SPECIES_FERROTHORN,
+        28,
+        abilityNum=2, // anticipation
+        nature=4, // naughty
         gender=0, 
-        move1=MOVE_TRUMP_CARD,
-        move2=MOVE_AIR_SLASH,
-        // move2=MOVE_QUICK_ATTACK,
-        move3=MOVE_HEX,
-        move4=MOVE_COUNTER,
+        move1=MOVE_STEEL_ROLLER,
+        move2=MOVE_BLOCK,
+        move3=MOVE_INGRAIN,
+        // move4=MOVE_SLEEP_TALK,
+        move4=MOVE_CUT,
         // EVs:
         hpEv=0, 
-        defEv=252,
+        atkEv=252,
+        spDefEv=0, 
+        defEv=0,
         // IVs:
         hpIv=0,
-        atkIv=0,
-        defIv=31,
+        atkIv=31,
+        defIv=0,
         speedIv=31,
-        spAtkIv=10,
-        spDefIv=31
+        spAtkIv=31,
+        spDefIv=0
     )
-
-
 
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
@@ -178,7 +130,9 @@ script EscapeRoom_MapScripts_SetRespawn{
 }
 
 script EscapeRoom_MapScripts_GetItems{
-    // additem(ITEM_CHOICE_SCARF)
+    additem(ITEM_EXP_CANDY_S)
+    additem(ITEM_WHITE_HERB)
+    additem(ITEM_HM04)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -188,17 +142,50 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 }
 
 
+
+
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
+
+
+//// SIGNS //// 
+
+script EscapeRoom_EventScript_MainInfoSign {
+    lockall
+    msgbox(SignMessageReadInfoAgain, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES)
+    {
+        msgbox(SignMessage1)
+        waitmessage
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_EndSign {
+    lockall
+    msgbox(EndSignMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_AnnihilapeStatue{
+    lockall
+    msgbox(AnnihilapeStatueMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+
+//// MAIN NPCS ////
 
 script EscapeRoom_Nurse_Heal_Pokemon{
     lockall
-    fadescreen(FADE_TO_BLACK)
-	special(HealPlayerParty)
-    playfanfare(MUS_HEAL)
-    waitfanfare
-	fadescreen(FADE_FROM_BLACK)
-    msgbox(Nurse_Heal_End, MSGBOX_NPC)
-    waitmessage
+    faceplayer
+    msgbox(Nurse_Ask_heal, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        special(HealPlayerParty)
+        msgbox(Nurse_Heal_End, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
     releaseall
 }
 
@@ -230,41 +217,309 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     releaseall
 }
 
+script EscapeRoom_EventScript_LostGlassesNPC{
+    lockall
+    faceplayer
+    msgbox(LostGlassesNPCmainMessage, MSGBOX_AUTOCLOSE)
 
-script EscapeRoom_EventScript_DoubleBattle1{
+    // if lost glasses obtained
+    checkitem(ITEM_LOST_GLASSES)
+    if(var(VAR_RESULT) == TRUE){
+
+        // TODO: display exclamation mark
+        // The rival uses it after beating Wallace
+
+        msgbox(LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        call(EscapeRoom_EventScript_ObtainLiepard)
+        removeitem(ITEM_LOST_GLASSES)
+
+        msgbox(LostGlassesNPCendMessage, MSGBOX_AUTOCLOSE)
+        waitmessage 
+
+        // TODO: walk away
+
+    }
+    releaseall
+}
+
+
+
+//// TRAINERS ////
+
+script EscapeRoom_EventScript_Trainer1{
+    faceplayer
     trainerbattle_double(
-        TRAINER_MY_CUSTOM_DOUBLE_BATTLE1, 
-        Double1Puzzle_Intro, 
-        Double1Puzzle_Outro, 
-        Double1Puzzle_NotEnoughMons,
+        TRAINER_CUSTOM_TRAINER1, 
+        Trainer1_Intro, 
+        Trainer1_Outro, 
+        DoubleBattle_NotEnoughMons,
         event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
-    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    msgbox(Trainer1_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
 
-script EscapeRoom_EventScript_DoubleBattle2{
-    trainerbattle_double(
-        TRAINER_MY_CUSTOM_DOUBLE_BATTLE2, 
-        Double1Puzzle_Intro, 
-        Double1Puzzle_Outro, 
-        Double1Puzzle_NotEnoughMons,
+script EscapeRoom_EventScript_Trainer2{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER2, 
+        Trainer2_Intro, 
+        Trainer2_Outro, 
         event_script=EscapeRoom_EventScript_PostMatchHeal,
     )
-    msgbox(Double1Puzzle_PostBattle, MSGBOX_AUTOCLOSE)
+    msgbox(Trainer2_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
 
+script EscapeRoom_EventScript_Trainer3{
+    faceplayer
+    trainerbattle_double(
+        TRAINER_CUSTOM_TRAINER3, 
+        Trainer3_Intro, 
+        Trainer3_Outro, 
+        DoubleBattle_NotEnoughMons,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Trainer3_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer4{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER4, 
+        Trainer4_Intro, 
+        Trainer4_Outro, 
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Trainer4_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer5{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER5, 
+        Trainer5_Intro, 
+        Trainer5_Outro, 
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Trainer5_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer6{
+    trainerbattle_double(
+        TRAINER_CUSTOM_TRAINER6, 
+        Trainer6_Intro, 
+        Trainer6_Outro, 
+        DoubleBattle_NotEnoughMons,
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Trainer6_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer7{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER7, 
+        Trainer7_Intro, 
+        Trainer7_Outro, 
+        event_script=EscapeRoom_EventScript_PostMatchHeal,
+    )
+    msgbox(Trainer7_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+
+//// POKEMON TRADES ////
+
+script EscapeRoom_EventScript_TradeZeraForHMCut{
+    end
+}
+
+script EscapeRoom_EventScript_TradeFerroVsDunsparce{
+    lockall
+    faceplayer
+    msgbox(format("Trade Ferrothorn for Dunsparce?"), MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        removemon(SPECIES_FERROTHORN)
+        givemon(
+            SPECIES_DUNSPARCE,
+            50,
+            abilityNum=2, // rattled
+            nature=8, // impish
+            gender=0, 
+            move1=MOVE_TRUMP_CARD,
+            move2=MOVE_AIR_SLASH,
+            move3=MOVE_HEX,
+            move4=MOVE_COUNTER,
+            // EVs:
+            hpEv=0, 
+            defEv=252,
+            // IVs:
+            hpIv=0,
+            atkIv=0,
+            defIv=31,
+            speedIv=31,
+            spAtkIv=10,
+            spDefIv=31
+        )
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_TradeFlorgesForEgg{
+    end
+}
+
+script EscapeRoom_EventScript_ObtainLiepard{
+    givemon(
+        SPECIES_LIEPARD,
+        50,
+        abilityNum=2, // Prankster
+        nature=16, // Mild
+        gender=0, 
+        move1=MOVE_ASSIST,
+        move2=MOVE_TRICK,
+        move3=MOVE_ROCK_SMASH,
+        move4=MOVE_ECHOED_VOICE,
+        // EVs:
+        atkEv=148, 
+        spAtkEv=252,
+        speedEv=108,
+        // IVs:
+        hpIv=31,
+        atkIv=31,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31
+    )
+    playfanfare(MUS_OBTAIN_ITEM)
+    msgbox(LiepardObtainMessage, MSGBOX_AUTOCLOSE)
+    waitfanfare
+}
+
+script EscapeRoom_EventScript_SellDunsparce{
+    end
+}
+
+script EscapeRoom_EventScript_TradePoochForSmeargle{
+    end
+}
+
+
+//// ITEMS ////
+
+script EscapeRoom_EventScript_FindPokeBall{
+    lockall
+    finditem(ITEM_POKE_BALL)
+    removeobject(9)
+    setflag(FLAG_POKE_BALL_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindNugget{
+    lockall
+    finditem(ITEM_NUGGET)
+    removeobject(10)
+    setflag(FLAG_NUGGET_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindRareCandy{
+    lockall
+    finditem(ITEM_RARE_CANDY)
+    removeobject(11)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindChoiceSpecs{
+    lockall
+    finditem(ITEM_CHOICE_SPECS)
+    removeobject(15)
+    setflag(FLAG_CHOICE_SPECS_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindLostGlasses{
+    lockall
+    finditem(ITEM_WISE_GLASSES)
+    removeobject(27)
+    setflag(FLAG_LOST_GLASSES_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_SafetyGogglesStatue{
+    lockall
+    msgbox(Goggles_Statue_Main, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+
+//// OTHER ////
+
+script EscapeRoom_EventScript_AnnihilapeBattle{
+    createmon(
+        side=1,
+        slot=0,
+        species=SPECIES_ANNIHILAPE,
+        level=100,
+        nature=22,
+        abilityNum=2,
+        gender=1,
+        hpEv=184,
+        defEv=72,
+        spAtkEv=252,
+        move1=MOVE_MIMIC
+    )
+    dowildbattle
+}
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
-text Nurse_Heal_End{
-    "I healed your POKéMON!"
+// SIGNS
+text SignMessage1{
+    "TBD"
 }
 
+text SignMessageReadInfoAgain{
+    "Do you want to read the important\n"
+    "information again?"
+}
+
+text EndSignMessage{
+    "The end.\p"
+    "...\p"
+    "For now."
+}
+
+text AnnihilapeStatueMessage{
+    "It's a statue of a Primeape"
+}
+
+
+// NURSE
+text Nurse_Ask_heal{
+    "Hi, should I heal your Pokémon?"
+}
+
+text Nurse_Heal_End{
+    "As good as new!"
+}
+
+
+// HINTS NPC
 text HintsIntroMessage{
     "Need help? I can give you a hint at the\n"
     "cost of getting time added to your\l"
@@ -283,6 +538,7 @@ text HintsNPCWhatKindOfHintMessage{
     "TBD"
 }
 
+// ANTI SOFTLOCK GUY
 text AntiSoftlockIntroMessage{
     "Hi, I'm the anti-softlock guy.\p"
     "I can roll back actions that have the\n"
@@ -297,30 +553,147 @@ text AntiSoftlockNoActionMessage{
 }
 
 
-text Double1Puzzle_NotEnoughMons{
+// LOST GLASSES NPC
+text LostGlassesNPCmainMessage{
+    "Have you seen my glasses?\n"
+    "I can't see without them!" 
+}
+
+text LostGlassesNPCGlassesFoundMessage{
+    "You've found them!\p"
+    "I guess I no longer need this\n"
+    "seeing-eye leopard...\p"
+    "..."
+}
+
+text LiepardObtainMessage{
+    "{PLAYER} received a Liepard!"
+}
+
+text LostGlassesNPCendMessage{
+    "See you around!"
+}
+
+
+// ITEM RETURNS
+text NewGreatBallMessage{
+    "You recover the ball."
+}
+
+
+// SAFETY GOGGLES STATUE
+text Goggles_Statue_Main{
+    "The statue is wearing a pair of goggles,\n"
+    "but it seems to be cursed.\p"
+    "There's no way I'm touching this. Maybe\n"
+    "a Pokémon could snatch it for me."
+}
+
+
+// BATTLES - OTHER
+text DoubleBattle_NotEnoughMons{
     "Want to battle?\n"
     "You should bring a second POKéMON."
 }
 
-text Double1Puzzle_Intro{
+
+// TRAINER 1 - Toedscruel Togedemaru
+text Trainer1_Intro{
     "Let's go!"
 }
 
-text Double1Puzzle_Outro{
+text Trainer1_Outro{
     "You cheated."
 }
 
-text Double1Finalwords{
+text Trainer1_PostBattle{
     "Fock off."
 }
 
-text Double1Puzzle_PostBattle{
-    "Alright, go on now."
+
+// TRAINER 2 - Charizard 
+text Trainer2_Intro{
+    "Let's go!"
 }
 
-text NewGreatBallMessage{
-    "You recover the ball."
+text Trainer2_Outro{
+    "You cheated."
 }
+
+text Trainer2_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 3 - Komala Tinkaton
+text Trainer3_Intro{
+    "Let's go!"
+}
+
+text Trainer3_Outro{
+    "You cheated."
+}
+
+text Trainer3_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 4 - Iron Valiant
+text Trainer4_Intro{
+    "Let's go!"
+}
+
+text Trainer4_Outro{
+    "You cheated."
+}
+
+text Trainer4_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 5 - Rayquaza
+text Trainer5_Intro{
+    "Let's go!"
+}
+
+text Trainer5_Outro{
+    "You cheated."
+}
+
+text Trainer5_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 6 - Lucario Lucario
+text Trainer6_Intro{
+    "Let's go!"
+}
+
+text Trainer6_Outro{
+    "You cheated."
+}
+
+text Trainer6_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 7 - Toxicroak Breloom
+text Trainer7_Intro{
+    "Let's go!"
+}
+
+text Trainer7_Outro{
+    "You cheated."
+}
+
+text Trainer7_PostBattle{
+    "Fock off."
+}
+
 
 
 
