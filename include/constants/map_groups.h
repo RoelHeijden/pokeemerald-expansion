@@ -6,7 +6,8 @@
 //
 
 // gMapGroup_EscapeRoom2
-#define MAP_ESCAPE_ROOM_MAIN (0 | (0 << 8))
+#define MAP_ESCAPE_ROOM_MAIN             (0 | (0 << 8))
+#define MAP_ESCAPE_ROOM_ANNIHILAPES_LAIR (1 | (0 << 8))
 
 // gMapGroup_TownsAndRoutes
 #define MAP_PETALBURG_CITY      (0 | (1 << 8))
