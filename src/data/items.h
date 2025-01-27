@@ -8478,17 +8478,33 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_MuscleBand,
     },
 
+    // [ITEM_WISE_GLASSES] =
+    // {
+    //     .name = _("Wise Glasses"),
+    //     .pluralName = _("Wise Glasses"),
+    //     .price = (I_PRICE >= GEN_9) ? 8000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
+    //     .holdEffect = HOLD_EFFECT_WISE_GLASSES,
+    //     .holdEffectParam = 10,
+    //     .description = COMPOUND_STRING(
+    //         "A pair of glasses\n"
+    //         "that ups the power\n"
+    //         "of special moves."),
+    //     .pocket = POCKET_ITEMS,
+    //     .type = ITEM_USE_BAG_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    //     .flingPower = 10,
+    //     .iconPic = gItemIcon_WiseGlasses,
+    //     .iconPalette = gItemIconPalette_WiseGlasses,
+    // },
     [ITEM_WISE_GLASSES] =
     {
-        .name = _("Wise Glasses"),
-        .pluralName = _("Wise Glasses"),
-        .price = (I_PRICE >= GEN_9) ? 8000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
-        .holdEffect = HOLD_EFFECT_WISE_GLASSES,
-        .holdEffectParam = 10,
+        .name = _("Lost Glasses"),
+        .pluralName = _("Lost Glasses"),
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A pair of glasses\n"
-            "that ups the power\n"
-            "of special moves."),
+            "A pair of glasses.\n"
+            "Someone must have\n"
+            "lost these."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -14127,4 +14143,21 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_PokeshiDoll,
         .iconPalette = gItemIconPalette_PokeshiDoll,
     },
+
+    // // ADDED
+    // [ITEM_LOST_GLASSES] =
+    // {
+    //     .name = _("Lost Glasses"),
+    //     .price = 0,
+    //     .description = COMPOUND_STRING(
+    //         "A pair of glasses.\n"
+    //         "Someone must have\n"
+    //         "lost these."),
+    //     .pocket = POCKET_ITEMS,
+    //     .type = ITEM_USE_BAG_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    //     .flingPower = 10,
+    //     .iconPic = gItemIcon_LostGlasses,
+    //     .iconPalette = gItemIconPalette_LostGlasses,
+    // },
 };
