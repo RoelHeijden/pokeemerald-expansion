@@ -1077,3 +1077,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/maps/EscapeRoom_Main/scripts.inc"
+
+	.include "data/maps/EscapeRoom_AnnihilapesLair/scripts.inc"

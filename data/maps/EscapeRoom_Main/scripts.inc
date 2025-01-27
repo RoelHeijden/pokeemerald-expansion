@@ -276,96 +276,96 @@ EscapeRoom_EventScript_LostGlassesNPC::
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_EventScript_LostGlassesNPC_2
 EscapeRoom_EventScript_LostGlassesNPC_1:
-# 243 "data/maps/EscapeRoom_Main/scripts.pory"
+# 244 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_LostGlassesNPC_2:
-# 231 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE
 # 232 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE
+# 233 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 234 "data/maps/EscapeRoom_Main/scripts.pory"
-	call EscapeRoom_EventScript_ObtainLiepard
 # 235 "data/maps/EscapeRoom_Main/scripts.pory"
+	call EscapeRoom_EventScript_ObtainLiepard
+# 236 "data/maps/EscapeRoom_Main/scripts.pory"
 	removeitem ITEM_LOST_GLASSES
-# 237 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox LostGlassesNPCendMessage, MSGBOX_AUTOCLOSE
 # 238 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox LostGlassesNPCendMessage, MSGBOX_AUTOCLOSE
+# 239 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_LostGlassesNPC_1
 
 
 EscapeRoom_EventScript_Trainer1::
-# 251 "data/maps/EscapeRoom_Main/scripts.pory"
-	faceplayer
 # 252 "data/maps/EscapeRoom_Main/scripts.pory"
+	faceplayer
+# 253 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_double TRAINER_CUSTOM_TRAINER1, Trainer1_Intro, Trainer1_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 259 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer1_PostBattle, MSGBOX_AUTOCLOSE
 # 260 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer1_PostBattle, MSGBOX_AUTOCLOSE
+# 261 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer2::
-# 265 "data/maps/EscapeRoom_Main/scripts.pory"
+# 266 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER2, Trainer2_Intro, Trainer2_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 271 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer2_PostBattle, MSGBOX_AUTOCLOSE
 # 272 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer2_PostBattle, MSGBOX_AUTOCLOSE
+# 273 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer3::
-# 277 "data/maps/EscapeRoom_Main/scripts.pory"
-	faceplayer
 # 278 "data/maps/EscapeRoom_Main/scripts.pory"
+	faceplayer
+# 279 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_double TRAINER_CUSTOM_TRAINER3, Trainer3_Intro, Trainer3_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 285 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer3_PostBattle, MSGBOX_AUTOCLOSE
 # 286 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer3_PostBattle, MSGBOX_AUTOCLOSE
+# 287 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer4::
-# 291 "data/maps/EscapeRoom_Main/scripts.pory"
+# 292 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER4, Trainer4_Intro, Trainer4_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 297 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer4_PostBattle, MSGBOX_AUTOCLOSE
 # 298 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer4_PostBattle, MSGBOX_AUTOCLOSE
+# 299 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer5::
-# 303 "data/maps/EscapeRoom_Main/scripts.pory"
+# 304 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER5, Trainer5_Intro, Trainer5_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 309 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer5_PostBattle, MSGBOX_AUTOCLOSE
 # 310 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer5_PostBattle, MSGBOX_AUTOCLOSE
+# 311 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer6::
-# 315 "data/maps/EscapeRoom_Main/scripts.pory"
+# 316 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_double TRAINER_CUSTOM_TRAINER6, Trainer6_Intro, Trainer6_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 322 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer6_PostBattle, MSGBOX_AUTOCLOSE
 # 323 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer6_PostBattle, MSGBOX_AUTOCLOSE
+# 324 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer7::
-# 328 "data/maps/EscapeRoom_Main/scripts.pory"
+# 329 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER7, Trainer7_Intro, Trainer7_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 334 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer7_PostBattle, MSGBOX_AUTOCLOSE
 # 335 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox Trainer7_PostBattle, MSGBOX_AUTOCLOSE
+# 336 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
@@ -375,24 +375,24 @@ EscapeRoom_EventScript_TradeZeraForHMCut::
 
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce::
-# 347 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 348 "data/maps/EscapeRoom_Main/scripts.pory"
-	faceplayer
+	lockall
 # 349 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox EscapeRoom_EventScript_TradeFerroVsDunsparce_Text_0, MSGBOX_YESNO
+	faceplayer
 # 350 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox EscapeRoom_EventScript_TradeFerroVsDunsparce_Text_0, MSGBOX_YESNO
+# 351 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_TradeFerroVsDunsparce_2
 EscapeRoom_EventScript_TradeFerroVsDunsparce_1:
-# 374 "data/maps/EscapeRoom_Main/scripts.pory"
+# 375 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce_2:
-# 351 "data/maps/EscapeRoom_Main/scripts.pory"
-	removemon SPECIES_FERROTHORN
 # 352 "data/maps/EscapeRoom_Main/scripts.pory"
+	removemon SPECIES_FERROTHORN
+# 353 "data/maps/EscapeRoom_Main/scripts.pory"
 	givemon SPECIES_DUNSPARCE, 50, abilityNum = 2, nature = 8, gender = 0, move1 = MOVE_TRUMP_CARD, move2 = MOVE_AIR_SLASH, move3 = MOVE_HEX, move4 = MOVE_COUNTER, hpEv = 0, defEv = 252, hpIv = 0, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 10, spDefIv = 31
 	goto EscapeRoom_EventScript_TradeFerroVsDunsparce_1
 
@@ -402,13 +402,13 @@ EscapeRoom_EventScript_TradeFlorgesForEgg::
 
 
 EscapeRoom_EventScript_ObtainLiepard::
-# 382 "data/maps/EscapeRoom_Main/scripts.pory"
+# 383 "data/maps/EscapeRoom_Main/scripts.pory"
 	givemon SPECIES_LIEPARD, 50, abilityNum = 2, nature = 16, gender = 0, move1 = MOVE_ASSIST, move2 = MOVE_TRICK, move3 = MOVE_ROCK_SMASH, move4 = MOVE_ECHOED_VOICE, atkEv = 148, spAtkEv = 252, speedEv = 108, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 404 "data/maps/EscapeRoom_Main/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
 # 405 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox LiepardObtainMessage, MSGBOX_AUTOCLOSE
+	playfanfare MUS_OBTAIN_ITEM
 # 406 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox LiepardObtainMessage, MSGBOX_AUTOCLOSE
+# 407 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitfanfare
 	return
 
@@ -422,128 +422,128 @@ EscapeRoom_EventScript_TradePoochForSmeargle::
 
 
 EscapeRoom_EventScript_FindPokeBall::
-# 421 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 422 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_POKE_BALL
+	lockall
 # 423 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 9
+	finditem ITEM_POKE_BALL
 # 424 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_POKE_BALL_OBTAINED
+	removeobject 9
 # 425 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_POKE_BALL_OBTAINED
+# 426 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_FindNugget::
-# 429 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 430 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_NUGGET
+	lockall
 # 431 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 10
+	finditem ITEM_NUGGET
 # 432 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_NUGGET_OBTAINED
+	removeobject 10
 # 433 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_NUGGET_OBTAINED
+# 434 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_FindRareCandy::
-# 437 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 438 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_RARE_CANDY
+	lockall
 # 439 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 11
+	finditem ITEM_RARE_CANDY
 # 440 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_RARE_CANDY_OBTAINED
+	removeobject 11
 # 441 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_RARE_CANDY_OBTAINED
+# 442 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_FindChoiceSpecs::
-# 445 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 446 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_CHOICE_SPECS
+	lockall
 # 447 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 15
+	finditem ITEM_CHOICE_SPECS
 # 448 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_CHOICE_SPECS_OBTAINED
+	removeobject 15
 # 449 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_CHOICE_SPECS_OBTAINED
+# 450 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_FindLostGlasses::
-# 453 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 454 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_WISE_GLASSES
+	lockall
 # 455 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 27
+	finditem ITEM_WISE_GLASSES
 # 456 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_LOST_GLASSES_OBTAINED
+	removeobject 27
 # 457 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_LOST_GLASSES_OBTAINED
+# 458 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_SafetyGogglesStatue::
-# 461 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 462 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Goggles_Statue_Main, MSGBOX_AUTOCLOSE
+	lockall
 # 463 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
+	msgbox Goggles_Statue_Main, MSGBOX_AUTOCLOSE
 # 464 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+# 465 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_AnnihilapeBattle::
-# 471 "data/maps/EscapeRoom_Main/scripts.pory"
+# 472 "data/maps/EscapeRoom_Main/scripts.pory"
 	createmon side = 1, slot = 0, species = SPECIES_ANNIHILAPE, level = 100, nature = 22, abilityNum = 2, gender = 1, hpEv = 184, defEv = 72, spAtkEv = 252, move1 = MOVE_MIMIC
-# 484 "data/maps/EscapeRoom_Main/scripts.pory"
+# 485 "data/maps/EscapeRoom_Main/scripts.pory"
 	dowildbattle
 	return
 
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce_Text_0:
-# 349 "data/maps/EscapeRoom_Main/scripts.pory"
+# 350 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Trade Ferrothorn for Dunsparce?$"
 
 SignMessage1::
-# 491 "data/maps/EscapeRoom_Main/scripts.pory"
+# 492 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 SignMessageReadInfoAgain::
-# 495 "data/maps/EscapeRoom_Main/scripts.pory"
+# 496 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to read the important\n"
 	.string "information again?$"
 
 EndSignMessage::
-# 500 "data/maps/EscapeRoom_Main/scripts.pory"
+# 501 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The end.\p"
 	.string "...\p"
 	.string "For now.$"
 
 AnnihilapeStatueMessage::
-# 506 "data/maps/EscapeRoom_Main/scripts.pory"
+# 507 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "It's a statue of a Primeape$"
 
 Nurse_Ask_heal::
-# 512 "data/maps/EscapeRoom_Main/scripts.pory"
+# 513 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, should I heal your Pokémon?$"
 
 Nurse_Heal_End::
-# 516 "data/maps/EscapeRoom_Main/scripts.pory"
+# 517 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "As good as new!$"
 
 HintsIntroMessage::
-# 522 "data/maps/EscapeRoom_Main/scripts.pory"
+# 523 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Need help? I can give you a hint at the\n"
 	.string "cost of getting time added to your\l"
 	.string "in-game clock.\p"
@@ -552,15 +552,15 @@ HintsIntroMessage::
 	.string "Do you want to get a hint right now?$"
 
 HintsNPCNoHintMessage::
-# 531 "data/maps/EscapeRoom_Main/scripts.pory"
+# 532 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'll be here if you need me.$"
 
 HintsNPCWhatKindOfHintMessage::
-# 535 "data/maps/EscapeRoom_Main/scripts.pory"
+# 536 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 AntiSoftlockIntroMessage::
-# 541 "data/maps/EscapeRoom_Main/scripts.pory"
+# 542 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "I can roll back actions that have the\n"
 	.string "possibility to get you softlocked.\p"
@@ -568,126 +568,126 @@ AntiSoftlockIntroMessage::
 	.string "are actually softlocked or not.$"
 
 AntiSoftlockNoActionMessage::
-# 549 "data/maps/EscapeRoom_Main/scripts.pory"
+# 550 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There's nothing I can do for you right\n"
 	.string "now.$"
 
 LostGlassesNPCmainMessage::
-# 556 "data/maps/EscapeRoom_Main/scripts.pory"
+# 557 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Have you seen my glasses?\n"
 	.string "I can't see without them!$"
 
 LostGlassesNPCGlassesFoundMessage::
-# 561 "data/maps/EscapeRoom_Main/scripts.pory"
+# 562 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You've found them!\p"
 	.string "I guess I no longer need this\n"
 	.string "seeing-eye leopard...\p"
 	.string "...$"
 
 LiepardObtainMessage::
-# 568 "data/maps/EscapeRoom_Main/scripts.pory"
+# 569 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Liepard!$"
 
 LostGlassesNPCendMessage::
-# 572 "data/maps/EscapeRoom_Main/scripts.pory"
+# 573 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "See you around!$"
 
 NewGreatBallMessage::
-# 578 "data/maps/EscapeRoom_Main/scripts.pory"
+# 579 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You recover the ball.$"
 
 Goggles_Statue_Main::
-# 584 "data/maps/EscapeRoom_Main/scripts.pory"
+# 585 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The statue is wearing a pair of goggles,\n"
 	.string "but it seems to be cursed.\p"
 	.string "There's no way I'm touching this. Maybe\n"
 	.string "a Pokémon could snatch it for me.$"
 
 DoubleBattle_NotEnoughMons::
-# 593 "data/maps/EscapeRoom_Main/scripts.pory"
+# 594 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to battle?\n"
 	.string "You should bring a second POKéMON.$"
 
 Trainer1_Intro::
-# 600 "data/maps/EscapeRoom_Main/scripts.pory"
+# 601 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer1_Outro::
-# 604 "data/maps/EscapeRoom_Main/scripts.pory"
+# 605 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer1_PostBattle::
-# 608 "data/maps/EscapeRoom_Main/scripts.pory"
+# 609 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer2_Intro::
-# 614 "data/maps/EscapeRoom_Main/scripts.pory"
+# 615 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer2_Outro::
-# 618 "data/maps/EscapeRoom_Main/scripts.pory"
+# 619 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer2_PostBattle::
-# 622 "data/maps/EscapeRoom_Main/scripts.pory"
+# 623 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer3_Intro::
-# 628 "data/maps/EscapeRoom_Main/scripts.pory"
+# 629 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer3_Outro::
-# 632 "data/maps/EscapeRoom_Main/scripts.pory"
+# 633 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer3_PostBattle::
-# 636 "data/maps/EscapeRoom_Main/scripts.pory"
+# 637 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer4_Intro::
-# 642 "data/maps/EscapeRoom_Main/scripts.pory"
+# 643 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer4_Outro::
-# 646 "data/maps/EscapeRoom_Main/scripts.pory"
+# 647 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer4_PostBattle::
-# 650 "data/maps/EscapeRoom_Main/scripts.pory"
+# 651 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer5_Intro::
-# 656 "data/maps/EscapeRoom_Main/scripts.pory"
+# 657 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer5_Outro::
-# 660 "data/maps/EscapeRoom_Main/scripts.pory"
+# 661 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer5_PostBattle::
-# 664 "data/maps/EscapeRoom_Main/scripts.pory"
+# 665 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer6_Intro::
-# 670 "data/maps/EscapeRoom_Main/scripts.pory"
+# 671 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer6_Outro::
-# 674 "data/maps/EscapeRoom_Main/scripts.pory"
+# 675 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer6_PostBattle::
-# 678 "data/maps/EscapeRoom_Main/scripts.pory"
+# 679 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer7_Intro::
-# 684 "data/maps/EscapeRoom_Main/scripts.pory"
+# 685 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's go!$"
 
 Trainer7_Outro::
-# 688 "data/maps/EscapeRoom_Main/scripts.pory"
+# 689 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer7_PostBattle::
-# 692 "data/maps/EscapeRoom_Main/scripts.pory"
+# 693 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
