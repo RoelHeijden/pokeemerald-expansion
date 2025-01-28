@@ -1079,3 +1079,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/EscapeRoom_Main/scripts.inc"
 
 	.include "data/maps/EscapeRoom_AnnihilapesLair/scripts.inc"
+
+	.include "data/maps/EscapeRoom_ShortcutRoute/scripts.inc"

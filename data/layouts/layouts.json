@@ -4414,7 +4414,7 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_MAIN",
       "name": "EscapeRoom_Main_Layout",
-      "width": 75,
+      "width": 76,
       "height": 50,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
@@ -4430,6 +4430,16 @@
       "secondary_tileset": "gTileset_MeteorFalls",
       "border_filepath": "data/layouts/EscapeRoom_AnnihilapesLair/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_AnnihilapesLair/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM_SHORTCUT_ROUTE",
+      "name": "EscapeRoom_ShortcutRoute_Layout",
+      "width": 50,
+      "height": 14,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/EscapeRoom_ShortcutRoute/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoom_ShortcutRoute/map.bin"
     }
   ]
 }

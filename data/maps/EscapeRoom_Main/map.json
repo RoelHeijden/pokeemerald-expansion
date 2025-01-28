@@ -2,15 +2,15 @@
   "id": "MAP_ESCAPE_ROOM_MAIN",
   "name": "EscapeRoom_Main",
   "layout": "LAYOUT_ESCAPE_ROOM_MAIN",
-  "music": "MUS_VS_REGI",
+  "music": "MUS_MT_PYRE_EXTERIOR",
   "region_map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_ROUTE",
-  "allow_cycling": true,
+  "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": true,
-  "show_map_name": true,
+  "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": 0,
   "object_events": [
@@ -120,8 +120,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 53,
-      "y": 18,
+      "x": 51,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -134,7 +134,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
       "x": 52,
-      "y": 18,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -230,7 +230,7 @@
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
       "script": "EscapeRoom_EventScript_Trainer4",
       "flag": "0"
@@ -245,7 +245,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "EscapeRoom_Nurse_Heal_Pokemon",
       "flag": "0"
     },
     {
@@ -258,7 +258,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "EscapeRoom_EventScript_HintsNPC",
       "flag": "0"
     },
     {
@@ -271,7 +271,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "EscapeRoom_EventScript_AntiSoftlockGuy",
       "flag": "0"
     },
     {
@@ -303,7 +303,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
       "x": 13,
-      "y": 21,
+      "y": 22,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -325,19 +325,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_CutTree",
       "flag": "FLAG_TEMP_11"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 55,
-      "y": 18,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EventScript_RockSmash",
-      "flag": "FLAG_TEMP_12"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
@@ -399,6 +386,34 @@
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_ANNIHILAPES_LAIR",
       "dest_warp_id": "0"
+    },
+    {
+      "x": 55,
+      "y": 17,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_SHORTCUT_ROUTE",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 30,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_SHORTCUT_ROUTE",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 61,
+      "y": 9,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
+      "dest_warp_id": "0"
+    },
+    {
+      "x": 47,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [
@@ -416,7 +431,7 @@
     {
       "type": "sign",
       "x": 10,
-      "y": 22,
+      "y": 23,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_EndSign"

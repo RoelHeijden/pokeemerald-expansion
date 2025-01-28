@@ -38,7 +38,8 @@
   ],
   "gMapGroup_EscapeRoom2": [
     "EscapeRoom_Main",
-    "EscapeRoom_AnnihilapesLair"
+    "EscapeRoom_AnnihilapesLair",
+    "EscapeRoom_ShortcutRoute"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
