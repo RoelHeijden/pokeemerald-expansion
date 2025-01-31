@@ -51,11 +51,11 @@
 #define FLAG_CHOICE_SPECS_OBTAINED          0x26 
 #define FLAG_LOST_GLASSES_OBTAINED          0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
-#define FLAG_UNUSED_0x29                    0x29
-#define FLAG_UNUSED_0x2A                    0x2A
-#define FLAG_UNUSED_0x2B                    0x2B
-#define FLAG_UNUSED_0x2C                    0x2C 
-#define FLAG_UNUSED_0x2D                    0x2D
+#define FLAG_GRAVESTONE_CHECK1              0x29
+#define FLAG_GRAVESTONE_CHECK2              0x2A
+#define FLAG_GRAVESTONE_CHECK3              0x2B
+#define FLAG_GRAVESTONE_CHECK4              0x2C 
+#define FLAG_HIDE_ANNIHILAPE                0x2D
 #define FLAG_UNUSED_0x2E                    0x2E
 #define FLAG_UNUSED_0x2F                    0x2F
 #define FLAG_UNUSED_0x30                    0x30

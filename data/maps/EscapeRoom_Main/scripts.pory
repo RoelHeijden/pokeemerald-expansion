@@ -51,6 +51,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_SetRespawn)
     call(EscapeRoom_MapScripts_GetItems)
     call(EscapeRoom_MapScripts_TurnOfBagUse)
+    setflag(FLAG_HIDE_ANNIHILAPE)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
 }
 
@@ -132,7 +133,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_EXP_CANDY_S)
     additem(ITEM_WHITE_HERB)
-    additem(ITEM_HM04)
+    // additem(ITEM_HM04)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -140,8 +141,6 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
         setflag(FLAG_TOGGLE_BAG_USE)
     }
 }
-
-
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
@@ -244,6 +243,54 @@ script EscapeRoom_EventScript_LostGlassesNPC{
     releaseall
 }
 
+script EscapeRoom_EventScript_Shop1NPC{
+    lockall
+    faceplayer
+    msgbox(MartNPC_AskToShop, MSGBOX_DEFAULT)
+    waitmessage
+    pokemart(EscapeRoom_Shop1_items)
+    msgbox(MartNPC_SayGoodbye, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_Shop2NPC{
+    lockall
+    faceplayer
+    msgbox(MartNPC_AskToShop, MSGBOX_DEFAULT)
+    waitmessage
+    pokemart(EscapeRoom_Shop2_items)
+    msgbox(MartNPC_SayGoodbye, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+mart EscapeRoom_Shop1_items{
+    ITEM_ESCAPE_ROPE
+    ITEM_CUSTAP_BERRY
+    ITEM_FLOAT_STONE
+    ITEM_RING_TARGET
+    ITEM_ENIGMA_BERRY
+}
+
+mart EscapeRoom_Shop2_items{
+    ITEM_TM12
+    ITEM_ABILITY_CAPSULE
+    ITEM_ENIGMA_BERRY
+}
+
+script EscapeRoom_MoveDeleterNPC{
+    lockall
+    faceplayer
+    msgbox(AskDeleteMove, MSGBOX_YESNO)
+    // if(var(VAR_RESULT) == YES){
+        
+    // }
+    // else{
+
+    // }
+    releaseall
+}
 
 
 //// TRAINERS ////
@@ -420,7 +467,7 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
 
 script EscapeRoom_EventScript_FindPokeBall{
     lockall
-    finditem(ITEM_POKE_BALL)
+    finditem(ITEM_ULTRA_BALL)
     removeobject(9)
     setflag(FLAG_POKE_BALL_OBTAINED)
     releaseall
@@ -466,7 +513,7 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
 }
 
 
-//// OTHER ////
+//// ANNIHILAPE'S LAIR ////
 
 script EscapeRoom_EventScript_AnnihilapeBattle{
     createmon(
@@ -483,6 +530,224 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         move1=MOVE_MIMIC
     )
     dowildbattle
+}
+
+script EscapeRoom_EventScript_GraveStone1{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+    // set first flag
+    setflag(FLAG_GRAVESTONE_CHECK1)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone2{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone3{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    if(flag(FLAG_GRAVESTONE_CHECK2) == TRUE)
+    {
+        msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        // set third flag
+        setflag(FLAG_GRAVESTONE_CHECK3)
+    }
+    else{
+        clearflag(FLAG_GRAVESTONE_CHECK3)
+    }
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)  
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone4{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone5{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone6{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone7{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    if(flag(FLAG_GRAVESTONE_CHECK3) == TRUE)
+    {
+        msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        setflag(FLAG_GRAVESTONE_CHECK4)
+        call(EscapeRoom_EventScript_SpawnAnnihilape)
+    }
+    else{
+        // clear flags
+        clearflag(FLAG_GRAVESTONE_CHECK1)
+        clearflag(FLAG_GRAVESTONE_CHECK2)
+        clearflag(FLAG_GRAVESTONE_CHECK3)
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone8{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    if(flag(FLAG_GRAVESTONE_CHECK1) == TRUE)
+    {
+        msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        // set second flag
+        setflag(FLAG_GRAVESTONE_CHECK2)
+    }
+    else{
+        clearflag(FLAG_GRAVESTONE_CHECK2)
+    }
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK3)  
+    
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone9{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone0{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_SpawnAnnihilape{
+    fadeoutbgm(0)
+    clearflag(FLAG_HIDE_ANNIHILAPE)
+	special(DoSealedChamberShakingEffect_Short)
+    msgbox(GravestoneAnnihilapesRoar, MSGBOX_AUTOCLOSE)
+	waitmessage
+    fadeinbgm(0)
 }
 
 
@@ -504,14 +769,48 @@ text EndSignMessage{
     "For now."
 }
 
+
+// ANNIHILAPE'S LAIR
 text AnnihilapeStatueMessage{
-    "It's a statue of a Primeape"
+    "Primeape, 1837.\p"
+    "May its restless spirit find peace\n"
+    "among the shadows."
+}
+
+text GravestoneNoneMessage{
+    "..."
+}
+
+text GravestoneClickMessage{
+    "Click."
+}
+
+text GravestoneAnnihilapesRoar{
+    "GRAAAAAHHRGHHH!"
+}
+
+text Goggles_Statue_Main{
+    "There's a pair of goggles attached to\n"
+    "the gravestone.\p"
+    "It radiates a strange, ominous energy.\n"    
+    "I should probably avoid touching this.\p"
+    "Perhaps there's a Pokémon who can\n"
+    "snatch the goggles for me."
+}
+
+text Goggles_Statue_AskSnatch{
+    "There's a pair of goggles attached to\n"
+    "the gravestone.\p"
+    "It radiates a strange, ominous energy.\n"    
+    "I should probably avoid touching this.\p"
+    "Do you want Zeraora to try and snatch\n"
+    "the goggles or you?"
 }
 
 
 // NURSE
 text Nurse_Ask_heal{
-    "Hi, should I heal your Pokémon?"
+    "Hello, should I heal your Pokémon?"
 }
 
 text Nurse_Heal_End{
@@ -537,6 +836,7 @@ text HintsNPCWhatKindOfHintMessage{
     // "What kind of hint would you like?"
     "TBD"
 }
+
 
 // ANTI SOFTLOCK GUY
 text AntiSoftlockIntroMessage{
@@ -575,18 +875,27 @@ text LostGlassesNPCendMessage{
 }
 
 
-// ITEM RETURNS
-text NewGreatBallMessage{
-    "You recover the ball."
+// SHOP NPCS
+text MartNPC_AskToShop{
+    "Hi, welcome to my shop.\p"
+    "Please note: all items can be resold for\n"
+    "the same price."
+}
+
+text MartNPC_SayGoodbye{
+    "See ya!"
 }
 
 
-// SAFETY GOGGLES STATUE
-text Goggles_Statue_Main{
-    "The statue is wearing a pair of goggles,\n"
-    "but it seems to be cursed.\p"
-    "There's no way I'm touching this. Maybe\n"
-    "a Pokémon could snatch it for me."
+// MOVE DELETER NPC
+text AskDeleteMove{
+    "Delete move plz?"
+}
+
+
+// ITEM RETURNS
+text NewGreatBallMessage{
+    "You recover the ball."
 }
 
 
@@ -611,7 +920,7 @@ text Trainer1_PostBattle{
 }
 
 
-// TRAINER 2 - Charizard 
+// TRAINER 2 - Dracozolt 
 text Trainer2_Intro{
     "Let's go!"
 }
