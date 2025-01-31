@@ -4415,7 +4415,7 @@
       "id": "LAYOUT_ESCAPE_ROOM_MAIN",
       "name": "EscapeRoom_Main_Layout",
       "width": 76,
-      "height": 50,
+      "height": 44,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Rustboro",
       "border_filepath": "data/layouts/EscapeRoom_Main/border.bin",
@@ -4440,6 +4440,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/EscapeRoom_ShortcutRoute/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_ShortcutRoute/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM_EGG_CAVE",
+      "name": "EscapeRoom_EggCave_Layout",
+      "width": 24,
+      "height": 12,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/EscapeRoom_EggCave/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoom_EggCave/map.bin"
     }
   ]
 }

@@ -68,7 +68,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
-      "x": 42,
+      "x": 43,
       "y": 22,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
@@ -107,7 +107,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
-      "x": 20,
+      "x": 19,
       "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -115,7 +115,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "EscapeRoom_MoveDeleterNPC",
       "flag": "0"
     },
     {
@@ -130,32 +130,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_FindPokeBall",
       "flag": "FLAG_POKE_BALL_OBTAINED"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 52,
-      "y": 19,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_FindNugget",
-      "flag": "FLAG_NUGGET_OBTAINED"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 12,
-      "y": 10,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_FindRareCandy",
-      "flag": "FLAG_RARE_CANDY_OBTAINED"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ANABEL",
@@ -377,6 +351,45 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 12,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_FindRareCandy",
+      "flag": "FLAG_RARE_CANDY_OBTAINED"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
+      "x": 48,
+      "y": 16,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_Shop1NPC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
+      "x": 20,
+      "y": 11,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_Shop2NPC",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -405,15 +418,15 @@
       "x": 61,
       "y": 9,
       "elevation": 0,
-      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
+      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
       "dest_warp_id": "0"
     },
     {
       "x": 47,
       "y": 6,
       "elevation": 0,
-      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
+      "dest_warp_id": "1"
     }
   ],
   "coord_events": [
@@ -422,7 +435,7 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 48,
+      "x": 47,
       "y": 16,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
