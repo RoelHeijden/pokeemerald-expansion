@@ -134,7 +134,7 @@ static void ClearFrontierRecord(void)
 static void WarpToTruck(void)
 {
     // set spawn / set respawn
-    SetWarpDestination(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 4, 17);
+    SetWarpDestination(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 47, 18);
     WarpIntoMap();
 }
 
@@ -178,7 +178,7 @@ void NewGameInitData(void)
     ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
-    SetMoney(&gSaveBlock1Ptr->money, 0);
+    SetMoney(&gSaveBlock1Ptr->money, 5000); // CHANGED
     SetCoins(0);
     ResetLinkContestBoolean();
     ResetGameStats();
