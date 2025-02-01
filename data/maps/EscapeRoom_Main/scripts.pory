@@ -59,6 +59,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_FLORGES,
         22,
+        item=ITEM_SAFETY_GOGGLES,
         abilityNum=2, // symbiosis
         nature=21, // gentle
         gender=1, // female
@@ -101,6 +102,31 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         speedIv=31,
         spAtkIv=31,
         spDefIv=0
+    )
+
+    givemon(
+        SPECIES_ZERAORA,
+        43,
+        item=ITEM_TM48,
+        abilityNum=0, 
+        nature=15, // modest
+        gender=0, 
+        move1=MOVE_PLASMA_FISTS,
+        move2=MOVE_CURSE,
+        move3=MOVE_SNATCH,
+        move4=MOVE_NONE,
+        // EVs:
+        hpEv=0, 
+        atkEv=0,
+        spDefEv=36, 
+        defEv=0,
+        // IVs:
+        hpIv=0,
+        atkIv=0,
+        defIv=0,
+        speedIv=0,
+        spAtkIv=31,
+        spDefIv=31
     )
 
     setflag(FLAG_SYS_POKEMON_GET)
@@ -188,10 +214,6 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     releaseall
 }
 
-script EscapeRoom_EventScript_PostMatchHeal{
-    special(HealPlayerParty)
-}
-
 script EscapeRoom_EventScript_HintsNPC{
     faceplayer
     lockall
@@ -266,10 +288,10 @@ script EscapeRoom_EventScript_Shop2NPC{
 }
 
 mart EscapeRoom_Shop1_items{
-    ITEM_ESCAPE_ROPE
-    ITEM_CUSTAP_BERRY
     ITEM_FLOAT_STONE
-    ITEM_RING_TARGET
+    ITEM_RING_TARGET 
+    ITEM_ESCAPE_ROPE   
+    ITEM_CUSTAP_BERRY
     ITEM_ENIGMA_BERRY
 }
 
@@ -302,11 +324,17 @@ script EscapeRoom_EventScript_Trainer1{
         Trainer1_Intro, 
         Trainer1_Outro, 
         DoubleBattle_NotEnoughMons,
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer1PostBattle,
     )
-    msgbox(Trainer1_PostBattle, MSGBOX_AUTOCLOSE)
-    waitmessage
-    end
+
+    // ask zera trade if previously declined
+    if(flag(FLAG_ZERA_TRADED) == FALSE){
+        call(EscapeRoom_EventScript_TradeZeraForHMCut)
+    }
+    else{
+        msgbox(Trainer1_PostBattle, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 }
 
 script EscapeRoom_EventScript_Trainer2{
@@ -384,11 +412,34 @@ script EscapeRoom_EventScript_Trainer7{
     end
 }
 
+//// POST BATTLE SCRIPTS ////
+
+script EscapeRoom_EventScript_PostMatchHeal{
+    special(HealPlayerParty)
+}
+
+script EscapeRoom_EventScript_Trainer1PostBattle{
+    call(EscapeRoom_EventScript_PostMatchHeal)
+    call(EscapeRoom_EventScript_TradeZeraForHMCut)
+}
+
 
 //// POKEMON TRADES ////
 
 script EscapeRoom_EventScript_TradeZeraForHMCut{
-    end
+    lockall
+    msgbox(AskZeraCutTradeMessage, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        setflag(FLAG_ZERA_TRADED)
+        removemon(SPECIES_ZERAORA)
+        giveitem(ITEM_HM01)
+        msgbox(ZeraCutTradeAccepted, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        msgbox(ZeraCutTradeDeclined, MSGBOX_AUTOCLOSE)
+    }
+    releaseall
 }
 
 script EscapeRoom_EventScript_TradeFerroVsDunsparce{
@@ -516,6 +567,7 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
 //// ANNIHILAPE'S LAIR ////
 
 script EscapeRoom_EventScript_AnnihilapeBattle{
+    lockall
     createmon(
         side=1,
         slot=0,
@@ -530,6 +582,7 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         move1=MOVE_MIMIC
     )
     dowildbattle
+    releaseall
 }
 
 script EscapeRoom_EventScript_GraveStone1{
@@ -878,8 +931,8 @@ text LostGlassesNPCendMessage{
 // SHOP NPCS
 text MartNPC_AskToShop{
     "Hi, welcome to my shop.\p"
-    "Please note: all items can be resold for\n"
-    "the same price."
+    "Every item can be sold back for the\n"
+    "same price."
 }
 
 text MartNPC_SayGoodbye{
@@ -899,6 +952,24 @@ text NewGreatBallMessage{
 }
 
 
+// TRADE NPCS
+text AskFerroDunsparceTrade{
+    ""
+}
+
+text AskFlorgesEggTrade{
+    ""
+}
+
+text AskDunsparceMoneyTrade{
+    ""
+}
+
+text AskPoochSmeargleTrade{
+    ""
+}
+
+
 // BATTLES - OTHER
 text DoubleBattle_NotEnoughMons{
     "Want to battle?\n"
@@ -908,7 +979,7 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 1 - Toedscruel Togedemaru
 text Trainer1_Intro{
-    "Let's go!"
+    "Something something HM Cut."
 }
 
 text Trainer1_Outro{
@@ -917,6 +988,21 @@ text Trainer1_Outro{
 
 text Trainer1_PostBattle{
     "Fock off."
+}
+
+text AskZeraCutTradeMessage{
+    "Wow, that Zeraora of yours is amazing.\n"
+    "I wish we had a Pokémon like that!\p"
+    "Would you be okay trading your Zeraora\n"
+    "for our HM Cut?" 
+}
+
+text ZeraCutTradeDeclined{
+    "Come back if you changed your mind."
+}
+
+text ZeraCutTradeAccepted{
+    "Bye-bye Zeraora."
 }
 
 
