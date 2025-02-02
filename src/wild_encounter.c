@@ -484,29 +484,51 @@ static void CreateWildMon(u16 species, u8 level)
         u8 nature = 0;
         // u32 personality = (Random32() / 25) * 25; // Hardy
 
-        // s16 y;
-        // s16 x;
-        // x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+
+        s16 x;
+        x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+        // s16 y;        
         // y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
         {
-            species = SPECIES_ZERAORA;
-            heldItem = ITEM_TM48;
-            level = 42;
-            abilityNum = 0;
-            gender = MON_GENDERLESS;
-            nature = NATURE_MODEST;
-            move1 = MOVE_SNATCH;
+            if(x >= 36){
+                species = SPECIES_ZERAORA;
+                heldItem = ITEM_TM48;
+                level = 42;
+                abilityNum = 0;
+                gender = MON_GENDERLESS;
+                nature = NATURE_MODEST;
+                move1 = MOVE_SNATCH;
 
-            spDefEv = 36;
+                spDefEv = 36;
 
-            hpIv=0;
-            atkIv=0;
-            defIv=0;
-            speedIv=0;
-            spAtkIv=31;
-            spDefIv=31;
+                hpIv=0;
+                atkIv=0;
+                defIv=0;
+                speedIv=0;
+                spAtkIv=31;
+                spDefIv=31;
+            }
+            else{
+                species = SPECIES_DUSKNOIR;
+                heldItem = ITEM_NONE;
+                level = 100;
+                abilityNum = 0; // pressure
+                gender = MON_MALE;
+                nature = NATURE_JOLLY;
+                move1 = MOVE_MEMENTO;
+
+                atkEv = 252;
+                speedEv = 252;
+
+                hpIv=31;
+                atkIv=31;
+                defIv=31;
+                speedIv=31;
+                spAtkIv=31;
+                spDefIv=31;
+            }
         }
 
         // set nature and gender
