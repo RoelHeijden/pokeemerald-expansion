@@ -45,6 +45,8 @@ script EscapeRoom_MapScripts_FindBallAferUse{
     releaseall
 }
 
+
+//// MAP START ////
 script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_GetFirstPokemon)
     call(EscapeRoom_MapScripts_GetBadges)
@@ -244,25 +246,37 @@ script EscapeRoom_EventScript_LostGlassesNPC{
     msgbox(LostGlassesNPCmainMessage, MSGBOX_AUTOCLOSE)
 
     // if lost glasses obtained
-    checkitem(ITEM_LOST_GLASSES)
+    checkitem(ITEM_WISE_GLASSES)
     if(var(VAR_RESULT) == TRUE){
 
-        // TODO: display exclamation mark
-        // The rival uses it after beating Wallace
+        // display exclamation mark
+        playse(SE_PIN)
+        applymovement(19, Common_Movement_ExclamationMark)
+        waitmovement(19)
 
         msgbox(LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
-
         call(EscapeRoom_EventScript_ObtainLiepard)
-        removeitem(ITEM_LOST_GLASSES)
-
+        lockall
+        removeitem(ITEM_WISE_GLASSES)
         msgbox(LostGlassesNPCendMessage, MSGBOX_AUTOCLOSE)
         waitmessage 
 
-        // TODO: walk away
+        // walk away
+        applymovement(19, EscapeRoom_Movement_LostGlassesNPC)
+        waitmovement(19)
+        delay(30)
+
+        removeobject(19)
+        // setflag(FLAG_HIDE_LOST_GLASSES_NPC)
 
     }
     releaseall
+    end
+}
+
+movement EscapeRoom_Movement_LostGlassesNPC{
+    walk_left * 8
 }
 
 script EscapeRoom_EventScript_Shop1NPC{
@@ -478,6 +492,7 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
 }
 
 script EscapeRoom_EventScript_ObtainLiepard{
+    lockall
     givemon(
         SPECIES_LIEPARD,
         50,

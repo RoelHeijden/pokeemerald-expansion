@@ -57,7 +57,7 @@
 #define FLAG_GRAVESTONE_CHECK4              0x2C 
 #define FLAG_HIDE_ANNIHILAPE                0x2D
 #define FLAG_ZERA_TRADED                    0x2E
-#define FLAG_UNUSED_0x2F                    0x2F
+#define FLAG_HIDE_LOST_GLASSES_NPC          0x2F
 #define FLAG_UNUSED_0x30                    0x30
 #define FLAG_UNUSED_0x31                    0x31 
 #define FLAG_UNUSED_0x32                    0x32
