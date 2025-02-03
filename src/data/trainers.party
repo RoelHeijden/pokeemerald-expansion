@@ -16980,21 +16980,23 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 
-Lucario @ Focus Sash  
+Lucario (M) @ Focus Sash  
 Ability: Inner Focus  
 Level: 70  
 EVs: 252 Atk / 252 Spe  
 Adamant Nature  
 IVs: 0 Def  
 - Close Combat  
+- Brick Break  
 
-Lucario @ Focus Sash  
+Lucario (F)  
 Ability: Inner Focus  
 Level: 70  
 EVs: 252 Atk / 252 Spe  
 Adamant Nature  
 IVs: 0 Def  
 - Close Combat  
+- Brick Break  
 
 
 === TRAINER_CUSTOM_TRAINER7 ===
