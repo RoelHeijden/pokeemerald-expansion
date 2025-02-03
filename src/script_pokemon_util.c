@@ -84,11 +84,6 @@ u8 ScriptGivePoochEgg(void)
     isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 
-    // set ability
-    // set moves
-    // set nature
-    // set ivs
-
     // set eggcycle to 1
     u32 eggCycles = 0;
     SetMonData(&mon, MON_DATA_FRIENDSHIP, &eggCycles);
