@@ -1131,6 +1131,12 @@ void GiveEggFromDaycare(void)
     _GiveEggFromDaycare(&gSaveBlock1Ptr->daycare);
 }
 
+// ADDED
+void ResetStepCounter(struct DayCare *daycare)
+{
+    daycare->stepCounter = 0;
+}
+
 static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
 {
     u32 i, validEggs = 0;
@@ -1150,7 +1156,8 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
     }
 
     // Try to hatch Egg
-    if (++daycare->stepCounter == ((P_EGG_CYCLE_LENGTH >= GEN_8) ? 127 : 255))
+    // if (++daycare->stepCounter == ((P_EGG_CYCLE_LENGTH >= GEN_8) ? 127 : 255))
+    if (++daycare->stepCounter == 16) // CHANGED
     {
         u32 eggCycles;
         u8 toSub = GetEggCyclesToSubtract();
@@ -1163,6 +1170,7 @@ static bool8 TryProduceOrHatchEgg(struct DayCare *daycare)
                 continue;
 
             eggCycles = GetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP);
+
             if (eggCycles != 0)
             {
                 if (eggCycles >= toSub)

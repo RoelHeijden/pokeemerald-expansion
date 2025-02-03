@@ -28,6 +28,7 @@
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
 
+
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 static void HealPlayerBoxes(void);
@@ -72,6 +73,33 @@ u8 ScriptGiveEgg(u16 species)
 
     return GiveMonToPlayer(&mon);
 }
+
+// ADDED
+u8 ScriptGivePoochEgg(void)
+{
+    struct Pokemon mon;
+    u8 isEgg;
+
+    CreateEgg(&mon, SPECIES_POOCHYENA, FALSE);
+    isEgg = TRUE;
+    SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
+
+    // set ability
+    // set moves
+    // set nature
+    // set ivs
+
+    // set eggcycle to 1
+    u32 eggCycles = 0;
+    SetMonData(&mon, MON_DATA_FRIENDSHIP, &eggCycles);
+
+    // reset stepcounter
+    ResetStepCounter(&gSaveBlock1Ptr->daycare);
+
+    return GiveMonToPlayer(&mon);
+}
+
+
 
 void HasEnoughMonsForDoubleBattle(void)
 {

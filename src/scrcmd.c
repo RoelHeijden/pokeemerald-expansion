@@ -1882,6 +1882,15 @@ bool8 ScrCmd_giveegg(struct ScriptContext *ctx)
     return FALSE;
 }
 
+
+// ADDED
+bool8 SrcCmd_givepoochegg(struct ScriptContext *ctx)
+{
+    gSpecialVar_Result = ScriptGivePoochEgg();
+    return FALSE;
+}
+
+
 bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
 {
     u8 partyIndex = ScriptReadByte(ctx);

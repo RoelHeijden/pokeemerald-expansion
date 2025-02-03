@@ -1271,6 +1271,13 @@
 	.byte 0xf7
 	.endm
 
+	@ Gives the player a specific Poochyena Egg for the escape room map.
+	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
+	.macro givepoochegg
+	.byte 0xf8
+	.endm
+
+
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).
 	@ If given anything else it will output it directly.
 	@ Note: Because the STR_VAR_# arguments given to this macro are not part of a processed string they are not
