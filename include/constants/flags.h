@@ -63,7 +63,7 @@
 #define FLAG_DUNSPARCE_TRADE_ACCEPTED       0x32
 #define FLAG_POOCH_TRADE_ACCEPTED           0x33 
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
-#define FLAG_UNUSED_0x35                    0x35 
+#define FLAG_GOGGLES_SNATCHED               0x35 
 #define FLAG_UNUSED_0x36                    0x36 
 #define FLAG_UNUSED_0x37                    0x37  
 #define FLAG_UNUSED_0x38                    0x38  

@@ -114,9 +114,9 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         nature=15, // modest
         gender=0, 
         move1=MOVE_PLASMA_FISTS,
-        move2=MOVE_CURSE,
-        move3=MOVE_SNATCH,
-        move4=MOVE_SURF,
+        move2=MOVE_SNATCH,
+        move3=MOVE_SURF,
+        move4=MOVE_NONE,
         // EVs:
         hpEv=0, 
         atkEv=0,
@@ -766,12 +766,6 @@ script EscapeRoom_EventScript_FindLostGlasses{
     releaseall
 }
 
-script EscapeRoom_EventScript_SafetyGogglesStatue{
-    lockall
-    msgbox(Goggles_Statue_Main, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-}
 
 //// MAP SWITCHES ////
 script EscapeRoom_EventScript_MapSwitch1{
@@ -1204,11 +1198,81 @@ script EscapeRoom_EventScript_GraveStone0{
 script EscapeRoom_EventScript_SpawnAnnihilape{
     fadeoutbgm(0)
     clearflag(FLAG_HIDE_ANNIHILAPE)
+
 	special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+
     msgbox(GravestoneAnnihilapesRoar, MSGBOX_AUTOCLOSE)
 	waitmessage
     fadeinbgm(0)
 }
+
+script EscapeRoom_EventScript_SafetyGogglesStatue{
+    lockall
+
+    // check if goggles already taken
+    if(flag(FLAG_GOGGLES_SNATCHED) == TRUE){
+        msgbox(GogglesAlreadySnatchedMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+    // check if Snatch Zera in party
+    checkpartymove(MOVE_SNATCH)
+    if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_ZERAORA){
+
+        // ask snatch goggles
+        msgbox(Goggles_Statue_AskSnatch, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+        }
+    }
+    // regular message
+    else{
+        msgbox(Goggles_Statue_Main, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_SnatchSafetyGoggles{
+    // takes goggles
+    delay(60)
+    msgbox(GogglesSnatchStart, MSGBOX_AUTOCLOSE)
+    waitmessage
+    delay(30)
+    finditem(ITEM_SAFETY_GOGGLES)
+
+    // curse happens
+    special(DoSealedChamberShakingEffect_Short)
+    playse(SE_PIN)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    lockall
+    delay(50)
+
+    // Zera Cursed message
+    msgbox(GogglesCurseHappens1, MSGBOX_AUTOCLOSE)
+    waitmessage
+    msgbox(GogglesCurseHappens2, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // replace Snatch with Curse   
+    checkpartymon(SPECIES_ZERAORA)
+    copyvar(VAR_0x8001, VAR_RESULT)
+    setvar(VAR_0x8002, MOVE_SNATCH)
+    setvar(VAR_0x8003, MOVE_CURSE)
+    replacemove(VAR_0x8001, VAR_0x8002, VAR_0x8003) 
+
+    setflag(FLAG_GOGGLES_SNATCHED)
+}
+
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
@@ -1284,6 +1348,25 @@ text Goggles_Statue_AskSnatch{
     "Do you want Zeraora to try and snatch\n"
     "the goggles or you?"
 }
+
+text GogglesAlreadySnatchedMessage{
+    "Let's stay away from this grave..."
+}
+
+text GogglesSnatchStart{
+    "Zeraora carefully takes the goggles\n"
+    "from the gravestone." 
+}
+
+text GogglesCurseHappens1{
+    "A curse was cast upon Zeraora!"
+}
+
+text GogglesCurseHappens2{
+    "That's not good."
+}
+
+
 
 // MAP SWITCHES
 text RotatedSwitchSoundMessage{
