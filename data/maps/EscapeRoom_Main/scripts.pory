@@ -116,7 +116,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move1=MOVE_PLASMA_FISTS,
         move2=MOVE_CURSE,
         move3=MOVE_SNATCH,
-        move4=MOVE_NONE,
+        move4=MOVE_SURF,
         // EVs:
         hpEv=0, 
         atkEv=0,
@@ -201,6 +201,20 @@ script EscapeRoom_EventScript_AnnihilapeStatue{
     releaseall
 }
 
+script EscapeRoom_EventScript_AncientWallSign{
+    lockall
+    msgbox(MysteriousWallSign, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_AncientWallBackroomSign{
+    lockall
+    msgbox(MysteriousWallBackroomSign, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
 
 //// MAIN NPCS ////
 
@@ -251,8 +265,9 @@ script EscapeRoom_EventScript_LostGlassesNPC{
 
         // display exclamation mark
         playse(SE_PIN)
-        applymovement(19, Common_Movement_ExclamationMark)
-        waitmovement(19)
+        applymovement(18, Common_Movement_ExclamationMark)
+        waitmovement(18)
+        lockall
 
         msgbox(LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -263,16 +278,42 @@ script EscapeRoom_EventScript_LostGlassesNPC{
         waitmessage 
 
         // walk away
-        applymovement(19, EscapeRoom_Movement_LostGlassesNPC)
-        waitmovement(19)
+        applymovement(18, EscapeRoom_Movement_LostGlassesNPC)
+        waitmovement(18)
         delay(30)
-
-        removeobject(19)
-        // setflag(FLAG_HIDE_LOST_GLASSES_NPC)
-
+        removeobject(18)
     }
     releaseall
     end
+}
+
+script EscapeRoom_EventScript_ObtainLiepard{
+    lockall
+    givemon(
+        SPECIES_LIEPARD,
+        50,
+        abilityNum=2, // Prankster
+        nature=16, // Mild
+        gender=0, 
+        move1=MOVE_ASSIST,
+        move2=MOVE_TRICK,
+        move3=MOVE_ROCK_SMASH,
+        move4=MOVE_ECHOED_VOICE,
+        // EVs:
+        atkEv=148, 
+        spAtkEv=252,
+        speedEv=108,
+        // IVs:
+        hpIv=31,
+        atkIv=31,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31
+    )    
+    message(LiepardObtainMessage)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
 }
 
 movement EscapeRoom_Movement_LostGlassesNPC{
@@ -426,6 +467,7 @@ script EscapeRoom_EventScript_Trainer7{
     end
 }
 
+
 //// POST BATTLE SCRIPTS ////
 
 script EscapeRoom_EventScript_PostMatchHeal{
@@ -444,6 +486,18 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
     lockall
     msgbox(AskZeraCutTradeMessage, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
+
+        // check if pokemon in party
+        checkpartymon(SPECIES_ZERAORA)
+        if(var(VAR_RESULT) == PARTY_SIZE)
+        {
+            msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+            releaseall
+            end
+        }
+
+        // trade pokemon
         setflag(FLAG_ZERA_TRADED)
         removemon(SPECIES_ZERAORA)
         giveitem(ITEM_HM01)
@@ -459,73 +513,222 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
 script EscapeRoom_EventScript_TradeFerroVsDunsparce{
     lockall
     faceplayer
-    msgbox(format("Trade Ferrothorn for Dunsparce?"), MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES){
-        removemon(SPECIES_FERROTHORN)
-        givemon(
-            SPECIES_DUNSPARCE,
-            50,
-            abilityNum=2, // rattled
-            nature=8, // impish
-            gender=0, 
-            move1=MOVE_TRUMP_CARD,
-            move2=MOVE_AIR_SLASH,
-            move3=MOVE_HEX,
-            move4=MOVE_COUNTER,
-            // EVs:
-            hpEv=0, 
-            defEv=252,
-            // IVs:
-            hpIv=0,
-            atkIv=0,
-            defIv=31,
-            speedIv=31,
-            spAtkIv=10,
-            spDefIv=31
-        )
+
+    // post trade 
+    if(flag(FLAG_FERRO_TRADE_ACCEPTED) == TRUE){
+        msgbox(FerroTradePostTrade, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        // ask trade
+        msgbox(AskFerroDunsparceTrade, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check if pokemon in party
+            checkpartymon(SPECIES_FERROTHORN)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            // trade pokemon
+            removemon(SPECIES_FERROTHORN)
+            givemon(
+                SPECIES_DUNSPARCE,
+                50,
+                abilityNum=2, // rattled
+                nature=8, // impish
+                gender=0, 
+                move1=MOVE_TRUMP_CARD,
+                move2=MOVE_AIR_SLASH,
+                move3=MOVE_HEX,
+                move4=MOVE_COUNTER,
+                // EVs:
+                hpEv=0, 
+                defEv=252,
+                // IVs:
+                hpIv=0,
+                atkIv=0,
+                defIv=31,
+                speedIv=31,
+                spAtkIv=10,
+                spDefIv=31
+            )
+            setflag(FLAG_FERRO_TRADE_ACCEPTED)
+
+            message(DunsparceReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            waitfanfare
+
+            lockall
+            msgbox(FerroTradeAccepted, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // trade declined
+        else{
+            msgbox(FerroTradeDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    releaseall
+    end
+}
+
+script EscapeRoom_EventScript_TradeFlorgesForEgg{
+    lockall
+    faceplayer
+
+    // post trade 
+    if(flag(FLAG_FLORGES_TRADE_ACCEPTED) == TRUE){
+        msgbox(FlorgesTradePostTrade, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        // ask trade
+        msgbox(AskFlorgesEggTrade, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check if pokemon in party
+            checkpartymon(SPECIES_FLORGES)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            // trade pokemon
+            removemon(SPECIES_FLORGES)
+            givepoochegg
+            setflag(FLAG_FLORGES_TRADE_ACCEPTED)
+
+            message(EggReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            waitfanfare
+            lockall
+            msgbox(FlorgesTradeAccepted, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // trade declined
+        else{
+            msgbox(FlorgesTradeDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
     }
     releaseall
 }
 
-script EscapeRoom_EventScript_TradeFlorgesForEgg{
-    end
-}
-
-script EscapeRoom_EventScript_ObtainLiepard{
-    lockall
-    givemon(
-        SPECIES_LIEPARD,
-        50,
-        abilityNum=2, // Prankster
-        nature=16, // Mild
-        gender=0, 
-        move1=MOVE_ASSIST,
-        move2=MOVE_TRICK,
-        move3=MOVE_ROCK_SMASH,
-        move4=MOVE_ECHOED_VOICE,
-        // EVs:
-        atkEv=148, 
-        spAtkEv=252,
-        speedEv=108,
-        // IVs:
-        hpIv=31,
-        atkIv=31,
-        defIv=31,
-        speedIv=31,
-        spAtkIv=31,
-        spDefIv=31
-    )
-    playfanfare(MUS_OBTAIN_ITEM)
-    msgbox(LiepardObtainMessage, MSGBOX_AUTOCLOSE)
-    waitfanfare
-}
-
 script EscapeRoom_EventScript_SellDunsparce{
-    end
+    lockall
+    faceplayer
+
+    // post trade 
+    if(flag(FLAG_DUNSPARCE_TRADE_ACCEPTED) == TRUE){
+        msgbox(DunsparceTradePostTrade, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        // ask trade
+        msgbox(AskDunsparceMoneyTrade, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check if pokemon in party
+            checkpartymon(SPECIES_DUNSPARCE)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            // trade pokemon
+            removemon(SPECIES_DUNSPARCE)
+            addmoney(20000)
+            setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
+
+            message(MoneyReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            waitfanfare
+            lockall
+            msgbox(DunsparceTradeAccepted, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // trade declined
+        else{
+            msgbox(DunsparceTradeDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    releaseall
 }
 
 script EscapeRoom_EventScript_TradePoochForSmeargle{
-    end
+    lockall
+    faceplayer
+
+    // post trade 
+    if(flag(FLAG_POOCH_TRADE_ACCEPTED) == TRUE){
+        msgbox(PoochTradePostTrade, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        // ask trade
+        msgbox(AskPoochSmeargleTrade, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check if pokemon in party
+            checkpartymon(SPECIES_POOCHYENA)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            // trade pokemon
+            removemon(SPECIES_POOCHYENA)
+            givemon(
+                SPECIES_SMEARGLE,
+                20,
+                abilityNum=0, // own tempo
+                nature=12, // serious
+                gender=0, 
+                move1=MOVE_FOLLOW_ME,
+                move2=MOVE_UPROAR,
+                move3=MOVE_SURF,
+                move4=MOVE_CONVERSION_2,
+                // EVs:
+                hpEv=0, 
+                // IVs:
+                hpIv=31,
+                atkIv=31,
+                defIv=31,
+                speedIv=31,
+                spAtkIv=31,
+                spDefIv=31
+            )
+            setflag(FLAG_POOCH_TRADE_ACCEPTED)
+
+            message(SmeargleReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            waitfanfare
+            lockall
+            msgbox(PoochTradeAccepted, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // trade declined
+        else{
+            msgbox(PoochTradeDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    releaseall
 }
 
 
@@ -534,23 +737,15 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
 script EscapeRoom_EventScript_FindPokeBall{
     lockall
     finditem(ITEM_ULTRA_BALL)
-    removeobject(9)
+    removeobject(8)
     setflag(FLAG_POKE_BALL_OBTAINED)
-    releaseall
-}
-
-script EscapeRoom_EventScript_FindNugget{
-    lockall
-    finditem(ITEM_NUGGET)
-    removeobject(10)
-    setflag(FLAG_NUGGET_OBTAINED)
     releaseall
 }
 
 script EscapeRoom_EventScript_FindRareCandy{
     lockall
     finditem(ITEM_RARE_CANDY)
-    removeobject(11)
+    removeobject(25)
     setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
 }
@@ -558,7 +753,7 @@ script EscapeRoom_EventScript_FindRareCandy{
 script EscapeRoom_EventScript_FindChoiceSpecs{
     lockall
     finditem(ITEM_CHOICE_SPECS)
-    removeobject(15)
+    removeobject(12)
     setflag(FLAG_CHOICE_SPECS_OBTAINED)
     releaseall
 }
@@ -566,7 +761,7 @@ script EscapeRoom_EventScript_FindChoiceSpecs{
 script EscapeRoom_EventScript_FindLostGlasses{
     lockall
     finditem(ITEM_WISE_GLASSES)
-    removeobject(27)
+    removeobject(22)
     setflag(FLAG_LOST_GLASSES_OBTAINED)
     releaseall
 }
@@ -576,6 +771,203 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
     msgbox(Goggles_Statue_Main, MSGBOX_AUTOCLOSE)
     waitmessage
     releaseall
+}
+
+//// MAP SWITCHES ////
+script EscapeRoom_EventScript_MapSwitch1{
+    lockall
+
+    // end if already solved
+    if(flag(FLAG_MAP_SWITCHES_SOLVED) == TRUE){
+        msgbox(MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+    // ask to change tablet direction
+    if(var(VAR_MAP_SWITCH_1) == 0){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 1){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 2){
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 3){
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+
+    // change direction
+    if(var(VAR_RESULT) == YES){
+        addvar(VAR_MAP_SWITCH_1, 1)
+        msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // full circle: back to north
+        if(var(VAR_MAP_SWITCH_1) >= 4){
+            setvar(VAR_MAP_SWITCH_1, 0)
+        }
+
+        // check for correct solution
+        call(EscapeRoom_EventScript_CheckSwitchesCorrect)
+    }
+
+    releaseall
+}
+
+script EscapeRoom_EventScript_MapSwitch2{
+    lockall
+
+    // end if already solved
+    if(flag(FLAG_MAP_SWITCHES_SOLVED) == TRUE){
+        msgbox(MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+    // ask to change tablet direction
+    if(var(VAR_MAP_SWITCH_2) == 0){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 1){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 2){
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 3){
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+
+    // change direction
+    if(var(VAR_RESULT) == YES){
+        addvar(VAR_MAP_SWITCH_2, 1)
+        msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // full circle: back to north
+        if(var(VAR_MAP_SWITCH_2) >= 4){
+            setvar(VAR_MAP_SWITCH_2, 0)
+        }
+
+        // check for correct solution
+        call(EscapeRoom_EventScript_CheckSwitchesCorrect)
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_MapSwitch3{
+    lockall
+
+    // end if already solved
+    if(flag(FLAG_MAP_SWITCHES_SOLVED) == TRUE){
+        msgbox(MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+    // ask to change tablet direction
+    if(var(VAR_MAP_SWITCH_3) == 0){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 1){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 2){
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 3){
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+
+    // change direction
+    if(var(VAR_RESULT) == YES){
+        addvar(VAR_MAP_SWITCH_3, 1)
+        msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // full circle: back to north
+        if(var(VAR_MAP_SWITCH_3) >= 4){
+            setvar(VAR_MAP_SWITCH_3, 0)
+        }
+        
+        // check for correct solution
+        call(EscapeRoom_EventScript_CheckSwitchesCorrect)
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_MapSwitch4{
+    lockall
+
+    // end if already solved
+    if(flag(FLAG_MAP_SWITCHES_SOLVED) == TRUE){
+        msgbox(MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+    // ask to change tablet direction
+    if(var(VAR_MAP_SWITCH_4) == 0){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 1){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 2){
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 3){
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+
+    // change direction
+    if(var(VAR_RESULT) == YES){
+        addvar(VAR_MAP_SWITCH_4, 1)
+        msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // full circle: back to north
+        if(var(VAR_MAP_SWITCH_4) >= 4){
+            setvar(VAR_MAP_SWITCH_4, 0)
+        }
+        
+        // check for correct solution
+        call(EscapeRoom_EventScript_CheckSwitchesCorrect)
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_CheckSwitchesCorrect{
+    if(
+        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- (pokedex)
+        var(VAR_MAP_SWITCH_2) == 0 &&  // north -- Trainer card
+        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- (npc dialogue)
+        var(VAR_MAP_SWITCH_4) == 3     // west  -- Pokemon screen
+    ){
+        call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
+    }
+}
+
+script EscapeRoom_EventScript_SwitchesOpenDoorSequence{
+    fadeoutbgm(0)
+    playse(SE_TRUCK_MOVE)
+	special(DoSealedChamberShakingEffect_Long)
+    waitstate
+    delay(40)
+	special(DoSealedChamberShakingEffect_Short)
+	waitstate
+	playse(SE_DOOR)
+    delay(40)
+    msgbox(MapSwitchDoorOpened, MSGBOX_DEFAULT)
+	closemessage
+    fadeinbgm(0)      
+    setflag(FLAG_MAP_SWITCHES_SOLVED)
 }
 
 
@@ -821,6 +1213,14 @@ script EscapeRoom_EventScript_SpawnAnnihilape{
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
+
+text SomethingsGoneWrongMessage{
+    "Something has gone wrong.\p"
+    "You may have found an unintended\n"
+    "solution that broke the game.\p"
+    "Consider contacting Ketchupplant."
+}
+
 // SIGNS
 text SignMessage1{
     "TBD"
@@ -835,6 +1235,16 @@ text EndSignMessage{
     "The end.\p"
     "...\p"
     "For now."
+}
+
+text MysteriousWallSign{
+    "There are four mysterious markings that\n"
+    "seem to point in various directions.\p"
+    "What a strange wall."
+}
+
+text MysteriousWallBackroomSign{
+    "So many choices."
 }
 
 
@@ -873,6 +1283,39 @@ text Goggles_Statue_AskSnatch{
     "I should probably avoid touching this.\p"
     "Do you want Zeraora to try and snatch\n"
     "the goggles or you?"
+}
+
+// MAP SWITCHES
+text RotatedSwitchSoundMessage{
+    "Clunk."
+}
+
+text MapSwitchPointedNorth{
+    "The tablet is pointed north.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedEast{
+    "The tablet is pointed east.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedSouth{
+    "The tablet is pointed south.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedWest{
+    "The tablet is pointed west.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchDoorOpened{
+    "What was that???"
+}
+
+text MApSwitchesAlreadySolved{
+    "The tablet is locked in place."
 }
 
 
@@ -967,21 +1410,95 @@ text NewGreatBallMessage{
 }
 
 
-// TRADE NPCS
+// TRADE NPC 2 - Ferrothorn Dunsparce
 text AskFerroDunsparceTrade{
-    ""
+    "I've found a Dunsparce on the beach.\n"
+    "Wanna trade it for your Ferrothorn?"
 }
 
+text DunsparceReceivedMessage{
+    "{PLAYER} received a Dunsparce!"
+}
+
+text FerroTradeAccepted{
+    "Bye-bye Ferrothorn."
+}
+
+text FerroTradeDeclined{
+    "Alright. Some other time maybe."
+}
+
+text FerroTradePostTrade{
+    "I love this Ferrothorn!"
+}
+
+
+// TRADE NPC 3 - Florges Egg
 text AskFlorgesEggTrade{
-    ""
+    "That's a nice Florges. Do you want to\n"
+    "trade it for my mystery egg?"
 }
 
+text EggReceivedMessage{
+    "{PLAYER} received an EGG!" 
+}
+
+text FlorgesTradeAccepted{
+    "Bye-bye Florges."
+}
+
+text FlorgesTradeDeclined{
+    "Okay, come back anytime."
+}
+
+text FlorgesTradePostTrade{
+    "TBD - allow to retrade Florges"
+}
+
+
+// TRADE NPC 4 - Dunsparce Money
 text AskDunsparceMoneyTrade{
-    ""
+    "Hi, I collect rare Pokémon as a hobby.\p"
+    "Your Dunsparce looks quite valuable,\n"
+    "would you sell it to me for ¥20.000?"
 }
 
+text MoneyReceivedMessage{
+    "{PLAYER} received ¥20.000!"
+}
+
+text DunsparceTradeAccepted{
+    "Bye-bye Dunsparce."
+}
+
+text DunsparceTradeDeclined{
+    "Hmm..."
+}
+
+text DunsparceTradePostTrade{
+    "My collection grows bigger and bigger!"
+}
+
+
+// TRADE NPC 5 - Poochyena Smeargle
 text AskPoochSmeargleTrade{
-    ""
+    "Want to trade dogs?"
+}
+
+text SmeargleReceivedMessage{
+    "{PLAYER} received a Smeargle!"
+}
+
+text PoochTradeAccepted{
+    "Bye-bye Poochyena."
+}
+
+text PoochTradeDeclined{
+    "Ahh, that's too bad!"
+}
+
+text PoochTradePostTrade{
+    "Thanks a lot."
 }
 
 
@@ -994,7 +1511,7 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 1 - Toedscruel Togedemaru
 text Trainer1_Intro{
-    "Something something HM Cut."
+    "Something something I have HM Cut."
 }
 
 text Trainer1_Outro{
@@ -1007,13 +1524,13 @@ text Trainer1_PostBattle{
 
 text AskZeraCutTradeMessage{
     "Wow, that Zeraora of yours is amazing.\n"
-    "I wish we had a Pokémon like that!\p"
+    "I wish I had a Pokémon like that!\p"
     "Would you be okay trading your Zeraora\n"
-    "for our HM Cut?" 
+    "for my HM Cut?" 
 }
 
 text ZeraCutTradeDeclined{
-    "Come back if you changed your mind."
+    "Come back if you change your mind."
 }
 
 text ZeraCutTradeAccepted{
@@ -1023,7 +1540,8 @@ text ZeraCutTradeAccepted{
 
 // TRAINER 2 - Dracozolt 
 text Trainer2_Intro{
-    "Let's go!"
+    "Doesn't the beach look beautiful?\n"
+    "I love nature."
 }
 
 text Trainer2_Outro{
@@ -1037,7 +1555,8 @@ text Trainer2_PostBattle{
 
 // TRAINER 3 - Komala Tinkaton
 text Trainer3_Intro{
-    "Let's go!"
+    "Rage is nearly guaranteed.\n"
+    "Try and realize getting entry takeswork."
 }
 
 text Trainer3_Outro{
@@ -1051,7 +1570,7 @@ text Trainer3_PostBattle{
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
-    "Let's go!"
+    "Only the exhausted could defeat me."
 }
 
 text Trainer4_Outro{
@@ -1065,7 +1584,9 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Rayquaza
 text Trainer5_Intro{
-    "Let's go!"
+    "Still being haunted by ghosts from\n"
+    "your past?\p"
+    "Yeah me too."
 }
 
 text Trainer5_Outro{
@@ -1079,7 +1600,7 @@ text Trainer5_PostBattle{
 
 // TRAINER 6 - Lucario Lucario
 text Trainer6_Intro{
-    "Let's go!"
+    "We share a FOCUS SASH!"
 }
 
 text Trainer6_Outro{
@@ -1093,7 +1614,10 @@ text Trainer6_PostBattle{
 
 // TRAINER 7 - Toxicroak Breloom
 text Trainer7_Intro{
-    "Let's go!"
+    "Too many options?\n"
+    "Be careful or you might freeze up.\p"
+    "There's a word for that, isn't there?\n"
+    "Ah well, I guess it's not important."
 }
 
 text Trainer7_Outro{

@@ -58,11 +58,11 @@
 #define FLAG_HIDE_ANNIHILAPE                0x2D
 #define FLAG_ZERA_TRADED                    0x2E
 #define FLAG_HIDE_LOST_GLASSES_NPC          0x2F
-#define FLAG_UNUSED_0x30                    0x30
-#define FLAG_UNUSED_0x31                    0x31 
-#define FLAG_UNUSED_0x32                    0x32
-#define FLAG_UNUSED_0x33                    0x33 
-#define FLAG_UNUSED_0x34                    0x34
+#define FLAG_FERRO_TRADE_ACCEPTED           0x30
+#define FLAG_FLORGES_TRADE_ACCEPTED         0x31 
+#define FLAG_DUNSPARCE_TRADE_ACCEPTED       0x32
+#define FLAG_POOCH_TRADE_ACCEPTED           0x33 
+#define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_UNUSED_0x35                    0x35 
 #define FLAG_UNUSED_0x36                    0x36 
 #define FLAG_UNUSED_0x37                    0x37  
@@ -1219,7 +1219,7 @@
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
-#define FLAG_UNUSED_0x493                                           0x493 // Unused Flag
+#define FLAG_ESCAPEROOM_TREE_CUT                                    0x493 
 #define FLAG_UNUSED_0x494                                           0x494 // Unused Flag
 #define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
 #define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
