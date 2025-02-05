@@ -1199,13 +1199,17 @@ script EscapeRoom_EventScript_SpawnAnnihilape{
     fadeoutbgm(0)
     clearflag(FLAG_HIDE_ANNIHILAPE)
 
+    playmoncry(SPECIES_GROUDON, CRY_MODE_NORMAL)
 	special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
     delay(10)
     special(DoSealedChamberShakingEffect_Short)
     delay(10)
     special(DoSealedChamberShakingEffect_Short)
 
     msgbox(GravestoneAnnihilapesRoar, MSGBOX_AUTOCLOSE)
+    waitmoncry
 	waitmessage
     fadeinbgm(0)
 }
@@ -1213,55 +1217,57 @@ script EscapeRoom_EventScript_SpawnAnnihilape{
 script EscapeRoom_EventScript_SafetyGogglesStatue{
     lockall
 
-    // check if goggles already taken
-    if(flag(FLAG_GOGGLES_SNATCHED) == TRUE){
-        msgbox(GogglesAlreadySnatchedMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        releaseall
-        end
-    }
+    // goggles still there
+    if(flag(FLAG_GOGGLES_SNATCHED) == FALSE){
+        // check if Snatch Zera in party
+        checkpartymove(MOVE_SNATCH)
+        if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_ZERAORA){
 
-    // check if Snatch Zera in party
-    checkpartymove(MOVE_SNATCH)
-    if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_ZERAORA){
-
-        // ask snatch goggles
-        msgbox(Goggles_Statue_AskSnatch, MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-            call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+            // ask snatch goggles
+            msgbox(Goggles_Statue_AskSnatch, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                setflag(FLAG_GOGGLES_SNATCHED)
+                call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+            }
+        }
+        // regular message
+        else{
+            msgbox(Goggles_Statue_Main, MSGBOX_AUTOCLOSE)
+            waitmessage
         }
     }
-    // regular message
+    // goggles already taken
     else{
-        msgbox(Goggles_Statue_Main, MSGBOX_AUTOCLOSE)
+        msgbox(GogglesAlreadySnatchedMessage, MSGBOX_AUTOCLOSE)
         waitmessage
     }
 
     releaseall
-    end
 }
 
 script EscapeRoom_EventScript_SnatchSafetyGoggles{
     // takes goggles
-    delay(60)
+    closemessage
+    fadeoutbgm(0)
+    delay(10)
     msgbox(GogglesSnatchStart, MSGBOX_AUTOCLOSE)
     waitmessage
-    delay(30)
+    delay(40)
     finditem(ITEM_SAFETY_GOGGLES)
-
+    
     // curse happens
-    special(DoSealedChamberShakingEffect_Short)
     playse(SE_PIN)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
     waitmovement(OBJ_EVENT_ID_PLAYER)
-    lockall
     delay(50)
-
-    // Zera Cursed message
-    msgbox(GogglesCurseHappens1, MSGBOX_AUTOCLOSE)
+    playse(SE_M_SWEET_SCENT)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
+    special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+    waitse
+    msgbox(GogglesCurseHappens, MSGBOX_AUTOCLOSE)    
     waitmessage
-    msgbox(GogglesCurseHappens2, MSGBOX_AUTOCLOSE)
-    waitmessage
+    fadeinbgm(0)
 
     // replace Snatch with Curse   
     checkpartymon(SPECIES_ZERAORA)
@@ -1269,8 +1275,6 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
     setvar(VAR_0x8002, MOVE_SNATCH)
     setvar(VAR_0x8003, MOVE_CURSE)
     replacemove(VAR_0x8001, VAR_0x8002, VAR_0x8003) 
-
-    setflag(FLAG_GOGGLES_SNATCHED)
 }
 
 
@@ -1331,41 +1335,37 @@ text GravestoneAnnihilapesRoar{
     "GRAAAAAHHRGHHH!"
 }
 
-text Goggles_Statue_Main{
+text Goggles_Statue_Main{  
     "There's a pair of goggles attached to\n"
-    "the gravestone.\p"
-    "It radiates a strange, ominous energy.\n"    
-    "I should probably avoid touching this.\p"
-    "Perhaps there's a Pokémon who can\n"
+    "the gravestone, radiating a strange,\l"
+    "ominous energy.\p"   
+    "I should probably avoid touching this.\n"
+    "Perhaps there's a Pokémon who can\l"
     "snatch the goggles for me."
 }
 
 text Goggles_Statue_AskSnatch{
     "There's a pair of goggles attached to\n"
-    "the gravestone.\p"
-    "It radiates a strange, ominous energy.\n"    
-    "I should probably avoid touching this.\p"
+    "the gravestone, radiating a strange,\l"
+    "ominous energy.\p"    
     "Do you want Zeraora to try and snatch\n"
-    "the goggles or you?"
+    "the goggles for you?"
 }
 
 text GogglesAlreadySnatchedMessage{
-    "Let's stay away from this grave..."
+    "Let's stay away from this gravestone\n"
+    "from now on..."
 }
 
 text GogglesSnatchStart{
-    "Zeraora carefully takes the goggles\n"
+    "Zeraora carefully detaches the goggles\n"
     "from the gravestone." 
 }
 
-text GogglesCurseHappens1{
-    "A curse was cast upon Zeraora!"
+text GogglesCurseHappens{
+    "A curse was cast upon Zeraora!\p"
+    "Something happened to Zeraora's moves."
 }
-
-text GogglesCurseHappens2{
-    "That's not good."
-}
-
 
 
 // MAP SWITCHES
