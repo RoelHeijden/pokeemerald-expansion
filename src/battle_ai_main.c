@@ -156,8 +156,16 @@ static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
 
-    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
+    // ADDED
+    // set roamer flag to each wild mon. Fix this logic within the roaming AI method itself
+    if (IsWildMonSmart()){
+        return AI_FLAG_ROAMING; 
+    }
+
+    // standard wild battle
+    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart()){ 
         return 0;
+    }
     if (trainerId == 0xFFFF)
     {
         flags = GetWildAiFlags();
@@ -5368,7 +5376,9 @@ static void AI_Watch(void)
 // Roaming pokemon logic
 static s32 AI_Roaming(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    if (IsBattlerTrapped(battlerAtk, FALSE))
+    // CHANGED
+    // only treat Zeraora as roamer
+    if (IsBattlerTrapped(battlerAtk, FALSE) || gBattleMons[battlerAtk].species != SPECIES_ZERAORA)
         return score;
 
     AI_Flee();
