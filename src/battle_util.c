@@ -456,11 +456,11 @@ bool32 TryRunFromBattle(u32 battler)
     u8 pyramidMultiplier;
     u8 speedVar;
 
-    // ADDED
-    // always success when trying to run
-    gCurrentTurnActionNumber = gBattlersCount;
-    gBattleOutcome = B_OUTCOME_RAN;
-    return TRUE;
+    // // ADDED
+    // // always success when trying to run
+    // gCurrentTurnActionNumber = gBattlersCount;
+    // gBattleOutcome = B_OUTCOME_RAN;
+    // return TRUE;
 
 
     if (gBattleMons[battler].item == ITEM_ENIGMA_BERRY_E_READER)
@@ -520,9 +520,13 @@ bool32 TryRunFromBattle(u32 battler)
         }
         else if (gBattleMons[battler].speed < gBattleMons[runningFromBattler].speed)
         {
-            speedVar = (gBattleMons[battler].speed * 128) / (gBattleMons[runningFromBattler].speed) + (gBattleStruct->runTries * 30);
-            if (speedVar > (Random() & 0xFF))
-                effect++;
+            // speedVar = (gBattleMons[battler].speed * 128) / (gBattleMons[runningFromBattler].speed) + (gBattleStruct->runTries * 30);
+            // if (speedVar > (Random() & 0xFF))
+            //     effect++;
+
+            // CHANGED
+            // run always fails if slower
+            effect = 0;
         }
         else // same speed or faster
         {
