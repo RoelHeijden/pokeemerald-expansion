@@ -675,6 +675,16 @@ const struct BattleBackground sBattleTerrainTable[] =
         .palette = gBattleTerrainPalette_Rock,
     },
 
+    // ADDED
+    [BATTLE_TERRAIN_BURIAL_GROUND] =
+    {
+        .tileset = gBattleTerrainTiles_Cave,
+        .tilemap = gBattleTerrainTilemap_Cave,
+        .entryTileset = gBattleTerrainAnimTiles_Cave,
+        .entryTilemap = gBattleTerrainAnimTilemap_Cave,
+        .palette = gBattleTerrainPalette_Cave,
+    },
+
     [BATTLE_TERRAIN_CAVE] =
     {
         .tileset = gBattleTerrainTiles_Cave,

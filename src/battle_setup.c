@@ -760,6 +760,10 @@ u8 BattleSetup_GetTerrainId(void)
     if (MetatileBehavior_IsSandOrDeepSand(tileBehavior))
         return BATTLE_TERRAIN_SAND;
 
+    // ADDED
+    if (MetatileBehavior_IsBurialGround(tileBehavior))
+        return BATTLE_TERRAIN_BURIAL_GROUND;
+
     switch (gMapHeader.mapType)
     {
     case MAP_TYPE_TOWN:
