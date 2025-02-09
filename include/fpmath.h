@@ -68,7 +68,8 @@ static inline uq4_12_t uq4_12_divide(uq4_12_t dividend, uq4_12_t divisor)
 // Returns an integer, rounded to nearest (rounding down on n.5)
 static inline u32 uq4_12_multiply_by_int_half_down(uq4_12_t modifier, u32 value)
 {
-    return UQ_4_12_TO_INT((modifier * value) + UQ_4_12_ROUND - 1);
+    // return UQ_4_12_TO_INT((modifier * value) + UQ_4_12_ROUND - 1);
+    return UQ_4_12_TO_INT(modifier * value);  // CHANGED -- always rounds down (correct dmg rolls)
 }
 
 // Multiplies value by the UQ_4_12 number modifier.
