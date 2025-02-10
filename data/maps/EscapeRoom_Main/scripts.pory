@@ -61,7 +61,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_FLORGES,
         22,
-        item=ITEM_SAFETY_GOGGLES,
+        item=ITEM_WHITE_HERB,
         abilityNum=2, // symbiosis
         nature=21, // gentle
         gender=1, // female
@@ -90,8 +90,8 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move1=MOVE_STEEL_ROLLER,
         move2=MOVE_BLOCK,
         move3=MOVE_INGRAIN,
-        // move4=MOVE_SLEEP_TALK,
-        move4=MOVE_CUT,
+        move4=MOVE_SLEEP_TALK,
+        // move4=MOVE_CUT,
         // EVs:
         hpEv=0, 
         atkEv=252,
@@ -106,30 +106,30 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         spDefIv=0
     )
 
-    givemon(
-        SPECIES_ZERAORA,
-        43,
-        item=ITEM_TM48,
-        abilityNum=0, 
-        nature=15, // modest
-        gender=0, 
-        move1=MOVE_PLASMA_FISTS,
-        move2=MOVE_SNATCH,
-        move3=MOVE_SURF,
-        move4=MOVE_NONE,
-        // EVs:
-        hpEv=0, 
-        atkEv=0,
-        spDefEv=36, 
-        defEv=0,
-        // IVs:
-        hpIv=0,
-        atkIv=0,
-        defIv=0,
-        speedIv=0,
-        spAtkIv=31,
-        spDefIv=31
-    )
+    // givemon(
+    //     SPECIES_ZERAORA,
+    //     43,
+    //     item=ITEM_TM48,
+    //     abilityNum=0, 
+    //     nature=15, // modest
+    //     gender=0, 
+    //     move1=MOVE_PLASMA_FISTS,
+    //     move2=MOVE_SNATCH,
+    //     move3=MOVE_SURF,
+    //     move4=MOVE_NONE,
+    //     // EVs:
+    //     hpEv=0, 
+    //     atkEv=0,
+    //     spDefEv=36, 
+    //     defEv=0,
+    //     // IVs:
+    //     hpIv=0,
+    //     atkIv=0,
+    //     defIv=0,
+    //     speedIv=0,
+    //     spAtkIv=31,
+    //     spDefIv=31
+    // )
 
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
@@ -160,8 +160,6 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_EXP_CANDY_S)
-    additem(ITEM_WHITE_HERB)
-    // additem(ITEM_HM04)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -974,13 +972,21 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         slot=0,
         species=SPECIES_ANNIHILAPE,
         level=100,
-        nature=22,
+        nature=22, // sassy
         abilityNum=2,
         gender=1,
+        move1=MOVE_MIMIC
+        // evs
         hpEv=184,
         defEv=72,
         spAtkEv=252,
-        move1=MOVE_MIMIC
+        // ivs
+        hpIv=31,
+        atkIv=31,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31
     )
     dowildbattle
     releaseall
@@ -996,13 +1002,25 @@ script EscapeRoom_EventScript_GraveStone1{
         end
     }
 
-    msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
+    if (flag(FLAG_GRAVESTONE_CHECK1) == FALSE &&
+        flag(FLAG_GRAVESTONE_CHECK2) == FALSE &&
+        flag(FLAG_GRAVESTONE_CHECK3) == FALSE){
+        msgbox(GravestoneClick1Message, MSGBOX_AUTOCLOSE)
+        waitmessage    
+        // set first flag
+        setflag(FLAG_GRAVESTONE_CHECK1)
+    }
+    else{
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_GRAVESTONE_CHECK1)
+    }
+
     // clear flags
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
-    // set first flag
-    setflag(FLAG_GRAVESTONE_CHECK1)
+
 
     releaseall
 }
@@ -1015,6 +1033,13 @@ script EscapeRoom_EventScript_GraveStone2{
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
     }
 
     // clear flags
@@ -1037,10 +1062,17 @@ script EscapeRoom_EventScript_GraveStone3{
 
     if(flag(FLAG_GRAVESTONE_CHECK2) == TRUE)
     {
-        msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+        msgbox(GravestoneClick3Message, MSGBOX_AUTOCLOSE)
         waitmessage
         // set third flag
         setflag(FLAG_GRAVESTONE_CHECK3)
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_GRAVESTONE_CHECK3)
     }
     else{
         clearflag(FLAG_GRAVESTONE_CHECK3)
@@ -1061,6 +1093,13 @@ script EscapeRoom_EventScript_GraveStone4{
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
     }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 
     // clear flags
     clearflag(FLAG_GRAVESTONE_CHECK1)
@@ -1079,6 +1118,13 @@ script EscapeRoom_EventScript_GraveStone5{
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
     }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 
     // clear flags
     clearflag(FLAG_GRAVESTONE_CHECK1)
@@ -1096,6 +1142,13 @@ script EscapeRoom_EventScript_GraveStone6{
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
     }
 
     // clear flags
@@ -1118,10 +1171,20 @@ script EscapeRoom_EventScript_GraveStone7{
 
     if(flag(FLAG_GRAVESTONE_CHECK3) == TRUE)
     {
-        msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
+        // msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+        // waitmessage
         setflag(FLAG_GRAVESTONE_CHECK4)
         call(EscapeRoom_EventScript_SpawnAnnihilape)
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        // clear flags
+        clearflag(FLAG_GRAVESTONE_CHECK1)
+        clearflag(FLAG_GRAVESTONE_CHECK2)
+        clearflag(FLAG_GRAVESTONE_CHECK3)
     }
     else{
         // clear flags
@@ -1144,10 +1207,17 @@ script EscapeRoom_EventScript_GraveStone8{
 
     if(flag(FLAG_GRAVESTONE_CHECK1) == TRUE)
     {
-        msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
+        msgbox(GravestoneClick2Message, MSGBOX_AUTOCLOSE)
         waitmessage
         // set second flag
         setflag(FLAG_GRAVESTONE_CHECK2)
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_GRAVESTONE_CHECK2)
     }
     else{
         clearflag(FLAG_GRAVESTONE_CHECK2)
@@ -1168,6 +1238,13 @@ script EscapeRoom_EventScript_GraveStone9{
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
     }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
 
     // clear flags
     clearflag(FLAG_GRAVESTONE_CHECK1)
@@ -1185,6 +1262,13 @@ script EscapeRoom_EventScript_GraveStone0{
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
     }
 
     // clear flags
@@ -1260,7 +1344,7 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     delay(50)
-    playse(SE_M_SWEET_SCENT)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
+    playse(SE_M_HAZE)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
     special(DoSealedChamberShakingEffect_Short)
     delay(10)
     special(DoSealedChamberShakingEffect_Short)
@@ -1312,7 +1396,7 @@ text MysteriousWallSign{
 }
 
 text MysteriousWallBackroomSign{
-    "So many choices."
+    "Choice paralysis?"
 }
 
 
@@ -1327,8 +1411,21 @@ text GravestoneNoneMessage{
     "..."
 }
 
-text GravestoneClickMessage{
-    "Click."
+text GravestoneClick1Message{
+    "A strange energy lingers in the air."
+}
+
+text GravestoneClick2Message{
+    "A spirit is stirring, drawn to your\n" 
+    "presence."
+}
+
+text GravestoneClick3Message{
+    "A deep rumble echoes from below."
+}
+
+text GravestoneResetMessage{
+    "The energy dissipates into the void."
 }
 
 text GravestoneAnnihilapesRoar{
@@ -1472,8 +1569,8 @@ text LostGlassesNPCendMessage{
 // SHOP NPCS
 text MartNPC_AskToShop{
     "Hi, welcome to my shop.\p"
-    "Every item can be sold back for the\n"
-    "same price."
+    "Don't worry, each item can be sold back\n"
+    "for same price."
 }
 
 text MartNPC_SayGoodbye{
