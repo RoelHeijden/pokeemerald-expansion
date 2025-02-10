@@ -5369,8 +5369,9 @@ static void TryChangingTurnOrderEffects(u32 battler1, u32 battler2)
     // Quick Claw and Custap Berry
     if (!gProtectStructs[battler1].quickDraw
      && ((holdEffectBattler1 == HOLD_EFFECT_QUICK_CLAW && gBattleStruct->quickClawRandom[battler1])
-     || (holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item))))
+     || (holdEffectBattler1 == HOLD_EFFECT_CUSTAP_BERRY && HasEnoughHpToEatBerry(battler1, 4, gBattleMons[battler1].item)))){
         gProtectStructs[battler1].usedCustapBerry = TRUE;
+    }
 
     // Battler 2
     // Quick Draw
@@ -5387,45 +5388,46 @@ static void CheckChangingTurnOrderEffects(void)
 {
     u32 i, battler;
 
-    if (!(gHitMarker & HITMARKER_RUN))
+    // REMOVED
+    // if (!(gHitMarker & HITMARKER_RUN))
+    // {
+    while (gBattleStruct->quickClawBattlerId < gBattlersCount)
     {
-        while (gBattleStruct->quickClawBattlerId < gBattlersCount)
+        battler = gBattlerAttacker = gBattleStruct->quickClawBattlerId;
+        gBattleStruct->quickClawBattlerId++;
+        if (gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
+            && gChosenMoveByBattler[battler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
+            && (gProtectStructs[battler].usedCustapBerry || gProtectStructs[battler].quickDraw)
+            && !(gBattleMons[battler].status1 & STATUS1_SLEEP)
+            && !(gDisableStructs[gBattlerAttacker].truantCounter)
+            && !(gProtectStructs[battler].noValidMoves))
         {
-            battler = gBattlerAttacker = gBattleStruct->quickClawBattlerId;
-            gBattleStruct->quickClawBattlerId++;
-            if (gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
-             && gChosenMoveByBattler[battler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
-             && (gProtectStructs[battler].usedCustapBerry || gProtectStructs[battler].quickDraw)
-             && !(gBattleMons[battler].status1 & STATUS1_SLEEP)
-             && !(gDisableStructs[gBattlerAttacker].truantCounter)
-             && !(gProtectStructs[battler].noValidMoves))
+            if (gProtectStructs[battler].usedCustapBerry)
             {
-                if (gProtectStructs[battler].usedCustapBerry)
+                gLastUsedItem = gBattleMons[battler].item;
+                PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+                if (GetBattlerHoldEffect(battler, FALSE) == HOLD_EFFECT_CUSTAP_BERRY)
                 {
-                    gLastUsedItem = gBattleMons[battler].item;
-                    PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
-                    if (GetBattlerHoldEffect(battler, FALSE) == HOLD_EFFECT_CUSTAP_BERRY)
-                    {
-                        // don't record berry since its gone now
-                        BattleScriptExecute(BattleScript_CustapBerryActivation);
-                    }
-                    else
-                    {
-                        RecordItemEffectBattle(battler, GetBattlerHoldEffect(battler, FALSE));
-                        BattleScriptExecute(BattleScript_QuickClawActivation);
-                    }
+                    // don't record berry since its gone now
+                    BattleScriptExecute(BattleScript_CustapBerryActivation);
                 }
-                else if (gProtectStructs[battler].quickDraw)
+                else
                 {
-                    gBattlerAbility = battler;
-                    gLastUsedAbility = gBattleMons[battler].ability;
-                    PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
-                    RecordAbilityBattle(battler, gLastUsedAbility);
-                    BattleScriptExecute(BattleScript_QuickDrawActivation);
+                    RecordItemEffectBattle(battler, GetBattlerHoldEffect(battler, FALSE));
+                    BattleScriptExecute(BattleScript_QuickClawActivation);
                 }
-                return;
             }
+            else if (gProtectStructs[battler].quickDraw)
+            {
+                gBattlerAbility = battler;
+                gLastUsedAbility = gBattleMons[battler].ability;
+                PREPARE_ABILITY_BUFFER(gBattleTextBuff1, gLastUsedAbility);
+                RecordAbilityBattle(battler, gLastUsedAbility);
+                BattleScriptExecute(BattleScript_QuickDrawActivation);
+            }
+            return;
         }
+        // }
     }
 
     // setup stuff before turns/actions
