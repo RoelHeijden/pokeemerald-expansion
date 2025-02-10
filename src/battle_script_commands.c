@@ -15435,8 +15435,9 @@ static void Cmd_handleballthrow(void)
             * (gBattleMons[gBattlerTarget].maxHP * 3 - gBattleMons[gBattlerTarget].hp * 2)
             / (3 * gBattleMons[gBattlerTarget].maxHP);
 
-        // ADDED THIS
-        if (odds >= 33)  // catching threshold
+
+        // ADDED 
+        if (odds >= 56)  // catching threshold
             odds = 255;
         else
             odds = 1;
