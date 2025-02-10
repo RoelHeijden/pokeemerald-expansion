@@ -156,16 +156,18 @@ static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
 
-    // ADDED
+    // CHANGED
     // set roamer flag to each wild mon. Fix this logic within the roaming AI method itself
-    if (IsWildMonSmart()){
-        return AI_FLAG_ROAMING; 
+    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI)){ 
+        if (IsWildMonSmart())
+            return AI_FLAG_ROAMING; 
+        else
+            return 0;
     }
-
-    // standard wild battle
-    if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart()){ 
-        return 0;
-    }
+    // // standard wild battle
+    // if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart()){ 
+    //     return 0;
+    // }
     if (trainerId == 0xFFFF)
     {
         flags = GetWildAiFlags();
@@ -5471,7 +5473,6 @@ static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     // used for Counter calcs
     int bulldozeDmg = 19;
 
-
     // Komala Bulldoze
     if(move == MOVE_BULLDOZE){
         score = 110;
@@ -5509,7 +5510,6 @@ static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         if(tinkatonHp == 0 && gSideTimers[GetBattlerSide(battlerAtk)].lightscreenTimer <= 1)
             score = 120;
     }
-
     return score;
 }
 
