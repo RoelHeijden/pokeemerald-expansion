@@ -543,6 +543,11 @@ static void CreateWildMon(u16 species, u8 level)
         ZeroMonData(&gEnemyParty[0]);
         CreateBoxMon(&gEnemyParty[0].box, species, level, USE_RANDOM_IVS, TRUE, personality, OT_ID_PLAYER_ID, 0);
 
+        // set Zera exp
+        u32 exp = 99315;
+        if (species == SPECIES_ZERAORA)
+            SetMonData(&gEnemyParty[0], MON_DATA_EXP, &exp);
+
         // Set level and ability
         SetMonData(&gEnemyParty[0], MON_DATA_LEVEL, &level);
         SetMonData(&gEnemyParty[0], MON_DATA_ABILITY_NUM, &abilityNum);
