@@ -4243,6 +4243,39 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .battleAnimScript = Move_STRUGGLE,
     },
 
+    [MOVE_SUPER_STRUGGLE] =
+    {
+        .name = COMPOUND_STRING("Give Up Entirely"),
+        .description = COMPOUND_STRING(
+            "Used only if all PP are gone.\n"
+            "Also hurts the user a a lot."),
+        // .effect = EFFECT_RECOIL_HP_25,
+        .effect = EFFECT_FINAL_GAMBIT,
+        .accuracy = 0,
+        .mirrorMoveBanned = TRUE,
+        // .additionalEffects = ADDITIONAL_EFFECTS({
+        //     .moveEffect = EFFECT_RECOIL_HP_25,
+        //     .self = TRUE,
+        // }),
+        .power = 50,
+        .type = TYPE_NORMAL,
+        .pp = 1,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .meFirstBanned = TRUE,
+        .mimicBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .sleepTalkBanned = TRUE,
+        .copycatBanned = TRUE,
+        .instructBanned = TRUE,
+        .encoreBanned = TRUE,
+        .assistBanned = TRUE,
+        .sketchBanned = TRUE,
+        .battleAnimScript = Move_STRUGGLE,
+    },
+
     [MOVE_SKETCH] =
     {
         .name = COMPOUND_STRING("Sketch"),

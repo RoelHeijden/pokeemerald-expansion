@@ -151,9 +151,18 @@ void HandleAction_UseMove(void)
     if (gProtectStructs[gBattlerAttacker].noValidMoves)
     {
         gProtectStructs[gBattlerAttacker].noValidMoves = FALSE;
-        gCurrentMove = gChosenMove = MOVE_STRUGGLE;
         gHitMarker |= HITMARKER_NO_PPDEDUCT;
-        *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(MOVE_STRUGGLE, NO_TARGET_OVERRIDE);
+
+        // ADDED
+        // implement Zera's super struggle
+        if (gBattlerAttacker == 1 && gBattleMons[gBattlerAttacker].species == SPECIES_ZERAORA){
+            gCurrentMove = gChosenMove = MOVE_SUPER_STRUGGLE;
+            *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(MOVE_SUPER_STRUGGLE, NO_TARGET_OVERRIDE);  
+        }
+        else{
+            gCurrentMove = gChosenMove = MOVE_STRUGGLE;
+            *(gBattleStruct->moveTarget + gBattlerAttacker) = GetMoveTarget(MOVE_STRUGGLE, NO_TARGET_OVERRIDE);            
+        }
     }
     else if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS || gBattleMons[gBattlerAttacker].status2 & STATUS2_RECHARGE)
     {

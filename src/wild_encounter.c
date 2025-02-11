@@ -579,9 +579,9 @@ static void CreateWildMon(u16 species, u8 level)
         // Recalculate stats after modifications
         CalculateMonStats(&gEnemyParty[0]);
 
-        // make sure Protect pp is set properly
+        // make sure Snatch pp is set properly
         u8 pp;
-        if (move1 == MOVE_PROTECT)
+        if (move1 == MOVE_SNATCH)
         {
             pp = 10;
             SetMonData(&gEnemyParty[0], MON_DATA_PP1, &pp);
