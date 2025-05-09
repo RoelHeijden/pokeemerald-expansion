@@ -4245,7 +4245,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_SUPER_STRUGGLE] =
     {
-        .name = COMPOUND_STRING("Give Up Entirely"),
+        .name = COMPOUND_STRING("Super Struggle"),
         .description = COMPOUND_STRING(
             "Used only if all PP are gone.\n"
             "Also hurts the user a a lot."),
