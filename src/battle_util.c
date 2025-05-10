@@ -11296,7 +11296,7 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
 // }
 
 // ADDED
-// also restores berries
+// also restore certain items (berries)
 void TryRestoreHeldItems(void)
 {
     u32 i;
@@ -11304,19 +11304,34 @@ void TryRestoreHeldItems(void)
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
-        // Check if held items should be restored after battle based on generation
         if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || gBattleStruct->itemLost[B_SIDE_PLAYER][i].stolen || returnNPCItems)
         {
             u16 lostItem = gBattleStruct->itemLost[B_SIDE_PLAYER][i].originalItem;
 
-            // NEW: Remove the restriction that excludes berries from being restored
-            if (lostItem != ITEM_NONE && GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) == ITEM_NONE)
+            // Check if the item is one of the explicitly allowed ones
+            bool32 isAllowedSpecialItem =
+                lostItem == ITEM_CUSTAP_BERRY ||
+                lostItem == ITEM_MYSTERY_BERRY ||
+                lostItem == ITEM_MARANGA_BERRY;
+
+            // Skip restoring berries unless it's one of the special cases, and mon isn't already holding it
+            if (ItemId_GetPocket(lostItem) == POCKET_BERRIES &&
+                !isAllowedSpecialItem &&
+                GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != lostItem)
+            {
+                lostItem = ITEM_NONE;
+            }
+
+            // Restore item if it’s valid, not a general berry (unless allowed), and not already held
+            if ((lostItem != ITEM_NONE || returnNPCItems) && 
+                (ItemId_GetPocket(lostItem) != POCKET_BERRIES || isAllowedSpecialItem))
             {
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
             }
         }
     }
 }
+
 
 
 
