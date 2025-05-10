@@ -11311,7 +11311,6 @@ void TryRestoreHeldItems(void)
             // Check if the item is one of the explicitly allowed ones
             bool32 isAllowedSpecialItem =
                 lostItem == ITEM_CUSTAP_BERRY ||
-                lostItem == ITEM_MYSTERY_BERRY ||
                 lostItem == ITEM_MARANGA_BERRY;
 
             // Skip restoring berries unless it's one of the special cases, and mon isn't already holding it
@@ -11326,6 +11325,23 @@ void TryRestoreHeldItems(void)
             if ((lostItem != ITEM_NONE || returnNPCItems) && 
                 (ItemId_GetPocket(lostItem) != POCKET_BERRIES || isAllowedSpecialItem))
             {
+                // ADDED
+                // check if item actually consumed
+                u16 currentHeldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                if (currentHeldItem != lostItem){
+                    // set flags for messaging ingame
+                    if (lostItem == ITEM_WHITE_HERB){
+                        FlagSet(FLAG_RECOVERED_WHITE_HERB);
+                    }
+                    if (lostItem == ITEM_CUSTAP_BERRY){
+                        FlagSet(FLAG_RECOVERED_CUSTAP);
+                    }
+                    if (lostItem == ITEM_MARANGA_BERRY){
+                        FlagSet(FLAG_RECOVERED_MARANGA);
+                    }
+                }
+
+                // restore item
                 SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
             }
         }

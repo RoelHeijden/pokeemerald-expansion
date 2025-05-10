@@ -117,7 +117,7 @@
 #define VAR_ROUTE102_STATE                               0x4061 // Unused Var
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
-#define VAR_ROUTE105_STATE                               0x4064 // Unused Var
+#define VAR_RETRIEVED_HELD_ITEM                          0x4064 // ADDED
 #define VAR_ROUTE106_STATE                               0x4065 // Unused Var
 #define VAR_ROUTE107_STATE                               0x4066 // Unused Var
 #define VAR_ROUTE108_STATE                               0x4067 // Unused Var
@@ -268,11 +268,11 @@
 #define VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL          0x40F8
 #define VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER           0x40F9 
 #define VAR_HINTS_USED_COUNTER                           0x40FA
-#define VAR_MAP_SWITCH_1                                 0x40FB // Unused Var
-#define VAR_MAP_SWITCH_2                                 0x40FC // Unused Var
-#define VAR_MAP_SWITCH_3                                 0x40FD // Unused Var
-#define VAR_MAP_SWITCH_4                                 0x40FE // Unused Var
-#define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
+#define VAR_MAP_SWITCH_1                                 0x40FB 
+#define VAR_MAP_SWITCH_2                                 0x40FC 
+#define VAR_MAP_SWITCH_3                                 0x40FD 
+#define VAR_MAP_SWITCH_4                                 0x40FE 
+#define VAR_UNUSED_0x40FF                                0x40FF 
 
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)

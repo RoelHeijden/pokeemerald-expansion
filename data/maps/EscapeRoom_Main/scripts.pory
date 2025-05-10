@@ -12,6 +12,7 @@ mapscripts EscapeRoom_Main_MapScripts {
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScript_GameStartScripts
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
+        VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
     ] 
 }
 
@@ -22,8 +23,20 @@ script EscapeRoom_MapScript_OnTransitionScripts{
 
 script EscapeRoom_MapScript_OnResumeScripts{
     // check if pokemon caught -- sets flag if true
+    getpartysize
+    if (var(VAR_RESULT) >= 3){
+        setflag(FLAG_ZERAORA_CAUGHT)
+    }
 
-    // check for ball return -- sets var if true
+    // check for ball return -- sets frame table var if true
+    if(flag(FLAG_BALL_USED) && !flag(FLAG_ZERAORA_CAUGHT)){
+        setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
+    }
+
+    // check if held item was retrieved -- sets frame table var if true
+    if(flag(FLAG_RECOVERED_WHITE_HERB) || flag(FLAG_RECOVERED_CUSTAP) || flag(FLAG_RECOVERED_MARANGA)){
+        setvar(VAR_RETRIEVED_HELD_ITEM, 1)
+    }
 
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
@@ -37,11 +50,39 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
 
 script EscapeRoom_MapScripts_FindBallAferUse{
     lockall
-    msgbox(NewGreatBallMessage, MSGBOX_AUTOCLOSE)
+    msgbox(NewBallMessage, MSGBOX_AUTOCLOSE)
     waitmessage
-    finditem(ITEM_GREAT_BALL)  // TODO: setflag at right location -- currently after great ball use
+    finditem(ITEM_ULTRA_BALL)
     clearflag(FLAG_BALL_USED)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
+    releaseall
+}
+
+script EscapeRoom_MapScripts_RetrievedItemMessage{
+    lockall
+
+    // White herb
+    if(flag(FLAG_RECOVERED_WHITE_HERB)){
+        msgbox(WhiteHerbRecoveredMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_RECOVERED_WHITE_HERB)
+    }
+
+    // Custap berry
+    if(flag(FLAG_RECOVERED_CUSTAP)){
+        msgbox(CustapBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_RECOVERED_CUSTAP)
+    }
+
+    // Maranga berry
+    if(flag(FLAG_RECOVERED_MARANGA)){
+        msgbox(MarangaBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_RECOVERED_MARANGA)
+    }
+
+    setvar(VAR_RETRIEVED_HELD_ITEM, 0)
     releaseall
 }
 
@@ -345,13 +386,13 @@ mart EscapeRoom_Shop1_items{
     ITEM_RING_TARGET 
     ITEM_ESCAPE_ROPE   
     ITEM_CUSTAP_BERRY
-    ITEM_ENIGMA_BERRY
+    ITEM_ETHER
 }
 
 mart EscapeRoom_Shop2_items{
     ITEM_TM12
     ITEM_ABILITY_CAPSULE
-    ITEM_ENIGMA_BERRY
+    ITEM_ETHER
 }
 
 script EscapeRoom_MoveDeleterNPC{
@@ -766,6 +807,7 @@ script EscapeRoom_EventScript_FindLostGlasses{
 
 
 //// MAP SWITCHES ////
+
 script EscapeRoom_EventScript_MapSwitch1{
     lockall
 
@@ -971,15 +1013,17 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         side=1,
         slot=0,
         species=SPECIES_ANNIHILAPE,
+        item=ITEM_SILK_SCARF,
         level=100,
-        nature=22, // sassy
+        nature=17, // Quiet
         abilityNum=2,
         gender=1,
         move1=MOVE_MIMIC
         // evs
-        hpEv=184,
-        defEv=72,
-        spAtkEv=252,
+        hpEv=12,
+        defEv=0,
+        spAtkEv=252, 
+        spDefEv=244,
         // ivs
         hpIv=31,
         atkIv=31,
@@ -1416,12 +1460,12 @@ text GravestoneClick1Message{
 }
 
 text GravestoneClick2Message{
-    "A spirit is stirring, drawn to your\n" 
-    "presence."
+    "A spirit stirs. You sense a presence." 
 }
 
 text GravestoneClick3Message{
-    "A deep rumble echoes from below."
+    "A deep rumble echoes from below.\n"
+    "The spirit draws near."
 }
 
 text GravestoneResetMessage{
@@ -1585,8 +1629,20 @@ text AskDeleteMove{
 
 
 // ITEM RETURNS
-text NewGreatBallMessage{
+text NewBallMessage{
     "You recover the ball."
+}
+
+text WhiteHerbRecoveredMessage{
+    "Your White Herb was restored."
+}
+
+text CustapBerryRecoveredMessage{
+    "Your Custap Berry was restored."
+}
+
+text MarangaBerryRecoveredMessage{
+    "Your Maranga Berry was restored."
 }
 
 
@@ -1616,7 +1672,7 @@ text FerroTradePostTrade{
 // TRADE NPC 3 - Florges Egg
 text AskFlorgesEggTrade{
     "That's a nice Florges. Do you want to\n"
-    "trade it for my mystery egg?"
+    "trade it for my Pokémon egg?"
 }
 
 text EggReceivedMessage{

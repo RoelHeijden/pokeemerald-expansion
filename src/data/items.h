@@ -1009,13 +1009,13 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ETHER] =
     {
-        .name = _("Ether"),
-        .price = (I_PRICE >= GEN_2) ? 1200 : 1,
-        .holdEffectParam = 10,
+        .name = _("Half Ether"), // CHANGED
+        .price = 2000, //(I_PRICE >= GEN_2) ? 1200 : 1,
+        .holdEffectParam = 5, // CHANGED
         .description = COMPOUND_STRING(
             "Restores the PP\n"
             "of a selected move\n"
-            "by 10."),
+            "by 5."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU_MOVES,
         .fieldUseFunc = ItemUseOutOfBattle_PPRecovery,

@@ -64,10 +64,10 @@
 #define FLAG_POOCH_TRADE_ACCEPTED           0x33 
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_GOGGLES_SNATCHED               0x35 
-#define FLAG_UNUSED_0x36                    0x36 
-#define FLAG_UNUSED_0x37                    0x37  
-#define FLAG_UNUSED_0x38                    0x38  
-#define FLAG_UNUSED_0x39                    0x39
+#define FLAG_RECOVERED_WHITE_HERB           0x36 
+#define FLAG_RECOVERED_MARANGA              0x37  
+#define FLAG_RECOVERED_CUSTAP               0x38  
+#define FLAG_ZERAORA_CAUGHT                 0x39
 #define FLAG_UNUSED_0x3A                    0x3A
 #define FLAG_UNUSED_0x3B                    0x3B 
 #define FLAG_UNUSED_0x3C                    0x3C  
