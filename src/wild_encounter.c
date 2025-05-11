@@ -495,6 +495,10 @@ static void CreateWildMon(u16 species, u8 level)
             if(x >= 36){
                 species = SPECIES_ZERAORA;
                 heldItem = ITEM_TM48;
+                // no held item post catching
+                if(FlagGet(FLAG_ZERAORA_CAUGHT) == TRUE){
+                    heldItem = ITEM_NONE;
+                }
                 level = 42;
                 abilityNum = 0;
                 gender = MON_GENDERLESS;
@@ -769,6 +773,17 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
         return FALSE;
 
     headerId = GetCurrentMapWildMonHeaderId();
+
+    // ADDED
+    // Remove Zeraora encounter after catching
+    if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN){
+        s16 x;
+        x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
+        if(x >= 36 && FlagGet(FLAG_ZERAORA_CAUGHT) == TRUE){
+            return FALSE;
+        }
+    }
+
     if (headerId == HEADER_NONE)
     {
         if (gMapHeader.mapLayoutId == LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS)
