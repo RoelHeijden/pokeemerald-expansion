@@ -13,6 +13,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScript_GameStartScripts
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+        VAR_REMOVE_HELD_ITEM, 1: EscapeRoom_MapScripts_RemoveHeldItem
     ] 
 }
 
@@ -24,8 +25,15 @@ script EscapeRoom_MapScript_OnTransitionScripts{
 script EscapeRoom_MapScript_OnResumeScripts{
     // check if pokemon caught -- sets flag if true
     getpartysize
-    if (var(VAR_RESULT) >= 3){
+    if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
         setflag(FLAG_ZERAORA_CAUGHT)
+
+        msgbox("check00")
+
+        // prevent Custap restore after catching zera
+        clearflag(FLAG_RECOVERED_CUSTAP)
+        setflag(FLAG_REMOVE_CUSTAP)
+        setvar(VAR_REMOVE_HELD_ITEM, 1)
     }
 
     // check for ball return -- sets frame table var if true
@@ -84,6 +92,24 @@ script EscapeRoom_MapScripts_RetrievedItemMessage{
 
     setvar(VAR_RETRIEVED_HELD_ITEM, 0)
     releaseall
+}
+
+script EscapeRoom_MapScripts_RemoveHeldItem{
+    if(flag(FLAG_REMOVE_CUSTAP) == TRUE){
+        clearflag(FLAG_REMOVE_CUSTAP)
+        checkpartymon(SPECIES_FERROTHORN)
+        msgbox("check1")
+        copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+        if(var(VAR_TEMP_0) != PARTY_SIZE){
+            msgbox("check2")
+            checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+            if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
+                msgbox("check3")
+                removepartyitem(VAR_TEMP_0)
+            }
+        }
+    }
+    setvar(VAR_REMOVE_HELD_ITEM, 0)
 }
 
 
@@ -263,6 +289,9 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     msgbox(Nurse_Ask_heal, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
         special(HealPlayerParty)
+        // playse(SE_SHOP)
+        playse(SE_USE_ITEM)
+        // playse(SE_SUCCESS)
         msgbox(Nurse_Heal_End, MSGBOX_AUTOCLOSE)
         waitmessage
     }
@@ -436,7 +465,7 @@ script EscapeRoom_EventScript_Trainer2{
         TRAINER_CUSTOM_TRAINER2, 
         Trainer2_Intro, 
         Trainer2_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer2PostBattle,
     )
     msgbox(Trainer2_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -514,8 +543,34 @@ script EscapeRoom_EventScript_PostMatchHeal{
 }
 
 script EscapeRoom_EventScript_Trainer1PostBattle{
+    // prevent white herb restore after winning
+    clearflag(FLAG_RECOVERED_WHITE_HERB)
+    checkpartymon(SPECIES_ZERAORA)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_WHITE_HERB){
+            removepartyitem(VAR_TEMP_0)
+        }
+    }
+
     call(EscapeRoom_EventScript_PostMatchHeal)
     call(EscapeRoom_EventScript_TradeZeraForHMCut)
+}
+
+script EscapeRoom_EventScript_Trainer2PostBattle{
+    // prevent maranga restore after winning
+    clearflag(FLAG_RECOVERED_MARANGA)
+    checkpartymon(SPECIES_FLORGES)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_MARANGA_BERRY){
+            removepartyitem(VAR_TEMP_0)
+        }
+    }
+    
+    call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
 

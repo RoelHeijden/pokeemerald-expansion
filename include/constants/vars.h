@@ -118,7 +118,7 @@
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
 #define VAR_RETRIEVED_HELD_ITEM                          0x4064 // ADDED
-#define VAR_ROUTE106_STATE                               0x4065 // Unused Var
+#define VAR_REMOVE_HELD_ITEM                             0x4065 // ADDED
 #define VAR_ROUTE107_STATE                               0x4066 // Unused Var
 #define VAR_ROUTE108_STATE                               0x4067 // Unused Var
 #define VAR_ROUTE109_STATE                               0x4068 // Unused Var

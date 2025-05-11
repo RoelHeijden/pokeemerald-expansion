@@ -11339,10 +11339,10 @@ void TryRestoreHeldItems(void)
                     if (lostItem == ITEM_MARANGA_BERRY){
                         FlagSet(FLAG_RECOVERED_MARANGA);
                     }
-                }
 
-                // restore item
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
+                    // restore item
+                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
+                }
             }
         }
     }

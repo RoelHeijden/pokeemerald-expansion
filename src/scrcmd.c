@@ -1955,10 +1955,11 @@ bool8 ScrCmd_checkpartymoveslot(struct ScriptContext *ctx)
 }
 
 // ADDED
-// check what item is held by a pokemon
+// check what item is held by a pokemon -- takes VAR as slot
 bool8 ScrCmd_checkpartyitem(struct ScriptContext *ctx)
 {
-    u8 slot = ScriptReadByte(ctx); 
+    // u8 slot = ScriptReadByte(ctx); 
+    u8 slot = VarGet(ScriptReadHalfword(ctx));
     u16 item;
 
     gSpecialVar_Result = 0; 
@@ -1981,10 +1982,11 @@ bool8 ScrCmd_checkpartyitem(struct ScriptContext *ctx)
 }
 
 // ADDED
-// removes the held item of a Pokémon in the specified party slot
+// removes the held item of a Pokémon in the specified party slot -- takes VAR as slot
 bool8 ScrCmd_removepartyitem(struct ScriptContext *ctx)
 {
-    u8 slot = ScriptReadByte(ctx);
+    // u8 slot = ScriptReadByte(ctx);
+    u8 slot = VarGet(ScriptReadHalfword(ctx));
     gSpecialVar_Result = 0; // Default to failure
     
     if (slot < PARTY_SIZE)
