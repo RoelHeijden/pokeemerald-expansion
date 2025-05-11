@@ -28,8 +28,6 @@ script EscapeRoom_MapScript_OnResumeScripts{
     if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
         setflag(FLAG_ZERAORA_CAUGHT)
 
-        msgbox("check00")
-
         // prevent Custap restore after catching zera
         clearflag(FLAG_RECOVERED_CUSTAP)
         setflag(FLAG_REMOVE_CUSTAP)
@@ -98,13 +96,10 @@ script EscapeRoom_MapScripts_RemoveHeldItem{
     if(flag(FLAG_REMOVE_CUSTAP) == TRUE){
         clearflag(FLAG_REMOVE_CUSTAP)
         checkpartymon(SPECIES_FERROTHORN)
-        msgbox("check1")
         copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
         if(var(VAR_TEMP_0) != PARTY_SIZE){
-            msgbox("check2")
             checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
             if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
-                msgbox("check3")
                 removepartyitem(VAR_TEMP_0)
             }
         }

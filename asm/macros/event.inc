@@ -1159,14 +1159,14 @@
     @ VAR_0x8005 is also set to the ID of the held item if an item is held.
 	.macro checkpartyitem slot:req
 	.byte 0xe5
-	.byte \slot
+	.2byte \slot
 	.endm
 
 	@ Removes the held item of a Pokémon in the given party slot. 
 	@ VAR_RESULT is set to 1 if successful, 0 otherwise.
 	.macro removepartyitem slot:req
 	.byte 0xe6
-	.byte \slot
+	.2byte \slot
 	.endm
 
 	@ Checks which moveslot a move is learned given a party slot and move.
