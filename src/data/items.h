@@ -11183,7 +11183,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_SKILL_SWAP] =
     {
         .name = _("TM48"),
-        .price = 3000,
+        .price = 0, // changed
         .description = COMPOUND_STRING(
             "Switches abilities\n"
             "with the foe on the\n"
