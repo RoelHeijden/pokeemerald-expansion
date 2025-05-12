@@ -42444,111 +42444,113 @@ F_TRAINER_FEMALE |
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 16981
         .doubleBattle = TRUE,
+#line 16982
+        .aiFlags = AI_FLAG_DOUBLE3,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 16983
-            .species = SPECIES_LUCARIO,
-#line 16983
-            .gender = TRAINER_MON_MALE,
-#line 16983
-            .heldItem = ITEM_FOCUS_SASH,
-#line 16986
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 16988
-            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
 #line 16984
-            .ability = ABILITY_INNER_FOCUS,
-#line 16985
-            .lvl = 70,
+            .species = SPECIES_LUCARIO,
+#line 16984
+            .gender = TRAINER_MON_MALE,
+#line 16984
+            .heldItem = ITEM_FOCUS_SASH,
 #line 16987
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 16989
+            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
+#line 16985
+            .ability = ABILITY_INNER_FOCUS,
+#line 16986
+            .lvl = 70,
+#line 16988
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16989
+#line 16990
                 MOVE_CLOSE_COMBAT,
                 MOVE_BRICK_BREAK,
             },
             },
             {
-#line 16992
-            .species = SPECIES_LUCARIO,
-#line 16992
-            .gender = TRAINER_MON_FEMALE,
-#line 16995
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 16997
-            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
 #line 16993
-            .ability = ABILITY_INNER_FOCUS,
-#line 16994
-            .lvl = 70,
+            .species = SPECIES_LUCARIO,
+#line 16993
+            .gender = TRAINER_MON_FEMALE,
 #line 16996
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 16998
+            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
+#line 16994
+            .ability = ABILITY_INNER_FOCUS,
+#line 16995
+            .lvl = 70,
+#line 16997
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 16998
+#line 16999
                 MOVE_CLOSE_COMBAT,
                 MOVE_BRICK_BREAK,
             },
             },
         },
     },
-#line 17002
+#line 17003
     [TRAINER_CUSTOM_TRAINER7] =
     {
-#line 17003
-        .trainerName = _("Help7"),
 #line 17004
-        .trainerClass = TRAINER_CLASS_EXPERT,
+        .trainerName = _("Help7"),
 #line 17005
+        .trainerClass = TRAINER_CLASS_EXPERT,
+#line 17006
         .trainerPic = TRAINER_PIC_EXPERT_M,
         .encounterMusic_gender = 
-#line 17007
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 17008
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 17009
         .doubleBattle = FALSE,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 17010
+#line 17011
             .species = SPECIES_TOXICROAK,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 17013
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 17015
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 0, 0),
-#line 17011
-            .ability = ABILITY_DRY_SKIN,
-#line 17012
-            .lvl = 88,
 #line 17014
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 17016
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 0, 0),
+#line 17012
+            .ability = ABILITY_DRY_SKIN,
+#line 17013
+            .lvl = 88,
+#line 17015
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17016
+#line 17017
                 MOVE_ME_FIRST,
             },
             },
             {
-#line 17018
+#line 17019
             .species = SPECIES_BRELOOM,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 17021
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
-#line 17023
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 17019
-            .ability = ABILITY_TECHNICIAN,
-#line 17020
-            .lvl = 47,
 #line 17022
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 17024
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17020
+            .ability = ABILITY_TECHNICIAN,
+#line 17021
+            .lvl = 47,
+#line 17023
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17023
+#line 17024
                 MOVE_DRAIN_PUNCH,
             },
             },

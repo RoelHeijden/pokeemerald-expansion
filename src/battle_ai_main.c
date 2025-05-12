@@ -62,7 +62,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 // ADDED
 static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -88,7 +88,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [18] = NULL,                     // Unused
     [19] = NULL,                     // Unused
     [20] = AI_Double2_Logic,         // AI_FLAG_DOUBLE2
-    [21] = AI_Single1_Logic,         // AI_FLAG_SINGLE1
+    [21] = AI_Double3_Logic,         // AI_FLAG_DOUBLE3
     [22] = NULL,                     // Unused
     [23] = NULL,                     // Unused
     [24] = NULL,                     // Unused
@@ -5514,6 +5514,18 @@ static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 }
 
 
-static s32 AI_Single1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    // use close combat over brick break
+    if(move == MOVE_CLOSE_COMBAT)
+        score += 20;
+
+    // avoid hitting smeargle (prioritize targetting Liepard)
+    if(gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
+        score -= 50;
+
+    // prioritize targetting Pooch or Dunsparce (avoid Liepard)
+    if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA || gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
+        score += 50;
+
     return score;
 }

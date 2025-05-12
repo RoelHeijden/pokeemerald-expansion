@@ -48,8 +48,8 @@
 #define AI_FLAG_CONSERVATIVE          (1 << 18)  // AI assumes all moves will low roll damage
 #define AI_FLAG_SEQUENCE_SWITCHING    (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle
 #define AI_FLAG_DOUBLE2               (1 << 20)  // AI for double battle2 (komala tinkaton)
-#define AI_FLAG_SINGLE1               (1 << 21)  // AI for single battle1 (lunatone gliscor dusclops)
-#define AI_FLAG_SINGLE4               (1 << 22)  // AI for single battle4 (probably: magician/pickpocket sequence)
+#define AI_FLAG_DOUBLE3               (1 << 21)  // AI for double battle2 (lucario lucario)
+#define AI_FLAG_SINGLE4               (1 << 22)  // unused
 
 #define AI_FLAG_COUNT                       23
 
