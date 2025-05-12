@@ -8992,6 +8992,25 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
             else
                 basePower = sTrumpCardPowerTable[gBattleMons[battlerAtk].pp[i]];
         }
+        // ADDED
+        // hardcoded edge case for Assist calling Trump Card
+        // Look for Assist in attacker's moveset, use Assist pp
+        else
+        {
+            int j;
+            for (j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (gBattleMons[battlerAtk].moves[j] == MOVE_ASSIST)
+                {
+                    u8 assistPp = gBattleMons[battlerAtk].pp[j];
+                    if (assistPp >= ARRAY_COUNT(sTrumpCardPowerTable))
+                        basePower = sTrumpCardPowerTable[ARRAY_COUNT(sTrumpCardPowerTable) - 1];
+                    else
+                        basePower = sTrumpCardPowerTable[assistPp];
+                    break;
+                }
+            }
+        }
         break;
     case EFFECT_ACROBATICS:
         if (gBattleMons[battlerAtk].item == ITEM_NONE
