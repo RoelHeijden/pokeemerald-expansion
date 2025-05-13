@@ -1,4 +1,7 @@
 
+
+
+
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_Main_MapScripts {
@@ -116,6 +119,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_GetItems)
     call(EscapeRoom_MapScripts_TurnOfBagUse)
     setflag(FLAG_HIDE_ANNIHILAPE)
+    removeobject(29)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
 }
 
@@ -326,6 +330,16 @@ script EscapeRoom_EventScript_LostGlassesNPC{
     checkitem(ITEM_WISE_GLASSES)
     if(var(VAR_RESULT) == TRUE){
 
+        // sanity check - check for poochyena in party
+        checkpartymon(SPECIES_POOCHYENA)
+        if(var(VAR_RESULT) == PARTY_SIZE)
+        {
+            msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+            releaseall
+            end
+        }
+
         // display exclamation mark
         playse(SE_PIN)
         applymovement(18, Common_Movement_ExclamationMark)
@@ -345,6 +359,9 @@ script EscapeRoom_EventScript_LostGlassesNPC{
         waitmovement(18)
         delay(30)
         removeobject(18)
+
+        // reset spawn and heal location
+        call(EscapeRoom_EventScript_RelocateNurseNPC)
     }
     releaseall
     end
@@ -383,6 +400,62 @@ movement EscapeRoom_Movement_LostGlassesNPC{
     walk_left * 8
 }
 
+script EscapeRoom_EventScript_RelocateNurseNPC{
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+
+    // player stops
+    playse(SE_PIN)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    delay(20)
+
+    // move Nurse to player
+    addobject(29)
+    applymovement(29, EscapeRoom_Movement1_Nurse1NPC)
+    waitmovement(29)
+
+    // dialogue and move player
+    applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerFaceRight)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    msgbox("Coming through!", MSGBOX_NPC)
+    waitmessage
+    applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerMoveAway)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+
+    // move nurse out of screen
+    applymovement(29, EscapeRoom_Movement2_Nurse1NPC)
+    waitmovement(29)
+    delay(30)
+    removeobject(29)
+
+    // remove nurse 1
+    removeobject(3) 
+    setflag(FLAG_HIDE_NURSE1_NPC)
+}
+
+movement EscapeRoom_Movement_PlayerFaceRight{
+    face_right
+}
+
+movement EscapeRoom_Movement1_Nurse1NPC{
+    walk_fast_down
+    walk_fast_left * 6
+    walk_fast_up
+    walk_fast_left
+}
+
+movement EscapeRoom_Movement_PlayerMoveAway{
+    walk_up
+    face_down
+}
+
+movement EscapeRoom_Movement2_Nurse1NPC{
+    walk_fast_left * 9
+}
+
+
+
+
 script EscapeRoom_EventScript_Shop1NPC{
     lockall
     faceplayer
@@ -416,6 +489,7 @@ mart EscapeRoom_Shop1_items{
 mart EscapeRoom_Shop2_items{
     ITEM_TM12
     ITEM_ABILITY_CAPSULE
+    ITEM_CUSTAP_BERRY
     ITEM_ETHER
 }
 

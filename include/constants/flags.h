@@ -68,9 +68,9 @@
 #define FLAG_RECOVERED_MARANGA              0x37  
 #define FLAG_RECOVERED_CUSTAP               0x38  
 #define FLAG_ZERAORA_CAUGHT                 0x39
-#define FLAG_REMOVE_CUSTAP                    0x3A
-#define FLAG_UNUSED_0x3B                    0x3B 
-#define FLAG_UNUSED_0x3C                    0x3C  
+#define FLAG_REMOVE_CUSTAP                  0x3A
+#define FLAG_HIDE_NURSE1_NPC                0x3B 
+#define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
 #define FLAG_UNUSED_0x3D                    0x3D  
 #define FLAG_UNUSED_0x3E                    0x3E  
 #define FLAG_UNUSED_0x3F                    0x3F  
