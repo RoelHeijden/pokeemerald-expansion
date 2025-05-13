@@ -373,7 +373,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     if(species == SPECIES_POOCHYENA){
 
         // set ability
-        u8 abilityNum = 2; // rattled
+        u8 abilityNum = 1; // quick feet
         SetMonData(temp, MON_DATA_ABILITY_NUM, &abilityNum);
 
         // Set moves
