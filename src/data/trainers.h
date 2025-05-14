@@ -42203,7 +42203,8 @@ F_TRAINER_FEMALE |
             {
 #line 16886
             .species = SPECIES_TOGEDEMARU,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16886
+            .gender = TRAINER_MON_FEMALE,
 #line 16886
             .heldItem = ITEM_ROCKY_HELMET,
 #line 16889
@@ -42225,7 +42226,8 @@ F_TRAINER_FEMALE |
             {
 #line 16894
             .species = SPECIES_TOEDSCRUEL,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16894
+            .gender = TRAINER_MON_MALE,
 #line 16894
             .heldItem = ITEM_FLAME_ORB,
 #line 16896
@@ -42309,7 +42311,8 @@ F_TRAINER_FEMALE |
             {
 #line 16926
             .species = SPECIES_KOMALA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16926
+            .gender = TRAINER_MON_MALE,
 #line 16926
             .heldItem = ITEM_AIR_BALLOON,
 #line 16929
@@ -42332,7 +42335,8 @@ F_TRAINER_FEMALE |
             {
 #line 16935
             .species = SPECIES_TINKATON,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16935
+            .gender = TRAINER_MON_FEMALE,
 #line 16938
             .ev = TRAINER_PARTY_EVS(0, 0, 0, 172, 0, 252),
 #line 16940
@@ -42517,7 +42521,8 @@ F_TRAINER_FEMALE |
             {
 #line 17011
             .species = SPECIES_TOXICROAK,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17011
+            .gender = TRAINER_MON_FEMALE,
 #line 17014
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 17016
@@ -42537,7 +42542,8 @@ F_TRAINER_FEMALE |
             {
 #line 17019
             .species = SPECIES_BRELOOM,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17019
+            .gender = TRAINER_MON_MALE,
 #line 17022
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
 #line 17024

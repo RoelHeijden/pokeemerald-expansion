@@ -178,7 +178,8 @@ enum {
     CAN_LEARN_MOVE,
     CANNOT_LEARN_MOVE,
     ALREADY_KNOWS_MOVE,
-    CANNOT_LEARN_MOVE_IS_EGG
+    CANNOT_LEARN_MOVE_IS_EGG,
+    WOULD_SOFTLOCK // ADDED
 };
 
 enum {
@@ -1158,6 +1159,10 @@ static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 move)
         break;
     case ALREADY_KNOWS_MOVE:
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_LEARNED);
+        break;
+    // ADDED
+    case WOULD_SOFTLOCK:
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_SOFTLOCK);
         break;
     default:
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
@@ -2209,6 +2214,9 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
         return CANNOT_LEARN_MOVE;
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
+    // ADDED - check if Liepard and Taunt
+    else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD && move == MOVE_TAUNT)
+        return WOULD_SOFTLOCK;
     else
         return CAN_LEARN_MOVE;
 }
@@ -5355,6 +5363,10 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 
     switch (CanTeachMove(mon, move))
     {
+    // ADDED
+    case WOULD_SOFTLOCK:
+        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMoveSoftlock);
+        return;
     case CANNOT_LEARN_MOVE:
         DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
         return;
