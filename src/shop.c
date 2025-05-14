@@ -39,6 +39,9 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+// ADDED
+#include "event_data.h"
+
 
 #define TAG_SCROLL_ARROW   2100
 #define TAG_ITEM_ICON_BASE 2110
@@ -640,9 +643,13 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
                 STR_CONV_MODE_LEFT_ALIGN,
                 6);
         }
-
+        
         if (ItemId_GetImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
             StringCopy(gStringVar4, gText_SoldOut);
+        // ADDED -- custap berry sold out
+        else if (itemId == ITEM_CUSTAP_BERRY && FlagGet(FLAG_CUSTAP_SOLD_OUT) == TRUE)
+            StringCopy(gStringVar4, gText_SoldOut);
+
         else
             StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
         x = GetStringRightAlignXOffset(FONT_NARROW, gStringVar4, 120);
@@ -1005,6 +1012,10 @@ static void Task_BuyMenu(u8 taskId)
 
             if (ItemId_GetImportance(itemId) && (CheckBagHasItem(itemId, 1) || CheckPCHasItem(itemId, 1)))
                 BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
+            // ADDED -- custap berry sold out
+            else if (itemId == ITEM_CUSTAP_BERRY && FlagGet(FLAG_CUSTAP_SOLD_OUT) == TRUE)
+                BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
+
             else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
             {
                 BuyMenuDisplayMessage(taskId, gText_YouDontHaveMoney, BuyMenuReturnToItemList);

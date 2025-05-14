@@ -12229,7 +12229,7 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Bicycle"),
         .price = 0,
-        .description = COMPOUND_STRING(
+        .description = COMPOUND_STRING(   
             "A folding bicycle\n"
             "that is faster than\n"
             "the Running Shoes."),

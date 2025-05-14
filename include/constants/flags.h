@@ -71,7 +71,7 @@
 #define FLAG_REMOVE_CUSTAP                  0x3A
 #define FLAG_HIDE_NURSE1_NPC                0x3B 
 #define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
-#define FLAG_UNUSED_0x3D                    0x3D  
+#define FLAG_CUSTAP_SOLD_OUT                0x3D  
 #define FLAG_UNUSED_0x3E                    0x3E  
 #define FLAG_UNUSED_0x3F                    0x3F  
 #define FLAG_UNUSED_0x40                    0x40  

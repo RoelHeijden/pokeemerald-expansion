@@ -30,6 +30,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
     getpartysize
     if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
         setflag(FLAG_ZERAORA_CAUGHT)
+        setflag(FLAG_CUSTAP_SOLD_OUT)
 
         // prevent Custap restore after catching zera
         clearflag(FLAG_RECOVERED_CUSTAP)
@@ -362,6 +363,9 @@ script EscapeRoom_EventScript_LostGlassesNPC{
 
         // reset spawn and heal location
         call(EscapeRoom_EventScript_RelocateNurseNPC)
+
+        // re allow Custap Berry
+        clearflag(FLAG_CUSTAP_SOLD_OUT)
     }
     releaseall
     end
@@ -1137,7 +1141,7 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         side=1,
         slot=0,
         species=SPECIES_ANNIHILAPE,
-        item=ITEM_SILK_SCARF,
+        // item=ITEM_SILK_SCARF,
         level=100,
         nature=17, // Quiet
         abilityNum=2,
