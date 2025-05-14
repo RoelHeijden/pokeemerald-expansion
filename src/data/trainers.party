@@ -16883,7 +16883,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 
-Togedemaru @ Rocky Helmet  
+Togedemaru (F) @ Rocky Helmet  
 Ability: Lightning Rod  
 Level: 59  
 EVs: 196 HP / 4 Atk / 120 Def / 188 SpD  
@@ -16891,7 +16891,7 @@ Careful Nature
 IVs: 0 SpA  
 - Swift
 
-Toedscruel @ Flame Orb  
+Toedscruel (M) @ Flame Orb  
 Ability: Mycelium Might  
 EVs: 204 HP / 252 Def / 52 SpD  
 Careful Nature  
@@ -16923,7 +16923,7 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE2
 
-Komala @ Air Balloon 
+Komala (M) @ Air Balloon 
 Ability: Comatose  
 Level: 45  
 EVs: 252 HP / 252 Spe  
@@ -16932,7 +16932,7 @@ IVs: 0 Atk / 0 SpD
 - Bulldoze  
 - Wish
 
-Tinkaton  
+Tinkaton (F) 
 Ability: Pickpocket  
 Level: 31  
 EVs: 252 SpD / 172 Spe  
@@ -17008,7 +17008,7 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Toxicroak  
+Toxicroak (F) 
 Ability: Dry Skin  
 Level: 88  
 EVs: 252 Atk / 252 Spe  
@@ -17016,7 +17016,7 @@ Adamant Nature
 IVs: 0 SpA / 0 SpD  
 - Me First  
 
-Breloom  
+Breloom (M) 
 Ability: Technician  
 Level: 47  
 EVs: 252 Atk  
