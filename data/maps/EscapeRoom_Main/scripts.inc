@@ -1056,7 +1056,7 @@ EscapeRoom_EventScript_SellDunsparce_5:
 # 817 "data/maps/EscapeRoom_Main/scripts.pory"
 	removemon SPECIES_DUNSPARCE
 # 818 "data/maps/EscapeRoom_Main/scripts.pory"
-	addmoney 20000
+	addmoney 21000
 # 819 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_DUNSPARCE_TRADE_ACCEPTED
 # 821 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -1243,22 +1243,22 @@ EscapeRoom_EventScript_MapSwitch1_2:
 
 EscapeRoom_EventScript_MapSwitch1_5:
 # 952 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedNorth, MSGBOX_YESNO
+	msgbox MapSwitchPointedNorthTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_4
 
 EscapeRoom_EventScript_MapSwitch1_8:
 # 955 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedEast, MSGBOX_YESNO
+	msgbox MapSwitchPointedEastTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_7
 
 EscapeRoom_EventScript_MapSwitch1_11:
 # 958 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedSouth, MSGBOX_YESNO
+	msgbox MapSwitchPointedSouthTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_10
 
 EscapeRoom_EventScript_MapSwitch1_14:
 # 961 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedWest, MSGBOX_YESNO
+	msgbox MapSwitchPointedWestTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_13
 
 EscapeRoom_EventScript_MapSwitch1_17:
@@ -1322,22 +1322,22 @@ EscapeRoom_EventScript_MapSwitch2_2:
 
 EscapeRoom_EventScript_MapSwitch2_5:
 # 995 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedNorth, MSGBOX_YESNO
+	msgbox MapSwitchPointedNorthTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_4
 
 EscapeRoom_EventScript_MapSwitch2_8:
 # 998 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedEast, MSGBOX_YESNO
+	msgbox MapSwitchPointedEastTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_7
 
 EscapeRoom_EventScript_MapSwitch2_11:
 # 1001 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedSouth, MSGBOX_YESNO
+	msgbox MapSwitchPointedSouthTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_10
 
 EscapeRoom_EventScript_MapSwitch2_14:
 # 1004 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedWest, MSGBOX_YESNO
+	msgbox MapSwitchPointedWestTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_13
 
 EscapeRoom_EventScript_MapSwitch2_17:
@@ -1401,22 +1401,22 @@ EscapeRoom_EventScript_MapSwitch3_2:
 
 EscapeRoom_EventScript_MapSwitch3_5:
 # 1037 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedNorth, MSGBOX_YESNO
+	msgbox MapSwitchPointedNorthTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_4
 
 EscapeRoom_EventScript_MapSwitch3_8:
 # 1040 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedEast, MSGBOX_YESNO
+	msgbox MapSwitchPointedEastTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_7
 
 EscapeRoom_EventScript_MapSwitch3_11:
 # 1043 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedSouth, MSGBOX_YESNO
+	msgbox MapSwitchPointedSouthTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_10
 
 EscapeRoom_EventScript_MapSwitch3_14:
 # 1046 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedWest, MSGBOX_YESNO
+	msgbox MapSwitchPointedWestTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_13
 
 EscapeRoom_EventScript_MapSwitch3_17:
@@ -1480,22 +1480,22 @@ EscapeRoom_EventScript_MapSwitch4_2:
 
 EscapeRoom_EventScript_MapSwitch4_5:
 # 1079 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedNorth, MSGBOX_YESNO
+	msgbox MapSwitchPointedNorthTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_4
 
 EscapeRoom_EventScript_MapSwitch4_8:
 # 1082 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedEast, MSGBOX_YESNO
+	msgbox MapSwitchPointedEastTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_7
 
 EscapeRoom_EventScript_MapSwitch4_11:
 # 1085 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedSouth, MSGBOX_YESNO
+	msgbox MapSwitchPointedSouthTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_10
 
 EscapeRoom_EventScript_MapSwitch4_14:
 # 1088 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchPointedWest, MSGBOX_YESNO
+	msgbox MapSwitchPointedWestTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_13
 
 EscapeRoom_EventScript_MapSwitch4_17:
@@ -2245,44 +2245,120 @@ RotatedSwitchSoundMessage::
 # 1641 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Clunk.$"
 
-MapSwitchPointedNorth::
-# 1645 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "The tablet is pointed north.\n"
-	.string "Do you want to change its direction?$"
-
-MapSwitchPointedEast::
-# 1650 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "The tablet is pointed east.\n"
-	.string "Do you want to change its direction?$"
-
-MapSwitchPointedSouth::
-# 1655 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "The tablet is pointed south.\n"
-	.string "Do you want to change its direction?$"
-
-MapSwitchPointedWest::
-# 1660 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "The tablet is pointed west.\n"
-	.string "Do you want to change its direction?$"
-
 MapSwitchDoorOpened::
-# 1665 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1645 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What was that???$"
 
 MApSwitchesAlreadySolved::
-# 1669 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1649 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The tablet is locked in place.$"
 
+MapSwitchPointedNorthTablet1::
+# 1654 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 1.\p"
+	.string "The tablet is pointed north.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedEastTablet1::
+# 1660 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 1.\p"
+	.string "The tablet is pointed east.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedSouthTablet1::
+# 1666 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 1.\p"
+	.string "The tablet is pointed south.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedWestTablet1::
+# 1672 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 1.\p"
+	.string "The tablet is pointed west.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedNorthTablet2::
+# 1679 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 2.\p"
+	.string "The tablet is pointed north.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedEastTablet2::
+# 1685 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 2.\p"
+	.string "The tablet is pointed east.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedSouthTablet2::
+# 1691 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 2.\p"
+	.string "The tablet is pointed south.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedWestTablet2::
+# 1697 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 2.\p"
+	.string "The tablet is pointed west.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedNorthTablet3::
+# 1704 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 3.\p"
+	.string "The tablet is pointed north.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedEastTablet3::
+# 1710 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 3.\p"
+	.string "The tablet is pointed east.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedSouthTablet3::
+# 1716 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 3.\p"
+	.string "The tablet is pointed south.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedWestTablet3::
+# 1722 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 3.\p"
+	.string "The tablet is pointed west.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedNorthTablet4::
+# 1729 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 4.\p"
+	.string "The tablet is pointed north.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedEastTablet4::
+# 1735 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 4.\p"
+	.string "The tablet is pointed east.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedSouthTablet4::
+# 1741 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 4.\p"
+	.string "The tablet is pointed south.\n"
+	.string "Do you want to change its direction?$"
+
+MapSwitchPointedWestTablet4::
+# 1747 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "TABLET 4.\p"
+	.string "The tablet is pointed west.\n"
+	.string "Do you want to change its direction?$"
+
 Nurse_Ask_heal::
-# 1675 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1755 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hello, should I heal your Pokémon?$"
 
 Nurse_Heal_End::
-# 1679 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1759 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "As good as new!$"
 
 HintsIntroMessage::
-# 1685 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1765 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Need help? I can give you a hint at the\n"
 	.string "cost of getting time added to your\l"
 	.string "in-game clock.\p"
@@ -2291,15 +2367,15 @@ HintsIntroMessage::
 	.string "Do you want to get a hint right now?$"
 
 HintsNPCNoHintMessage::
-# 1694 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1774 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'll be here if you need me.$"
 
 HintsNPCWhatKindOfHintMessage::
-# 1698 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1778 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 AntiSoftlockIntroMessage::
-# 1705 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1785 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "I can roll back actions that have the\n"
 	.string "possibility to get you softlocked.\p"
@@ -2307,251 +2383,251 @@ AntiSoftlockIntroMessage::
 	.string "are actually softlocked or not.$"
 
 AntiSoftlockNoActionMessage::
-# 1713 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1793 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There's nothing I can do for you right\n"
 	.string "now.$"
 
 LostGlassesNPCmainMessage::
-# 1720 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1800 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Have you seen my glasses?\n"
 	.string "I can't see without them!$"
 
 LostGlassesNPCGlassesFoundMessage::
-# 1725 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1805 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You've found them!\p"
 	.string "I guess I no longer need this\n"
 	.string "seeing-eye leopard...\p"
 	.string "...$"
 
 LiepardObtainMessage::
-# 1732 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1812 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Liepard!$"
 
 LostGlassesNPCendMessage::
-# 1736 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1816 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "See you around!$"
 
 MartNPC_AskToShop::
-# 1742 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1822 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, welcome to my shop.\p"
 	.string "Don't worry, each item can be sold back\n"
 	.string "for same price.$"
 
 MartNPC_SayGoodbye::
-# 1748 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1828 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "See ya!$"
 
 AskDeleteMove::
-# 1754 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1834 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Delete move plz?$"
 
 NewBallMessage::
-# 1760 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1840 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You recover the ball.$"
 
 WhiteHerbRecoveredMessage::
-# 1764 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1844 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your White Herb was restored.$"
 
 CustapBerryRecoveredMessage::
-# 1768 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1848 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your Custap Berry was restored.$"
 
 MarangaBerryRecoveredMessage::
-# 1772 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1852 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your Maranga Berry was restored.$"
 
 AskFerroDunsparceTrade::
-# 1778 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1858 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I've found a Dunsparce on the beach.\n"
 	.string "Wanna trade it for your Ferrothorn?$"
 
 DunsparceReceivedMessage::
-# 1783 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1863 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Dunsparce!$"
 
 FerroTradeAccepted::
-# 1787 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1867 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Ferrothorn.$"
 
 FerroTradeDeclined::
-# 1791 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1871 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Alright. Some other time maybe.$"
 
 FerroTradePostTrade::
-# 1795 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1875 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I love this Ferrothorn!$"
 
 AskFlorgesEggTrade::
-# 1801 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1881 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That's a nice Florges. Do you want to\n"
 	.string "trade it for my Pokémon egg?$"
 
 EggReceivedMessage::
-# 1806 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1886 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received an EGG!$"
 
 FlorgesTradeAccepted::
-# 1810 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1890 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Florges.$"
 
 FlorgesTradeDeclined::
-# 1814 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1894 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Okay, come back anytime.$"
 
 FlorgesTradePostTrade::
-# 1818 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1898 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD - allow to retrade Florges$"
 
 AskDunsparceMoneyTrade::
-# 1824 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1904 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, I collect rare Pokémon as a hobby.\p"
 	.string "Your Dunsparce looks quite valuable,\n"
 	.string "would you sell it to me for ¥20.000?$"
 
 MoneyReceivedMessage::
-# 1830 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1910 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received ¥20.000!$"
 
 DunsparceTradeAccepted::
-# 1834 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1914 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Dunsparce.$"
 
 DunsparceTradeDeclined::
-# 1838 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1918 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hmm...$"
 
 DunsparceTradePostTrade::
-# 1842 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1922 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "My collection grows bigger and bigger!$"
 
 AskPoochSmeargleTrade::
-# 1848 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1928 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to trade dogs?$"
 
 SmeargleReceivedMessage::
-# 1852 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1932 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Smeargle!$"
 
 PoochTradeAccepted::
-# 1856 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1936 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Poochyena.$"
 
 PoochTradeDeclined::
-# 1860 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1940 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Ahh, that's too bad!$"
 
 PoochTradePostTrade::
-# 1864 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1944 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thanks a lot.$"
 
 DoubleBattle_NotEnoughMons::
-# 1870 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1950 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to battle?\n"
 	.string "You should bring a second POKéMON.$"
 
 Trainer1_Intro::
-# 1877 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1957 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Something something I have HM Cut.$"
 
 Trainer1_Outro::
-# 1881 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1961 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer1_PostBattle::
-# 1885 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1965 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 AskZeraCutTradeMessage::
-# 1889 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1969 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wow, that Zeraora of yours is amazing.\n"
 	.string "I wish I had a Pokémon like that!\p"
 	.string "Would you be okay trading your Zeraora\n"
 	.string "for my HM Cut?$"
 
 ZeraCutTradeDeclined::
-# 1896 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1976 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Come back if you change your mind.$"
 
 ZeraCutTradeAccepted::
-# 1900 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1980 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Zeraora.$"
 
 Trainer2_Intro::
-# 1906 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1986 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Doesn't the beach look beautiful?\n"
 	.string "I love nature.$"
 
 Trainer2_Outro::
-# 1911 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1991 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer2_PostBattle::
-# 1915 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1995 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer3_Intro::
-# 1921 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2001 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Rage is nearly guaranteed.\n"
 	.string "Try and realize getting entry takeswork.$"
 
 Trainer3_Outro::
-# 1926 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2006 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer3_PostBattle::
-# 1930 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2010 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer4_Intro::
-# 1936 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2016 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Only the exhausted could defeat me.$"
 
 Trainer4_Outro::
-# 1940 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2020 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer4_PostBattle::
-# 1944 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2024 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer5_Intro::
-# 1950 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2030 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Still being haunted by ghosts from\n"
 	.string "your past?\p"
 	.string "Yeah me too.$"
 
 Trainer5_Outro::
-# 1956 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2036 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer5_PostBattle::
-# 1960 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2040 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer6_Intro::
-# 1966 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2046 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "We share a FOCUS SASH!$"
 
 Trainer6_Outro::
-# 1970 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2050 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer6_PostBattle::
-# 1974 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2054 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer7_Intro::
-# 1980 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2060 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Too many options?\n"
 	.string "Be careful or you might freeze up.\p"
 	.string "There's a word for that, isn't there?\n"
 	.string "Ah well, I guess it's not important.$"
 
 Trainer7_Outro::
-# 1987 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2067 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer7_PostBattle::
-# 1991 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2071 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"

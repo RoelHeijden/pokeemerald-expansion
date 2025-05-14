@@ -421,7 +421,7 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     // dialogue and move player
     applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerFaceRight)
     waitmovement(OBJ_EVENT_ID_PLAYER)
-    msgbox("Coming through!", MSGBOX_NPC)
+    msgbox(RunningNurseMessage, MSGBOX_NPC)
     waitmessage
     applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerMoveAway)
     waitmovement(OBJ_EVENT_ID_PLAYER)
@@ -456,9 +456,6 @@ movement EscapeRoom_Movement_PlayerMoveAway{
 movement EscapeRoom_Movement2_Nurse1NPC{
     walk_fast_left * 9
 }
-
-
-
 
 script EscapeRoom_EventScript_Shop1NPC{
     lockall
@@ -815,7 +812,7 @@ script EscapeRoom_EventScript_SellDunsparce{
 
             // trade pokemon
             removemon(SPECIES_DUNSPARCE)
-            addmoney(20000)
+            addmoney(21000)
             setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
 
             message(MoneyReceivedMessage)
@@ -949,16 +946,16 @@ script EscapeRoom_EventScript_MapSwitch1{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_1) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorthTablet1, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_1) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEastTablet1, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_1) == 2){
-        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouthTablet1, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_1) == 3){
-        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWestTablet1, MSGBOX_YESNO)
     }
 
     // change direction
@@ -992,16 +989,16 @@ script EscapeRoom_EventScript_MapSwitch2{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_2) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorthTablet2, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_2) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEastTablet2, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_2) == 2){
-        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouthTablet2, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_2) == 3){
-        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWestTablet2, MSGBOX_YESNO)
     }
 
     // change direction
@@ -1034,16 +1031,16 @@ script EscapeRoom_EventScript_MapSwitch3{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_3) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorthTablet3, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_3) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEastTablet3, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_3) == 2){
-        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouthTablet3, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_3) == 3){
-        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWestTablet3, MSGBOX_YESNO)
     }
 
     // change direction
@@ -1076,16 +1073,16 @@ script EscapeRoom_EventScript_MapSwitch4{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_4) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorthTablet4, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_4) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEastTablet4, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_4) == 2){
-        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouthTablet4, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_4) == 3){
-        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWestTablet4, MSGBOX_YESNO)
     }
 
     // change direction
@@ -1642,32 +1639,112 @@ text RotatedSwitchSoundMessage{
     "Clunk."
 }
 
-text MapSwitchPointedNorth{
-    "The tablet is pointed north.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedEast{
-    "The tablet is pointed east.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedSouth{
-    "The tablet is pointed south.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedWest{
-    "The tablet is pointed west.\n"
-    "Do you want to change its direction?"
-}
-
 text MapSwitchDoorOpened{
     "What was that???"
 }
 
 text MApSwitchesAlreadySolved{
     "The tablet is locked in place."
+}
+
+// tablet 1
+text MapSwitchPointedNorthTablet1{
+    "TABLET 1.\p"
+    "The tablet is pointed north.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedEastTablet1{
+    "TABLET 1.\p"
+    "The tablet is pointed east.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedSouthTablet1{
+    "TABLET 1.\p"
+    "The tablet is pointed south.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedWestTablet1{
+    "TABLET 1.\p"
+    "The tablet is pointed west.\n"
+    "Do you want to change its direction?"
+}
+
+// tablet 2
+text MapSwitchPointedNorthTablet2{
+    "TABLET 2.\p"
+    "The tablet is pointed north.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedEastTablet2{
+    "TABLET 2.\p"
+    "The tablet is pointed east.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedSouthTablet2{
+    "TABLET 2.\p"
+    "The tablet is pointed south.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedWestTablet2{
+    "TABLET 2.\p"
+    "The tablet is pointed west.\n"
+    "Do you want to change its direction?"
+}
+
+// tablet 3
+text MapSwitchPointedNorthTablet3{
+    "TABLET 3.\p"
+    "The tablet is pointed north.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedEastTablet3{
+    "TABLET 3.\p"
+    "The tablet is pointed east.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedSouthTablet3{
+    "TABLET 3.\p"
+    "The tablet is pointed south.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedWestTablet3{
+    "TABLET 3.\p"
+    "The tablet is pointed west.\n"
+    "Do you want to change its direction?"
+}
+
+// tablet 4
+text MapSwitchPointedNorthTablet4{
+    "TABLET 4.\p"
+    "The tablet is pointed north.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedEastTablet4{
+    "TABLET 4.\p"
+    "The tablet is pointed east.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedSouthTablet4{
+    "TABLET 4.\p"
+    "The tablet is pointed south.\n"
+    "Do you want to change its direction?"
+}
+
+text MapSwitchPointedWestTablet4{
+    "TABLET 4.\p"
+    "The tablet is pointed west.\n"
+    "Do you want to change its direction?"
 }
 
 
@@ -1678,6 +1755,10 @@ text Nurse_Ask_heal{
 
 text Nurse_Heal_End{
     "As good as new!"
+}
+
+text RunningNurseMessage{
+    "I've been relocated!"
 }
 
 
