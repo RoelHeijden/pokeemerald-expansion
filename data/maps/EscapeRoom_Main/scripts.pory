@@ -1585,7 +1585,7 @@ text GravestoneClick1Message{
 }
 
 text GravestoneClick2Message{
-    "A spirit stirs. You sense a presence." 
+    "A spirit stirs.\nYou sense a presence." 
 }
 
 text GravestoneClick3Message{
