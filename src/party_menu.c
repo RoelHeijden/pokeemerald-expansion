@@ -5444,8 +5444,38 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
     switch (Menu_ProcessInputNoWrapClearOnChoose())
     {
     case 0:
-        DisplayPartyMenuMessage(gText_WhichMoveToForget, TRUE);
-        gTasks[taskId].func = Task_ShowSummaryScreenToForgetMove;
+        // ADDED
+        struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+        if (species == SPECIES_FLORGES || species == SPECIES_FERROTHORN){
+
+            // set move
+            u16 move = MOVE_NONE;
+            if (species == SPECIES_FLORGES)
+                move = MOVE_GRASS_KNOT;
+            if (species == SPECIES_FERROTHORN)
+                move = MOVE_BLOCK;
+            
+            // find moveslot
+            for (u8 i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (GetMonData(mon, MON_DATA_MOVE1 + i) == move)
+                {
+                    SetMoveSlotToReplace(i);
+                    break;
+                }
+            }
+
+            GetMonNickname(mon, gStringVar1);
+            StringCopy(gStringVar2, GetMoveName(move));
+            DisplayLearnMoveMessage(gText_12PoofForgotMove);
+            gTasks[taskId].func = Task_PartyMenuReplaceMove;
+        }
+        else{
+            // original code
+            DisplayPartyMenuMessage(gText_WhichMoveToForget, TRUE);
+            gTasks[taskId].func = Task_ShowSummaryScreenToForgetMove;
+        }
         break;
     case MENU_B_PRESSED:
         PlaySE(SE_SELECT);
