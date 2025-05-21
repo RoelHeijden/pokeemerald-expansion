@@ -2215,7 +2215,7 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
     // ADDED - check if Liepard and Taunt
-    else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD && move == MOVE_TAUNT)
+    else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD && (move == MOVE_TAUNT || move == MOVE_CUT))
         return WOULD_SOFTLOCK;
     else
         return CAN_LEARN_MOVE;
