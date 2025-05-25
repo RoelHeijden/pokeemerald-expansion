@@ -2226,8 +2226,8 @@ Goggles_Statue_Main::
 	.string "There's a pair of goggles attached to\n"
 	.string "the gravestone, radiating a strange,\l"
 	.string "ominous energy.\p"
-	.string "I should probably avoid touching this.\n"
-	.string "Perhaps there's a Pokémon who can\l"
+	.string "I should probably avoid touching this.\p"
+	.string "Perhaps there's a Pokémon who can\n"
 	.string "snatch the goggles for me.$"
 
 Goggles_Statue_AskSnatch::

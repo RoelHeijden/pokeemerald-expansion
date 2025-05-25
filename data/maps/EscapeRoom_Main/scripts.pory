@@ -1614,8 +1614,8 @@ text Goggles_Statue_Main{
     "There's a pair of goggles attached to\n"
     "the gravestone, radiating a strange,\l"
     "ominous energy.\p"   
-    "I should probably avoid touching this.\n"
-    "Perhaps there's a Pokémon who can\l"
+    "I should probably avoid touching this.\p"
+    "Perhaps there's a Pokémon who can\n"
     "snatch the goggles for me."
 }
 
