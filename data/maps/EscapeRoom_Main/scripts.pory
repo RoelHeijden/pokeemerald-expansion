@@ -1,6 +1,44 @@
 
 
-
+const LOCALID_ANTI_SOFTLOCK_GUY = 1
+const LOCALID_HINT_GUY = 2
+const LOCALID_NURSE1 = 3
+const LOCALID_TRAINER2 = 4
+const LOCALID_TRAINER3 = 5
+const LOCALID_DUNSPARCE_GUY = 6
+const LOCALID_MOVE_DELETER = 7
+const LOCALID_ULTRA_BALL_NPC = 8
+const LOCALID_TRAINER6_R = 9
+const LOCALID_TRAINER6_L = 10
+const LOCALID_MARANGA_BERRY = 11
+const LOCALID_MAP_SWITCH4 = 12
+const LOCALID_TRAINER5 = 13
+const LOCALID_TRAINER4 = 14
+const LOCALID_NURSE2 = 15
+const LOCALID_HINT_GUY2 = 16
+const LOCALID_ANTI_SOFTLOCK_GUY2 = 17
+const LOCALID_GLASSES_GUY = 18
+const LOCALID_SMEARGLE_NPC = 19
+const LOCALID_TRAINER7 = 20
+const LOCALID_CUT_TREE = 21
+const LOCALID_LOST_GLASSES = 22
+const LOCALID_TRAINER1 = 23
+const LOCALID_DUNSPARCE_BUYER = 24
+const LOCALID_RARE_CANDY = 25
+const LOCALID_SHOP1 = 26
+const LOCALID_SHOP2 = 27
+const LOCALID_MAP_SWITCH2 = 28
+const LOCALID_NURSE_DUMMY = 29
+const LOCALID_ZERA_HINT_NPC = 30
+const LOCALID_APE_HINT_NPC = 31
+const _DUMMY_2 = 32
+const _DUMMY_3 = 33
+const _DUMMY_4 = 34
+const _DUMMY_5 = 35
+const _DUMMY_6 = 36
+const _DUMMY_7 = 37
+const _DUMMY_8 = 38
+const _DUMMY_9 = 39
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
@@ -22,7 +60,10 @@ mapscripts EscapeRoom_Main_MapScripts {
 
 
 script EscapeRoom_MapScript_OnTransitionScripts{
-    // keep double1 moved
+    // set annihilape hint npc movement
+    if(flag(FLAG_HIDE_ANNIHILAPE) == FALSE){
+        setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_LOOK_AROUND)
+    }
 }
 
 script EscapeRoom_MapScript_OnResumeScripts{
@@ -121,7 +162,8 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_GetItems)
     call(EscapeRoom_MapScripts_TurnOfBagUse)
     setflag(FLAG_HIDE_ANNIHILAPE)
-    removeobject(29)
+    setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
+    removeobject(LOCALID_NURSE_DUMMY)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
 }
 
@@ -352,8 +394,8 @@ script EscapeRoom_EventScript_LostGlassesNPC{
 
         // display exclamation mark
         playse(SE_PIN)
-        applymovement(18, Common_Movement_ExclamationMark)
-        waitmovement(18)
+        applymovement(LOCALID_GLASSES_GUY, Common_Movement_ExclamationMark)
+        waitmovement(LOCALID_GLASSES_GUY)
         lockall
 
         msgbox(LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE)
@@ -365,10 +407,10 @@ script EscapeRoom_EventScript_LostGlassesNPC{
         waitmessage 
 
         // walk away
-        applymovement(18, EscapeRoom_Movement_LostGlassesNPC)
-        waitmovement(18)
+        applymovement(LOCALID_GLASSES_GUY, EscapeRoom_Movement_LostGlassesNPC)
+        waitmovement(LOCALID_GLASSES_GUY)
         delay(30)
-        removeobject(18)
+        removeobject(LOCALID_GLASSES_GUY)
 
         // reset spawn and heal location
         call(EscapeRoom_EventScript_RelocateNurseNPC)
@@ -423,9 +465,9 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     delay(20)
 
     // move Nurse to player
-    addobject(29)
-    applymovement(29, EscapeRoom_Movement1_Nurse1NPC)
-    waitmovement(29)
+    addobject(LOCALID_NURSE_DUMMY)
+    applymovement(LOCALID_NURSE_DUMMY, EscapeRoom_Movement1_Nurse1NPC)
+    waitmovement(LOCALID_NURSE_DUMMY)
 
     // dialogue and move player
     applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerFaceRight)
@@ -436,13 +478,13 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     waitmovement(OBJ_EVENT_ID_PLAYER)
 
     // move nurse out of screen
-    applymovement(29, EscapeRoom_Movement2_Nurse1NPC)
-    waitmovement(29)
+    applymovement(LOCALID_NURSE_DUMMY, EscapeRoom_Movement2_Nurse1NPC)
+    waitmovement(LOCALID_NURSE_DUMMY)
     delay(30)
-    removeobject(29)
+    removeobject(LOCALID_NURSE_DUMMY)
 
     // remove nurse 1
-    removeobject(3) 
+    removeobject(LOCALID_NURSE1) 
     setflag(FLAG_HIDE_NURSE1_NPC)
 }
 
@@ -513,6 +555,83 @@ script EscapeRoom_MoveDeleterNPC{
     // else{
 
     // }
+    releaseall
+}
+
+script EscapeRoom_UltraBallNPC{
+    lockall
+    faceplayer
+
+    if(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
+        // start quiz
+        msgbox(UltraBallQuizStart, MSGBOX_DEFAULT)
+
+        // TODO: quiz
+
+        // give ultra ball
+        giveitem(ITEM_ULTRA_BALL)
+        setflag(FLAG_POKE_BALL_OBTAINED)
+    }
+    else{
+        // post script message
+        msgbox(UltaBallQuizPostScript, MSGBOX_NPC)
+
+    }
+    releaseall
+}
+
+
+//// RANDOM HINT NPCS ////
+
+script EscapeRoom_AnnihilapeHintNPC{
+    lockall
+
+    // initial message
+    if(flag(FLAG_ANNIHILAPE_HINT_RECEIVED) == FALSE){
+        // standard message
+        if(flag(FLAG_HIDE_ANNIHILAPE) == TRUE){
+            msgbox(AnnihilapeHintNoMessage1, MSGBOX_AUTOCLOSE)
+            waitmessage
+            faceplayer
+            msgbox(AnnihilapeHintNoMessage2, MSGBOX_AUTOCLOSE)
+            waitmessage
+            applymovement(LOCALID_APE_HINT_NPC, face_npc_up)
+            waitmovement(LOCALID_APE_HINT_NPC)
+        }
+        // if ape has spawned
+        else{
+            faceplayer
+
+            // esclamation mark
+            playse(SE_PIN)
+            applymovement(LOCALID_APE_HINT_NPC, Common_Movement_ExclamationMark)
+            waitmovement(LOCALID_APE_HINT_NPC)
+            delay(30)
+
+            msgbox(AnnihilapeHintMessage, MSGBOX_NPC)
+            setflag(FLAG_ANNIHILAPE_HINT_RECEIVED)
+        }
+    }
+    // post script message
+    else{
+        faceplayer
+        msgbox(AnnihilapeHintMessagePostScript, MSGBOX_NPC)
+    }
+    releaseall
+}
+
+movement face_npc_up{
+    face_up
+}
+
+script EscapeRoom_ZeraoraHintNPC{
+    lockall
+    if(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
+        msgbox(ZeraoraHintMessage, MSGBOX_NPC)
+    }
+    else{
+        msgbox(ZeraoraHintPostCatchMessage, MSGBOX_NPC)
+    }
     releaseall
 }
 
@@ -907,34 +1026,18 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
 
 //// ITEMS ////
 
-script EscapeRoom_EventScript_FindPokeBall{
-    lockall
-    finditem(ITEM_ULTRA_BALL)
-    removeobject(8)
-    setflag(FLAG_POKE_BALL_OBTAINED)
-    releaseall
-}
-
 script EscapeRoom_EventScript_FindRareCandy{
     lockall
     finditem(ITEM_RARE_CANDY)
-    removeobject(25)
+    removeobject(LOCALID_RARE_CANDY)
     setflag(FLAG_RARE_CANDY_OBTAINED)
-    releaseall
-}
-
-script EscapeRoom_EventScript_FindChoiceSpecs{
-    lockall
-    finditem(ITEM_CHOICE_SPECS)
-    removeobject(12)
-    setflag(FLAG_CHOICE_SPECS_OBTAINED)
     releaseall
 }
 
 script EscapeRoom_EventScript_FindLostGlasses{
     lockall
     finditem(ITEM_WISE_GLASSES)
-    removeobject(22)
+    removeobject(LOCALID_LOST_GLASSES)
     setflag(FLAG_LOST_GLASSES_OBTAINED)
     releaseall
 }
@@ -1151,7 +1254,7 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         level=100,
         nature=17, // Quiet
         abilityNum=2,
-        gender=1,
+        gender=2,
         move1=MOVE_MIMIC
         // evs
         hpEv=12,
@@ -1803,6 +1906,58 @@ text AntiSoftlockIntroMessage{
 text AntiSoftlockNoActionMessage{
     "There's nothing I can do for you right\n"
     "now."
+}
+
+
+// ULTRA BALL QUIZ NPC
+
+text UltraBallQuizStart{
+    "(This will be a quiz at some point)"
+}
+
+text UltaBallQuizPostScript{
+    "Thanks for playing!"
+}
+
+
+// ZERA HINT NPC
+text ZeraoraHintMessage{
+    "Have you seen the Zeraora that lives\n"
+    "in this area?\p"
+    "I've seen people attempt to catch it,\n"
+    "but no one's been able to get its HP\l"
+    "below 50%.\p"
+    "It kind of just gives up after a while."
+}
+
+text ZeraoraHintPostCatchMessage{
+    "Wow, you actually caught the Zeraora!"
+}
+
+
+// ANNIHILAPE HINT NPC
+text AnnihilapeHintNoMessage1{
+    "..."
+}
+
+text AnnihilapeHintNoMessage2{
+    "This place is haunted!"
+}
+
+text AnnihilapeHintMessage{
+    "Annihilape has returned!?\p"
+    "Hmm...\p"
+    "Defeating her won't do much good,\n"
+    "she always comes back.\p"
+    "I also wouldn't waste any Poké Balls on\n"
+    "her if I were you."
+}
+
+text AnnihilapeHintMessagePostScript{
+    "Defeating Annihilape won't do much\n"
+    "good, she always comes back.\p"
+    "I also wouldn't waste any Poké Balls on\n"
+    "her if I were you."
 }
 
 

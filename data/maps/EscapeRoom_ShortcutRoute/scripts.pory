@@ -1,3 +1,9 @@
+
+const LOCALID_SMASH_ROCK = 1
+const LOCALID_MAP_SWITCH3 = 2
+const LOCALID_CHOICE_SPECS = 3
+
+
 mapscripts EscapeRoom_ShortcutRoute_MapScripts {
     MAP_SCRIPT_ON_LOAD: SetWallOnLoad
 }
@@ -12,4 +18,13 @@ script SetWallOnLoad{
         setmetatile(9, 1, METATILE_Cave_SealedChamberBraille_Mid, TRUE)
         setmetatile(10, 1, METATILE_Cave_SealedChamberBraille_Mid, TRUE) 
     }
+}
+
+
+script EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs{
+    lockall
+    finditem(ITEM_CHOICE_SPECS)
+    removeobject(LOCALID_CHOICE_SPECS)
+    setflag(FLAG_CHOICE_SPECS_OBTAINED)
+    releaseall
 }
