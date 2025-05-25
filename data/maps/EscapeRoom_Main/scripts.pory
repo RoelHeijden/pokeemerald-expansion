@@ -114,6 +114,7 @@ script EscapeRoom_MapScripts_RemoveHeldItem{
 
 //// MAP START ////
 script EscapeRoom_MapScript_GameStartScripts{
+    call(EscapeRoom_MapScript_GetPokedex)
     call(EscapeRoom_MapScripts_GetFirstPokemon)
     call(EscapeRoom_MapScripts_GetBadges)
     call(EscapeRoom_MapScripts_SetRespawn)
@@ -122,6 +123,14 @@ script EscapeRoom_MapScript_GameStartScripts{
     setflag(FLAG_HIDE_ANNIHILAPE)
     removeobject(29)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
+}
+
+script EscapeRoom_MapScript_GetPokedex{
+    setflag(FLAG_SYS_POKEDEX_GET)
+	special(SetUnlockedPokedexFlags)
+    setflag(FLAG_RECEIVED_POKEDEX_FROM_BIRCH)
+    special(EnableNationalPokedex)
+    setflag(FLAG_SYS_NATIONAL_DEX)
 }
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
@@ -1104,9 +1113,9 @@ script EscapeRoom_EventScript_MapSwitch4{
 
 script EscapeRoom_EventScript_CheckSwitchesCorrect{
     if(
-        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- (pokedex)
+        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Bag
         var(VAR_MAP_SWITCH_2) == 0 &&  // north -- Trainer card
-        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- (npc dialogue)
+        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Pokedex
         var(VAR_MAP_SWITCH_4) == 3     // west  -- Pokemon screen
     ){
         call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
