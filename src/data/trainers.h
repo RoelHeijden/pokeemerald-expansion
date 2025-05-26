@@ -42518,7 +42518,7 @@ F_TRAINER_FEMALE |
 #line 17009
         .doubleBattle = FALSE,
 #line 17010
-        .aiFlags = AI_FLAG_SINGLE4,
+        .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {

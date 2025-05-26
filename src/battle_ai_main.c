@@ -5531,10 +5531,7 @@ static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
+// unused
 static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
-    // prevent switching
-    if(move == MOVE_ME_FIRST)
-        score += 50;
-
     return score;
 }
