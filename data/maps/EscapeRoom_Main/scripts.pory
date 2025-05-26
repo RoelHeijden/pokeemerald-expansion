@@ -75,7 +75,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
 
         // prevent Custap restore after catching zera
         clearflag(FLAG_RECOVERED_CUSTAP)
-        setflag(FLAG_REMOVE_CUSTAP)
+        setflag(FLAG_REMOVE_FERRO_CUSTAP)
         setvar(VAR_REMOVE_HELD_ITEM, 1)
     }
 
@@ -138,18 +138,24 @@ script EscapeRoom_MapScripts_RetrievedItemMessage{
 }
 
 script EscapeRoom_MapScripts_RemoveHeldItem{
-    if(flag(FLAG_REMOVE_CUSTAP) == TRUE){
-        clearflag(FLAG_REMOVE_CUSTAP)
-        checkpartymon(SPECIES_FERROTHORN)
-        copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
-        if(var(VAR_TEMP_0) != PARTY_SIZE){
-            checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
-            if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
-                removepartyitem(VAR_TEMP_0)
-            }
+    // remove ferrothon custap post zera catch
+    if(flag(FLAG_REMOVE_FERRO_CUSTAP) == TRUE){
+        clearflag(FLAG_REMOVE_FERRO_CUSTAP)
+        call(EscapeRoom_MapScripts_RemoveFerroCustap)
+    }
+
+    setvar(VAR_REMOVE_HELD_ITEM, 0)
+}
+
+script EscapeRoom_MapScripts_RemoveFerroCustap{
+    checkpartymon(SPECIES_FERROTHORN)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
+            removepartyitem(VAR_TEMP_0)
         }
     }
-    setvar(VAR_REMOVE_HELD_ITEM, 0)
 }
 
 
@@ -592,6 +598,7 @@ script EscapeRoom_AnnihilapeHintNPC{
         if(flag(FLAG_HIDE_ANNIHILAPE) == TRUE){
             msgbox(AnnihilapeHintNoMessage1, MSGBOX_AUTOCLOSE)
             waitmessage
+            delay(20)
             faceplayer
             msgbox(AnnihilapeHintNoMessage2, MSGBOX_AUTOCLOSE)
             waitmessage
@@ -701,7 +708,7 @@ script EscapeRoom_EventScript_Trainer5{
         TRAINER_CUSTOM_TRAINER5, 
         Trainer5_Intro, 
         Trainer5_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer5PostBattle,
     )
     msgbox(Trainer5_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -764,6 +771,21 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
     if(var(VAR_TEMP_0) != PARTY_SIZE){
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
         if(var(VAR_0x8005) == ITEM_MARANGA_BERRY){
+            removepartyitem(VAR_TEMP_0)
+        }
+    }
+    
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Trainer5PostBattle{
+    // prevent custap restore after winning
+    clearflag(FLAG_RECOVERED_CUSTAP)
+    checkpartymon(SPECIES_POOCHYENA)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
             removepartyitem(VAR_TEMP_0)
         }
     }
@@ -1916,7 +1938,7 @@ text UltraBallQuizStart{
 }
 
 text UltaBallQuizPostScript{
-    "Thanks for playing!"
+    "(Thanks for playing)"
 }
 
 
@@ -2179,7 +2201,7 @@ text Trainer3_PostBattle{
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
-    "Only the exhausted could defeat me."
+    "Exhausted already?"
 }
 
 text Trainer4_Outro{
@@ -2193,9 +2215,9 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Rayquaza
 text Trainer5_Intro{
-    "Still being haunted by ghosts from\n"
-    "your past?\p"
-    "Yeah me too."
+    "Back for more, huh?\n"
+    "Thought you'd escaped your ghosts."
+
 }
 
 text Trainer5_Outro{
@@ -2209,7 +2231,8 @@ text Trainer5_PostBattle{
 
 // TRAINER 6 - Lucario Lucario
 text Trainer6_Intro{
-    "We share a FOCUS SASH!"
+    "You cannot steal our items.\p"
+    "But can you borrow one?"
 }
 
 text Trainer6_Outro{
@@ -2224,9 +2247,7 @@ text Trainer6_PostBattle{
 // TRAINER 7 - Toxicroak Breloom
 text Trainer7_Intro{
     "Too many options?\n"
-    "Be careful or you might freeze up.\p"
-    "There's a word for that, isn't there?\n"
-    "Ah well, I guess it's not important."
+    "Be careful or you might freeze up!"
 }
 
 text Trainer7_Outro{

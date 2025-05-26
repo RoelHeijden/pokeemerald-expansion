@@ -2662,7 +2662,8 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Stardust"),
         .pluralName = _("Stardust"),
-        .price = (I_PRICE >= GEN_7) ? 3000 * TREASURE_FACTOR: 2000,
+        // .price = (I_PRICE >= GEN_7) ? 3000 * TREASURE_FACTOR: 2000,
+        .price = 2000, // CHANGED
         .description = COMPOUND_STRING(
             "Beautiful red sand.\n"
             "Can be sold at a\n"
