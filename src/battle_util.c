@@ -491,7 +491,9 @@ bool32 TryRunFromBattle(u32 battler)
     {
         effect++;
     }
-    else if (GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
+    // ADDED
+    // added IsBattlerAlive(battler) check -- prevent run away when fainted
+    else if (IsBattlerAlive(battler) && GetBattlerAbility(battler) == ABILITY_RUN_AWAY)
     {
         if (InBattlePyramid())
         {
