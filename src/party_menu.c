@@ -5327,7 +5327,9 @@ bool8 PlayerHasMove(u16 move)
         return FALSE;
         break;
     }
-    return CheckBagHasItem(item, 1);
+    // METHOD TURNED OFF
+    return FALSE;
+    // return CheckBagHasItem(item, 1);
 }
 
 
