@@ -42482,6 +42482,8 @@ F_TRAINER_FEMALE |
             .species = SPECIES_LUCARIO,
 #line 16993
             .gender = TRAINER_MON_FEMALE,
+#line 16993
+            .heldItem = ITEM_FOCUS_SASH,
 #line 16996
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16998
@@ -42515,48 +42517,50 @@ F_TRAINER_FEMALE |
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 17009
         .doubleBattle = FALSE,
+#line 17010
+        .aiFlags = AI_FLAG_SINGLE4,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 17011
-            .species = SPECIES_TOXICROAK,
-#line 17011
-            .gender = TRAINER_MON_FEMALE,
-#line 17014
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 17016
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 0, 0),
 #line 17012
-            .ability = ABILITY_DRY_SKIN,
-#line 17013
-            .lvl = 88,
+            .species = SPECIES_TOXICROAK,
+#line 17012
+            .gender = TRAINER_MON_FEMALE,
 #line 17015
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 17017
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 0, 0),
+#line 17013
+            .ability = ABILITY_DRY_SKIN,
+#line 17014
+            .lvl = 88,
+#line 17016
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17017
+#line 17018
                 MOVE_ME_FIRST,
             },
             },
             {
-#line 17019
-            .species = SPECIES_BRELOOM,
-#line 17019
-            .gender = TRAINER_MON_MALE,
-#line 17022
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
-#line 17024
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17020
-            .ability = ABILITY_TECHNICIAN,
-#line 17021
-            .lvl = 47,
+            .species = SPECIES_BRELOOM,
+#line 17020
+            .gender = TRAINER_MON_MALE,
 #line 17023
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 17025
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17021
+            .ability = ABILITY_TECHNICIAN,
+#line 17022
+            .lvl = 47,
+#line 17024
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17024
+#line 17025
                 MOVE_DRAIN_PUNCH,
             },
             },

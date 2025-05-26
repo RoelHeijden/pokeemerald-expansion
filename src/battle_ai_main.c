@@ -63,6 +63,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 // ADDED
 static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -89,7 +90,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [19] = NULL,                     // Unused
     [20] = AI_Double2_Logic,         // AI_FLAG_DOUBLE2
     [21] = AI_Double3_Logic,         // AI_FLAG_DOUBLE3
-    [22] = NULL,                     // Unused
+    [22] = AI_Single4_Logic,         // AI_FLAG_SINGLE4
     [23] = NULL,                     // Unused
     [24] = NULL,                     // Unused
     [25] = NULL,                     // Unused
@@ -5525,6 +5526,14 @@ static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
     // prioritize targetting Pooch or Dunsparce (avoid Liepard)
     if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA || gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
+        score += 50;
+
+    return score;
+}
+
+static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    // prevent switching
+    if(move == MOVE_ME_FIRST)
         score += 50;
 
     return score;

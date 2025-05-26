@@ -16990,7 +16990,7 @@ IVs: 0 Def
 - Close Combat  
 - Brick Break  
 
-Lucario (F)  
+Lucario (F) @ Focus Sash 
 Ability: Inner Focus  
 Level: 70  
 EVs: 252 Atk / 252 Spe  
@@ -17007,6 +17007,7 @@ Pic: Expert M
 Gender: Male
 Music: Intense
 Double Battle: No
+AI: AI_FLAG_SINGLE4
 
 Toxicroak (F) 
 Ability: Dry Skin  
