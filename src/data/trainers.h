@@ -42458,8 +42458,6 @@ F_TRAINER_FEMALE |
             .species = SPECIES_LUCARIO,
 #line 16984
             .gender = TRAINER_MON_MALE,
-#line 16984
-            .heldItem = ITEM_FOCUS_SASH,
 #line 16987
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16989
@@ -42519,49 +42517,28 @@ F_TRAINER_FEMALE |
         .doubleBattle = FALSE,
 #line 17010
         .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
-        .partySize = 2,
+        .partySize = 1,
         .party = (const struct TrainerMon[])
         {
             {
 #line 17012
-            .species = SPECIES_TOXICROAK,
+            .species = SPECIES_KROOKODILE,
 #line 17012
-            .gender = TRAINER_MON_FEMALE,
+            .gender = TRAINER_MON_MALE,
 #line 17015
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 17017
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 0, 0),
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 0),
 #line 17013
-            .ability = ABILITY_DRY_SKIN,
+            .ability = ABILITY_INTIMIDATE,
 #line 17014
-            .lvl = 88,
+            .lvl = 58,
 #line 17016
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17018
                 MOVE_ME_FIRST,
-            },
-            },
-            {
-#line 17020
-            .species = SPECIES_BRELOOM,
-#line 17020
-            .gender = TRAINER_MON_MALE,
-#line 17023
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
-#line 17025
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 17021
-            .ability = ABILITY_TECHNICIAN,
-#line 17022
-            .lvl = 47,
-#line 17024
-            .nature = NATURE_ADAMANT,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            .moves = {
-#line 17025
-                MOVE_DRAIN_PUNCH,
             },
             },
         },

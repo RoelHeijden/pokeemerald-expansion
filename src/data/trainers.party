@@ -16981,7 +16981,7 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE3
 
-Lucario (M) @ Focus Sash  
+Lucario (M) 
 Ability: Inner Focus  
 Level: 70  
 EVs: 252 Atk / 252 Spe  
@@ -17009,20 +17009,18 @@ Music: Intense
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Toxicroak (F) 
-Ability: Dry Skin  
-Level: 88  
+Krookodile (M)  
+Ability: Intimidate  
+Level: 58  
 EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-IVs: 0 SpA / 0 SpD  
-- Me First  
+Naive Nature  
+IVs: 0 SpD  
+- Me First
 
-Breloom (M) 
-Ability: Technician  
-Level: 47  
+Kartana  
+Ability: Beast Boost  
+Level: 40  
 EVs: 252 Atk  
 Adamant Nature  
-- Drain Punch  
-
-
+- Leaf Blade
 

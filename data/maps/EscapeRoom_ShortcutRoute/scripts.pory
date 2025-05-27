@@ -24,7 +24,7 @@ script SetWallOnLoad{
 
 script EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs{
     lockall
-    finditem(ITEM_CHOICE_SPECS)
+    finditem(ITEM_CHOICE_SCARF)
     removeobject(LOCALID_CHOICE_SPECS)
     setflag(FLAG_CHOICE_SPECS_OBTAINED)
     releaseall

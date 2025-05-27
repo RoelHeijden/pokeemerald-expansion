@@ -29,7 +29,7 @@ EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs::
 # 26 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	lockall
 # 27 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	finditem ITEM_CHOICE_SPECS
+	finditem ITEM_CHOICE_SCARF
 # 28 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	removeobject 3
 # 29 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
