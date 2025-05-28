@@ -8461,7 +8461,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
     #endif
         .evYield_Defense = 1,
         .evYield_SpDefense = 2,
-        .itemRare = ITEM_SPELL_TAG,
+        // .itemRare = ITEM_SPELL_TAG, // REMOVED
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 25,
         .friendship = 35,
