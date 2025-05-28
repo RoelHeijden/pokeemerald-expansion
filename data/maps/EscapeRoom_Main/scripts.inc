@@ -520,7 +520,7 @@ EscapeRoom_EventScript_ObtainLiepard::
 # 432 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
 # 433 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_LIEPARD, 50, abilityNum = 2, nature = 17, gender = 0, move1 = MOVE_ASSIST, move2 = MOVE_TRICK, move3 = MOVE_ROCK_SMASH, move4 = MOVE_ECHOED_VOICE, atkEv = 140, spAtkEv = 252, speedEv = 0, hpIv = 31, atkIv = 31, defIv = 0, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_LIEPARD, 50, abilityNum = 2, nature = 17, gender = 0, move1 = MOVE_ASSIST, move2 = MOVE_TRICK, move3 = MOVE_ROCK_SMASH, move4 = MOVE_ECHOED_VOICE, atkEv = 140, spAtkEv = 252, speedEv = 0, hpIv = 31, atkIv = 31, defIv = 18, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 455 "data/maps/EscapeRoom_Main/scripts.pory"
 	message LiepardObtainMessage
 # 456 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -1281,7 +1281,7 @@ EscapeRoom_EventScript_TradePoochForSmeargle_5:
 # 1009 "data/maps/EscapeRoom_Main/scripts.pory"
 	removemon SPECIES_POOCHYENA
 # 1010 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_SMEARGLE, 30, abilityNum = 0, nature = 15, gender = 0, move1 = MOVE_BESTOW, move2 = MOVE_UPROAR, move3 = MOVE_SURF, move4 = MOVE_CONVERSION_2, hpEv = 0, spAtkEv = 252, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
+	givemon SPECIES_SMEARGLE, 30, abilityNum = 0, nature = 15, gender = 0, move1 = MOVE_SWITCHEROO, move2 = MOVE_UPROAR, move3 = MOVE_SURF, move4 = MOVE_CONVERSION_2, hpEv = 0, spAtkEv = 252, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
 # 1031 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_POOCH_TRADE_ACCEPTED
 # 1033 "data/maps/EscapeRoom_Main/scripts.pory"

@@ -89,6 +89,11 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
     }
 
+    // check if Dusknoir's Stardust is succesfully stolen
+    if(flag(FLAG_STARDUST_STOLEN) == FALSE){
+        call(EscapeRoom_MapScripts_CheckStardustStolen)
+    }
+
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
@@ -157,6 +162,27 @@ script EscapeRoom_MapScripts_RemoveFerroCustap{
         }
     }
 }
+
+script EscapeRoom_MapScripts_CheckStardustStolen{
+    checkitem(ITEM_STARDUST) // in bag
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_STARDUST_STOLEN)
+    }
+    checkpartyitem(0) // held by pokemon slot 1
+    if(var(VAR_0x8005) == ITEM_STARDUST) {
+        setflag(FLAG_STARDUST_STOLEN)
+    }
+    checkpartyitem(1) // held by pokemon slot 2
+    if(var(VAR_0x8005) == ITEM_STARDUST) {
+        setflag(FLAG_STARDUST_STOLEN)
+    }
+    checkpartyitem(2) // held by pokemon slot 3
+    if(var(VAR_0x8005) == ITEM_STARDUST) {
+        setflag(FLAG_STARDUST_STOLEN)
+    }
+}
+
+
 
 
 //// MAP START ////
@@ -447,7 +473,7 @@ script EscapeRoom_EventScript_ObtainLiepard{
         // IVs:
         hpIv=31,
         atkIv=31,
-        defIv=0, // for krook struggle >50%
+        defIv=18, // for krook struggle >50%
         speedIv=31,
         spAtkIv=31,
         spDefIv=31
@@ -962,7 +988,7 @@ script EscapeRoom_EventScript_SellDunsparce{
 
             // trade pokemon
             removemon(SPECIES_DUNSPARCE)
-            addmoney(21000)
+            addmoney(6000)
             setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
 
             message(MoneyReceivedMessage)
@@ -1013,7 +1039,7 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 abilityNum=0, // own tempo
                 nature=15, // Modest
                 gender=0, 
-                move1=MOVE_BESTOW,
+                move1=MOVE_SWITCHEROO,
                 move2=MOVE_UPROAR,
                 move3=MOVE_SURF,
                 move4=MOVE_CONVERSION_2,

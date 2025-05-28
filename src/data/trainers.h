@@ -42517,7 +42517,7 @@ F_TRAINER_FEMALE |
         .doubleBattle = FALSE,
 #line 17010
         .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
-        .partySize = 1,
+        .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
@@ -42539,6 +42539,26 @@ F_TRAINER_FEMALE |
             .moves = {
 #line 17018
                 MOVE_ME_FIRST,
+            },
+            },
+            {
+#line 17020
+            .species = SPECIES_KARTANA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17023
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 17025
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17021
+            .ability = ABILITY_BEAST_BOOST,
+#line 17022
+            .lvl = 40,
+#line 17024
+            .nature = NATURE_ADAMANT,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 17025
+                MOVE_LEAF_BLADE,
             },
             },
         },
