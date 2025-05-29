@@ -16981,23 +16981,23 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE3
 
-Lucario (M) 
+Lucario (M) @ Focus Sash  
 Ability: Inner Focus  
-Level: 70  
+Level: 60  
 EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-IVs: 0 Def  
+Naughty Nature  
+IVs: 0 HP / 0 SpD  
 - Close Combat  
-- Brick Break  
+- Brick Break
 
-Lucario (F) @ Focus Sash 
+Lucario (F)
 Ability: Inner Focus  
-Level: 70  
+Level: 60   
 EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-IVs: 0 Def  
+Naughty Nature  
+IVs: 0 HP / 0 SpD  
 - Close Combat  
-- Brick Break  
+- Brick Break
 
 
 === TRAINER_CUSTOM_TRAINER7 ===
@@ -17019,7 +17019,7 @@ IVs: 0 SpD
 
 Kartana  
 Ability: Beast Boost  
-Level: 40  
+Level: 44  
 EVs: 252 Atk  
 Adamant Nature  
 - Leaf Blade

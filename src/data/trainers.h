@@ -42458,16 +42458,18 @@ F_TRAINER_FEMALE |
             .species = SPECIES_LUCARIO,
 #line 16984
             .gender = TRAINER_MON_MALE,
+#line 16984
+            .heldItem = ITEM_FOCUS_SASH,
 #line 16987
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16989
-            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(0, 31, 31, 31, 31, 0),
 #line 16985
             .ability = ABILITY_INNER_FOCUS,
 #line 16986
-            .lvl = 70,
+            .lvl = 60,
 #line 16988
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_NAUGHTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16990
@@ -42480,18 +42482,16 @@ F_TRAINER_FEMALE |
             .species = SPECIES_LUCARIO,
 #line 16993
             .gender = TRAINER_MON_FEMALE,
-#line 16993
-            .heldItem = ITEM_FOCUS_SASH,
 #line 16996
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16998
-            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(0, 31, 31, 31, 31, 0),
 #line 16994
             .ability = ABILITY_INNER_FOCUS,
 #line 16995
-            .lvl = 70,
+            .lvl = 60,
 #line 16997
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_NAUGHTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16999
@@ -42552,7 +42552,7 @@ F_TRAINER_FEMALE |
 #line 17021
             .ability = ABILITY_BEAST_BOOST,
 #line 17022
-            .lvl = 40,
+            .lvl = 44,
 #line 17024
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

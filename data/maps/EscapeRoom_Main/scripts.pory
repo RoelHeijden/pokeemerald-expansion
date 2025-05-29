@@ -1052,7 +1052,7 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 defIv=31,
                 speedIv=31,
                 spAtkIv=31,
-                spDefIv=31
+                spDefIv=28 // Resisted Krook Uproar (x1.5) ohkos
             )
             setflag(FLAG_POOCH_TRADE_ACCEPTED)
 
@@ -1720,8 +1720,8 @@ text EndSignMessage{
 }
 
 text MysteriousWallSign{
-    "There are four mysterious markings that\n"
-    "seem to point in various directions.\p"
+    // "There are four mysterious markings that\n"
+    // "seem to point in various directions.\p"
     "What a strange wall."
 }
 
@@ -1971,9 +1971,8 @@ text UltaBallQuizPostScript{
 
 // ZERA HINT NPC
 text ZeraoraHintMessage{
-    "Have you seen the Zeraora that lives\n"
-    "in this area?\p"
-    "I've seen people attempt to catch it,\n"
+    "Have you seen the Zeraora around here?\p"
+    "I've seen people trying to catch it\n"
     "but no one's been able to get its HP\l"
     "below 50%.\p"
     "It kind of just gives up after a while."
@@ -2118,7 +2117,7 @@ text FlorgesTradePostTrade{
 text AskDunsparceMoneyTrade{
     "Hi, I collect rare Pokémon as a hobby.\p"
     "Your Dunsparce looks quite valuable,\n"
-    "would you sell it to me for ¥20.000?"
+    "would you sell it to me for 6.000?"
 }
 
 text MoneyReceivedMessage{
@@ -2169,7 +2168,7 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 1 - Toedscruel Togedemaru
 text Trainer1_Intro{
-    "Something something I have HM Cut."
+    "Something something I've got HM Cut!"
 }
 
 text Trainer1_Outro{
@@ -2198,8 +2197,7 @@ text ZeraCutTradeAccepted{
 
 // TRAINER 2 - Dracozolt 
 text Trainer2_Intro{
-    "Doesn't the beach look beautiful?\n"
-    "I love nature."
+    "I hate grass."
 }
 
 text Trainer2_Outro{
@@ -2242,7 +2240,7 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Rayquaza
 text Trainer5_Intro{
-    "Back for more, huh?\n"
+    "Back for more?\n"
     "Thought you'd escaped your ghosts."
 
 }
@@ -2258,7 +2256,7 @@ text Trainer5_PostBattle{
 
 // TRAINER 6 - Lucario Lucario
 text Trainer6_Intro{
-    "Our item you cannot steal.\p"
+    "You can't steal our item.\p"
     "Wanna borrow it?"
 }
 
