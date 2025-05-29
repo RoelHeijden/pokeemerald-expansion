@@ -9497,7 +9497,10 @@ BattleScript_TryFaint:
 	goto BattleScript_MoveEnd
 
 BattleScript_RemoveTerrain:
-	jumpifterrainaffected BS_TARGET, STATUS_FIELD_TERRAIN_ANY, BattleScript_RemoveTerrain_Cont
+	@ CHANGED - hard coded for steel roller to work on levitating mons
+	@ original: 
+	@ jumpifterrainaffected BS_TARGET, STATUS_FIELD_TERRAIN_ANY, BattleScript_RemoveTerrain_Cont
+	jumpifhalfword CMP_COMMON_BITS, gFieldStatuses, STATUS_FIELD_TERRAIN_ANY, BattleScript_RemoveTerrain_Cont
 	goto BattleScript_ButItFailed
 BattleScript_RemoveTerrain_Cont:
 	critcalc
