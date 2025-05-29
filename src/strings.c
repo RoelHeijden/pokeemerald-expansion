@@ -110,7 +110,7 @@ const u8 gText_EmptyPokedexInfo1[] = _(""); // Unused
 const u8 gText_CryOf[] = _("CRY OF");
 const u8 gText_EmptyPokedexInfo2[] = _(""); // Unused
 // const u8 gText_SizeComparedTo[] = _("SIZE COMPARED TO ");
-const u8 gText_SizeComparedTo[] = _("Third W. ");
+const u8 gText_SizeComparedTo[] = _("T3: W.");
 const u8 gText_PokedexRegistration[] = _("POKéDEX registration completed.");
 const u8 gText_HTHeight[] = _("HT");
 const u8 gText_WTWeight[] = _("WT");
@@ -283,7 +283,7 @@ const u8 *const gPyramidBagMenu_ReturnToStrings[] =
     [PYRAMIDBAG_LOC_CHOOSE_TOSS] = gText_TheField
 };
 
-const u8 gText_ReturnToVar1[] = _("Return to\n{STR_VAR_1}.\nFirst S."); // CHANGED
+const u8 gText_ReturnToVar1[] = _("Return to\n{STR_VAR_1}.\nT1: S."); // CHANGED
 // const u8 gText_ReturnToVar1[] = _("Return to\n{STR_VAR_1}.");
 const u8 gText_ItemsPocket[] = _("ITEMS");
 const u8 gText_PokeBallsPocket[] = _("POKé BALLS");
@@ -1222,7 +1222,7 @@ const u8 gText_Points[] = _(" points"); // Unused
 const u8 gText_TrainerCardTime[] = _("TIME");
 const u8 gJPText_BattlePoints[] = _("ゲ-ムポイント"); // Unused. Name presumed, translation is Game Points
 const u8 gText_Var1sTrainerCard[] = _("{STR_VAR_1}'s TRAINER CARD");
-const u8 gText_HallOfFameDebut[] = _("Second N.");  // CHANGED
+const u8 gText_HallOfFameDebut[] = _("T2: N.");  // CHANGED
 const u8 gText_LinkBattles[] = _("LINK BATTLES");
 const u8 gText_LinkCableBattles[] = _("LINK CABLE BATTLES");
 const u8 gText_WinsLosses[] = _("W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}");

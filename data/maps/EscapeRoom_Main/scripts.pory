@@ -668,6 +668,23 @@ script EscapeRoom_ZeraoraHintNPC{
     releaseall
 }
 
+script EscapeRoom_TabletsHintNPC{
+    lockall
+    if(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
+        msgbox(FourTabletsHintMessage1, MSGBOX_NPC)
+    }
+    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
+        msgbox(FourTabletsHintMessage2, MSGBOX_NPC)
+    }
+    elif(flag(FLAG_CHOICE_SPECS_OBTAINED) == FALSE){
+        msgbox(FourTabletsHintMessage3, MSGBOX_NPC)
+    }
+    else{
+        msgbox(FourTabletsHintMessage4, MSGBOX_NPC)
+    }
+    releaseall
+}
+
 
 //// TRAINERS ////
 
@@ -1232,6 +1249,11 @@ script EscapeRoom_EventScript_MapSwitch4{
         end
     }
 
+    // set flag that fourth switch has been found
+    if(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
+        setflag(FLAG_MAP_SWITCH_4_FOUND)
+    }
+
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_4) == 0){
         msgbox(MapSwitchPointedNorthTablet4, MSGBOX_YESNO)
@@ -1722,7 +1744,7 @@ text EndSignMessage{
 text MysteriousWallSign{
     // "There are four mysterious markings that\n"
     // "seem to point in various directions.\p"
-    "What a strange wall."
+    "What a weird looking wall."
 }
 
 text MysteriousWallBackroomSign{
@@ -2006,6 +2028,26 @@ text AnnihilapeHintMessagePostScript{
     "good, she always comes back.\p"
     "I also wouldn't waste any Poké Balls on\n"
     "her if I were you."
+}
+
+// TABLETS HINT NPC
+text FourTabletsHintMessage1{
+    "Do you see that strange tablet?\n"
+    "I'm looking for more of them!\p"
+    "I wonder what they do."
+}
+
+text FourTabletsHintMessage2{
+    "Wait...\p"
+    "You've found all four!"
+}
+
+text FourTabletsHintMessage3{
+    "Did something just open?"
+}
+
+text FourTabletsHintMessage4{
+    "Enjoy your Choice Scarf I guess..."
 }
 
 
