@@ -5471,6 +5471,21 @@ static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     int battlerTinkaton = (gBattleMons[3].species == SPECIES_TINKATON) * 2 + 1;
     int tinkatonHp = gBattleMons[battlerTinkaton].hp;  // max = 109
 
+
+
+    // Additional case to make early battles less possible:
+    // never use Wish if player still has Ferrothorn
+    if(gBattleMons[0].species == SPECIES_FERROTHORN || gBattleMons[2].species == SPECIES_FERROTHORN){
+        if(move == MOVE_WISH){
+            score = 1;
+            return score;
+        }
+        if(move == MOVE_BULLDOZE){
+            score = 200;
+            return score;
+        }
+    }
+
     // used for Counter calcs
     int bulldozeDmg = 19;
 
