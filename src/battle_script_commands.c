@@ -13060,23 +13060,26 @@ static void Cmd_settypetorandomresistance(void)
             u32 i, resistTypes = 0;
             u32 hitByType = gLastHitByType[gBattlerAttacker];
 
-            // ADDED
-            // always become Ghost if hit by Normal or Fighting
-            if (hitByType == TYPE_NORMAL || hitByType == TYPE_FIGHTING)
-            {
-                if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
-                {
-                    SET_BATTLER_TYPE(gBattlerAttacker, TYPE_GHOST);
-                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_GHOST);
-                    gBattlescriptCurrInstr = cmd->nextInstr;
-                    return;
-                }
-                else
-                {
-                    gBattlescriptCurrInstr = cmd->failInstr;
-                    return;
-                }
-            }
+            // // REMOVE
+            // DebugPrintf("Last hit by: %d", hitByType);
+
+            // // ADDED
+            // // always become Ghost if hit by Fighting
+            // if (hitByType == TYPE_FIGHTING)
+            // {
+            //     if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+            //     {
+            //         SET_BATTLER_TYPE(gBattlerAttacker, TYPE_GHOST);
+            //         PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_GHOST);
+            //         gBattlescriptCurrInstr = cmd->nextInstr;
+            //         return;
+            //     }
+            //     else
+            //     {
+            //         gBattlescriptCurrInstr = cmd->failInstr;
+            //         return;
+            //     }
+            // }
 
 
             for (i = 0; i < NUMBER_OF_MON_TYPES; i++) // Find all types that resist.
@@ -13137,9 +13140,9 @@ static void Cmd_settypetorandomresistance(void)
             u32 i, resistTypes = 0;
 
             // ADDED
-            // always become Ghost if hit by Normal or Fighting
-            u32 hitByType = gLastHitByType[gBattlerAttacker];
-            if (hitByType == TYPE_NORMAL || hitByType == TYPE_FIGHTING)
+            // always become Ghost when selecting a Fighting move with Conversion2
+            u32 moveType = gLastUsedMoveType[gBattlerTarget];
+            if (moveType == TYPE_FIGHTING)
             {
                 if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
                 {
@@ -13148,11 +13151,11 @@ static void Cmd_settypetorandomresistance(void)
                     gBattlescriptCurrInstr = cmd->nextInstr;
                     return;
                 }
-                else
-                {
-                    gBattlescriptCurrInstr = cmd->failInstr;
-                    return;
-                }
+                // else
+                // {
+                //     gBattlescriptCurrInstr = cmd->failInstr;
+                //     return;
+                // }
             }
 
 
