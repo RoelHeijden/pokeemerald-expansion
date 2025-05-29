@@ -14815,13 +14815,55 @@ static void Cmd_assistattackselect(void)
         }
     }
 
+    // ADDED
+    // hardcode move selection for Lucario battle
+    // pick conversion2 if only conversion2 and surf on turn 2
     if (chooseableMovesNo)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
+
+        // Check for special case: always pick Conversion2 if
+        // only Surf and Conversion 2 are available
+        // only on turn 2
+        // only if the opponent is lucario
+        if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter == 1)
+        {
+            bool8 hasSurf = FALSE, hasConversion2 = FALSE;
+            for (int i = 0; i < 2; i++)
+            {
+                if (validMoves[i] == MOVE_SURF)
+                    hasSurf = TRUE;
+                else if (validMoves[i] == MOVE_CONVERSION_2)
+                    hasConversion2 = TRUE;
+            }
+
+            if (hasSurf && hasConversion2)
+            {
+                // Check if the opponent is Lucario
+                u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
+                if (gBattleMons[opponent].species == SPECIES_LUCARIO)
+                {
+                    gCalledMove = MOVE_CONVERSION_2;
+                    gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+                    gBattlescriptCurrInstr = cmd->nextInstr;
+                    TRY_FREE_AND_SET_NULL(validMoves);
+                    return;
+                }
+            }
+        }
+
+        // Default random selection
         gCalledMove = validMoves[Random() % chooseableMovesNo];
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+    // if (chooseableMovesNo)
+    // {
+    //     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
+    //     gCalledMove = validMoves[Random() % chooseableMovesNo];
+    //     gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+    //     gBattlescriptCurrInstr = cmd->nextInstr;
+    // }
     else
     {
         gBattlescriptCurrInstr = cmd->failInstr;
