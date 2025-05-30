@@ -42530,7 +42530,7 @@ F_TRAINER_FEMALE |
 #line 17017
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 0),
 #line 17013
-            .ability = ABILITY_INTIMIDATE,
+            .ability = ABILITY_ANGER_POINT,
 #line 17014
             .lvl = 58,
 #line 17016

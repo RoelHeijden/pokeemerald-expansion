@@ -224,10 +224,6 @@ void HandleAction_UseMove(void)
 
     moveTarget = GetBattlerMoveTargetType(gBattlerAttacker, gCurrentMove);
 
-
-
-
-
     // choose target
     side = BATTLE_OPPOSITE(GetBattlerSide(gBattlerAttacker));
     if (IsAffectedByFollowMe(gBattlerAttacker, side, gCurrentMove)
@@ -420,6 +416,25 @@ void HandleAction_UseMove(void)
         gBattleStruct->hpBefore[i] = gBattleMons[i].hp;
         gSpecialStatuses[i].emergencyExited = FALSE;
     }
+
+
+    // ADDED
+    // enforce choice lock in Me First edge case
+    // if the forced move doesn't match choice-locked move: it should fail
+    u16 choicedMove = gBattleStruct->choicedMove[gBattlerAttacker];
+    u16 heldItemEffect = GetBattlerHoldEffect(gBattlerAttacker, TRUE);
+    if (HOLD_EFFECT_CHOICE(heldItemEffect)
+        && choicedMove != MOVE_NONE
+        && choicedMove != MOVE_UNAVAILABLE
+        && choicedMove != gCurrentMove)
+    {
+        FlagSet(FLAG_ME_FIRST_CHOICE_LOCK);
+    }
+    else
+    {
+        FlagClear(FLAG_ME_FIRST_CHOICE_LOCK);
+    }
+
 
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }

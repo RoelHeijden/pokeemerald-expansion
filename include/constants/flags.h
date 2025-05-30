@@ -76,7 +76,7 @@
 #define FLAG_STARDUST_OBTAINED              0x3F  
 #define FLAG_STARDUST_STOLEN                0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
-#define FLAG_UNUSED_0x42                    0x42  
+#define FLAG_ME_FIRST_CHOICE_LOCK           0x42  
 #define FLAG_UNUSED_0x43                    0x43  
 #define FLAG_UNUSED_0x44                    0x44  
 #define FLAG_UNUSED_0x45                    0x45

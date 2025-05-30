@@ -473,6 +473,7 @@ static void Cmd_trysetrest(void);
 static void Cmd_jumpifnotfirstturn(void);
 static void Cmd_setmiracleeye(void);
 static void Cmd_jumpifuproarwakes(void);
+static void Cmd_jumpifmefirstlockfail(void);
 static void Cmd_stockpile(void);
 static void Cmd_stockpiletobasedamage(void);
 static void Cmd_stockpiletohpheal(void);
@@ -852,7 +853,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_swapstatstages,                          //0xFA
     Cmd_averagestats,                            //0xFB
     Cmd_jumpifoppositegenders,                   //0xFC
-    Cmd_unused,                                  //0xFD
+    Cmd_jumpifmefirstlockfail,                   //0xFD  // ADDED (was unused)
     Cmd_tryworryseed,                            //0xFE
     Cmd_callnative,                              //0xFF
 };
@@ -11561,6 +11562,17 @@ static void Cmd_jumpifuproarwakes(void)
     CMD_ARGS(const u8 *jumpInstr);
 
     if (UproarWakeUpCheck(gBattlerTarget))
+        gBattlescriptCurrInstr = cmd->jumpInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+// ADDED
+static void Cmd_jumpifmefirstlockfail(void)
+{
+    CMD_ARGS(const u8 *jumpInstr);
+
+    if (FlagGet(FLAG_ME_FIRST_CHOICE_LOCK))
         gBattlescriptCurrInstr = cmd->jumpInstr;
     else
         gBattlescriptCurrInstr = cmd->nextInstr;

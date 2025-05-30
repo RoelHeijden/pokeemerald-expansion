@@ -2394,7 +2394,7 @@ EndSignMessage::
 
 MysteriousWallSign::
 # 1744 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "What a strange wall.$"
+	.string "What a weird looking wall.$"
 
 MysteriousWallBackroomSign::
 # 1750 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -2659,8 +2659,8 @@ AnnihilapeHintMessagePostScript::
 
 FourTabletsHintMessage1::
 # 2034 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Did you see that tablet?\n"
-	.string "I'm looking for more of them.\p"
+	.string "Do you see that strange tablet?\n"
+	.string "I'm looking for more of them!\p"
 	.string "I wonder what they do.$"
 
 FourTabletsHintMessage2::
@@ -2670,11 +2670,11 @@ FourTabletsHintMessage2::
 
 FourTabletsHintMessage3::
 # 2045 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Did something open??$"
+	.string "Did something just open?$"
 
 FourTabletsHintMessage4::
 # 2049 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Enjoy your Choice Scarf I guess.$"
+	.string "Enjoy your Choice Scarf I guess...$"
 
 LostGlassesNPCmainMessage::
 # 2055 "data/maps/EscapeRoom_Main/scripts.pory"

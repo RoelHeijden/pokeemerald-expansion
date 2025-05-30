@@ -1336,9 +1336,9 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro unused ptr:req
+	.macro jumpifmefirstlockfail jumpInstr:req
 	.byte 0xfd
-	.4byte \ptr
+	.4byte \jumpInstr
 	.endm
 
 	.macro tryworryseed failInstr:req

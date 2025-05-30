@@ -4726,6 +4726,8 @@ BattleScript_NotAffectedAbilityPopUp::
 
 BattleScript_EffectUproar::
 	attackcanceler
+	@ added
+	jumpifmefirstlockfail BattleScript_FailedFromAtkString
 	accuracycheck BattleScript_PrintMoveMissed, ACC_CURR_MOVE
 	attackstring
 	jumpifstatus2 BS_ATTACKER, STATUS2_MULTIPLETURNS, BattleScript_UproarHit
