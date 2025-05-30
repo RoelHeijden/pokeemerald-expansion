@@ -1865,8 +1865,9 @@ static void Cmd_ppreduce(void)
         gProtectStructs[gBattlerAttacker].notFirstStrike = TRUE;
 
         // For item Metronome, echoed voice
-        if (gCurrentMove != gLastResultingMoves[gBattlerAttacker] || WasUnableToUseMove(gBattlerAttacker))
+        if (gCurrentMove != gLastResultingMoves[gBattlerAttacker] || WasUnableToUseMove(gBattlerAttacker)){
             gBattleStruct->sameMoveTurns[gBattlerAttacker] = 0;
+        }
 
         if (gBattleMons[gBattlerAttacker].pp[gCurrMovePos] > ppToDeduct)
             gBattleMons[gBattlerAttacker].pp[gCurrMovePos] -= ppToDeduct;
@@ -6420,8 +6421,14 @@ static void Cmd_moveend(void)
         case MOVEEND_SAME_MOVE_TURNS:
             if (gCurrentMove != gLastResultingMoves[gBattlerAttacker] || gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
                 gBattleStruct->sameMoveTurns[gBattlerAttacker] = 0;
-            else if (gCurrentMove == gLastResultingMoves[gBattlerAttacker] && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT)
+            else if (gCurrentMove == gLastResultingMoves[gBattlerAttacker] && gSpecialStatuses[gBattlerAttacker].parentalBondState != PARENTAL_BOND_1ST_HIT){
                 gBattleStruct->sameMoveTurns[gBattlerAttacker]++;
+            
+                // ADDED
+                if (gCurrentMove == MOVE_ECHOED_VOICE){
+                    gBattleStruct->echoedVoiceUsedThisTurn = TRUE;
+                }
+            }
             gBattleScripting.moveendState++;
             break;
         case MOVEEND_SET_EVOLUTION_TRACKER:

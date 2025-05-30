@@ -3975,6 +3975,19 @@ static void HandleEndTurn_ContinueBattle(void)
 
     if (gBattleControllerExecFlags == 0)
     {
+        // ADDED
+        // reset echoed voice counters
+        if (gBattleStruct->echoedVoiceUsedThisTurn)
+        {
+            if (gBattleStruct->echoedVoiceChainCount < 4)
+                gBattleStruct->echoedVoiceChainCount++;
+        }
+        else
+            gBattleStruct->echoedVoiceChainCount = 0;
+        gBattleStruct->echoedVoiceUsedThisTurn = FALSE;
+
+
+
         gBattleMainFunc = BattleTurnPassed;
         for (i = 0; i < BATTLE_COMMUNICATION_ENTRIES_COUNT; i++)
             gBattleCommunication[i] = 0;

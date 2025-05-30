@@ -9074,13 +9074,25 @@ static inline u32 CalcMoveBasePower(u32 move, u32 battlerAtk, u32 battlerDef, u3
             basePower = 150;
         break;
     case EFFECT_ECHOED_VOICE:
-        // gBattleStruct->sameMoveTurns incremented in ppreduce
-        if (gBattleStruct->sameMoveTurns[battlerAtk] != 0)
+        // CHANGED
+        // echoed voice stack shared for all pokemon
+        if (gBattleStruct->echoedVoiceChainCount > 0)
         {
-            basePower += (basePower * gBattleStruct->sameMoveTurns[battlerAtk]);
+            basePower = 40 + 40 * gBattleStruct->echoedVoiceChainCount;
             if (basePower > 200)
                 basePower = 200;
         }
+        else
+            basePower = 40;
+
+        // original code:
+        // // gBattleStruct->sameMoveTurns incremented in ppreduce
+        // if (gBattleStruct->sameMoveTurns[battlerAtk] != 0)
+        // {
+        //     basePower += (basePower * gBattleStruct->sameMoveTurns[battlerAtk]);
+        //     if (basePower > 200)
+        //         basePower = 200;
+        // }
         break;
     case EFFECT_PAYBACK:
         if (GetBattlerTurnOrderNum(battlerAtk) > GetBattlerTurnOrderNum(battlerDef)
