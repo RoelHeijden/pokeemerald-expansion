@@ -372,9 +372,8 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     msgbox(Nurse_Ask_heal, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
         special(HealPlayerParty)
-        // playse(SE_SHOP)
         playse(SE_USE_ITEM)
-        // playse(SE_SUCCESS)
+        waitse
         msgbox(Nurse_Heal_End, MSGBOX_AUTOCLOSE)
         waitmessage
     }
@@ -1048,8 +1047,24 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 end
             }
 
+            // first heal if liepard is fainted (would allow double skip)
+            partymonhasfainted
+            lockall
+            if(var(VAR_RESULT) != PARTY_SIZE){
+                if(var(VAR_0x8004) == SPECIES_LIEPARD){
+                    msgbox(HealBeforeTradeMessage, MSGBOX_DEFAULT)
+                    waitmessage
+                    special(HealPlayerParty)
+                    playse(SE_USE_ITEM)
+                    waitse
+                    msgbox(HealedBeforeTradeMessage, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                }
+            }
+
             // trade pokemon
             removemon(SPECIES_POOCHYENA)
+            lockall
             givemon(
                 SPECIES_SMEARGLE,
                 30,
@@ -1071,12 +1086,13 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 spAtkIv=31,
                 spDefIv=28 // Resisted Krook Uproar (x1.5) ohkos
             )
+            lockall
             setflag(FLAG_POOCH_TRADE_ACCEPTED)
 
             message(SmeargleReceivedMessage)
             playfanfare(MUS_OBTAIN_ITEM)
-            waitfanfare
             lockall
+            waitfanfare
             msgbox(PoochTradeAccepted, MSGBOX_AUTOCLOSE)
             waitmessage
         }
@@ -2200,6 +2216,13 @@ text PoochTradePostTrade{
     "Thanks a lot."
 }
 
+text HealBeforeTradeMessage{
+    "First let me heal your Pokémon."
+}
+
+text HealedBeforeTradeMessage{
+    "There you go."
+}
 
 // BATTLES - OTHER
 text DoubleBattle_NotEnoughMons{
