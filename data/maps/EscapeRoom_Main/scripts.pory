@@ -579,15 +579,60 @@ mart EscapeRoom_Shop2_items{
 script EscapeRoom_MoveDeleterNPC{
     lockall
     faceplayer
-    msgbox(AskDeleteMove, MSGBOX_YESNO)
-    // if(var(VAR_RESULT) == YES){
-        
-    // }
-    // else{
+    // msgbox(AskDeleteMove, MSGBOX_YESNO)
 
-    // }
+    // ask menu: delete a move / restore moveset / cancel
+    
+    // standard move deleter script
+    call(EscapeRoom_ChooseMoveToDelete)
+
+    // restore moves
+
     releaseall
 }
+
+script EscapeRoom_ChooseMoveToDelete{
+    msgbox("Which Pokémon?", MSGBOX_DEFAULT)
+	special(ChoosePartyMon)
+	waitstate
+
+    // end if no mon chosen
+	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+        msgbox("Come again", MSGBOX_AUTOCLOSE)
+        releaseall
+        end
+    }
+
+    // end if no move chosen
+	if (var(VAR_MOVE_DELETER_CHOSEN_SLOT) == MAX_MON_MOVES) {
+        msgbox("Come again", MSGBOX_AUTOCLOSE)
+        releaseall
+        end
+    }
+
+    // end if mon only has 1 move
+    special(GetNumMovesSelectedMonHas)
+    if (var(VAR_RESULT) == 1) {
+        msgbox("only has one move", MSGBOX_AUTOCLOSE)
+        releaseall
+        end
+    }
+
+    // buffer move and -- TODO: set move flag
+    copyvar(VAR_0x8005, VAR_MOVE_DELETER_CHOSEN_SLOT)
+    setvar(VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES)
+    special(BufferMoveDeleterNicknameAndMove)
+
+    // delete move
+    special(MoveDeleterForgetMove)
+    playse(SE_SHOP)
+    msgbox("move deleted", MSGBOX_AUTOCLOSE)
+    end
+}
+
+
+
+
 
 script EscapeRoom_UltraBallNPC{
     lockall
@@ -2175,11 +2220,11 @@ text FlorgesTradePostTrade{
 text AskDunsparceMoneyTrade{
     "Hi, I collect rare Pokémon as a hobby.\p"
     "Your Dunsparce looks quite valuable,\n"
-    "would you sell it to me for 6.000?"
+    "would you sell it to me for ¥6.000?"
 }
 
 text MoneyReceivedMessage{
-    "{PLAYER} received ¥20.000!"
+    "{PLAYER} received ¥6.000!"
 }
 
 text DunsparceTradeAccepted{
@@ -2221,7 +2266,7 @@ text HealBeforeTradeMessage{
 }
 
 text HealedBeforeTradeMessage{
-    "There you go."
+    "Alright, let's trade!"
 }
 
 // BATTLES - OTHER

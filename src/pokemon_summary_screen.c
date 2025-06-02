@@ -2302,6 +2302,10 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                     PlaySE(SE_SELECT);
                     sMoveSlotToReplace = sMonSummaryScreen->firstMoveIndex;
                     gSpecialVar_0x8005 = sMoveSlotToReplace;
+
+                    // ADDED
+                    VarSet(VAR_MOVE_DELETER_CHOSEN_SLOT, sMoveSlotToReplace);
+
                     BeginCloseSummaryScreen(taskId);
                 }
                 else
@@ -2316,6 +2320,10 @@ static void Task_HandleReplaceMoveInput(u8 taskId)
                 PlaySE(SE_SELECT);
                 sMoveSlotToReplace = MAX_MON_MOVES;
                 gSpecialVar_0x8005 = MAX_MON_MOVES;
+
+                // ADDED
+                VarSet(VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES);
+
                 BeginCloseSummaryScreen(taskId);
             }
         }

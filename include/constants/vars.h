@@ -272,7 +272,7 @@
 #define VAR_MAP_SWITCH_2                                 0x40FC 
 #define VAR_MAP_SWITCH_3                                 0x40FD 
 #define VAR_MAP_SWITCH_4                                 0x40FE 
-#define VAR_UNUSED_0x40FF                                0x40FF 
+#define VAR_MOVE_DELETER_CHOSEN_SLOT                     0x40FF 
 
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)

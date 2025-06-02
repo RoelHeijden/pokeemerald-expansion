@@ -5293,42 +5293,44 @@ bool8 BoxMonKnowsMove(struct BoxPokemon *boxMon, u16 move)
 // ADDED
 bool8 PlayerHasMove(u16 move)
 {
-    u16 item;
-    switch (move)
-    {
-    case MOVE_SECRET_POWER:
-        item = ITEM_TM43;
-        break;
-    case MOVE_CUT:
-        item = ITEM_HM01;
-        break;
-    case MOVE_FLY:
-        item = ITEM_HM02;
-        break;
-    case MOVE_SURF:
-        item = ITEM_HM03;
-        break;
-    case MOVE_STRENGTH:
-        item = ITEM_HM04;
-        break;
-    case MOVE_FLASH:
-        item = ITEM_HM05;
-        break;
-    case MOVE_ROCK_SMASH:
-        item = ITEM_HM06;
-        break;
-    case MOVE_WATERFALL:
-        item = ITEM_HM07;
-        break;
-    case MOVE_DIVE:
-        item = ITEM_HM08;
-        break;    
-    default:       
-        return FALSE;
-        break;
-    }
     // METHOD TURNED OFF
+    // prevent HM use when not taught to pokemon
     return FALSE;
+
+    // u16 item;
+    // switch (move)
+    // {
+    // case MOVE_SECRET_POWER:
+    //     item = ITEM_TM43;
+    //     break;
+    // case MOVE_CUT:
+    //     item = ITEM_HM01;
+    //     break;
+    // case MOVE_FLY:
+    //     item = ITEM_HM02;
+    //     break;
+    // case MOVE_SURF:
+    //     item = ITEM_HM03;
+    //     break;
+    // case MOVE_STRENGTH:
+    //     item = ITEM_HM04;
+    //     break;
+    // case MOVE_FLASH:
+    //     item = ITEM_HM05;
+    //     break;
+    // case MOVE_ROCK_SMASH:
+    //     item = ITEM_HM06;
+    //     break;
+    // case MOVE_WATERFALL:
+    //     item = ITEM_HM07;
+    //     break;
+    // case MOVE_DIVE:
+    //     item = ITEM_HM08;
+    //     break;    
+    // default:       
+    //     return FALSE;
+    //     break;
+    // }
     // return CheckBagHasItem(item, 1);
 }
 
@@ -7630,15 +7632,6 @@ static void UNUSED ChoosePartyMonByMenuType(u8 menuType)
     InitPartyMenu(menuType, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, FALSE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ReturnToField);
 }
 
-static void BufferMonSelection(void)
-{
-    gSpecialVar_0x8004 = GetCursorSelectionMonId();
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
-        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
-    gFieldCallback2 = CB2_FadeFromPartyMenu;
-    SetMainCallback2(CB2_ReturnToField);
-}
-
 bool8 CB2_FadeFromPartyMenu(void)
 {
     FadeInFromBlack();
@@ -7700,6 +7693,34 @@ static void Task_ChoosePartyMon(u8 taskId)
         DestroyTask(taskId);
     }
 }
+
+static void BufferMonSelection(void)
+{
+    gSpecialVar_0x8004 = GetCursorSelectionMonId();
+    if (gSpecialVar_0x8004 >= PARTY_SIZE){
+        gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+
+
+        // CHANGED/ADDED
+        // set OW callback only if nothing chosen (B press)
+        gFieldCallback2 = CB2_FadeFromPartyMenu;
+        SetMainCallback2(CB2_ReturnToField);
+    }
+    else{
+        // go straight to move delete script if mon selected
+        GetNumMovesSelectedMonHas();
+        if(gSpecialVar_Result > 1)
+        {
+            gFieldCallback2 = CB2_FadeFromPartyMenu;
+            SetMainCallback2(MoveDeleterChooseMoveToForget);
+        }
+    }
+}
+
+
+
+
+
 
 void ChooseMonForMoveRelearner(void)
 {
@@ -7793,6 +7814,13 @@ void BufferMoveDeleterNicknameAndMove(void)
 void MoveDeleterForgetMove(void)
 {
     u16 i;
+
+    // ADDED
+    // set flags to track which moves were deleted
+    // u16 deletedMove = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
+
+    // TODO
+    // set flag
 
     SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], MOVE_NONE, gSpecialVar_0x8005);
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);
