@@ -2214,7 +2214,7 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
         return CANNOT_LEARN_MOVE;
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
-    // ADDED - check if Liepard and Taunt
+    // ADDED - check if Liepard and Taunt or Cut
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD && (move == MOVE_TAUNT || move == MOVE_CUT))
         return WOULD_SOFTLOCK;
     else
@@ -7696,24 +7696,23 @@ static void Task_ChoosePartyMon(u8 taskId)
 
 static void BufferMonSelection(void)
 {
+    gFieldCallback2 = CB2_FadeFromPartyMenu;
     gSpecialVar_0x8004 = GetCursorSelectionMonId();
     if (gSpecialVar_0x8004 >= PARTY_SIZE){
         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
 
-
         // CHANGED/ADDED
         // set OW callback only if nothing chosen (B press)
-        gFieldCallback2 = CB2_FadeFromPartyMenu;
         SetMainCallback2(CB2_ReturnToField);
     }
     else{
         // go straight to move delete script if mon selected
         GetNumMovesSelectedMonHas();
         if(gSpecialVar_Result > 1)
-        {
-            gFieldCallback2 = CB2_FadeFromPartyMenu;
             SetMainCallback2(MoveDeleterChooseMoveToForget);
-        }
+        else
+            SetMainCallback2(CB2_ReturnToField);
+
     }
 }
 
@@ -7817,10 +7816,75 @@ void MoveDeleterForgetMove(void)
 
     // ADDED
     // set flags to track which moves were deleted
-    // u16 deletedMove = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    u16 deletedMove = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    switch (deletedMove)
+    {
+        case MOVE_TRUMP_CARD:
+            FlagSet(FLAG_TRUMP_CARD_DELETED);
+            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            break;
+        case MOVE_HEX:
+            FlagSet(FLAG_HEX_DELETED);
+            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            break;
+        case MOVE_COUNTER:
+            FlagSet(FLAG_COUNTER_DELETED);
+            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            break;
+        case MOVE_AIR_SLASH:
+            FlagSet(FLAG_AIR_SLASH_DELETED);
+            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            break;
+        case MOVE_ASSIST:
+            FlagSet(FLAG_ASSIST_DELETED);
+            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            break;
+        case MOVE_ROCK_SMASH:
+            FlagSet(FLAG_ROCK_SMASH_DELETED);
+            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            break;
+        case MOVE_ECHOED_VOICE:
+            FlagSet(FLAG_ECHOED_VOICE_DELETED);
+            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            break;
+        case MOVE_TRICK:
+            FlagSet(FLAG_TRICK_DELETED);
+            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            break;
+        case MOVE_ICE_FANG:
+            FlagSet(FLAG_ICE_FANG_DELETED);
+            FlagSet(FLAG_POOCH_MOVE_DELETED);
+            break;
+        case MOVE_SLEEP_TALK:
+            FlagSet(FLAG_SLEEP_TALK_DELETED);
+            FlagSet(FLAG_POOCH_MOVE_DELETED);
+            break;
+        case MOVE_ENDEAVOR:
+            FlagSet(FLAG_ENDEAVOR_DELETED);
+            FlagSet(FLAG_POOCH_MOVE_DELETED);
+            break;
+        case MOVE_TAUNT:
+            FlagSet(FLAG_TAUNT_DELETED);
+            FlagSet(FLAG_POOCH_MOVE_DELETED);
+            break;
+        case MOVE_SURF:
+            FlagSet(FLAG_SURF_DELETED);
+            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            break;
+        case MOVE_SWITCHEROO:
+            FlagSet(FLAG_SWITCHEROO_DELETED);
+            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            break;
+        case MOVE_UPROAR:
+            FlagSet(FLAG_UPROAR_DELETED);
+            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            break;
+        case MOVE_CONVERSION_2:
+            FlagSet(FLAG_CONVERSION_2_DELETED);
+            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            break;
+    }
 
-    // TODO
-    // set flag
 
     SetMonMoveSlot(&gPlayerParty[gSpecialVar_0x8004], MOVE_NONE, gSpecialVar_0x8005);
     RemoveMonPPBonus(&gPlayerParty[gSpecialVar_0x8004], gSpecialVar_0x8005);

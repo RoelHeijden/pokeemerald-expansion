@@ -1901,6 +1901,49 @@ bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
     return FALSE;
 }
 
+
+
+// ADDED
+// add move to nearest free slot
+bool8 SrcCmd_addmonmove(struct ScriptContext *ctx)
+{
+    u16 partymonspecies = ScriptReadHalfword(ctx);
+    u16 move = ScriptReadHalfword(ctx);
+    struct Pokemon *mon;
+    u16 species;
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i];
+        species = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (species == partymonspecies)
+        {
+            for (u8 j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (GetMonData(mon, MON_DATA_MOVE1 + j) == MOVE_NONE)
+                {
+                    SetMonMoveSlot(mon, move, j);
+                    gSpecialVar_Result = TRUE;
+                    return FALSE;
+                }
+            }
+
+            // Species found, but no empty slots
+            gSpecialVar_Result = FALSE;
+            return FALSE;
+        }
+    }
+
+    // Species not found
+    gSpecialVar_Result = FALSE;
+    return FALSE;
+}
+
+
+
+
+
 bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
 {
     u8 i;

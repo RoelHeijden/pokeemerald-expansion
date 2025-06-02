@@ -579,33 +579,35 @@ mart EscapeRoom_Shop2_items{
 script EscapeRoom_MoveDeleterNPC{
     lockall
     faceplayer
-    // msgbox(AskDeleteMove, MSGBOX_YESNO)
+    msgbox(AskDeleteMove, MSGBOX_DEFAULT)
 
-    // ask menu: delete a move / restore moveset / cancel
-    
+    // ask menu: delete a move / restore moveset
+    dynmultichoice(20, 8, FALSE, 6, 0, 0, 
+    "Delete a move", 
+    "Restore deleted moves")
+
     // standard move deleter script
-    call(EscapeRoom_ChooseMoveToDelete)
-
+    if(var(VAR_RESULT) == 0){
+        call(EscapeRoom_ChooseMoveToDelete)
+    }
     // restore moves
-
+    elif(var(VAR_RESULT) == 1){
+        call(EscapeRoom_RestoreMoveset)
+    }
+    // cancel or B press
+    else{
+        msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
+    }
     releaseall
 }
 
 script EscapeRoom_ChooseMoveToDelete{
-    msgbox("Which Pokémon?", MSGBOX_DEFAULT)
 	special(ChoosePartyMon)
 	waitstate
 
     // end if no mon chosen
 	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
-        msgbox("Come again", MSGBOX_AUTOCLOSE)
-        releaseall
-        end
-    }
-
-    // end if no move chosen
-	if (var(VAR_MOVE_DELETER_CHOSEN_SLOT) == MAX_MON_MOVES) {
-        msgbox("Come again", MSGBOX_AUTOCLOSE)
+        msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
         releaseall
         end
     }
@@ -613,7 +615,14 @@ script EscapeRoom_ChooseMoveToDelete{
     // end if mon only has 1 move
     special(GetNumMovesSelectedMonHas)
     if (var(VAR_RESULT) == 1) {
-        msgbox("only has one move", MSGBOX_AUTOCLOSE)
+        msgbox(MoveDeleterOnlyOneMove, MSGBOX_AUTOCLOSE)
+        releaseall
+        end
+    }
+
+    // end if no mon chosen
+	if (var(VAR_MOVE_DELETER_CHOSEN_SLOT) == MAX_MON_MOVES) {
+        msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
         releaseall
         end
     }
@@ -626,12 +635,141 @@ script EscapeRoom_ChooseMoveToDelete{
     // delete move
     special(MoveDeleterForgetMove)
     playse(SE_SHOP)
-    msgbox("move deleted", MSGBOX_AUTOCLOSE)
+    msgbox(MoveDeleterMoveDeleted, MSGBOX_AUTOCLOSE)
     end
 }
 
+script EscapeRoom_RestoreMoveset{
+    // flag to detect if no moves were restored
+    setflag(FLAG_TEMP_5)
 
+    // --- POOCHYENA ---
+    checkpartymon(SPECIES_POOCHYENA)
+    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_POOCH_MOVE_DELETED) == TRUE)
+    {
+        if (flag(FLAG_ICE_FANG_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_POOCHYENA, MOVE_ICE_FANG)
+            clearflag(FLAG_ICE_FANG_DELETED)
+        }
+        if (flag(FLAG_SLEEP_TALK_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_POOCHYENA, MOVE_SLEEP_TALK)
+            clearflag(FLAG_SLEEP_TALK_DELETED)
+        }
+        if (flag(FLAG_ENDEAVOR_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_POOCHYENA, MOVE_ENDEAVOR)
+            clearflag(FLAG_ENDEAVOR_DELETED)
+        }
+        if (flag(FLAG_TAUNT_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_POOCHYENA, MOVE_TAUNT)
+            clearflag(FLAG_TAUNT_DELETED)
+        }
 
+        msgbox(PoochMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        clearflag(FLAG_POOCH_MOVE_DELETED)
+        clearflag(FLAG_TEMP_5)
+    }
+
+    // --- LIEPARD ---
+    checkpartymon(SPECIES_LIEPARD)
+    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_LIEPARD_MOVE_DELETED) == TRUE)
+    {
+        if (flag(FLAG_ASSIST_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_LIEPARD, MOVE_ASSIST)
+            clearflag(FLAG_ASSIST_DELETED)
+        }
+        if (flag(FLAG_ROCK_SMASH_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_LIEPARD, MOVE_ROCK_SMASH)
+            clearflag(FLAG_ROCK_SMASH_DELETED)
+        }
+        if (flag(FLAG_ECHOED_VOICE_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_LIEPARD, MOVE_ECHOED_VOICE)
+            clearflag(FLAG_ECHOED_VOICE_DELETED)
+        }
+        if (flag(FLAG_TRICK_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_LIEPARD, MOVE_TRICK)
+            clearflag(FLAG_TRICK_DELETED)
+        }
+
+        msgbox(LiepardMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        clearflag(FLAG_LIEPARD_MOVE_DELETED)
+        clearflag(FLAG_TEMP_5)
+    }
+
+    // --- DUNSPARCE ---
+    checkpartymon(SPECIES_DUNSPARCE)
+    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_DUNSPARCE_MOVE_DELETED) == TRUE)
+    {
+        if (flag(FLAG_TRUMP_CARD_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_DUNSPARCE, MOVE_TRUMP_CARD)
+            clearflag(FLAG_TRUMP_CARD_DELETED)
+        }
+        if (flag(FLAG_HEX_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_DUNSPARCE, MOVE_HEX)
+            clearflag(FLAG_HEX_DELETED)
+        }
+        if (flag(FLAG_COUNTER_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_DUNSPARCE, MOVE_COUNTER)
+            clearflag(FLAG_COUNTER_DELETED)
+        }
+        if (flag(FLAG_AIR_SLASH_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_DUNSPARCE, MOVE_AIR_SLASH)
+            clearflag(FLAG_AIR_SLASH_DELETED)
+        }
+
+        msgbox(DunsparceMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
+        clearflag(FLAG_TEMP_5)
+    }
+
+    // --- SMEARGLE ---
+    checkpartymon(SPECIES_SMEARGLE)
+    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_SMEARGLE_MOVE_DELETED) == TRUE)
+    {
+        if (flag(FLAG_SURF_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_SMEARGLE, MOVE_SURF)
+            clearflag(FLAG_SURF_DELETED)
+        }
+        if (flag(FLAG_SWITCHEROO_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_SMEARGLE, MOVE_SWITCHEROO)
+            clearflag(FLAG_SWITCHEROO_DELETED)
+        }
+        if (flag(FLAG_UPROAR_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_SMEARGLE, MOVE_UPROAR)
+            clearflag(FLAG_UPROAR_DELETED)
+        }
+        if (flag(FLAG_CONVERSION_2_DELETED) == TRUE)
+        {
+            addmonmove(SPECIES_SMEARGLE, MOVE_CONVERSION_2)
+            clearflag(FLAG_CONVERSION_2_DELETED)
+        }
+
+        msgbox(SmeargleMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        clearflag(FLAG_SMEARGLE_MOVE_DELETED)
+        clearflag(FLAG_TEMP_5)
+    }
+
+    // no moves restored
+    if (flag(FLAG_TEMP_5) == TRUE)
+    {
+        msgbox(NoMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        clearflag(FLAG_TEMP_5)
+    }
+}
 
 
 script EscapeRoom_UltraBallNPC{
@@ -2148,8 +2286,44 @@ text MartNPC_SayGoodbye{
 
 // MOVE DELETER NPC
 text AskDeleteMove{
-    "Delete move plz?"
+    "Hello, I can temporarily delete one of\n"
+    "your Pokémon's moves.\p"
+    "What would you like to do?"
 }
+
+text MoveDeleterComeAgain{
+    "Please come again!"
+}
+
+text MoveDeleterMoveDeleted{
+	"{STR_VAR_1}'s {STR_VAR_2} was removed!"
+}
+
+text MoveDeleterOnlyOneMove{
+    "That Pokémon has only one move left."
+}
+
+text PoochMovesRestoredMessage{
+    "Poochyena's moves were restored!"
+}
+
+text LiepardMovesRestoredMessage{
+    "Liepard's moves were restored!"
+}
+
+text DunsparceMovesRestoredMessage{
+    "Dunsparce's moves were restored!"
+}
+
+text SmeargleMovesRestoredMessage{
+    "Smeargle's moves were restored!"
+}
+
+text NoMovesRestoredMessage{
+    "There were no moves to restore."
+}
+
+
 
 
 // ITEM RETURNS

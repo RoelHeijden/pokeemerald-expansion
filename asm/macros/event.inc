@@ -1146,6 +1146,14 @@
 	.2byte \move
 	.endm
 
+	@ Adds a move to the nearest free moveslot of a Pokémon in the player's party, indicated by pokemon species.
+	@ VAR_RESULT is set to FALSE if the species was not found in the player party, or the moveslots are all filled.
+	.macro addmonmove partymonspecies:req, move:req
+	.byte 0xf9
+	.2byte \partymonspecies
+	.2byte \move
+	.endm
+
 	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
 	@ VAR_0x8004 is also set to this Pokemon's species.

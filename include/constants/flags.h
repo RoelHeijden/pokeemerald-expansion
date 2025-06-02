@@ -653,28 +653,29 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_UNUSED_0x264   0x264
-#define FLAG_UNUSED_0x265   0x265  
-#define FLAG_UNUSED_0x266   0x266  
-#define FLAG_UNUSED_0x267   0x267  
-#define FLAG_UNUSED_0x268   0x268  
-#define FLAG_UNUSED_0x269   0x269  
-#define FLAG_UNUSED_0x26A   0x26A  
-#define FLAG_UNUSED_0x26B   0x26B  
-#define FLAG_UNUSED_0x26C   0x26C  
-#define FLAG_UNUSED_0x26D   0x26D  
-#define FLAG_UNUSED_0x26E   0x26E  
-#define FLAG_UNUSED_0x26F   0x26F  
-#define FLAG_UNUSED_0x270   0x270  
-#define FLAG_UNUSED_0x271   0x271  
-#define FLAG_UNUSED_0x272   0x272  
-#define FLAG_UNUSED_0x273  0x273 // Unused Flag
+// move deleter flags
+#define FLAG_TRUMP_CARD_DELETED     0x264
+#define FLAG_HEX_DELETED            0x265
+#define FLAG_COUNTER_DELETED        0x266
+#define FLAG_AIR_SLASH_DELETED      0x267
+#define FLAG_ASSIST_DELETED         0x268
+#define FLAG_ROCK_SMASH_DELETED     0x269
+#define FLAG_ECHOED_VOICE_DELETED   0x26A
+#define FLAG_TRICK_DELETED          0x26B
+#define FLAG_ICE_FANG_DELETED       0x26C
+#define FLAG_SLEEP_TALK_DELETED     0x26D
+#define FLAG_ENDEAVOR_DELETED       0x26E
+#define FLAG_SURF_DELETED           0x26F
+#define FLAG_SWITCHEROO_DELETED     0x270
+#define FLAG_UPROAR_DELETED         0x271
+#define FLAG_CONVERSION_2_DELETED   0x272
+#define FLAG_TAUNT_DELETED          0x273
 #define FLAG_UNUSED_0x274  0x274 // Unused Flag
 #define FLAG_UNUSED_0x275  0x275 // Unused Flag
-#define FLAG_UNUSED_0x276  0x276 // Unused Flag
-#define FLAG_UNUSED_0x277  0x277 // Unused Flag
-#define FLAG_UNUSED_0x278  0x278 // Unused Flag
-#define FLAG_UNUSED_0x279  0x279 // Unused Flag
+#define FLAG_POOCH_MOVE_DELETED     0x276 
+#define FLAG_LIEPARD_MOVE_DELETED   0x277 
+#define FLAG_DUNSPARCE_MOVE_DELETED  0x278
+#define FLAG_SMEARGLE_MOVE_DELETED  0x279
 #define FLAG_UNUSED_0x27A  0x27A // Unused Flag
 #define FLAG_UNUSED_0x27B  0x27B // Unused Flag
 #define FLAG_UNUSED_0x27C  0x27C // Unused Flag
