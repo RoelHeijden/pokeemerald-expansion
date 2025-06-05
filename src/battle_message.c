@@ -351,6 +351,7 @@ static const u8 sText_CantEscape[] = _("Can't escape!\p");
 static const u8 sText_DontLeaveBirch[] = _("PROF. BIRCH: Don't leave me like this!\p");
 static const u8 sText_ButNothingHappened[] = _("But nothing happened!");
 static const u8 sText_ButItFailed[] = _("But it failed!");
+static const u8 sText_ButItFailedAbilityShield[] = _("{B_DEF_NAME_WITH_PREFIX}'s Ability is protected by\nthe effects of its Ability Shield"); // ADDED
 static const u8 sText_ItHurtConfusion[] = _("It hurt itself in its\nconfusion!");
 static const u8 sText_MirrorMoveFailed[] = _("The Mirror Move failed!");
 static const u8 sText_StartedToRain[] = _("It started to rain!");
@@ -1560,6 +1561,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 
     // ADDED THESE
     [STRINGID_FORFEITTOTRAINER - BATTLESTRINGS_TABLE_START] = sText_PlayerForfeitToTrainer,
+    [STRINGID_ABILITYSHIELDFAIL - BATTLESTRINGS_TABLE_START] = sText_ButItFailedAbilityShield,
 };
 
 const u16 gTrainerUsedItemStringIds[] =

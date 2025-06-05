@@ -578,18 +578,18 @@ script EscapeRoom_EventScript_Shop2NPC{
 }
 
 mart EscapeRoom_Shop1_items{
+    ITEM_ETHER
+    ITEM_CUSTAP_BERRY
     ITEM_FLOAT_STONE
     ITEM_RING_TARGET 
     ITEM_ESCAPE_ROPE   
-    ITEM_CUSTAP_BERRY
-    ITEM_ETHER
 }
 
 mart EscapeRoom_Shop2_items{
     ITEM_TM12
-    ITEM_ABILITY_CAPSULE
-    ITEM_CUSTAP_BERRY
     ITEM_ETHER
+    ITEM_CUSTAP_BERRY
+    ITEM_ABILITY_CAPSULE
 }
 
 script EscapeRoom_MoveDeleterNPC{
@@ -2456,7 +2456,7 @@ text LostGlassesNPCendMessage{
 text MartNPC_AskToShop{
     "Hi, welcome to my shop.\p"
     "Don't worry, each item can be sold back\n"
-    "for same price."
+    "for the same price."
 }
 
 text MartNPC_SayGoodbye{

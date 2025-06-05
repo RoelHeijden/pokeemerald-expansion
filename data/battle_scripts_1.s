@@ -4709,6 +4709,13 @@ BattleScript_ButItFailed::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_ButItFailedAbilityShield::
+	pause B_WAIT_TIME_SHORT
+	orhalfword gMoveResultFlags, MOVE_RESULT_FAIL_ABILITY_SHIELD
+	resultmessage
+	waitmessage B_WAIT_TIME_LONGEST
+	goto BattleScript_MoveEnd
+
 BattleScript_NotAffected::
 	pause B_WAIT_TIME_SHORT
 	orhalfword gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE
@@ -5202,7 +5209,8 @@ BattleScript_EffectSkillSwap::
 	attackstring
 	ppreduce
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
-	tryswapabilities BattleScript_ButItFailed
+	@ tryswapabilities BattleScript_ButItFailed
+	tryswapabilities BattleScript_ButItFailedAbilityShield, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 .if B_ABILITY_POP_UP == TRUE

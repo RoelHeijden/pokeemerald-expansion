@@ -1170,8 +1170,9 @@
 	.byte 0xd9
 	.endm
 
-	.macro tryswapabilities failInstr:req
+	.macro tryswapabilities failInstrAbilityShield:req, failInstr:req
 	.byte 0xda
+	.4byte \failInstrAbilityShield
 	.4byte \failInstr
 	.endm
 

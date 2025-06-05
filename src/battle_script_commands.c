@@ -2580,7 +2580,14 @@ static void Cmd_resultmessage(void)
             break;
         case MOVE_RESULT_FAILED:
             stringId = STRINGID_BUTITFAILED;
+            DebugPrintf("check1");
             break;
+        // ADDED
+        case MOVE_RESULT_FAIL_ABILITY_SHIELD:
+            stringId = STRINGID_ABILITYSHIELDFAIL;
+            DebugPrintf("check2");
+            break;
+
         case MOVE_RESULT_DOESNT_AFFECT_FOE:
             stringId = STRINGID_ITDOESNTAFFECT;
             break;
@@ -14684,7 +14691,9 @@ static void Cmd_setroom(void)
 // Skill Swap
 static void Cmd_tryswapabilities(void)
 {
-    CMD_ARGS(const u8 *failInstr);
+    // CHANGED -- added ability shield fail instr
+    // CMD_ARGS(const u8 *failInstr);
+    CMD_ARGS(const u8 *failInstrAbilityShield, const u8 *failInstr);
 
     if (gAbilitiesInfo[gBattleMons[gBattlerAttacker].ability].cantBeSwapped
       || gAbilitiesInfo[gBattleMons[gBattlerTarget].ability].cantBeSwapped)
@@ -14695,7 +14704,7 @@ static void Cmd_tryswapabilities(void)
     else if (GetBattlerHoldEffect(gBattlerTarget, TRUE) == HOLD_EFFECT_ABILITY_SHIELD)
     {
         RecordItemEffectBattle(gBattlerTarget, HOLD_EFFECT_ABILITY_SHIELD);
-        gBattlescriptCurrInstr = cmd->failInstr;
+        gBattlescriptCurrInstr = cmd->failInstrAbilityShield; // CHANGED
     }
     else
     {

@@ -775,15 +775,15 @@ EscapeRoom_EventScript_Shop2NPC::
 # 580 "data/maps/EscapeRoom_Main/scripts.pory"
 EscapeRoom_Shop1_items:
 # 581 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_FLOAT_STONE
-# 582 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_RING_TARGET
-# 583 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_ESCAPE_ROPE
-# 584 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_CUSTAP_BERRY
-# 585 "data/maps/EscapeRoom_Main/scripts.pory"
 	.2byte ITEM_ETHER
+# 582 "data/maps/EscapeRoom_Main/scripts.pory"
+	.2byte ITEM_CUSTAP_BERRY
+# 583 "data/maps/EscapeRoom_Main/scripts.pory"
+	.2byte ITEM_FLOAT_STONE
+# 584 "data/maps/EscapeRoom_Main/scripts.pory"
+	.2byte ITEM_RING_TARGET
+# 585 "data/maps/EscapeRoom_Main/scripts.pory"
+	.2byte ITEM_ESCAPE_ROPE
 	.2byte ITEM_NONE
 
 	.align 2
@@ -792,11 +792,11 @@ EscapeRoom_Shop2_items:
 # 589 "data/maps/EscapeRoom_Main/scripts.pory"
 	.2byte ITEM_TM12
 # 590 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ETHER
 # 591 "data/maps/EscapeRoom_Main/scripts.pory"
 	.2byte ITEM_CUSTAP_BERRY
 # 592 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_ETHER
+	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_NONE
 
 EscapeRoom_MoveDeleterNPC::
@@ -3405,7 +3405,7 @@ MartNPC_AskToShop::
 # 2456 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, welcome to my shop.\p"
 	.string "Don't worry, each item can be sold back\n"
-	.string "for same price.$"
+	.string "for the same price.$"
 
 MartNPC_SayGoodbye::
 # 2462 "data/maps/EscapeRoom_Main/scripts.pory"
