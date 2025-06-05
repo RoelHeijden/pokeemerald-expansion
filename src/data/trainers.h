@@ -42187,7 +42187,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER1] =
     {
 #line 16879
-        .trainerName = _("HM Cut"),
+        .trainerName = _("Has HM01"),
 #line 16880
         .trainerClass = TRAINER_CLASS_COLLECTOR,
 #line 16881

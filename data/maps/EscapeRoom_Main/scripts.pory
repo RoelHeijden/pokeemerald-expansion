@@ -58,11 +58,18 @@ mapscripts EscapeRoom_Main_MapScripts {
     ] 
 }
 
+// MAIN //
 
 script EscapeRoom_MapScript_OnTransitionScripts{
     // set annihilape hint npc movement
     if(flag(FLAG_HIDE_ANNIHILAPE) == FALSE){
         setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_LOOK_AROUND)
+    }
+
+    // keep trainer 3 moved from the door
+    if(flag(FLAG_TRAINER3_DEFEATED)){
+        setobjectxyperm(LOCALID_TRAINER3, 62, 10)
+        setobjectmovementtype(LOCALID_TRAINER3, MOVEMENT_TYPE_FACE_LEFT)
     }
 }
 
@@ -103,6 +110,9 @@ script EscapeRoom_MapScript_OnResumeScripts{
 script EscapeRoom_MapScript_OnWarpIntoScripts{
     // set NPC facing
 }
+
+
+// OTHER //
 
 script EscapeRoom_MapScripts_FindBallAferUse{
     lockall
@@ -181,7 +191,6 @@ script EscapeRoom_MapScripts_CheckStardustStolen{
         setflag(FLAG_STARDUST_STOLEN)
     }
 }
-
 
 
 
@@ -929,13 +938,13 @@ script EscapeRoom_EventScript_Trainer2{
 }
 
 script EscapeRoom_EventScript_Trainer3{
-    faceplayer
+    // faceplayer
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER3, 
         Trainer3_Intro, 
         Trainer3_Outro, 
         DoubleBattle_NotEnoughMons,
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer3PostBattle,
     )
     msgbox(Trainer3_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -1028,6 +1037,32 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
     
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
+
+script EscapeRoom_EventScript_Trainer3PostBattle{
+    // move away from door
+    lockall
+    msgbox(Trainer3FinalWords, MSGBOX_AUTOCLOSE)
+    waitmessage
+    applymovement(LOCALID_TRAINER3, EscapeRoom_Movement_Trainer3End)
+    waitmovement(LOCALID_TRAINER3)
+    copyobjectxytoperm(LOCALID_TRAINER3)
+
+    // set flag to keep it moved away
+    setflag(FLAG_TRAINER3_DEFEATED)
+
+    // heal 
+    call(EscapeRoom_EventScript_PostMatchHeal)
+
+    releaseall
+    end
+}
+
+movement EscapeRoom_Movement_Trainer3End{
+    face_right
+    walk_right * 2
+    face_left
+}
+
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
     // prevent custap restore after winning
@@ -2255,18 +2290,15 @@ text AnnihilapeHintNoMessage2{
 }
 
 text AnnihilapeHintMessage{
-    "Annihilape has returned!?\p"
+    "The Annihilape has returned!?\p"
     "Hmm...\p"
-    "Defeating her won't do much good,\n"
-    "and catching her?\l"
-    "Impossible."
+    "Don't waste your strength.\n"
+    "She won't stay down and won't be caught."
 }
 
 text AnnihilapeHintMessagePostScript{
-    "Defeating Annihilape won't do much\n"
-    "good,\l"
-    "and catching her?\l"
-    "Impossible."
+    "Don't waste your strength.\n"
+    "She won't stay down and won't be caught."
 }
 
 // TABLETS HINT NPC
@@ -2386,7 +2418,7 @@ text MarangaBerryRecoveredMessage{
 
 // TRADE NPC 2 - Ferrothorn Dunsparce
 text AskFerroDunsparceTrade{
-    "I've found a Dunsparce on the beach.\n"
+    "I've found a Dunsparce on the beach.\p"
     "Wanna trade it for your Ferrothorn?"
 }
 
@@ -2399,7 +2431,7 @@ text FerroTradeAccepted{
 }
 
 text FerroTradeDeclined{
-    "Alright. Some other time maybe."
+    "Some other time perhaps."
 }
 
 text FerroTradePostTrade{
@@ -2409,8 +2441,9 @@ text FerroTradePostTrade{
 
 // TRADE NPC 3 - Florges Egg
 text AskFlorgesEggTrade{
-    "That's a nice Florges. Do you want to\n"
-    "trade it for my Pokémon egg?"
+    "That's a nice Florges.\p"
+    "Do you want to trade it for a mystery\n"
+    "egg?"
 }
 
 text EggReceivedMessage{
@@ -2426,7 +2459,7 @@ text FlorgesTradeDeclined{
 }
 
 text FlorgesTradePostTrade{
-    "TBD - allow to retrade Florges"
+    "Do I sense regret?"
 }
 
 
@@ -2456,7 +2489,7 @@ text DunsparceTradePostTrade{
 
 // TRADE NPC 5 - Poochyena Smeargle
 text AskPoochSmeargleTrade{
-    "Want to trade dogs?"
+    "Wanna trade dogs?"
 }
 
 text SmeargleReceivedMessage{
@@ -2492,8 +2525,9 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 1 - Toedscruel Togedemaru
 text Trainer1_Intro{
-    "Sharing is caring!\p"
-    "That's what mom used to say."
+    "Sharing is caring.\n"
+    "Can you see the appeal?\p"
+    "Win the fight and we may have a deal."
 }
 
 text Trainer1_Outro{
@@ -2551,6 +2585,10 @@ text Trainer3_PostBattle{
     "Fock off."
 }
 
+text Trainer3FinalWords{
+    "Entry granted."
+}
+
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
@@ -2601,8 +2639,8 @@ text Trainer6_PostBattle{
 // TRAINER 7 - Toxicroak Breloom
 text Trainer7_Intro{
     "So many options.\n"
-    "Where do I start?\l"
-    "Making a decision feels really hard."
+    "Where do I start?\p"
+    "Making decisions was never this hard."
 }
 
 text Trainer7_Outro{

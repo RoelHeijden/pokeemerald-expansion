@@ -63,7 +63,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 // ADDED
 static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Single2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -90,7 +90,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [19] = NULL,                     // Unused
     [20] = AI_Double2_Logic,         // AI_FLAG_DOUBLE2
     [21] = AI_Double3_Logic,         // AI_FLAG_DOUBLE3
-    [22] = AI_Single4_Logic,         // AI_FLAG_SINGLE4
+    [22] = AI_Single2_Logic,         // AI_FLAG_SINGLE2
     [23] = NULL,                     // Unused
     [24] = NULL,                     // Unused
     [25] = NULL,                     // Unused
@@ -5564,6 +5564,31 @@ static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
 
 // unused
-static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+static s32 AI_Single2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+
+    // // Flamethrower into Ferrothorn
+    // if(gBattleMons[battlerDef].species == SPECIES_FERROTHORN){ 
+    //     if(move == MOVE_FLAMETHROWER)
+    //         score = 150;
+    //     if(move == MOVE_EARTH_POWER)
+    //         score = 50;
+    // }
+
+    // // Earth Power into Zeraora
+    // if(gBattleMons[battlerDef].species == SPECIES_ZERAORA){ 
+    //     if(move == MOVE_FLAMETHROWER)
+    //         score = 50;
+    //     if(move == MOVE_EARTH_POWER)
+    //         score = 150;
+    // }
+
+    // // Flamethrower into Florges
+    // if(gBattleMons[battlerDef].species == SPECIES_FLORGES){ 
+    //     if(move == MOVE_FLAMETHROWER)
+    //         score = 150;
+    //     if(move == MOVE_EARTH_POWER)
+    //         score = 50;
+    // }
+
     return score;
 }

@@ -49,7 +49,7 @@
 #define AI_FLAG_SEQUENCE_SWITCHING    (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle
 #define AI_FLAG_DOUBLE2               (1 << 20)  // AI for double battle2 (komala tinkaton)
 #define AI_FLAG_DOUBLE3               (1 << 21)  // AI for double battle3 (lucario lucario)
-#define AI_FLAG_SINGLE4               (1 << 22)  // AI for single battle4 (toxicroak, breloom)
+#define AI_FLAG_SINGLE2               (1 << 22)  // AI for single battle4 (toxicroak, breloom)
 
 #define AI_FLAG_COUNT                       23
 
