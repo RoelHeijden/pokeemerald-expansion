@@ -7817,71 +7817,105 @@ void MoveDeleterForgetMove(void)
     // ADDED
     // set flags to track which moves were deleted
     u16 deletedMove = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
+    u16 movePp = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PP1 + gSpecialVar_0x8005);
+
     switch (deletedMove)
     {
         case MOVE_TRUMP_CARD:
             FlagSet(FLAG_TRUMP_CARD_DELETED);
             FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_TRUMP_CARD_DELETED_0_PP);
             break;
         case MOVE_HEX:
             FlagSet(FLAG_HEX_DELETED);
             FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_HEX_DELETED_0_PP);
             break;
         case MOVE_COUNTER:
             FlagSet(FLAG_COUNTER_DELETED);
             FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_COUNTER_DELETED_0_PP);
             break;
         case MOVE_AIR_SLASH:
             FlagSet(FLAG_AIR_SLASH_DELETED);
             FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_AIR_SLASH_DELETED_0_PP);
             break;
         case MOVE_ASSIST:
             FlagSet(FLAG_ASSIST_DELETED);
             FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_ASSIST_DELETED_0_PP);
             break;
         case MOVE_ROCK_SMASH:
             FlagSet(FLAG_ROCK_SMASH_DELETED);
             FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_ROCK_SMASH_DELETED_0_PP);
             break;
         case MOVE_ECHOED_VOICE:
             FlagSet(FLAG_ECHOED_VOICE_DELETED);
             FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_ECHOED_VOICE_DELETED_0_PP);
             break;
         case MOVE_TRICK:
             FlagSet(FLAG_TRICK_DELETED);
             FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_TRICK_DELETED_0_PP);
             break;
         case MOVE_ICE_FANG:
             FlagSet(FLAG_ICE_FANG_DELETED);
             FlagSet(FLAG_POOCH_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_ICE_FANG_DELETED_0_PP);
             break;
         case MOVE_SLEEP_TALK:
             FlagSet(FLAG_SLEEP_TALK_DELETED);
             FlagSet(FLAG_POOCH_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_SLEEP_TALK_DELETED_0_PP);
             break;
         case MOVE_ENDEAVOR:
             FlagSet(FLAG_ENDEAVOR_DELETED);
             FlagSet(FLAG_POOCH_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_ENDEAVOR_DELETED_0_PP);
             break;
         case MOVE_TAUNT:
             FlagSet(FLAG_TAUNT_DELETED);
             FlagSet(FLAG_POOCH_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_TAUNT_DELETED_0_PP);
             break;
         case MOVE_SURF:
             FlagSet(FLAG_SURF_DELETED);
             FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_SURF_DELETED_0_PP);
             break;
         case MOVE_SWITCHEROO:
             FlagSet(FLAG_SWITCHEROO_DELETED);
             FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_SWITCHEROO_DELETED_0_PP);
             break;
         case MOVE_UPROAR:
             FlagSet(FLAG_UPROAR_DELETED);
             FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_UPROAR_DELETED_0_PP);
             break;
         case MOVE_CONVERSION_2:
             FlagSet(FLAG_CONVERSION_2_DELETED);
             FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+            if (movePp == 0)
+                FlagSet(FLAG_CONVERSION_2_DELETED_0_PP);
             break;
     }
 

@@ -250,6 +250,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_hideicemap						@ 0xf7
 	.4byte SrcCmd_givepoochegg						@ 0xf8
 	.4byte SrcCmd_addmonmove						@ 0xf9
+	.4byte SrcCmd_monhas0pp							@ 0xfa
+	.4byte SrcCmd_setmonmove0pp						@ 0xfb
 
 
 gScriptCmdTableEnd::

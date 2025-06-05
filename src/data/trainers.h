@@ -42404,7 +42404,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER5] =
     {
 #line 16964
-        .trainerName = _("tbd"),
+        .trainerName = _("Ape"),
 #line 16965
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
 #line 16966
@@ -42442,7 +42442,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER6] =
     {
 #line 16978
-        .trainerName = _("tbd"),
+        .trainerName = _("Rob & Pop"),
 #line 16979
         .trainerClass = TRAINER_CLASS_OLD_COUPLE,
 #line 16980
@@ -42509,7 +42509,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7] =
     {
 #line 17006
-        .trainerName = _("tbd"),
+        .trainerName = _("Turnem"),
 #line 17007
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC,
 #line 17008

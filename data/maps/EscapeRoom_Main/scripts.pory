@@ -665,57 +665,110 @@ script EscapeRoom_RestoreMoveset{
     checkpartymon(SPECIES_POOCHYENA)
     if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_POOCH_MOVE_DELETED) == TRUE)
     {
+        // check if all moves have 0 pp
+        // if true: set flag
+        monhas0pp(SPECIES_POOCHYENA)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
+        }
+
         if (flag(FLAG_ICE_FANG_DELETED) == TRUE)
         {
             addmonmove(SPECIES_POOCHYENA, MOVE_ICE_FANG)
             clearflag(FLAG_ICE_FANG_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ICE_FANG_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_POOCHYENA, MOVE_ICE_FANG)
+                clearflag(FLAG_ICE_FANG_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_SLEEP_TALK_DELETED) == TRUE)
         {
             addmonmove(SPECIES_POOCHYENA, MOVE_SLEEP_TALK)
             clearflag(FLAG_SLEEP_TALK_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_SLEEP_TALK_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_POOCHYENA, MOVE_SLEEP_TALK)
+                clearflag(FLAG_SLEEP_TALK_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_ENDEAVOR_DELETED) == TRUE)
         {
             addmonmove(SPECIES_POOCHYENA, MOVE_ENDEAVOR)
             clearflag(FLAG_ENDEAVOR_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ENDEAVOR_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_POOCHYENA, MOVE_ENDEAVOR)
+                clearflag(FLAG_ENDEAVOR_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_TAUNT_DELETED) == TRUE)
         {
             addmonmove(SPECIES_POOCHYENA, MOVE_TAUNT)
             clearflag(FLAG_TAUNT_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_TAUNT_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_POOCHYENA, MOVE_TAUNT)
+                clearflag(FLAG_TAUNT_DELETED_0_PP)
+            }
         }
 
         call(EscapeRoom_MoveRestoredSound)
         msgbox(PoochMovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
         clearflag(FLAG_POOCH_MOVE_DELETED)
-        clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_TEMP_5) // indicate that at least one move was restored
+        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
     // --- LIEPARD ---
     checkpartymon(SPECIES_LIEPARD)
     if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_LIEPARD_MOVE_DELETED) == TRUE)
     {
+        // check if all moves have 0 pp
+        // if true: set flag
+        monhas0pp(SPECIES_LIEPARD)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
+        }
+
         if (flag(FLAG_ASSIST_DELETED) == TRUE)
         {
             addmonmove(SPECIES_LIEPARD, MOVE_ASSIST)
             clearflag(FLAG_ASSIST_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ASSIST_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_LIEPARD, MOVE_ASSIST)
+                clearflag(FLAG_ASSIST_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_ROCK_SMASH_DELETED) == TRUE)
         {
             addmonmove(SPECIES_LIEPARD, MOVE_ROCK_SMASH)
             clearflag(FLAG_ROCK_SMASH_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ROCK_SMASH_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_LIEPARD, MOVE_ROCK_SMASH)
+                clearflag(FLAG_ROCK_SMASH_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_ECHOED_VOICE_DELETED) == TRUE)
         {
             addmonmove(SPECIES_LIEPARD, MOVE_ECHOED_VOICE)
             clearflag(FLAG_ECHOED_VOICE_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ECHOED_VOICE_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_LIEPARD, MOVE_ECHOED_VOICE)
+                clearflag(FLAG_ECHOED_VOICE_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_TRICK_DELETED) == TRUE)
         {
             addmonmove(SPECIES_LIEPARD, MOVE_TRICK)
             clearflag(FLAG_TRICK_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_TRICK_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_LIEPARD, MOVE_TRICK)
+                clearflag(FLAG_TRICK_DELETED_0_PP)
+            }
         }
 
         call(EscapeRoom_MoveRestoredSound)
@@ -723,31 +776,58 @@ script EscapeRoom_RestoreMoveset{
         waitmessage
         clearflag(FLAG_LIEPARD_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
     // --- DUNSPARCE ---
     checkpartymon(SPECIES_DUNSPARCE)
     if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_DUNSPARCE_MOVE_DELETED) == TRUE)
     {
+        // check if all moves have 0 pp
+        // if true: set flag
+        monhas0pp(SPECIES_DUNSPARCE)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
+        }
+
         if (flag(FLAG_TRUMP_CARD_DELETED) == TRUE)
         {
             addmonmove(SPECIES_DUNSPARCE, MOVE_TRUMP_CARD)
             clearflag(FLAG_TRUMP_CARD_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_TRUMP_CARD_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_TRUMP_CARD)
+                clearflag(FLAG_TRUMP_CARD_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_HEX_DELETED) == TRUE)
         {
             addmonmove(SPECIES_DUNSPARCE, MOVE_HEX)
             clearflag(FLAG_HEX_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_HEX_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_HEX)
+                clearflag(FLAG_HEX_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_COUNTER_DELETED) == TRUE)
         {
             addmonmove(SPECIES_DUNSPARCE, MOVE_COUNTER)
             clearflag(FLAG_COUNTER_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_COUNTER_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_COUNTER)
+                clearflag(FLAG_COUNTER_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_AIR_SLASH_DELETED) == TRUE)
         {
             addmonmove(SPECIES_DUNSPARCE, MOVE_AIR_SLASH)
             clearflag(FLAG_AIR_SLASH_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_AIR_SLASH_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_AIR_SLASH)
+                clearflag(FLAG_AIR_SLASH_DELETED_0_PP)
+            }
         }
 
         call(EscapeRoom_MoveRestoredSound)
@@ -755,31 +835,58 @@ script EscapeRoom_RestoreMoveset{
         waitmessage
         clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
     // --- SMEARGLE ---
     checkpartymon(SPECIES_SMEARGLE)
     if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_SMEARGLE_MOVE_DELETED) == TRUE)
     {
+        // check if all moves have 0 pp
+        // if true: set flag
+        monhas0pp(SPECIES_SMEARGLE)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
+        }
+
         if (flag(FLAG_SURF_DELETED) == TRUE)
         {
             addmonmove(SPECIES_SMEARGLE, MOVE_SURF)
             clearflag(FLAG_SURF_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_SURF_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_SMEARGLE, MOVE_SURF)
+                clearflag(FLAG_SURF_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_SWITCHEROO_DELETED) == TRUE)
         {
             addmonmove(SPECIES_SMEARGLE, MOVE_SWITCHEROO)
             clearflag(FLAG_SWITCHEROO_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_SWITCHEROO_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_SMEARGLE, MOVE_SWITCHEROO)
+                clearflag(FLAG_SWITCHEROO_DELETED_0_PP)
+            }
         }
+
         if (flag(FLAG_UPROAR_DELETED) == TRUE)
         {
             addmonmove(SPECIES_SMEARGLE, MOVE_UPROAR)
             clearflag(FLAG_UPROAR_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_UPROAR_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_SMEARGLE, MOVE_UPROAR)
+                clearflag(FLAG_UPROAR_DELETED_0_PP)
+            }
         }
+        
         if (flag(FLAG_CONVERSION_2_DELETED) == TRUE)
         {
             addmonmove(SPECIES_SMEARGLE, MOVE_CONVERSION_2)
             clearflag(FLAG_CONVERSION_2_DELETED)
+            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_CONVERSION_2_DELETED_0_PP)){
+                setmonmove0pp(SPECIES_SMEARGLE, MOVE_CONVERSION_2)
+                clearflag(FLAG_CONVERSION_2_DELETED_0_PP)
+            }
         }
 
         call(EscapeRoom_MoveRestoredSound)
@@ -787,6 +894,7 @@ script EscapeRoom_RestoreMoveset{
         waitmessage
         clearflag(FLAG_SMEARGLE_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
     // no moves restored
@@ -2606,8 +2714,6 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Rayquaza
 text Trainer5_Intro{
-    // "Back for more?\n"
-    // "Thought you'd escaped your ghosts."
     "My birds are amazing!\n"
     "They always find their way back."
 }

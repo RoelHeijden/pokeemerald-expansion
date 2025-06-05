@@ -16961,7 +16961,7 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER5 ===
-Name: tbd
+Name: Ape
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -16975,7 +16975,7 @@ EVs: 252 Atk / 252 Spe
 
 
 === TRAINER_CUSTOM_TRAINER6 ===
-Name: tbd
+Name: Rob & Pop
 Class: Old Couple
 Pic: Old Couple
 Gender: Male
@@ -17003,7 +17003,7 @@ IVs: 0 HP / 0 SpD
 
 
 === TRAINER_CUSTOM_TRAINER7 ===
-Name: tbd
+Name: Turnem
 Class: Ruin Maniac
 Pic: Ruin Maniac
 Gender: Male

@@ -676,23 +676,23 @@
 #define FLAG_LIEPARD_MOVE_DELETED   0x277 
 #define FLAG_DUNSPARCE_MOVE_DELETED  0x278
 #define FLAG_SMEARGLE_MOVE_DELETED  0x279
-#define FLAG_UNUSED_0x27A  0x27A // Unused Flag
-#define FLAG_UNUSED_0x27B  0x27B // Unused Flag
-#define FLAG_UNUSED_0x27C  0x27C // Unused Flag
-#define FLAG_UNUSED_0x27D  0x27D // Unused Flag
-#define FLAG_UNUSED_0x27E  0x27E // Unused Flag
-#define FLAG_UNUSED_0x27F  0x27F // Unused Flag
-#define FLAG_UNUSED_0x280  0x280 // Unused Flag
-#define FLAG_UNUSED_0x281  0x281 // Unused Flag
-#define FLAG_UNUSED_0x282  0x282 // Unused Flag
-#define FLAG_UNUSED_0x283  0x283 // Unused Flag
-#define FLAG_UNUSED_0x284  0x284 // Unused Flag
-#define FLAG_UNUSED_0x285  0x285 // Unused Flag
-#define FLAG_UNUSED_0x286  0x286 // Unused Flag
-#define FLAG_UNUSED_0x287  0x287 // Unused Flag
-#define FLAG_UNUSED_0x288  0x288 // Unused Flag
-#define FLAG_UNUSED_0x289  0x289 // Unused Flag
-#define FLAG_UNUSED_0x28A  0x28A // Unused Flag
+#define FLAG_TRUMP_CARD_DELETED_0_PP      0x27A
+#define FLAG_HEX_DELETED_0_PP             0x27B
+#define FLAG_COUNTER_DELETED_0_PP         0x27C
+#define FLAG_AIR_SLASH_DELETED_0_PP       0x27D
+#define FLAG_ASSIST_DELETED_0_PP          0x27E
+#define FLAG_ROCK_SMASH_DELETED_0_PP      0x27F
+#define FLAG_ECHOED_VOICE_DELETED_0_PP    0x280
+#define FLAG_TRICK_DELETED_0_PP           0x281
+#define FLAG_ICE_FANG_DELETED_0_PP        0x282
+#define FLAG_SLEEP_TALK_DELETED_0_PP      0x283
+#define FLAG_ENDEAVOR_DELETED_0_PP        0x284
+#define FLAG_TAUNT_DELETED_0_PP           0x285
+#define FLAG_SURF_DELETED_0_PP            0x286
+#define FLAG_SWITCHEROO_DELETED_0_PP      0x287
+#define FLAG_UPROAR_DELETED_0_PP          0x288
+#define FLAG_CONVERSION_2_DELETED_0_PP    0x289
+#define FLAG_MON_HAS_0_PP_WHEN_RESTORING  0x28A
 #define FLAG_UNUSED_0x28B  0x28B // Unused Flag
 #define FLAG_UNUSED_0x28C  0x28C // Unused Flag
 #define FLAG_UNUSED_0x28D  0x28D // Unused Flag

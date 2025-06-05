@@ -1941,6 +1941,74 @@ bool8 SrcCmd_addmonmove(struct ScriptContext *ctx)
 }
 
 
+// ADDED
+// check if all pp is 0
+bool8 SrcCmd_monhas0pp(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    struct Pokemon *mon;
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i];
+        if (species == GetMonData(mon, MON_DATA_SPECIES))
+        {
+            bool8 allMovesZeroPP = TRUE;
+
+            for (u8 j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                u8 pp = GetMonData(mon, MON_DATA_PP1 + j);
+
+                if (move != MOVE_NONE && pp != 0)
+                {
+                    allMovesZeroPP = FALSE;
+                    break;
+                }
+            }
+            gSpecialVar_Result = allMovesZeroPP;
+            return FALSE;
+        }
+    }
+    // species not found in party
+    gSpecialVar_Result = FALSE;
+    return FALSE;
+}
+
+
+// ADDED
+// sets the PP of the given move to 0 for the first party mon matching the species
+bool8 SrcCmd_setmonmove0pp(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    u16 move = ScriptReadHalfword(ctx);
+    struct Pokemon *mon;
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i];
+        if (GetMonData(mon, MON_DATA_SPECIES) == species)
+        {
+            for (u8 j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (move == GetMonData(mon, MON_DATA_MOVE1 + j))
+                {
+                    SetMonData(mon, MON_DATA_PP1 + j, &((u8){0}));
+                    gSpecialVar_Result = TRUE;
+                    return TRUE; 
+                }
+            }
+            gSpecialVar_Result = FALSE;
+            return FALSE; // species found, but move not found
+        }
+    }
+    gSpecialVar_Result = FALSE;
+    return FALSE; // species not found
+}
+
+
+
+
 
 
 
