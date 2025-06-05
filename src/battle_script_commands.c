@@ -7813,10 +7813,10 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     moneyReward = 0;
 
     if(trainerId == TRAINER_CUSTOM_TRAINER1){
-        moneyReward = 500;
+        moneyReward = 1000;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER2){
-        moneyReward = 500;
+        moneyReward = 1000;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER3){
         moneyReward = 500;
