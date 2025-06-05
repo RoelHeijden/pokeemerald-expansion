@@ -2194,6 +2194,19 @@ static bool32 ShouldUseItem(u32 battler)
 
         switch (ItemId_GetBattleUsage(item))
         {
+
+        // ADDED -- use PP restore items if any move has 0 pp
+        case EFFECT_ITEM_RESTORE_PP:
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+            {
+                if (gBattleMons[battler].moves[j] != MOVE_NONE && gBattleMons[battler].pp[j] == 0)
+                {
+                    shouldUse = TRUE;
+                    break;
+                }
+            }
+            break;
+
         case EFFECT_ITEM_HEAL_AND_CURE_STATUS:
             shouldUse = AI_ShouldHeal(battler, 0);
             break;

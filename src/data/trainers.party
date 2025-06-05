@@ -16876,9 +16876,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
 === TRAINER_CUSTOM_TRAINER1 ===
-Name: Help1
-Class: Expert
-Pic: Expert M
+Name: HM Cut
+Class: Collector
+Pic: Collector
 Gender: Male
 Music: Intense
 Double Battle: Yes
@@ -16899,12 +16899,14 @@ Careful Nature
 
 
 === TRAINER_CUSTOM_TRAINER2 ===
-Name: Help2
-Class: Expert
-Pic: Expert M
+Name: Zoysia
+Class: Aroma Lady
+Pic: Aroma Lady
 Gender: Male
 Music: Intense
+Items: Max Elixir
 Double Battle: No
+AI: AI_FLAG_SINGLE2
 
 Dracozolt @ Ability Shield  
 Ability: Volt Absorb  
@@ -16915,9 +16917,9 @@ Modest Nature
 
 
 === TRAINER_CUSTOM_TRAINER3 ===
-Name: Help3
-Class: Expert
-Pic: Expert M
+Name: 68 65 78
+Class: Hex Maniac
+Pic: Hex Maniac
 Gender: Male
 Music: Intense
 Double Battle: Yes
@@ -16942,9 +16944,9 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER4 ===
-Name: Help4
-Class: Expert
-Pic: Expert M
+Name: Ace
+Class: Triathlete
+Pic: Running Triathlete M
 Gender: Male
 Music: Intense
 Double Battle: No
@@ -16959,9 +16961,9 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER5 ===
-Name: Help5
-Class: Expert
-Pic: Expert M
+Name: tbd
+Class: Bird Keeper
+Pic: Bird Keeper
 Gender: Male
 Music: Intense
 Double Battle: No
@@ -16973,9 +16975,9 @@ EVs: 252 Atk / 252 Spe
 
 
 === TRAINER_CUSTOM_TRAINER6 ===
-Name: Help6
-Class: Expert
-Pic: Expert M
+Name: tbd
+Class: Old Couple
+Pic: Old Couple
 Gender: Male
 Music: Intense
 Double Battle: Yes
@@ -17001,9 +17003,9 @@ IVs: 0 HP / 0 SpD
 
 
 === TRAINER_CUSTOM_TRAINER7 ===
-Name: Help7
-Class: Expert
-Pic: Expert M
+Name: tbd
+Class: Ruin Maniac
+Pic: Ruin Maniac
 Gender: Male
 Music: Intense
 Double Battle: No
