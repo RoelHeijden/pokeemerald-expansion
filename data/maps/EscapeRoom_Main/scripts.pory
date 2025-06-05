@@ -335,6 +335,13 @@ script EscapeRoom_EventScript_MainInfoSign {
     releaseall
 }
 
+script EscapeRoom_EventScript_MoveDeleterSign {
+    lockall
+    msgbox(MoveDeleterSignMessage, MSGBOX_DEFAULT)
+    waitmessage
+    releaseall
+}
+
 script EscapeRoom_EventScript_EndSign {
     lockall
     msgbox(EndSignMessage, MSGBOX_AUTOCLOSE)
@@ -634,7 +641,9 @@ script EscapeRoom_ChooseMoveToDelete{
 
     // delete move
     special(MoveDeleterForgetMove)
+    // playse(SE_SUCCESS)
     playse(SE_SHOP)
+    waitse
     msgbox(MoveDeleterMoveDeleted, MSGBOX_AUTOCLOSE)
     end
 }
@@ -668,7 +677,9 @@ script EscapeRoom_RestoreMoveset{
             clearflag(FLAG_TAUNT_DELETED)
         }
 
-        msgbox(PoochMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        call(EscapeRoom_MoveRestoredSound)
+        msgbox(PoochMovesRestoredMessage, MSGBOX_DEFAULT)
+        waitmessage
         clearflag(FLAG_POOCH_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
     }
@@ -698,7 +709,9 @@ script EscapeRoom_RestoreMoveset{
             clearflag(FLAG_TRICK_DELETED)
         }
 
-        msgbox(LiepardMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        call(EscapeRoom_MoveRestoredSound)
+        msgbox(LiepardMovesRestoredMessage, MSGBOX_DEFAULT)
+        waitmessage
         clearflag(FLAG_LIEPARD_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
     }
@@ -728,7 +741,9 @@ script EscapeRoom_RestoreMoveset{
             clearflag(FLAG_AIR_SLASH_DELETED)
         }
 
-        msgbox(DunsparceMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        call(EscapeRoom_MoveRestoredSound)
+        msgbox(DunsparceMovesRestoredMessage, MSGBOX_DEFAULT)
+        waitmessage
         clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
     }
@@ -758,7 +773,9 @@ script EscapeRoom_RestoreMoveset{
             clearflag(FLAG_CONVERSION_2_DELETED)
         }
 
-        msgbox(SmeargleMovesRestoredMessage, MSGBOX_AUTOCLOSE)
+        call(EscapeRoom_MoveRestoredSound)
+        msgbox(SmeargleMovesRestoredMessage, MSGBOX_DEFAULT)
+        waitmessage
         clearflag(FLAG_SMEARGLE_MOVE_DELETED)
         clearflag(FLAG_TEMP_5)
     }
@@ -771,6 +788,15 @@ script EscapeRoom_RestoreMoveset{
     }
 }
 
+script EscapeRoom_MoveRestoredSound{
+    delay(10)
+    playse(SE_NOTE_E)
+    delay(7)
+    playse(SE_NOTE_G)
+    delay(7)
+    playse(SE_NOTE_C_HIGH)
+    waitse
+}
 
 script EscapeRoom_UltraBallNPC{
     lockall
@@ -1187,7 +1213,7 @@ script EscapeRoom_EventScript_SellDunsparce{
 
             // trade pokemon
             removemon(SPECIES_DUNSPARCE)
-            addmoney(6000)
+            addmoney(5000)
             setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
 
             message(MoneyReceivedMessage)
@@ -1337,6 +1363,7 @@ script EscapeRoom_EventScript_MapSwitch1{
 
     // change direction
     if(var(VAR_RESULT) == YES){
+        playse(SE_CLICK)
         addvar(VAR_MAP_SWITCH_1, 1)
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -1380,6 +1407,7 @@ script EscapeRoom_EventScript_MapSwitch2{
 
     // change direction
     if(var(VAR_RESULT) == YES){
+        playse(SE_CLICK)
         addvar(VAR_MAP_SWITCH_2, 1)
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -1422,6 +1450,7 @@ script EscapeRoom_EventScript_MapSwitch3{
 
     // change direction
     if(var(VAR_RESULT) == YES){
+        playse(SE_CLICK)
         addvar(VAR_MAP_SWITCH_3, 1)
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -1469,6 +1498,7 @@ script EscapeRoom_EventScript_MapSwitch4{
 
     // change direction
     if(var(VAR_RESULT) == YES){
+        playse(SE_CLICK)
         addvar(VAR_MAP_SWITCH_4, 1)
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -1950,6 +1980,18 @@ text MysteriousWallBackroomSign{
     "Choice paralysis?"
 }
 
+text MoveDeleterSignMessage{
+    "-- Temporary Move Deleter --\p" 
+
+    "Get rid of your moves and put them\n"
+    "back whenever you want.\p"
+
+    "Please note that a restored move will\n"
+    "get 0 pp if\l"
+    "a) it had 0 pp when deleted.\l"
+    "b) all current moves have 0 pp."
+}
+
 
 // ANNIHILAPE'S LAIR
 text AnnihilapeStatueMessage{
@@ -2180,7 +2222,6 @@ text AntiSoftlockNoActionMessage{
 
 
 // ULTRA BALL QUIZ NPC
-
 text UltraBallQuizStart{
     "(This will be a quiz at some point)"
 }
@@ -2217,16 +2258,15 @@ text AnnihilapeHintMessage{
     "Annihilape has returned!?\p"
     "Hmm...\p"
     "Defeating her won't do much good,\n"
-    "she always comes back.\p"
-    "I also wouldn't waste any Poké Balls on\n"
-    "her if I were you."
+    "and catching her?\l"
+    "Impossible."
 }
 
 text AnnihilapeHintMessagePostScript{
     "Defeating Annihilape won't do much\n"
-    "good, she always comes back.\p"
-    "I also wouldn't waste any Poké Balls on\n"
-    "her if I were you."
+    "good,\l"
+    "and catching her?\l"
+    "Impossible."
 }
 
 // TABLETS HINT NPC
@@ -2286,9 +2326,9 @@ text MartNPC_SayGoodbye{
 
 // MOVE DELETER NPC
 text AskDeleteMove{
-    "Hello, I can temporarily delete one of\n"
-    "your Pokémon's moves.\p"
-    "What would you like to do?"
+    // "Hello, I can temporarily delete one of\n"
+    // "your Pokémon's moves.\p"
+    "Hi, what would you like to do?"
 }
 
 text MoveDeleterComeAgain{
@@ -2392,13 +2432,13 @@ text FlorgesTradePostTrade{
 
 // TRADE NPC 4 - Dunsparce Money
 text AskDunsparceMoneyTrade{
-    "Hi, I collect rare Pokémon as a hobby.\p"
+    "I collect rare Pokémon as a hobby!\p"
     "Your Dunsparce looks quite valuable,\n"
-    "would you sell it to me for ¥6.000?"
+    "would you sell it to me for ¥5.000?"
 }
 
 text MoneyReceivedMessage{
-    "{PLAYER} received ¥6.000!"
+    "{PLAYER} received ¥5.000!"
 }
 
 text DunsparceTradeAccepted{
@@ -2452,7 +2492,8 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 1 - Toedscruel Togedemaru
 text Trainer1_Intro{
-    "Something something I've got HM Cut!"
+    "Sharing is caring!\p"
+    "That's what mom used to say."
 }
 
 text Trainer1_Outro{
@@ -2481,7 +2522,10 @@ text ZeraCutTradeAccepted{
 
 // TRAINER 2 - Dracozolt 
 text Trainer2_Intro{
-    "I hate grass."
+    // "Roots run deep where secrets lie,\n"
+    // "cut the path, or walk on by."
+    "The land may hide its fiercest face,\n"
+    "beneath the calm of leafy grace."
 }
 
 text Trainer2_Outro{
@@ -2524,9 +2568,10 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Rayquaza
 text Trainer5_Intro{
-    "Back for more?\n"
-    "Thought you'd escaped your ghosts."
-
+    // "Back for more?\n"
+    // "Thought you'd escaped your ghosts."
+    "My birds are amazing!\n"
+    "They always find their way back."
 }
 
 text Trainer5_Outro{
@@ -2540,8 +2585,8 @@ text Trainer5_PostBattle{
 
 // TRAINER 6 - Lucario Lucario
 text Trainer6_Intro{
-    "You can't steal our item.\p"
-    "Wanna borrow it?"
+    "We're starting to get bored...\n"
+    "Show us a trick!"
 }
 
 text Trainer6_Outro{
@@ -2555,8 +2600,9 @@ text Trainer6_PostBattle{
 
 // TRAINER 7 - Toxicroak Breloom
 text Trainer7_Intro{
-    "Too many options?\n"
-    "Be careful or you might freeze up."
+    "So many options.\n"
+    "Where do I start?\l"
+    "Making a decision feels really hard."
 }
 
 text Trainer7_Outro{
