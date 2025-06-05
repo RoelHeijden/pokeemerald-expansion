@@ -11020,7 +11020,7 @@
           "map": "MAP_ESCAPE_ROOM_MAIN",
           "base_label": "gEscapeRoom0",
           "land_mons": {
-            "encounter_rate": 20,
+            "encounter_rate": 40,
             "mons": [
               {
                 "min_level": 5,
