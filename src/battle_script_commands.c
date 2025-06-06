@@ -2580,12 +2580,11 @@ static void Cmd_resultmessage(void)
             break;
         case MOVE_RESULT_FAILED:
             stringId = STRINGID_BUTITFAILED;
-            DebugPrintf("check1");
             break;
+            
         // ADDED
         case MOVE_RESULT_FAIL_ABILITY_SHIELD:
             stringId = STRINGID_ABILITYSHIELDFAIL;
-            DebugPrintf("check2");
             break;
 
         case MOVE_RESULT_DOESNT_AFFECT_FOE:
@@ -14850,14 +14849,14 @@ static void Cmd_assistattackselect(void)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
 
-        // Check for special case: always pick Conversion2 if
+        // Special case 1: Surf + Conversion 2 vs Lucario on turn 2
         // only Surf and Conversion 2 are available
         // only on turn 2
         // only if the opponent is lucario
         if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter == 1)
         {
             bool8 hasSurf = FALSE, hasConversion2 = FALSE;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < MAX_MON_MOVES; i++)
             {
                 if (validMoves[i] == MOVE_SURF)
                     hasSurf = TRUE;
@@ -14879,6 +14878,44 @@ static void Cmd_assistattackselect(void)
                 }
             }
         }
+
+        // ADDED
+        // special case 2: Ice Fang + Endeavor vs Mega Rayquaza
+        // only Ice Fang and Endeavor available
+        // only if opponent is mega rayqyaza
+        // on turn 1: Endeavor, on turn 2: Ice Fang
+        if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter <= 1)
+        {
+            bool8 hasIceFang = FALSE, hasEndeavor = FALSE;
+            for (int i = 0; i < MAX_MON_MOVES; i++)
+            {
+                if (validMoves[i] == MOVE_ICE_FANG)
+                    hasIceFang = TRUE;
+                else if (validMoves[i] == MOVE_ENDEAVOR)
+                    hasEndeavor = TRUE;
+            }
+
+            if (hasIceFang && hasEndeavor)
+            {
+                u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
+                if (gBattleMons[opponent].species == SPECIES_RAYQUAZA_MEGA)
+                {
+                    // On turn 1, use Endeavor; turn 2, use Ice Fang
+                    u16 chosenMove = (gBattleResults.battleTurnCounter == 0)
+                        ? MOVE_ENDEAVOR
+                        : MOVE_ICE_FANG;
+
+                    gCalledMove = chosenMove;
+                    gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+                    gBattlescriptCurrInstr = cmd->nextInstr;
+                    TRY_FREE_AND_SET_NULL(validMoves);
+                    return;
+                }
+            }
+        }
+
+
+
 
         // Default random selection
         gCalledMove = validMoves[Random() % chooseableMovesNo];
