@@ -1171,6 +1171,22 @@
 	.endm
 
 
+	@ makes a backup of the players current party pokemon.
+	.macro backupplayerparty
+	.byte 0xfc
+	.endm
+
+	@ loads a backup of the players previous party pokemon.
+	.macro restoreplayerparty
+	.byte 0xfd
+	.endm
+
+	@ compares the players party backup to the current pokemon 
+	@ VAR_RESULT is set to FALSE if no differences were found. TRUE if different.
+	.macro partybackupisdifferent
+	.byte 0xfe
+	.endm
+
 
 	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.

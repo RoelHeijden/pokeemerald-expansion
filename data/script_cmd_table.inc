@@ -252,6 +252,9 @@ gScriptCmdTable::
 	.4byte SrcCmd_addmonmove						@ 0xf9
 	.4byte SrcCmd_monhas0pp							@ 0xfa
 	.4byte SrcCmd_setmonmove0pp						@ 0xfb
+	.4byte ScrCmd_backupplayerparty				    @ 0xfc
+	.4byte ScrCmd_restoreplayerparty				@ 0xfd
+	.4byte ScrCmd_partybackupisdifferent			@ 0xfe
 
 
 gScriptCmdTableEnd::

@@ -55,6 +55,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_REMOVE_HELD_ITEM, 1: EscapeRoom_MapScripts_RemoveHeldItem
+        VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
     ] 
 }
 
@@ -104,6 +105,23 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
+    }
+    
+    // set var for pre-damage restore
+    if(flag(FLAG_PLAYER_JUST_LOST) == TRUE){
+        partybackupisdifferent
+        if(var(VAR_RESULT) == TRUE){
+            setvar(VAR_ASK_RESET_PREDAMAGE, 1)
+        }
+        clearflag(FLAG_PLAYER_JUST_LOST)
+    }
+
+    if(flag(FLAG_JUST_HAD_ZERA_BATTLE) == TRUE && flag(FLAG_ZERAORA_CAUGHT) == FALSE){
+        partybackupisdifferent
+        if(var(VAR_RESULT) == TRUE){
+            setvar(VAR_ASK_RESET_PREDAMAGE, 1)
+        }
+        clearflag(FLAG_JUST_HAD_ZERA_BATTLE)
     }
 } 
 
@@ -190,6 +208,17 @@ script EscapeRoom_MapScripts_CheckStardustStolen{
     if(var(VAR_0x8005) == ITEM_STARDUST) {
         setflag(FLAG_STARDUST_STOLEN)
     }
+}
+
+script EscapeRoom_MapScripts_AskResetPredamage{
+    lockall
+    msgbox(AskResetPredamageMessage, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        restoreplayerparty
+        msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
+    }
+    setvar(VAR_ASK_RESET_PREDAMAGE, 0)
+    releaseall
 }
 
 
@@ -1014,6 +1043,7 @@ script EscapeRoom_TabletsHintNPC{
 //// TRAINERS ////
 
 script EscapeRoom_EventScript_Trainer1{
+    backupplayerparty
     faceplayer
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER1, 
@@ -1034,6 +1064,7 @@ script EscapeRoom_EventScript_Trainer1{
 }
 
 script EscapeRoom_EventScript_Trainer2{
+    backupplayerparty
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER2, 
         Trainer2_Intro, 
@@ -1046,7 +1077,7 @@ script EscapeRoom_EventScript_Trainer2{
 }
 
 script EscapeRoom_EventScript_Trainer3{
-    // faceplayer
+    backupplayerparty
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER3, 
         Trainer3_Intro, 
@@ -1060,6 +1091,7 @@ script EscapeRoom_EventScript_Trainer3{
 }
 
 script EscapeRoom_EventScript_Trainer4{
+    backupplayerparty
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER4, 
         Trainer4_Intro, 
@@ -1072,6 +1104,7 @@ script EscapeRoom_EventScript_Trainer4{
 }
 
 script EscapeRoom_EventScript_Trainer5{
+    backupplayerparty
     if(flag(FLAG_STARDUST_STOLEN) == FALSE){
         trainerbattle_single(
             TRAINER_CUSTOM_TRAINER5_A, 
@@ -1095,6 +1128,7 @@ script EscapeRoom_EventScript_Trainer5{
 }
 
 script EscapeRoom_EventScript_Trainer6{
+    backupplayerparty
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER6, 
         Trainer6_Intro, 
@@ -1108,6 +1142,7 @@ script EscapeRoom_EventScript_Trainer6{
 }
 
 script EscapeRoom_EventScript_Trainer7{
+    backupplayerparty
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER7, 
         Trainer7_Intro, 
@@ -1700,6 +1735,7 @@ script EscapeRoom_EventScript_SwitchesOpenDoorSequence{
 
 script EscapeRoom_EventScript_AnnihilapeBattle{
     lockall
+    backupplayerparty
     createmon(
         side=1,
         slot=0,
@@ -2328,7 +2364,7 @@ text MapSwitchPointedWestTablet4{
 
 // NURSE
 text Nurse_Ask_heal{
-    "Hello, should I heal your Pokémon?"
+    "Should I heal your Pokémon?"
 }
 
 text Nurse_Heal_End{
@@ -2516,7 +2552,6 @@ text NoMovesRestoredMessage{
 
 
 
-
 // ITEM RETURNS
 text NewBallMessage{
     "You recover the ball."
@@ -2532,6 +2567,17 @@ text CustapBerryRecoveredMessage{
 
 text MarangaBerryRecoveredMessage{
     "Your Maranga Berry was restored."
+}
+
+
+// PRE DAMAGE RESET
+text AskResetPredamageMessage{
+    "Want to set your Pokémon's HP and move\n"
+    "PP back to their pre-battle state?"
+}
+
+text PreDamagedStateRestoredMessage{
+    "Your team's state was restored."
 }
 
 

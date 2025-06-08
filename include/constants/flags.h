@@ -693,8 +693,8 @@
 #define FLAG_UPROAR_DELETED_0_PP          0x288
 #define FLAG_CONVERSION_2_DELETED_0_PP    0x289
 #define FLAG_MON_HAS_0_PP_WHEN_RESTORING  0x28A
-#define FLAG_UNUSED_0x28B  0x28B // Unused Flag
-#define FLAG_UNUSED_0x28C  0x28C // Unused Flag
+#define FLAG_PLAYER_JUST_LOST             0x28B
+#define FLAG_JUST_HAD_ZERA_BATTLE         0x28C  
 #define FLAG_UNUSED_0x28D  0x28D // Unused Flag
 #define FLAG_UNUSED_0x28E  0x28E // Unused Flag
 #define FLAG_UNUSED_0x28F  0x28F // Unused Flag

@@ -1995,7 +1995,7 @@ bool8 SrcCmd_setmonmove0pp(struct ScriptContext *ctx)
                 {
                     SetMonData(mon, MON_DATA_PP1 + j, &((u8){0}));
                     gSpecialVar_Result = TRUE;
-                    return TRUE; 
+                    return FALSE; 
                 }
             }
             gSpecialVar_Result = FALSE;
@@ -2005,6 +2005,82 @@ bool8 SrcCmd_setmonmove0pp(struct ScriptContext *ctx)
     gSpecialVar_Result = FALSE;
     return FALSE; // species not found
 }
+
+
+// ADDED
+bool8 ScrCmd_backupplayerparty(struct ScriptContext *ctx)
+{
+    for (int i = 0; i < PARTY_SIZE; i++)
+        gPlayerPartyBackup[i] = gPlayerParty[i];
+
+    gPartyBackupInUse = TRUE;
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_restoreplayerparty(struct ScriptContext *ctx)
+{
+    if (gPartyBackupInUse)
+    {
+        for (int i = 0; i < PARTY_SIZE; i++)
+            gPlayerParty[i] = gPlayerPartyBackup[i];
+
+        gPartyBackupInUse = FALSE;
+    }
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_partybackupisdifferent(struct ScriptContext *ctx)
+{
+    gSpecialVar_Result = FALSE;
+
+    if (!gPartyBackupInUse)
+        return FALSE; // no backup to compare with
+    
+    for (int i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *curMon = &gPlayerParty[i];
+        struct Pokemon *backupMon = &gPlayerPartyBackup[i];
+
+        // check if species in slots match
+        if (GetMonData(curMon, MON_DATA_SPECIES) != GetMonData(backupMon, MON_DATA_SPECIES)){
+            gSpecialVar_Result = TRUE;
+            return FALSE;
+        }
+
+        // skip next steps if slot has no pokemon
+        if (GetMonData(curMon, MON_DATA_SPECIES) == SPECIES_NONE)
+            continue;
+
+        // check if HP matches
+        if (GetMonData(curMon, MON_DATA_HP) != GetMonData(backupMon, MON_DATA_HP)){
+            gSpecialVar_Result = TRUE;
+            return FALSE;
+        }
+
+        // check if moves and PP matches
+        for (int j = 0; j < MAX_MON_MOVES; j++)
+        {
+            if (GetMonData(curMon, MON_DATA_MOVE1 + j) != GetMonData(backupMon, MON_DATA_MOVE1 + j)){
+                gSpecialVar_Result = TRUE;
+                return FALSE;
+            }
+
+            if (GetMonData(curMon, MON_DATA_PP1 + j) != GetMonData(backupMon, MON_DATA_PP1 + j)){
+                gSpecialVar_Result = TRUE;
+                return FALSE;
+            }
+        }
+    }
+
+    // no changes found
+    gSpecialVar_Result = FALSE;
+    return FALSE; 
+}
+
+
+
 
 
 

@@ -679,6 +679,8 @@ extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
+extern struct Pokemon gPlayerPartyBackup[PARTY_SIZE]; // ADDED
+extern bool8 gPartyBackupInUse;                       // ADDED
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;

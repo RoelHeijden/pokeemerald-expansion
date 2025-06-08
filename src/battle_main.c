@@ -5590,6 +5590,9 @@ static void HandleEndTurn_BattleLost(void)
         gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
     }
 
+    // ADDED
+    FlagSet(FLAG_PLAYER_JUST_LOST); 
+
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }
 
@@ -5604,6 +5607,10 @@ static void HandleEndTurn_RanFromBattle(void)
         gBattlescriptCurrInstr = BattleScript_LocalBattleLostPrintWhiteOut;
         // sText_PlayerForfeitToTrainer
         gBattleOutcome = B_OUTCOME_LOST;
+
+        // ADDED
+        FlagSet(FLAG_PLAYER_JUST_LOST); 
+
     }
     // CHANGED to else if
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
