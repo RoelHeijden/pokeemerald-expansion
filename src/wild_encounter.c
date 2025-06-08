@@ -516,11 +516,12 @@ static void CreateWildMon(u16 species, u8 level)
             }
             else{
                 species = SPECIES_DUSKNOIR;
-                heldItem = ITEM_STARDUST;
-                // stardust removed after obtaining it once
-                if(FlagGet(FLAG_STARDUST_STOLEN) == TRUE){
-                    heldItem = ITEM_NONE;
-                }
+                // heldItem = ITEM_STARDUST;
+                // // stardust removed after obtaining it once
+                // if(FlagGet(FLAG_STARDUST_STOLEN) == TRUE){
+                //     heldItem = ITEM_NONE;
+                // }
+                heldItem = ITEM_NONE;
                 level = 100;
                 abilityNum = 0; // pressure
                 gender = MON_MALE;

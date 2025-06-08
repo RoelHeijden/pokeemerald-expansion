@@ -16960,15 +16960,28 @@ IVs: 0 Atk
 - Focus Blast
 
 
-=== TRAINER_CUSTOM_TRAINER5 ===
-Name: Ape
+=== TRAINER_CUSTOM_TRAINER5_A ===
+Name: Abe
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
 Music: Intense
 Double Battle: No
 
-Rayquaza  
+Rayquaza @ Stardust
+Ability: Air Lock  
+EVs: 252 Atk / 252 Spe  
+- Dragon Ascent
+
+=== TRAINER_CUSTOM_TRAINER5_B ===
+Name: Abe
+Class: Bird Keeper
+Pic: Bird Keeper
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Rayquaza
 Ability: Air Lock  
 EVs: 252 Atk / 252 Spe  
 - Dragon Ascent
