@@ -211,7 +211,8 @@ BattleScript_TrainerBallBlock::
 	finishaction
 
 BattleScript_RunByUsingItem::
-	playse SE_FLEE
+	@ playse SE_FLEE
+	setfleeforfeit
 	setbyte gBattleOutcome, B_OUTCOME_RAN
 	finishturn
 

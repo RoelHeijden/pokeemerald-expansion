@@ -2456,12 +2456,18 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_PokeDoll,
     },
 
+
+
     [ITEM_FLUFFY_TAIL] =
     {
-        .name = _("Fluffy Tail"),
-        .price = (I_PRICE >= GEN_7) ? 100 : 1000,
-        .description = sPokeDollDesc,
-        .pocket = POCKET_ITEMS,
+        .name = _("Not-So-Fluffy Tail"),
+        .price = 0, // changed
+        .description = COMPOUND_STRING(
+            "Use to forfeit\n"
+            "a wild battle.\n"
+            "(QoL feature)"),
+        .importance = 1,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .battleUsage = EFFECT_ITEM_ESCAPE,

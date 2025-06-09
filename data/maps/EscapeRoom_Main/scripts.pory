@@ -347,6 +347,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 }
 
 script EscapeRoom_MapScripts_GetItems{
+    additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_EXP_CANDY_S)
 }
 
@@ -1735,7 +1736,16 @@ script EscapeRoom_EventScript_SwitchesOpenDoorSequence{
 
 script EscapeRoom_EventScript_AnnihilapeBattle{
     lockall
+
+    // backup party state
     backupplayerparty
+
+    // allow items (wild battle)
+    if(flag(FLAG_TOGGLE_BAG_USE) == TRUE){
+        clearflag(FLAG_TOGGLE_BAG_USE)
+    }
+
+    // set annihilape battle
     createmon(
         side=1,
         slot=0,
@@ -2417,7 +2427,7 @@ text UltraBallQuizStart{
 }
 
 text UltaBallQuizPostScript{
-    "(Thanks for playing)"
+    "Thanks for playing!"
 }
 
 

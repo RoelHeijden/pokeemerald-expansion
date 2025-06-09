@@ -572,7 +572,7 @@ static void Cmd_jumpifhasnohp(void);
 static void Cmd_jumpifnotcurrentmoveargtype(void);
 static void Cmd_pickup(void);
 static void Cmd_unused3(void);
-static void Cmd_unused4(void);
+// static void Cmd_unused4(void);
 static void Cmd_settypebasedhalvers(void);
 static void Cmd_jumpifsubstituteblocks(void);
 static void Cmd_tryrecycleitem(void);
@@ -589,12 +589,13 @@ static void Cmd_subattackerhpbydmg(void);
 static void Cmd_removeattackerstatus1(void);
 static void Cmd_finishaction(void);
 static void Cmd_finishturn(void);
+static void Cmd_setfleeforfeit(void); // ADDED
 static void Cmd_trainerslideout(void);
 static void Cmd_settelekinesis(void);
 static void Cmd_swapstatstages(void);
 static void Cmd_averagestats(void);
 static void Cmd_jumpifoppositegenders(void);
-static void Cmd_unused(void);
+// static void Cmd_unused(void);
 static void Cmd_tryworryseed(void);
 static void Cmd_callnative(void);
 
@@ -831,7 +832,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifnotcurrentmoveargtype,             //0xE4
     Cmd_pickup,                                  //0xE5
     Cmd_unused3,                                 //0xE6
-    Cmd_unused4,                                 //0xE7
+    Cmd_setfleeforfeit,                                 //0xE7
     Cmd_settypebasedhalvers,                     //0xE8
     Cmd_jumpifsubstituteblocks,                  //0xE9
     Cmd_tryrecycleitem,                          //0xEA
@@ -15115,9 +15116,9 @@ static void Cmd_unused3(void)
 {
 }
 
-static void Cmd_unused4(void)
-{
-}
+// static void Cmd_unused4(void)
+// {
+// }
 
 // Water and Mud Sport
 static void Cmd_settypebasedhalvers(void)
@@ -15998,6 +15999,16 @@ static void Cmd_finishturn(void)
     gCurrentTurnActionNumber = gBattlersCount;
 }
 
+// ADDED
+static void Cmd_setfleeforfeit(void)
+{
+    CMD_ARGS();
+    
+    gProtectStructs[gBattlerAttacker].fleeType = FLEE_FORFEIT;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+
 static void Cmd_trainerslideout(void)
 {
     CMD_ARGS(u8 position);
@@ -16098,9 +16109,9 @@ static void Cmd_jumpifoppositegenders(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
-static void Cmd_unused(void)
-{
-}
+// static void Cmd_unused(void)
+// {
+// }
 
 static void Cmd_tryworryseed(void)
 {

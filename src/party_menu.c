@@ -4610,8 +4610,9 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_SELECT);
-        if (!IsItemFlute(gSpecialVar_ItemId))
+        if (!IsItemFlute(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_FLUFFY_TAIL) { // ADDED fluffy tail (wild battle forfeit) to not be consumed
             RemoveBagItem(gSpecialVar_ItemId, 1);
+        }
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
@@ -4667,7 +4668,7 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         if (!IsItemFlute(item))
         {
             PlaySE(SE_USE_ITEM);
-            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM)
+            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM && item != ITEM_FLUFFY_TAIL)  // ADDED - fluffy tail case
                 RemoveBagItem(item, 1);
         }
         else

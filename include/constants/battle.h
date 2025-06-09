@@ -445,6 +445,7 @@
 
 #define FLEE_ITEM    1
 #define FLEE_ABILITY 2
+#define FLEE_FORFEIT 3
 
 // Return value for IsRunningFromBattleImpossible.
 #define BATTLE_RUN_SUCCESS        0

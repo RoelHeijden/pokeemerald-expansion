@@ -5610,7 +5610,6 @@ static void HandleEndTurn_RanFromBattle(void)
 
         // ADDED
         FlagSet(FLAG_PLAYER_JUST_LOST); 
-
     }
     // CHANGED to else if
     else if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
@@ -5636,6 +5635,13 @@ static void HandleEndTurn_RanFromBattle(void)
             break;
         case FLEE_ABILITY:
             gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
+            break;
+        // ADDED
+        case FLEE_FORFEIT:
+            gBattlescriptCurrInstr = BattleScript_LocalBattleLostPrintWhiteOut;
+            gBattleOutcome = B_OUTCOME_LOST;
+            // ADDED
+            FlagSet(FLAG_PLAYER_JUST_LOST); 
             break;
         }
     }

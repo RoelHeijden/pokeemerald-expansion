@@ -1237,7 +1237,7 @@
 	.byte 0xe6
 	.endm
 
-	.macro unused4
+	.macro setfleeforfeit
 	.byte 0xe7
 	.endm
 
