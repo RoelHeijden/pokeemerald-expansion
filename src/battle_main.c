@@ -1984,6 +1984,20 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
             CreateMon(&party[i], partyData[i].species, partyData[i].lvl, 0, TRUE, personalityValue, otIdType, fixedOtId);
             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
 
+
+            // ADDED
+            // trainer 5 item removed after it's been stolen one
+            if (partyData[i].species == SPECIES_RAYQUAZA && partyData[i].heldItem == ITEM_STARDUST)
+            {
+                if (FlagGet(FLAG_STARDUST_STOLEN) == TRUE)
+                {
+                    u16 newItem = ITEM_NONE;
+                    SetMonData(&party[i], MON_DATA_HELD_ITEM, &newItem);
+                }
+            }
+
+            
+
             CustomTrainerPartyAssignMoves(&party[i], &partyData[i]);
             SetMonData(&party[i], MON_DATA_IVS, &(partyData[i].iv));
             if (partyData[i].ev != NULL)

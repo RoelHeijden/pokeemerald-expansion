@@ -16876,7 +16876,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
 === TRAINER_CUSTOM_TRAINER1 ===
-Name: GivesHM01
+Name: H.M. One
 Class: Collector
 Pic: Collector
 Gender: Male
@@ -16960,7 +16960,7 @@ IVs: 0 Atk
 - Focus Blast
 
 
-=== TRAINER_CUSTOM_TRAINER5_A ===
+=== TRAINER_CUSTOM_TRAINER5 ===
 Name: Abe
 Class: Bird Keeper
 Pic: Bird Keeper
@@ -16969,19 +16969,6 @@ Music: Intense
 Double Battle: No
 
 Rayquaza @ Stardust
-Ability: Air Lock  
-EVs: 252 Atk / 252 Spe  
-- Dragon Ascent
-
-=== TRAINER_CUSTOM_TRAINER5_B ===
-Name: Abe
-Class: Bird Keeper
-Pic: Bird Keeper
-Gender: Male
-Music: Intense
-Double Battle: No
-
-Rayquaza
 Ability: Air Lock  
 EVs: 252 Atk / 252 Spe  
 - Dragon Ascent

@@ -7832,7 +7832,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     if(trainerId == TRAINER_CUSTOM_TRAINER4){
         moneyReward = 500;
     }
-    if(trainerId == TRAINER_CUSTOM_TRAINER5_A || trainerId == TRAINER_CUSTOM_TRAINER5_B){
+    if(trainerId == TRAINER_CUSTOM_TRAINER5){
         moneyReward = 500;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER6){

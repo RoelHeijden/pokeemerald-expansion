@@ -1102,22 +1102,12 @@ script EscapeRoom_EventScript_Trainer4{
 }
 
 script EscapeRoom_EventScript_Trainer5{
-    if(flag(FLAG_STARDUST_STOLEN) == FALSE){
-        trainerbattle_single(
-            TRAINER_CUSTOM_TRAINER5_A, 
-            Trainer5_Intro, 
-            Trainer5_Outro, 
-            event_script=EscapeRoom_EventScript_Trainer5PostBattle,
-        )
-    }
-    else{
-        trainerbattle_single(
-            TRAINER_CUSTOM_TRAINER5_B, 
-            Trainer5_Intro, 
-            Trainer5_Outro, 
-            event_script=EscapeRoom_EventScript_Trainer5PostBattle,
-        )
-    }
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER5, 
+        Trainer5_Intro, 
+        Trainer5_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer5PostBattle,
+    )
 
     msgbox(Trainer5_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
