@@ -389,6 +389,9 @@ bool8 CheckForTrainersWantingBattle(void)
 
     if (gNoOfApproachingTrainers == 1)
     {
+        // ADDED
+        BackupPlayerParty();
+
         ResetTrainerOpponentIds();
         ConfigureAndSetUpOneTrainerBattle(gApproachingTrainers[gNoOfApproachingTrainers - 1].objectEventId,
                                           gApproachingTrainers[gNoOfApproachingTrainers - 1].trainerScriptPtr);
@@ -397,6 +400,9 @@ bool8 CheckForTrainersWantingBattle(void)
     }
     else if (gNoOfApproachingTrainers == 2)
     {
+        // ADDED
+        BackupPlayerParty();
+        
         ResetTrainerOpponentIds();
         for (i = 0; i < gNoOfApproachingTrainers; i++, gApproachingTrainerId++)
         {

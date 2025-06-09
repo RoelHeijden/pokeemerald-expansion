@@ -1044,7 +1044,6 @@ script EscapeRoom_TabletsHintNPC{
 //// TRAINERS ////
 
 script EscapeRoom_EventScript_Trainer1{
-    backupplayerparty
     faceplayer
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER1, 
@@ -1065,7 +1064,6 @@ script EscapeRoom_EventScript_Trainer1{
 }
 
 script EscapeRoom_EventScript_Trainer2{
-    backupplayerparty
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER2, 
         Trainer2_Intro, 
@@ -1078,7 +1076,7 @@ script EscapeRoom_EventScript_Trainer2{
 }
 
 script EscapeRoom_EventScript_Trainer3{
-    backupplayerparty
+    faceplayer
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER3, 
         Trainer3_Intro, 
@@ -1092,7 +1090,6 @@ script EscapeRoom_EventScript_Trainer3{
 }
 
 script EscapeRoom_EventScript_Trainer4{
-    backupplayerparty
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER4, 
         Trainer4_Intro, 
@@ -1105,7 +1102,6 @@ script EscapeRoom_EventScript_Trainer4{
 }
 
 script EscapeRoom_EventScript_Trainer5{
-    backupplayerparty
     if(flag(FLAG_STARDUST_STOLEN) == FALSE){
         trainerbattle_single(
             TRAINER_CUSTOM_TRAINER5_A, 
@@ -1129,7 +1125,6 @@ script EscapeRoom_EventScript_Trainer5{
 }
 
 script EscapeRoom_EventScript_Trainer6{
-    backupplayerparty
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER6, 
         Trainer6_Intro, 
@@ -1143,7 +1138,6 @@ script EscapeRoom_EventScript_Trainer6{
 }
 
 script EscapeRoom_EventScript_Trainer7{
-    backupplayerparty
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER7, 
         Trainer7_Intro, 

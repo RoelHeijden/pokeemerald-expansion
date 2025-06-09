@@ -514,14 +514,9 @@ static void CreateWildMon(u16 species, u8 level)
                 spAtkIv=31;
                 spDefIv=31;
 
-                // set flag for pre-damage reset
+                // set flag and backup for pre-damage reset
                 FlagSet(FLAG_JUST_HAD_ZERA_BATTLE);
-                
-                // backup player party
-                for (int i = 0; i < PARTY_SIZE; i++)
-                    gPlayerPartyBackup[i] = gPlayerParty[i];
-                gPartyBackupInUse = TRUE;
-
+                BackupPlayerParty();
             }
             else{
                 species = SPECIES_DUSKNOIR;

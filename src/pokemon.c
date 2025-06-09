@@ -6999,3 +6999,13 @@ void UpdateDaysPassedSinceFormChange(u16 days)
         }
     }
 }
+
+
+// ADDED
+void BackupPlayerParty(void)
+{
+    for (int i = 0; i < PARTY_SIZE; i++)
+        gPlayerPartyBackup[i] = gPlayerParty[i];
+
+    gPartyBackupInUse = TRUE;
+}
