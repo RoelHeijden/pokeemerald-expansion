@@ -445,8 +445,8 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     lockall
 
     // if no potential softlocks:
-    msgbox(AntiSoftlockIntroMessage)
-    msgbox(AntiSoftlockNoActionMessage)
+    msgbox(AntiSoftlockIntroMessage, MSGBOX_DEFAULT)
+    msgbox(AntiSoftlockNoActionMessage, MSGBOX_DEFAULT)
     releaseall
 }
 
@@ -946,9 +946,8 @@ script EscapeRoom_MoveRestoredSound{
 }
 
 script EscapeRoom_UltraBallNPC{
-    lockall
+    lock
     faceplayer
-
     if(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
         // start quiz
         msgbox(UltraBallQuizStart, MSGBOX_DEFAULT)
@@ -961,7 +960,7 @@ script EscapeRoom_UltraBallNPC{
     }
     else{
         // post script message
-        msgbox(UltaBallQuizPostScript, MSGBOX_NPC)
+        msgbox(UltaBallQuizPostScript, MSGBOX_DEFAULT)
 
     }
     releaseall
@@ -1003,7 +1002,7 @@ script EscapeRoom_AnnihilapeHintNPC{
     // post script message
     else{
         faceplayer
-        msgbox(AnnihilapeHintMessagePostScript, MSGBOX_NPC)
+        msgbox(AnnihilapeHintMessage, MSGBOX_NPC)
     }
     releaseall
 }
@@ -1013,12 +1012,13 @@ movement face_npc_up{
 }
 
 script EscapeRoom_ZeraoraHintNPC{
-    lockall
+    lock
+    faceplayer
     if(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
-        msgbox(ZeraoraHintMessage, MSGBOX_NPC)
+        msgbox(ZeraoraHintMessage, MSGBOX_DEFAULT)
     }
     else{
-        msgbox(ZeraoraHintPostCatchMessage, MSGBOX_NPC)
+        msgbox(ZeraoraHintPostCatchMessage, MSGBOX_DEFAULT)
     }
     releaseall
 }
@@ -1362,12 +1362,12 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
 }
 
 script EscapeRoom_EventScript_SellDunsparce{
-    lockall
+    lock
     faceplayer
 
     // post trade 
     if(flag(FLAG_DUNSPARCE_TRADE_ACCEPTED) == TRUE){
-        msgbox(DunsparceTradePostTrade, MSGBOX_NPC)
+        msgbox(DunsparceTradePostTrade, MSGBOX_DEFAULT)
         waitmessage
     }
     else{
@@ -2202,7 +2202,7 @@ text GravestoneClick3Message{
 }
 
 text GravestoneResetMessage{
-    "The energy dissipates into the void."
+    "The energy dissipates into the void... "
 }
 
 text GravestoneAnnihilapesRoar{
@@ -2441,14 +2441,11 @@ text AnnihilapeHintNoMessage2{
 text AnnihilapeHintMessage{
     "The Annihilape has returned!?\p"
     "Hmm...\p"
-    "Don't waste your strength.\n"
-    "She won't stay down and won't be caught."
+    "Don't waste your strength trying to\n"
+    "defeat her.\p"
+    "She'll always be back."
 }
 
-text AnnihilapeHintMessagePostScript{
-    "Don't waste your strength.\n"
-    "She won't stay down and won't be caught."
-}
 
 // TABLETS HINT NPC
 text FourTabletsHintMessage1{
