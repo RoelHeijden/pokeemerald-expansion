@@ -492,6 +492,9 @@ static void CreateWildMon(u16 species, u8 level)
 
         if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
         {
+            // backup player party
+            BackupPlayerParty();
+
             if(x >= 36){
                 species = SPECIES_ZERAORA;
                 heldItem = ITEM_TM48;
@@ -514,9 +517,8 @@ static void CreateWildMon(u16 species, u8 level)
                 spAtkIv=31;
                 spDefIv=31;
 
-                // set flag and backup for pre-damage reset
+                // set flag for pre-damage reset, even on wins against Zera
                 FlagSet(FLAG_JUST_HAD_ZERA_BATTLE);
-                BackupPlayerParty();
             }
             else{
                 species = SPECIES_DUSKNOIR;
