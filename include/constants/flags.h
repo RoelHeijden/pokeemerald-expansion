@@ -47,7 +47,7 @@
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
 #define FLAG_NUGGET_OBTAINED                0x24
-#define FLAG_RARE_CANDY_OBTAINED            0x25
+#define FLAG_TM12_OBTAINED                  0x25
 #define FLAG_CHOICE_SPECS_OBTAINED          0x26 
 #define FLAG_LOST_GLASSES_OBTAINED          0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28

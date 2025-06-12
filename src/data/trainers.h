@@ -42378,24 +42378,24 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16954
-            .species = SPECIES_IRON_VALIANT,
+            .species = SPECIES_IRON_BUNDLE,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16954
             .heldItem = ITEM_BOOSTER_ENERGY,
 #line 16957
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 0, 252, 0),
+            .ev = TRAINER_PARTY_EVS(100, 0, 0, 0, 252, 0),
 #line 16959
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 16955
             .ability = ABILITY_QUARK_DRIVE,
 #line 16956
-            .lvl = 50,
+            .lvl = 68,
 #line 16958
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16960
-                MOVE_FOCUS_BLAST,
+                MOVE_WHIRLPOOL,
             },
             },
         },
@@ -42511,7 +42511,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7] =
     {
 #line 17006
-        .trainerName = _("Turnem"),
+        .trainerName = _("Turner"),
 #line 17007
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC,
 #line 17008

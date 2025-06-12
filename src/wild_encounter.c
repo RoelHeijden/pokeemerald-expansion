@@ -521,18 +521,13 @@ static void CreateWildMon(u16 species, u8 level)
                 FlagSet(FLAG_JUST_HAD_ZERA_BATTLE);
             }
             else{
-                species = SPECIES_DUSKNOIR;
-                // heldItem = ITEM_STARDUST;
-                // // stardust removed after obtaining it once
-                // if(FlagGet(FLAG_STARDUST_STOLEN) == TRUE){
-                //     heldItem = ITEM_NONE;
-                // }
+                species = SPECIES_GIRATINA;
                 heldItem = ITEM_NONE;
-                level = 100;
+                level = 90;
                 abilityNum = 0; // pressure
-                gender = MON_MALE;
-                nature = NATURE_JOLLY;
-                move1 = MOVE_MEMENTO;
+                gender = MON_GENDERLESS;
+                nature = NATURE_ADAMANT;
+                move1 = MOVE_ROAR;
 
                 atkEv = 252;
                 speedEv = 252;

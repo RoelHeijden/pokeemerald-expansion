@@ -24,7 +24,7 @@ const LOCALID_CUT_TREE = 21
 const LOCALID_LOST_GLASSES = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
-const LOCALID_RARE_CANDY = 25
+const LOCALID_TM12 = 25
 const LOCALID_SHOP1 = 26
 const LOCALID_SHOP2 = 27
 const LOCALID_MAP_SWITCH2 = 28
@@ -608,18 +608,19 @@ script EscapeRoom_EventScript_Shop2NPC{
 }
 
 mart EscapeRoom_Shop1_items{
-    ITEM_ETHER
     ITEM_CUSTAP_BERRY
     ITEM_FLOAT_STONE
     ITEM_RING_TARGET 
     ITEM_ESCAPE_ROPE   
+    ITEM_ETHER
 }
 
 mart EscapeRoom_Shop2_items{
-    ITEM_TM12
-    ITEM_ETHER
-    ITEM_CUSTAP_BERRY
+    // ITEM_TM12
+    ITEM_RARE_CANDY
+    ITEM_TM27
     ITEM_ABILITY_CAPSULE
+    ITEM_CUSTAP_BERRY
 }
 
 script EscapeRoom_MoveDeleterNPC{
@@ -1491,11 +1492,11 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
 
 //// ITEMS ////
 
-script EscapeRoom_EventScript_FindRareCandy{
+script EscapeRoom_EventScript_FindTmTaunt{
     lockall
-    finditem(ITEM_RARE_CANDY)
-    removeobject(LOCALID_RARE_CANDY)
-    setflag(FLAG_RARE_CANDY_OBTAINED)
+    finditem(ITEM_TM12)
+    removeobject(LOCALID_TM12)
+    setflag(FLAG_TM12_OBTAINED)
     releaseall
 }
 

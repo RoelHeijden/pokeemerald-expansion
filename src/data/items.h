@@ -1009,9 +1009,9 @@ const struct Item gItemsInfo[] =
 
     [ITEM_ETHER] =
     {
-        .name = _("Half Ether"), // CHANGED
-        .price = 2500, //(I_PRICE >= GEN_2) ? 1200 : 1,
-        .holdEffectParam = 5, // CHANGED
+        .name = _("Ether"),
+        .price = 2000, //(I_PRICE >= GEN_2) ? 1200 : 1,
+        .holdEffectParam = 10, 
         .description = COMPOUND_STRING(
             "Restores the PP\n"
             "of a selected move\n"
@@ -1906,7 +1906,7 @@ const struct Item gItemsInfo[] =
         .name = _("Rare Candy"),
         .pluralName = _("Rare Candies"),
         // .price = (I_PRICE >= GEN_7) ? 10000 : 4800,
-        .price = 0,
+        .price = 4000,
         .description = COMPOUND_STRING(
             "Raises the level\n"
             "of a Pokémon by\n"
@@ -10624,7 +10624,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_TAUNT] =
     {
         .name = _("TM12"),
-        .price = 4000,
+        .price = 0,
         .description = COMPOUND_STRING(
             "Enrages the foe so\n"
             "it can only use\n"
@@ -10875,8 +10875,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_SLEEP_TALK] = 
     {
         .name = _("TM27"),
-        // .price = 3000,
-        .price = 0,
+        .price = 2000,
         .description = COMPOUND_STRING(
             "User performs one\n"
             "of its own moves\n" 
