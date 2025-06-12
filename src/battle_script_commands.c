@@ -1844,21 +1844,32 @@ static void Cmd_ppreduce(void)
     if (gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS)
         gHitMarker |= HITMARKER_NO_PPDEDUCT;
 
-    if (moveTarget == MOVE_TARGET_BOTH
-        || moveTarget == MOVE_TARGET_FOES_AND_ALLY
-        || moveTarget == MOVE_TARGET_ALL_BATTLERS
-        || gMovesInfo[gCurrentMove].forcePressure)
-    {
-        for (i = 0; i < gBattlersCount; i++)
-        {
-            if (GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker) && IsBattlerAlive(i))
-                ppToDeduct += (GetBattlerAbility(i) == ABILITY_PRESSURE);
-        }
+
+
+    // ADDED
+    // only deduct 1pp if Assist fails
+    // (gCurrentMove remains assist when the move fails)
+    if (gCurrentMove == MOVE_ASSIST){
+        // do nothing - keep ppToDeduct = 1
     }
-    else if (moveTarget != MOVE_TARGET_OPPONENTS_FIELD)
+    else
     {
-        if (gBattlerAttacker != gBattlerTarget && GetBattlerAbility(gBattlerTarget) == ABILITY_PRESSURE)
-             ppToDeduct++;
+        if (moveTarget == MOVE_TARGET_BOTH
+            || moveTarget == MOVE_TARGET_FOES_AND_ALLY
+            || moveTarget == MOVE_TARGET_ALL_BATTLERS
+            || gMovesInfo[gCurrentMove].forcePressure)
+        {
+            for (i = 0; i < gBattlersCount; i++)
+            {
+                if (GetBattlerSide(i) != GetBattlerSide(gBattlerAttacker) && IsBattlerAlive(i))
+                    ppToDeduct += (GetBattlerAbility(i) == ABILITY_PRESSURE);
+            }
+        }
+        else if (moveTarget != MOVE_TARGET_OPPONENTS_FIELD)
+        {
+            if (gBattlerAttacker != gBattlerTarget && GetBattlerAbility(gBattlerTarget) == ABILITY_PRESSURE)
+                ppToDeduct++;
+        }
     }
 
     if (!(gHitMarker & (HITMARKER_NO_PPDEDUCT | HITMARKER_NO_ATTACKSTRING)) && gBattleMons[gBattlerAttacker].pp[gCurrMovePos])
@@ -1878,8 +1889,8 @@ static void Cmd_ppreduce(void)
         if (MOVE_IS_PERMANENT(gBattlerAttacker, gCurrMovePos))
         {
             BtlController_EmitSetMonData(gBattlerAttacker, BUFFER_A, REQUEST_PPMOVE1_BATTLE + gCurrMovePos, 0,
-                                         sizeof(gBattleMons[gBattlerAttacker].pp[gCurrMovePos]),
-                                         &gBattleMons[gBattlerAttacker].pp[gCurrMovePos]);
+                                        sizeof(gBattleMons[gBattlerAttacker].pp[gCurrMovePos]),
+                                        &gBattleMons[gBattlerAttacker].pp[gCurrMovePos]);
             MarkBattlerForControllerExec(gBattlerAttacker);
         }
     }
@@ -7821,10 +7832,10 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     moneyReward = 0;
 
     if(trainerId == TRAINER_CUSTOM_TRAINER1){
-        moneyReward = 1000;
+        moneyReward = 500;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER2){
-        moneyReward = 1000;
+        moneyReward = 500;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER3){
         moneyReward = 500;
@@ -14900,7 +14911,7 @@ static void Cmd_assistattackselect(void)
             if (hasIceFang && hasEndeavor)
             {
                 u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
-                if (gBattleMons[opponent].species == SPECIES_RAYQUAZA_MEGA)
+                if (gBattleMons[opponent].species == SPECIES_RAYQUAZA)
                 {
                     // On turn 1, use Endeavor; turn 2, use Ice Fang
                     u16 chosenMove = (gBattleResults.battleTurnCounter == 0)
