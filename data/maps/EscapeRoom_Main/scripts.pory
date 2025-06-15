@@ -24,7 +24,7 @@ const LOCALID_CUT_TREE = 21
 const LOCALID_LOST_GLASSES = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
-const LOCALID_TM12 = 25
+const LOCALID_STARDUST = 25
 const LOCALID_SHOP1 = 26
 const LOCALID_SHOP2 = 27
 const LOCALID_MAP_SWITCH2 = 28
@@ -616,11 +616,10 @@ mart EscapeRoom_Shop1_items{
 }
 
 mart EscapeRoom_Shop2_items{
-    // ITEM_TM12
     ITEM_RARE_CANDY
-    ITEM_TM27
     ITEM_ABILITY_CAPSULE
     ITEM_CUSTAP_BERRY
+    ITEM_TM27
 }
 
 script EscapeRoom_MoveDeleterNPC{
@@ -1026,17 +1025,20 @@ script EscapeRoom_ZeraoraHintNPC{
 
 script EscapeRoom_TabletsHintNPC{
     lockall
-    if(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
+    if(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
         msgbox(FourTabletsHintMessage1, MSGBOX_NPC)
     }
-    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
+    elif(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
         msgbox(FourTabletsHintMessage2, MSGBOX_NPC)
     }
-    elif(flag(FLAG_CHOICE_SPECS_OBTAINED) == FALSE){
+    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
         msgbox(FourTabletsHintMessage3, MSGBOX_NPC)
     }
-    else{
+    elif(flag(FLAG_CHOICE_SPECS_OBTAINED) == FALSE){
         msgbox(FourTabletsHintMessage4, MSGBOX_NPC)
+    }
+    else{
+        msgbox(FourTabletsHintMessage5, MSGBOX_NPC)
     }
     releaseall
 }
@@ -1121,7 +1123,7 @@ script EscapeRoom_EventScript_Trainer6{
         Trainer6_Intro, 
         Trainer6_Outro, 
         DoubleBattle_NotEnoughMons,
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer6PostBattle,
     )
     msgbox(Trainer6_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -1174,7 +1176,7 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
             removepartyitem(VAR_TEMP_0)
         }
     }
-    
+    setflag(FLAG_TRAINER2_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
@@ -1203,7 +1205,6 @@ movement EscapeRoom_Movement_Trainer3End{
     face_left
 }
 
-
 script EscapeRoom_EventScript_Trainer5PostBattle{
     // prevent custap restore after winning
     clearflag(FLAG_RECOVERED_CUSTAP)
@@ -1215,9 +1216,15 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
             removepartyitem(VAR_TEMP_0)
         }
     }
-    
+    setflag(FLAG_TRAINER5_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
+
+script EscapeRoom_EventScript_Trainer6PostBattle{
+    setflag(FLAG_TRAINER6_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
 
 
 //// POKEMON TRADES ////
@@ -1281,7 +1288,7 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
                 50,
                 abilityNum=2, // rattled
                 nature=8, // impish
-                gender=0, 
+                gender=1, // female
                 move1=MOVE_TRUMP_CARD,
                 move2=MOVE_AIR_SLASH,
                 move3=MOVE_HEX,
@@ -1388,15 +1395,11 @@ script EscapeRoom_EventScript_SellDunsparce{
 
             // trade pokemon
             removemon(SPECIES_DUNSPARCE)
-            addmoney(5000)
             setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
 
-            message(MoneyReceivedMessage)
-            playfanfare(MUS_OBTAIN_ITEM)
-            waitfanfare
-            lockall
-            msgbox(DunsparceTradeAccepted, MSGBOX_AUTOCLOSE)
+            msgbox(AskDunsparceReturnAcceptedMessage, MSGBOX_DEFAULT)
             waitmessage
+            giveitem(ITEM_TM12) // TM TAUNT
         }
         // trade declined
         else{
@@ -1492,11 +1495,12 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
 
 //// ITEMS ////
 
-script EscapeRoom_EventScript_FindTmTaunt{
+script EscapeRoom_EventScript_FindStardust{
     lockall
-    finditem(ITEM_TM12)
-    removeobject(LOCALID_TM12)
-    setflag(FLAG_TM12_OBTAINED)
+    // finditem(ITEM_STARDUST)
+    finditem(ITEM_CUSTAP_BERRY)
+    removeobject(LOCALID_STARDUST)
+    setflag(FLAG_STARDUST_OBTAINED)
     releaseall
 }
 
@@ -2456,15 +2460,25 @@ text FourTabletsHintMessage1{
 }
 
 text FourTabletsHintMessage2{
-    "Wait...\p"
-    "You've found all four!"
+    "I'm so done with this search.\p"
+    "Maybe it's time to just kick back\n"
+    "and stare at the waves for a while."
 }
 
 text FourTabletsHintMessage3{
-    "Did something just open?"
+    "Wait...\p"
+    "You actually found all four?\p"
+    "I guess that ends my search.\n"
+    "Time to go back to my regular job.\p"
+    "Not sure what's on for today,\n"
+    "I'd have to check the menus."
 }
 
 text FourTabletsHintMessage4{
+    "Did you feel that earthquake?"
+}
+
+text FourTabletsHintMessage5{
     "Enjoy your Choice Scarf I guess..."
 }
 
@@ -2493,8 +2507,8 @@ text LostGlassesNPCendMessage{
 
 // SHOP NPCS
 text MartNPC_AskToShop{
-    "Hi, welcome to my shop.\p"
-    "Don't worry, each item can be sold back\n"
+    "Welcome to my shop.\p"
+    "Don't worry, all these items can be sold\n"
     "for the same price."
 }
 
@@ -2622,25 +2636,31 @@ text FlorgesTradePostTrade{
 
 // TRADE NPC 4 - Dunsparce Money
 text AskDunsparceMoneyTrade{
-    "I collect rare Pokémon as a hobby!\p"
-    "Your Dunsparce looks quite valuable,\n"
-    "would you sell it to me for ¥5.000?"
+    "Dunsparce and I were playing near the\n"
+    "water, but she went missing!\p"
+    "Have you seen my Dunsparce???"
 }
 
-text MoneyReceivedMessage{
-    "{PLAYER} received ¥5.000!"
+text AskDunsparceReturnAcceptedMessage{
+    "Omg you found her!\p"
+    "Thank you so much!\n"
+    "Here, you can have this."
 }
 
-text DunsparceTradeAccepted{
-    "Bye-bye Dunsparce."
-}
+// text MoneyReceivedMessage{
+//     "{PLAYER} received ¥5.000!"
+// }
+
+// text DunsparceTradeAccepted{
+//     "Bye-bye Dunsparce."
+// }
 
 text DunsparceTradeDeclined{
     "Hmm..."
 }
 
 text DunsparceTradePostTrade{
-    "My collection grows bigger and bigger!"
+    "It's so good to be back together!"
 }
 
 
@@ -2784,6 +2804,7 @@ text Trainer5_PostBattle{
 text Trainer6_Intro{
     "We're starting to get bored...\n"
     "Show us a trick!"
+    // CHANGE
 }
 
 text Trainer6_Outro{
@@ -2800,6 +2821,7 @@ text Trainer7_Intro{
     "So many options.\n"
     "Where do I start?\p"
     "Making decisions was never this hard."
+    // CHANGE
 }
 
 text Trainer7_Outro{

@@ -859,1765 +859,1776 @@ EscapeRoom_Shop1_items:
 	.align 2
 # 618 "data/maps/EscapeRoom_Main/scripts.pory"
 EscapeRoom_Shop2_items:
-# 620 "data/maps/EscapeRoom_Main/scripts.pory"
+# 619 "data/maps/EscapeRoom_Main/scripts.pory"
 	.2byte ITEM_RARE_CANDY
-# 621 "data/maps/EscapeRoom_Main/scripts.pory"
-	.2byte ITEM_TM27
-# 622 "data/maps/EscapeRoom_Main/scripts.pory"
+# 620 "data/maps/EscapeRoom_Main/scripts.pory"
 	.2byte ITEM_ABILITY_CAPSULE
-# 623 "data/maps/EscapeRoom_Main/scripts.pory"
+# 621 "data/maps/EscapeRoom_Main/scripts.pory"
 	.2byte ITEM_CUSTAP_BERRY
+# 622 "data/maps/EscapeRoom_Main/scripts.pory"
+	.2byte ITEM_TM27
 	.2byte ITEM_NONE
 
 EscapeRoom_MoveDeleterNPC::
-# 627 "data/maps/EscapeRoom_Main/scripts.pory"
+# 626 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 628 "data/maps/EscapeRoom_Main/scripts.pory"
+# 627 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 629 "data/maps/EscapeRoom_Main/scripts.pory"
+# 628 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AskDeleteMove, MSGBOX_DEFAULT
-# 632 "data/maps/EscapeRoom_Main/scripts.pory"
+# 631 "data/maps/EscapeRoom_Main/scripts.pory"
 	dynmultichoice 20, 8, FALSE, 6, 0, 0, EscapeRoom_MoveDeleterNPC_Text_0, EscapeRoom_MoveDeleterNPC_Text_1
-# 637 "data/maps/EscapeRoom_Main/scripts.pory"
+# 636 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, 0
 	goto_if_eq EscapeRoom_MoveDeleterNPC_2
-# 641 "data/maps/EscapeRoom_Main/scripts.pory"
+# 640 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, 1
 	goto_if_eq EscapeRoom_MoveDeleterNPC_3
-# 646 "data/maps/EscapeRoom_Main/scripts.pory"
+# 645 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MoveDeleterComeAgain, MSGBOX_AUTOCLOSE
 EscapeRoom_MoveDeleterNPC_1:
-# 648 "data/maps/EscapeRoom_Main/scripts.pory"
+# 647 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_MoveDeleterNPC_2:
-# 638 "data/maps/EscapeRoom_Main/scripts.pory"
+# 637 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_ChooseMoveToDelete
 	goto EscapeRoom_MoveDeleterNPC_1
 
 EscapeRoom_MoveDeleterNPC_3:
-# 642 "data/maps/EscapeRoom_Main/scripts.pory"
+# 641 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_RestoreMoveset
 	goto EscapeRoom_MoveDeleterNPC_1
 
 
 EscapeRoom_ChooseMoveToDelete::
-# 652 "data/maps/EscapeRoom_Main/scripts.pory"
+# 651 "data/maps/EscapeRoom_Main/scripts.pory"
 	special ChoosePartyMon
-# 653 "data/maps/EscapeRoom_Main/scripts.pory"
+# 652 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitstate
-# 656 "data/maps/EscapeRoom_Main/scripts.pory"
+# 655 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
 	goto_if_eq EscapeRoom_ChooseMoveToDelete_2
-# 663 "data/maps/EscapeRoom_Main/scripts.pory"
+# 662 "data/maps/EscapeRoom_Main/scripts.pory"
 	special GetNumMovesSelectedMonHas
-# 664 "data/maps/EscapeRoom_Main/scripts.pory"
+# 663 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, 1
 	goto_if_eq EscapeRoom_ChooseMoveToDelete_5
-# 671 "data/maps/EscapeRoom_Main/scripts.pory"
+# 670 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES
 	goto_if_eq EscapeRoom_ChooseMoveToDelete_8
-# 678 "data/maps/EscapeRoom_Main/scripts.pory"
+# 677 "data/maps/EscapeRoom_Main/scripts.pory"
 	copyvar VAR_0x8005, VAR_MOVE_DELETER_CHOSEN_SLOT
-# 679 "data/maps/EscapeRoom_Main/scripts.pory"
+# 678 "data/maps/EscapeRoom_Main/scripts.pory"
 	setvar VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES
-# 680 "data/maps/EscapeRoom_Main/scripts.pory"
+# 679 "data/maps/EscapeRoom_Main/scripts.pory"
 	special BufferMoveDeleterNicknameAndMove
-# 683 "data/maps/EscapeRoom_Main/scripts.pory"
+# 682 "data/maps/EscapeRoom_Main/scripts.pory"
 	special MoveDeleterForgetMove
-# 685 "data/maps/EscapeRoom_Main/scripts.pory"
+# 684 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_SHOP
-# 686 "data/maps/EscapeRoom_Main/scripts.pory"
+# 685 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitse
-# 687 "data/maps/EscapeRoom_Main/scripts.pory"
+# 686 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MoveDeleterMoveDeleted, MSGBOX_AUTOCLOSE
 	end
 
 EscapeRoom_ChooseMoveToDelete_2:
-# 657 "data/maps/EscapeRoom_Main/scripts.pory"
+# 656 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MoveDeleterComeAgain, MSGBOX_AUTOCLOSE
-# 658 "data/maps/EscapeRoom_Main/scripts.pory"
+# 657 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_ChooseMoveToDelete_5:
-# 665 "data/maps/EscapeRoom_Main/scripts.pory"
+# 664 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MoveDeleterOnlyOneMove, MSGBOX_AUTOCLOSE
-# 666 "data/maps/EscapeRoom_Main/scripts.pory"
+# 665 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_ChooseMoveToDelete_8:
-# 672 "data/maps/EscapeRoom_Main/scripts.pory"
+# 671 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MoveDeleterComeAgain, MSGBOX_AUTOCLOSE
-# 673 "data/maps/EscapeRoom_Main/scripts.pory"
+# 672 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 
 EscapeRoom_RestoreMoveset::
-# 693 "data/maps/EscapeRoom_Main/scripts.pory"
+# 692 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_TEMP_5
-# 696 "data/maps/EscapeRoom_Main/scripts.pory"
+# 695 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_POOCHYENA
-# 697 "data/maps/EscapeRoom_Main/scripts.pory"
+# 696 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_RestoreMoveset_3
 EscapeRoom_RestoreMoveset_1:
-# 755 "data/maps/EscapeRoom_Main/scripts.pory"
+# 754 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_LIEPARD
-# 756 "data/maps/EscapeRoom_Main/scripts.pory"
+# 755 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_RestoreMoveset_8
 EscapeRoom_RestoreMoveset_6:
-# 814 "data/maps/EscapeRoom_Main/scripts.pory"
+# 813 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_DUNSPARCE
-# 815 "data/maps/EscapeRoom_Main/scripts.pory"
+# 814 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_RestoreMoveset_16
 EscapeRoom_RestoreMoveset_14:
-# 873 "data/maps/EscapeRoom_Main/scripts.pory"
+# 872 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_SMEARGLE
-# 874 "data/maps/EscapeRoom_Main/scripts.pory"
+# 873 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_RestoreMoveset_27
 EscapeRoom_RestoreMoveset_25:
-# 932 "data/maps/EscapeRoom_Main/scripts.pory"
+# 931 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TEMP_5, EscapeRoom_RestoreMoveset_43
 	return
 
 EscapeRoom_RestoreMoveset_2:
-# 701 "data/maps/EscapeRoom_Main/scripts.pory"
+# 700 "data/maps/EscapeRoom_Main/scripts.pory"
 	monhas0pp SPECIES_POOCHYENA
-# 702 "data/maps/EscapeRoom_Main/scripts.pory"
+# 701 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_RestoreMoveset_12
 EscapeRoom_RestoreMoveset_11:
-# 706 "data/maps/EscapeRoom_Main/scripts.pory"
+# 705 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ICE_FANG_DELETED, EscapeRoom_RestoreMoveset_23
 EscapeRoom_RestoreMoveset_22:
-# 716 "data/maps/EscapeRoom_Main/scripts.pory"
+# 715 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SLEEP_TALK_DELETED, EscapeRoom_RestoreMoveset_37
 EscapeRoom_RestoreMoveset_36:
-# 726 "data/maps/EscapeRoom_Main/scripts.pory"
+# 725 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ENDEAVOR_DELETED, EscapeRoom_RestoreMoveset_59
 EscapeRoom_RestoreMoveset_58:
-# 736 "data/maps/EscapeRoom_Main/scripts.pory"
+# 735 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TAUNT_DELETED, EscapeRoom_RestoreMoveset_83
 EscapeRoom_RestoreMoveset_82:
-# 746 "data/maps/EscapeRoom_Main/scripts.pory"
+# 745 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_MoveRestoredSound
-# 747 "data/maps/EscapeRoom_Main/scripts.pory"
+# 746 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox PoochMovesRestoredMessage, MSGBOX_DEFAULT
-# 748 "data/maps/EscapeRoom_Main/scripts.pory"
+# 747 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 749 "data/maps/EscapeRoom_Main/scripts.pory"
+# 748 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_POOCH_MOVE_DELETED
-# 750 "data/maps/EscapeRoom_Main/scripts.pory"
+# 749 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TEMP_5
-# 751 "data/maps/EscapeRoom_Main/scripts.pory"
+# 750 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_1
 
 EscapeRoom_RestoreMoveset_3:
-# 697 "data/maps/EscapeRoom_Main/scripts.pory"
+# 696 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_POOCH_MOVE_DELETED, EscapeRoom_RestoreMoveset_2
 	goto EscapeRoom_RestoreMoveset_1
 
 EscapeRoom_RestoreMoveset_7:
-# 760 "data/maps/EscapeRoom_Main/scripts.pory"
+# 759 "data/maps/EscapeRoom_Main/scripts.pory"
 	monhas0pp SPECIES_LIEPARD
-# 761 "data/maps/EscapeRoom_Main/scripts.pory"
+# 760 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_RestoreMoveset_20
 EscapeRoom_RestoreMoveset_19:
-# 765 "data/maps/EscapeRoom_Main/scripts.pory"
+# 764 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ASSIST_DELETED, EscapeRoom_RestoreMoveset_34
 EscapeRoom_RestoreMoveset_33:
-# 775 "data/maps/EscapeRoom_Main/scripts.pory"
+# 774 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ROCK_SMASH_DELETED, EscapeRoom_RestoreMoveset_52
 EscapeRoom_RestoreMoveset_51:
-# 785 "data/maps/EscapeRoom_Main/scripts.pory"
+# 784 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ECHOED_VOICE_DELETED, EscapeRoom_RestoreMoveset_76
 EscapeRoom_RestoreMoveset_75:
-# 795 "data/maps/EscapeRoom_Main/scripts.pory"
+# 794 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TRICK_DELETED, EscapeRoom_RestoreMoveset_104
 EscapeRoom_RestoreMoveset_103:
-# 805 "data/maps/EscapeRoom_Main/scripts.pory"
+# 804 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_MoveRestoredSound
-# 806 "data/maps/EscapeRoom_Main/scripts.pory"
+# 805 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox LiepardMovesRestoredMessage, MSGBOX_DEFAULT
-# 807 "data/maps/EscapeRoom_Main/scripts.pory"
+# 806 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 808 "data/maps/EscapeRoom_Main/scripts.pory"
+# 807 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_LIEPARD_MOVE_DELETED
-# 809 "data/maps/EscapeRoom_Main/scripts.pory"
+# 808 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TEMP_5
-# 810 "data/maps/EscapeRoom_Main/scripts.pory"
+# 809 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_6
 
 EscapeRoom_RestoreMoveset_8:
-# 756 "data/maps/EscapeRoom_Main/scripts.pory"
+# 755 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_LIEPARD_MOVE_DELETED, EscapeRoom_RestoreMoveset_7
 	goto EscapeRoom_RestoreMoveset_6
 
 EscapeRoom_RestoreMoveset_12:
-# 703 "data/maps/EscapeRoom_Main/scripts.pory"
+# 702 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_11
 
 EscapeRoom_RestoreMoveset_15:
-# 819 "data/maps/EscapeRoom_Main/scripts.pory"
+# 818 "data/maps/EscapeRoom_Main/scripts.pory"
 	monhas0pp SPECIES_DUNSPARCE
-# 820 "data/maps/EscapeRoom_Main/scripts.pory"
+# 819 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_RestoreMoveset_31
 EscapeRoom_RestoreMoveset_30:
-# 824 "data/maps/EscapeRoom_Main/scripts.pory"
+# 823 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TRUMP_CARD_DELETED, EscapeRoom_RestoreMoveset_49
 EscapeRoom_RestoreMoveset_48:
-# 834 "data/maps/EscapeRoom_Main/scripts.pory"
+# 833 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_HEX_DELETED, EscapeRoom_RestoreMoveset_69
 EscapeRoom_RestoreMoveset_68:
-# 844 "data/maps/EscapeRoom_Main/scripts.pory"
+# 843 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_COUNTER_DELETED, EscapeRoom_RestoreMoveset_97
 EscapeRoom_RestoreMoveset_96:
-# 854 "data/maps/EscapeRoom_Main/scripts.pory"
+# 853 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_AIR_SLASH_DELETED, EscapeRoom_RestoreMoveset_122
 EscapeRoom_RestoreMoveset_121:
-# 864 "data/maps/EscapeRoom_Main/scripts.pory"
+# 863 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_MoveRestoredSound
-# 865 "data/maps/EscapeRoom_Main/scripts.pory"
+# 864 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox DunsparceMovesRestoredMessage, MSGBOX_DEFAULT
-# 866 "data/maps/EscapeRoom_Main/scripts.pory"
+# 865 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 867 "data/maps/EscapeRoom_Main/scripts.pory"
+# 866 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_DUNSPARCE_MOVE_DELETED
-# 868 "data/maps/EscapeRoom_Main/scripts.pory"
+# 867 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TEMP_5
-# 869 "data/maps/EscapeRoom_Main/scripts.pory"
+# 868 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_14
 
 EscapeRoom_RestoreMoveset_16:
-# 815 "data/maps/EscapeRoom_Main/scripts.pory"
+# 814 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_DUNSPARCE_MOVE_DELETED, EscapeRoom_RestoreMoveset_15
 	goto EscapeRoom_RestoreMoveset_14
 
 EscapeRoom_RestoreMoveset_20:
-# 762 "data/maps/EscapeRoom_Main/scripts.pory"
+# 761 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_19
 
 EscapeRoom_RestoreMoveset_23:
-# 708 "data/maps/EscapeRoom_Main/scripts.pory"
+# 707 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_POOCHYENA, MOVE_ICE_FANG
-# 709 "data/maps/EscapeRoom_Main/scripts.pory"
+# 708 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ICE_FANG_DELETED
-# 710 "data/maps/EscapeRoom_Main/scripts.pory"
+# 709 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_39
-# 710 "data/maps/EscapeRoom_Main/scripts.pory"
+# 709 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ICE_FANG_DELETED_0_PP, EscapeRoom_RestoreMoveset_39
 	goto EscapeRoom_RestoreMoveset_22
 
 EscapeRoom_RestoreMoveset_26:
-# 878 "data/maps/EscapeRoom_Main/scripts.pory"
+# 877 "data/maps/EscapeRoom_Main/scripts.pory"
 	monhas0pp SPECIES_SMEARGLE
-# 879 "data/maps/EscapeRoom_Main/scripts.pory"
+# 878 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_RestoreMoveset_46
 EscapeRoom_RestoreMoveset_45:
-# 883 "data/maps/EscapeRoom_Main/scripts.pory"
+# 882 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SURF_DELETED, EscapeRoom_RestoreMoveset_66
 EscapeRoom_RestoreMoveset_65:
-# 893 "data/maps/EscapeRoom_Main/scripts.pory"
+# 892 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SWITCHEROO_DELETED, EscapeRoom_RestoreMoveset_90
 EscapeRoom_RestoreMoveset_89:
-# 903 "data/maps/EscapeRoom_Main/scripts.pory"
+# 902 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_UPROAR_DELETED, EscapeRoom_RestoreMoveset_115
 EscapeRoom_RestoreMoveset_114:
-# 913 "data/maps/EscapeRoom_Main/scripts.pory"
+# 912 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_CONVERSION_2_DELETED, EscapeRoom_RestoreMoveset_133
 EscapeRoom_RestoreMoveset_132:
-# 923 "data/maps/EscapeRoom_Main/scripts.pory"
+# 922 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_MoveRestoredSound
-# 924 "data/maps/EscapeRoom_Main/scripts.pory"
+# 923 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox SmeargleMovesRestoredMessage, MSGBOX_DEFAULT
-# 925 "data/maps/EscapeRoom_Main/scripts.pory"
+# 924 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 926 "data/maps/EscapeRoom_Main/scripts.pory"
+# 925 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SMEARGLE_MOVE_DELETED
-# 927 "data/maps/EscapeRoom_Main/scripts.pory"
+# 926 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TEMP_5
-# 928 "data/maps/EscapeRoom_Main/scripts.pory"
+# 927 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_25
 
 EscapeRoom_RestoreMoveset_27:
-# 874 "data/maps/EscapeRoom_Main/scripts.pory"
+# 873 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SMEARGLE_MOVE_DELETED, EscapeRoom_RestoreMoveset_26
 	goto EscapeRoom_RestoreMoveset_25
 
 EscapeRoom_RestoreMoveset_31:
-# 821 "data/maps/EscapeRoom_Main/scripts.pory"
+# 820 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_30
 
 EscapeRoom_RestoreMoveset_34:
-# 767 "data/maps/EscapeRoom_Main/scripts.pory"
+# 766 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_LIEPARD, MOVE_ASSIST
-# 768 "data/maps/EscapeRoom_Main/scripts.pory"
+# 767 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ASSIST_DELETED
-# 769 "data/maps/EscapeRoom_Main/scripts.pory"
+# 768 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_54
-# 769 "data/maps/EscapeRoom_Main/scripts.pory"
+# 768 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ASSIST_DELETED_0_PP, EscapeRoom_RestoreMoveset_54
 	goto EscapeRoom_RestoreMoveset_33
 
 EscapeRoom_RestoreMoveset_37:
-# 718 "data/maps/EscapeRoom_Main/scripts.pory"
+# 717 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_POOCHYENA, MOVE_SLEEP_TALK
-# 719 "data/maps/EscapeRoom_Main/scripts.pory"
+# 718 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SLEEP_TALK_DELETED
-# 720 "data/maps/EscapeRoom_Main/scripts.pory"
+# 719 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_61
-# 720 "data/maps/EscapeRoom_Main/scripts.pory"
+# 719 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SLEEP_TALK_DELETED_0_PP, EscapeRoom_RestoreMoveset_61
 	goto EscapeRoom_RestoreMoveset_36
 
 EscapeRoom_RestoreMoveset_39:
-# 711 "data/maps/EscapeRoom_Main/scripts.pory"
+# 710 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_POOCHYENA, MOVE_ICE_FANG
-# 712 "data/maps/EscapeRoom_Main/scripts.pory"
+# 711 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ICE_FANG_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_22
 
 EscapeRoom_RestoreMoveset_43:
-# 934 "data/maps/EscapeRoom_Main/scripts.pory"
+# 933 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox NoMovesRestoredMessage, MSGBOX_AUTOCLOSE
-# 935 "data/maps/EscapeRoom_Main/scripts.pory"
+# 934 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TEMP_5
 	return
 
 EscapeRoom_RestoreMoveset_46:
-# 880 "data/maps/EscapeRoom_Main/scripts.pory"
+# 879 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_MON_HAS_0_PP_WHEN_RESTORING
 	goto EscapeRoom_RestoreMoveset_45
 
 EscapeRoom_RestoreMoveset_49:
-# 826 "data/maps/EscapeRoom_Main/scripts.pory"
+# 825 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_DUNSPARCE, MOVE_TRUMP_CARD
-# 827 "data/maps/EscapeRoom_Main/scripts.pory"
+# 826 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TRUMP_CARD_DELETED
-# 828 "data/maps/EscapeRoom_Main/scripts.pory"
+# 827 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_71
-# 828 "data/maps/EscapeRoom_Main/scripts.pory"
+# 827 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TRUMP_CARD_DELETED_0_PP, EscapeRoom_RestoreMoveset_71
 	goto EscapeRoom_RestoreMoveset_48
 
 EscapeRoom_RestoreMoveset_52:
-# 777 "data/maps/EscapeRoom_Main/scripts.pory"
+# 776 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_LIEPARD, MOVE_ROCK_SMASH
-# 778 "data/maps/EscapeRoom_Main/scripts.pory"
+# 777 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ROCK_SMASH_DELETED
-# 779 "data/maps/EscapeRoom_Main/scripts.pory"
+# 778 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_78
-# 779 "data/maps/EscapeRoom_Main/scripts.pory"
+# 778 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ROCK_SMASH_DELETED_0_PP, EscapeRoom_RestoreMoveset_78
 	goto EscapeRoom_RestoreMoveset_51
 
 EscapeRoom_RestoreMoveset_54:
-# 770 "data/maps/EscapeRoom_Main/scripts.pory"
+# 769 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_LIEPARD, MOVE_ASSIST
-# 771 "data/maps/EscapeRoom_Main/scripts.pory"
+# 770 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ASSIST_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_33
 
 EscapeRoom_RestoreMoveset_59:
-# 728 "data/maps/EscapeRoom_Main/scripts.pory"
+# 727 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_POOCHYENA, MOVE_ENDEAVOR
-# 729 "data/maps/EscapeRoom_Main/scripts.pory"
+# 728 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ENDEAVOR_DELETED
-# 730 "data/maps/EscapeRoom_Main/scripts.pory"
+# 729 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_85
-# 730 "data/maps/EscapeRoom_Main/scripts.pory"
+# 729 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ENDEAVOR_DELETED_0_PP, EscapeRoom_RestoreMoveset_85
 	goto EscapeRoom_RestoreMoveset_58
 
 EscapeRoom_RestoreMoveset_61:
-# 721 "data/maps/EscapeRoom_Main/scripts.pory"
+# 720 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_POOCHYENA, MOVE_SLEEP_TALK
-# 722 "data/maps/EscapeRoom_Main/scripts.pory"
+# 721 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SLEEP_TALK_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_36
 
 EscapeRoom_RestoreMoveset_66:
-# 885 "data/maps/EscapeRoom_Main/scripts.pory"
+# 884 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_SMEARGLE, MOVE_SURF
-# 886 "data/maps/EscapeRoom_Main/scripts.pory"
+# 885 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SURF_DELETED
-# 887 "data/maps/EscapeRoom_Main/scripts.pory"
+# 886 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_92
-# 887 "data/maps/EscapeRoom_Main/scripts.pory"
+# 886 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SURF_DELETED_0_PP, EscapeRoom_RestoreMoveset_92
 	goto EscapeRoom_RestoreMoveset_65
 
 EscapeRoom_RestoreMoveset_69:
-# 836 "data/maps/EscapeRoom_Main/scripts.pory"
+# 835 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_DUNSPARCE, MOVE_HEX
-# 837 "data/maps/EscapeRoom_Main/scripts.pory"
+# 836 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_HEX_DELETED
-# 838 "data/maps/EscapeRoom_Main/scripts.pory"
+# 837 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_99
-# 838 "data/maps/EscapeRoom_Main/scripts.pory"
+# 837 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_HEX_DELETED_0_PP, EscapeRoom_RestoreMoveset_99
 	goto EscapeRoom_RestoreMoveset_68
 
 EscapeRoom_RestoreMoveset_71:
-# 829 "data/maps/EscapeRoom_Main/scripts.pory"
+# 828 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_DUNSPARCE, MOVE_TRUMP_CARD
-# 830 "data/maps/EscapeRoom_Main/scripts.pory"
+# 829 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TRUMP_CARD_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_48
 
 EscapeRoom_RestoreMoveset_76:
-# 787 "data/maps/EscapeRoom_Main/scripts.pory"
+# 786 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_LIEPARD, MOVE_ECHOED_VOICE
-# 788 "data/maps/EscapeRoom_Main/scripts.pory"
+# 787 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ECHOED_VOICE_DELETED
-# 789 "data/maps/EscapeRoom_Main/scripts.pory"
+# 788 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_106
-# 789 "data/maps/EscapeRoom_Main/scripts.pory"
+# 788 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_ECHOED_VOICE_DELETED_0_PP, EscapeRoom_RestoreMoveset_106
 	goto EscapeRoom_RestoreMoveset_75
 
 EscapeRoom_RestoreMoveset_78:
-# 780 "data/maps/EscapeRoom_Main/scripts.pory"
+# 779 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_LIEPARD, MOVE_ROCK_SMASH
-# 781 "data/maps/EscapeRoom_Main/scripts.pory"
+# 780 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ROCK_SMASH_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_51
 
 EscapeRoom_RestoreMoveset_83:
-# 738 "data/maps/EscapeRoom_Main/scripts.pory"
+# 737 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_POOCHYENA, MOVE_TAUNT
-# 739 "data/maps/EscapeRoom_Main/scripts.pory"
+# 738 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TAUNT_DELETED
-# 740 "data/maps/EscapeRoom_Main/scripts.pory"
+# 739 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_110
-# 740 "data/maps/EscapeRoom_Main/scripts.pory"
+# 739 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TAUNT_DELETED_0_PP, EscapeRoom_RestoreMoveset_110
 	goto EscapeRoom_RestoreMoveset_82
 
 EscapeRoom_RestoreMoveset_85:
-# 731 "data/maps/EscapeRoom_Main/scripts.pory"
+# 730 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_POOCHYENA, MOVE_ENDEAVOR
-# 732 "data/maps/EscapeRoom_Main/scripts.pory"
+# 731 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ENDEAVOR_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_58
 
 EscapeRoom_RestoreMoveset_90:
-# 895 "data/maps/EscapeRoom_Main/scripts.pory"
+# 894 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_SMEARGLE, MOVE_SWITCHEROO
-# 896 "data/maps/EscapeRoom_Main/scripts.pory"
+# 895 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SWITCHEROO_DELETED
-# 897 "data/maps/EscapeRoom_Main/scripts.pory"
+# 896 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_117
-# 897 "data/maps/EscapeRoom_Main/scripts.pory"
+# 896 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_SWITCHEROO_DELETED_0_PP, EscapeRoom_RestoreMoveset_117
 	goto EscapeRoom_RestoreMoveset_89
 
 EscapeRoom_RestoreMoveset_92:
-# 888 "data/maps/EscapeRoom_Main/scripts.pory"
+# 887 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_SMEARGLE, MOVE_SURF
-# 889 "data/maps/EscapeRoom_Main/scripts.pory"
+# 888 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SURF_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_65
 
 EscapeRoom_RestoreMoveset_97:
-# 846 "data/maps/EscapeRoom_Main/scripts.pory"
+# 845 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_DUNSPARCE, MOVE_COUNTER
-# 847 "data/maps/EscapeRoom_Main/scripts.pory"
+# 846 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_COUNTER_DELETED
-# 848 "data/maps/EscapeRoom_Main/scripts.pory"
+# 847 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_124
-# 848 "data/maps/EscapeRoom_Main/scripts.pory"
+# 847 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_COUNTER_DELETED_0_PP, EscapeRoom_RestoreMoveset_124
 	goto EscapeRoom_RestoreMoveset_96
 
 EscapeRoom_RestoreMoveset_99:
-# 839 "data/maps/EscapeRoom_Main/scripts.pory"
+# 838 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_DUNSPARCE, MOVE_HEX
-# 840 "data/maps/EscapeRoom_Main/scripts.pory"
+# 839 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_HEX_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_68
 
 EscapeRoom_RestoreMoveset_104:
-# 797 "data/maps/EscapeRoom_Main/scripts.pory"
+# 796 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_LIEPARD, MOVE_TRICK
-# 798 "data/maps/EscapeRoom_Main/scripts.pory"
+# 797 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TRICK_DELETED
-# 799 "data/maps/EscapeRoom_Main/scripts.pory"
+# 798 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_128
-# 799 "data/maps/EscapeRoom_Main/scripts.pory"
+# 798 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TRICK_DELETED_0_PP, EscapeRoom_RestoreMoveset_128
 	goto EscapeRoom_RestoreMoveset_103
 
 EscapeRoom_RestoreMoveset_106:
-# 790 "data/maps/EscapeRoom_Main/scripts.pory"
+# 789 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_LIEPARD, MOVE_ECHOED_VOICE
-# 791 "data/maps/EscapeRoom_Main/scripts.pory"
+# 790 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_ECHOED_VOICE_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_75
 
 EscapeRoom_RestoreMoveset_110:
-# 741 "data/maps/EscapeRoom_Main/scripts.pory"
+# 740 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_POOCHYENA, MOVE_TAUNT
-# 742 "data/maps/EscapeRoom_Main/scripts.pory"
+# 741 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TAUNT_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_82
 
 EscapeRoom_RestoreMoveset_115:
-# 905 "data/maps/EscapeRoom_Main/scripts.pory"
+# 904 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_SMEARGLE, MOVE_UPROAR
-# 906 "data/maps/EscapeRoom_Main/scripts.pory"
+# 905 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_UPROAR_DELETED
-# 907 "data/maps/EscapeRoom_Main/scripts.pory"
+# 906 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_135
-# 907 "data/maps/EscapeRoom_Main/scripts.pory"
+# 906 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_UPROAR_DELETED_0_PP, EscapeRoom_RestoreMoveset_135
 	goto EscapeRoom_RestoreMoveset_114
 
 EscapeRoom_RestoreMoveset_117:
-# 898 "data/maps/EscapeRoom_Main/scripts.pory"
+# 897 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_SMEARGLE, MOVE_SWITCHEROO
-# 899 "data/maps/EscapeRoom_Main/scripts.pory"
+# 898 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SWITCHEROO_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_89
 
 EscapeRoom_RestoreMoveset_122:
-# 856 "data/maps/EscapeRoom_Main/scripts.pory"
+# 855 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_DUNSPARCE, MOVE_AIR_SLASH
-# 857 "data/maps/EscapeRoom_Main/scripts.pory"
+# 856 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_AIR_SLASH_DELETED
-# 858 "data/maps/EscapeRoom_Main/scripts.pory"
+# 857 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_139
-# 858 "data/maps/EscapeRoom_Main/scripts.pory"
+# 857 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_AIR_SLASH_DELETED_0_PP, EscapeRoom_RestoreMoveset_139
 	goto EscapeRoom_RestoreMoveset_121
 
 EscapeRoom_RestoreMoveset_124:
-# 849 "data/maps/EscapeRoom_Main/scripts.pory"
+# 848 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_DUNSPARCE, MOVE_COUNTER
-# 850 "data/maps/EscapeRoom_Main/scripts.pory"
+# 849 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_COUNTER_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_96
 
 EscapeRoom_RestoreMoveset_128:
-# 800 "data/maps/EscapeRoom_Main/scripts.pory"
+# 799 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_LIEPARD, MOVE_TRICK
-# 801 "data/maps/EscapeRoom_Main/scripts.pory"
+# 800 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TRICK_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_103
 
 EscapeRoom_RestoreMoveset_133:
-# 915 "data/maps/EscapeRoom_Main/scripts.pory"
+# 914 "data/maps/EscapeRoom_Main/scripts.pory"
 	addmonmove SPECIES_SMEARGLE, MOVE_CONVERSION_2
-# 916 "data/maps/EscapeRoom_Main/scripts.pory"
+# 915 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_CONVERSION_2_DELETED
-# 917 "data/maps/EscapeRoom_Main/scripts.pory"
+# 916 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MON_HAS_0_PP_WHEN_RESTORING, EscapeRoom_RestoreMoveset_143
-# 917 "data/maps/EscapeRoom_Main/scripts.pory"
+# 916 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_CONVERSION_2_DELETED_0_PP, EscapeRoom_RestoreMoveset_143
 	goto EscapeRoom_RestoreMoveset_132
 
 EscapeRoom_RestoreMoveset_135:
-# 908 "data/maps/EscapeRoom_Main/scripts.pory"
+# 907 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_SMEARGLE, MOVE_UPROAR
-# 909 "data/maps/EscapeRoom_Main/scripts.pory"
+# 908 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_UPROAR_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_114
 
 EscapeRoom_RestoreMoveset_139:
-# 859 "data/maps/EscapeRoom_Main/scripts.pory"
+# 858 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_DUNSPARCE, MOVE_AIR_SLASH
-# 860 "data/maps/EscapeRoom_Main/scripts.pory"
+# 859 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_AIR_SLASH_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_121
 
 EscapeRoom_RestoreMoveset_143:
-# 918 "data/maps/EscapeRoom_Main/scripts.pory"
+# 917 "data/maps/EscapeRoom_Main/scripts.pory"
 	setmonmove0pp SPECIES_SMEARGLE, MOVE_CONVERSION_2
-# 919 "data/maps/EscapeRoom_Main/scripts.pory"
+# 918 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_CONVERSION_2_DELETED_0_PP
 	goto EscapeRoom_RestoreMoveset_132
 
 
 EscapeRoom_MoveRestoredSound::
-# 940 "data/maps/EscapeRoom_Main/scripts.pory"
+# 939 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 10
-# 941 "data/maps/EscapeRoom_Main/scripts.pory"
+# 940 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_NOTE_E
+# 941 "data/maps/EscapeRoom_Main/scripts.pory"
+	delay 7
 # 942 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 7
-# 943 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_NOTE_G
-# 944 "data/maps/EscapeRoom_Main/scripts.pory"
+# 943 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 7
-# 945 "data/maps/EscapeRoom_Main/scripts.pory"
+# 944 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_NOTE_C_HIGH
-# 946 "data/maps/EscapeRoom_Main/scripts.pory"
+# 945 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitse
 	return
 
 
 EscapeRoom_UltraBallNPC::
-# 950 "data/maps/EscapeRoom_Main/scripts.pory"
+# 949 "data/maps/EscapeRoom_Main/scripts.pory"
 	lock
-# 951 "data/maps/EscapeRoom_Main/scripts.pory"
+# 950 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 952 "data/maps/EscapeRoom_Main/scripts.pory"
+# 951 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_POKE_BALL_OBTAINED, EscapeRoom_UltraBallNPC_2
-# 964 "data/maps/EscapeRoom_Main/scripts.pory"
+# 963 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox UltaBallQuizPostScript, MSGBOX_DEFAULT
 EscapeRoom_UltraBallNPC_1:
-# 967 "data/maps/EscapeRoom_Main/scripts.pory"
+# 966 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_UltraBallNPC_2:
-# 954 "data/maps/EscapeRoom_Main/scripts.pory"
+# 953 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox UltraBallQuizStart, MSGBOX_DEFAULT
-# 959 "data/maps/EscapeRoom_Main/scripts.pory"
+# 958 "data/maps/EscapeRoom_Main/scripts.pory"
 	giveitem ITEM_ULTRA_BALL
-# 960 "data/maps/EscapeRoom_Main/scripts.pory"
+# 959 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_POKE_BALL_OBTAINED
 	goto EscapeRoom_UltraBallNPC_1
 
 
 EscapeRoom_AnnihilapeHintNPC::
-# 974 "data/maps/EscapeRoom_Main/scripts.pory"
+# 973 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 977 "data/maps/EscapeRoom_Main/scripts.pory"
+# 976 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_ANNIHILAPE_HINT_RECEIVED, EscapeRoom_AnnihilapeHintNPC_2
-# 1005 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1004 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1006 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1005 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AnnihilapeHintMessage, MSGBOX_NPC
 EscapeRoom_AnnihilapeHintNPC_1:
-# 1008 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1007 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_AnnihilapeHintNPC_2:
-# 979 "data/maps/EscapeRoom_Main/scripts.pory"
+# 978 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_HIDE_ANNIHILAPE, EscapeRoom_AnnihilapeHintNPC_5
-# 991 "data/maps/EscapeRoom_Main/scripts.pory"
+# 990 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 994 "data/maps/EscapeRoom_Main/scripts.pory"
+# 993 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_PIN
-# 995 "data/maps/EscapeRoom_Main/scripts.pory"
+# 994 "data/maps/EscapeRoom_Main/scripts.pory"
 	applymovement 31, Common_Movement_ExclamationMark
-# 996 "data/maps/EscapeRoom_Main/scripts.pory"
+# 995 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmovement 31
-# 997 "data/maps/EscapeRoom_Main/scripts.pory"
+# 996 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 30
-# 999 "data/maps/EscapeRoom_Main/scripts.pory"
+# 998 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AnnihilapeHintMessage, MSGBOX_NPC
-# 1000 "data/maps/EscapeRoom_Main/scripts.pory"
+# 999 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_ANNIHILAPE_HINT_RECEIVED
 	goto EscapeRoom_AnnihilapeHintNPC_1
 
 EscapeRoom_AnnihilapeHintNPC_5:
-# 980 "data/maps/EscapeRoom_Main/scripts.pory"
+# 979 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AnnihilapeHintNoMessage1, MSGBOX_AUTOCLOSE
+# 980 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 981 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
-# 982 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 20
-# 983 "data/maps/EscapeRoom_Main/scripts.pory"
+# 982 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 984 "data/maps/EscapeRoom_Main/scripts.pory"
+# 983 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AnnihilapeHintNoMessage2, MSGBOX_AUTOCLOSE
-# 985 "data/maps/EscapeRoom_Main/scripts.pory"
+# 984 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 986 "data/maps/EscapeRoom_Main/scripts.pory"
+# 985 "data/maps/EscapeRoom_Main/scripts.pory"
 	applymovement 31, face_npc_up
-# 987 "data/maps/EscapeRoom_Main/scripts.pory"
+# 986 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmovement 31
 	goto EscapeRoom_AnnihilapeHintNPC_1
 
 
-# 1011 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1010 "data/maps/EscapeRoom_Main/scripts.pory"
 face_npc_up:
-# 1012 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1011 "data/maps/EscapeRoom_Main/scripts.pory"
 	face_up
 	step_end
 
 EscapeRoom_ZeraoraHintNPC::
-# 1016 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1015 "data/maps/EscapeRoom_Main/scripts.pory"
 	lock
-# 1017 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1016 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1018 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1017 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_ZERAORA_CAUGHT, EscapeRoom_ZeraoraHintNPC_2
-# 1022 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1021 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox ZeraoraHintPostCatchMessage, MSGBOX_DEFAULT
 EscapeRoom_ZeraoraHintNPC_1:
-# 1024 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1023 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_ZeraoraHintNPC_2:
-# 1019 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1018 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox ZeraoraHintMessage, MSGBOX_DEFAULT
 	goto EscapeRoom_ZeraoraHintNPC_1
 
 
 EscapeRoom_TabletsHintNPC::
-# 1028 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1027 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1029 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_unset FLAG_MAP_SWITCH_4_FOUND, EscapeRoom_TabletsHintNPC_2
-# 1032 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_unset FLAG_MAP_SWITCHES_SOLVED, EscapeRoom_TabletsHintNPC_3
-# 1035 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_unset FLAG_CHOICE_SPECS_OBTAINED, EscapeRoom_TabletsHintNPC_4
-# 1039 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox FourTabletsHintMessage4, MSGBOX_NPC
-EscapeRoom_TabletsHintNPC_1:
+# 1028 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_unset FLAG_TRAINER6_DEFEATED, EscapeRoom_TabletsHintNPC_2
+# 1031 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_unset FLAG_MAP_SWITCH_4_FOUND, EscapeRoom_TabletsHintNPC_3
+# 1034 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_unset FLAG_MAP_SWITCHES_SOLVED, EscapeRoom_TabletsHintNPC_4
+# 1037 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_unset FLAG_CHOICE_SPECS_OBTAINED, EscapeRoom_TabletsHintNPC_5
 # 1041 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox FourTabletsHintMessage5, MSGBOX_NPC
+EscapeRoom_TabletsHintNPC_1:
+# 1043 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_TabletsHintNPC_2:
-# 1030 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1029 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FourTabletsHintMessage1, MSGBOX_NPC
 	goto EscapeRoom_TabletsHintNPC_1
 
 EscapeRoom_TabletsHintNPC_3:
-# 1033 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1032 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FourTabletsHintMessage2, MSGBOX_NPC
 	goto EscapeRoom_TabletsHintNPC_1
 
 EscapeRoom_TabletsHintNPC_4:
-# 1036 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1035 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FourTabletsHintMessage3, MSGBOX_NPC
+	goto EscapeRoom_TabletsHintNPC_1
+
+EscapeRoom_TabletsHintNPC_5:
+# 1038 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox FourTabletsHintMessage4, MSGBOX_NPC
 	goto EscapeRoom_TabletsHintNPC_1
 
 
 EscapeRoom_EventScript_Trainer1::
-# 1048 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1050 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1049 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1051 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_double TRAINER_CUSTOM_TRAINER1, Trainer1_Intro, Trainer1_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_Trainer1PostBattle
-# 1058 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1060 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_ZERA_TRADED, EscapeRoom_EventScript_Trainer1_1
-# 1062 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1064 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer1_PostBattle, MSGBOX_AUTOCLOSE
-# 1063 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1065 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	return
 
 EscapeRoom_EventScript_Trainer1_1:
-# 1059 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1061 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_TradeZeraForHMCut
 	return
 
 
 EscapeRoom_EventScript_Trainer2::
-# 1068 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1070 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER2, Trainer2_Intro, Trainer2_Outro, event_script = EscapeRoom_EventScript_Trainer2PostBattle
-# 1074 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1076 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer2_PostBattle, MSGBOX_AUTOCLOSE
-# 1075 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1077 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer3::
-# 1080 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1082 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1081 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1083 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_double TRAINER_CUSTOM_TRAINER3, Trainer3_Intro, Trainer3_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_Trainer3PostBattle
-# 1088 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1090 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer3_PostBattle, MSGBOX_AUTOCLOSE
-# 1089 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1091 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer4::
-# 1094 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1096 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER4, Trainer4_Intro, Trainer4_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 1100 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1102 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer4_PostBattle, MSGBOX_AUTOCLOSE
-# 1101 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1103 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer5::
-# 1106 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1108 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER5, Trainer5_Intro, Trainer5_Outro, event_script = EscapeRoom_EventScript_Trainer5PostBattle
-# 1113 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1115 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer5_PostBattle, MSGBOX_AUTOCLOSE
-# 1114 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1116 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer6::
-# 1119 "data/maps/EscapeRoom_Main/scripts.pory"
-	trainerbattle_double TRAINER_CUSTOM_TRAINER6, Trainer6_Intro, Trainer6_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 1126 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1121 "data/maps/EscapeRoom_Main/scripts.pory"
+	trainerbattle_double TRAINER_CUSTOM_TRAINER6, Trainer6_Intro, Trainer6_Outro, DoubleBattle_NotEnoughMons, event_script = EscapeRoom_EventScript_Trainer6PostBattle
+# 1128 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer6_PostBattle, MSGBOX_AUTOCLOSE
-# 1127 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1129 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_Trainer7::
-# 1132 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1134 "data/maps/EscapeRoom_Main/scripts.pory"
 	trainerbattle_single TRAINER_CUSTOM_TRAINER7, Trainer7_Intro, Trainer7_Outro, event_script = EscapeRoom_EventScript_PostMatchHeal
-# 1138 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1140 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Trainer7_PostBattle, MSGBOX_AUTOCLOSE
-# 1139 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1141 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	end
 
 
 EscapeRoom_EventScript_PostMatchHeal::
-# 1147 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1149 "data/maps/EscapeRoom_Main/scripts.pory"
 	special HealPlayerParty
 	return
 
 
 EscapeRoom_EventScript_Trainer1PostBattle::
-# 1152 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_RECOVERED_WHITE_HERB
-# 1153 "data/maps/EscapeRoom_Main/scripts.pory"
-	checkpartymon SPECIES_ZERAORA
 # 1154 "data/maps/EscapeRoom_Main/scripts.pory"
-	copyvar VAR_TEMP_0, VAR_RESULT
+	clearflag FLAG_RECOVERED_WHITE_HERB
 # 1155 "data/maps/EscapeRoom_Main/scripts.pory"
+	checkpartymon SPECIES_ZERAORA
+# 1156 "data/maps/EscapeRoom_Main/scripts.pory"
+	copyvar VAR_TEMP_0, VAR_RESULT
+# 1157 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_TEMP_0, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_Trainer1PostBattle_2
 EscapeRoom_EventScript_Trainer1PostBattle_1:
-# 1162 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1164 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_PostMatchHeal
-# 1163 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1165 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_TradeZeraForHMCut
 	return
 
 EscapeRoom_EventScript_Trainer1PostBattle_2:
-# 1156 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1158 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartyitem VAR_TEMP_0
-# 1157 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1159 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_0x8005, ITEM_WHITE_HERB
 	goto_if_eq EscapeRoom_EventScript_Trainer1PostBattle_4
 	goto EscapeRoom_EventScript_Trainer1PostBattle_1
 
 EscapeRoom_EventScript_Trainer1PostBattle_4:
-# 1158 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1160 "data/maps/EscapeRoom_Main/scripts.pory"
 	removepartyitem VAR_TEMP_0
 	goto EscapeRoom_EventScript_Trainer1PostBattle_1
 
 
 EscapeRoom_EventScript_Trainer2PostBattle::
-# 1168 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_RECOVERED_MARANGA
-# 1169 "data/maps/EscapeRoom_Main/scripts.pory"
-	checkpartymon SPECIES_FLORGES
 # 1170 "data/maps/EscapeRoom_Main/scripts.pory"
-	copyvar VAR_TEMP_0, VAR_RESULT
+	clearflag FLAG_RECOVERED_MARANGA
 # 1171 "data/maps/EscapeRoom_Main/scripts.pory"
+	checkpartymon SPECIES_FLORGES
+# 1172 "data/maps/EscapeRoom_Main/scripts.pory"
+	copyvar VAR_TEMP_0, VAR_RESULT
+# 1173 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_TEMP_0, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_Trainer2PostBattle_2
 EscapeRoom_EventScript_Trainer2PostBattle_1:
-# 1178 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1179 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_TRAINER2_DEFEATED
+# 1180 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_PostMatchHeal
 	return
 
 EscapeRoom_EventScript_Trainer2PostBattle_2:
-# 1172 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1174 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartyitem VAR_TEMP_0
-# 1173 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1175 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_0x8005, ITEM_MARANGA_BERRY
 	goto_if_eq EscapeRoom_EventScript_Trainer2PostBattle_4
 	goto EscapeRoom_EventScript_Trainer2PostBattle_1
 
 EscapeRoom_EventScript_Trainer2PostBattle_4:
-# 1174 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1176 "data/maps/EscapeRoom_Main/scripts.pory"
 	removepartyitem VAR_TEMP_0
 	goto EscapeRoom_EventScript_Trainer2PostBattle_1
 
 
 EscapeRoom_EventScript_Trainer3PostBattle::
-# 1183 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
-# 1184 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox Trainer3FinalWords, MSGBOX_AUTOCLOSE
 # 1185 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
+	lockall
 # 1186 "data/maps/EscapeRoom_Main/scripts.pory"
-	applymovement 5, EscapeRoom_Movement_Trainer3End
+	msgbox Trainer3FinalWords, MSGBOX_AUTOCLOSE
 # 1187 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmovement 5
+	waitmessage
 # 1188 "data/maps/EscapeRoom_Main/scripts.pory"
+	applymovement 5, EscapeRoom_Movement_Trainer3End
+# 1189 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmovement 5
+# 1190 "data/maps/EscapeRoom_Main/scripts.pory"
 	copyobjectxytoperm 5
-# 1191 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1193 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_TRAINER3_DEFEATED
-# 1194 "data/maps/EscapeRoom_Main/scripts.pory"
-	call EscapeRoom_EventScript_PostMatchHeal
 # 1196 "data/maps/EscapeRoom_Main/scripts.pory"
+	call EscapeRoom_EventScript_PostMatchHeal
+# 1198 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 
-# 1200 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1202 "data/maps/EscapeRoom_Main/scripts.pory"
 EscapeRoom_Movement_Trainer3End:
-# 1201 "data/maps/EscapeRoom_Main/scripts.pory"
-	face_right
-# 1202 "data/maps/EscapeRoom_Main/scripts.pory"
-	walk_right
-# 1202 "data/maps/EscapeRoom_Main/scripts.pory"
-	walk_right
 # 1203 "data/maps/EscapeRoom_Main/scripts.pory"
+	face_right
+# 1204 "data/maps/EscapeRoom_Main/scripts.pory"
+	walk_right
+# 1204 "data/maps/EscapeRoom_Main/scripts.pory"
+	walk_right
+# 1205 "data/maps/EscapeRoom_Main/scripts.pory"
 	face_left
 	step_end
 
 EscapeRoom_EventScript_Trainer5PostBattle::
-# 1209 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_RECOVERED_CUSTAP
 # 1210 "data/maps/EscapeRoom_Main/scripts.pory"
-	checkpartymon SPECIES_POOCHYENA
+	clearflag FLAG_RECOVERED_CUSTAP
 # 1211 "data/maps/EscapeRoom_Main/scripts.pory"
-	copyvar VAR_TEMP_0, VAR_RESULT
+	checkpartymon SPECIES_POOCHYENA
 # 1212 "data/maps/EscapeRoom_Main/scripts.pory"
+	copyvar VAR_TEMP_0, VAR_RESULT
+# 1213 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_TEMP_0, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_Trainer5PostBattle_2
 EscapeRoom_EventScript_Trainer5PostBattle_1:
 # 1219 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_TRAINER5_DEFEATED
+# 1220 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_PostMatchHeal
 	return
 
 EscapeRoom_EventScript_Trainer5PostBattle_2:
-# 1213 "data/maps/EscapeRoom_Main/scripts.pory"
-	checkpartyitem VAR_TEMP_0
 # 1214 "data/maps/EscapeRoom_Main/scripts.pory"
+	checkpartyitem VAR_TEMP_0
+# 1215 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_0x8005, ITEM_CUSTAP_BERRY
 	goto_if_eq EscapeRoom_EventScript_Trainer5PostBattle_4
 	goto EscapeRoom_EventScript_Trainer5PostBattle_1
 
 EscapeRoom_EventScript_Trainer5PostBattle_4:
-# 1215 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1216 "data/maps/EscapeRoom_Main/scripts.pory"
 	removepartyitem VAR_TEMP_0
 	goto EscapeRoom_EventScript_Trainer5PostBattle_1
 
 
+EscapeRoom_EventScript_Trainer6PostBattle::
+# 1224 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_TRAINER6_DEFEATED
+# 1225 "data/maps/EscapeRoom_Main/scripts.pory"
+	call EscapeRoom_EventScript_PostMatchHeal
+	return
+
+
 EscapeRoom_EventScript_TradeZeraForHMCut::
-# 1226 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1233 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1227 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1234 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AskZeraCutTradeMessage, MSGBOX_YESNO
-# 1228 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1235 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_TradeZeraForHMCut_2
-# 1248 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1255 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox ZeraCutTradeDeclined, MSGBOX_AUTOCLOSE
 EscapeRoom_EventScript_TradeZeraForHMCut_1:
-# 1250 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1257 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_TradeZeraForHMCut_2:
-# 1231 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1238 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_ZERAORA
-# 1232 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1239 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EscapeRoom_EventScript_TradeZeraForHMCut_6
-# 1241 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1248 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_ZERA_TRADED
-# 1242 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1249 "data/maps/EscapeRoom_Main/scripts.pory"
 	removemon SPECIES_ZERAORA
-# 1243 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1250 "data/maps/EscapeRoom_Main/scripts.pory"
 	giveitem ITEM_HM01
-# 1244 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1251 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox ZeraCutTradeAccepted, MSGBOX_AUTOCLOSE
-# 1245 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1252 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradeZeraForHMCut_1
 
 EscapeRoom_EventScript_TradeZeraForHMCut_6:
-# 1234 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1241 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
-# 1235 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1242 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1236 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1243 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce::
-# 1254 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1261 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1255 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1262 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1258 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_FERRO_TRADE_ACCEPTED, EscapeRoom_EventScript_TradeFerroVsDunsparce_2
-# 1264 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox AskFerroDunsparceTrade, MSGBOX_YESNO
 # 1265 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_FERRO_TRADE_ACCEPTED, EscapeRoom_EventScript_TradeFerroVsDunsparce_2
+# 1271 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox AskFerroDunsparceTrade, MSGBOX_YESNO
+# 1272 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_TradeFerroVsDunsparce_5
-# 1312 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1319 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FerroTradeDeclined, MSGBOX_AUTOCLOSE
-# 1313 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1320 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_TradeFerroVsDunsparce_1:
-# 1316 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1323 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce_2:
-# 1259 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1266 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FerroTradePostTrade, MSGBOX_NPC
-# 1260 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1267 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradeFerroVsDunsparce_1
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce_5:
-# 1268 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1275 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_FERROTHORN
-# 1269 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1276 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EscapeRoom_EventScript_TradeFerroVsDunsparce_9
-# 1278 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1285 "data/maps/EscapeRoom_Main/scripts.pory"
 	removemon SPECIES_FERROTHORN
-# 1279 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_DUNSPARCE, 50, abilityNum = 2, nature = 8, gender = 0, move1 = MOVE_TRUMP_CARD, move2 = MOVE_AIR_SLASH, move3 = MOVE_HEX, move4 = MOVE_COUNTER, hpEv = 0, defEv = 252, hpIv = 0, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 10, spDefIv = 31
-# 1300 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_FERRO_TRADE_ACCEPTED
-# 1302 "data/maps/EscapeRoom_Main/scripts.pory"
-	message DunsparceReceivedMessage
-# 1303 "data/maps/EscapeRoom_Main/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 1304 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitfanfare
-# 1306 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
+# 1286 "data/maps/EscapeRoom_Main/scripts.pory"
+	givemon SPECIES_DUNSPARCE, 50, abilityNum = 2, nature = 8, gender = 1, move1 = MOVE_TRUMP_CARD, move2 = MOVE_AIR_SLASH, move3 = MOVE_HEX, move4 = MOVE_COUNTER, hpEv = 0, defEv = 252, hpIv = 0, atkIv = 0, defIv = 31, speedIv = 31, spAtkIv = 10, spDefIv = 31
 # 1307 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_FERRO_TRADE_ACCEPTED
+# 1309 "data/maps/EscapeRoom_Main/scripts.pory"
+	message DunsparceReceivedMessage
+# 1310 "data/maps/EscapeRoom_Main/scripts.pory"
+	playfanfare MUS_OBTAIN_ITEM
+# 1311 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitfanfare
+# 1313 "data/maps/EscapeRoom_Main/scripts.pory"
+	lockall
+# 1314 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FerroTradeAccepted, MSGBOX_AUTOCLOSE
-# 1308 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1315 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradeFerroVsDunsparce_1
 
 EscapeRoom_EventScript_TradeFerroVsDunsparce_9:
-# 1271 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1278 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
-# 1272 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1279 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1273 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1280 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 
 EscapeRoom_EventScript_TradeFlorgesForEgg::
-# 1321 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1328 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1322 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1329 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1325 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_FLORGES_TRADE_ACCEPTED, EscapeRoom_EventScript_TradeFlorgesForEgg_2
-# 1331 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox AskFlorgesEggTrade, MSGBOX_YESNO
 # 1332 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_FLORGES_TRADE_ACCEPTED, EscapeRoom_EventScript_TradeFlorgesForEgg_2
+# 1338 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox AskFlorgesEggTrade, MSGBOX_YESNO
+# 1339 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_TradeFlorgesForEgg_5
-# 1358 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1365 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FlorgesTradeDeclined, MSGBOX_AUTOCLOSE
-# 1359 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1366 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_TradeFlorgesForEgg_1:
-# 1362 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1369 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_TradeFlorgesForEgg_2:
-# 1326 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1333 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox FlorgesTradePostTrade, MSGBOX_NPC
-# 1327 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1334 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradeFlorgesForEgg_1
 
 EscapeRoom_EventScript_TradeFlorgesForEgg_5:
-# 1335 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1342 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_FLORGES
-# 1336 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1343 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EscapeRoom_EventScript_TradeFlorgesForEgg_9
-# 1345 "data/maps/EscapeRoom_Main/scripts.pory"
-	removemon SPECIES_FLORGES
-# 1346 "data/maps/EscapeRoom_Main/scripts.pory"
-	givepoochegg
-# 1347 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_FLORGES_TRADE_ACCEPTED
-# 1349 "data/maps/EscapeRoom_Main/scripts.pory"
-	message EggReceivedMessage
-# 1350 "data/maps/EscapeRoom_Main/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 1351 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitfanfare
 # 1352 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
+	removemon SPECIES_FLORGES
 # 1353 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox FlorgesTradeAccepted, MSGBOX_AUTOCLOSE
+	givepoochegg
 # 1354 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_FLORGES_TRADE_ACCEPTED
+# 1356 "data/maps/EscapeRoom_Main/scripts.pory"
+	message EggReceivedMessage
+# 1357 "data/maps/EscapeRoom_Main/scripts.pory"
+	playfanfare MUS_OBTAIN_ITEM
+# 1358 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitfanfare
+# 1359 "data/maps/EscapeRoom_Main/scripts.pory"
+	lockall
+# 1360 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox FlorgesTradeAccepted, MSGBOX_AUTOCLOSE
+# 1361 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradeFlorgesForEgg_1
 
 EscapeRoom_EventScript_TradeFlorgesForEgg_9:
-# 1338 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1345 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
-# 1339 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1346 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1340 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1347 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 
 EscapeRoom_EventScript_SellDunsparce::
-# 1366 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1373 "data/maps/EscapeRoom_Main/scripts.pory"
 	lock
-# 1367 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1374 "data/maps/EscapeRoom_Main/scripts.pory"
 	faceplayer
-# 1370 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_DUNSPARCE_TRADE_ACCEPTED, EscapeRoom_EventScript_SellDunsparce_2
-# 1376 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox AskDunsparceMoneyTrade, MSGBOX_YESNO
 # 1377 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_DUNSPARCE_TRADE_ACCEPTED, EscapeRoom_EventScript_SellDunsparce_2
+# 1383 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox AskDunsparceMoneyTrade, MSGBOX_YESNO
+# 1384 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_SellDunsparce_5
-# 1403 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1406 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox DunsparceTradeDeclined, MSGBOX_AUTOCLOSE
-# 1404 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1407 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_SellDunsparce_1:
-# 1407 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1410 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_SellDunsparce_2:
-# 1371 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1378 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox DunsparceTradePostTrade, MSGBOX_DEFAULT
-# 1372 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1379 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_SellDunsparce_1
 
 EscapeRoom_EventScript_SellDunsparce_5:
-# 1380 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1387 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_DUNSPARCE
-# 1381 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1388 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EscapeRoom_EventScript_SellDunsparce_9
-# 1390 "data/maps/EscapeRoom_Main/scripts.pory"
-	removemon SPECIES_DUNSPARCE
-# 1391 "data/maps/EscapeRoom_Main/scripts.pory"
-	addmoney 5000
-# 1392 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_DUNSPARCE_TRADE_ACCEPTED
-# 1394 "data/maps/EscapeRoom_Main/scripts.pory"
-	message MoneyReceivedMessage
-# 1395 "data/maps/EscapeRoom_Main/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 1396 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitfanfare
 # 1397 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
+	removemon SPECIES_DUNSPARCE
 # 1398 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox DunsparceTradeAccepted, MSGBOX_AUTOCLOSE
-# 1399 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_DUNSPARCE_TRADE_ACCEPTED
+# 1400 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox AskDunsparceReturnAcceptedMessage, MSGBOX_DEFAULT
+# 1401 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
+# 1402 "data/maps/EscapeRoom_Main/scripts.pory"
+	giveitem ITEM_TM12
 	goto EscapeRoom_EventScript_SellDunsparce_1
 
 EscapeRoom_EventScript_SellDunsparce_9:
-# 1383 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1390 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
-# 1384 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1391 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1385 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1392 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 
 EscapeRoom_EventScript_TradePoochForSmeargle::
-# 1411 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1414 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1412 "data/maps/EscapeRoom_Main/scripts.pory"
-	faceplayer
 # 1415 "data/maps/EscapeRoom_Main/scripts.pory"
+	faceplayer
+# 1418 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_POOCH_TRADE_ACCEPTED, EscapeRoom_EventScript_TradePoochForSmeargle_2
-# 1421 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1424 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AskPoochSmeargleTrade, MSGBOX_YESNO
-# 1422 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1425 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_TradePoochForSmeargle_5
-# 1485 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1488 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox PoochTradeDeclined, MSGBOX_AUTOCLOSE
-# 1486 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1489 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_TradePoochForSmeargle_1:
-# 1489 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1492 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_TradePoochForSmeargle_2:
-# 1416 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1419 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox PoochTradePostTrade, MSGBOX_NPC
-# 1417 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1420 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradePoochForSmeargle_1
 
 EscapeRoom_EventScript_TradePoochForSmeargle_5:
-# 1425 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1428 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymon SPECIES_POOCHYENA
-# 1426 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1429 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_eq EscapeRoom_EventScript_TradePoochForSmeargle_9
-# 1435 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1438 "data/maps/EscapeRoom_Main/scripts.pory"
 	partymonhasfainted
-# 1436 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1439 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1437 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1440 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_TradePoochForSmeargle_12
 EscapeRoom_EventScript_TradePoochForSmeargle_11:
-# 1450 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1453 "data/maps/EscapeRoom_Main/scripts.pory"
 	removemon SPECIES_POOCHYENA
-# 1451 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1454 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1452 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1455 "data/maps/EscapeRoom_Main/scripts.pory"
 	givemon SPECIES_SMEARGLE, 30, abilityNum = 0, nature = 15, gender = 0, move1 = MOVE_SWITCHEROO, move2 = MOVE_UPROAR, move3 = MOVE_SURF, move4 = MOVE_CONVERSION_2, hpEv = 0, spAtkEv = 252, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 28
-# 1473 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
-# 1474 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_POOCH_TRADE_ACCEPTED
 # 1476 "data/maps/EscapeRoom_Main/scripts.pory"
-	message SmeargleReceivedMessage
-# 1477 "data/maps/EscapeRoom_Main/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 1478 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
+# 1477 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_POOCH_TRADE_ACCEPTED
 # 1479 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitfanfare
+	message SmeargleReceivedMessage
 # 1480 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox PoochTradeAccepted, MSGBOX_AUTOCLOSE
+	playfanfare MUS_OBTAIN_ITEM
 # 1481 "data/maps/EscapeRoom_Main/scripts.pory"
+	lockall
+# 1482 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitfanfare
+# 1483 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox PoochTradeAccepted, MSGBOX_AUTOCLOSE
+# 1484 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradePoochForSmeargle_1
 
 EscapeRoom_EventScript_TradePoochForSmeargle_9:
-# 1428 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1431 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
-# 1429 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1432 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1430 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1433 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_TradePoochForSmeargle_12:
-# 1438 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1441 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_0x8004, SPECIES_LIEPARD
 	goto_if_eq EscapeRoom_EventScript_TradePoochForSmeargle_14
 	goto EscapeRoom_EventScript_TradePoochForSmeargle_11
 
 EscapeRoom_EventScript_TradePoochForSmeargle_14:
-# 1439 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox HealBeforeTradeMessage, MSGBOX_DEFAULT
-# 1440 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
-# 1441 "data/maps/EscapeRoom_Main/scripts.pory"
-	special HealPlayerParty
 # 1442 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_USE_ITEM
+	msgbox HealBeforeTradeMessage, MSGBOX_DEFAULT
 # 1443 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitse
+	waitmessage
 # 1444 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox HealedBeforeTradeMessage, MSGBOX_AUTOCLOSE
+	special HealPlayerParty
 # 1445 "data/maps/EscapeRoom_Main/scripts.pory"
+	playse SE_USE_ITEM
+# 1446 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitse
+# 1447 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox HealedBeforeTradeMessage, MSGBOX_AUTOCLOSE
+# 1448 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradePoochForSmeargle_11
 
 
-EscapeRoom_EventScript_FindTmTaunt::
-# 1496 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
-# 1497 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_TM12
-# 1498 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 25
+EscapeRoom_EventScript_FindStardust::
 # 1499 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_TM12_OBTAINED
-# 1500 "data/maps/EscapeRoom_Main/scripts.pory"
+	lockall
+# 1501 "data/maps/EscapeRoom_Main/scripts.pory"
+	finditem ITEM_CUSTAP_BERRY
+# 1502 "data/maps/EscapeRoom_Main/scripts.pory"
+	removeobject 25
+# 1503 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_STARDUST_OBTAINED
+# 1504 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_FindLostGlasses::
-# 1504 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
-# 1505 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_WISE_GLASSES
-# 1506 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 22
-# 1507 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_LOST_GLASSES_OBTAINED
 # 1508 "data/maps/EscapeRoom_Main/scripts.pory"
+	lockall
+# 1509 "data/maps/EscapeRoom_Main/scripts.pory"
+	finditem ITEM_WISE_GLASSES
+# 1510 "data/maps/EscapeRoom_Main/scripts.pory"
+	removeobject 22
+# 1511 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_LOST_GLASSES_OBTAINED
+# 1512 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_MapSwitch1::
-# 1515 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1519 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1518 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1522 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MAP_SWITCHES_SOLVED, EscapeRoom_EventScript_MapSwitch1_2
-# 1526 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1530 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_1, 0
 	goto_if_eq EscapeRoom_EventScript_MapSwitch1_5
 EscapeRoom_EventScript_MapSwitch1_4:
-# 1529 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1533 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_1, 1
 	goto_if_eq EscapeRoom_EventScript_MapSwitch1_8
 EscapeRoom_EventScript_MapSwitch1_7:
-# 1532 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1536 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_1, 2
 	goto_if_eq EscapeRoom_EventScript_MapSwitch1_11
 EscapeRoom_EventScript_MapSwitch1_10:
-# 1535 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1539 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_1, 3
 	goto_if_eq EscapeRoom_EventScript_MapSwitch1_14
 EscapeRoom_EventScript_MapSwitch1_13:
-# 1540 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1544 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_MapSwitch1_17
 EscapeRoom_EventScript_MapSwitch1_16:
-# 1555 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1559 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_MapSwitch1_2:
-# 1519 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1523 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE
-# 1520 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1524 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1521 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1525 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_MapSwitch1_5:
-# 1527 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1531 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedNorthTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_4
 
 EscapeRoom_EventScript_MapSwitch1_8:
-# 1530 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1534 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedEastTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_7
 
 EscapeRoom_EventScript_MapSwitch1_11:
-# 1533 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1537 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedSouthTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_10
 
 EscapeRoom_EventScript_MapSwitch1_14:
-# 1536 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1540 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedWestTablet1, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch1_13
 
 EscapeRoom_EventScript_MapSwitch1_17:
-# 1541 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1545 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_CLICK
-# 1542 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1546 "data/maps/EscapeRoom_Main/scripts.pory"
 	addvar VAR_MAP_SWITCH_1, 1
-# 1543 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
-# 1544 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1547 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
+# 1548 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+# 1551 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_1, 4
 	goto_if_ge EscapeRoom_EventScript_MapSwitch1_20
 EscapeRoom_EventScript_MapSwitch1_19:
-# 1552 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1556 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_CheckSwitchesCorrect
 	goto EscapeRoom_EventScript_MapSwitch1_16
 
 EscapeRoom_EventScript_MapSwitch1_20:
-# 1548 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1552 "data/maps/EscapeRoom_Main/scripts.pory"
 	setvar VAR_MAP_SWITCH_1, 0
 	goto EscapeRoom_EventScript_MapSwitch1_19
 
 
 EscapeRoom_EventScript_MapSwitch2::
-# 1559 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1563 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1562 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1566 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MAP_SWITCHES_SOLVED, EscapeRoom_EventScript_MapSwitch2_2
-# 1570 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1574 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_2, 0
 	goto_if_eq EscapeRoom_EventScript_MapSwitch2_5
 EscapeRoom_EventScript_MapSwitch2_4:
-# 1573 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1577 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_2, 1
 	goto_if_eq EscapeRoom_EventScript_MapSwitch2_8
 EscapeRoom_EventScript_MapSwitch2_7:
-# 1576 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1580 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_2, 2
 	goto_if_eq EscapeRoom_EventScript_MapSwitch2_11
 EscapeRoom_EventScript_MapSwitch2_10:
-# 1579 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1583 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_2, 3
 	goto_if_eq EscapeRoom_EventScript_MapSwitch2_14
 EscapeRoom_EventScript_MapSwitch2_13:
-# 1584 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1588 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_MapSwitch2_17
 EscapeRoom_EventScript_MapSwitch2_16:
-# 1598 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1602 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_MapSwitch2_2:
-# 1563 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1567 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE
-# 1564 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1568 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1565 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1569 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_MapSwitch2_5:
-# 1571 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1575 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedNorthTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_4
 
 EscapeRoom_EventScript_MapSwitch2_8:
-# 1574 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1578 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedEastTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_7
 
 EscapeRoom_EventScript_MapSwitch2_11:
-# 1577 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1581 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedSouthTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_10
 
 EscapeRoom_EventScript_MapSwitch2_14:
-# 1580 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1584 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedWestTablet2, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch2_13
 
 EscapeRoom_EventScript_MapSwitch2_17:
-# 1585 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1589 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_CLICK
-# 1586 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1590 "data/maps/EscapeRoom_Main/scripts.pory"
 	addvar VAR_MAP_SWITCH_2, 1
-# 1587 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
-# 1588 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1591 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
+# 1592 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+# 1595 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_2, 4
 	goto_if_ge EscapeRoom_EventScript_MapSwitch2_20
 EscapeRoom_EventScript_MapSwitch2_19:
-# 1596 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1600 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_CheckSwitchesCorrect
 	goto EscapeRoom_EventScript_MapSwitch2_16
 
 EscapeRoom_EventScript_MapSwitch2_20:
-# 1592 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1596 "data/maps/EscapeRoom_Main/scripts.pory"
 	setvar VAR_MAP_SWITCH_2, 0
 	goto EscapeRoom_EventScript_MapSwitch2_19
 
 
 EscapeRoom_EventScript_MapSwitch3::
-# 1602 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1606 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1605 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1609 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MAP_SWITCHES_SOLVED, EscapeRoom_EventScript_MapSwitch3_2
-# 1613 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1617 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_3, 0
 	goto_if_eq EscapeRoom_EventScript_MapSwitch3_5
 EscapeRoom_EventScript_MapSwitch3_4:
-# 1616 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1620 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_3, 1
 	goto_if_eq EscapeRoom_EventScript_MapSwitch3_8
 EscapeRoom_EventScript_MapSwitch3_7:
-# 1619 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1623 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_3, 2
 	goto_if_eq EscapeRoom_EventScript_MapSwitch3_11
 EscapeRoom_EventScript_MapSwitch3_10:
-# 1622 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1626 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_3, 3
 	goto_if_eq EscapeRoom_EventScript_MapSwitch3_14
 EscapeRoom_EventScript_MapSwitch3_13:
-# 1627 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1631 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_MapSwitch3_17
 EscapeRoom_EventScript_MapSwitch3_16:
-# 1641 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1645 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_MapSwitch3_2:
-# 1606 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1610 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE
-# 1607 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1611 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1608 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1612 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_MapSwitch3_5:
-# 1614 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1618 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedNorthTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_4
 
 EscapeRoom_EventScript_MapSwitch3_8:
-# 1617 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1621 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedEastTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_7
 
 EscapeRoom_EventScript_MapSwitch3_11:
-# 1620 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1624 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedSouthTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_10
 
 EscapeRoom_EventScript_MapSwitch3_14:
-# 1623 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1627 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedWestTablet3, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch3_13
 
 EscapeRoom_EventScript_MapSwitch3_17:
-# 1628 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1632 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_CLICK
-# 1629 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1633 "data/maps/EscapeRoom_Main/scripts.pory"
 	addvar VAR_MAP_SWITCH_3, 1
-# 1630 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
-# 1631 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1634 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
+# 1635 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+# 1638 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_3, 4
 	goto_if_ge EscapeRoom_EventScript_MapSwitch3_20
 EscapeRoom_EventScript_MapSwitch3_19:
-# 1639 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1643 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_CheckSwitchesCorrect
 	goto EscapeRoom_EventScript_MapSwitch3_16
 
 EscapeRoom_EventScript_MapSwitch3_20:
-# 1635 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1639 "data/maps/EscapeRoom_Main/scripts.pory"
 	setvar VAR_MAP_SWITCH_3, 0
 	goto EscapeRoom_EventScript_MapSwitch3_19
 
 
 EscapeRoom_EventScript_MapSwitch4::
-# 1645 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1649 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1648 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1652 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_MAP_SWITCHES_SOLVED, EscapeRoom_EventScript_MapSwitch4_2
-# 1656 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1660 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_MAP_SWITCH_4_FOUND, EscapeRoom_EventScript_MapSwitch4_5
 EscapeRoom_EventScript_MapSwitch4_4:
-# 1661 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1665 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_4, 0
 	goto_if_eq EscapeRoom_EventScript_MapSwitch4_8
 EscapeRoom_EventScript_MapSwitch4_7:
-# 1664 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1668 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_4, 1
 	goto_if_eq EscapeRoom_EventScript_MapSwitch4_11
 EscapeRoom_EventScript_MapSwitch4_10:
-# 1667 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1671 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_4, 2
 	goto_if_eq EscapeRoom_EventScript_MapSwitch4_14
 EscapeRoom_EventScript_MapSwitch4_13:
-# 1670 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1674 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_4, 3
 	goto_if_eq EscapeRoom_EventScript_MapSwitch4_17
 EscapeRoom_EventScript_MapSwitch4_16:
-# 1675 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1679 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_MapSwitch4_20
 EscapeRoom_EventScript_MapSwitch4_19:
-# 1689 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1693 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_MapSwitch4_2:
-# 1649 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1653 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MApSwitchesAlreadySolved, MSGBOX_AUTOCLOSE
-# 1650 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1654 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1651 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1655 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	end
 
 EscapeRoom_EventScript_MapSwitch4_5:
-# 1657 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1661 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_MAP_SWITCH_4_FOUND
 	goto EscapeRoom_EventScript_MapSwitch4_4
 
 EscapeRoom_EventScript_MapSwitch4_8:
-# 1662 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1666 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedNorthTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_7
 
 EscapeRoom_EventScript_MapSwitch4_11:
-# 1665 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1669 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedEastTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_10
 
 EscapeRoom_EventScript_MapSwitch4_14:
-# 1668 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1672 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedSouthTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_13
 
 EscapeRoom_EventScript_MapSwitch4_17:
-# 1671 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1675 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox MapSwitchPointedWestTablet4, MSGBOX_YESNO
 	goto EscapeRoom_EventScript_MapSwitch4_16
 
 EscapeRoom_EventScript_MapSwitch4_20:
-# 1676 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1680 "data/maps/EscapeRoom_Main/scripts.pory"
 	playse SE_CLICK
-# 1677 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1681 "data/maps/EscapeRoom_Main/scripts.pory"
 	addvar VAR_MAP_SWITCH_4, 1
-# 1678 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
-# 1679 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1682 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE
+# 1683 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+# 1686 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_4, 4
 	goto_if_ge EscapeRoom_EventScript_MapSwitch4_23
 EscapeRoom_EventScript_MapSwitch4_22:
-# 1687 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1691 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_CheckSwitchesCorrect
 	goto EscapeRoom_EventScript_MapSwitch4_19
 
 EscapeRoom_EventScript_MapSwitch4_23:
-# 1683 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1687 "data/maps/EscapeRoom_Main/scripts.pory"
 	setvar VAR_MAP_SWITCH_4, 0
 	goto EscapeRoom_EventScript_MapSwitch4_22
 
 
 EscapeRoom_EventScript_CheckSwitchesCorrect::
-# 1694 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1698 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_1, 2
 	goto_if_eq EscapeRoom_EventScript_CheckSwitchesCorrect_3
 	return
 
 EscapeRoom_EventScript_CheckSwitchesCorrect_1:
-# 1699 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1703 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_SwitchesOpenDoorSequence
 	return
 
 EscapeRoom_EventScript_CheckSwitchesCorrect_2:
-# 1696 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1700 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_3, 3
 	goto_if_eq EscapeRoom_EventScript_CheckSwitchesCorrect_6
 	return
 
 EscapeRoom_EventScript_CheckSwitchesCorrect_3:
-# 1695 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1699 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_2, 0
 	goto_if_eq EscapeRoom_EventScript_CheckSwitchesCorrect_2
 	return
 
 EscapeRoom_EventScript_CheckSwitchesCorrect_6:
-# 1697 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1701 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_MAP_SWITCH_4, 3
 	goto_if_eq EscapeRoom_EventScript_CheckSwitchesCorrect_1
 	return
 
 
 EscapeRoom_EventScript_SwitchesOpenDoorSequence::
-# 1704 "data/maps/EscapeRoom_Main/scripts.pory"
-	fadeoutbgm 0
-# 1705 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_TRUCK_MOVE
-# 1706 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Long
-# 1707 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitstate
 # 1708 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 40
+	fadeoutbgm 0
 # 1709 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
+	playse SE_TRUCK_MOVE
 # 1710 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitstate
+	special DoSealedChamberShakingEffect_Long
 # 1711 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_DOOR
+	waitstate
 # 1712 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 40
 # 1713 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox MapSwitchDoorOpened, MSGBOX_DEFAULT
+	special DoSealedChamberShakingEffect_Short
 # 1714 "data/maps/EscapeRoom_Main/scripts.pory"
-	closemessage
+	waitstate
 # 1715 "data/maps/EscapeRoom_Main/scripts.pory"
-	fadeinbgm 0
+	playse SE_DOOR
 # 1716 "data/maps/EscapeRoom_Main/scripts.pory"
+	delay 40
+# 1717 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox MapSwitchDoorOpened, MSGBOX_DEFAULT
+# 1718 "data/maps/EscapeRoom_Main/scripts.pory"
+	closemessage
+# 1719 "data/maps/EscapeRoom_Main/scripts.pory"
+	fadeinbgm 0
+# 1720 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_MAP_SWITCHES_SOLVED
 	return
 
 
 EscapeRoom_EventScript_AnnihilapeBattle::
-# 1723 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1727 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1726 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1730 "data/maps/EscapeRoom_Main/scripts.pory"
 	backupplayerparty
-# 1729 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1733 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_TOGGLE_BAG_USE, EscapeRoom_EventScript_AnnihilapeBattle_2
 EscapeRoom_EventScript_AnnihilapeBattle_1:
-# 1734 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1738 "data/maps/EscapeRoom_Main/scripts.pory"
 	createmon side = 1, slot = 0, species = SPECIES_ANNIHILAPE, level = 100, nature = 17, abilityNum = 2, gender = 2, move1 = MOVE_MIMIC hpEv = 12, defEv = 0, spAtkEv = 252, spDefEv = 244, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 1757 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1761 "data/maps/EscapeRoom_Main/scripts.pory"
 	dowildbattle
-# 1758 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1762 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_AnnihilapeBattle_2:
-# 1730 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1734 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_TOGGLE_BAG_USE
 	goto EscapeRoom_EventScript_AnnihilapeBattle_1
 
 
 EscapeRoom_EventScript_GraveStone1::
-# 1762 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1766 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1763 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1764 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1767 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone1_2
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1768 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1771 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone1_2
+# 1775 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone1_8
 EscapeRoom_EventScript_GraveStone1_6:
-# 1781 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1785 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1782 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1786 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1783 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1787 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK1
 EscapeRoom_EventScript_GraveStone1_4:
-# 1787 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 1788 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 1791 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 1792 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 1795 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2625,48 +2636,48 @@ EscapeRoom_EventScript_GraveStone1_2:
 	end
 
 EscapeRoom_EventScript_GraveStone1_5:
-# 1774 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1778 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneClick1Message, MSGBOX_AUTOCLOSE
-# 1775 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1779 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1777 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1781 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_GRAVESTONE_CHECK1
 	goto EscapeRoom_EventScript_GraveStone1_4
 
 EscapeRoom_EventScript_GraveStone1_7:
-# 1773 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1777 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone1_5
 	goto EscapeRoom_EventScript_GraveStone1_6
 
 EscapeRoom_EventScript_GraveStone1_8:
-# 1772 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1776 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone1_7
 	goto EscapeRoom_EventScript_GraveStone1_6
 
 
 EscapeRoom_EventScript_GraveStone2::
-# 1795 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1799 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1796 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1797 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1800 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone2_2
-# 1803 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone2_3
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1801 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1804 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone2_2
+# 1807 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone2_3
+# 1808 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone2_3
-# 1805 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1809 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone2_3
 EscapeRoom_EventScript_GraveStone2_1:
-# 1812 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
-# 1813 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 1814 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 1816 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 1817 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 1818 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 1820 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2674,36 +2685,36 @@ EscapeRoom_EventScript_GraveStone2_2:
 	end
 
 EscapeRoom_EventScript_GraveStone2_3:
-# 1807 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1811 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1808 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1812 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_GraveStone2_1
 
 
 EscapeRoom_EventScript_GraveStone3::
-# 1820 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1824 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1821 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1822 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1825 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone3_2
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1826 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1829 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone3_2
+# 1833 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone3_5
-# 1836 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1840 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone3_6
-# 1837 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1841 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone3_6
-# 1844 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1848 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK3
 EscapeRoom_EventScript_GraveStone3_4:
-# 1847 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1851 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK1
-# 1848 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1852 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK2
-# 1850 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1854 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2711,47 +2722,47 @@ EscapeRoom_EventScript_GraveStone3_2:
 	end
 
 EscapeRoom_EventScript_GraveStone3_5:
-# 1831 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1835 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneClick3Message, MSGBOX_AUTOCLOSE
-# 1832 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1836 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1834 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1838 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_GRAVESTONE_CHECK3
 	goto EscapeRoom_EventScript_GraveStone3_4
 
 EscapeRoom_EventScript_GraveStone3_6:
-# 1839 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1843 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1840 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1844 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1841 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1845 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK3
 	goto EscapeRoom_EventScript_GraveStone3_4
 
 
 EscapeRoom_EventScript_GraveStone4::
-# 1854 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1858 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1855 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1856 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1859 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone4_2
-# 1862 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone4_3
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1860 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1863 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone4_2
+# 1866 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone4_3
+# 1867 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone4_3
-# 1864 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1868 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone4_3
 EscapeRoom_EventScript_GraveStone4_1:
-# 1871 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
-# 1872 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 1873 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 1875 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 1876 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 1877 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 1879 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2759,36 +2770,36 @@ EscapeRoom_EventScript_GraveStone4_2:
 	end
 
 EscapeRoom_EventScript_GraveStone4_3:
-# 1866 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1870 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1867 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1871 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_GraveStone4_1
 
 
 EscapeRoom_EventScript_GraveStone5::
-# 1879 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1883 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1880 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1881 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1884 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone5_2
-# 1887 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone5_3
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1885 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1888 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone5_2
+# 1891 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone5_3
+# 1892 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone5_3
-# 1889 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1893 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone5_3
 EscapeRoom_EventScript_GraveStone5_1:
-# 1896 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
-# 1897 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 1898 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 1900 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 1901 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 1902 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 1904 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2796,36 +2807,36 @@ EscapeRoom_EventScript_GraveStone5_2:
 	end
 
 EscapeRoom_EventScript_GraveStone5_3:
-# 1891 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1895 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1892 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1896 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_GraveStone5_1
 
 
 EscapeRoom_EventScript_GraveStone6::
-# 1904 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1908 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1905 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1906 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1909 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone6_2
-# 1912 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone6_3
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1910 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1913 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone6_2
+# 1916 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone6_3
+# 1917 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone6_3
-# 1914 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1918 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone6_3
 EscapeRoom_EventScript_GraveStone6_1:
-# 1921 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
-# 1922 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 1923 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 1925 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 1926 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 1927 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 1929 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2833,36 +2844,36 @@ EscapeRoom_EventScript_GraveStone6_2:
 	end
 
 EscapeRoom_EventScript_GraveStone6_3:
-# 1916 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1920 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1917 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1921 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_GraveStone6_1
 
 
 EscapeRoom_EventScript_GraveStone7::
-# 1929 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1933 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1930 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1931 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1934 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone7_2
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1935 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1938 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone7_2
+# 1942 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone7_5
-# 1945 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1949 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone7_6
-# 1946 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1950 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone7_6
-# 1957 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1961 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK1
-# 1958 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1962 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK2
-# 1959 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1963 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK3
 EscapeRoom_EventScript_GraveStone7_4:
-# 1961 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1965 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2870,49 +2881,49 @@ EscapeRoom_EventScript_GraveStone7_2:
 	end
 
 EscapeRoom_EventScript_GraveStone7_5:
-# 1942 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1946 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_GRAVESTONE_CHECK4
-# 1943 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1947 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_SpawnAnnihilape
 	goto EscapeRoom_EventScript_GraveStone7_4
 
 EscapeRoom_EventScript_GraveStone7_6:
-# 1948 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1949 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
-# 1951 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
 # 1952 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
+	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
 # 1953 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
+# 1955 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 1956 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 1957 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK3
 	goto EscapeRoom_EventScript_GraveStone7_4
 
 
 EscapeRoom_EventScript_GraveStone8::
-# 1965 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1969 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 1966 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 1967 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 1970 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone8_2
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 1971 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 1974 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone8_2
+# 1978 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone8_5
-# 1981 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1985 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone8_6
-# 1982 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1986 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone8_6
-# 1989 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1993 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK2
 EscapeRoom_EventScript_GraveStone8_4:
-# 1992 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1996 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK1
-# 1993 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1997 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK3
-# 1995 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1999 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2920,47 +2931,47 @@ EscapeRoom_EventScript_GraveStone8_2:
 	end
 
 EscapeRoom_EventScript_GraveStone8_5:
-# 1976 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1980 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneClick2Message, MSGBOX_AUTOCLOSE
-# 1977 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1981 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1979 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1983 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_GRAVESTONE_CHECK2
 	goto EscapeRoom_EventScript_GraveStone8_4
 
 EscapeRoom_EventScript_GraveStone8_6:
-# 1984 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1988 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 1985 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1989 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 1986 "data/maps/EscapeRoom_Main/scripts.pory"
+# 1990 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_GRAVESTONE_CHECK2
 	goto EscapeRoom_EventScript_GraveStone8_4
 
 
 EscapeRoom_EventScript_GraveStone9::
-# 1999 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2003 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 2000 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 2001 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 2004 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone9_2
-# 2007 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone9_3
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 2005 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 2008 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone9_2
+# 2011 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone9_3
+# 2012 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone9_3
-# 2009 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2013 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone9_3
 EscapeRoom_EventScript_GraveStone9_1:
-# 2016 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
-# 2017 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 2018 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 2020 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 2021 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 2022 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 2024 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -2968,36 +2979,36 @@ EscapeRoom_EventScript_GraveStone9_2:
 	end
 
 EscapeRoom_EventScript_GraveStone9_3:
-# 2011 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2015 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 2012 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2016 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_GraveStone9_1
 
 
 EscapeRoom_EventScript_GraveStone0::
-# 2024 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2028 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 2025 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
-# 2026 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 2029 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone0_2
-# 2032 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone0_3
+	msgbox GravestoneNoneMessage, MSGBOX_AUTOCLOSE
+# 2030 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmessage
 # 2033 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK4, EscapeRoom_EventScript_GraveStone0_2
+# 2036 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_GRAVESTONE_CHECK1, EscapeRoom_EventScript_GraveStone0_3
+# 2037 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK2, EscapeRoom_EventScript_GraveStone0_3
-# 2034 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2038 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_set FLAG_GRAVESTONE_CHECK3, EscapeRoom_EventScript_GraveStone0_3
 EscapeRoom_EventScript_GraveStone0_1:
-# 2041 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK1
-# 2042 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK2
-# 2043 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_GRAVESTONE_CHECK3
 # 2045 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK1
+# 2046 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK2
+# 2047 "data/maps/EscapeRoom_Main/scripts.pory"
+	clearflag FLAG_GRAVESTONE_CHECK3
+# 2049 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -3005,186 +3016,186 @@ EscapeRoom_EventScript_GraveStone0_2:
 	end
 
 EscapeRoom_EventScript_GraveStone0_3:
-# 2036 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2040 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GravestoneResetMessage, MSGBOX_AUTOCLOSE
-# 2037 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2041 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_GraveStone0_1
 
 
 EscapeRoom_EventScript_SpawnAnnihilape::
-# 2049 "data/maps/EscapeRoom_Main/scripts.pory"
-	fadeoutbgm 0
-# 2050 "data/maps/EscapeRoom_Main/scripts.pory"
-	clearflag FLAG_HIDE_ANNIHILAPE
-# 2052 "data/maps/EscapeRoom_Main/scripts.pory"
-	playmoncry SPECIES_GROUDON, CRY_MODE_NORMAL
 # 2053 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
+	fadeoutbgm 0
 # 2054 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 10
-# 2055 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
+	clearflag FLAG_HIDE_ANNIHILAPE
 # 2056 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 10
+	playmoncry SPECIES_GROUDON, CRY_MODE_NORMAL
 # 2057 "data/maps/EscapeRoom_Main/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
 # 2058 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 10
 # 2059 "data/maps/EscapeRoom_Main/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
+# 2060 "data/maps/EscapeRoom_Main/scripts.pory"
+	delay 10
 # 2061 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GravestoneAnnihilapesRoar, MSGBOX_AUTOCLOSE
+	special DoSealedChamberShakingEffect_Short
 # 2062 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmoncry
+	delay 10
 # 2063 "data/maps/EscapeRoom_Main/scripts.pory"
+	special DoSealedChamberShakingEffect_Short
+# 2065 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox GravestoneAnnihilapesRoar, MSGBOX_AUTOCLOSE
+# 2066 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmoncry
+# 2067 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
-# 2064 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2068 "data/maps/EscapeRoom_Main/scripts.pory"
 	fadeinbgm 0
 	return
 
 
 EscapeRoom_EventScript_SafetyGogglesStatue::
-# 2068 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2072 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
-# 2071 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2075 "data/maps/EscapeRoom_Main/scripts.pory"
 	goto_if_unset FLAG_GOGGLES_SNATCHED, EscapeRoom_EventScript_SafetyGogglesStatue_2
-# 2091 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2095 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox GogglesAlreadySnatchedMessage, MSGBOX_AUTOCLOSE
-# 2092 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2096 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_SafetyGogglesStatue_1:
-# 2095 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2099 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_SafetyGogglesStatue_2:
-# 2073 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2077 "data/maps/EscapeRoom_Main/scripts.pory"
 	checkpartymove MOVE_SNATCH
-# 2074 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2078 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_SafetyGogglesStatue_7
 EscapeRoom_EventScript_SafetyGogglesStatue_6:
-# 2085 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2089 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Goggles_Statue_Main, MSGBOX_AUTOCLOSE
-# 2086 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2090 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_SafetyGogglesStatue_1
 
 EscapeRoom_EventScript_SafetyGogglesStatue_5:
-# 2077 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2081 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox Goggles_Statue_AskSnatch, MSGBOX_YESNO
-# 2078 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2082 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_SafetyGogglesStatue_10
 	goto EscapeRoom_EventScript_SafetyGogglesStatue_1
 
 EscapeRoom_EventScript_SafetyGogglesStatue_7:
-# 2074 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2078 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_0x8004, SPECIES_ZERAORA
 	goto_if_eq EscapeRoom_EventScript_SafetyGogglesStatue_5
 	goto EscapeRoom_EventScript_SafetyGogglesStatue_6
 
 EscapeRoom_EventScript_SafetyGogglesStatue_10:
-# 2079 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2083 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_GOGGLES_SNATCHED
-# 2080 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2084 "data/maps/EscapeRoom_Main/scripts.pory"
 	call EscapeRoom_EventScript_SnatchSafetyGoggles
 	goto EscapeRoom_EventScript_SafetyGogglesStatue_1
 
 
 EscapeRoom_EventScript_SnatchSafetyGoggles::
-# 2100 "data/maps/EscapeRoom_Main/scripts.pory"
-	closemessage
-# 2101 "data/maps/EscapeRoom_Main/scripts.pory"
-	fadeoutbgm 0
-# 2102 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 10
-# 2103 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GogglesSnatchStart, MSGBOX_AUTOCLOSE
 # 2104 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
+	closemessage
 # 2105 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 40
+	fadeoutbgm 0
 # 2106 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_SAFETY_GOGGLES
-# 2109 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_PIN
-# 2110 "data/maps/EscapeRoom_Main/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-# 2111 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
-# 2112 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 50
-# 2113 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_M_HAZE
-# 2114 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
-# 2115 "data/maps/EscapeRoom_Main/scripts.pory"
 	delay 10
-# 2116 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
-# 2117 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitse
-# 2118 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GogglesCurseHappens, MSGBOX_AUTOCLOSE
-# 2119 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2107 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox GogglesSnatchStart, MSGBOX_AUTOCLOSE
+# 2108 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
+# 2109 "data/maps/EscapeRoom_Main/scripts.pory"
+	delay 40
+# 2110 "data/maps/EscapeRoom_Main/scripts.pory"
+	finditem ITEM_SAFETY_GOGGLES
+# 2113 "data/maps/EscapeRoom_Main/scripts.pory"
+	playse SE_PIN
+# 2114 "data/maps/EscapeRoom_Main/scripts.pory"
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
+# 2115 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitmovement OBJ_EVENT_ID_PLAYER
+# 2116 "data/maps/EscapeRoom_Main/scripts.pory"
+	delay 50
+# 2117 "data/maps/EscapeRoom_Main/scripts.pory"
+	playse SE_M_HAZE
+# 2118 "data/maps/EscapeRoom_Main/scripts.pory"
+	special DoSealedChamberShakingEffect_Short
+# 2119 "data/maps/EscapeRoom_Main/scripts.pory"
+	delay 10
 # 2120 "data/maps/EscapeRoom_Main/scripts.pory"
-	fadeinbgm 0
+	special DoSealedChamberShakingEffect_Short
+# 2121 "data/maps/EscapeRoom_Main/scripts.pory"
+	waitse
+# 2122 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox GogglesCurseHappens, MSGBOX_AUTOCLOSE
 # 2123 "data/maps/EscapeRoom_Main/scripts.pory"
-	checkpartymon SPECIES_ZERAORA
+	waitmessage
 # 2124 "data/maps/EscapeRoom_Main/scripts.pory"
-	copyvar VAR_0x8001, VAR_RESULT
-# 2125 "data/maps/EscapeRoom_Main/scripts.pory"
-	setvar VAR_0x8002, MOVE_SNATCH
-# 2126 "data/maps/EscapeRoom_Main/scripts.pory"
-	setvar VAR_0x8003, MOVE_CURSE
+	fadeinbgm 0
 # 2127 "data/maps/EscapeRoom_Main/scripts.pory"
+	checkpartymon SPECIES_ZERAORA
+# 2128 "data/maps/EscapeRoom_Main/scripts.pory"
+	copyvar VAR_0x8001, VAR_RESULT
+# 2129 "data/maps/EscapeRoom_Main/scripts.pory"
+	setvar VAR_0x8002, MOVE_SNATCH
+# 2130 "data/maps/EscapeRoom_Main/scripts.pory"
+	setvar VAR_0x8003, MOVE_CURSE
+# 2131 "data/maps/EscapeRoom_Main/scripts.pory"
 	replacemove VAR_0x8001, VAR_0x8002, VAR_0x8003
 	return
 
 
 EscapeRoom_MoveDeleterNPC_Text_0:
-# 633 "data/maps/EscapeRoom_Main/scripts.pory"
+# 632 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Delete a move$"
 
 EscapeRoom_MoveDeleterNPC_Text_1:
-# 634 "data/maps/EscapeRoom_Main/scripts.pory"
+# 633 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Restore deleted moves$"
 
 SomethingsGoneWrongMessage::
-# 2135 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2139 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Something has gone wrong.\p"
 	.string "You may have found an unintended\n"
 	.string "solution that broke the game.\p"
 	.string "Consider contacting Ketchupplant.$"
 
 SignMessage1::
-# 2143 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2147 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 SignMessageReadInfoAgain::
-# 2147 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2151 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to read the important\n"
 	.string "information again?$"
 
 EndSignMessage::
-# 2152 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2156 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The end.\p"
 	.string "...\p"
 	.string "For now.$"
 
 MysteriousWallSign::
-# 2158 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2162 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What a weird looking wall.$"
 
 MysteriousWallBackroomSign::
-# 2164 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2168 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Choice paralysis?$"
 
 MoveDeleterSignMessage::
-# 2168 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2172 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "-- Temporary Move Deleter --\p"
 	.string "Get rid of your moves and put them\n"
 	.string "back whenever you want.\p"
@@ -3194,38 +3205,38 @@ MoveDeleterSignMessage::
 	.string "b) all current moves have 0 pp.$"
 
 AnnihilapeStatueMessage::
-# 2182 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2186 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Primeape, 1837.\p"
 	.string "May its restless spirit find peace\n"
 	.string "among the shadows.$"
 
 GravestoneNoneMessage::
-# 2188 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2192 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "...$"
 
 GravestoneClick1Message::
-# 2192 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2196 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "A strange energy lingers in the air.$"
 
 GravestoneClick2Message::
-# 2196 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2200 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "A spirit stirs.\nYou sense a presence.$"
 
 GravestoneClick3Message::
-# 2200 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2204 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "A deep rumble echoes from below.\n"
 	.string "The spirit draws near.$"
 
 GravestoneResetMessage::
-# 2205 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2209 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The energy dissipates into the void... $"
 
 GravestoneAnnihilapesRoar::
-# 2209 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2213 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "GRAAAAAHHRGHHH!$"
 
 Goggles_Statue_Main::
-# 2213 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2217 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There's a pair of goggles attached to\n"
 	.string "the gravestone, radiating a strange,\l"
 	.string "ominous energy.\p"
@@ -3234,7 +3245,7 @@ Goggles_Statue_Main::
 	.string "snatch the goggles for me.$"
 
 Goggles_Statue_AskSnatch::
-# 2222 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2226 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There's a pair of goggles attached to\n"
 	.string "the gravestone, radiating a strange,\l"
 	.string "ominous energy.\p"
@@ -3242,142 +3253,142 @@ Goggles_Statue_AskSnatch::
 	.string "the goggles for you?$"
 
 GogglesAlreadySnatchedMessage::
-# 2230 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2234 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's stay away from this gravestone\n"
 	.string "from now on...$"
 
 GogglesSnatchStart::
-# 2235 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2239 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Zeraora carefully detaches the goggles\n"
 	.string "from the gravestone.$"
 
 GogglesCurseHappens::
-# 2240 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2244 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "A curse was cast upon Zeraora!\p"
 	.string "Something happened to Zeraora's moves.$"
 
 RotatedSwitchSoundMessage::
-# 2247 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2251 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Clunk.$"
 
 MapSwitchDoorOpened::
-# 2251 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2255 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What was that???$"
 
 MApSwitchesAlreadySolved::
-# 2255 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2259 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The tablet is locked in place.$"
 
 MapSwitchPointedNorthTablet1::
-# 2260 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2264 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 1.\p"
 	.string "The tablet is pointed north.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedEastTablet1::
-# 2266 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2270 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 1.\p"
 	.string "The tablet is pointed east.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedSouthTablet1::
-# 2272 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2276 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 1.\p"
 	.string "The tablet is pointed south.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedWestTablet1::
-# 2278 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2282 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 1.\p"
 	.string "The tablet is pointed west.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedNorthTablet2::
-# 2285 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2289 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 2.\p"
 	.string "The tablet is pointed north.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedEastTablet2::
-# 2291 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2295 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 2.\p"
 	.string "The tablet is pointed east.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedSouthTablet2::
-# 2297 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2301 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 2.\p"
 	.string "The tablet is pointed south.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedWestTablet2::
-# 2303 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2307 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 2.\p"
 	.string "The tablet is pointed west.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedNorthTablet3::
-# 2310 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2314 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 3.\p"
 	.string "The tablet is pointed north.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedEastTablet3::
-# 2316 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2320 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 3.\p"
 	.string "The tablet is pointed east.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedSouthTablet3::
-# 2322 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2326 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 3.\p"
 	.string "The tablet is pointed south.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedWestTablet3::
-# 2328 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2332 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 3.\p"
 	.string "The tablet is pointed west.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedNorthTablet4::
-# 2335 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2339 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 4.\p"
 	.string "The tablet is pointed north.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedEastTablet4::
-# 2341 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2345 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 4.\p"
 	.string "The tablet is pointed east.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedSouthTablet4::
-# 2347 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2351 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 4.\p"
 	.string "The tablet is pointed south.\n"
 	.string "Do you want to change its direction?$"
 
 MapSwitchPointedWestTablet4::
-# 2353 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2357 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TABLET 4.\p"
 	.string "The tablet is pointed west.\n"
 	.string "Do you want to change its direction?$"
 
 Nurse_Ask_heal::
-# 2361 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2365 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Should I heal your Pokémon?$"
 
 Nurse_Heal_End::
-# 2365 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2369 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "As good as new!$"
 
 RunningNurseMessage::
-# 2369 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2373 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I've been relocated!$"
 
 HintsIntroMessage::
-# 2375 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2379 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Need help? I can give you a hint at the\n"
 	.string "cost of getting time added to your\l"
 	.string "in-game clock.\p"
@@ -3386,15 +3397,15 @@ HintsIntroMessage::
 	.string "Do you want to get a hint right now?$"
 
 HintsNPCNoHintMessage::
-# 2384 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2388 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'll be here if you need me.$"
 
 HintsNPCWhatKindOfHintMessage::
-# 2388 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2392 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 AntiSoftlockIntroMessage::
-# 2395 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2399 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, I'm the anti-softlock guy.\p"
 	.string "I can roll back actions that have the\n"
 	.string "possibility to get you softlocked.\p"
@@ -3402,20 +3413,20 @@ AntiSoftlockIntroMessage::
 	.string "are actually softlocked or not.$"
 
 AntiSoftlockNoActionMessage::
-# 2403 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2407 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There's nothing I can do for you right\n"
 	.string "now.$"
 
 UltraBallQuizStart::
-# 2410 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2414 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "(This will be a quiz at some point)$"
 
 UltaBallQuizPostScript::
-# 2414 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2418 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thanks for playing!$"
 
 ZeraoraHintMessage::
-# 2420 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2424 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Have you seen the Zeraora around here?\p"
 	.string "I've seen people trying to catch it\n"
 	.string "but no one's been able to get its HP\l"
@@ -3423,19 +3434,19 @@ ZeraoraHintMessage::
 	.string "It kind of just gives up after a while.$"
 
 ZeraoraHintPostCatchMessage::
-# 2428 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2432 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wow, you actually caught the Zeraora!$"
 
 AnnihilapeHintNoMessage1::
-# 2434 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2438 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "...$"
 
 AnnihilapeHintNoMessage2::
-# 2438 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2442 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "This place is haunted!$"
 
 AnnihilapeHintMessage::
-# 2442 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2446 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The Annihilape has returned!?\p"
 	.string "Hmm...\p"
 	.string "Don't waste your strength trying to\n"
@@ -3443,322 +3454,330 @@ AnnihilapeHintMessage::
 	.string "She'll always be back.$"
 
 FourTabletsHintMessage1::
-# 2452 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2456 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you see that strange tablet?\n"
 	.string "I'm looking for more of them!\p"
 	.string "I wonder what they do.$"
 
 FourTabletsHintMessage2::
-# 2458 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Wait...\p"
-	.string "You've found all four!$"
+# 2462 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "I'm so done with this search.\p"
+	.string "Maybe it's time to just kick back\n"
+	.string "and stare at the waves for a while.$"
 
 FourTabletsHintMessage3::
-# 2463 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Did something just open?$"
+# 2468 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Wait...\p"
+	.string "You actually found all four?\p"
+	.string "I guess that ends my search.\n"
+	.string "Time to go back to my regular job.\p"
+	.string "Not sure what's on for today,\n"
+	.string "I'd have to check the menus.$"
 
 FourTabletsHintMessage4::
-# 2467 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2477 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Did you feel that earthquake?$"
+
+FourTabletsHintMessage5::
+# 2481 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Enjoy your Choice Scarf I guess...$"
 
 LostGlassesNPCmainMessage::
-# 2473 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2487 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Have you seen my glasses?\n"
 	.string "I can't see without them!$"
 
 LostGlassesNPCGlassesFoundMessage::
-# 2478 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2492 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You've found them!\p"
 	.string "I guess I no longer need this\n"
 	.string "seeing-eye leopard...\p"
 	.string "...$"
 
 LiepardObtainMessage::
-# 2485 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2499 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Liepard!$"
 
 LostGlassesNPCendMessage::
-# 2489 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2503 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "See you around!$"
 
 MartNPC_AskToShop::
-# 2495 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Hi, welcome to my shop.\p"
-	.string "Don't worry, each item can be sold back\n"
+# 2509 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Welcome to my shop.\p"
+	.string "Don't worry, all these items can be sold\n"
 	.string "for the same price.$"
 
 MartNPC_SayGoodbye::
-# 2501 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2515 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "See ya!$"
 
 AskDeleteMove::
-# 2507 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2521 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, what would you like to do?$"
 
 MoveDeleterComeAgain::
-# 2513 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2527 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Please come again!$"
 
 MoveDeleterMoveDeleted::
-# 2517 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2531 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{STR_VAR_1}'s {STR_VAR_2} was removed!$"
 
 MoveDeleterOnlyOneMove::
-# 2521 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2535 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That Pokémon has only one move left.$"
 
 PoochMovesRestoredMessage::
-# 2525 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2539 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Poochyena's moves were restored!$"
 
 LiepardMovesRestoredMessage::
-# 2529 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2543 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Liepard's moves were restored!$"
 
 DunsparceMovesRestoredMessage::
-# 2533 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2547 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Dunsparce's moves were restored!$"
 
 SmeargleMovesRestoredMessage::
-# 2537 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2551 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Smeargle's moves were restored!$"
 
 NoMovesRestoredMessage::
-# 2541 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2555 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There were no moves to restore.$"
 
 NewBallMessage::
-# 2548 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2562 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You recover the ball.$"
 
 WhiteHerbRecoveredMessage::
-# 2552 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2566 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your White Herb was restored.$"
 
 CustapBerryRecoveredMessage::
-# 2556 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2570 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your Custap Berry was restored.$"
 
 MarangaBerryRecoveredMessage::
-# 2560 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2574 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your Maranga Berry was restored.$"
 
 AskResetPredamageMessage::
-# 2566 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2580 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to set your Pokémon's HP and move\n"
 	.string "PP back to their pre-battle state?$"
 
 PreDamagedStateRestoredMessage::
-# 2571 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2585 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your team's state was restored.$"
 
 AskFerroDunsparceTrade::
-# 2577 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2591 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I've found a Dunsparce on the beach.\p"
 	.string "Wanna trade it for your Ferrothorn?$"
 
 DunsparceReceivedMessage::
-# 2582 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2596 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Dunsparce!$"
 
 FerroTradeAccepted::
-# 2586 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2600 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Ferrothorn.$"
 
 FerroTradeDeclined::
-# 2590 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2604 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Some other time perhaps.$"
 
 FerroTradePostTrade::
-# 2594 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2608 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I love this Ferrothorn!$"
 
 AskFlorgesEggTrade::
-# 2600 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2614 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That's a nice Florges.\p"
 	.string "Do you want to trade it for a mystery\n"
 	.string "egg?$"
 
 EggReceivedMessage::
-# 2606 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2620 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received an EGG!$"
 
 FlorgesTradeAccepted::
-# 2610 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2624 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Florges.$"
 
 FlorgesTradeDeclined::
-# 2614 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2628 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Okay, come back anytime.$"
 
 FlorgesTradePostTrade::
-# 2618 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2632 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do I sense regret?$"
 
 AskDunsparceMoneyTrade::
-# 2624 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "I collect rare Pokémon as a hobby!\p"
-	.string "Your Dunsparce looks quite valuable,\n"
-	.string "would you sell it to me for ¥5.000?$"
+# 2638 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Dunsparce and I were playing near the\n"
+	.string "water, but she went missing!\p"
+	.string "Have you seen my Dunsparce???$"
 
-MoneyReceivedMessage::
-# 2630 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "{PLAYER} received ¥5.000!$"
-
-DunsparceTradeAccepted::
-# 2634 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Bye-bye Dunsparce.$"
+AskDunsparceReturnAcceptedMessage::
+# 2644 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Omg you found her!\p"
+	.string "Thank you so much!\n"
+	.string "Here, you can have this.$"
 
 DunsparceTradeDeclined::
-# 2638 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2658 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hmm...$"
 
 DunsparceTradePostTrade::
-# 2642 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "My collection grows bigger and bigger!$"
+# 2662 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "It's so good to be back together!$"
 
 AskPoochSmeargleTrade::
-# 2648 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2668 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wanna trade dogs?$"
 
 SmeargleReceivedMessage::
-# 2652 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2672 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Smeargle!$"
 
 PoochTradeAccepted::
-# 2656 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2676 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Poochyena.$"
 
 PoochTradeDeclined::
-# 2660 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2680 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Ahh, that's too bad!$"
 
 PoochTradePostTrade::
-# 2664 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2684 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thanks a lot.$"
 
 HealBeforeTradeMessage::
-# 2668 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2688 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "First let me heal your Pokémon.$"
 
 HealedBeforeTradeMessage::
-# 2672 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2692 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Alright, let's trade!$"
 
 DoubleBattle_NotEnoughMons::
-# 2677 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2697 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to battle?\n"
 	.string "You should bring a second POKéMON.$"
 
 Trainer1_Intro::
-# 2684 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2704 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Sharing is caring.\n"
 	.string "Can you see the appeal?\p"
 	.string "Win the fight and we may have a deal.$"
 
 Trainer1_Outro::
-# 2690 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2710 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer1_PostBattle::
-# 2694 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2714 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 AskZeraCutTradeMessage::
-# 2698 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2718 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wow, that Zeraora of yours is amazing.\n"
 	.string "I wish I had a Pokémon like that!\p"
 	.string "Would you be okay trading your Zeraora\n"
 	.string "for my HM Cut?$"
 
 ZeraCutTradeDeclined::
-# 2705 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2725 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Come back if you change your mind.$"
 
 ZeraCutTradeAccepted::
-# 2709 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2729 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Bye-bye Zeraora.$"
 
 Trainer2_Intro::
-# 2715 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2735 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The land may hide its fiercest face,\n"
 	.string "beneath the calm of leafy grace.$"
 
 Trainer2_Outro::
-# 2722 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2742 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer2_PostBattle::
-# 2726 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2746 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer3_Intro::
-# 2732 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2752 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Rage is nearly guaranteed.\n"
 	.string "Try and realize getting entry takeswork.$"
 
 Trainer3_Outro::
-# 2737 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2757 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer3_PostBattle::
-# 2741 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2761 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer3FinalWords::
-# 2745 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2765 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Entry granted.$"
 
 Trainer4_Intro::
-# 2751 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2771 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Exhausted already?$"
 
 Trainer4_Outro::
-# 2755 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2775 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer4_PostBattle::
-# 2759 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2779 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer5_Intro::
-# 2765 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2785 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "My carrier birds are amazing!\n"
 	.string "They always find their way back.\p"
 	.string "This one might've just come back from\n"
 	.string "the moon though...$"
 
 Trainer5_Outro::
-# 2774 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2794 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer5_PostBattle::
-# 2778 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2798 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer6_Intro::
-# 2784 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2804 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "We're starting to get bored...\n"
 	.string "Show us a trick!$"
 
 Trainer6_Outro::
-# 2789 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2810 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer6_PostBattle::
-# 2793 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2814 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"
 
 Trainer7_Intro::
-# 2799 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2820 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So many options.\n"
 	.string "Where do I start?\p"
 	.string "Making decisions was never this hard.$"
 
 Trainer7_Outro::
-# 2805 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2827 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer7_PostBattle::
-# 2809 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2831 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Fock off.$"

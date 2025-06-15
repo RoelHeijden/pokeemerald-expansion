@@ -2,7 +2,7 @@
 const LOCALID_SMASH_ROCK = 1
 const LOCALID_MAP_SWITCH3 = 2
 const LOCALID_CHOICE_SPECS = 3
-const LOCALID_STARDUST = 4
+const LOCALID_NUGGET = 4
 
 
 mapscripts EscapeRoom_ShortcutRoute_MapScripts {
@@ -30,11 +30,11 @@ script EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs{
     releaseall
 }
 
-script EscapeRoom_ShortcutRoute_EventScript_FindStardust{
+script EscapeRoom_ShortcutRoute_EventScript_FindNugget{
     lockall
-    finditem(ITEM_STARDUST)
-    removeobject(LOCALID_STARDUST)
-    setflag(FLAG_STARDUST_OBTAINED)
+    finditem(ITEM_NUGGET)
+    removeobject(LOCALID_NUGGET)
+    setflag(FLAG_NUGGET_OBTAINED)
     releaseall
 }
 

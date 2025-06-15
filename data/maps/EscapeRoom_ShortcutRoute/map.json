@@ -63,8 +63,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_ShortcutRoute_EventScript_FindStardust",
-      "flag": "FLAG_STARDUST_OBTAINED"
+      "script": "EscapeRoom_ShortcutRoute_EventScript_FindNugget",
+      "flag": "FLAG_NUGGET_OBTAINED"
     }
   ],
   "warp_events": [

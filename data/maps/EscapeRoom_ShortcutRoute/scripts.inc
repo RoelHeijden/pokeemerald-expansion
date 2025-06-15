@@ -39,15 +39,15 @@ EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs::
 	return
 
 
-EscapeRoom_ShortcutRoute_EventScript_FindStardust::
+EscapeRoom_ShortcutRoute_EventScript_FindNugget::
 # 34 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	lockall
 # 35 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	finditem ITEM_STARDUST
+	finditem ITEM_NUGGET
 # 36 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	removeobject 4
 # 37 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	setflag FLAG_STARDUST_OBTAINED
+	setflag FLAG_NUGGET_OBTAINED
 # 38 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	releaseall
 	return

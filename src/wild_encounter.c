@@ -521,11 +521,11 @@ static void CreateWildMon(u16 species, u8 level)
                 FlagSet(FLAG_JUST_HAD_ZERA_BATTLE);
             }
             else{
-                species = SPECIES_GIRATINA;
+                species = SPECIES_AERODACTYL;
                 heldItem = ITEM_NONE;
-                level = 90;
-                abilityNum = 0; // pressure
-                gender = MON_GENDERLESS;
+                level = 87;
+                abilityNum = 1; // pressure
+                gender = 0;  // male?
                 nature = NATURE_ADAMANT;
                 move1 = MOVE_ROAR;
 
