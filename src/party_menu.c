@@ -179,7 +179,8 @@ enum {
     CANNOT_LEARN_MOVE,
     ALREADY_KNOWS_MOVE,
     CANNOT_LEARN_MOVE_IS_EGG,
-    WOULD_SOFTLOCK // ADDED
+    WOULD_SOFTLOCK, // ADDED
+    FIX_MOVES_FIRST // ADDED
 };
 
 enum {
@@ -1163,6 +1164,10 @@ static void DisplayPartyPokemonDataToTeachMove(u8 slot, u16 move)
     // ADDED
     case WOULD_SOFTLOCK:
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_SOFTLOCK);
+        break;
+    // ADDED
+    case FIX_MOVES_FIRST:
+        DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_FIX_MOVES);
         break;
     default:
         DisplayPartyPokemonDescriptionData(slot, PARTYBOX_DESC_ABLE_2);
@@ -2208,6 +2213,9 @@ static void Task_HandleCancelParticipationYesNoInput(u8 taskId)
 
 static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 {
+    // ADDED
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
     else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
@@ -2217,6 +2225,35 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
     // ADDED - check if Liepard and Taunt or Cut
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD && (move == MOVE_TAUNT || move == MOVE_CUT))
         return WOULD_SOFTLOCK;
+    // ADDED
+    // check if mon has a deleted move (that could be restored)
+    else if (species == SPECIES_POOCHYENA &&
+             (FlagGet(FLAG_ICE_FANG_DELETED) ||
+              FlagGet(FLAG_SLEEP_TALK_DELETED) ||
+              FlagGet(FLAG_ENDEAVOR_DELETED) ||
+              FlagGet(FLAG_TAUNT_DELETED)))
+        return FIX_MOVES_FIRST;
+
+    else if (species == SPECIES_LIEPARD &&
+             (FlagGet(FLAG_ASSIST_DELETED) ||
+              FlagGet(FLAG_ROCK_SMASH_DELETED) ||
+              FlagGet(FLAG_ECHOED_VOICE_DELETED) ||
+              FlagGet(FLAG_TRICK_DELETED)))
+        return FIX_MOVES_FIRST;
+
+    else if (species == SPECIES_DUNSPARCE &&
+             (FlagGet(FLAG_TRUMP_CARD_DELETED) ||
+              FlagGet(FLAG_HEX_DELETED) ||
+              FlagGet(FLAG_COUNTER_DELETED) ||
+              FlagGet(FLAG_AIR_SLASH_DELETED)))
+        return FIX_MOVES_FIRST;
+
+    else if (species == SPECIES_SMEARGLE &&
+             (FlagGet(FLAG_SURF_DELETED) ||
+              FlagGet(FLAG_SWITCHEROO_DELETED) ||
+              FlagGet(FLAG_UPROAR_DELETED) ||
+              FlagGet(FLAG_CONVERSION_2_DELETED)))
+        return FIX_MOVES_FIRST;
     else
         return CAN_LEARN_MOVE;
 }
@@ -5368,15 +5405,19 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 
     switch (CanTeachMove(mon, move))
     {
-    // ADDED
-    case WOULD_SOFTLOCK:
-        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMoveSoftlock);
-        return;
     case CANNOT_LEARN_MOVE:
         DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMove);
         return;
     case ALREADY_KNOWS_MOVE:
         DisplayLearnMoveMessageAndClose(taskId, gText_PkmnAlreadyKnows);
+        return;
+    // ADDED
+    case WOULD_SOFTLOCK:
+        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMoveSoftlock);
+        return;
+    // ADDED
+    case FIX_MOVES_FIRST:
+        DisplayLearnMoveMessageAndClose(taskId, gText_PkmnCantLearnMoveFixMoves);
         return;
     }
 

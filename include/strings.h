@@ -494,7 +494,8 @@ extern const u8 gText_PkmnFriendlyBaseVar2CantFall[];
 extern const u8 gText_PkmnAdoresBaseVar2Fell[];
 extern const u8 gText_PkmnAlreadyKnows[];
 extern const u8 gText_PkmnCantLearnMove[];
-extern const u8 gText_PkmnCantLearnMoveSoftlock[];
+extern const u8 gText_PkmnCantLearnMoveSoftlock[];  // ADDED
+extern const u8 gText_PkmnCantLearnMoveFixMoves[];  // ADDED
 extern const u8 gText_PkmnNeedsToReplaceMove[];
 extern const u8 gText_PkmnLearnedMove3[];
 extern const u8 gText_WhichMoveToForget[];
@@ -2161,7 +2162,8 @@ extern const u8 gText_NotAble[];
 extern const u8 gText_Able3[];
 extern const u8 gText_NotAble2[];
 extern const u8 gText_Learned[];
-extern const u8 gText_WouldSoftlock[];
+extern const u8 gText_WouldSoftlock[]; // ADDED
+extern const u8 gText_FixMovesFirst[]; // ADDED
 extern const u8 gText_Have[];
 extern const u8 gText_DontHave[];
 extern const u8 gText_Take[];

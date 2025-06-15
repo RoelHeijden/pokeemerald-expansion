@@ -677,6 +677,7 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_HAVE]       = gText_Have,
     [PARTYBOX_DESC_DONT_HAVE]  = gText_DontHave,
     [PARTYBOX_DESC_SOFTLOCK]   = gText_WouldSoftlock, // ADDED 
+    [PARTYBOX_DESC_FIX_MOVES]  = gText_FixMovesFirst, // ADDED 
 };
 
 static const u16 sUnusedData[] =

@@ -585,6 +585,8 @@ movement EscapeRoom_Movement2_Nurse1NPC{
     walk_fast_left * 9
 }
 
+// MART NPCS
+
 script EscapeRoom_EventScript_Shop1NPC{
     lockall
     faceplayer
@@ -621,6 +623,9 @@ mart EscapeRoom_Shop2_items{
     ITEM_CUSTAP_BERRY
     ITEM_TM27
 }
+
+
+// MOVE DELETER NPC
 
 script EscapeRoom_MoveDeleterNPC{
     lockall
@@ -944,6 +949,8 @@ script EscapeRoom_MoveRestoredSound{
     playse(SE_NOTE_C_HIGH)
     waitse
 }
+
+// ULTRA BALL QUIZ NPC
 
 script EscapeRoom_UltraBallNPC{
     lock
