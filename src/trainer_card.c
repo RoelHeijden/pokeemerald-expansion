@@ -963,7 +963,18 @@ static bool8 PrintAllOnCardBack(void)
         break;
     case 3:
         PrintTradesStringOnCard();
-        PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textNumLinkContests, sTrainerCardStatColors);
+
+        // CHANGED
+        // trainer card hints depend on stage of game
+        if(FlagGet(FLAG_TRAINER3_DEFEATED) == FALSE)
+            PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textNumLinkContests, sTrainerCardStatColors);
+        else if(FlagGet(FLAG_TRAINER5_DEFEATED) == FALSE)
+            PrintStatOnBackOfCard(5, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
+        else if(FlagGet(FLAG_TRAINER6_DEFEATED) == FALSE)
+            PrintStatOnBackOfCard(5, gText_HallOfFameDebut3, sData->textNumLinkContests, sTrainerCardStatColors);
+        else
+            PrintStatOnBackOfCard(5, gText_HallOfFameDebut4, sData->textNumLinkContests, sTrainerCardStatColors);
+
         break;
     case 4:
         PrintBerryCrushStringOnCard();
