@@ -142,7 +142,7 @@ const u8 gItemEffect_SuperbRemedy[10] = {
 
 const u8 gItemEffect_Ether[7] = {
     [4] = ITEM4_HEAL_PP_ONE | ITEM4_HEAL_PP,
-    [6] = 5, // CHANGED
+    [6] = 10,
 };
 
 const u8 gItemEffect_MaxEther[7] = {
