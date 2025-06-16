@@ -3916,8 +3916,13 @@ static void Cmd_setadditionaleffects(void)
             {
                 percentChance = CalcSecondaryEffectChance(gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), additionalEffect);
 
+                // ADDED: force effects with >50% chance to be 100%
+                if (percentChance > 50)
+                    percentChance = 100;
+
                 // ADDED
-                // skip effects with a probability below 50%
+                // for search: FLAG_DISABLE_BATTLE_RNG
+                // skip secondary effects with a probability below 50%
                 if (percentChance >= 50 || percentChance == 0)
                 {
                     // Activate effect if it's primary (chance == 0) or if RNGesus says so
