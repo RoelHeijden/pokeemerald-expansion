@@ -16937,8 +16937,8 @@ IVs: 0 Atk / 0 SpD
 Tinkaton (F) 
 Ability: Pickpocket  
 Level: 31  
-EVs: 252 SpD / 172 Spe  
-Serious Nature  
+EVs: 252 SpD / 252 Spe  
+Timid Nature  
 IVs: 0 Atk  
 - Light Screen
 
@@ -16953,11 +16953,11 @@ Double Battle: No
 
 Iron Bundle @ Booster Energy  
 Ability: Quark Drive  
-Level: 68  
-EVs: 100 HP / 252 SpA  
-Modest Nature  
+Level: 65  
+EVs: 252 SpA / 252 Spe  
+Timid Nature  
 IVs: 0 Atk  
-- Whirlpool
+- Chilling Water
 
 
 === TRAINER_CUSTOM_TRAINER5 ===
@@ -16983,7 +16983,7 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE3
 
-Lucario (M) @ Focus Sash  
+Lucario (M)
 Ability: Inner Focus  
 Level: 60  
 EVs: 252 Atk / 252 Spe  
@@ -16998,8 +16998,7 @@ Level: 60
 EVs: 252 Atk / 252 Spe  
 Naughty Nature  
 IVs: 0 HP / 0 SpD  
-- Close Combat  
-- Brick Break
+- Focus Punch
 
 
 === TRAINER_CUSTOM_TRAINER7 ===

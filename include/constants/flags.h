@@ -47,7 +47,7 @@
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
 #define FLAG_NUGGET_OBTAINED                0x24
-#define FLAG_UNUSED                         0x25
+#define FLAG_ETHER_SOLD_OUT                 0x25
 #define FLAG_CHOICE_SPECS_OBTAINED          0x26 
 #define FLAG_LOST_GLASSES_OBTAINED          0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
@@ -77,14 +77,14 @@
 #define FLAG_STARDUST_STOLEN                0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
 #define FLAG_ME_FIRST_CHOICE_LOCK           0x42  
-#define FLAG_TRAINER3_DEFEATED              0x43  
-#define FLAG_TRAINER6_DEFEATED              0x44  
-#define FLAG_TRAINER2_DEFEATED              0x45
+#define FLAG_TRAINER1_DEFEATED              0x43  
+#define FLAG_TRAINER2_DEFEATED              0x44  
+#define FLAG_TRAINER3_DEFEATED              0x45
 
-#define FLAG_TRAINER5_DEFEATED               0x46
-#define FLAG_UNUSED_0x047               0x47  
-#define FLAG_UNUSED_0x048               0x48
-#define FLAG_UNUSED_0x049    0x49 // Unused Flag
+#define FLAG_TRAINER4_DEFEATED               0x46
+#define FLAG_TRAINER5_DEFEATED               0x47  
+#define FLAG_TRAINER6_DEFEATED               0x48
+#define FLAG_TRAINER7_DEFEATED               0x49
 #define FLAG_UNUSED_0x04A    0x4A // Unused Flag
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag

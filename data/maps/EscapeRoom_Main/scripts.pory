@@ -503,26 +503,48 @@ script EscapeRoom_EventScript_ObtainLiepard{
     lockall
     givemon(
         SPECIES_LIEPARD,
-        50,
+        40,
         abilityNum=2, // Prankster
-        nature=17, // Quiet - make Krook outspeed if scarfed
+        nature=17, // Quiet 
         gender=0, 
         move1=MOVE_ASSIST,
         move2=MOVE_TRICK,
         move3=MOVE_ROCK_SMASH,
         move4=MOVE_ECHOED_VOICE,
         // EVs:
-        atkEv=140, 
+        atkEv=252, 
         spAtkEv=252,
         speedEv=0,
         // IVs:
         hpIv=31,
         atkIv=31,
-        defIv=18, // for krook struggle >50%
-        speedIv=31,
+        defIv=31,
+        speedIv=0,
         spAtkIv=31,
         spDefIv=31
     )    
+    // givemon(
+    //     SPECIES_LIEPARD,
+    //     50,
+    //     abilityNum=2, // Prankster
+    //     nature=17, // Quiet - make Krook outspeed if scarfed
+    //     gender=0, 
+    //     move1=MOVE_ASSIST,
+    //     move2=MOVE_TRICK,
+    //     move3=MOVE_ROCK_SMASH,
+    //     move4=MOVE_ECHOED_VOICE,
+    //     // EVs:
+    //     atkEv=140, 
+    //     spAtkEv=252,
+    //     speedEv=0,
+    //     // IVs:
+    //     hpIv=31,
+    //     atkIv=31,
+    //     defIv=18, // for krook struggle >50%
+    //     speedIv=31,
+    //     spAtkIv=31,
+    //     spDefIv=31
+    // )    
     message(LiepardObtainMessage)
     playfanfare(MUS_OBTAIN_ITEM)
     waitfanfare
@@ -1104,7 +1126,7 @@ script EscapeRoom_EventScript_Trainer4{
         TRAINER_CUSTOM_TRAINER4, 
         Trainer4_Intro, 
         Trainer4_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer4PostBattle,
     )
     msgbox(Trainer4_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -1142,7 +1164,7 @@ script EscapeRoom_EventScript_Trainer7{
         TRAINER_CUSTOM_TRAINER7, 
         Trainer7_Intro, 
         Trainer7_Outro, 
-        event_script=EscapeRoom_EventScript_PostMatchHeal,
+        event_script=EscapeRoom_EventScript_Trainer7PostBattle,
     )
     msgbox(Trainer7_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
@@ -1167,7 +1189,7 @@ script EscapeRoom_EventScript_Trainer1PostBattle{
             removepartyitem(VAR_TEMP_0)
         }
     }
-
+    setflag(FLAG_TRAINER1_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
     call(EscapeRoom_EventScript_TradeZeraForHMCut)
 }
@@ -1212,6 +1234,12 @@ movement EscapeRoom_Movement_Trainer3End{
     face_left
 }
 
+script EscapeRoom_EventScript_Trainer4PostBattle{
+    setflag(FLAG_TRAINER4_DEFEATED)
+    setflag(FLAG_ETHER_SOLD_OUT)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
 script EscapeRoom_EventScript_Trainer5PostBattle{
     // prevent custap restore after winning
     clearflag(FLAG_RECOVERED_CUSTAP)
@@ -1232,6 +1260,10 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
+script EscapeRoom_EventScript_Trainer7PostBattle{
+    setflag(FLAG_TRAINER7_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
 
 
 //// POKEMON TRADES ////
@@ -1303,6 +1335,7 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
                 // EVs:
                 hpEv=0, 
                 defEv=252,
+                speedEv=252,
                 // IVs:
                 hpIv=0,
                 atkIv=0,
@@ -2467,18 +2500,18 @@ text FourTabletsHintMessage1{
 }
 
 text FourTabletsHintMessage2{
-    "I'm so done with this search.\p"
-    "Maybe it's time to just kick back\n"
-    "and stare at the waves for a while."
+    "I'm so done with this search...\p"
+    "Maybe it's time to just kick back and\n"
+    "stare at the waves for a while."
 }
 
 text FourTabletsHintMessage3{
-    "Wait...\p"
-    "You actually found all four?\p"
-    "I guess that ends my search.\n"
-    "Time to go back to my regular job.\p"
-    "Not sure what's on for today,\n"
-    "I'd have to check the menus."
+    "Wait...\n"
+    "You actually found all four!?\p"
+    "I suppose now I can stop looking and\n"
+    "get back to my regular job.\p"
+    "Not sure I'm serving today.\n"
+    "I'd have to look through my menus."
 }
 
 text FourTabletsHintMessage4{
@@ -2486,7 +2519,7 @@ text FourTabletsHintMessage4{
 }
 
 text FourTabletsHintMessage5{
-    "Enjoy your Choice Scarf I guess..."
+    "Enjoy your Choice Scarf I guess."
 }
 
 
@@ -2515,7 +2548,7 @@ text LostGlassesNPCendMessage{
 // SHOP NPCS
 text MartNPC_AskToShop{
     "Welcome to my shop.\p"
-    "Don't worry, all these items can be sold\n"
+    "Don't worry, all items can be sold back\n"
     "for the same price."
 }
 
@@ -2644,14 +2677,14 @@ text FlorgesTradePostTrade{
 // TRADE NPC 4 - Dunsparce Money
 text AskDunsparceMoneyTrade{
     "Dunsparce and I were playing near the\n"
-    "water, but she went missing!\p"
-    "Have you seen my Dunsparce???"
+    "water when she went missing.\p"
+    "Have you seen my Dunsparce?"
 }
 
 text AskDunsparceReturnAcceptedMessage{
-    "Omg you found her!\p"
+    "Omg you found her!!\p"
     "Thank you so much!\n"
-    "Here, you can have this."
+    "Here, have this."
 }
 
 // text MoneyReceivedMessage{

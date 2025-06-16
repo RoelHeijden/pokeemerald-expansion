@@ -42342,7 +42342,7 @@ F_TRAINER_FEMALE |
 #line 16937
             .gender = TRAINER_MON_FEMALE,
 #line 16940
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 172, 0, 252),
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 252),
 #line 16942
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 16938
@@ -42350,7 +42350,7 @@ F_TRAINER_FEMALE |
 #line 16939
             .lvl = 31,
 #line 16941
-            .nature = NATURE_SERIOUS,
+            .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16943
@@ -42383,19 +42383,19 @@ F_TRAINER_FEMALE |
 #line 16954
             .heldItem = ITEM_BOOSTER_ENERGY,
 #line 16957
-            .ev = TRAINER_PARTY_EVS(100, 0, 0, 0, 252, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0),
 #line 16959
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 16955
             .ability = ABILITY_QUARK_DRIVE,
 #line 16956
-            .lvl = 68,
+            .lvl = 65,
 #line 16958
-            .nature = NATURE_MODEST,
+            .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16960
-                MOVE_WHIRLPOOL,
+                MOVE_CHILLING_WATER,
             },
             },
         },
@@ -42464,8 +42464,6 @@ F_TRAINER_FEMALE |
             .species = SPECIES_LUCARIO,
 #line 16986
             .gender = TRAINER_MON_MALE,
-#line 16986
-            .heldItem = ITEM_FOCUS_SASH,
 #line 16989
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16991
@@ -42501,69 +42499,68 @@ F_TRAINER_FEMALE |
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17001
-                MOVE_CLOSE_COMBAT,
-                MOVE_BRICK_BREAK,
+                MOVE_FOCUS_PUNCH,
             },
             },
         },
     },
-#line 17005
+#line 17004
     [TRAINER_CUSTOM_TRAINER7] =
     {
-#line 17006
+#line 17005
         .trainerName = _("Turner"),
-#line 17007
+#line 17006
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC,
-#line 17008
+#line 17007
         .trainerPic = TRAINER_PIC_RUIN_MANIAC,
         .encounterMusic_gender = 
-#line 17010
+#line 17009
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
-#line 17011
+#line 17010
         .doubleBattle = FALSE,
-#line 17012
+#line 17011
         .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 17014
+#line 17013
             .species = SPECIES_KROOKODILE,
-#line 17014
+#line 17013
             .gender = TRAINER_MON_MALE,
-#line 17017
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 17019
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 0),
-#line 17015
-            .ability = ABILITY_ANGER_POINT,
 #line 17016
-            .lvl = 58,
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 17018
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 0),
+#line 17014
+            .ability = ABILITY_ANGER_POINT,
+#line 17015
+            .lvl = 58,
+#line 17017
             .nature = NATURE_NAIVE,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17020
+#line 17019
                 MOVE_ME_FIRST,
             },
             },
             {
-#line 17022
+#line 17021
             .species = SPECIES_KARTANA,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 17025
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
-#line 17027
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 17023
-            .ability = ABILITY_BEAST_BOOST,
 #line 17024
-            .lvl = 44,
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
 #line 17026
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17022
+            .ability = ABILITY_BEAST_BOOST,
+#line 17023
+            .lvl = 44,
+#line 17025
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17027
+#line 17026
                 MOVE_LEAF_BLADE,
             },
             },

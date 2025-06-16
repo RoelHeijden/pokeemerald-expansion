@@ -521,16 +521,16 @@ static void CreateWildMon(u16 species, u8 level)
                 FlagSet(FLAG_JUST_HAD_ZERA_BATTLE);
             }
             else{
-                species = SPECIES_AERODACTYL;
+                species = SPECIES_DUSKNOIR;
                 heldItem = ITEM_NONE;
-                level = 87;
-                abilityNum = 1; // pressure
-                gender = 0;  // male?
+                level = 72;
+                abilityNum = 0; // pressure
+                gender = 0;  // male
                 nature = NATURE_ADAMANT;
-                move1 = MOVE_ROAR;
+                move1 = MOVE_MEMENTO;
 
                 atkEv = 252;
-                speedEv = 252;
+                speedEv = 0;
 
                 hpIv=31;
                 atkIv=31;

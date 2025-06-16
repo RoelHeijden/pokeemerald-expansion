@@ -5536,8 +5536,10 @@ static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         score += 20;
 
     // prioritize targetting Pooch or Dunsparce (avoid Liepard)
-    if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA || gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
+    if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA)
         score += 50;
+    if(gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
+        score += 40;
 
 
     // --- MAIN BATTLE --- 
@@ -5565,30 +5567,5 @@ static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
 // unused
 static s32 AI_Single2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
-
-    // // Flamethrower into Ferrothorn
-    // if(gBattleMons[battlerDef].species == SPECIES_FERROTHORN){ 
-    //     if(move == MOVE_FLAMETHROWER)
-    //         score = 150;
-    //     if(move == MOVE_EARTH_POWER)
-    //         score = 50;
-    // }
-
-    // // Earth Power into Zeraora
-    // if(gBattleMons[battlerDef].species == SPECIES_ZERAORA){ 
-    //     if(move == MOVE_FLAMETHROWER)
-    //         score = 50;
-    //     if(move == MOVE_EARTH_POWER)
-    //         score = 150;
-    // }
-
-    // // Flamethrower into Florges
-    // if(gBattleMons[battlerDef].species == SPECIES_FLORGES){ 
-    //     if(move == MOVE_FLAMETHROWER)
-    //         score = 150;
-    //     if(move == MOVE_EARTH_POWER)
-    //         score = 50;
-    // }
-
     return score;
 }
