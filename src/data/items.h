@@ -1529,7 +1529,8 @@ const struct Item gItemsInfo[] =
     {
         .name = HANDLE_EXPANDED_ITEM_NAME("AbilityPatch", "Ability Patch"),
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("AbilityPatches", "Ability Patches"),
-        .price = (I_PRICE >= GEN_9) ? 250000 : 20,
+        // .price = (I_PRICE >= GEN_9) ? 250000 : 20,
+        .price = 2000, // CHANGED
         .holdEffectParam = 0,
         .description = COMPOUND_STRING(
             "Turns the ability\n"

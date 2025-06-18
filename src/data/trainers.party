@@ -16961,7 +16961,7 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER5 ===
-Name: Abe
+Name: R.T. Abe
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
@@ -16975,30 +16975,29 @@ EVs: 252 Atk / 252 Spe
 
 
 === TRAINER_CUSTOM_TRAINER6 ===
-Name: Rob & Pop
-Class: Old Couple
-Pic: Old Couple
+Name: Ton & Tey
+Class: Twins
+Pic: Twins
 Gender: Male
 Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_DOUBLE3
 
-Lucario (M)
-Ability: Inner Focus  
-Level: 60  
-EVs: 252 Atk / 252 Spe  
-Naughty Nature  
-IVs: 0 HP / 0 SpD  
-- Close Combat  
-- Brick Break
+Archaludon (F) @ Power Herb  
+Ability: Stamina  
+Level: 48  
+EVs: 252 SpA / 204 Spe  
+Rash Nature  
+IVs: 0 HP / 0 Atk / 0 SpD  
+- Electro Shot  
 
-Lucario (F)
-Ability: Inner Focus  
-Level: 60   
-EVs: 252 Atk / 252 Spe  
-Naughty Nature  
-IVs: 0 HP / 0 SpD  
-- Focus Punch
+Archaludon (F) @ Power Herb  
+Ability: Stalwart  
+Level: 48  
+EVs: 252 SpA / 252 Spe  
+Rash Nature  
+IVs: 0 HP / 0 Atk / 0 SpD  
+- Electro Shot  
 
 
 === TRAINER_CUSTOM_TRAINER7 ===
@@ -17010,18 +17009,18 @@ Music: Intense
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
-Krookodile (M)  
-Ability: Anger Point  
-Level: 58  
+Pangoro (F)
+Ability: Scrappy  
+Level: 51  
 EVs: 252 Atk / 252 Spe  
 Naive Nature  
-IVs: 0 SpD  
+IVs: 0 HP / 0 SpD  
 - Me First
 
-Kartana  
-Ability: Beast Boost  
-Level: 44  
+Urshifu-Rapid-Strike (M)
+Ability: Unseen Fist  
+Level: 33   
 EVs: 252 Atk  
 Adamant Nature  
-- Leaf Blade
+- Surging Strikes
 

@@ -7833,7 +7833,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     }
 
     // ADDED
-    // 0 money reward, except for:
+    // 0 money reward money, except for:
     moneyReward = 0;
 
     if(trainerId == TRAINER_CUSTOM_TRAINER1){
@@ -7852,7 +7852,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         moneyReward = 500;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER6){
-        moneyReward = 500;
+        moneyReward = 1500; // for ability patch
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER7){
         moneyReward = 500;
@@ -14861,41 +14861,41 @@ static void Cmd_assistattackselect(void)
     }
 
     // ADDED
-    // hardcode move selection for Lucario battle
+    // hardcode assist RNG move selection for Lucario battle
     // pick conversion2 if only conversion2 and surf on turn 2
     if (chooseableMovesNo)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
 
-        // Special case 1: Surf + Conversion 2 vs Lucario on turn 2
-        // only Surf and Conversion 2 are available
-        // only on turn 2
-        // only if the opponent is lucario
-        if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter == 1)
-        {
-            bool8 hasSurf = FALSE, hasConversion2 = FALSE;
-            for (int i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (validMoves[i] == MOVE_SURF)
-                    hasSurf = TRUE;
-                else if (validMoves[i] == MOVE_CONVERSION_2)
-                    hasConversion2 = TRUE;
-            }
+        // // Special case 1: Surf + Conversion 2 vs Lucario on turn 2
+        // // only Surf and Conversion 2 are available
+        // // only on turn 2
+        // // only if the opponent is lucario
+        // if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter == 1)
+        // {
+        //     bool8 hasSurf = FALSE, hasConversion2 = FALSE;
+        //     for (int i = 0; i < MAX_MON_MOVES; i++)
+        //     {
+        //         if (validMoves[i] == MOVE_SURF)
+        //             hasSurf = TRUE;
+        //         else if (validMoves[i] == MOVE_CONVERSION_2)
+        //             hasConversion2 = TRUE;
+        //     }
 
-            if (hasSurf && hasConversion2)
-            {
-                // Check if the opponent is Lucario
-                u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
-                if (gBattleMons[opponent].species == SPECIES_LUCARIO)
-                {
-                    gCalledMove = MOVE_CONVERSION_2;
-                    gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
-                    gBattlescriptCurrInstr = cmd->nextInstr;
-                    TRY_FREE_AND_SET_NULL(validMoves);
-                    return;
-                }
-            }
-        }
+        //     if (hasSurf && hasConversion2)
+        //     {
+        //         // Check if the opponent is Lucario
+        //         u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
+        //         if (gBattleMons[opponent].species == SPECIES_LUCARIO)
+        //         {
+        //             gCalledMove = MOVE_CONVERSION_2;
+        //             gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+        //             gBattlescriptCurrInstr = cmd->nextInstr;
+        //             TRY_FREE_AND_SET_NULL(validMoves);
+        //             return;
+        //         }
+        //     }
+        // }
 
         // ADDED
         // special case 2: Ice Fang + Endeavor vs Mega Rayquaza

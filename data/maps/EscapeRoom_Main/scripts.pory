@@ -31,7 +31,7 @@ const LOCALID_MAP_SWITCH2 = 28
 const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
-const _DUMMY_2 = 32
+const LOCALID_SMASH_ROCK2 = 32
 const _DUMMY_3 = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
@@ -71,6 +71,12 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     if(flag(FLAG_TRAINER3_DEFEATED)){
         setobjectxyperm(LOCALID_TRAINER3, 62, 10)
         setobjectmovementtype(LOCALID_TRAINER3, MOVEMENT_TYPE_FACE_LEFT)
+    }
+
+    // keep fisherman (smeargle trade) moved
+    if(flag(FLAG_FISHERMAN_MOVED) == TRUE){
+        setobjectxyperm(LOCALID_SMEARGLE_NPC, 13, 22)
+        setobjectmovementtype(LOCALID_SMEARGLE_NPC, MOVEMENT_TYPE_FACE_UP)
     }
 }
 
@@ -642,6 +648,7 @@ mart EscapeRoom_Shop1_items{
 mart EscapeRoom_Shop2_items{
     ITEM_RARE_CANDY
     ITEM_ABILITY_CAPSULE
+    ITEM_ABILITY_PATCH
     ITEM_CUSTAP_BERRY
     ITEM_TM27
 }
@@ -1236,7 +1243,7 @@ movement EscapeRoom_Movement_Trainer3End{
 
 script EscapeRoom_EventScript_Trainer4PostBattle{
     setflag(FLAG_TRAINER4_DEFEATED)
-    setflag(FLAG_ETHER_SOLD_OUT)
+    // setflag(FLAG_ETHER_SOLD_OUT)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
@@ -1251,6 +1258,7 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
             removepartyitem(VAR_TEMP_0)
         }
     }
+    // setflag(FLAG_CUSTAP_SOLD_OUT) // prevent custap lines in trainer7?
     setflag(FLAG_TRAINER5_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
@@ -1456,8 +1464,38 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
 
     // post trade 
     if(flag(FLAG_POOCH_TRADE_ACCEPTED) == TRUE){
-        msgbox(PoochTradePostTrade, MSGBOX_NPC)
-        waitmessage
+
+        // rock smash rock is still there
+        if(flag(FLAG_ESCAPEROOM_SMACH_ROCK2) == FALSE){
+            msgbox(PoochTradePostTrade, MSGBOX_NPC)
+            waitmessage
+        }
+        // rock smash rock is gone
+        else{
+            if(flag(FLAG_FISHERMAN_MOVED) == FALSE){
+                msgbox(ICanGoFishingMessage, MSGBOX_NPC)
+                waitmessage
+                setflag(FLAG_FISHERMAN_MOVED)
+
+                // move player if fisherman is approached from the south
+                if(var(VAR_FACING) == DIR_NORTH){
+                    applymovement(OBJ_EVENT_ID_PLAYER, PlayerMovesAwayForFisherman)
+                    waitmovement(OBJ_EVENT_ID_PLAYER)
+                }
+
+                // movement script
+                applymovement(LOCALID_SMEARGLE_NPC, FishermanMovesDown)
+                waitmovement(LOCALID_SMEARGLE_NPC)
+                copyobjectxytoperm(LOCALID_SMEARGLE_NPC)
+
+            }
+            else{
+                msgbox(HappyDaysMessage, MSGBOX_NPC)
+                waitmessage
+                applymovement(LOCALID_SMEARGLE_NPC, FishermanLooksUp)
+                waitmovement(LOCALID_SMEARGLE_NPC)
+            }
+        }
     }
     else{
         // ask trade
@@ -1494,24 +1532,24 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
             lockall
             givemon(
                 SPECIES_SMEARGLE,
-                30,
+                5,
                 abilityNum=0, // own tempo
-                nature=15, // Modest
+                nature=18, // Bashful
                 gender=0, 
-                move1=MOVE_SWITCHEROO,
-                move2=MOVE_UPROAR,
-                move3=MOVE_SURF,
-                move4=MOVE_CONVERSION_2,
+                move1=MOVE_UPROAR,
+                move2=MOVE_SURF,
+                move3=MOVE_CONVERSION_2,
+                move4=MOVE_RAGE_POWDER,
                 // EVs:
                 hpEv=0, 
-                spAtkEv=252,
+                spAtkEv=0,
                 // IVs:
                 hpIv=31,
                 atkIv=31,
                 defIv=31,
                 speedIv=31,
                 spAtkIv=31,
-                spDefIv=28 // Resisted Krook Uproar (x1.5) ohkos
+                spDefIv=31 // Resisted Krook Uproar (x1.5) ohkos with 28 ivs (lvl 30)
             )
             lockall
             setflag(FLAG_POOCH_TRADE_ACCEPTED)
@@ -1530,6 +1568,25 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
         }
     }
     releaseall
+}
+
+movement PlayerMovesAwayForFisherman {
+    face_down
+    walk_faster_down * 2
+    face_left
+    walk_faster_left
+    face_right
+}
+
+movement FishermanMovesDown {
+    walk_faster_down * 5
+    face_right
+    walk_faster_right * 2
+    face_up
+}
+
+movement FishermanLooksUp {
+    face_up
 }
 
 
@@ -2216,7 +2273,7 @@ text MoveDeleterSignMessage{
     "back whenever you want.\p"
 
     "Please note that a restored move will\n"
-    "get 0 pp if\l"
+    "get 0 pp if:\l"
     "a) it had 0 pp when deleted.\l"
     "b) all current moves have 0 pp."
 }
@@ -2510,8 +2567,8 @@ text FourTabletsHintMessage3{
     "You actually found all four!?\p"
     "I suppose now I can stop looking and\n"
     "get back to my regular job.\p"
-    "Not sure I'm serving today.\n"
-    "I'd have to look through my menus."
+    "Not sure what we're serving today.\n"
+    "I'll have to look through the menus."
 }
 
 text FourTabletsHintMessage4{
@@ -2520,6 +2577,7 @@ text FourTabletsHintMessage4{
 
 text FourTabletsHintMessage5{
     "Enjoy your Choice Scarf I guess."
+    // CHANGE?
 }
 
 
@@ -2706,7 +2764,11 @@ text DunsparceTradePostTrade{
 
 // TRADE NPC 5 - Poochyena Smeargle
 text AskPoochSmeargleTrade{
-    "Wanna trade dogs?"
+    "I want to go fishing.\p"
+    "...\p"
+    "so...\p"
+    "...\p"
+    "Wanna trade dogs instead?"
 }
 
 text SmeargleReceivedMessage{
@@ -2722,7 +2784,7 @@ text PoochTradeDeclined{
 }
 
 text PoochTradePostTrade{
-    "Thanks a lot."
+    "I'd still like to go fishing..."
 }
 
 text HealBeforeTradeMessage{
@@ -2732,6 +2794,17 @@ text HealBeforeTradeMessage{
 text HealedBeforeTradeMessage{
     "Alright, let's trade!"
 }
+
+text ICanGoFishingMessage{
+    "I CAN GO FISHING!"
+}
+
+text HappyDaysMessage{
+    "Happy days."
+}
+
+
+
 
 // BATTLES - OTHER
 text DoubleBattle_NotEnoughMons{
@@ -2823,8 +2896,6 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Rayquaza
 text Trainer5_Intro{
-    // "My birds are amazing!\n"
-    // "They always find their way back."
     "My carrier birds are amazing!\n"
     "They always find their way back.\p"
     "This one might've just come back from\n"
@@ -2840,11 +2911,10 @@ text Trainer5_PostBattle{
 }
 
 
-// TRAINER 6 - Lucario Lucario
+// TRAINER 6 - Archaludon Archaludon
 text Trainer6_Intro{
-    "We're starting to get bored...\n"
-    "Show us a trick!"
-    // CHANGE
+    "Even twins have their differences.\n"
+    "In time, you'll understand!"
 }
 
 text Trainer6_Outro{
@@ -2856,7 +2926,7 @@ text Trainer6_PostBattle{
 }
 
 
-// TRAINER 7 - Toxicroak Breloom
+// TRAINER 7 - Pangoro Urshifu
 text Trainer7_Intro{
     "So many options.\n"
     "Where do I start?\p"

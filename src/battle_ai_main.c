@@ -5531,36 +5531,20 @@ static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
 
 static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
-    // use close combat over brick break
-    if(move == MOVE_CLOSE_COMBAT)
-        score += 20;
-
-    // prioritize targetting Pooch or Dunsparce (avoid Liepard)
+    // prioritize certain targets
     if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA)
         score += 50;
-    if(gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
+    if(gBattleMons[battlerDef].species == SPECIES_LIEPARD)
         score += 40;
+    if(gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
+        score += 30;
+    if(gBattleMons[battlerDef].species == SPECIES_FERROTHORN)
+        score += 20;
+    if(gBattleMons[battlerDef].species == SPECIES_FLORGES)
+        score += 10;
+    if(gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
+        score += 0;
 
-
-    // --- MAIN BATTLE --- 
-
-    if(gBattleMons[battlerDef].species == SPECIES_SMEARGLE){
-        int moveDefender = gBattleMons[battlerDef].moves[gBattleStruct->chosenMovePositions[battlerDef]];
-
-        // check if Smeargle has Surf or Uproar
-        bool8 hasSurfOrUproar = FALSE;
-        for (int i = 0; i < MAX_MON_MOVES; i++)
-            if (gBattleMons[battlerDef].moves[i] == MOVE_SURF || gBattleMons[battlerDef].moves[i] == MOVE_UPROAR)
-                hasSurfOrUproar = TRUE;
-
-        // target smeargle if it uses conversion2 AND it carries either Surf or Uproar
-        if(moveDefender == MOVE_CONVERSION_2 && hasSurfOrUproar)
-            score += 50;
-        // avoid smeargle otherwise
-        else
-            score -= 50;
-    }
-        
     return score;
 }
 

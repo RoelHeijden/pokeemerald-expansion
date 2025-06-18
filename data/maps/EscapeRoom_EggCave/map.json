@@ -3,7 +3,7 @@
   "name": "EscapeRoom_EggCave",
   "layout": "LAYOUT_ESCAPE_ROOM_EGG_CAVE",
   "music": "MUS_CAVE_OF_ORIGIN",
-  "region_map_section": "MAPSEC_ABANDONED_SHIP",
+  "region_map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
