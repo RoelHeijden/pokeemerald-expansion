@@ -387,12 +387,31 @@ script EscapeRoom_EventScript_MoveDeleterSign {
     releaseall
 }
 
-script EscapeRoom_EventScript_EndSign {
+script EscapeRoom_EventScript_EndSign{
     lockall
-    msgbox(EndSignMessage, MSGBOX_AUTOCLOSE)
+    if(!flag(FLAG_END_ESCAPE_ROOM)){
+        setflag(FLAG_END_ESCAPE_ROOM)
+        playfanfare(MUS_OBTAIN_BADGE)
+        msgbox(EscapeRoomEndCongratz)
+        waitfanfare
+    }
+    else{
+        msgbox(EscapeRoomEndCongratz)
+        waitmessage
+    }
+    
+    // call(EscapeRoom_EventScript_CalcHintsUsed)
+    setvar(VAR_HINTS_USED_COUNTER, 0)
+
+
+    bufferplaytimeandhints
+    msgbox(EndEscapeRoomSignMessage)
     waitmessage
     releaseall
 }
+
+
+
 
 script EscapeRoom_EventScript_AnnihilapeStatue{
     lockall
@@ -599,9 +618,9 @@ movement EscapeRoom_Movement_PlayerFaceRight{
 
 movement EscapeRoom_Movement1_Nurse1NPC{
     walk_fast_down
-    walk_fast_left * 6
-    walk_fast_up
-    walk_fast_left
+    walk_faster_left * 6
+    walk_faster_up
+    walk_faster_left
 }
 
 movement EscapeRoom_Movement_PlayerMoveAway{
@@ -610,7 +629,7 @@ movement EscapeRoom_Movement_PlayerMoveAway{
 }
 
 movement EscapeRoom_Movement2_Nurse1NPC{
-    walk_fast_left * 9
+    walk_faster_left * 9
 }
 
 // MART NPCS
@@ -1243,7 +1262,7 @@ movement EscapeRoom_Movement_Trainer3End{
 
 script EscapeRoom_EventScript_Trainer4PostBattle{
     setflag(FLAG_TRAINER4_DEFEATED)
-    // setflag(FLAG_ETHER_SOLD_OUT)
+    setflag(FLAG_ETHER_SOLD_OUT)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
@@ -2250,10 +2269,16 @@ text SignMessageReadInfoAgain{
     "information again?"
 }
 
-text EndSignMessage{
-    "The end.\p"
-    "...\p"
-    "For now."
+text EscapeRoomEndCongratz{
+    "Congratulations!\n"
+    "You have beaten the escape room!"
+}
+
+text EndEscapeRoomSignMessage{
+    "Final time: {STR_VAR_1}.\n"
+    "Hints used: {STR_VAR_2}.\p"
+    "Thank you for playing.\n"
+    " - Roel"
 }
 
 text MysteriousWallSign{
@@ -2745,14 +2770,6 @@ text AskDunsparceReturnAcceptedMessage{
     "Here, have this."
 }
 
-// text MoneyReceivedMessage{
-//     "{PLAYER} received ¥5.000!"
-// }
-
-// text DunsparceTradeAccepted{
-//     "Bye-bye Dunsparce."
-// }
-
 text DunsparceTradeDeclined{
     "Hmm..."
 }
@@ -2766,7 +2783,7 @@ text DunsparceTradePostTrade{
 text AskPoochSmeargleTrade{
     "I want to go fishing.\p"
     "...\p"
-    "so...\p"
+    "...\p"
     "...\p"
     "Wanna trade dogs instead?"
 }
@@ -2914,7 +2931,7 @@ text Trainer5_PostBattle{
 // TRAINER 6 - Archaludon Archaludon
 text Trainer6_Intro{
     "Even twins have their differences.\n"
-    "In time, you'll understand!"
+    "Eventually you'll understand!"
 }
 
 text Trainer6_Outro{

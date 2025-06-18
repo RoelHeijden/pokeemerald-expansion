@@ -1224,7 +1224,7 @@
 #define FLAG_ESCAPEROOM_SMACH_ROCK1                                 0x494 // cave rock
 #define FLAG_ESCAPEROOM_SMACH_ROCK2                                 0x495 // fisherman rock
 #define FLAG_FISHERMAN_MOVED                                        0x496
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
+#define FLAG_END_ESCAPE_ROOM                                        0x497
 #define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
