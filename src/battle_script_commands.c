@@ -13183,14 +13183,14 @@ static void Cmd_settypetorandomresistance(void)
             u32 i, resistTypes = 0;
 
             // ADDED
-            // always become Ghost when selecting a Fighting move with Conversion2
+            // always become Ground when selecting an Electric move with Conversion2
             u32 moveType = gLastUsedMoveType[gBattlerTarget];
-            if (moveType == TYPE_FIGHTING)
+            if (moveType == TYPE_ELECTRIC)
             {
-                if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GHOST))
+                if (!IS_BATTLER_OF_TYPE(gBattlerAttacker, TYPE_GROUND))
                 {
-                    SET_BATTLER_TYPE(gBattlerAttacker, TYPE_GHOST);
-                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_GHOST);
+                    SET_BATTLER_TYPE(gBattlerAttacker, TYPE_GROUND);
+                    PREPARE_TYPE_BUFFER(gBattleTextBuff1, TYPE_GROUND);
                     gBattlescriptCurrInstr = cmd->nextInstr;
                     return;
                 }
