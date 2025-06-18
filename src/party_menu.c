@@ -5491,9 +5491,12 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
     {
     case 0:
         // ADDED
+        // auto delete moves
         struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
-        if (species == SPECIES_FLORGES || species == SPECIES_FERROTHORN){
+        if (species == SPECIES_FLORGES || 
+            species == SPECIES_FERROTHORN || 
+            (species == SPECIES_DUNSPARCE && FlagGet(FLAG_HEX_DELETED_FOR_DIG) == FALSE)){
 
             // set move
             u16 move = MOVE_NONE;
@@ -5501,6 +5504,10 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
                 move = MOVE_GRASS_KNOT;
             if (species == SPECIES_FERROTHORN)
                 move = MOVE_BLOCK;
+            if (species == SPECIES_DUNSPARCE){
+                move = MOVE_HEX;
+                FlagSet(FLAG_HEX_DELETED_FOR_DIG);
+            }
             
             // find moveslot
             for (u8 i = 0; i < MAX_MON_MOVES; i++)
