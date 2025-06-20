@@ -11382,15 +11382,32 @@ void TryRestoreHeldItems(void)
                 u16 currentHeldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
                 if (currentHeldItem != lostItem){
                     // set flags for messaging ingame
-                    if (lostItem == ITEM_WHITE_HERB){
+
+                    // if item was flung
+                    if (lostItem == gLastFlungItem){
+                        FlagSet(FLAG_RECOVERED_FLUNG_ITEM);
+
+                        if (lostItem == ITEM_MENTAL_HERB){
+                            FlagSet(FLAG_RECOVERED_MENTAL_HERB);
+                        }
+                        else if (lostItem == ITEM_SAFETY_GOGGLES){
+                            FlagSet(FLAG_RECOVERED_GOGGLES);
+                        }
+
+                    }
+                    // if item was not flung (but lost in another way)
+                    else if (lostItem == ITEM_WHITE_HERB){
                         FlagSet(FLAG_RECOVERED_WHITE_HERB);
                     }
-                    if (lostItem == ITEM_CUSTAP_BERRY){
+                    else if (lostItem == ITEM_CUSTAP_BERRY){
                         FlagSet(FLAG_RECOVERED_CUSTAP);
                     }
-                    if (lostItem == ITEM_MARANGA_BERRY){
+                    else if (lostItem == ITEM_MARANGA_BERRY){
                         FlagSet(FLAG_RECOVERED_MARANGA);
                     }
+
+                    
+
 
                     // restore item
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);

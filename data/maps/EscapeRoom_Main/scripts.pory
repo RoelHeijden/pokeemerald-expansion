@@ -99,7 +99,11 @@ script EscapeRoom_MapScript_OnResumeScripts{
     }
 
     // check if held item was retrieved -- sets frame table var if true
-    if(flag(FLAG_RECOVERED_WHITE_HERB) || flag(FLAG_RECOVERED_CUSTAP) || flag(FLAG_RECOVERED_MARANGA)){
+    if(flag(FLAG_RECOVERED_WHITE_HERB) || 
+        flag(FLAG_RECOVERED_CUSTAP) || 
+        flag(FLAG_RECOVERED_MARANGA) ||
+        flag(FLAG_RECOVERED_FLUNG_ITEM))
+    {
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
     }
 
@@ -170,6 +174,13 @@ script EscapeRoom_MapScripts_RetrievedItemMessage{
         msgbox(MarangaBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
         waitmessage
         clearflag(FLAG_RECOVERED_MARANGA)
+    }
+
+    // Flung item
+    if(flag(FLAG_RECOVERED_FLUNG_ITEM)){
+        msgbox(FlungItemRecoveredMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        clearflag(FLAG_RECOVERED_FLUNG_ITEM)
     }
 
     setvar(VAR_RETRIEVED_HELD_ITEM, 0)
@@ -1277,6 +1288,19 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
             removepartyitem(VAR_TEMP_0)
         }
     }
+
+    // prevent Goggles restore after winning
+    clearflag(FLAG_RECOVERED_GOGGLES)
+    clearflag(FLAG_RECOVERED_FLUNG_ITEM) // prevent item restore message
+    checkpartymon(SPECIES_LIEPARD)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
+            removepartyitem(VAR_TEMP_0)
+        }
+    }
+
     // setflag(FLAG_CUSTAP_SOLD_OUT) // prevent custap lines in trainer7?
     setflag(FLAG_TRAINER5_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)

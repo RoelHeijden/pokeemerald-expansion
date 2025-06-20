@@ -734,6 +734,7 @@ BattleScript_EffectFling::
 	attackcanceler
 	jumpifcantfling BS_ATTACKER, BattleScript_FailedFromAtkString
 	setlastuseditem BS_ATTACKER
+	setlastflungitem BS_ATTACKER
 	accuracycheck BattleScript_FlingMissed, ACC_CURR_MOVE
 	attackstring
 	pause B_WAIT_TIME_SHORT

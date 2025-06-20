@@ -9179,6 +9179,13 @@ static void Cmd_various(void)
         gLastUsedItem = gBattleMons[battler].item;
         break;
     }
+    // ADDED
+    case VARIOUS_SET_LAST_FLUNG_ITEM:
+    {
+        VARIOUS_ARGS();
+        gLastFlungItem = gBattleMons[battler].item;
+        break;
+    }
     case VARIOUS_TRY_FAIRY_LOCK:
     {
         VARIOUS_ARGS(const u8 *failInstr);

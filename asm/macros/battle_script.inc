@@ -2111,6 +2111,11 @@
 	various \battler, VARIOUS_SET_LAST_USED_ITEM
 	.endm
 
+	@ added
+	.macro setlastflungitem battler:req
+	various \battler, VARIOUS_SET_LAST_FLUNG_ITEM
+	.endm
+
 	.macro jumpifabsent battler:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_ABSENT
 	.4byte \jumpInstr

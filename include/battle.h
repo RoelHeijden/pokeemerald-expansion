@@ -1059,6 +1059,7 @@ extern s32 gBattleMoveDamage;
 extern s32 gHpDealt;
 extern s32 gBideDmg[MAX_BATTLERS_COUNT];
 extern u16 gLastUsedItem;
+extern u16 gLastFlungItem; // ADDED
 extern u16 gLastUsedAbility;
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
