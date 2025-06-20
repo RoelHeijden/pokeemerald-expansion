@@ -11068,6 +11068,10 @@ bool32 CanBattlerGetOrLoseItem(u32 battler, u16 itemId)
     // Mail can be stolen now
     if (itemId == ITEM_ENIGMA_BERRY_E_READER)
         return FALSE;
+    // ADDED
+    // prevent this specific mail from being stolen/moved
+    else if (itemId == ITEM_DREAM_MAIL)
+        return FALSE;
     else if (DoesSpeciesUseHoldItemToChangeForm(species, itemId))
         return FALSE;
     else if (holdEffect == HOLD_EFFECT_Z_CRYSTAL)
