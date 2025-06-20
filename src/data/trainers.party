@@ -16876,9 +16876,9 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
 === TRAINER_CUSTOM_TRAINER1 ===
-Name: H.M. One
-Class: Collector
-Pic: Collector
+Name: Cut Guy
+Class: Tuber M
+Pic: Pokefan M
 Gender: Male
 Music: Intense
 Double Battle: Yes
@@ -16899,9 +16899,9 @@ Careful Nature
 
 
 === TRAINER_CUSTOM_TRAINER2 ===
-Name: Zoysia
-Class: Aroma Lady
-Pic: Aroma Lady
+Name: 63 75 74
+Class: Hex Maniac
+Pic: Hex Maniac
 Gender: Male
 Music: Intense
 Items: Max Elixir
@@ -16917,9 +16917,9 @@ Modest Nature
 
 
 === TRAINER_CUSTOM_TRAINER3 ===
-Name: 68 65 78
-Class: Hex Maniac
-Pic: Hex Maniac
+Name: rostic
+Class: Pokemaniac
+Pic: Pokemaniac
 Gender: Male
 Music: Intense
 Double Battle: Yes

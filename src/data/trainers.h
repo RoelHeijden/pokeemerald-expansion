@@ -42187,11 +42187,11 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER1] =
     {
 #line 16879
-        .trainerName = _("H.M. One"),
+        .trainerName = _("Cut Guy"),
 #line 16880
-        .trainerClass = TRAINER_CLASS_COLLECTOR,
+        .trainerClass = TRAINER_CLASS_TUBER_M,
 #line 16881
-        .trainerPic = TRAINER_PIC_COLLECTOR,
+        .trainerPic = TRAINER_PIC_POKEFAN_M,
         .encounterMusic_gender = 
 #line 16883
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -42252,11 +42252,11 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER2] =
     {
 #line 16902
-        .trainerName = _("Zoysia"),
+        .trainerName = _("63 75 74"),
 #line 16903
-        .trainerClass = TRAINER_CLASS_AROMA_LADY,
+        .trainerClass = TRAINER_CLASS_HEX_MANIAC,
 #line 16904
-        .trainerPic = TRAINER_PIC_AROMA_LADY,
+        .trainerPic = TRAINER_PIC_HEX_MANIAC,
         .encounterMusic_gender = 
 #line 16906
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -42297,11 +42297,11 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER3] =
     {
 #line 16920
-        .trainerName = _("68 65 78"),
+        .trainerName = _("rostic"),
 #line 16921
-        .trainerClass = TRAINER_CLASS_HEX_MANIAC,
+        .trainerClass = TRAINER_CLASS_POKEMANIAC,
 #line 16922
-        .trainerPic = TRAINER_PIC_HEX_MANIAC,
+        .trainerPic = TRAINER_PIC_POKEMANIAC,
         .encounterMusic_gender = 
 #line 16924
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
