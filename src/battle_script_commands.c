@@ -1849,7 +1849,7 @@ static void Cmd_ppreduce(void)
     // ADDED
     // only deduct 1pp if Assist fails
     // (gCurrentMove remains assist when the move fails)
-    if (gCurrentMove == MOVE_ASSIST){
+    if (gCurrentMove == MOVE_ASSIST || gCurrentMove == MOVE_SLEEP_TALK){
         // do nothing - keep ppToDeduct = 1
     }
     else
