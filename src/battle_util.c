@@ -11406,9 +11406,6 @@ void TryRestoreHeldItems(void)
                         FlagSet(FLAG_RECOVERED_MARANGA);
                     }
 
-                    
-
-
                     // restore item
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
                 }

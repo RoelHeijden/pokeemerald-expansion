@@ -199,9 +199,9 @@ gScriptCmdTable::
 	.4byte ScrCmd_setescapewarp                     @ 0xc4
 	.4byte ScrCmd_waitmoncry                        @ 0xc5
 	.4byte ScrCmd_bufferboxname                     @ 0xc6
-	.4byte ScrCmd_nop1                              @ 0xc7
-	.4byte ScrCmd_nop1                              @ 0xc8
-	.4byte ScrCmd_nop1                              @ 0xc9
+	.4byte ScrCmd_backupmonmoveset		    		@ 0xc7
+	.4byte ScrCmd_restoremonmoveset					@ 0xc8
+	.4byte ScrCmd_nop1								@ 0xc9
 	.4byte ScrCmd_nop1                              @ 0xca
 	.4byte ScrCmd_nop1                              @ 0xcb
 	.4byte ScrCmd_nop1                              @ 0xcc
@@ -248,7 +248,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_addgametime						@ 0xf5
 	.4byte ScrCmd_showicemap						@ 0xf6
 	.4byte ScrCmd_hideicemap						@ 0xf7
-	.4byte SrcCmd_givepoochegg						@ 0xf8
+	.4byte SrcCmd_givesnubbullegg					@ 0xf8
 	.4byte SrcCmd_addmonmove						@ 0xf9
 	.4byte SrcCmd_monhas0pp							@ 0xfa
 	.4byte SrcCmd_setmonmove0pp						@ 0xfb

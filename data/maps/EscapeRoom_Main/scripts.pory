@@ -24,7 +24,7 @@ const LOCALID_CUT_TREE = 21
 const LOCALID_LOST_GLASSES = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
-const LOCALID_STARDUST = 25
+const LOCALID_NUGGET = 25
 const LOCALID_SHOP1 = 26
 const LOCALID_SHOP2 = 27
 const LOCALID_MAP_SWITCH2 = 28
@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const _DUMMY_3 = 33
+const LOCALID_DUSKNOIR_MAIL_NPC = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -93,6 +93,26 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setvar(VAR_REMOVE_HELD_ITEM, 1)
     }
 
+
+    // check if Liepard succesfully sacked vs Dusknoir
+    // prevent mental herb recovery if so
+    getpartysize
+    if (var(VAR_RESULT) == 2){
+        partymonhasfainted
+        if(var(VAR_0x8004) == SPECIES_LIEPARD){
+            setflag(FLAG_LIEPARD_SACKED)
+        }
+    }
+    if(flag(FLAG_LIEPARD_SACKED) && flag(FLAG_MENTAL_HERB_USED_FOR_SACK) == FALSE){
+        // make sure this happens only once
+        setflag(FLAG_MENTAL_HERB_USED_FOR_SACK)
+
+        // prevent mental herb restore after succesful sack vs Dusknoir
+        clearflag(FLAG_RECOVERED_FLUNG_ITEM)
+        setflag(FLAG_REMOVE_LIEPARD_MENTAL_HERB)
+        setvar(VAR_REMOVE_HELD_ITEM, 1)
+    }
+
     // check for ball return -- sets frame table var if true
     if(flag(FLAG_BALL_USED) && !flag(FLAG_ZERAORA_CAUGHT)){
         setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
@@ -107,7 +127,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
     }
 
-    // check if Dusknoir's Stardust is succesfully stolen
+    // check if Rayquaza's Stardust is succesfully stolen
     if(flag(FLAG_STARDUST_STOLEN) == FALSE){
         call(EscapeRoom_MapScripts_CheckStardustStolen)
     }
@@ -194,7 +214,24 @@ script EscapeRoom_MapScripts_RemoveHeldItem{
         call(EscapeRoom_MapScripts_RemoveFerroCustap)
     }
 
+    // remove liepard mental herb after liepard sack
+    if(flag(FLAG_REMOVE_LIEPARD_MENTAL_HERB) == TRUE){
+        clearflag(FLAG_REMOVE_LIEPARD_MENTAL_HERB)
+        call(EscapeRoom_MapScripts_RemoveLiepardMentalHerb)
+    }
+
     setvar(VAR_REMOVE_HELD_ITEM, 0)
+}
+
+script EscapeRoom_MapScripts_RemoveLiepardMentalHerb{
+    checkpartymon(SPECIES_LIEPARD)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_MENTAL_HERB){
+            removepartyitem(VAR_TEMP_0)
+        }
+    }
 }
 
 script EscapeRoom_MapScripts_RemoveFerroCustap{
@@ -266,7 +303,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_FLORGES,
         22,
-        item=ITEM_WHITE_HERB,
+        item=ITEM_EXP_CANDY_S,
         abilityNum=2, // symbiosis
         nature=21, // gentle
         gender=1, // female
@@ -295,8 +332,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move1=MOVE_STEEL_ROLLER,
         move2=MOVE_BLOCK,
         move3=MOVE_INGRAIN,
-        move4=MOVE_SLEEP_TALK,
-        // move4=MOVE_CUT,
+        move4=MOVE_SUNNY_DAY,
         // EVs:
         hpEv=0, 
         atkEv=252,
@@ -310,31 +346,6 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         spAtkIv=31,
         spDefIv=0
     )
-
-    // givemon(
-    //     SPECIES_ZERAORA,
-    //     43,
-    //     item=ITEM_TM48,
-    //     abilityNum=0, 
-    //     nature=15, // modest
-    //     gender=0, 
-    //     move1=MOVE_PLASMA_FISTS,
-    //     move2=MOVE_SNATCH,
-    //     move3=MOVE_SURF,
-    //     move4=MOVE_NONE,
-    //     // EVs:
-    //     hpEv=0, 
-    //     atkEv=0,
-    //     spDefEv=36, 
-    //     defEv=0,
-    //     // IVs:
-    //     hpIv=0,
-    //     atkIv=0,
-    //     defIv=0,
-    //     speedIv=0,
-    //     spAtkIv=31,
-    //     spDefIv=31
-    // )
 
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
@@ -365,7 +376,6 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
-    additem(ITEM_EXP_CANDY_S)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -410,7 +420,7 @@ script EscapeRoom_EventScript_EndSign{
         msgbox(EscapeRoomEndCongratz)
         waitmessage
     }
-    
+
     // call(EscapeRoom_EventScript_CalcHintsUsed)
     setvar(VAR_HINTS_USED_COUNTER, 0)
 
@@ -495,8 +505,8 @@ script EscapeRoom_EventScript_LostGlassesNPC{
     checkitem(ITEM_WISE_GLASSES)
     if(var(VAR_RESULT) == TRUE){
 
-        // sanity check - check for poochyena in party
-        checkpartymon(SPECIES_POOCHYENA)
+        // sanity check - check for Snubbull in party
+        checkpartymon(SPECIES_SNUBBULL)
         if(var(VAR_RESULT) == PARTY_SIZE)
         {
             msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -546,7 +556,7 @@ script EscapeRoom_EventScript_ObtainLiepard{
         move1=MOVE_ASSIST,
         move2=MOVE_TRICK,
         move3=MOVE_ROCK_SMASH,
-        move4=MOVE_ECHOED_VOICE,
+        move4=MOVE_U_TURN,
         // EVs:
         atkEv=252, 
         spAtkEv=252,
@@ -559,28 +569,6 @@ script EscapeRoom_EventScript_ObtainLiepard{
         spAtkIv=31,
         spDefIv=31
     )    
-    // givemon(
-    //     SPECIES_LIEPARD,
-    //     50,
-    //     abilityNum=2, // Prankster
-    //     nature=17, // Quiet - make Krook outspeed if scarfed
-    //     gender=0, 
-    //     move1=MOVE_ASSIST,
-    //     move2=MOVE_TRICK,
-    //     move3=MOVE_ROCK_SMASH,
-    //     move4=MOVE_ECHOED_VOICE,
-    //     // EVs:
-    //     atkEv=140, 
-    //     spAtkEv=252,
-    //     speedEv=0,
-    //     // IVs:
-    //     hpIv=31,
-    //     atkIv=31,
-    //     defIv=18, // for krook struggle >50%
-    //     speedIv=31,
-    //     spAtkIv=31,
-    //     spDefIv=31
-    // )    
     message(LiepardObtainMessage)
     playfanfare(MUS_OBTAIN_ITEM)
     waitfanfare
@@ -668,17 +656,17 @@ script EscapeRoom_EventScript_Shop2NPC{
 }
 
 mart EscapeRoom_Shop1_items{
+    ITEM_ABILITY_CAPSULE
     ITEM_CUSTAP_BERRY
     ITEM_FLOAT_STONE
     ITEM_RING_TARGET 
-    ITEM_ESCAPE_ROPE   
+    // ITEM_ESCAPE_ROPE   
     ITEM_ETHER
+    ITEM_TM28
 }
 
 mart EscapeRoom_Shop2_items{
-    ITEM_RARE_CANDY
-    ITEM_ABILITY_CAPSULE
-    ITEM_ABILITY_PATCH
+    ITEM_MENTAL_HERB
     ITEM_CUSTAP_BERRY
     ITEM_TM27
 }
@@ -737,258 +725,65 @@ script EscapeRoom_ChooseMoveToDelete{
         end
     }
 
-    // buffer move and -- TODO: set move flag
+    // make moveset backup
+    backupmonmoveset(VAR_0x8004)
+
+    // buffer move 
     copyvar(VAR_0x8005, VAR_MOVE_DELETER_CHOSEN_SLOT)
     setvar(VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES)
     special(BufferMoveDeleterNicknameAndMove)
 
     // delete move
     special(MoveDeleterForgetMove)
-    // playse(SE_SUCCESS)
-    playse(SE_SHOP)
+    playse(SE_SUCCESS)  // CHANGED
+    // playse(SE_SHOP)
     waitse
     msgbox(MoveDeleterMoveDeleted, MSGBOX_AUTOCLOSE)
     end
 }
 
 script EscapeRoom_RestoreMoveset{
-    // flag to detect if no moves were restored
+    // flag to detect if no moves were restored at all
     setflag(FLAG_TEMP_5)
 
-    // --- POOCHYENA ---
-    checkpartymon(SPECIES_POOCHYENA)
-    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_POOCH_MOVE_DELETED) == TRUE)
-    {
-        // check if all moves have 0 pp
-        // if true: set flag
-        monhas0pp(SPECIES_POOCHYENA)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
-        }
-
-        if (flag(FLAG_ICE_FANG_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_POOCHYENA, MOVE_ICE_FANG)
-            clearflag(FLAG_ICE_FANG_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ICE_FANG_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_POOCHYENA, MOVE_ICE_FANG)
-                clearflag(FLAG_ICE_FANG_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_SLEEP_TALK_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_POOCHYENA, MOVE_SLEEP_TALK)
-            clearflag(FLAG_SLEEP_TALK_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_SLEEP_TALK_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_POOCHYENA, MOVE_SLEEP_TALK)
-                clearflag(FLAG_SLEEP_TALK_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_ENDEAVOR_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_POOCHYENA, MOVE_ENDEAVOR)
-            clearflag(FLAG_ENDEAVOR_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ENDEAVOR_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_POOCHYENA, MOVE_ENDEAVOR)
-                clearflag(FLAG_ENDEAVOR_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_TAUNT_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_POOCHYENA, MOVE_TAUNT)
-            clearflag(FLAG_TAUNT_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_TAUNT_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_POOCHYENA, MOVE_TAUNT)
-                clearflag(FLAG_TAUNT_DELETED_0_PP)
-            }
-        }
-
+    // Liepard
+    restoremonmoveset(SPECIES_LIEPARD)
+    if(var(VAR_RESULT) == TRUE){
         call(EscapeRoom_MoveRestoredSound)
-        msgbox(PoochMovesRestoredMessage, MSGBOX_DEFAULT)
-        waitmessage
-        clearflag(FLAG_POOCH_MOVE_DELETED)
-        clearflag(FLAG_TEMP_5) // indicate that at least one move was restored
-        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
-    }
-
-    // --- LIEPARD ---
-    checkpartymon(SPECIES_LIEPARD)
-    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_LIEPARD_MOVE_DELETED) == TRUE)
-    {
-        // check if all moves have 0 pp
-        // if true: set flag
-        monhas0pp(SPECIES_LIEPARD)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
-        }
-
-        if (flag(FLAG_ASSIST_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_LIEPARD, MOVE_ASSIST)
-            clearflag(FLAG_ASSIST_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ASSIST_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_LIEPARD, MOVE_ASSIST)
-                clearflag(FLAG_ASSIST_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_ROCK_SMASH_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_LIEPARD, MOVE_ROCK_SMASH)
-            clearflag(FLAG_ROCK_SMASH_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ROCK_SMASH_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_LIEPARD, MOVE_ROCK_SMASH)
-                clearflag(FLAG_ROCK_SMASH_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_ECHOED_VOICE_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_LIEPARD, MOVE_ECHOED_VOICE)
-            clearflag(FLAG_ECHOED_VOICE_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_ECHOED_VOICE_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_LIEPARD, MOVE_ECHOED_VOICE)
-                clearflag(FLAG_ECHOED_VOICE_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_TRICK_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_LIEPARD, MOVE_TRICK)
-            clearflag(FLAG_TRICK_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_TRICK_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_LIEPARD, MOVE_TRICK)
-                clearflag(FLAG_TRICK_DELETED_0_PP)
-            }
-        }
-
-        call(EscapeRoom_MoveRestoredSound)
+        clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_LIEPARD_MOVE_DELETED)
         msgbox(LiepardMovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
-        clearflag(FLAG_LIEPARD_MOVE_DELETED)
-        clearflag(FLAG_TEMP_5)
-        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
-    // --- DUNSPARCE ---
-    checkpartymon(SPECIES_DUNSPARCE)
-    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_DUNSPARCE_MOVE_DELETED) == TRUE)
-    {
-        // check if all moves have 0 pp
-        // if true: set flag
-        monhas0pp(SPECIES_DUNSPARCE)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
-        }
-
-        if (flag(FLAG_TRUMP_CARD_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_DUNSPARCE, MOVE_TRUMP_CARD)
-            clearflag(FLAG_TRUMP_CARD_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_TRUMP_CARD_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_TRUMP_CARD)
-                clearflag(FLAG_TRUMP_CARD_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_HEX_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_DUNSPARCE, MOVE_HEX)
-            clearflag(FLAG_HEX_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_HEX_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_HEX)
-                clearflag(FLAG_HEX_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_COUNTER_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_DUNSPARCE, MOVE_COUNTER)
-            clearflag(FLAG_COUNTER_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_COUNTER_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_COUNTER)
-                clearflag(FLAG_COUNTER_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_AIR_SLASH_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_DUNSPARCE, MOVE_AIR_SLASH)
-            clearflag(FLAG_AIR_SLASH_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_AIR_SLASH_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_DUNSPARCE, MOVE_AIR_SLASH)
-                clearflag(FLAG_AIR_SLASH_DELETED_0_PP)
-            }
-        }
-
+    // Snubbull
+    restoremonmoveset(SPECIES_SNUBBULL)
+    if(var(VAR_RESULT) == TRUE){
         call(EscapeRoom_MoveRestoredSound)
+        clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_SNUBBULL_MOVE_DELETED)
+        msgbox(SnubbullMovesRestoredMessage, MSGBOX_DEFAULT)
+        waitmessage
+    }
+
+    // Dunsparce
+    restoremonmoveset(SPECIES_DUNSPARCE)
+    if(var(VAR_RESULT) == TRUE){
+        call(EscapeRoom_MoveRestoredSound)
+        clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
         msgbox(DunsparceMovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
-        clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
-        clearflag(FLAG_TEMP_5)
-        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
-    // --- SMEARGLE ---
-    checkpartymon(SPECIES_SMEARGLE)
-    if (var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_SMEARGLE_MOVE_DELETED) == TRUE)
-    {
-        // check if all moves have 0 pp
-        // if true: set flag
-        monhas0pp(SPECIES_SMEARGLE)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
-        }
-
-        if (flag(FLAG_SURF_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_SMEARGLE, MOVE_SURF)
-            clearflag(FLAG_SURF_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_SURF_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_SMEARGLE, MOVE_SURF)
-                clearflag(FLAG_SURF_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_SWITCHEROO_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_SMEARGLE, MOVE_SWITCHEROO)
-            clearflag(FLAG_SWITCHEROO_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_SWITCHEROO_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_SMEARGLE, MOVE_SWITCHEROO)
-                clearflag(FLAG_SWITCHEROO_DELETED_0_PP)
-            }
-        }
-
-        if (flag(FLAG_UPROAR_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_SMEARGLE, MOVE_UPROAR)
-            clearflag(FLAG_UPROAR_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_UPROAR_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_SMEARGLE, MOVE_UPROAR)
-                clearflag(FLAG_UPROAR_DELETED_0_PP)
-            }
-        }
-        
-        if (flag(FLAG_CONVERSION_2_DELETED) == TRUE)
-        {
-            addmonmove(SPECIES_SMEARGLE, MOVE_CONVERSION_2)
-            clearflag(FLAG_CONVERSION_2_DELETED)
-            if(flag(FLAG_MON_HAS_0_PP_WHEN_RESTORING) || flag(FLAG_CONVERSION_2_DELETED_0_PP)){
-                setmonmove0pp(SPECIES_SMEARGLE, MOVE_CONVERSION_2)
-                clearflag(FLAG_CONVERSION_2_DELETED_0_PP)
-            }
-        }
-
+    // Smeargle
+    restoremonmoveset(SPECIES_SMEARGLE)
+    if(var(VAR_RESULT) == TRUE){
         call(EscapeRoom_MoveRestoredSound)
+        clearflag(FLAG_TEMP_5)
+        clearflag(FLAG_SMEARGLE_MOVE_DELETED)
         msgbox(SmeargleMovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
-        clearflag(FLAG_SMEARGLE_MOVE_DELETED)
-        clearflag(FLAG_TEMP_5)
-        clearflag(FLAG_MON_HAS_0_PP_WHEN_RESTORING)
     }
 
     // no moves restored
@@ -997,6 +792,7 @@ script EscapeRoom_RestoreMoveset{
         msgbox(NoMovesRestoredMessage, MSGBOX_AUTOCLOSE)
         clearflag(FLAG_TEMP_5)
     }
+
 }
 
 script EscapeRoom_MoveRestoredSound{
@@ -1090,7 +886,7 @@ script EscapeRoom_ZeraoraHintNPC{
 }
 
 script EscapeRoom_TabletsHintNPC{
-    lockall
+    lock
     if(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
         msgbox(FourTabletsHintMessage1, MSGBOX_NPC)
     }
@@ -1100,12 +896,15 @@ script EscapeRoom_TabletsHintNPC{
     elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
         msgbox(FourTabletsHintMessage3, MSGBOX_NPC)
     }
-    elif(flag(FLAG_CHOICE_SPECS_OBTAINED) == FALSE){
+    else{
         msgbox(FourTabletsHintMessage4, MSGBOX_NPC)
     }
-    else{
-        msgbox(FourTabletsHintMessage5, MSGBOX_NPC)
-    }
+    releaseall
+}
+
+script EscapeRoom_DusknoirStoleMyMailNPC{
+    lock
+    msgbox(DusknoirStoleMyMailMsg, MSGBOX_NPC)
     releaseall
 }
 
@@ -1278,9 +1077,10 @@ script EscapeRoom_EventScript_Trainer4PostBattle{
 }
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
+
     // prevent custap restore after winning
     clearflag(FLAG_RECOVERED_CUSTAP)
-    checkpartymon(SPECIES_POOCHYENA)
+    checkpartymon(SPECIES_SNUBBULL)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
@@ -1320,7 +1120,7 @@ script EscapeRoom_EventScript_Trainer7PostBattle{
 //// POKEMON TRADES ////
 
 script EscapeRoom_EventScript_TradeZeraForHMCut{
-    lockall
+    lock
     msgbox(AskZeraCutTradeMessage, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
 
@@ -1348,7 +1148,7 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
 }
 
 script EscapeRoom_EventScript_TradeFerroVsDunsparce{
-    lockall
+    lock
     faceplayer
 
     // post trade 
@@ -1416,7 +1216,7 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
 }
 
 script EscapeRoom_EventScript_TradeFlorgesForEgg{
-    lockall
+    lock
     faceplayer
 
     // post trade 
@@ -1441,7 +1241,7 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
 
             // trade pokemon
             removemon(SPECIES_FLORGES)
-            givepoochegg
+            givesnubbullegg
             setflag(FLAG_FLORGES_TRADE_ACCEPTED)
 
             message(EggReceivedMessage)
@@ -1501,52 +1301,52 @@ script EscapeRoom_EventScript_SellDunsparce{
     releaseall
 }
 
-script EscapeRoom_EventScript_TradePoochForSmeargle{
-    lockall
+script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
+    lock
     faceplayer
 
     // post trade 
-    if(flag(FLAG_POOCH_TRADE_ACCEPTED) == TRUE){
+    if(flag(FLAG_SNUBB_TRADE_ACCEPTED) == TRUE){
 
         // rock smash rock is still there
         if(flag(FLAG_ESCAPEROOM_SMACH_ROCK2) == FALSE){
-            msgbox(PoochTradePostTrade, MSGBOX_NPC)
+            msgbox(SnubbTradePostTrade, MSGBOX_NPC)
             waitmessage
         }
-        // rock smash rock is gone
-        else{
-            if(flag(FLAG_FISHERMAN_MOVED) == FALSE){
-                msgbox(ICanGoFishingMessage, MSGBOX_NPC)
-                waitmessage
-                setflag(FLAG_FISHERMAN_MOVED)
+    //     // rock smash rock is gone
+    //     else{
+    //         if(flag(FLAG_FISHERMAN_MOVED) == FALSE){
+    //             msgbox(ICanGoFishingMessage, MSGBOX_NPC)
+    //             waitmessage
+    //             setflag(FLAG_FISHERMAN_MOVED)
 
-                // move player if fisherman is approached from the south
-                if(var(VAR_FACING) == DIR_NORTH){
-                    applymovement(OBJ_EVENT_ID_PLAYER, PlayerMovesAwayForFisherman)
-                    waitmovement(OBJ_EVENT_ID_PLAYER)
-                }
+    //             // move player if fisherman is approached from the south
+    //             if(var(VAR_FACING) == DIR_NORTH){
+    //                 applymovement(OBJ_EVENT_ID_PLAYER, PlayerMovesAwayForFisherman)
+    //                 waitmovement(OBJ_EVENT_ID_PLAYER)
+    //             }
 
-                // movement script
-                applymovement(LOCALID_SMEARGLE_NPC, FishermanMovesDown)
-                waitmovement(LOCALID_SMEARGLE_NPC)
-                copyobjectxytoperm(LOCALID_SMEARGLE_NPC)
+    //             // movement script
+    //             applymovement(LOCALID_SMEARGLE_NPC, FishermanMovesDown)
+    //             waitmovement(LOCALID_SMEARGLE_NPC)
+    //             copyobjectxytoperm(LOCALID_SMEARGLE_NPC)
 
-            }
-            else{
-                msgbox(HappyDaysMessage, MSGBOX_NPC)
-                waitmessage
-                applymovement(LOCALID_SMEARGLE_NPC, FishermanLooksUp)
-                waitmovement(LOCALID_SMEARGLE_NPC)
-            }
-        }
+    //         }
+    //         else{
+    //             msgbox(HappyDaysMessage, MSGBOX_NPC)
+    //             waitmessage
+    //             applymovement(LOCALID_SMEARGLE_NPC, FishermanLooksUp)
+    //             waitmovement(LOCALID_SMEARGLE_NPC)
+    //         }
+    //     }
     }
     else{
         // ask trade
-        msgbox(AskPoochSmeargleTrade, MSGBOX_YESNO)
+        msgbox(AskSnubbullSmeargleTrade, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
 
             // check if pokemon in party
-            checkpartymon(SPECIES_POOCHYENA)
+            checkpartymon(SPECIES_SNUBBULL)
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -1555,23 +1355,23 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 end
             }
 
-            // first heal if liepard is fainted (would allow double skip)
-            partymonhasfainted
-            lockall
-            if(var(VAR_RESULT) != PARTY_SIZE){
-                if(var(VAR_0x8004) == SPECIES_LIEPARD){
-                    msgbox(HealBeforeTradeMessage, MSGBOX_DEFAULT)
-                    waitmessage
-                    special(HealPlayerParty)
-                    playse(SE_USE_ITEM)
-                    waitse
-                    msgbox(HealedBeforeTradeMessage, MSGBOX_AUTOCLOSE)
-                    waitmessage
-                }
-            }
+            // // first heal if liepard is fainted (would allow double skip)
+            // partymonhasfainted
+            // lockall
+            // if(var(VAR_RESULT) != PARTY_SIZE){
+            //     if(var(VAR_0x8004) == SPECIES_LIEPARD){
+            //         msgbox(HealBeforeTradeMessage, MSGBOX_DEFAULT)
+            //         waitmessage
+            //         special(HealPlayerParty)
+            //         playse(SE_USE_ITEM)
+            //         waitse
+            //         msgbox(HealedBeforeTradeMessage, MSGBOX_AUTOCLOSE)
+            //         waitmessage
+            //     }
+            // }
 
             // trade pokemon
-            removemon(SPECIES_POOCHYENA)
+            removemon(SPECIES_SNUBBULL)
             lockall
             givemon(
                 SPECIES_SMEARGLE,
@@ -1579,10 +1379,9 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 abilityNum=0, // own tempo
                 nature=18, // Bashful
                 gender=0, 
-                move1=MOVE_UPROAR,
-                move2=MOVE_SURF,
-                move3=MOVE_CONVERSION_2,
-                move4=MOVE_RAGE_POWDER,
+                move1=MOVE_SURF,
+                move2=MOVE_REST,
+                move3=MOVE_SHED_TAIL,
                 // EVs:
                 hpEv=0, 
                 spAtkEv=0,
@@ -1592,21 +1391,21 @@ script EscapeRoom_EventScript_TradePoochForSmeargle{
                 defIv=31,
                 speedIv=31,
                 spAtkIv=31,
-                spDefIv=31 // Resisted Krook Uproar (x1.5) ohkos with 28 ivs (lvl 30)
+                spDefIv=31
             )
             lockall
-            setflag(FLAG_POOCH_TRADE_ACCEPTED)
+            setflag(FLAG_SNUBB_TRADE_ACCEPTED)
 
             message(SmeargleReceivedMessage)
             playfanfare(MUS_OBTAIN_ITEM)
             lockall
             waitfanfare
-            msgbox(PoochTradeAccepted, MSGBOX_AUTOCLOSE)
+            msgbox(SnubbTradeAccepted, MSGBOX_AUTOCLOSE)
             waitmessage
         }
         // trade declined
         else{
-            msgbox(PoochTradeDeclined, MSGBOX_AUTOCLOSE)
+            msgbox(SnubbTradeDeclined, MSGBOX_AUTOCLOSE)
             waitmessage
         }
     }
@@ -1635,12 +1434,11 @@ movement FishermanLooksUp {
 
 //// ITEMS ////
 
-script EscapeRoom_EventScript_FindStardust{
+script EscapeRoom_EventScript_FindNugget{
     lockall
-    // finditem(ITEM_STARDUST)
-    finditem(ITEM_CUSTAP_BERRY)
-    removeobject(LOCALID_STARDUST)
-    setflag(FLAG_STARDUST_OBTAINED)
+    finditem(ITEM_NUGGET)
+    removeobject(LOCALID_NUGGET)
+    setflag(FLAG_NUGGET_OBTAINED)
     releaseall
 }
 
@@ -2294,8 +2092,8 @@ text SignMessageReadInfoAgain{
 }
 
 text EscapeRoomEndCongratz{
-    "Congratulations!\n"
-    "You have beaten the escape room!"
+    "Congratulations, you have\n"
+    "completed the escape room!"
 }
 
 text EndEscapeRoomSignMessage{
@@ -2624,9 +2422,10 @@ text FourTabletsHintMessage4{
     "Did you feel that earthquake?"
 }
 
-text FourTabletsHintMessage5{
-    "Enjoy your Choice Scarf I guess."
-    // CHANGE?
+// Dusknoir mail hint NPC
+
+text DusknoirStoleMyMailMsg{
+    "A Dusknoir stole my mail!"
 }
 
 
@@ -2683,8 +2482,8 @@ text MoveDeleterOnlyOneMove{
     "That Pokémon has only one move left."
 }
 
-text PoochMovesRestoredMessage{
-    "Poochyena's moves were restored!"
+text SnubbullMovesRestoredMessage{
+    "Snubbull's moves were restored!"
 }
 
 text LiepardMovesRestoredMessage{
@@ -2720,6 +2519,10 @@ text CustapBerryRecoveredMessage{
 
 text MarangaBerryRecoveredMessage{
     "Your Maranga Berry was restored."
+}
+
+text FlungItemRecoveredMessage{
+    "Your flung item was restored."
 }
 
 
@@ -2803,8 +2606,8 @@ text DunsparceTradePostTrade{
 }
 
 
-// TRADE NPC 5 - Poochyena Smeargle
-text AskPoochSmeargleTrade{
+// TRADE NPC 5 - Snubbull Smeargle
+text AskSnubbullSmeargleTrade{
     "I want to go fishing.\p"
     "...\p"
     "...\p"
@@ -2816,15 +2619,15 @@ text SmeargleReceivedMessage{
     "{PLAYER} received a Smeargle!"
 }
 
-text PoochTradeAccepted{
-    "Bye-bye Poochyena."
+text SnubbTradeAccepted{
+    "Bye-bye Snubbull."
 }
 
-text PoochTradeDeclined{
+text SnubbTradeDeclined{
     "Ahh, that's too bad!"
 }
 
-text PoochTradePostTrade{
+text SnubbTradePostTrade{
     "I'd still like to go fishing..."
 }
 

@@ -1188,6 +1188,22 @@
 	.endm
 
 
+	@ makes a backup of a given pokemon's moveset.
+	@ takes a var as input.
+	@ VAR_RESULT is set to FALSE if a backup is already active. TRUE otherwise.
+	.macro backupmonmoveset partyslot:req
+	.byte 0xc7
+	.2byte \partyslot
+	.endm
+
+	@ loads the backup a given pokemon's moveset.
+	@ VAR_RESULT is set to FALSE if there was no backup to restore. TRUE otherwise.
+	.macro restoremonmoveset species:req
+	.byte 0xc8
+	.2byte \species
+	.endm
+
+
 	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
 	@ VAR_0x8004 is also set to this Pokemon's species.
@@ -1313,9 +1329,9 @@
 	.byte 0xf7
 	.endm
 
-	@ Gives the player a specific Poochyena Egg for the escape room map.
+	@ Gives the player a specific Snubbull Egg for the escape room map.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givepoochegg
+	.macro givesnubbullegg
 	.byte 0xf8
 	.endm
 

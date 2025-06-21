@@ -1906,8 +1906,8 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Rare Candy"),
         .pluralName = _("Rare Candies"),
-        // .price = (I_PRICE >= GEN_7) ? 10000 : 4800,
-        .price = 4000,
+        // .price = (I_PRICE >= GEN_7) ? 10000 : 4800
+        .price = 0,
         .description = COMPOUND_STRING(
             "Raises the level\n"
             "of a Pokémon by\n"
@@ -8273,7 +8273,8 @@ const struct Item gItemsInfo[] =
     [ITEM_MENTAL_HERB] =
     {
         .name = _("Mental Herb"),
-        .price = (I_PRICE >= GEN_9) ? 10000 : ((I_PRICE >= GEN_7) ? 4000 : 100),
+        // .price = (I_PRICE >= GEN_9) ? 10000 : ((I_PRICE >= GEN_7) ? 4000 : 100),
+        .price = 2000,
         .holdEffect = HOLD_EFFECT_MENTAL_HERB,
         .description = COMPOUND_STRING(
         #if B_MENTAL_HERB >= GEN_5

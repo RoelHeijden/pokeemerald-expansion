@@ -61,7 +61,7 @@
 #define FLAG_FERRO_TRADE_ACCEPTED           0x30
 #define FLAG_FLORGES_TRADE_ACCEPTED         0x31 
 #define FLAG_DUNSPARCE_TRADE_ACCEPTED       0x32
-#define FLAG_POOCH_TRADE_ACCEPTED           0x33 
+#define FLAG_SNUBB_TRADE_ACCEPTED           0x33 
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_GOGGLES_SNATCHED               0x35 
 #define FLAG_RECOVERED_WHITE_HERB           0x36 
@@ -73,7 +73,7 @@
 #define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
 #define FLAG_ANNIHILAPE_HINT_RECEIVED       0x3E  
-#define FLAG_STARDUST_OBTAINED              0x3F  
+#define FLAG_RARE_CANDY_OBTAINED            0x3F  
 #define FLAG_STARDUST_STOLEN                0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
 #define FLAG_ME_FIRST_CHOICE_LOCK           0x42  
@@ -85,7 +85,7 @@
 #define FLAG_TRAINER5_DEFEATED               0x47  
 #define FLAG_TRAINER6_DEFEATED               0x48
 #define FLAG_TRAINER7_DEFEATED               0x49
-#define FLAG_UNUSED_0x04A    0x4A // Unused Flag
+#define FLAG_WHITE_HERB_OBTAINED             0x4A  
 #define FLAG_UNUSED_0x04B    0x4B // Unused Flag
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
@@ -653,47 +653,45 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-// move deleter flags
-#define FLAG_TRUMP_CARD_DELETED     0x264
-#define FLAG_HEX_DELETED            0x265
-#define FLAG_COUNTER_DELETED        0x266
-#define FLAG_AIR_SLASH_DELETED      0x267
-#define FLAG_ASSIST_DELETED         0x268
-#define FLAG_ROCK_SMASH_DELETED     0x269
-#define FLAG_ECHOED_VOICE_DELETED   0x26A
-#define FLAG_TRICK_DELETED          0x26B
-#define FLAG_ICE_FANG_DELETED       0x26C
-#define FLAG_SLEEP_TALK_DELETED     0x26D
-#define FLAG_ENDEAVOR_DELETED       0x26E
-#define FLAG_SURF_DELETED           0x26F
-#define FLAG_SWITCHEROO_DELETED     0x270
-#define FLAG_UPROAR_DELETED         0x271
-#define FLAG_CONVERSION_2_DELETED   0x272
-#define FLAG_TAUNT_DELETED          0x273
+#define FLAG_SNUBBULL_MOVE_DELETED      0x264 
+#define FLAG_LIEPARD_MOVE_DELETED       0x265 
+#define FLAG_DUNSPARCE_MOVE_DELETED     0x266 
+#define FLAG_SMEARGLE_MOVE_DELETED      0x267 
+#define FLAG_UNUSED_0x268  0x268 // Unused Flag
+#define FLAG_UNUSED_0x269  0x269 // Unused Flag
+#define FLAG_UNUSED_0x26A  0x26A // Unused Flag
+#define FLAG_UNUSED_0x26B  0x26B // Unused Flag
+#define FLAG_UNUSED_0x26C  0x26C // Unused Flag
+#define FLAG_UNUSED_0x26D  0x26D // Unused Flag
+#define FLAG_UNUSED_0x26E  0x26E // Unused Flag
+#define FLAG_UNUSED_0x26F  0x26F // Unused Flag
+#define FLAG_UNUSED_0x270  0x270 // Unused Flag
+#define FLAG_UNUSED_0x271  0x271 // Unused Flag
+#define FLAG_UNUSED_0x272  0x272 // Unused Flag
+#define FLAG_UNUSED_0x273  0x273 // Unused Flag
 #define FLAG_UNUSED_0x274  0x274 // Unused Flag
 #define FLAG_UNUSED_0x275  0x275 // Unused Flag
-#define FLAG_POOCH_MOVE_DELETED     0x276 
-#define FLAG_LIEPARD_MOVE_DELETED   0x277 
-#define FLAG_DUNSPARCE_MOVE_DELETED  0x278
-#define FLAG_SMEARGLE_MOVE_DELETED  0x279
-#define FLAG_TRUMP_CARD_DELETED_0_PP      0x27A
-#define FLAG_HEX_DELETED_0_PP             0x27B
-#define FLAG_COUNTER_DELETED_0_PP         0x27C
-#define FLAG_AIR_SLASH_DELETED_0_PP       0x27D
-#define FLAG_ASSIST_DELETED_0_PP          0x27E
-#define FLAG_ROCK_SMASH_DELETED_0_PP      0x27F
-#define FLAG_ECHOED_VOICE_DELETED_0_PP    0x280
-#define FLAG_TRICK_DELETED_0_PP           0x281
-#define FLAG_ICE_FANG_DELETED_0_PP        0x282
-#define FLAG_SLEEP_TALK_DELETED_0_PP      0x283
-#define FLAG_ENDEAVOR_DELETED_0_PP        0x284
-#define FLAG_TAUNT_DELETED_0_PP           0x285
-#define FLAG_SURF_DELETED_0_PP            0x286
-#define FLAG_SWITCHEROO_DELETED_0_PP      0x287
-#define FLAG_UPROAR_DELETED_0_PP          0x288
-#define FLAG_CONVERSION_2_DELETED_0_PP    0x289
-#define FLAG_MON_HAS_0_PP_WHEN_RESTORING  0x28A
-
+#define FLAG_UNUSED_0x276  0x276 // Unused Flag
+#define FLAG_UNUSED_0x277  0x277 // Unused Flag
+#define FLAG_UNUSED_0x278  0x278 // Unused Flag
+#define FLAG_UNUSED_0x279  0x279 // Unused Flag
+#define FLAG_UNUSED_0x27A  0x27A // Unused Flag
+#define FLAG_UNUSED_0x27B  0x27B // Unused Flag
+#define FLAG_UNUSED_0x27C  0x27C // Unused Flag
+#define FLAG_UNUSED_0x27D  0x27D // Unused Flag
+#define FLAG_UNUSED_0x27E  0x27E // Unused Flag
+#define FLAG_UNUSED_0x27F  0x27F // Unused Flag
+#define FLAG_UNUSED_0x280  0x280 // Unused Flag
+#define FLAG_UNUSED_0x281  0x281 // Unused Flag
+#define FLAG_UNUSED_0x282  0x282 // Unused Flag
+#define FLAG_UNUSED_0x283  0x283 // Unused Flag
+#define FLAG_UNUSED_0x284  0x284 // Unused Flag
+#define FLAG_UNUSED_0x285  0x285 // Unused Flag
+#define FLAG_UNUSED_0x286  0x286 // Unused Flag
+#define FLAG_UNUSED_0x287  0x287 // Unused Flag
+#define FLAG_UNUSED_0x288  0x288 // Unused Flag
+#define FLAG_UNUSED_0x289  0x289 // Unused Flag
+#define FLAG_UNUSED_0x28A  0x28A // Unused Flag
 #define FLAG_PLAYER_JUST_LOST             0x28B
 #define FLAG_JUST_HAD_ZERA_BATTLE         0x28C  
 #define FLAG_HEX_DELETED_FOR_DIG          0x28D
@@ -1228,10 +1226,10 @@
 #define FLAG_END_ESCAPE_ROOM                                        0x497
 #define FLAG_RECOVERED_MENTAL_HERB                                  0x498 
 #define FLAG_RECOVERED_GOGGLES                                      0x499 
-#define FLAG_RECOVERED_FLUNG_ITEM                                   0x49A // Unused Flag
-#define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag
-#define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
-#define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag
+#define FLAG_RECOVERED_FLUNG_ITEM                                   0x49A 
+#define FLAG_REMOVE_LIEPARD_MENTAL_HERB                             0x49B
+#define FLAG_MENTAL_HERB_USED_FOR_SACK                                           0x49C // Unused Flag
+#define FLAG_LIEPARD_SACKED                                           0x49D // Unused Flag
 #define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag

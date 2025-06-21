@@ -54,7 +54,7 @@
       "flag": "FLAG_HIDE_NURSE1_NPC"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_HEX_MANIAC",
       "x": 43,
       "y": 22,
       "elevation": 0,
@@ -67,7 +67,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_HEX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
       "x": 62,
       "y": 10,
       "elevation": 0,
@@ -258,7 +258,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_TradePoochForSmeargle",
+      "script": "EscapeRoom_EventScript_TradeSnubbullForSmeargle",
       "flag": "0"
     },
     {
@@ -301,7 +301,7 @@
       "flag": "FLAG_LOST_GLASSES_OBTAINED"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MANIAC",
+      "graphics_id": "OBJ_EVENT_GFX_POKEFAN_M",
       "x": 58,
       "y": 18,
       "elevation": 0,
@@ -316,7 +316,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
       "x": 4,
-      "y": 12,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 1,
@@ -336,8 +336,8 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_FindStardust",
-      "flag": "FLAG_STARDUST_OBTAINED"
+      "script": "EscapeRoom_EventScript_FindNugget",
+      "flag": "FLAG_NUGGET_OBTAINED"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
@@ -405,7 +405,7 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_F",
       "x": 64,
       "y": 20,
       "elevation": 0,
@@ -429,6 +429,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
       "flag": "FLAG_ESCAPEROOM_SMACH_ROCK2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MAN_4",
+      "x": 15,
+      "y": 12,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_DusknoirStoleMyMailNPC",
+      "flag": "0"
     }
   ],
   "warp_events": [

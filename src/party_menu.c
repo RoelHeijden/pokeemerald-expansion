@@ -2226,33 +2226,11 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD && (move == MOVE_TAUNT || move == MOVE_CUT))
         return WOULD_SOFTLOCK;
     // ADDED
-    // check if mon has a deleted move (that could be restored)
-    else if (species == SPECIES_POOCHYENA &&
-             (FlagGet(FLAG_ICE_FANG_DELETED) ||
-              FlagGet(FLAG_SLEEP_TALK_DELETED) ||
-              FlagGet(FLAG_ENDEAVOR_DELETED) ||
-              FlagGet(FLAG_TAUNT_DELETED)))
-        return FIX_MOVES_FIRST;
-
-    else if (species == SPECIES_LIEPARD &&
-             (FlagGet(FLAG_ASSIST_DELETED) ||
-              FlagGet(FLAG_ROCK_SMASH_DELETED) ||
-              FlagGet(FLAG_ECHOED_VOICE_DELETED) ||
-              FlagGet(FLAG_TRICK_DELETED)))
-        return FIX_MOVES_FIRST;
-
-    else if (species == SPECIES_DUNSPARCE &&
-             (FlagGet(FLAG_TRUMP_CARD_DELETED) ||
-              FlagGet(FLAG_HEX_DELETED) ||
-              FlagGet(FLAG_COUNTER_DELETED) ||
-              FlagGet(FLAG_AIR_SLASH_DELETED)))
-        return FIX_MOVES_FIRST;
-
-    else if (species == SPECIES_SMEARGLE &&
-             (FlagGet(FLAG_SURF_DELETED) ||
-              FlagGet(FLAG_SWITCHEROO_DELETED) ||
-              FlagGet(FLAG_UPROAR_DELETED) ||
-              FlagGet(FLAG_CONVERSION_2_DELETED)))
+    // check if mon has a deleted move (that could still be restored)
+    else if ((species == SPECIES_SNUBBULL && FlagGet(FLAG_SNUBBULL_MOVE_DELETED)) ||
+             (species == SPECIES_LIEPARD && FlagGet(FLAG_LIEPARD_MOVE_DELETED)) ||
+             (species == SPECIES_DUNSPARCE && FlagGet(FLAG_DUNSPARCE_MOVE_DELETED)) ||
+             (species == SPECIES_SMEARGLE && FlagGet(FLAG_SMEARGLE_MOVE_DELETED)))
         return FIX_MOVES_FIRST;
     else
         return CAN_LEARN_MOVE;
@@ -5491,12 +5469,12 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
     {
     case 0:
         // ADDED
-        // auto delete moves
+        // auto delete / auto replace moves
         struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
         u16 species = GetMonData(mon, MON_DATA_SPECIES);
         if (species == SPECIES_FLORGES || 
-            species == SPECIES_FERROTHORN || 
-            (species == SPECIES_DUNSPARCE && FlagGet(FLAG_HEX_DELETED_FOR_DIG) == FALSE)){
+            species == SPECIES_FERROTHORN){
+            // || (species == SPECIES_DUNSPARCE && FlagGet(FLAG_HEX_DELETED_FOR_DIG) == FALSE)){
 
             // set move
             u16 move = MOVE_NONE;
@@ -5504,10 +5482,10 @@ static void Task_HandleReplaceMoveYesNoInput(u8 taskId)
                 move = MOVE_GRASS_KNOT;
             if (species == SPECIES_FERROTHORN)
                 move = MOVE_BLOCK;
-            if (species == SPECIES_DUNSPARCE){
-                move = MOVE_HEX;
-                FlagSet(FLAG_HEX_DELETED_FOR_DIG);
-            }
+            // if (species == SPECIES_DUNSPARCE){
+            //     move = MOVE_HEX;
+            //     FlagSet(FLAG_HEX_DELETED_FOR_DIG);
+            // }
             
             // find moveslot
             for (u8 i = 0; i < MAX_MON_MOVES; i++)
@@ -7747,6 +7725,7 @@ static void BufferMonSelection(void)
 {
     gFieldCallback2 = CB2_FadeFromPartyMenu;
     gSpecialVar_0x8004 = GetCursorSelectionMonId();
+
     if (gSpecialVar_0x8004 >= PARTY_SIZE){
         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
 
@@ -7864,108 +7843,23 @@ void MoveDeleterForgetMove(void)
     u16 i;
 
     // ADDED
-    // set flags to track which moves were deleted
-    u16 deletedMove = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_MOVE1 + gSpecialVar_0x8005);
-    u16 movePp = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_PP1 + gSpecialVar_0x8005);
-
-    switch (deletedMove)
+    // set flags to track which mons had moves deleted
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    switch (species)
     {
-        case MOVE_TRUMP_CARD:
-            FlagSet(FLAG_TRUMP_CARD_DELETED);
-            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_TRUMP_CARD_DELETED_0_PP);
-            break;
-        case MOVE_HEX:
-            FlagSet(FLAG_HEX_DELETED);
-            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_HEX_DELETED_0_PP);
-            break;
-        case MOVE_COUNTER:
-            FlagSet(FLAG_COUNTER_DELETED);
-            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_COUNTER_DELETED_0_PP);
-            break;
-        case MOVE_AIR_SLASH:
-            FlagSet(FLAG_AIR_SLASH_DELETED);
-            FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_AIR_SLASH_DELETED_0_PP);
-            break;
-        case MOVE_ASSIST:
-            FlagSet(FLAG_ASSIST_DELETED);
-            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_ASSIST_DELETED_0_PP);
-            break;
-        case MOVE_ROCK_SMASH:
-            FlagSet(FLAG_ROCK_SMASH_DELETED);
-            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_ROCK_SMASH_DELETED_0_PP);
-            break;
-        case MOVE_ECHOED_VOICE:
-            FlagSet(FLAG_ECHOED_VOICE_DELETED);
-            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_ECHOED_VOICE_DELETED_0_PP);
-            break;
-        case MOVE_TRICK:
-            FlagSet(FLAG_TRICK_DELETED);
-            FlagSet(FLAG_LIEPARD_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_TRICK_DELETED_0_PP);
-            break;
-        case MOVE_ICE_FANG:
-            FlagSet(FLAG_ICE_FANG_DELETED);
-            FlagSet(FLAG_POOCH_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_ICE_FANG_DELETED_0_PP);
-            break;
-        case MOVE_SLEEP_TALK:
-            FlagSet(FLAG_SLEEP_TALK_DELETED);
-            FlagSet(FLAG_POOCH_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_SLEEP_TALK_DELETED_0_PP);
-            break;
-        case MOVE_ENDEAVOR:
-            FlagSet(FLAG_ENDEAVOR_DELETED);
-            FlagSet(FLAG_POOCH_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_ENDEAVOR_DELETED_0_PP);
-            break;
-        case MOVE_TAUNT:
-            FlagSet(FLAG_TAUNT_DELETED);
-            FlagSet(FLAG_POOCH_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_TAUNT_DELETED_0_PP);
-            break;
-        case MOVE_SURF:
-            FlagSet(FLAG_SURF_DELETED);
-            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_SURF_DELETED_0_PP);
-            break;
-        case MOVE_SWITCHEROO:
-            FlagSet(FLAG_SWITCHEROO_DELETED);
-            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_SWITCHEROO_DELETED_0_PP);
-            break;
-        case MOVE_UPROAR:
-            FlagSet(FLAG_UPROAR_DELETED);
-            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_UPROAR_DELETED_0_PP);
-            break;
-        case MOVE_CONVERSION_2:
-            FlagSet(FLAG_CONVERSION_2_DELETED);
-            FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
-            if (movePp == 0)
-                FlagSet(FLAG_CONVERSION_2_DELETED_0_PP);
-            break;
+    case SPECIES_LIEPARD:
+        FlagSet(FLAG_LIEPARD_MOVE_DELETED);
+        break;
+    case SPECIES_SNUBBULL:
+        FlagSet(FLAG_SNUBBULL_MOVE_DELETED);
+        break;
+    case SPECIES_DUNSPARCE:
+        FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);
+        break;
+    case SPECIES_SMEARGLE:
+        FlagSet(FLAG_SMEARGLE_MOVE_DELETED);
+        break;
     }
 
 

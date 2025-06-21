@@ -677,6 +677,19 @@ extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
 #define GET_SHINY_VALUE(otId, personality) (HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality))
 
+// ADDED
+#define MAX_SPECIES 6  // currently set to 6 pokemon. Should be more than enough
+struct MonMovesBackup
+{
+    u16 moves[MAX_MON_MOVES];
+    u8 pp[MAX_MON_MOVES];
+    bool8 valid;
+};
+extern struct MonMovesBackup sMonMovesetBackup[MAX_SPECIES]; // ADDED
+
+
+
+
 extern u8 gPlayerPartyCount;
 extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern struct Pokemon gPlayerPartyBackup[PARTY_SIZE]; // ADDED

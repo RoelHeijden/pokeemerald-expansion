@@ -970,10 +970,13 @@ static bool8 PrintAllOnCardBack(void)
             PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textNumLinkContests, sTrainerCardStatColors);
         else if(FlagGet(FLAG_TRAINER5_DEFEATED) == FALSE)
             PrintStatOnBackOfCard(5, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
-        else if(FlagGet(FLAG_TRAINER6_DEFEATED) == FALSE)
-            PrintStatOnBackOfCard(5, gText_HallOfFameDebut3, sData->textNumLinkContests, sTrainerCardStatColors);
+            
         else
-            PrintStatOnBackOfCard(5, gText_HallOfFameDebut4, sData->textNumLinkContests, sTrainerCardStatColors);
+            PrintStatOnBackOfCard(5, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
+        // else if(FlagGet(FLAG_TRAINER6_DEFEATED) == FALSE)
+        //     PrintStatOnBackOfCard(5, gText_HallOfFameDebut3, sData->textNumLinkContests, sTrainerCardStatColors);
+        // else
+        //     PrintStatOnBackOfCard(5, gText_HallOfFameDebut4, sData->textNumLinkContests, sTrainerCardStatColors);
 
         break;
     case 4:

@@ -2,7 +2,8 @@
 const LOCALID_SMASH_ROCK = 1
 const LOCALID_MAP_SWITCH3 = 2
 const LOCALID_CHOICE_SPECS = 3
-const LOCALID_NUGGET = 4
+const LOCALID_RARE_CANDY = 4
+const LOCALID_WHITE_HERB = 5
 
 
 mapscripts EscapeRoom_ShortcutRoute_MapScripts {
@@ -30,12 +31,19 @@ script EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs{
     releaseall
 }
 
-script EscapeRoom_ShortcutRoute_EventScript_FindNugget{
+script EscapeRoom_ShortcutRoute_EventScript_FindRareCandy{
     lockall
-    finditem(ITEM_NUGGET)
-    removeobject(LOCALID_NUGGET)
-    setflag(FLAG_NUGGET_OBTAINED)
+    finditem(ITEM_RARE_CANDY)
+    removeobject(LOCALID_RARE_CANDY)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
 }
 
+script EscapeRoom_ShortcutRoute_EventScript_FindWhiteHerb{
+    lockall
+    finditem(ITEM_WHITE_HERB)
+    removeobject(LOCALID_WHITE_HERB)
+    setflag(FLAG_WHITE_HERB_OBTAINED)
+    releaseall
+}
 

@@ -1884,9 +1884,9 @@ bool8 ScrCmd_giveegg(struct ScriptContext *ctx)
 
 
 // ADDED
-bool8 SrcCmd_givepoochegg(struct ScriptContext *ctx)
+bool8 SrcCmd_givesnubbullegg(struct ScriptContext *ctx)
 {
-    gSpecialVar_Result = ScriptGivePoochEgg();
+    gSpecialVar_Result = ScriptGiveSnubbullEgg();
     return FALSE;
 }
 
@@ -2081,9 +2081,81 @@ bool8 ScrCmd_partybackupisdifferent(struct ScriptContext *ctx)
 
 
 
+// ADDED
+bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
+{
+    u16 partyslot = VarGet(ScriptReadHalfword(ctx));
+    gSpecialVar_Result = FALSE;
 
+    // get species
+    if (partyslot >= PARTY_SIZE)
+        return FALSE;
+    u16 species = GetMonData(&gPlayerParty[partyslot], MON_DATA_SPECIES);
 
+    // return if a backup already exists for the pokemon
+    if (sMonMovesetBackup[species].valid)
+        return FALSE; // Backup already exists
 
+    // make backup
+    for (int i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == species)
+        {
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+            {
+                sMonMovesetBackup[species].moves[j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j);
+                sMonMovesetBackup[species].pp[j] = GetMonData(&gPlayerParty[i], MON_DATA_PP1 + j);
+            }
+            sMonMovesetBackup[species].valid = TRUE;
+            break;
+        }
+    }
+
+    gSpecialVar_Result = TRUE;
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    gSpecialVar_Result = FALSE;
+
+    if (!sMonMovesetBackup[species].valid)
+        return FALSE;
+
+    for (int i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == species)
+        {
+            // check if current total PP is 0
+            u32 totalCurrentPP = 0;
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+                totalCurrentPP += GetMonData(&gPlayerParty[i], MON_DATA_PP1 + j);
+
+            // restore backup moveset
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+            {
+                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, &sMonMovesetBackup[species].moves[j]);
+                SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, &sMonMovesetBackup[species].pp[j]);
+
+                // set 0 pp if total pp == 0
+                if (totalCurrentPP == 0)
+                {
+                    u8 zero = 0;
+                    SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, &zero);
+                }
+            }
+            break;
+        }
+    }
+
+    // clear backup
+    sMonMovesetBackup[species].valid = FALSE;
+
+    gSpecialVar_Result = TRUE;
+    return FALSE;
+}
 
 
 
