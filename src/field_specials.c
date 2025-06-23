@@ -1438,6 +1438,23 @@ u8 TryUpdateRusturfTunnelState(void)
     return FALSE;
 }
 
+// ADDED
+u8 TryTriggerRockSmashNPC(void)
+{
+    if (!FlagGet(FLAG_ROCK_SMASH_GUY_MOVED)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ESCAPE_ROOM_MAIN))
+    {
+        // sets var to 1 if rock smash #2 is broken
+        // triggers NPC script
+        if (FlagGet(FLAG_HIDE_SMASH_ROCK2))
+        {
+            VarSet(VAR_ROCK_SMASH_NPC_STATE, 1);
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
 void SetShoalItemFlag(u16 unused)
 {
     FlagSet(FLAG_SYS_SHOAL_ITEM);
