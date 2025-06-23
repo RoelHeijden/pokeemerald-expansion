@@ -377,6 +377,11 @@ const u32 gObjectEventPic_KyogreOld[] = INCBIN_U32("graphics/object_events/pics/
 const u32 gObjectEventPic_AnnihilapeOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/annihilape.4bpp");
 const u16 gObjectEventPal_Annihilape[] = INCBIN_U16("graphics/object_events/palettes/annihilape.gbapal");
 
+// ADDED
+const u32 gObjectEventPic_TrapinchOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/trapinch.4bpp");
+const u16 gObjectEventPal_Trapinch[] = INCBIN_U16("graphics/object_events/palettes/trapinch.gbapal");
+
+
 
 const u32 gObjectEventPic_VigorothMover[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/vigoroth_mover.4bpp");
 const u32 gObjectEventPic_SudowoodoTree[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/sudowoodo_tree.4bpp");
