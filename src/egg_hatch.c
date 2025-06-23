@@ -379,7 +379,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
         // set moves
         u16 move1 = MOVE_ENDEAVOR;
         u16 move2 = MOVE_FLING;
-        u16 move3 = MOVE_NONE;
+        u16 move3 = MOVE_MIMIC;
         u16 move4 = MOVE_NONE;
         SetMonData(temp, MON_DATA_MOVE1, &move1);
         SetMonData(temp, MON_DATA_MOVE2, &move2);

@@ -159,8 +159,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 30,
-      "y": 22,
+      "x": 7,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -172,10 +172,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
-      "x": 13,
-      "y": 15,
+      "x": 12,
+      "y": 16,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -250,10 +250,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
-      "x": 11,
-      "y": 17,
+      "x": 14,
+      "y": 20,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -262,11 +262,11 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
-      "x": 9,
-      "y": 21,
+      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+      "x": 24,
+      "y": 7,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
@@ -289,8 +289,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 40,
-      "y": 8,
+      "x": 39,
+      "y": 7,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -315,8 +315,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_LITTLE_GIRL",
-      "x": 4,
-      "y": 13,
+      "x": 6,
+      "y": 14,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_LEFT_AND_RIGHT",
       "movement_range_x": 1,
@@ -328,16 +328,16 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 5,
-      "y": 10,
+      "x": 26,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_FindNugget",
-      "flag": "FLAG_NUGGET_OBTAINED"
+      "script": "EscapeRoom_EventScript_FindRareCandy",
+      "flag": "FLAG_RARE_CANDY_OBTAINED"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
@@ -419,8 +419,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK",
-      "x": 11,
-      "y": 18,
+      "x": 27,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 1,
@@ -428,12 +428,12 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_RockSmash",
-      "flag": "FLAG_ESCAPEROOM_SMACH_ROCK2"
+      "flag": "FLAG_HIDE_SMASH_ROCK2"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_4",
-      "x": 15,
-      "y": 12,
+      "x": 19,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
       "movement_range_x": 1,
@@ -441,6 +441,45 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_DusknoirStoleMyMailNPC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_FindCustapBerry",
+      "flag": "FLAG_CUSTAP_BERRY_OBTAINED"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 27,
+      "y": 10,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_RockSmashNPC",
+      "flag": "FLAG_HIDE_ROCKSMASH_NPC"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
+      "x": 2,
+      "y": 13,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
       "flag": "0"
     }
   ],
@@ -495,19 +534,19 @@
     },
     {
       "type": "sign",
-      "x": 7,
-      "y": 23,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_EndSign"
-    },
-    {
-      "type": "sign",
       "x": 16,
       "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_MoveDeleterSign"
+    },
+    {
+      "type": "sign",
+      "x": 19,
+      "y": 11,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_MainInfoSign"
     }
   ]
 }

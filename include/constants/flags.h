@@ -46,9 +46,9 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_NUGGET_OBTAINED                0x24
+#define FLAG_CUSTAP_BERRY_OBTAINED          0x24
 #define FLAG_ETHER_SOLD_OUT                 0x25
-#define FLAG_CHOICE_SPECS_OBTAINED          0x26 
+#define FLAG_FLOAT_STONE_OBTAINED           0x26
 #define FLAG_LOST_GLASSES_OBTAINED          0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
 #define FLAG_GRAVESTONE_CHECK1              0x29
@@ -76,7 +76,7 @@
 #define FLAG_RARE_CANDY_OBTAINED            0x3F  
 #define FLAG_STARDUST_STOLEN                0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
-#define FLAG_ME_FIRST_CHOICE_LOCK           0x42  
+#define FLAG_ME_FIRST_CHOICE_LOCK           0x42
 #define FLAG_TRAINER1_DEFEATED              0x43  
 #define FLAG_TRAINER2_DEFEATED              0x44  
 #define FLAG_TRAINER3_DEFEATED              0x45
@@ -86,7 +86,7 @@
 #define FLAG_TRAINER6_DEFEATED               0x48
 #define FLAG_TRAINER7_DEFEATED               0x49
 #define FLAG_WHITE_HERB_OBTAINED             0x4A  
-#define FLAG_UNUSED_0x04B    0x4B // Unused Flag
+#define FLAG_HIDE_ROCKSMASH_NPC              0x4B  
 #define FLAG_UNUSED_0x04C    0x4C // Unused Flag
 #define FLAG_UNUSED_0x04D    0x4D // Unused Flag
 #define FLAG_UNUSED_0x04E    0x4E // Unused Flag
@@ -1220,18 +1220,18 @@
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
 #define FLAG_ESCAPEROOM_TREE_CUT                                    0x493 
-#define FLAG_ESCAPEROOM_SMACH_ROCK1                                 0x494 // cave rock
-#define FLAG_ESCAPEROOM_SMACH_ROCK2                                 0x495 // fisherman rock
-#define FLAG_FISHERMAN_MOVED                                        0x496
+#define FLAG_HIDE_SMASH_ROCK1                                       0x494 // cave rock
+#define FLAG_HIDE_SMASH_ROCK2                                       0x495 // one-way rock
+#define FLAG_ROCK_SMASH_GUY_MOVED                                   0x496
 #define FLAG_END_ESCAPE_ROOM                                        0x497
 #define FLAG_RECOVERED_MENTAL_HERB                                  0x498 
 #define FLAG_RECOVERED_GOGGLES                                      0x499 
 #define FLAG_RECOVERED_FLUNG_ITEM                                   0x49A 
 #define FLAG_REMOVE_LIEPARD_MENTAL_HERB                             0x49B
-#define FLAG_MENTAL_HERB_USED_FOR_SACK                                           0x49C // Unused Flag
-#define FLAG_LIEPARD_SACKED                                           0x49D // Unused Flag
-#define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
-#define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
+#define FLAG_MENTAL_HERB_USED_FOR_SACK                              0x49C 
+#define FLAG_LIEPARD_SACKED                                         0x49D 
+#define FLAG_RAN_FROM_TRAPINCH                                      0x49E
+#define FLAG_HIDE_TRAPINCH                                          0x49F  
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
 #define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag
 #define FLAG_UNUSED_0x4A2                                           0x4A2 // Unused Flag

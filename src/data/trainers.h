@@ -42435,7 +42435,7 @@ F_TRAINER_FEMALE |
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16974
-                MOVE_DRAGON_ASCENT,
+                MOVE_EARTHQUAKE,
             },
             },
         },

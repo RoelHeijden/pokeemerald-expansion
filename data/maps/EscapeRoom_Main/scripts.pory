@@ -24,7 +24,7 @@ const LOCALID_CUT_TREE = 21
 const LOCALID_LOST_GLASSES = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
-const LOCALID_NUGGET = 25
+const LOCALID_RARE_CANDY = 25
 const LOCALID_SHOP1 = 26
 const LOCALID_SHOP2 = 27
 const LOCALID_MAP_SWITCH2 = 28
@@ -33,9 +33,9 @@ const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_DUSKNOIR_MAIL_NPC = 33
-const _DUMMY_4 = 34
-const _DUMMY_5 = 35
-const _DUMMY_6 = 36
+const LOCALID_CUSTAP_BERRY = 34
+const LOCALID_ROCK_SMASH_NPC = 35
+const LOCALID_MUSHROOM_NPC = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
 const _DUMMY_9 = 39
@@ -56,6 +56,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_REMOVE_HELD_ITEM, 1: EscapeRoom_MapScripts_RemoveHeldItem
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
+        VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed // make sure this one is at the bottom
     ] 
 }
 
@@ -71,12 +72,6 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     if(flag(FLAG_TRAINER3_DEFEATED)){
         setobjectxyperm(LOCALID_TRAINER3, 62, 10)
         setobjectmovementtype(LOCALID_TRAINER3, MOVEMENT_TYPE_FACE_LEFT)
-    }
-
-    // keep fisherman (smeargle trade) moved
-    if(flag(FLAG_FISHERMAN_MOVED) == TRUE){
-        setobjectxyperm(LOCALID_SMEARGLE_NPC, 13, 22)
-        setobjectmovementtype(LOCALID_SMEARGLE_NPC, MOVEMENT_TYPE_FACE_UP)
     }
 }
 
@@ -275,6 +270,11 @@ script EscapeRoom_MapScripts_AskResetPredamage{
     releaseall
 }
 
+script EscapeRoom_MapScripts_CheckIfRockSmashed{
+    call(EscapeRoom_MoveRockSmashNPC)
+    setvar(VAR_ROCK_SMASH_NPC_STATE, 0)
+}
+
 
 
 //// MAP START ////
@@ -430,9 +430,6 @@ script EscapeRoom_EventScript_EndSign{
     waitmessage
     releaseall
 }
-
-
-
 
 script EscapeRoom_EventScript_AnnihilapeStatue{
     lockall
@@ -656,19 +653,18 @@ script EscapeRoom_EventScript_Shop2NPC{
 }
 
 mart EscapeRoom_Shop1_items{
-    ITEM_ABILITY_CAPSULE
-    ITEM_CUSTAP_BERRY
-    ITEM_FLOAT_STONE
-    ITEM_RING_TARGET 
-    // ITEM_ESCAPE_ROPE   
-    ITEM_ETHER
-    ITEM_TM28
+    ITEM_CUSTAP_BERRY       // 2000
+    ITEM_FLOAT_STONE        // 2000
+    ITEM_RING_TARGET        // 2000 
+    ITEM_ESCAPE_ROPE        // 2000  
+    ITEM_ETHER              // 2000 // Rethink: SOLD OUT vs 2500 price
 }
 
 mart EscapeRoom_Shop2_items{
-    ITEM_MENTAL_HERB
-    ITEM_CUSTAP_BERRY
-    ITEM_TM27
+    ITEM_ABILITY_CAPSULE    // 3100
+    ITEM_MENTAL_HERB        // 2000
+    ITEM_CUSTAP_BERRY       // 2000
+    ITEM_TM27               // 2000
 }
 
 
@@ -826,6 +822,68 @@ script EscapeRoom_UltraBallNPC{
 
     }
     releaseall
+}
+
+
+// ONE-WAY ROCK SMASH NPC
+
+script EscapeRoom_RockSmashNPC{
+    lock
+    msgbox(RockSmashNPCstuck, MSGBOX_NPC)
+    waitmessage
+    applymovement(LOCALID_ROCK_SMASH_NPC, face_npc_up)
+    waitmovement(LOCALID_ROCK_SMASH_NPC)
+    releaseall
+}
+
+script EscapeRoom_MoveRockSmashNPC{
+    // script triggers if rock is smashed
+
+    // exclamation mark
+    playse(SE_PIN)
+    applymovement(LOCALID_ROCK_SMASH_NPC, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_ROCK_SMASH_NPC)
+
+    // move player away
+    applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerMoveAwayFromRock)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    
+    // move NPC up
+    applymovement(LOCALID_ROCK_SMASH_NPC, RockSmashNPCMovesUp)
+    waitmovement(LOCALID_ROCK_SMASH_NPC)
+
+    // dialogue
+    msgbox(RockSmashNPCFarewellMsg, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // move NPC away
+    applymovement(LOCALID_ROCK_SMASH_NPC, RockSmashNPCMovesAway)
+    waitmovement(LOCALID_ROCK_SMASH_NPC)
+    
+    // remove object
+    playse(SE_EXIT)
+    delay(5)
+    removeobject(LOCALID_ROCK_SMASH_NPC)
+    setflag(FLAG_HIDE_ROCKSMASH_NPC)
+    waitse
+
+    setflag(FLAG_ROCK_SMASH_GUY_MOVED)
+}
+
+movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
+    walk_fast_left * 2
+    face_right
+}
+
+movement RockSmashNPCMovesUp {
+    walk_up
+    face_left
+}
+
+movement RockSmashNPCMovesAway {
+    face_right
+    walk_right * 3
+    face_up
 }
 
 
@@ -1182,7 +1240,8 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
                 move1=MOVE_TRUMP_CARD,
                 move2=MOVE_AIR_SLASH,
                 move3=MOVE_HEX,
-                move4=MOVE_COUNTER,
+                // move4=MOVE_COUNTER,
+                move4=MOVE_NONE,
                 // EVs:
                 hpEv=0, 
                 defEv=252,
@@ -1307,38 +1366,8 @@ script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
 
     // post trade 
     if(flag(FLAG_SNUBB_TRADE_ACCEPTED) == TRUE){
-
-        // rock smash rock is still there
-        if(flag(FLAG_ESCAPEROOM_SMACH_ROCK2) == FALSE){
-            msgbox(SnubbTradePostTrade, MSGBOX_NPC)
-            waitmessage
-        }
-    //     // rock smash rock is gone
-    //     else{
-    //         if(flag(FLAG_FISHERMAN_MOVED) == FALSE){
-    //             msgbox(ICanGoFishingMessage, MSGBOX_NPC)
-    //             waitmessage
-    //             setflag(FLAG_FISHERMAN_MOVED)
-
-    //             // move player if fisherman is approached from the south
-    //             if(var(VAR_FACING) == DIR_NORTH){
-    //                 applymovement(OBJ_EVENT_ID_PLAYER, PlayerMovesAwayForFisherman)
-    //                 waitmovement(OBJ_EVENT_ID_PLAYER)
-    //             }
-
-    //             // movement script
-    //             applymovement(LOCALID_SMEARGLE_NPC, FishermanMovesDown)
-    //             waitmovement(LOCALID_SMEARGLE_NPC)
-    //             copyobjectxytoperm(LOCALID_SMEARGLE_NPC)
-
-    //         }
-    //         else{
-    //             msgbox(HappyDaysMessage, MSGBOX_NPC)
-    //             waitmessage
-    //             applymovement(LOCALID_SMEARGLE_NPC, FishermanLooksUp)
-    //             waitmovement(LOCALID_SMEARGLE_NPC)
-    //         }
-    //     }
+        msgbox(SnubbTradePostTrade, MSGBOX_NPC)
+        waitmessage
     }
     else{
         // ask trade
@@ -1355,21 +1384,6 @@ script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
                 end
             }
 
-            // // first heal if liepard is fainted (would allow double skip)
-            // partymonhasfainted
-            // lockall
-            // if(var(VAR_RESULT) != PARTY_SIZE){
-            //     if(var(VAR_0x8004) == SPECIES_LIEPARD){
-            //         msgbox(HealBeforeTradeMessage, MSGBOX_DEFAULT)
-            //         waitmessage
-            //         special(HealPlayerParty)
-            //         playse(SE_USE_ITEM)
-            //         waitse
-            //         msgbox(HealedBeforeTradeMessage, MSGBOX_AUTOCLOSE)
-            //         waitmessage
-            //     }
-            // }
-
             // trade pokemon
             removemon(SPECIES_SNUBBULL)
             lockall
@@ -1380,8 +1394,9 @@ script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
                 nature=18, // Bashful
                 gender=0, 
                 move1=MOVE_SURF,
-                move2=MOVE_REST,
-                move3=MOVE_SHED_TAIL,
+                move2=MOVE_NONE,
+                move3=MOVE_NONE,
+                move4=MOVE_NONE,
                 // EVs:
                 hpEv=0, 
                 spAtkEv=0,
@@ -1410,35 +1425,26 @@ script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
         }
     }
     releaseall
-}
 
-movement PlayerMovesAwayForFisherman {
-    face_down
-    walk_faster_down * 2
-    face_left
-    walk_faster_left
-    face_right
-}
 
-movement FishermanMovesDown {
-    walk_faster_down * 5
-    face_right
-    walk_faster_right * 2
-    face_up
-}
-
-movement FishermanLooksUp {
-    face_up
 }
 
 
 //// ITEMS ////
 
-script EscapeRoom_EventScript_FindNugget{
+script EscapeRoom_EventScript_FindRareCandy{
     lockall
-    finditem(ITEM_NUGGET)
-    removeobject(LOCALID_NUGGET)
-    setflag(FLAG_NUGGET_OBTAINED)
+    finditem(ITEM_RARE_CANDY)
+    removeobject(LOCALID_RARE_CANDY)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindCustapBerry{
+    lockall
+    finditem(ITEM_CUSTAP_BERRY)
+    removeobject(LOCALID_CUSTAP_BERRY)
+    setflag(FLAG_CUSTAP_BERRY_OBTAINED)
     releaseall
 }
 
@@ -2070,7 +2076,6 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
 }
 
 
-
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 
@@ -2110,7 +2115,7 @@ text MysteriousWallSign{
 }
 
 text MysteriousWallBackroomSign{
-    "Choice paralysis?"
+    "bliep bloop (TBD)"
 }
 
 text MoveDeleterSignMessage{
@@ -2425,7 +2430,9 @@ text FourTabletsHintMessage4{
 // Dusknoir mail hint NPC
 
 text DusknoirStoleMyMailMsg{
-    "A Dusknoir stole my mail!"
+    "A Dusknoir stole my mail!\p"
+    "To be honest I don't really mind.\n"
+    "It's just a bit strange." 
 }
 
 
@@ -2450,6 +2457,14 @@ text LostGlassesNPCendMessage{
     "See you around!"
 }
 
+// ONE-WAY ROCK SMASH NPC
+text RockSmashNPCstuck{
+    "I'm stuck!"
+}
+
+text RockSmashNPCFarewellMsg{
+    "What took you so long?"
+}
 
 // SHOP NPCS
 text MartNPC_AskToShop{
@@ -2501,7 +2516,6 @@ text SmeargleMovesRestoredMessage{
 text NoMovesRestoredMessage{
     "There were no moves to restore."
 }
-
 
 
 // ITEM RETURNS
@@ -2608,11 +2622,7 @@ text DunsparceTradePostTrade{
 
 // TRADE NPC 5 - Snubbull Smeargle
 text AskSnubbullSmeargleTrade{
-    "I want to go fishing.\p"
-    "...\p"
-    "...\p"
-    "...\p"
-    "Wanna trade dogs instead?"
+    "TBD (start trade)"
 }
 
 text SmeargleReceivedMessage{
@@ -2620,7 +2630,7 @@ text SmeargleReceivedMessage{
 }
 
 text SnubbTradeAccepted{
-    "Bye-bye Snubbull."
+    "Bye-bye Aipom."
 }
 
 text SnubbTradeDeclined{
@@ -2628,26 +2638,8 @@ text SnubbTradeDeclined{
 }
 
 text SnubbTradePostTrade{
-    "I'd still like to go fishing..."
+    "TBD (post trade)"
 }
-
-text HealBeforeTradeMessage{
-    "First let me heal your Pokémon."
-}
-
-text HealedBeforeTradeMessage{
-    "Alright, let's trade!"
-}
-
-text ICanGoFishingMessage{
-    "I CAN GO FISHING!"
-}
-
-text HappyDaysMessage{
-    "Happy days."
-}
-
-
 
 
 // BATTLES - OTHER

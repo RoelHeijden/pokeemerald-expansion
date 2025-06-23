@@ -1,13 +1,12 @@
 
 const LOCALID_SMASH_ROCK = 1
 const LOCALID_MAP_SWITCH3 = 2
-const LOCALID_CHOICE_SPECS = 3
-const LOCALID_RARE_CANDY = 4
-const LOCALID_WHITE_HERB = 5
+const LOCALID_WHITE_HERB = 3
 
 
 mapscripts EscapeRoom_ShortcutRoute_MapScripts {
     MAP_SCRIPT_ON_LOAD: SetWallOnLoad
+    MAP_SCRIPT_ON_TRANSITION: ResetSmashRock1
 }
 
 
@@ -22,22 +21,18 @@ script SetWallOnLoad{
     }
 }
 
-
-script EscapeRoom_ShortcutRoute_EventScript_FindChoiceSpecs{
-    lockall
-    finditem(ITEM_CHOICE_SCARF)
-    removeobject(LOCALID_CHOICE_SPECS)
-    setflag(FLAG_CHOICE_SPECS_OBTAINED)
-    releaseall
+script ResetSmashRock1{
+    // reset rock smash rock1 untill rock2 is cleared (prevent potential softlock)
+    if(!(flag(FLAG_HIDE_SMASH_ROCK1) && flag(FLAG_HIDE_SMASH_ROCK2))){
+        if(flag(FLAG_HIDE_SMASH_ROCK2) == FALSE){
+            clearflag(FLAG_HIDE_SMASH_ROCK1)
+        }
+        else{
+            setflag(FLAG_HIDE_SMASH_ROCK1)
+        }
+    }
 }
 
-script EscapeRoom_ShortcutRoute_EventScript_FindRareCandy{
-    lockall
-    finditem(ITEM_RARE_CANDY)
-    removeobject(LOCALID_RARE_CANDY)
-    setflag(FLAG_RARE_CANDY_OBTAINED)
-    releaseall
-}
 
 script EscapeRoom_ShortcutRoute_EventScript_FindWhiteHerb{
     lockall
@@ -46,4 +41,3 @@ script EscapeRoom_ShortcutRoute_EventScript_FindWhiteHerb{
     setflag(FLAG_WHITE_HERB_OBTAINED)
     releaseall
 }
-

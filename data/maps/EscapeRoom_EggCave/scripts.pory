@@ -1,0 +1,103 @@
+const LOCALID_EDD_TRADE_NPC = 1
+const LOCALID_TABLET1 = 2
+const LOCALID_TABLETS_COOK_NPC = 3
+const LOCALID_FLOAT_STONE = 4
+const LOCALID_TRAPINCH = 5
+
+
+mapscripts EscapeRoom_EggCave_MapScripts {
+
+}
+
+
+script EscapeRoom_EggCave_EventScript_FindFloatStone{
+    lockall
+    finditem(ITEM_FLOAT_STONE)
+    removeobject(LOCALID_FLOAT_STONE)
+    setflag(FLAG_FLOAT_STONE_OBTAINED)
+    releaseall
+}
+
+
+script EscapeRoom_EventScript_TrapinchBlocksPlayer{
+    // triggered by trigger tile
+    lockall
+
+    // if Trapinch not yet ran from
+    if(flag(FLAG_RAN_FROM_TRAPINCH) == FALSE){
+        
+        // move Trapinch
+        applymovement(LOCALID_TRAPINCH, TrapinchMoveIn)
+
+        // face trapinch
+        applymovement(OBJ_EVENT_ID_PLAYER, PlayerFaceLeft)
+
+        // play sound
+        playmoncry(SPECIES_TRAPINCH, CRY_MODE_ENCOUNTER)
+        waitmovement(LOCALID_TRAPINCH)
+        delay(40)
+	    waitmoncry
+
+        // do battle
+        call(EscapeRoom_EventScript_TrapinchBattle)
+
+        ////// if battle won (ran away) ////// 
+
+        // remove Trapinch 
+        fadescreen(FADE_TO_BLACK)
+        setflag(FLAG_HIDE_TRAPINCH)
+        removeobject(LOCALID_TRAPINCH)
+        fadescreen(FADE_FROM_BLACK)
+
+        // set flags and prevent future trigger
+        setvar(VAR_EGGCAVE_MAPSCRIPT_TRAPINCH_TRIGGER, 1)
+        setflag(FLAG_RAN_FROM_TRAPINCH)
+    }
+    releaseall
+}
+
+movement PlayerFaceLeft{
+    face_left
+}
+
+movement TrapinchMoveIn{
+    walk_faster_right * 2
+}
+
+script EscapeRoom_EventScript_TrapinchBattle{
+    lockall
+
+    // backup party state
+    backupplayerparty
+
+    // allow items (wild battle)
+    if(flag(FLAG_TOGGLE_BAG_USE) == TRUE){
+        clearflag(FLAG_TOGGLE_BAG_USE)
+    }
+
+    // set annihilape battle
+    createmon(
+        side=1,
+        slot=0,
+        species=SPECIES_TRAPINCH,
+        level=80,
+        nature=3, // adamant
+        abilityNum=1, // arena trap
+        gender=1,
+        move1=MOVE_EARTHQUAKE
+        // evs
+        hpEv=4,
+        defEv=0,
+        atkEv=252, 
+        spDefEv=252,
+        // ivs
+        hpIv=31,
+        atkIv=31,
+        defIv=31,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31
+    )
+    dowildbattle
+    releaseall
+}

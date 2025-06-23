@@ -1086,7 +1086,8 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Berry Juice"),
         .pluralName = _("Berry Juice"),
-        .price = 100,
+        // .price = 100,
+        .price = 0, // CHANGED
         .holdEffect = HOLD_EFFECT_RESTORE_HP,
         .holdEffectParam = 20,
         .description = COMPOUND_STRING(
@@ -1513,7 +1514,7 @@ const struct Item gItemsInfo[] =
     [ITEM_ABILITY_CAPSULE] =
     {
         .name = HANDLE_EXPANDED_ITEM_NAME("AbilityCapsle", "Ability Capsule"),
-        .price = 2000,
+        .price = 3100,
         .holdEffectParam = 0,
         .description = COMPOUND_STRING(
             "Switches a Poké-\n"
@@ -2595,7 +2596,8 @@ const struct Item gItemsInfo[] =
     [ITEM_BIG_MUSHROOM] =
     {
         .name = _("Big Mushroom"),
-        .price = 5000 * TREASURE_FACTOR,
+        // .price = 5000 * TREASURE_FACTOR,
+        .price = 0, //CHANGED
         .description = sBigMushroomDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
