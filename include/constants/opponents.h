@@ -863,7 +863,7 @@
 #define TRAINER_CUSTOM_TRAINER3             857
 #define TRAINER_CUSTOM_TRAINER4             858
 #define TRAINER_CUSTOM_TRAINER5             859
-#define TRAINER_CUSTOM_TRAINER6             860
+#define TRAINER_CUSTOM_TRAINER9             860
 #define TRAINER_CUSTOM_TRAINER7             861
 
 

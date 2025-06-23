@@ -28,13 +28,14 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
         
         // move Trapinch
         applymovement(LOCALID_TRAPINCH, TrapinchMoveIn)
+        waitmovement(LOCALID_TRAPINCH)
 
         // face trapinch
-        applymovement(OBJ_EVENT_ID_PLAYER, PlayerFaceLeft)
+        applymovement(OBJ_EVENT_ID_PLAYER, PlayerFaceUp)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
 
         // play sound
         playmoncry(SPECIES_TRAPINCH, CRY_MODE_ENCOUNTER)
-        waitmovement(LOCALID_TRAPINCH)
         delay(40)
 	    waitmoncry
 
@@ -56,12 +57,13 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
     releaseall
 }
 
-movement PlayerFaceLeft{
-    face_left
+movement PlayerFaceUp{
+    face_up
 }
 
 movement TrapinchMoveIn{
-    walk_faster_right * 2
+    face_down
+    walk_faster_down * 2
 }
 
 script EscapeRoom_EventScript_TrapinchBattle{

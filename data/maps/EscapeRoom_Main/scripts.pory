@@ -8,8 +8,8 @@ const LOCALID_TRAINER3 = 5
 const LOCALID_DUNSPARCE_GUY = 6
 const LOCALID_MOVE_DELETER = 7
 const LOCALID_ULTRA_BALL_NPC = 8
-const LOCALID_TRAINER6_R = 9
-const LOCALID_TRAINER6_L = 10
+const LOCALID_TRAINER9_R = 9
+const LOCALID_TRAINER9_L = 10
 const LOCALID_MARANGA_BERRY = 11
 const LOCALID_MAP_SWITCH4 = 12
 const LOCALID_TRAINER5 = 13
@@ -56,7 +56,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_REMOVE_HELD_ITEM, 1: EscapeRoom_MapScripts_RemoveHeldItem
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
-        VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed // make sure this one is at the bottom
+        VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
     ] 
 }
 
@@ -494,7 +494,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 }
 
 script EscapeRoom_EventScript_LostGlassesNPC{
-    lockall
+    lock
     faceplayer
     msgbox(LostGlassesNPCmainMessage, MSGBOX_AUTOCLOSE)
 
@@ -502,10 +502,11 @@ script EscapeRoom_EventScript_LostGlassesNPC{
     checkitem(ITEM_WISE_GLASSES)
     if(var(VAR_RESULT) == TRUE){
 
-        // sanity check - check for Snubbull in party
-        checkpartymon(SPECIES_SNUBBULL)
+        // sanity check - check for Aipom in party
+        checkpartymon(SPECIES_AIPOM)
         if(var(VAR_RESULT) == PARTY_SIZE)
         {
+            lock
             msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
             waitmessage
             releaseall
@@ -752,13 +753,13 @@ script EscapeRoom_RestoreMoveset{
         waitmessage
     }
 
-    // Snubbull
-    restoremonmoveset(SPECIES_SNUBBULL)
+    // Aipom
+    restoremonmoveset(SPECIES_AIPOM)
     if(var(VAR_RESULT) == TRUE){
         call(EscapeRoom_MoveRestoredSound)
         clearflag(FLAG_TEMP_5)
-        clearflag(FLAG_SNUBBULL_MOVE_DELETED)
-        msgbox(SnubbullMovesRestoredMessage, MSGBOX_DEFAULT)
+        clearflag(FLAG_AIPOM_MOVE_DELETED)
+        msgbox(AipomMovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
     }
 
@@ -945,7 +946,7 @@ script EscapeRoom_ZeraoraHintNPC{
 
 script EscapeRoom_TabletsHintNPC{
     lock
-    if(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
+    if(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
         msgbox(FourTabletsHintMessage1, MSGBOX_NPC)
     }
     elif(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
@@ -1040,15 +1041,15 @@ script EscapeRoom_EventScript_Trainer5{
     end
 }
 
-script EscapeRoom_EventScript_Trainer6{
+script EscapeRoom_EventScript_Trainer9{
     trainerbattle_double(
-        TRAINER_CUSTOM_TRAINER6, 
-        Trainer6_Intro, 
-        Trainer6_Outro, 
+        TRAINER_CUSTOM_TRAINER9, 
+        Trainer9_Intro, 
+        Trainer9_Outro, 
         DoubleBattle_NotEnoughMons,
-        event_script=EscapeRoom_EventScript_Trainer6PostBattle,
+        event_script=EscapeRoom_EventScript_Trainer9PostBattle,
     )
-    msgbox(Trainer6_PostBattle, MSGBOX_AUTOCLOSE)
+    msgbox(Trainer9_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
@@ -1138,7 +1139,7 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
 
     // prevent custap restore after winning
     clearflag(FLAG_RECOVERED_CUSTAP)
-    checkpartymon(SPECIES_SNUBBULL)
+    checkpartymon(SPECIES_AIPOM)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
@@ -1164,8 +1165,8 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
-script EscapeRoom_EventScript_Trainer6PostBattle{
-    setflag(FLAG_TRAINER6_DEFEATED)
+script EscapeRoom_EventScript_Trainer9PostBattle{
+    setflag(FLAG_TRAINER9_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
@@ -1300,7 +1301,7 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
 
             // trade pokemon
             removemon(SPECIES_FLORGES)
-            givesnubbullegg
+            giveaipomegg
             setflag(FLAG_FLORGES_TRADE_ACCEPTED)
 
             message(EggReceivedMessage)
@@ -1360,22 +1361,22 @@ script EscapeRoom_EventScript_SellDunsparce{
     releaseall
 }
 
-script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
+script EscapeRoom_EventScript_TradeAipomForSmeargle{
     lock
     faceplayer
 
     // post trade 
-    if(flag(FLAG_SNUBB_TRADE_ACCEPTED) == TRUE){
-        msgbox(SnubbTradePostTrade, MSGBOX_NPC)
+    if(flag(FLAG_AIPOM_TRADE_ACCEPTED) == TRUE){
+        msgbox(AipomTradePostTrade, MSGBOX_NPC)
         waitmessage
     }
     else{
         // ask trade
-        msgbox(AskSnubbullSmeargleTrade, MSGBOX_YESNO)
+        msgbox(AskAipomSmeargleTrade, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
 
             // check if pokemon in party
-            checkpartymon(SPECIES_SNUBBULL)
+            checkpartymon(SPECIES_AIPOM)
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -1385,7 +1386,7 @@ script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
             }
 
             // trade pokemon
-            removemon(SPECIES_SNUBBULL)
+            removemon(SPECIES_AIPOM)
             lockall
             givemon(
                 SPECIES_SMEARGLE,
@@ -1409,18 +1410,18 @@ script EscapeRoom_EventScript_TradeSnubbullForSmeargle{
                 spDefIv=31
             )
             lockall
-            setflag(FLAG_SNUBB_TRADE_ACCEPTED)
+            setflag(FLAG_AIPOM_TRADE_ACCEPTED)
 
             message(SmeargleReceivedMessage)
             playfanfare(MUS_OBTAIN_ITEM)
             lockall
             waitfanfare
-            msgbox(SnubbTradeAccepted, MSGBOX_AUTOCLOSE)
+            msgbox(AipomTradeAccepted, MSGBOX_AUTOCLOSE)
             waitmessage
         }
         // trade declined
         else{
-            msgbox(SnubbTradeDeclined, MSGBOX_AUTOCLOSE)
+            msgbox(AipomTradeDeclined, MSGBOX_AUTOCLOSE)
             waitmessage
         }
     }
@@ -2431,7 +2432,7 @@ text FourTabletsHintMessage4{
 
 text DusknoirStoleMyMailMsg{
     "A Dusknoir stole my mail!\p"
-    "To be honest I don't really mind.\n"
+    "To be honest, I don't really mind.\n"
     "It's just a bit strange." 
 }
 
@@ -2497,8 +2498,8 @@ text MoveDeleterOnlyOneMove{
     "That Pokémon has only one move left."
 }
 
-text SnubbullMovesRestoredMessage{
-    "Snubbull's moves were restored!"
+text AipomMovesRestoredMessage{
+    "Aipom's moves were restored!"
 }
 
 text LiepardMovesRestoredMessage{
@@ -2620,8 +2621,8 @@ text DunsparceTradePostTrade{
 }
 
 
-// TRADE NPC 5 - Snubbull Smeargle
-text AskSnubbullSmeargleTrade{
+// TRADE NPC 5 - Aipom Smeargle
+text AskAipomSmeargleTrade{
     "TBD (start trade)"
 }
 
@@ -2629,15 +2630,15 @@ text SmeargleReceivedMessage{
     "{PLAYER} received a Smeargle!"
 }
 
-text SnubbTradeAccepted{
+text AipomTradeAccepted{
     "Bye-bye Aipom."
 }
 
-text SnubbTradeDeclined{
+text AipomTradeDeclined{
     "Ahh, that's too bad!"
 }
 
-text SnubbTradePostTrade{
+text AipomTradePostTrade{
     "TBD (post trade)"
 }
 
@@ -2748,16 +2749,16 @@ text Trainer5_PostBattle{
 
 
 // TRAINER 6 - Archaludon Archaludon
-text Trainer6_Intro{
+text Trainer9_Intro{
     "Even twins have their differences.\n"
     "Eventually you'll understand!"
 }
 
-text Trainer6_Outro{
+text Trainer9_Outro{
     "You cheated."
 }
 
-text Trainer6_PostBattle{
+text Trainer9_PostBattle{
     "Fock off."
 }
 

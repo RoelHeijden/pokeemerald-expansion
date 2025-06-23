@@ -1884,9 +1884,9 @@ bool8 ScrCmd_giveegg(struct ScriptContext *ctx)
 
 
 // ADDED
-bool8 SrcCmd_givesnubbullegg(struct ScriptContext *ctx)
+bool8 SrcCmd_giveaipomegg(struct ScriptContext *ctx)
 {
-    gSpecialVar_Result = ScriptGiveSnubbullEgg();
+    gSpecialVar_Result = ScriptGiveAipomEgg();
     return FALSE;
 }
 

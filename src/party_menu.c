@@ -2227,7 +2227,7 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
         return WOULD_SOFTLOCK;
     // ADDED
     // check if mon has a deleted move (that could still be restored)
-    else if ((species == SPECIES_SNUBBULL && FlagGet(FLAG_SNUBBULL_MOVE_DELETED)) ||
+    else if ((species == SPECIES_AIPOM && FlagGet(FLAG_AIPOM_MOVE_DELETED)) ||
              (species == SPECIES_LIEPARD && FlagGet(FLAG_LIEPARD_MOVE_DELETED)) ||
              (species == SPECIES_DUNSPARCE && FlagGet(FLAG_DUNSPARCE_MOVE_DELETED)) ||
              (species == SPECIES_SMEARGLE && FlagGet(FLAG_SMEARGLE_MOVE_DELETED)))
@@ -7851,8 +7851,8 @@ void MoveDeleterForgetMove(void)
     case SPECIES_LIEPARD:
         FlagSet(FLAG_LIEPARD_MOVE_DELETED);
         break;
-    case SPECIES_SNUBBULL:
-        FlagSet(FLAG_SNUBBULL_MOVE_DELETED);
+    case SPECIES_AIPOM:
+        FlagSet(FLAG_AIPOM_MOVE_DELETED);
         break;
     case SPECIES_DUNSPARCE:
         FlagSet(FLAG_DUNSPARCE_MOVE_DELETED);

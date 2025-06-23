@@ -326,16 +326,16 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     personality = GetMonData(egg, MON_DATA_PERSONALITY);
 
     // ADDED
-    // custom poochyena, now Snubbull egg - nature and gender
-    if(species == SPECIES_SNUBBULL){
+    // custom Aipom egg - nature and gender
+    if(species == SPECIES_AIPOM){
         // set nature & gender
-        u8 nature = NATURE_ADAMANT;
+        u8 nature = NATURE_RELAXED;
         u8 gender = MON_FEMALE;
         do{
             personality = Random32();
         }
         while (nature != GetNatureFromPersonality(personality)
-            || gender != GetGenderFromSpeciesAndPersonality(SPECIES_SNUBBULL, personality));
+            || gender != GetGenderFromSpeciesAndPersonality(SPECIES_AIPOM, personality));
     }
 
     for (i = 0; i < NUM_STATS; i++)
@@ -369,11 +369,11 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     SetMonData(temp, MON_DATA_POKEBALL, &ball);
 
     // ADDED
-    // custom poochyena, now Snubbull egg
-    if(species == SPECIES_SNUBBULL){
+    // custom Aipom egg
+    if(species == SPECIES_AIPOM){
 
         // set ability
-        u8 abilityNum = 0; // Intimidate
+        u8 abilityNum = 1; // Pickup
         SetMonData(temp, MON_DATA_ABILITY_NUM, &abilityNum);
 
         // set moves
@@ -390,7 +390,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
         u8 hpIv = 31; 
         u8 atkIv = 31; 
         u8 defIv = 31; 
-        u8 speedIv = 31; 
+        u8 speedIv = 0; 
         u8 spAtkIv = 31; 
         u8 spDefIv = 31; 
         SetMonData(temp, MON_DATA_HP_IV, &hpIv);

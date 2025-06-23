@@ -42441,7 +42441,7 @@ F_TRAINER_FEMALE |
         },
     },
 #line 16977
-    [TRAINER_CUSTOM_TRAINER6] =
+    [TRAINER_CUSTOM_TRAINER9] =
     {
 #line 16978
         .trainerName = _("Ton & Tey"),

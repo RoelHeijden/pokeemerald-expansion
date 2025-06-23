@@ -75,12 +75,12 @@ u8 ScriptGiveEgg(u16 species)
 }
 
 // ADDED
-u8 ScriptGiveSnubbullEgg(void)
+u8 ScriptGiveAipomEgg(void)
 {
     struct Pokemon mon;
     u8 isEgg;
 
-    CreateEgg(&mon, SPECIES_SNUBBULL, FALSE);
+    CreateEgg(&mon, SPECIES_AIPOM, FALSE);
     isEgg = TRUE;
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
 

@@ -1331,7 +1331,7 @@
 
 	@ Gives the player a specific Snubbull Egg for the escape room map.
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
-	.macro givesnubbullegg
+	.macro giveaipomegg
 	.byte 0xf8
 	.endm
 

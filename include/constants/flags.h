@@ -61,7 +61,7 @@
 #define FLAG_FERRO_TRADE_ACCEPTED           0x30
 #define FLAG_FLORGES_TRADE_ACCEPTED         0x31 
 #define FLAG_DUNSPARCE_TRADE_ACCEPTED       0x32
-#define FLAG_SNUBB_TRADE_ACCEPTED           0x33 
+#define FLAG_AIPOM_TRADE_ACCEPTED           0x33 
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_GOGGLES_SNATCHED               0x35 
 #define FLAG_RECOVERED_WHITE_HERB           0x36 
@@ -83,7 +83,7 @@
 
 #define FLAG_TRAINER4_DEFEATED               0x46
 #define FLAG_TRAINER5_DEFEATED               0x47  
-#define FLAG_TRAINER6_DEFEATED               0x48
+#define FLAG_TRAINER9_DEFEATED               0x48
 #define FLAG_TRAINER7_DEFEATED               0x49
 #define FLAG_WHITE_HERB_OBTAINED             0x4A  
 #define FLAG_HIDE_ROCKSMASH_NPC              0x4B  
@@ -653,7 +653,7 @@
 #define FLAG_HIDDEN_ITEM_ROUTE_123_RARE_CANDY                (FLAG_HIDDEN_ITEMS_START + 0x6E)
 #define FLAG_HIDDEN_ITEM_ROUTE_105_BIG_PEARL                 (FLAG_HIDDEN_ITEMS_START + 0x6F)
 
-#define FLAG_SNUBBULL_MOVE_DELETED      0x264 
+#define FLAG_AIPOM_MOVE_DELETED         0x264 
 #define FLAG_LIEPARD_MOVE_DELETED       0x265 
 #define FLAG_DUNSPARCE_MOVE_DELETED     0x266 
 #define FLAG_SMEARGLE_MOVE_DELETED      0x267 
