@@ -621,6 +621,10 @@ static void CreateWildMon(u16 species, u8 level)
             pp = 10;
             SetMonData(&gEnemyParty[0], MON_DATA_PP1, &pp);
         }
+        if (move1 == MOVE_KNOCK_OFF){
+            pp = 20;
+            SetMonData(&gEnemyParty[0], MON_DATA_PP1, &pp);
+        }
     }
 }
 #ifdef BUGFIX
@@ -947,6 +951,9 @@ void RockSmashWildEncounter(void)
 {
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
+    // ADDED
+    u8 GUARANTEED_ENCOUNTER_NUM = 5;
+
     if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
@@ -955,12 +962,39 @@ void RockSmashWildEncounter(void)
         {
             gSpecialVar_Result = FALSE;
         }
-        else if (WildEncounterCheck(wildPokemonInfo->encounterRate, TRUE) == TRUE
+
+        // ADDED
+        // increment encounter var if in tunnel
+        if(TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+            VarSet(VAR_SHUCKLE_ROCKS_SMASHED, VarGet(VAR_SHUCKLE_ROCKS_SMASHED) + 1);
+
+        // ADDED
+        // no encounter the first N rocks
+        else if (VarGet(VAR_SHUCKLE_ROCKS_SMASHED) < GUARANTEED_ENCOUNTER_NUM){
+            // bypass
+        }
+        // guaranteed encounter on the Nth rock (including entry rock)
+        else if (VarGet(VAR_SHUCKLE_ROCKS_SMASHED) == GUARANTEED_ENCOUNTER_NUM
          && TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
         {
             BattleSetup_StartWildBattle();
             gSpecialVar_Result = TRUE;
         }
+        // normal random encounter after the first N rocks
+        else if (VarGet(VAR_SHUCKLE_ROCKS_SMASHED) > GUARANTEED_ENCOUNTER_NUM
+         && WildEncounterCheck(wildPokemonInfo->encounterRate, TRUE) == TRUE
+         && TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+        {
+            BattleSetup_StartWildBattle();
+            gSpecialVar_Result = TRUE;
+        }
+
+        // else if (WildEncounterCheck(wildPokemonInfo->encounterRate, TRUE) == TRUE
+        //  && TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
+        // {
+        //     BattleSetup_StartWildBattle();
+        //     gSpecialVar_Result = TRUE;
+        // }
         else
         {
             gSpecialVar_Result = FALSE;
