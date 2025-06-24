@@ -8234,6 +8234,10 @@ static void Cmd_removeitem(void)
     gBattleStruct->canPickupItem |= (1u << battler);
     CheckSetUnburden(battler);
 
+    // ADDED
+    // for pickup tiebreaker
+    gBattleStruct->battlerPickupItemLastUsed = battler; 
+
     BtlController_EmitSetMonData(battler, BUFFER_A, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[battler].item), &gBattleMons[battler].item);
     MarkBattlerForControllerExec(battler);
 

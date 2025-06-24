@@ -56,6 +56,7 @@ match the ROM; this is also why sSoundMovesTable's declaration is in the middle 
 functions instead of at the top of the file with the other declarations.
 */
 
+
 static bool32 TryRemoveScreens(u32 battler);
 static bool32 IsUnnerveAbilityOnOpposingSide(u32 battler);
 static u32 GetFlingPowerFromItemId(u32 itemId);
@@ -5058,7 +5059,11 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
                  && gBattleStruct->changedItems[battler] == ITEM_NONE   // Will not inherit an item
                  && PickupHasValidTarget(battler))
                 {
-                    gBattlerTarget = RandomUniformExcept(RNG_PICKUP, 0, gBattlersCount - 1, CantPickupItem);
+                    // CHANGED
+                    // pick target that last used their item 
+                    gBattlerTarget = gBattleStruct->battlerPickupItemLastUsed;
+
+                    // gBattlerTarget = RandomUniformExcept(RNG_PICKUP, 0, gBattlersCount - 1, CantPickupItem);
                     gLastUsedItem = GetUsedHeldItem(gBattlerTarget);
                     BattleScriptPushCursorAndCallback(BattleScript_PickupActivates);
                     effect++;
@@ -11383,6 +11388,10 @@ void TryRestoreHeldItems(void)
                 if (currentHeldItem != lostItem){
                     // set flags for messaging ingame
 
+                    // dont recover prev item if current held item is stolen berry juice
+                    if(currentHeldItem == ITEM_BERRY_JUICE && gLastFlungItem != ITEM_NONE)
+                        return;
+
                     // if item was flung
                     if (lostItem == gLastFlungItem){
                         FlagSet(FLAG_RECOVERED_FLUNG_ITEM);
@@ -11627,6 +11636,9 @@ bool32 PickupHasValidTarget(u32 battler)
     }
     return FALSE;
 }
+
+
+
 
 bool32 IsBattlerWeatherAffected(u32 battler, u32 weatherFlags)
 {
