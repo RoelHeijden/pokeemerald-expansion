@@ -11,20 +11,20 @@ const LOCALID_ULTRA_BALL_NPC = 8
 const LOCALID_TRAINER9_R = 9
 const LOCALID_TRAINER9_L = 10
 const LOCALID_MARANGA_BERRY = 11
-const LOCALID_MAP_SWITCH4 = 12
-const LOCALID_TRAINER5 = 13
+const LOCALID_CUSTAP_BERRY = 12
+const LOCALID_TRAINER6 = 13
 const LOCALID_TRAINER4 = 14
 const LOCALID_NURSE2 = 15
 const LOCALID_HINT_GUY2 = 16
 const LOCALID_ANTI_SOFTLOCK_GUY2 = 17
 const LOCALID_GLASSES_GUY = 18
 const LOCALID_SMEARGLE_NPC = 19
-const LOCALID_TRAINER7 = 20
+const LOCALID_TRAINER5 = 20
 const LOCALID_CUT_TREE = 21
 const LOCALID_LOST_GLASSES = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
-const LOCALID_RARE_CANDY = 25
+const LOCALID_ROCK_SMASH_NPC = 25
 const LOCALID_SHOP1 = 26
 const LOCALID_SHOP2 = 27
 const LOCALID_MAP_SWITCH2 = 28
@@ -33,9 +33,9 @@ const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_DUSKNOIR_MAIL_NPC = 33
-const LOCALID_CUSTAP_BERRY = 34
-const LOCALID_ROCK_SMASH_NPC = 35
-const LOCALID_MUSHROOM_NPC = 36
+const _DUMMY_4 = 34
+const _DUMMY_5 = 35
+const _DUMMY_6 = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
 const _DUMMY_9 = 39
@@ -554,7 +554,7 @@ script EscapeRoom_EventScript_ObtainLiepard{
         move1=MOVE_ASSIST,
         move2=MOVE_TRICK,
         move3=MOVE_ROCK_SMASH,
-        move4=MOVE_U_TURN,
+        move4=MOVE_COPYCAT,
         // EVs:
         atkEv=252, 
         spAtkEv=252,
@@ -844,10 +844,6 @@ script EscapeRoom_MoveRockSmashNPC{
     playse(SE_PIN)
     applymovement(LOCALID_ROCK_SMASH_NPC, Common_Movement_ExclamationMark)
     waitmovement(LOCALID_ROCK_SMASH_NPC)
-
-    // move player away
-    applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerMoveAwayFromRock)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
     
     // move NPC up
     applymovement(LOCALID_ROCK_SMASH_NPC, RockSmashNPCMovesUp)
@@ -856,6 +852,10 @@ script EscapeRoom_MoveRockSmashNPC{
     // dialogue
     msgbox(RockSmashNPCFarewellMsg, MSGBOX_AUTOCLOSE)
     waitmessage
+
+    // move player away
+    applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerMoveAwayFromRock)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
 
     // move NPC away
     applymovement(LOCALID_ROCK_SMASH_NPC, RockSmashNPCMovesAway)
@@ -872,17 +872,17 @@ script EscapeRoom_MoveRockSmashNPC{
 }
 
 movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
-    walk_fast_left * 2
-    face_right
+    walk_right
+    walk_down
+    face_up
 }
 
 movement RockSmashNPCMovesUp {
     walk_up
-    face_left
+    face_right
 }
 
 movement RockSmashNPCMovesAway {
-    face_right
     walk_right * 3
     face_up
 }
@@ -1035,8 +1035,20 @@ script EscapeRoom_EventScript_Trainer5{
         Trainer5_Outro, 
         event_script=EscapeRoom_EventScript_Trainer5PostBattle,
     )
-
     msgbox(Trainer5_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer6{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER6, 
+        Trainer6_Intro, 
+        Trainer6_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer6PostBattle,
+    )
+
+    msgbox(Trainer6_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
@@ -1054,17 +1066,7 @@ script EscapeRoom_EventScript_Trainer9{
     end
 }
 
-script EscapeRoom_EventScript_Trainer7{
-    trainerbattle_single(
-        TRAINER_CUSTOM_TRAINER7, 
-        Trainer7_Intro, 
-        Trainer7_Outro, 
-        event_script=EscapeRoom_EventScript_Trainer7PostBattle,
-    )
-    msgbox(Trainer7_PostBattle, MSGBOX_AUTOCLOSE)
-    waitmessage
-    end
-}
+
 
 
 //// POST BATTLE SCRIPTS ////
@@ -1136,6 +1138,11 @@ script EscapeRoom_EventScript_Trainer4PostBattle{
 }
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
+    setflag(FLAG_TRAINER5_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Trainer6PostBattle{
 
     // prevent custap restore after winning
     clearflag(FLAG_RECOVERED_CUSTAP)
@@ -1161,7 +1168,7 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
     }
 
     // setflag(FLAG_CUSTAP_SOLD_OUT) // prevent custap lines in trainer7?
-    setflag(FLAG_TRAINER5_DEFEATED)
+    setflag(FLAG_TRAINER6_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
@@ -1170,10 +1177,7 @@ script EscapeRoom_EventScript_Trainer9PostBattle{
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
-script EscapeRoom_EventScript_Trainer7PostBattle{
-    setflag(FLAG_TRAINER7_DEFEATED)
-    call(EscapeRoom_EventScript_PostMatchHeal)
-}
+
 
 
 //// POKEMON TRADES ////
@@ -1432,14 +1436,6 @@ script EscapeRoom_EventScript_TradeAipomForSmeargle{
 
 
 //// ITEMS ////
-
-script EscapeRoom_EventScript_FindRareCandy{
-    lockall
-    finditem(ITEM_RARE_CANDY)
-    removeobject(LOCALID_RARE_CANDY)
-    setflag(FLAG_RARE_CANDY_OBTAINED)
-    releaseall
-}
 
 script EscapeRoom_EventScript_FindCustapBerry{
     lockall
@@ -2731,16 +2727,14 @@ text Trainer4_PostBattle{
 }
 
 
-// TRAINER 5 - Rayquaza
+// TRAINER 5 - Meowth Onix (money battle)
 text Trainer5_Intro{
-    "My carrier birds are amazing!\n"
-    "They always find their way back.\p"
-    "This one might've just come back from\n"
-    "the moon though..."
+    "You dont need to assist me.\n"
+    "I'm rich enough."
 }
 
 text Trainer5_Outro{
-    "You cheated."
+    "Did you have enough?"
 }
 
 text Trainer5_PostBattle{
@@ -2748,7 +2742,24 @@ text Trainer5_PostBattle{
 }
 
 
-// TRAINER 6 - Archaludon Archaludon
+// TRAINER 6 - Rayquaza 
+text Trainer6_Intro{
+    "My carrier birds are amazing!\n"
+    "They always find their way back.\p"
+    "This one might've just come back from\n"
+    "the moon though..."
+}
+
+text Trainer6_Outro{
+    "You cheated."
+}
+
+text Trainer6_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 9 - ??? ??? (unbeatable double)
 text Trainer9_Intro{
     "Even twins have their differences.\n"
     "Eventually you'll understand!"
@@ -2763,21 +2774,7 @@ text Trainer9_PostBattle{
 }
 
 
-// TRAINER 7 - Pangoro Urshifu
-text Trainer7_Intro{
-    "So many options.\n"
-    "Where do I start?\p"
-    "Making decisions was never this hard."
-    // CHANGE
-}
 
-text Trainer7_Outro{
-    "You cheated."
-}
-
-text Trainer7_PostBattle{
-    "Fock off."
-}
 
 
 

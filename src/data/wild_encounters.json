@@ -11020,7 +11020,7 @@
           "map": "MAP_ESCAPE_ROOM_MAIN",
           "base_label": "gEscapeRoom0",
           "land_mons": {
-            "encounter_rate": 40,
+            "encounter_rate": 30,
             "mons": [
               {
                 "min_level": 5,
@@ -11061,6 +11061,40 @@
                 "min_level": 5,
                 "max_level": 5,
                 "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_NONE"
+              }
+            ]
+          }
+        },
+        {
+          "map": "MAP_ESCAPE_ROOM_SHORTCUT_ROUTE",
+          "base_label": "gEscapeRoom_ShortcutRoute0",
+          "rock_smash_mons": {
+            "encounter_rate": 50,
+            "mons": [
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_ARCANINE"
+              },
+              {
+                "min_level": 5,
+                "max_level": 5,
+                "species": "SPECIES_ARCANINE"
               },
               {
                 "min_level": 5,

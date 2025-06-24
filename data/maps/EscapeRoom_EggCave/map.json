@@ -30,7 +30,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
       "x": 8,
-      "y": 3,
+      "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -63,21 +63,34 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EggCave_EventScript_FindFloatStone",
-      "flag": "FLAG_FLOAT_STONE_OBTAINED"
+      "script": "EscapeRoom_EggCave_EventScript_FindRareCandy",
+      "flag": "FLAG_RARE_CANDY_OBTAINED"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_TRAPINCH",
       "x": 5,
       "y": 23,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
+      "movement_type": "MOVEMENT_TYPE_WALK_IN_PLACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_HIDE_TRAPINCH"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
+      "x": 25,
+      "y": 23,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_MapSwitch4",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -96,18 +109,18 @@
       "dest_warp_id": "4"
     },
     {
-      "x": 19,
-      "y": 4,
-      "elevation": 0,
-      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
-      "dest_warp_id": "3"
-    },
-    {
       "x": 7,
       "y": 27,
       "elevation": 0,
-      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 25,
+      "y": 27,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
+      "dest_warp_id": "6"
     }
   ],
   "coord_events": [

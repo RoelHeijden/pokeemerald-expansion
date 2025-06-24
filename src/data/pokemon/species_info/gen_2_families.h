@@ -4511,8 +4511,8 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_5) ? 177 : 80,
         .evYield_Defense = 1,
         .evYield_SpDefense = 1,
-        .itemCommon = ITEM_BERRY_JUICE,
-        .itemRare = ITEM_BERRY_JUICE,
+        // .itemCommon = ITEM_BERRY_JUICE,  // REMOVED
+        // .itemRare = ITEM_BERRY_JUICE,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
         .friendship = STANDARD_FRIENDSHIP,

@@ -42,7 +42,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
-      "x": 49,
+      "x": 48,
       "y": 16,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -94,8 +94,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
-      "x": 17,
-      "y": 9,
+      "x": 16,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -128,7 +128,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "EscapeRoom_EventScript_Trainer6",
+      "script": "EscapeRoom_EventScript_Trainer9",
       "flag": "0"
     },
     {
@@ -141,7 +141,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "1",
-      "script": "EscapeRoom_EventScript_Trainer6",
+      "script": "EscapeRoom_EventScript_Trainer9",
       "flag": "0"
     },
     {
@@ -158,17 +158,17 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
-      "x": 7,
-      "y": 19,
+      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
+      "x": 4,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_MapSwitch4",
-      "flag": "0"
+      "script": "EscapeRoom_EventScript_FindCustapBerry",
+      "flag": "FLAG_CUSTAP_BERRY_OBTAINED"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_5",
@@ -180,7 +180,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NORMAL",
       "trainer_sight_or_berry_tree_id": "2",
-      "script": "EscapeRoom_EventScript_Trainer5",
+      "script": "EscapeRoom_EventScript_Trainer6",
       "flag": "0"
     },
     {
@@ -198,8 +198,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
-      "x": 21,
-      "y": 11,
+      "x": 20,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -212,7 +212,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_CONTEST_JUDGE",
       "x": 22,
-      "y": 11,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -225,7 +225,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MYSTERY_GIFT_MAN",
       "x": 23,
-      "y": 11,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -250,7 +250,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_FISHERMAN",
-      "x": 14,
+      "x": 15,
       "y": 20,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
@@ -263,15 +263,15 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
-      "x": 24,
-      "y": 7,
+      "x": 26,
+      "y": 5,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NORMAL",
-      "trainer_sight_or_berry_tree_id": "4",
-      "script": "EscapeRoom_EventScript_Trainer7",
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_Trainer5",
       "flag": "0"
     },
     {
@@ -327,21 +327,21 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 26,
-      "y": 5,
+      "graphics_id": "OBJ_EVENT_GFX_HIKER",
+      "x": 27,
+      "y": 10,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_FindRareCandy",
-      "flag": "FLAG_RARE_CANDY_OBTAINED"
+      "script": "EscapeRoom_RockSmashNPC",
+      "flag": "FLAG_HIDE_ROCKSMASH_NPC"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
-      "x": 48,
+      "x": 47,
       "y": 16,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -354,8 +354,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MART_EMPLOYEE",
-      "x": 20,
-      "y": 11,
+      "x": 19,
+      "y": 10,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -368,7 +368,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
       "x": 13,
-      "y": 5,
+      "y": 4,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -442,45 +442,6 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_DusknoirStoleMyMailNPC",
       "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 4,
-      "y": 8,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_EventScript_FindCustapBerry",
-      "flag": "FLAG_CUSTAP_BERRY_OBTAINED"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_HIKER",
-      "x": 27,
-      "y": 10,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_UP",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_RockSmashNPC",
-      "flag": "FLAG_HIDE_ROCKSMASH_NPC"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
-      "x": 2,
-      "y": 13,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
-      "flag": "0"
     }
   ],
   "warp_events": [
@@ -518,6 +479,20 @@
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
       "dest_warp_id": "1"
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
+      "dest_warp_id": "2"
+    },
+    {
+      "x": 6,
+      "y": 22,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
+      "dest_warp_id": "3"
     }
   ],
   "coord_events": [
@@ -526,27 +501,41 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 47,
-      "y": 16,
+      "x": 49,
+      "y": 15,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_MainInfoSign"
     },
     {
       "type": "sign",
-      "x": 16,
-      "y": 9,
+      "x": 15,
+      "y": 10,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_MoveDeleterSign"
     },
     {
       "type": "sign",
-      "x": 19,
-      "y": 11,
+      "x": 21,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_MainInfoSign"
+    },
+    {
+      "type": "secret_base",
+      "x": 11,
+      "y": 9,
+      "elevation": 0,
+      "secret_base_id": "SECRET_BASE_TREE4_1"
+    },
+    {
+      "type": "secret_base",
+      "x": 10,
+      "y": 9,
+      "elevation": 0,
+      "secret_base_id": "SECRET_BASE_TREE4_1"
     }
   ]
 }

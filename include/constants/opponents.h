@@ -863,8 +863,8 @@
 #define TRAINER_CUSTOM_TRAINER3             857
 #define TRAINER_CUSTOM_TRAINER4             858
 #define TRAINER_CUSTOM_TRAINER5             859
-#define TRAINER_CUSTOM_TRAINER9             860
-#define TRAINER_CUSTOM_TRAINER7             861
+#define TRAINER_CUSTOM_TRAINER6             860
+#define TRAINER_CUSTOM_TRAINER9             861
 
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows

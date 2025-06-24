@@ -968,7 +968,7 @@ static bool8 PrintAllOnCardBack(void)
         // trainer card hints depend on stage of game
         if(FlagGet(FLAG_TRAINER3_DEFEATED) == FALSE)
             PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textNumLinkContests, sTrainerCardStatColors);
-        else if(FlagGet(FLAG_TRAINER5_DEFEATED) == FALSE)
+        else if(FlagGet(FLAG_TRAINER6_DEFEATED) == FALSE)
             PrintStatOnBackOfCard(5, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
             
         else

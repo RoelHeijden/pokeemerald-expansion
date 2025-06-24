@@ -16961,6 +16961,31 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER5 ===
+Name: Rocky
+Class: Rich Boy
+Pic: Rich Boy
+Gender: Male
+Music: Intense
+Double Battle: Yes
+AI: AI_FLAG_SEQUENCE_SWITCHING
+
+Meowth-Alola  
+Ability: Pickup  
+Level: 4  
+EVs: 252 Spe  
+Timid Nature  
+- Pay Day  
+
+Onix  
+Ability: Sturdy  
+Level: 4  
+EVs: 252 Spe  
+Timid Nature  
+IVs: 0 HP / 0 Atk  
+- Substitute  
+
+
+=== TRAINER_CUSTOM_TRAINER6 ===
 Name: R.T. Abe
 Class: Bird Keeper
 Pic: Bird Keeper
@@ -16998,29 +17023,4 @@ EVs: 252 SpA / 252 Spe
 Rash Nature  
 IVs: 0 HP / 0 Atk / 0 SpD  
 - Electro Shot  
-
-
-=== TRAINER_CUSTOM_TRAINER7 ===
-Name: Turner
-Class: Ruin Maniac
-Pic: Ruin Maniac
-Gender: Male
-Music: Intense
-Double Battle: No
-AI: AI_FLAG_SEQUENCE_SWITCHING
-
-Pangoro (F)
-Ability: Scrappy  
-Level: 51  
-EVs: 252 Atk / 252 Spe  
-Naive Nature  
-IVs: 0 HP / 0 SpD  
-- Me First
-
-Urshifu-Rapid-Strike (M)
-Ability: Unseen Fist  
-Level: 33   
-EVs: 252 Atk  
-Adamant Nature  
-- Surging Strikes
 

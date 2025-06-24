@@ -1,7 +1,7 @@
 const LOCALID_EDD_TRADE_NPC = 1
 const LOCALID_TABLET1 = 2
 const LOCALID_TABLETS_COOK_NPC = 3
-const LOCALID_FLOAT_STONE = 4
+const LOCALID_RARE_CANDY = 4
 const LOCALID_TRAPINCH = 5
 
 
@@ -10,11 +10,11 @@ mapscripts EscapeRoom_EggCave_MapScripts {
 }
 
 
-script EscapeRoom_EggCave_EventScript_FindFloatStone{
+script EscapeRoom_EggCave_EventScript_FindRareCandy{
     lockall
-    finditem(ITEM_FLOAT_STONE)
-    removeobject(LOCALID_FLOAT_STONE)
-    setflag(FLAG_FLOAT_STONE_OBTAINED)
+    finditem(ITEM_RARE_CANDY)
+    removeobject(LOCALID_RARE_CANDY)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
 }
 

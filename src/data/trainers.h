@@ -42404,168 +42404,166 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER5] =
     {
 #line 16964
-        .trainerName = _("R.T. Abe"),
+        .trainerName = _("Rocky"),
 #line 16965
-        .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
+        .trainerClass = TRAINER_CLASS_RICH_BOY,
 #line 16966
-        .trainerPic = TRAINER_PIC_BIRD_KEEPER,
+        .trainerPic = TRAINER_PIC_RICH_BOY,
         .encounterMusic_gender = 
 #line 16968
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 16969
-        .doubleBattle = FALSE,
-        .partySize = 1,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 16971
-            .species = SPECIES_RAYQUAZA,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 16971
-            .heldItem = ITEM_STARDUST,
-#line 16973
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 16974
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 16972
-            .ability = ABILITY_AIR_LOCK,
-#line 16974
-            .lvl = 100,
-            .nature = NATURE_HARDY,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            .moves = {
-#line 16974
-                MOVE_EARTHQUAKE,
-            },
-            },
-        },
-    },
-#line 16977
-    [TRAINER_CUSTOM_TRAINER9] =
-    {
-#line 16978
-        .trainerName = _("Ton & Tey"),
-#line 16979
-        .trainerClass = TRAINER_CLASS_TWINS,
-#line 16980
-        .trainerPic = TRAINER_PIC_TWINS,
-        .encounterMusic_gender = 
-#line 16982
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
-#line 16983
         .doubleBattle = TRUE,
-#line 16984
-        .aiFlags = AI_FLAG_DOUBLE3,
-        .partySize = 2,
-        .party = (const struct TrainerMon[])
-        {
-            {
-#line 16986
-            .species = SPECIES_ARCHALUDON,
-#line 16986
-            .gender = TRAINER_MON_FEMALE,
-#line 16986
-            .heldItem = ITEM_POWER_HERB,
-#line 16989
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 204, 252, 0),
-#line 16991
-            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 0),
-#line 16987
-            .ability = ABILITY_STAMINA,
-#line 16988
-            .lvl = 48,
-#line 16990
-            .nature = NATURE_RASH,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            .moves = {
-#line 16992
-                MOVE_ELECTRO_SHOT,
-            },
-            },
-            {
-#line 16994
-            .species = SPECIES_ARCHALUDON,
-#line 16994
-            .gender = TRAINER_MON_FEMALE,
-#line 16994
-            .heldItem = ITEM_POWER_HERB,
-#line 16997
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0),
-#line 16999
-            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 0),
-#line 16995
-            .ability = ABILITY_STALWART,
-#line 16996
-            .lvl = 48,
-#line 16998
-            .nature = NATURE_RASH,
-            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
-            .moves = {
-#line 17000
-                MOVE_ELECTRO_SHOT,
-            },
-            },
-        },
-    },
-#line 17003
-    [TRAINER_CUSTOM_TRAINER7] =
-    {
-#line 17004
-        .trainerName = _("Turner"),
-#line 17005
-        .trainerClass = TRAINER_CLASS_RUIN_MANIAC,
-#line 17006
-        .trainerPic = TRAINER_PIC_RUIN_MANIAC,
-        .encounterMusic_gender = 
-#line 17008
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
-#line 17009
-        .doubleBattle = FALSE,
-#line 17010
+#line 16970
         .aiFlags = AI_FLAG_SEQUENCE_SWITCHING,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 17012
-            .species = SPECIES_PANGORO,
-#line 17012
-            .gender = TRAINER_MON_FEMALE,
-#line 17015
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 17017
-            .iv = TRAINER_PARTY_IVS(0, 31, 31, 31, 31, 0),
-#line 17013
-            .ability = ABILITY_SCRAPPY,
-#line 17014
-            .lvl = 51,
-#line 17016
-            .nature = NATURE_NAIVE,
+#line 16972
+            .species = SPECIES_MEOWTH_ALOLA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16975
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 0),
+#line 16977
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 16973
+            .ability = ABILITY_PICKUP,
+#line 16974
+            .lvl = 4,
+#line 16976
+            .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17018
-                MOVE_ME_FIRST,
+#line 16977
+                MOVE_PAY_DAY,
             },
             },
             {
-#line 17020
-            .species = SPECIES_URSHIFU_RAPID_STRIKE,
-#line 17020
-            .gender = TRAINER_MON_MALE,
-#line 17023
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
-#line 17025
+#line 16979
+            .species = SPECIES_ONIX,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16982
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 0),
+#line 16984
+            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 31),
+#line 16980
+            .ability = ABILITY_STURDY,
+#line 16981
+            .lvl = 4,
+#line 16983
+            .nature = NATURE_TIMID,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16985
+                MOVE_SUBSTITUTE,
+            },
+            },
+        },
+    },
+#line 16988
+    [TRAINER_CUSTOM_TRAINER6] =
+    {
+#line 16989
+        .trainerName = _("R.T. Abe"),
+#line 16990
+        .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
+#line 16991
+        .trainerPic = TRAINER_PIC_BIRD_KEEPER,
+        .encounterMusic_gender = 
+#line 16993
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 16994
+        .doubleBattle = FALSE,
+        .partySize = 1,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 16996
+            .species = SPECIES_RAYQUAZA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 16996
+            .heldItem = ITEM_STARDUST,
+#line 16998
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 16999
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 17021
-            .ability = ABILITY_UNSEEN_FIST,
+#line 16997
+            .ability = ABILITY_AIR_LOCK,
+#line 16999
+            .lvl = 100,
+            .nature = NATURE_HARDY,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 16999
+                MOVE_EARTHQUAKE,
+            },
+            },
+        },
+    },
+#line 17002
+    [TRAINER_CUSTOM_TRAINER9] =
+    {
+#line 17003
+        .trainerName = _("Ton & Tey"),
+#line 17004
+        .trainerClass = TRAINER_CLASS_TWINS,
+#line 17005
+        .trainerPic = TRAINER_PIC_TWINS,
+        .encounterMusic_gender = 
+#line 17007
+            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+#line 17008
+        .doubleBattle = TRUE,
+#line 17009
+        .aiFlags = AI_FLAG_DOUBLE3,
+        .partySize = 2,
+        .party = (const struct TrainerMon[])
+        {
+            {
+#line 17011
+            .species = SPECIES_ARCHALUDON,
+#line 17011
+            .gender = TRAINER_MON_FEMALE,
+#line 17011
+            .heldItem = ITEM_POWER_HERB,
+#line 17014
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 204, 252, 0),
+#line 17016
+            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 0),
+#line 17012
+            .ability = ABILITY_STAMINA,
+#line 17013
+            .lvl = 48,
+#line 17015
+            .nature = NATURE_RASH,
+            .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .moves = {
+#line 17017
+                MOVE_ELECTRO_SHOT,
+            },
+            },
+            {
+#line 17019
+            .species = SPECIES_ARCHALUDON,
+#line 17019
+            .gender = TRAINER_MON_FEMALE,
+#line 17019
+            .heldItem = ITEM_POWER_HERB,
 #line 17022
-            .lvl = 33,
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0),
 #line 17024
-            .nature = NATURE_ADAMANT,
+            .iv = TRAINER_PARTY_IVS(0, 0, 31, 31, 31, 0),
+#line 17020
+            .ability = ABILITY_STALWART,
+#line 17021
+            .lvl = 48,
+#line 17023
+            .nature = NATURE_RASH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17025
-                MOVE_SURGING_STRIKES,
+                MOVE_ELECTRO_SHOT,
             },
             },
         },

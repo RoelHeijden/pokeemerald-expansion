@@ -83,14 +83,14 @@
 
 #define FLAG_TRAINER4_DEFEATED               0x46
 #define FLAG_TRAINER5_DEFEATED               0x47  
-#define FLAG_TRAINER9_DEFEATED               0x48
-#define FLAG_TRAINER7_DEFEATED               0x49
+#define FLAG_TRAINER6_DEFEATED               0x48
+#define FLAG_TRAINER9_DEFEATED               0x49
 #define FLAG_WHITE_HERB_OBTAINED             0x4A  
 #define FLAG_HIDE_ROCKSMASH_NPC              0x4B  
-#define FLAG_UNUSED_0x04C    0x4C // Unused Flag
-#define FLAG_UNUSED_0x04D    0x4D // Unused Flag
-#define FLAG_UNUSED_0x04E    0x4E // Unused Flag
-#define FLAG_UNUSED_0x04F    0x4F // Unused Flag
+#define FLAG_SHUCKLE_SMASH_ROCK1             0x4C 
+#define FLAG_SHUCKLE_SMASH_ROCK2             0x4D  
+#define FLAG_SHUCKLE_SMASH_ROCK3             0x4E
+#define FLAG_SHUCKLE_SMASH_ROCK4             0x4F 
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -98,7 +98,7 @@
 #define FLAG_RESCUED_BIRCH                       0x52
 #define FLAG_LEGENDARIES_IN_SOOTOPOLIS           0x53
 
-#define FLAG_UNUSED_0x054                    0x54  // Unused Flag
+#define FLAG_BERRY_JUICE_OBTAINED                    0x54
 #define FLAG_UNUSED_0x055                    0x55  // Unused Flag
 
 #define FLAG_HIDE_CONTEST_POKE_BALL          0x56  // Always set after new game, object it hides is added directly

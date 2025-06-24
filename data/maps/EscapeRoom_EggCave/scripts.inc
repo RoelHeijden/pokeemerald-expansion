@@ -2,15 +2,15 @@ EscapeRoom_EggCave_MapScripts::
 	.byte 0
 
 
-EscapeRoom_EggCave_EventScript_FindFloatStone::
+EscapeRoom_EggCave_EventScript_FindRareCandy::
 # 14 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
 # 15 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	finditem ITEM_FLOAT_STONE
+	finditem ITEM_RARE_CANDY
 # 16 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	removeobject 4
 # 17 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setflag FLAG_FLOAT_STONE_OBTAINED
+	setflag FLAG_RARE_CANDY_OBTAINED
 # 18 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return

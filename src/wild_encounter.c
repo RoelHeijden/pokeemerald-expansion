@@ -457,10 +457,14 @@ static void CreateWildMon(u16 species, u8 level)
     // ADDED
     // custom pokemon encounters for Escape room maps: main and ice puzzle
     u16 headerId = GetCurrentMapWildMonHeaderId();
-    if(gWildMonHeaders[headerId].mapNum != MAP_ESCAPE_ROOM_MAIN){
+    if(gWildMonHeaders[headerId].mapNum != MAP_ESCAPE_ROOM_MAIN  && 
+        gWildMonHeaders[headerId].mapNum != MAP_ESCAPE_ROOM_SHORTCUT_ROUTE){
         CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
     }
     else{
+        // backup player party
+        BackupPlayerParty();
+
         u16 species;
         u8 level;
         u8 abilityNum = 1;
@@ -482,18 +486,34 @@ static void CreateWildMon(u16 species, u8 level)
         u8 spDefIv = 31; 
         u8 gender = 0;
         u8 nature = 0;
-        // u32 personality = (Random32() / 25) * 25; // Hardy
-
 
         s16 x;
         x = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x;
         // s16 y;        
         // y = gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y;
 
-        if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
+
+        if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_SHORTCUT_ROUTE)
         {
-            // backup player party
-            BackupPlayerParty();
+            species = SPECIES_SHUCKLE;
+            heldItem = ITEM_BERRY_JUICE;
+
+            level = 4;
+            abilityNum = 1;
+            gender = MON_MALE;
+            nature = NATURE_BASHFUL;
+            move1 = MOVE_KNOCK_OFF;
+
+            hpIv=31;
+            atkIv=31;
+            defIv=31;
+            speedIv=31;
+            spAtkIv=31;
+            spDefIv=31;
+        }
+        else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
+        {
+
 
             if(x >= 36){
                 species = SPECIES_ZERAORA;
