@@ -40,6 +40,7 @@ const _DUMMY_7 = 37
 const _DUMMY_8 = 38
 const _DUMMY_9 = 39
 
+
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_Main_MapScripts {
@@ -86,6 +87,9 @@ script EscapeRoom_MapScript_OnResumeScripts{
         clearflag(FLAG_RECOVERED_CUSTAP)
         setflag(FLAG_REMOVE_FERRO_CUSTAP)
         setvar(VAR_REMOVE_HELD_ITEM, 1)
+
+        // prevent recovered item message
+        clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
     }
 
 
@@ -103,9 +107,13 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setflag(FLAG_MENTAL_HERB_USED_FOR_SACK)
 
         // prevent mental herb restore after succesful sack vs Dusknoir
-        clearflag(FLAG_RECOVERED_FLUNG_ITEM)
+        clearflag(FLAG_RECOVERED_MENTAL_HERB)
         setflag(FLAG_REMOVE_LIEPARD_MENTAL_HERB)
         setvar(VAR_REMOVE_HELD_ITEM, 1)
+
+        // prevent recovered item message
+        clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+        clearflag(FLAG_RECOVERED_FLUNG_ITEM)
     }
 
     // check for ball return -- sets frame table var if true
@@ -114,10 +122,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
     }
 
     // check if held item was retrieved -- sets frame table var if true
-    if(flag(FLAG_RECOVERED_WHITE_HERB) || 
-        flag(FLAG_RECOVERED_CUSTAP) || 
-        flag(FLAG_RECOVERED_MARANGA) ||
-        flag(FLAG_RECOVERED_FLUNG_ITEM))
+    if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
     {
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
     }
@@ -141,6 +146,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
         clearflag(FLAG_PLAYER_JUST_LOST)
     }
 
+    // set ask pre damage reset
     if(flag(FLAG_JUST_HAD_ZERA_BATTLE) == TRUE && flag(FLAG_ZERAORA_CAUGHT) == FALSE){
         partybackupisdifferent
         if(var(VAR_RESULT) == TRUE){
@@ -170,32 +176,11 @@ script EscapeRoom_MapScripts_FindBallAferUse{
 script EscapeRoom_MapScripts_RetrievedItemMessage{
     lockall
 
-    // White herb
-    if(flag(FLAG_RECOVERED_WHITE_HERB)){
-        msgbox(WhiteHerbRecoveredMessage, MSGBOX_AUTOCLOSE)
+    // main message
+    if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE)){
+        msgbox(HeldItemRecoveredMessage, MSGBOX_AUTOCLOSE)
         waitmessage
-        clearflag(FLAG_RECOVERED_WHITE_HERB)
-    }
-
-    // Custap berry
-    if(flag(FLAG_RECOVERED_CUSTAP)){
-        msgbox(CustapBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        clearflag(FLAG_RECOVERED_CUSTAP)
-    }
-
-    // Maranga berry
-    if(flag(FLAG_RECOVERED_MARANGA)){
-        msgbox(MarangaBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        clearflag(FLAG_RECOVERED_MARANGA)
-    }
-
-    // Flung item
-    if(flag(FLAG_RECOVERED_FLUNG_ITEM)){
-        msgbox(FlungItemRecoveredMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        clearflag(FLAG_RECOVERED_FLUNG_ITEM)
+        clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
     }
 
     setvar(VAR_RETRIEVED_HELD_ITEM, 0)
@@ -844,6 +829,7 @@ script EscapeRoom_MoveRockSmashNPC{
     playse(SE_PIN)
     applymovement(LOCALID_ROCK_SMASH_NPC, Common_Movement_ExclamationMark)
     waitmovement(LOCALID_ROCK_SMASH_NPC)
+    delay(30)
     
     // move NPC up
     applymovement(LOCALID_ROCK_SMASH_NPC, RockSmashNPCMovesUp)
@@ -1076,6 +1062,9 @@ script EscapeRoom_EventScript_PostMatchHeal{
 }
 
 script EscapeRoom_EventScript_Trainer1PostBattle{
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+
     // prevent white herb restore after winning
     clearflag(FLAG_RECOVERED_WHITE_HERB)
     checkpartymon(SPECIES_ZERAORA)
@@ -1086,12 +1075,16 @@ script EscapeRoom_EventScript_Trainer1PostBattle{
             removepartyitem(VAR_TEMP_0)
         }
     }
+
     setflag(FLAG_TRAINER1_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
     call(EscapeRoom_EventScript_TradeZeraForHMCut)
 }
 
 script EscapeRoom_EventScript_Trainer2PostBattle{
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+
     // prevent maranga restore after winning
     clearflag(FLAG_RECOVERED_MARANGA)
     checkpartymon(SPECIES_FLORGES)
@@ -1143,6 +1136,9 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
 }
 
 script EscapeRoom_EventScript_Trainer6PostBattle{
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+    clearflag(FLAG_RECOVERED_FLUNG_ITEM)
 
     // prevent custap restore after winning
     clearflag(FLAG_RECOVERED_CUSTAP)
@@ -1155,9 +1151,10 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
         }
     }
 
+    // TODO: change Goggles to new item
+
     // prevent Goggles restore after winning
     clearflag(FLAG_RECOVERED_GOGGLES)
-    clearflag(FLAG_RECOVERED_FLUNG_ITEM) // prevent item restore message
     checkpartymon(SPECIES_LIEPARD)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
@@ -1176,8 +1173,6 @@ script EscapeRoom_EventScript_Trainer9PostBattle{
     setflag(FLAG_TRAINER9_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
-
-
 
 
 //// POKEMON TRADES ////
@@ -2520,20 +2515,8 @@ text NewBallMessage{
     "You recover the ball."
 }
 
-text WhiteHerbRecoveredMessage{
-    "Your White Herb was restored."
-}
-
-text CustapBerryRecoveredMessage{
-    "Your Custap Berry was restored."
-}
-
-text MarangaBerryRecoveredMessage{
-    "Your Maranga Berry was restored."
-}
-
-text FlungItemRecoveredMessage{
-    "Your flung item was restored."
+text HeldItemRecoveredMessage{
+    "Your held item was restored."
 }
 
 
@@ -2761,8 +2744,7 @@ text Trainer6_PostBattle{
 
 // TRAINER 9 - ??? ??? (unbeatable double)
 text Trainer9_Intro{
-    "Even twins have their differences.\n"
-    "Eventually you'll understand!"
+    "TBD"
 }
 
 text Trainer9_Outro{

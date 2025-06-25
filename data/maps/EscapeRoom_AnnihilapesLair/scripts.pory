@@ -1,81 +1,82 @@
+
+
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_AnnihilapesLair_MapScripts {
-    MAP_SCRIPT_ON_TRANSITION: EscapeRoom_AnnihilapesLair_MapScript_OnTransitionScripts
     MAP_SCRIPT_ON_RESUME: EscapeRoom_AnnihilapesLair_MapScript_OnResumeScripts
 
-    MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE [
-        VAR_ESCAPE_ROOM_MAPSCRIPT_WARP_COUNTER, 0: EscapeRoom_AnnihilapesLair_MapScript_OnWarpIntoScripts
-    ]
-
     MAP_SCRIPT_ON_FRAME_TABLE [
-        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_AnnihilapesLair_MapScripts_FindBallAferUse
-        VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_AnnihilapesLair_MapScripts_RetrievedItemMessage
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
+        VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
     ] 
 }
 
 
-
-script EscapeRoom_AnnihilapesLair_MapScript_OnTransitionScripts{
-    // e.g. keep double1 moved
-}
-
 script EscapeRoom_AnnihilapesLair_MapScript_OnResumeScripts{
+    call(EscapeRoom_AnnihilapesLair_ReturnBall)
+    call(EscapeRoom_AnnihilapesLair_DisableBagUse)
+    call(EscapeRoom_AnnihilapesLair_SetLostItemVars)
+} 
+
+script EscapeRoom_AnnihilapesLair_ReturnBall{
     // check for ball return -- sets frame table var if true
     if(flag(FLAG_BALL_USED) && !flag(FLAG_ZERAORA_CAUGHT)){
         setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1)
     }
+}
 
-    // check if held item was retrieved -- sets frame table var if true
-    if(flag(FLAG_RECOVERED_WHITE_HERB) || flag(FLAG_RECOVERED_CUSTAP) || flag(FLAG_RECOVERED_MARANGA)){
-        setvar(VAR_RETRIEVED_HELD_ITEM, 1)
-    }
-
+script EscapeRoom_AnnihilapesLair_DisableBagUse{
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
     }
-} 
-
-script EscapeRoom_AnnihilapesLair_MapScript_OnWarpIntoScripts{
-    // e.g. set NPC facing
 }
 
-script EscapeRoom_AnnihilapesLair_MapScripts_FindBallAferUse{
-    lockall
-    msgbox(NewBallMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    finditem(ITEM_ULTRA_BALL)
-    clearflag(FLAG_BALL_USED)
-    setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
-    releaseall
+script EscapeRoom_AnnihilapesLair_SetLostItemVars{
+    // check if held item was retrieved -- sets frame table var if true
+    if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
+    {
+        setvar(VAR_RETRIEVED_HELD_ITEM, 1)
+    }
 }
 
-script EscapeRoom_AnnihilapesLair_MapScripts_RetrievedItemMessage{
-    lockall
 
-    // White herb
-    if(flag(FLAG_RECOVERED_WHITE_HERB)){
-        msgbox(WhiteHerbRecoveredMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        clearflag(FLAG_RECOVERED_WHITE_HERB)
-    }
 
-    // Custap berry
-    if(flag(FLAG_RECOVERED_CUSTAP)){
-        msgbox(CustapBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        clearflag(FLAG_RECOVERED_CUSTAP)
-    }
+// script EscapeRoom_AnnihilapesLair_MapScripts_FindBallAferUse{
+//     lockall
+//     msgbox(NewBallMessage, MSGBOX_AUTOCLOSE)
+//     waitmessage
+//     finditem(ITEM_ULTRA_BALL)
+//     clearflag(FLAG_BALL_USED)
+//     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 0)
+//     releaseall
+// }
 
-    // Maranga berry
-    if(flag(FLAG_RECOVERED_MARANGA)){
-        msgbox(MarangaBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        clearflag(FLAG_RECOVERED_MARANGA)
-    }
+// script EscapeRoom_AnnihilapesLair_MapScripts_RetrievedItemMessage{
+//     lockall
 
-    setvar(VAR_RETRIEVED_HELD_ITEM, 0)
-    releaseall
-}
+//     // White herb
+//     if(flag(FLAG_RECOVERED_WHITE_HERB)){
+//         msgbox(WhiteHerbRecoveredMessage, MSGBOX_AUTOCLOSE)
+//         waitmessage
+//         clearflag(FLAG_RECOVERED_WHITE_HERB)
+//     }
+
+//     // Custap berry
+//     if(flag(FLAG_RECOVERED_CUSTAP)){
+//         msgbox(CustapBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
+//         waitmessage
+//         clearflag(FLAG_RECOVERED_CUSTAP)
+//     }
+
+//     // Maranga berry
+//     if(flag(FLAG_RECOVERED_MARANGA)){
+//         msgbox(MarangaBerryRecoveredMessage, MSGBOX_AUTOCLOSE)
+//         waitmessage
+//         clearflag(FLAG_RECOVERED_MARANGA)
+//     }
+
+//     setvar(VAR_RETRIEVED_HELD_ITEM, 0)
+//     releaseall
+// }
 

@@ -11388,10 +11388,11 @@ void TryRestoreHeldItems(void)
                 if (currentHeldItem != lostItem){
                     // set flags for messaging ingame
 
-                    // dont recover prev item if current held item is stolen berry juice
-                    if(currentHeldItem == ITEM_BERRY_JUICE && gLastFlungItem != ITEM_NONE)
+                    // dont recover prev item if current held item is the stolen berry juice
+                    if(currentHeldItem == ITEM_BERRY_JUICE && gLastFlungItem == ITEM_SAFETY_GOGGLES)
                         return;
 
+                    // following flags are used to remove the held items if needed (e.g. after consuming and winning)
                     // if item was flung
                     if (lostItem == gLastFlungItem){
                         FlagSet(FLAG_RECOVERED_FLUNG_ITEM);
@@ -11414,6 +11415,9 @@ void TryRestoreHeldItems(void)
                     else if (lostItem == ITEM_MARANGA_BERRY){
                         FlagSet(FLAG_RECOVERED_MARANGA);
                     }
+
+                    // set main flag
+                    FlagSet(FLAG_DO_RECOVERED_ITEM_MESSAGE);
 
                     // restore item
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);

@@ -5,18 +5,37 @@ const LOCALID_RARE_CANDY = 4
 const LOCALID_TRAPINCH = 5
 
 
+////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
+
 mapscripts EscapeRoom_EggCave_MapScripts {
+    MAP_SCRIPT_ON_RESUME: EscapeRoom_EggCave_OnResumeMapScripts
 
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+    ] 
 }
 
 
-script EscapeRoom_EggCave_EventScript_FindRareCandy{
-    lockall
-    finditem(ITEM_RARE_CANDY)
-    removeobject(LOCALID_RARE_CANDY)
-    setflag(FLAG_RARE_CANDY_OBTAINED)
-    releaseall
+script EscapeRoom_EggCave_OnResumeMapScripts {
+    call(EscapeRoom_EggCave_DisableBagUse)
+    call(EscapeRoom_EggCave_SetLostItemVars)
 }
+
+script EscapeRoom_EggCave_DisableBagUse{
+    // disable bag use 
+    if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+}
+
+script EscapeRoom_EggCave_SetLostItemVars{
+    // check if held item was retrieved -- sets frame table var if true
+    if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
+    {
+        setvar(VAR_RETRIEVED_HELD_ITEM, 1)
+    }
+}
+
 
 
 script EscapeRoom_EventScript_TrapinchBlocksPlayer{
@@ -101,5 +120,13 @@ script EscapeRoom_EventScript_TrapinchBattle{
         spDefIv=31
     )
     dowildbattle
+    releaseall
+}
+
+script EscapeRoom_EggCave_EventScript_FindRareCandy{
+    lockall
+    finditem(ITEM_RARE_CANDY)
+    removeobject(LOCALID_RARE_CANDY)
+    setflag(FLAG_RARE_CANDY_OBTAINED)
     releaseall
 }

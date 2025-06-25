@@ -4,10 +4,38 @@ const LOCALID_MAP_SWITCH3 = 2
 const LOCALID_WHITE_HERB = 3
 
 
+////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
+
 mapscripts EscapeRoom_ShortcutRoute_MapScripts {
     // MAP_SCRIPT_ON_LOAD: SetWallOnLoad
     MAP_SCRIPT_ON_TRANSITION: CheckResetRocks
-    MAP_SCRIPT_ON_RESUME: CheckIfBerryJuiceObtained
+    MAP_SCRIPT_ON_RESUME: EscapeRoom_ShortcutRoute_OnResumeMapScripts
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+    ] 
+}
+
+
+script EscapeRoom_ShortcutRoute_OnResumeMapScripts {
+    call(CheckIfBerryJuiceObtained)
+    call(EscapeRoom_ShortcutRoute_DisableBagUse)
+    call(EscapeRoom_ShortcutRoute_SetLostItemVars)
+}
+
+script EscapeRoom_ShortcutRoute_DisableBagUse{
+    // disable bag use 
+    if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+}
+
+script EscapeRoom_ShortcutRoute_SetLostItemVars{
+    // check if held item was retrieved -- sets frame table var if true
+    if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
+    {
+        setvar(VAR_RETRIEVED_HELD_ITEM, 1)
+    }
 }
 
 
@@ -71,7 +99,7 @@ script CheckIfBerryJuiceObtained{
 }
 
 
-
+////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
 script EscapeRoom_ShortcutRoute_EventScript_FindWhiteHerb{
