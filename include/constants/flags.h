@@ -1232,7 +1232,7 @@
 #define FLAG_LIEPARD_SACKED                                         0x49D 
 #define FLAG_RAN_FROM_TRAPINCH                                      0x49E
 #define FLAG_HIDE_TRAPINCH                                          0x49F  
-#define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
+#define FLAG_RECOVERED_BERRY_JUICE                                           0x4A0  
 #define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag
 #define FLAG_UNUSED_0x4A2                                           0x4A2 // Unused Flag
 #define FLAG_UNUSED_0x4A3                                           0x4A3 // Unused Flag

@@ -11403,6 +11403,9 @@ void TryRestoreHeldItems(void)
                         else if (lostItem == ITEM_SAFETY_GOGGLES){
                             FlagSet(FLAG_RECOVERED_GOGGLES);
                         }
+                        else if (lostItem == ITEM_BERRY_JUICE){
+                            FlagSet(FLAG_RECOVERED_BERRY_JUICE);
+                        }
 
                     }
                     // if item was not flung (but lost in another way)
@@ -11414,6 +11417,9 @@ void TryRestoreHeldItems(void)
                     }
                     else if (lostItem == ITEM_MARANGA_BERRY){
                         FlagSet(FLAG_RECOVERED_MARANGA);
+                    }
+                    else if (lostItem == ITEM_BERRY_JUICE){
+                        FlagSet(FLAG_RECOVERED_BERRY_JUICE);
                     }
 
                     // set main flag

@@ -1131,6 +1131,31 @@ script EscapeRoom_EventScript_Trainer4PostBattle{
 }
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+    clearflag(FLAG_RECOVERED_FLUNG_ITEM)
+
+    // prevent Liepard's Berry Juice restore after winning
+    clearflag(FLAG_RECOVERED_BERRY_JUICE)
+    checkpartymon(SPECIES_LIEPARD)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_BERRY_JUICE){
+            removepartyitem(VAR_TEMP_0)
+        }
+    }
+
+    // make sure Aipom has its Berry Juice left
+    checkpartymon(SPECIES_AIPOM)
+    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
+    if(var(VAR_TEMP_0) != PARTY_SIZE){
+        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+        if(var(VAR_0x8005) == ITEM_NONE){
+            givepartyitem(ITEM_BERRY_JUICE, VAR_TEMP_0)
+        }
+    }
+
     setflag(FLAG_TRAINER5_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
@@ -2116,10 +2141,11 @@ text MoveDeleterSignMessage{
     "Get rid of your moves and put them\n"
     "back whenever you want.\p"
 
-    "Please note that a restored move will\n"
-    "get 0 pp if:\l"
-    "a) it had 0 pp when deleted.\l"
-    "b) all current moves have 0 pp."
+    "To prevent abusing this move deleter\n"
+    "for Struggle, a restored move will have:\l"
+
+    "a) the PP amount it had when deleted.\l"
+    "b) 0 PP if all other moves have 0 PP."
 }
 
 
@@ -2516,7 +2542,7 @@ text NewBallMessage{
 }
 
 text HeldItemRecoveredMessage{
-    "Your held item was restored."
+    "Your held items were restored."
 }
 
 

@@ -255,6 +255,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_backupplayerparty				    @ 0xfc
 	.4byte ScrCmd_restoreplayerparty				@ 0xfd
 	.4byte ScrCmd_partybackupisdifferent			@ 0xfe
+	.4byte ScrCmd_givepartyitem						@ 0xff
 
 
 gScriptCmdTableEnd::

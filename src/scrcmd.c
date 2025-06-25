@@ -2121,8 +2121,16 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
     u16 species = ScriptReadHalfword(ctx);
     gSpecialVar_Result = FALSE;
 
-    if (!sMonMovesetBackup[species].valid)
+    if (!sMonMovesetBackup[species].valid){
+
+        // REMOVE
+        DebugPrintf("NOT A VALID BACKUP (good probably)");
+
         return FALSE;
+    }
+
+    // REMOVE
+    DebugPrintf("valid move backup found. valid=%d", sMonMovesetBackup[species].valid);
 
     for (int i = 0; i < PARTY_SIZE; i++)
     {
@@ -2263,6 +2271,33 @@ bool8 ScrCmd_removepartyitem(struct ScriptContext *ctx)
     }
     return FALSE;
 }
+
+// ADDED
+// gives a held item to a Pokémon in the specified party slot -- takes VAR as slot, constant as item
+bool8 ScrCmd_givepartyitem(struct ScriptContext *ctx)
+{
+    u16 item = ScriptReadHalfword(ctx);                    // item is passed directly as a constant
+    u8 slot = VarGet(ScriptReadHalfword(ctx));             // slot is passed as a variable
+    gSpecialVar_Result = 0;                                
+
+    if (slot < PARTY_SIZE)
+    {
+        struct Pokemon *mon = &gPlayerParty[slot];
+        u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
+        if (species && !GetMonData(mon, MON_DATA_IS_EGG, NULL))
+        {
+            if (GetMonData(mon, MON_DATA_HELD_ITEM, NULL) == ITEM_NONE) // only give if no item held
+            {
+                SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+                gSpecialVar_Result = 1;
+            }
+        }
+    }
+    return FALSE;
+}
+
+
+
 
 // ADDED
 bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)

@@ -1227,6 +1227,14 @@
 	.2byte \slot
 	.endm
 
+	@ Gives a held item to a Pokémon in the given party slot. 
+	@ VAR_RESULT is set to 1 if successful, 0 otherwise.
+	.macro givepartyitem item:req, slot:req
+	.byte 0xff
+	.2byte \item
+	.2byte \slot
+	.endm
+
 	@ Checks which moveslot a move is learned given a party slot and move.
 	@ VAR_RESULT is set to the moveslot idx.
 	.macro checkpartymoveslot slot:req, move:req
