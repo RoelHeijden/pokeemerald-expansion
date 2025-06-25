@@ -82,7 +82,7 @@ EWRAM_DATA u8 gPlayerPartyCount = 0;
 EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {0};
 EWRAM_DATA struct Pokemon gPlayerPartyBackup[PARTY_SIZE] = {0}; // ADDED
-EWRAM_DATA struct MonMovesBackup sMonMovesetBackup[MAX_SPECIES] = {0}; // ADDED
+EWRAM_DATA struct MonMovesBackup sMonMovesetBackup[MAX_BACKUP_SLOTS] = {0}; // ADDED
 EWRAM_DATA bool8 gPartyBackupInUse = FALSE; // ADDED
 
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {0};

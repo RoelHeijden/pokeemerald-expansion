@@ -2087,33 +2087,62 @@ bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
     u16 partyslot = VarGet(ScriptReadHalfword(ctx));
     gSpecialVar_Result = FALSE;
 
-    // get species
     if (partyslot >= PARTY_SIZE)
         return FALSE;
+
     u16 species = GetMonData(&gPlayerParty[partyslot], MON_DATA_SPECIES);
 
-    // return if a backup already exists for the pokemon
-    if (sMonMovesetBackup[species].valid)
-        return FALSE; // Backup already exists
-
-    // make backup
-    for (int i = 0; i < PARTY_SIZE; i++)
+    // check if backup already exists
+    for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
     {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == species)
+        if (sMonMovesetBackup[i].valid &&
+            sMonMovesetBackup[i].species == species)
         {
+            // backup exists — update PP for matching moves
             for (int j = 0; j < MAX_MON_MOVES; j++)
             {
-                sMonMovesetBackup[species].moves[j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j);
-                sMonMovesetBackup[species].pp[j] = GetMonData(&gPlayerParty[i], MON_DATA_PP1 + j);
+                u16 move = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + j);
+                if (move == MOVE_NONE)
+                    continue;
+
+                // search for the move in backup
+                for (int k = 0; k < MAX_MON_MOVES; k++)
+                {
+                    if (sMonMovesetBackup[i].moves[k] == move)
+                    {
+                        sMonMovesetBackup[i].pp[k] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
+                        break;
+                    }
+                }
             }
-            sMonMovesetBackup[species].valid = TRUE;
+
+            gSpecialVar_Result = TRUE;
+            return FALSE;
+        }
+    }
+
+    // no backup — create new one
+    for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
+    {
+        if (!sMonMovesetBackup[i].valid)
+        {
+            sMonMovesetBackup[i].species = species;
+
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+            {
+                sMonMovesetBackup[i].moves[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + j);
+                sMonMovesetBackup[i].pp[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
+            }
+
+            sMonMovesetBackup[i].valid = TRUE;
+            gSpecialVar_Result = TRUE;
             break;
         }
     }
 
-    gSpecialVar_Result = TRUE;
     return FALSE;
 }
+
 
 // ADDED
 bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
@@ -2121,50 +2150,78 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
     u16 species = ScriptReadHalfword(ctx);
     gSpecialVar_Result = FALSE;
 
-    if (!sMonMovesetBackup[species].valid){
-
-        // REMOVE
-        DebugPrintf("NOT A VALID BACKUP (good probably)");
-
-        return FALSE;
-    }
-
-    // REMOVE
-    DebugPrintf("valid move backup found. valid=%d", sMonMovesetBackup[species].valid);
-
+    // find party slot matching the species
+    int partyslot = -1;
     for (int i = 0; i < PARTY_SIZE; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == species)
+        {
+            partyslot = i;
+            break;
+        }
+    }
+    if (partyslot == -1)
+        return FALSE; // species not found in party
+
+    // find matching backup entry
+    for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
+    {
+        if (sMonMovesetBackup[i].valid &&
+            sMonMovesetBackup[i].species == species)
         {
             // check if current total PP is 0
             u32 totalCurrentPP = 0;
             for (int j = 0; j < MAX_MON_MOVES; j++)
                 totalCurrentPP += GetMonData(&gPlayerParty[i], MON_DATA_PP1 + j);
 
-            // restore backup moveset
+            // restore only deleted moves
             for (int j = 0; j < MAX_MON_MOVES; j++)
             {
-                SetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, &sMonMovesetBackup[species].moves[j]);
-                SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, &sMonMovesetBackup[species].pp[j]);
+                u16 backupMove = sMonMovesetBackup[i].moves[j];
+                if (backupMove == MOVE_NONE)
+                    continue;
 
-                // set 0 pp if total pp == 0
-                if (totalCurrentPP == 0)
+                bool8 moveStillExists = FALSE;
+                for (int k = 0; k < MAX_MON_MOVES; k++)
                 {
-                    u8 zero = 0;
-                    SetMonData(&gPlayerParty[i], MON_DATA_PP1 + j, &zero);
+                    u16 currentMove = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + k);
+                    if (currentMove == backupMove)
+                    {
+                        moveStillExists = TRUE;
+                        break;
+                    }
+                }
+
+                // only restore move if it's missing
+                if (!moveStillExists)
+                {
+                    // find first empty slot to write into
+                    for (int k = 0; k < MAX_MON_MOVES; k++)
+                    {
+                        u16 currentMove = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + k);
+                        if (currentMove == MOVE_NONE)
+                        {
+                            SetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + k, &backupMove);
+                            SetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + k, &sMonMovesetBackup[i].pp[j]);
+
+                            if (totalCurrentPP == 0)
+                            {
+                                u8 zero = 0;
+                                SetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + k, &zero);
+                            }
+                            break;
+                        }
+                    }
                 }
             }
+            
+            sMonMovesetBackup[i].valid = FALSE;
+            gSpecialVar_Result = TRUE;
             break;
         }
     }
-
-    // clear backup
-    sMonMovesetBackup[species].valid = FALSE;
-
-    gSpecialVar_Result = TRUE;
     return FALSE;
 }
-
 
 
 

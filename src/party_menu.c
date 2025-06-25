@@ -7729,18 +7729,20 @@ static void BufferMonSelection(void)
     if (gSpecialVar_0x8004 >= PARTY_SIZE){
         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
 
-        // CHANGED/ADDED
+    // CHANGED/ADDED
         // set OW callback only if nothing chosen (B press)
         SetMainCallback2(CB2_ReturnToField);
     }
     else{
+        // backup chosen slot
+        VarSet(VAR_MOVE_DELETE_MONSLOT_BACKUP, gSpecialVar_0x8004);
+
         // go straight to move delete script if mon selected
         GetNumMovesSelectedMonHas();
-        if(gSpecialVar_Result > 1)
-            SetMainCallback2(MoveDeleterChooseMoveToForget);
+        if(gSpecialVar_Result > 1){
+            SetMainCallback2(MoveDeleterChooseMoveToForget);}
         else
             SetMainCallback2(CB2_ReturnToField);
-
     }
 }
 

@@ -478,6 +478,8 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     releaseall
 }
 
+// LOST GLASSES GUY (LIEPARD TRADE)
+
 script EscapeRoom_EventScript_LostGlassesNPC{
     lock
     faceplayer
@@ -561,6 +563,8 @@ movement EscapeRoom_Movement_LostGlassesNPC{
     walk_left * 8
 }
 
+// MOVING NURSE
+
 script EscapeRoom_EventScript_RelocateNurseNPC{
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
 
@@ -613,6 +617,8 @@ movement EscapeRoom_Movement_PlayerMoveAway{
 movement EscapeRoom_Movement2_Nurse1NPC{
     walk_faster_left * 9
 }
+
+
 
 // MART NPCS
 
@@ -682,8 +688,15 @@ script EscapeRoom_MoveDeleterNPC{
 }
 
 script EscapeRoom_ChooseMoveToDelete{
+    // reset mon slot var
+    setvar(VAR_MOVE_DELETE_MONSLOT_BACKUP, 6)
+
+    // choose mon
 	special(ChoosePartyMon)
 	waitstate
+
+    // somewhere this got overwritten. Set it back
+    copyvar(VAR_0x8004, VAR_MOVE_DELETE_MONSLOT_BACKUP)
 
     // end if no mon chosen
 	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
@@ -2141,8 +2154,8 @@ text MoveDeleterSignMessage{
     "Get rid of your moves and put them\n"
     "back whenever you want.\p"
 
-    "To prevent abusing this move deleter\n"
-    "for Struggle, a restored move will have:\l"
+    "To prevent abusing the move deleter for\n"
+    "Struggle, a restored move will have:\l"
 
     "a) the PP amount it had when deleted.\l"
     "b) 0 PP if all other moves have 0 PP."
