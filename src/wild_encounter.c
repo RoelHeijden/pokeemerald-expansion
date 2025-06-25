@@ -958,15 +958,14 @@ void RockSmashWildEncounter(void)
     {
         const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
 
+        // ADDED
+        // increment encounter var after every rock smashed
+        VarSet(VAR_SHUCKLE_ROCKS_SMASHED, VarGet(VAR_SHUCKLE_ROCKS_SMASHED) + 1);
+
         if (wildPokemonInfo == NULL)
         {
             gSpecialVar_Result = FALSE;
         }
-
-        // ADDED
-        // increment encounter var if in tunnel
-        if(TryGenerateWildMon(wildPokemonInfo, WILD_AREA_ROCKS, WILD_CHECK_REPEL | WILD_CHECK_KEEN_EYE) == TRUE)
-            VarSet(VAR_SHUCKLE_ROCKS_SMASHED, VarGet(VAR_SHUCKLE_ROCKS_SMASHED) + 1);
 
         // ADDED
         // no encounter the first N rocks
