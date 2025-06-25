@@ -954,13 +954,23 @@ void RockSmashWildEncounter(void)
     // ADDED
     u8 GUARANTEED_ENCOUNTER_NUM = 5;
 
+    // ADDED
+    // increment encounter var after every rock smashed in shortcut tunnel
+    if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_SHORTCUT_ROUTE)
+        VarSet(VAR_SHUCKLE_ROCKS_SMASHED, VarGet(VAR_SHUCKLE_ROCKS_SMASHED) + 1);
+
+    // ADDED
+    // no encounter after berry juice obtained
+    if(FlagGet(FLAG_BERRY_JUICE_OBTAINED))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+
     if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;
-
-        // ADDED
-        // increment encounter var after every rock smashed
-        VarSet(VAR_SHUCKLE_ROCKS_SMASHED, VarGet(VAR_SHUCKLE_ROCKS_SMASHED) + 1);
 
         if (wildPokemonInfo == NULL)
         {
