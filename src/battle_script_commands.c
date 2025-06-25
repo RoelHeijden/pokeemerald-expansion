@@ -12861,9 +12861,14 @@ static void Cmd_mimicattackcopy(void)
             gBattleMons[gBattlerAttacker].moves[gCurrMovePos] = gLastMoves[gBattlerTarget];
             if (gMovesInfo[gLastMoves[gBattlerTarget]].pp < 5)
                 gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = gMovesInfo[gLastMoves[gBattlerTarget]].pp;
-            else
+            else{
                 gBattleMons[gBattlerAttacker].pp[gCurrMovePos] = 5;
 
+                // ADDED
+                // to set max pp to 5 as well later on
+                gDisableStructs[gBattlerAttacker].isMimicCopied[gCurrMovePos] = TRUE;
+            }
+            
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, gLastMoves[gBattlerTarget])
 
             gDisableStructs[gBattlerAttacker].mimickedMoves |= gBitTable[gCurrMovePos];

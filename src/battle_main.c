@@ -4361,10 +4361,22 @@ static void HandleTurnActionSelectionState(void)
                         {
                             moveInfo.moves[i] = gBattleMons[battler].moves[i];
                             moveInfo.currentPp[i] = gBattleMons[battler].pp[i];
-                            moveInfo.maxPp[i] = CalculatePPWithBonus(
-                                                            gBattleMons[battler].moves[i],
-                                                            gBattleMons[battler].ppBonuses,
-                                                            i);
+                            // moveInfo.maxPp[i] = CalculatePPWithBonus(
+                            //                                 gBattleMons[battler].moves[i],
+                            //                                 gBattleMons[battler].ppBonuses,
+                            //                                 i);
+
+                            // ADDED
+                            // check if move was Mimic copied. Set max pp to 5 if true.
+                            if (gDisableStructs[battler].isMimicCopied[i])
+                                moveInfo.maxPp[i] = 5;
+                            else
+                            {
+                                moveInfo.maxPp[i] = CalculatePPWithBonus(
+                                                        gBattleMons[battler].moves[i],
+                                                        gBattleMons[battler].ppBonuses,
+                                                        i);
+                            }
                         }
 
                         BtlController_EmitChooseMove(battler, BUFFER_A, (gBattleTypeFlags & BATTLE_TYPE_DOUBLE) != 0, FALSE, &moveInfo);
