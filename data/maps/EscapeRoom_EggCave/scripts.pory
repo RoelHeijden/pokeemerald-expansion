@@ -136,8 +136,11 @@ script EscapeRoom_EggCave_EventScript_FindRareCandy{
 script EscapeRoom_EggCave_EventScript_Find2000Cash{
     lockall
     addmoney(2000)
-    msgbox("TBD: Money received")
+    message("{PLAYER} received ¥2.000!")
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
     removeobject(LOCALID_2000_CASH)
     setflag(FLAG_2000_CASH_OBTAINED)
     releaseall
 }
+
