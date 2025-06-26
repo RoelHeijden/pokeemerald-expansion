@@ -141,16 +141,20 @@ EscapeRoom_EggCave_EventScript_Find2000Cash::
 # 138 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	addmoney 2000
 # 139 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	msgbox EscapeRoom_EggCave_EventScript_Find2000Cash_Text_0
+	message EscapeRoom_EggCave_EventScript_Find2000Cash_Text_0
 # 140 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	removeobject 7
+	playfanfare MUS_OBTAIN_ITEM
 # 141 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setflag FLAG_2000_CASH_OBTAINED
+	waitfanfare
 # 142 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	removeobject 7
+# 143 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	setflag FLAG_2000_CASH_OBTAINED
+# 144 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EggCave_EventScript_Find2000Cash_Text_0:
 # 139 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	.string "TBD: Money received$"
+	.string "{PLAYER} received ¥2.000!$"

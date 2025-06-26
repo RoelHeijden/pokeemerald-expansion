@@ -361,6 +361,7 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
+    additem(ITEM_ETHER)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -649,13 +650,12 @@ mart EscapeRoom_Shop1_items{
     ITEM_FLOAT_STONE        // 2000
     ITEM_RING_TARGET        // 2000 
     ITEM_ESCAPE_ROPE        // 2000  
-    ITEM_ETHER              // 2000 // Rethink: SOLD OUT vs 2500 price
 }
 
 mart EscapeRoom_Shop2_items{
     ITEM_ABILITY_CAPSULE    // 3125
-    ITEM_MENTAL_HERB        // 2000
     ITEM_CUSTAP_BERRY       // 2000
+    ITEM_MENTAL_HERB        // 2000
     ITEM_TM27               // 2000
 }
 
@@ -868,6 +868,7 @@ script EscapeRoom_MoveRockSmashNPC{
     waitse
 
     setflag(FLAG_ROCK_SMASH_GUY_MOVED)
+    setflag(FLAG_MENTAL_HERB_SOLD_OUT)
 }
 
 movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
@@ -938,7 +939,16 @@ script EscapeRoom_ZeraoraHintNPC{
         msgbox(ZeraoraHintMessage, MSGBOX_DEFAULT)
     }
     else{
-        msgbox(ZeraoraHintPostCatchMessage, MSGBOX_DEFAULT)
+        if(flag(FLAG_WHITE_HERB_OBTAINED) == TRUE){
+            msgbox(ZeraoraHintPostCatchMessage, MSGBOX_DEFAULT)
+            waitmessage
+            giveitem(ITEM_WHITE_HERB)
+            setflag(FLAG_WHITE_HERB_OBTAINED)
+        }
+        else{
+            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_DEFAULT)
+            waitmessage
+        }
     }
     releaseall
 }
@@ -1028,7 +1038,6 @@ script EscapeRoom_EventScript_Trainer4{
 }
 
 script EscapeRoom_EventScript_Trainer5{
-
     // if assist in party and trainer not yet defeated
     // reject battle
     checkpartymove(MOVE_ASSIST)
@@ -2155,9 +2164,10 @@ text MoveDeleterSignMessage{
     "Get rid of your moves and put them\n"
     "back whenever you want.\p"
 
-    "To prevent abusing the move deleter for\n"
-    "Struggle, a restored move will have:\l"
+    "However, the move deleter cannot be\n"
+    "used to regain a move's PP.\p"
 
+    "A restored move will get:\n"
     "a) the PP amount it had when deleted.\l"
     "b) 0 PP if all other moves have 0 PP."
 }
@@ -2404,14 +2414,23 @@ text UltaBallQuizPostScript{
 // ZERA HINT NPC
 text ZeraoraHintMessage{
     "Have you seen the Zeraora around here?\p"
-    "I've seen people trying to catch it\n"
-    "but no one's been able to get its HP\l"
-    "below 50%.\p"
-    "It kind of just gives up after a while."
+    "I've seen people try to catch it but no\n"
+    "one's been able to get its HP below 50%.\p"
+    "Will you show me the Zeraora if you do\n"
+    "manage to capture it?\p"
+    "I've always wanted to see one up close."
+    // "It kind of just gives up after a while."
 }
 
 text ZeraoraHintPostCatchMessage{
-    "Wow, you actually caught the Zeraora!"
+    "Wow, you actually caught the Zeraora!\n"
+    "I can't believe my eyes!\p"
+    "You've made a dream come true...\n"
+    "Take this! It's the least I can do."
+}
+
+text ZeraoraHintPostCatchMessage2{
+    "I'll never forget this day."
 }
 
 
@@ -2752,7 +2771,8 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Meowth Onix (money battle)
 text Trainer5_Intro{
-    "Alright, let's battle!"
+    "That's more like it.\n"
+    "Let's see how much you're worth!"
 }
 
 text Trainer5_Outro{
@@ -2764,9 +2784,8 @@ text Trainer5_PostBattle{
 }
 
 text Trainer5_RemoveAssistMessage{
-    "I'm rich enough to care for myself.\n"
-    "I don't need you to assist me.\p"
-    "Come back when that move is gone."
+    "Do I look like I need your assistance?\n"
+    "Try again when that move is gone."
 }
 
 

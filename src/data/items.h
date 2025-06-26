@@ -995,7 +995,8 @@ const struct Item gItemsInfo[] =
     [ITEM_FULL_HEAL] =
     {
         .name = _("Full Heal"),
-        .price = (I_PRICE >= GEN_7) ? 400 : 600,
+        // .price = (I_PRICE >= GEN_7) ? 400 : 600,
+        .price = 0, //changed
         .description = sFullHealDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -1010,7 +1011,7 @@ const struct Item gItemsInfo[] =
     [ITEM_ETHER] =
     {
         .name = _("Ether"),
-        .price = 2000, //(I_PRICE >= GEN_2) ? 1200 : 1,
+        .price = 0, //(I_PRICE >= GEN_2) ? 1200 : 1,
         .holdEffectParam = 10, 
         .description = COMPOUND_STRING(
             "Restores the PP\n"
@@ -9281,7 +9282,8 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Leppa Berry"),
         .pluralName = _("Leppa Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        // .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 0,
         .holdEffect = HOLD_EFFECT_RESTORE_PP,
         .holdEffectParam = 10,
         .description = COMPOUND_STRING(

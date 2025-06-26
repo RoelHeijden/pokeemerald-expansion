@@ -1,7 +1,10 @@
 
 const LOCALID_SMASH_ROCK = 1
 const LOCALID_MAP_SWITCH3 = 2
-const LOCALID_WHITE_HERB = 3
+const LOCALID_ROCK1 = 3
+const LOCALID_ROCK2 = 4
+const LOCALID_ROCK3 = 5
+const LOCALID_ROCK4 = 6
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -102,10 +105,4 @@ script CheckIfBerryJuiceObtained{
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
-script EscapeRoom_ShortcutRoute_EventScript_FindWhiteHerb{
-    lockall
-    finditem(ITEM_WHITE_HERB)
-    removeobject(LOCALID_WHITE_HERB)
-    setflag(FLAG_WHITE_HERB_OBTAINED)
-    releaseall
-}
+
