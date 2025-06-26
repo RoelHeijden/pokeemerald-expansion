@@ -653,7 +653,7 @@ mart EscapeRoom_Shop1_items{
 }
 
 mart EscapeRoom_Shop2_items{
-    ITEM_ABILITY_CAPSULE    // 3100
+    ITEM_ABILITY_CAPSULE    // 3125
     ITEM_MENTAL_HERB        // 2000
     ITEM_CUSTAP_BERRY       // 2000
     ITEM_TM27               // 2000
@@ -1028,6 +1028,17 @@ script EscapeRoom_EventScript_Trainer4{
 }
 
 script EscapeRoom_EventScript_Trainer5{
+
+    // if assist in party and trainer not yet defeated
+    // reject battle
+    checkpartymove(MOVE_ASSIST)
+    if(var(VAR_RESULT) != PARTY_SIZE && flag(FLAG_TRAINER5_DEFEATED) == FALSE){
+        lock
+        msgbox(Trainer5_RemoveAssistMessage, MSGBOX_NPC)
+        releaseall
+        end
+    }
+
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER5, 
         Trainer5_Intro, 
@@ -1157,17 +1168,7 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         if(var(VAR_0x8005) == ITEM_BERRY_JUICE){
             removepartyitem(VAR_TEMP_0)
         }
-    }
-
-    // make sure Aipom has its Berry Juice left
-    checkpartymon(SPECIES_AIPOM)
-    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
-    if(var(VAR_TEMP_0) != PARTY_SIZE){
-        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
-        if(var(VAR_0x8005) == ITEM_NONE){
-            givepartyitem(ITEM_BERRY_JUICE, VAR_TEMP_0)
-        }
-    }
+    } 
 
     setflag(FLAG_TRAINER5_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
@@ -2751,8 +2752,7 @@ text Trainer4_PostBattle{
 
 // TRAINER 5 - Meowth Onix (money battle)
 text Trainer5_Intro{
-    "You dont need to assist me.\n"
-    "I'm rich enough."
+    "Alright, let's battle!"
 }
 
 text Trainer5_Outro{
@@ -2761,6 +2761,12 @@ text Trainer5_Outro{
 
 text Trainer5_PostBattle{
     "Fock off."
+}
+
+text Trainer5_RemoveAssistMessage{
+    "I'm rich enough to care for myself.\n"
+    "I don't need you to assist me.\p"
+    "Come back when that move is gone."
 }
 
 

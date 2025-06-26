@@ -48,7 +48,7 @@
 #define FLAG_POKE_BALL_OBTAINED             0x23 
 #define FLAG_CUSTAP_BERRY_OBTAINED          0x24
 #define FLAG_ETHER_SOLD_OUT                 0x25
-#define FLAG_FLOAT_STONE_OBTAINED           0x26
+#define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LOST_GLASSES_OBTAINED          0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
 #define FLAG_GRAVESTONE_CHECK1              0x29
@@ -1233,7 +1233,7 @@
 #define FLAG_RAN_FROM_TRAPINCH                                      0x49E
 #define FLAG_HIDE_TRAPINCH                                          0x49F  
 #define FLAG_RECOVERED_BERRY_JUICE                                           0x4A0  
-#define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused Flag
+#define FLAG_UNUSED_0x4A1                                           0x4A1 
 #define FLAG_UNUSED_0x4A2                                           0x4A2 // Unused Flag
 #define FLAG_UNUSED_0x4A3                                           0x4A3 // Unused Flag
 #define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag

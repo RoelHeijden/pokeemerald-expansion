@@ -42428,9 +42428,9 @@ F_TRAINER_FEMALE |
 #line 16972
             .ability = ABILITY_PICKUP,
 #line 16973
-            .lvl = 4,
+            .lvl = 10,
 #line 16975
-            .nature = NATURE_TIMID,
+            .nature = NATURE_JOLLY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16976
@@ -42448,7 +42448,7 @@ F_TRAINER_FEMALE |
 #line 16979
             .ability = ABILITY_STURDY,
 #line 16980
-            .lvl = 4,
+            .lvl = 5,
 #line 16982
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

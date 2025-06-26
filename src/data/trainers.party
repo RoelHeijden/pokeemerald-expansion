@@ -16970,14 +16970,14 @@ AI: AI_FLAG_TRAINER5
 
 Meowth-Alola  
 Ability: Pickup  
-Level: 4  
+Level: 10   
 EVs: 252 Spe  
-Timid Nature  
+Jolly Nature  
 - Pay Day  
 
 Onix  
 Ability: Sturdy  
-Level: 4  
+Level: 5  
 EVs: 252 Spe  
 Timid Nature  
 IVs: 0 HP / 0 Atk  
