@@ -16906,7 +16906,6 @@ Gender: Male
 Music: Intense
 Items: Max Elixir
 Double Battle: No
-AI: AI_FLAG_SINGLE2
 
 Dracozolt @ Ability Shield  
 Ability: Volt Absorb  
@@ -16923,7 +16922,7 @@ Pic: Pokemaniac
 Gender: Male
 Music: Intense
 Double Battle: Yes
-AI: AI_FLAG_DOUBLE2
+AI: AI_FLAG_TRAINER3
 
 Komala (M) @ Air Balloon 
 Ability: Comatose  
@@ -16967,7 +16966,7 @@ Pic: Rich Boy
 Gender: Male
 Music: Intense
 Double Battle: Yes
-AI: AI_FLAG_SEQUENCE_SWITCHING
+AI: AI_FLAG_TRAINER5
 
 Meowth-Alola  
 Ability: Pickup  
@@ -17006,21 +17005,21 @@ Pic: Twins
 Gender: Male
 Music: Intense
 Double Battle: Yes
-AI: AI_FLAG_DOUBLE3
+AI: AI_FLAG_TRAINER9
 
-Archaludon (F) @ Power Herb  
-Ability: Stamina  
-Level: 48  
-EVs: 252 SpA / 204 Spe  
-Rash Nature  
-IVs: 0 HP / 0 Atk / 0 SpD  
-- Electro Shot  
+Lucario (M)  
+Ability: Inner Focus  
+Level: 70  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+- Close Combat  
 
-Archaludon (F) @ Power Herb  
-Ability: Stalwart  
-Level: 48  
-EVs: 252 SpA / 252 Spe  
-Rash Nature  
-IVs: 0 HP / 0 Atk / 0 SpD  
-- Electro Shot  
+Lucario (F)  
+Ability: Inner Focus  
+Level: 70  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+- Close Combat  
+
+
 

@@ -61,9 +61,9 @@ static s32 AI_PowerfulStatus(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
 static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 // ADDED
-static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Single2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -88,9 +88,9 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [17] = NULL,                     // Unused
     [18] = NULL,                     // Unused
     [19] = NULL,                     // Unused
-    [20] = AI_Double2_Logic,         // AI_FLAG_DOUBLE2
-    [21] = AI_Double3_Logic,         // AI_FLAG_DOUBLE3
-    [22] = AI_Single2_Logic,         // AI_FLAG_SINGLE2
+    [20] = AI_Trainer3,              // AI_FLAG_TRAINER3
+    [21] = AI_Trainer5,              // AI_FLAG_TRAINER5
+    [22] = AI_Trainer9,              // AI_FLAG_TRAINER9
     [23] = NULL,                     // Unused
     [24] = NULL,                     // Unused
     [25] = NULL,                     // Unused
@@ -5457,8 +5457,8 @@ void ResetDynamicAiFunc(void)
 ////////////////////////////////////////////////////////////////////////////
 
 
-// Double battle 2 logic
-static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
+// trainer 3 (fenekin komala)
+static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
     // int battlerFlorges = (gBattleMons[2].species == SPECIES_FLORGES) * 2;
 
@@ -5529,8 +5529,20 @@ static s32 AI_Double2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
+// trainer5 (meowth onix)
+static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    // determine aipom slot
+    int battlerAipom = (gBattleMons[2].species == SPECIES_AIPOM) * 2;
 
-static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    // always target Aipom with Pay Day
+    if(move == MOVE_PAY_DAY && battlerDef == battlerAipom){
+        score += 50;
+    }
+    return score;
+}
+
+// trainer 9 (lucario lucario)
+static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
     // prioritize certain targets
     if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA)
         score += 50;
@@ -5549,7 +5561,4 @@ static s32 AI_Double3_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 }
 
 
-// unused
-static s32 AI_Single2_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
-    return score;
-}
+

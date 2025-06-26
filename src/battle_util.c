@@ -8369,6 +8369,31 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
     u32 moveType;
     GET_MOVE_TYPE(move, moveType);
 
+    // ADDED
+    // target override for trainer5 (meowth onix) 
+    // if move is Struggle and opponents are Liepard + Aipom: target Aipom
+    if (move == MOVE_STRUGGLE)
+    {
+        u8 battler1 = GetBattlerAtPosition(BATTLE_OPPOSITE(gBattlerAttacker));
+        u8 battler2 = battler1 ^ BIT_FLANK;
+
+        u16 species1 = gBattleMons[battler1].species;
+        u16 species2 = gBattleMons[battler2].species;
+
+        if ((species1 == SPECIES_LIEPARD && species2 == SPECIES_AIPOM) ||
+            (species1 == SPECIES_AIPOM && species2 == SPECIES_LIEPARD))
+        {
+            if (species1 == SPECIES_AIPOM)
+                targetBattler = battler1;
+            else
+                targetBattler = battler2;
+
+            *(gBattleStruct->moveTarget + gBattlerAttacker) = targetBattler;
+            return targetBattler;
+        }
+    }
+
+
     if (setTarget != NO_TARGET_OVERRIDE)
         moveTarget = setTarget - 1;
     else

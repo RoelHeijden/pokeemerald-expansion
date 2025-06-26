@@ -47,9 +47,9 @@
 #define AI_FLAG_SMART_MON_CHOICES     (1 << 17)  // AI will make smarter decisions when choosing which mon to send out mid-battle and after a KO, which are separate decisions. Automatically included by AI_FLAG_SMART_SWITCHING.
 #define AI_FLAG_CONSERVATIVE          (1 << 18)  // AI assumes all moves will low roll damage
 #define AI_FLAG_SEQUENCE_SWITCHING    (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle
-#define AI_FLAG_DOUBLE2               (1 << 20)  // AI for double battle2 (komala tinkaton)
-#define AI_FLAG_DOUBLE3               (1 << 21)  // AI for double battle3 (lucario lucario)
-#define AI_FLAG_SINGLE2               (1 << 22)  // AI for single battle4 (toxicroak, breloom)
+#define AI_FLAG_TRAINER3               (1 << 20)  // AI for double trainer3 (komala tinkaton)
+#define AI_FLAG_TRAINER5               (1 << 21)  // AI for double trainer5 (meowth onix)
+#define AI_FLAG_TRAINER9               (1 << 22)  // AI for single trainer9 (lucario lucario)
 
 #define AI_FLAG_COUNT                       23
 
