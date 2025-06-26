@@ -694,8 +694,8 @@
 #define FLAG_UNUSED_0x28A  0x28A // Unused Flag
 #define FLAG_PLAYER_JUST_LOST             0x28B
 #define FLAG_JUST_HAD_ZERA_BATTLE         0x28C  
-#define FLAG_HEX_DELETED_FOR_DIG          0x28D
-#define FLAG_UNUSED_0x28E  0x28E // Unused Flag
+#define FLAG_UNUSED_0x28D                 0x28D
+#define FLAG_MENTAL_HERB_SOLD_OUT         0x28E 
 #define FLAG_UNUSED_0x28F  0x28F // Unused Flag
 #define FLAG_UNUSED_0x290  0x290 // Unused Flag
 #define FLAG_UNUSED_0x291  0x291 // Unused Flag

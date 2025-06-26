@@ -652,6 +652,9 @@ static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y)
         // ADDED -- ether sold out
         else if (itemId == ITEM_ETHER && FlagGet(FLAG_ETHER_SOLD_OUT) == TRUE)
             StringCopy(gStringVar4, gText_SoldOut);
+        // ADDED -- ether sold out
+        else if (itemId == ITEM_MENTAL_HERB && FlagGet(FLAG_MENTAL_HERB_SOLD_OUT) == TRUE)
+            StringCopy(gStringVar4, gText_SoldOut);
 
         else
             StringExpandPlaceholders(gStringVar4, gText_PokedollarVar1);
@@ -1021,6 +1024,9 @@ static void Task_BuyMenu(u8 taskId)
                 BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
             // ADDED -- ether sold out
             else if (itemId == ITEM_ETHER && FlagGet(FLAG_ETHER_SOLD_OUT) == TRUE)
+                BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
+            // ADDED -- mental herb sold out
+            else if (itemId == ITEM_MENTAL_HERB && FlagGet(FLAG_MENTAL_HERB_SOLD_OUT) == TRUE)
                 BuyMenuDisplayMessage(taskId, gText_ThatItemIsSoldOut, BuyMenuReturnToItemList);
 
             else if (!IsEnoughMoney(&gSaveBlock1Ptr->money, sShopData->totalCost))
