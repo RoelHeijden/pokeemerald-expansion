@@ -15098,11 +15098,22 @@ static void Cmd_pickup(void)
 
             ability = gSpeciesInfo[species].abilities[GetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM)];
 
+            // ADDED
+            // increment possible pickup encounters
+            if (ability == ABILITY_PICKUP
+                && species != SPECIES_NONE
+                && species != SPECIES_EGG
+                && heldItem == ITEM_NONE){
+                VarSet(VAR_PICKUP_COUNTER, VarGet(VAR_PICKUP_COUNTER) + 1);
+            }
+            u8 PICKUP_FIGHTS_NUM = 7;
+
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
                 && species != SPECIES_EGG
                 && heldItem == ITEM_NONE
-                && (Random() % 10) == 0)
+                && VarGet(VAR_PICKUP_COUNTER) == PICKUP_FIGHTS_NUM) // ADDED -- find item on the 7th win only
+                // && (Random() % 10) == 0)
             {
                 if (isInPyramid)
                 {
@@ -15119,7 +15130,12 @@ static void Cmd_pickup(void)
                         percentTotal += sPickupTable[j].percentage[lvlDivBy10];
                         if (rand < percentTotal)
                         {
-                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupTable[j].itemId);
+                            // SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupTable[j].itemId);
+
+                            // CHANGED
+                            // always get a Full Heal
+                            u16 item = ITEM_FULL_HEAL;
+                            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
                             break;
                         }
                     }
