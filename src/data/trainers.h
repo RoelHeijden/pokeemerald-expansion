@@ -42313,46 +42313,44 @@ F_TRAINER_FEMALE |
             {
 #line 16927
             .species = SPECIES_KOMALA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16927
-            .gender = TRAINER_MON_MALE,
-#line 16927
-            .heldItem = ITEM_AIR_BALLOON,
+            .heldItem = ITEM_SNOWBALL,
 #line 16930
-            .ev = TRAINER_PARTY_EVS(252, 0, 0, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(228, 0, 0, 0, 0, 0),
 #line 16932
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 0),
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 15),
 #line 16928
             .ability = ABILITY_COMATOSE,
 #line 16929
-            .lvl = 45,
+            .lvl = 40,
 #line 16931
-            .nature = NATURE_BOLD,
+            .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16933
-                MOVE_BULLDOZE,
+                MOVE_EARTHQUAKE,
                 MOVE_WISH,
             },
             },
             {
 #line 16936
-            .species = SPECIES_TINKATON,
-#line 16936
-            .gender = TRAINER_MON_FEMALE,
+            .species = SPECIES_KLEFKI,
+            .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16939
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 252),
+            .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 0, 252),
 #line 16941
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 0, 31, 31),
 #line 16937
-            .ability = ABILITY_PICKPOCKET,
+            .ability = ABILITY_MAGICIAN,
 #line 16938
-            .lvl = 31,
+            .lvl = 26,
 #line 16940
-            .nature = NATURE_TIMID,
+            .nature = NATURE_SASSY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16942
-                MOVE_LIGHT_SCREEN,
+                MOVE_FLASH_CANNON,
             },
             },
         },

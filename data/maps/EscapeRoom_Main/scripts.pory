@@ -296,6 +296,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         gender=1, // female
         move1=MOVE_NATURE_POWER,
         move2=MOVE_GRASS_KNOT,
+        // move2=MOVE_SKILL_SWAP,
         move3=MOVE_GRASSY_TERRAIN,
         move4=MOVE_CAMOUFLAGE,
         // EVs:
@@ -303,11 +304,11 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         spDefEv=252,
         // IVs:
         hpIv=31,
-        atkIv=1,
-        defIv=3,
+        atkIv=0,
+        defIv=0,
         speedIv=31,
         spAtkIv=0,
-        spDefIv=30
+        spDefIv=31
     )
 
     givemon(
@@ -319,7 +320,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move1=MOVE_STEEL_ROLLER,
         move2=MOVE_BLOCK,
         move3=MOVE_INGRAIN,
-        move4=MOVE_SUNNY_DAY,
+        move4=MOVE_GRAVITY,
         // EVs:
         hpEv=0, 
         atkEv=252,
@@ -1347,14 +1348,13 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
             removemon(SPECIES_FERROTHORN)
             givemon(
                 SPECIES_DUNSPARCE,
-                50,
+                48,
                 abilityNum=2, // rattled
                 nature=8, // impish
                 gender=1, // female
                 move1=MOVE_TRUMP_CARD,
-                move2=MOVE_AIR_SLASH,
-                move3=MOVE_HEX,
-                // move4=MOVE_COUNTER,
+                move2=MOVE_HEX,
+                move3=MOVE_ICE_BEAM,
                 move4=MOVE_NONE,
                 // EVs:
                 hpEv=0, 
@@ -1365,7 +1365,7 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
                 atkIv=0,
                 defIv=31,
                 speedIv=31,
-                spAtkIv=10,
+                spAtkIv=0,
                 spDefIv=31
             )
             setflag(FLAG_FERRO_TRADE_ACCEPTED)

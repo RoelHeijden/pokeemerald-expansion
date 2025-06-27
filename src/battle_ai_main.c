@@ -5460,72 +5460,34 @@ void ResetDynamicAiFunc(void)
 // trainer 3 (fenekin komala)
 static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 {
-    // int battlerFlorges = (gBattleMons[2].species == SPECIES_FLORGES) * 2;
-
-    int battlerDunsparce = (gBattleMons[2].species == SPECIES_DUNSPARCE) * 2;
-    int dunsparceHp = gBattleMons[battlerDunsparce].hp;  // max = 160
-
-    int battlerKomala = (gBattleMons[3].species == SPECIES_KOMALA) * 2 + 1;
-    int komalaHp = gBattleMons[battlerKomala].hp;  // max = 155
-
-    int battlerTinkaton = (gBattleMons[3].species == SPECIES_TINKATON) * 2 + 1;
-    int tinkatonHp = gBattleMons[battlerTinkaton].hp;  // max = 109
+    // determine EQ damage to Dunsparce (single target)
+    int EQ_DAMAGE = 29;
+    if (gBattleMons[battlerAtk].statStages[STAT_ATK] > 6) // any positive boost
+        EQ_DAMAGE = 43;
 
 
-
-    // Additional case to make early battles less possible:
-    // never use Wish if player still has Ferrothorn
-    if(gBattleMons[0].species == SPECIES_FERROTHORN || gBattleMons[2].species == SPECIES_FERROTHORN){
-        if(move == MOVE_WISH){
-            score = 1;
-            return score;
-        }
-        if(move == MOVE_BULLDOZE){
-            score = 200;
-            return score;
-        }
+    // klefki always attack Florges
+    if(move == MOVE_FLASH_CANNON){
+        if(gBattleMons[battlerDef].species == SPECIES_FLORGES)
+            score += 50;
     }
 
-    // used for Counter calcs
-    int bulldozeDmg = 19;
-
-    // Komala Bulldoze
-    if(move == MOVE_BULLDOZE){
-        score = 110;
-
-        // always bulldoze if it KOs
-        if(dunsparceHp <= bulldozeDmg)
-            score = 150;
-    }
-
-    // Komala Wish
+    // Komala prioritize Wish
     if(move == MOVE_WISH){
-        score = 50;
+        score += 20;
 
-        // use double wish (fail) if Bulldoze lets Counter KO
-        if (komalaHp <= (2 * bulldozeDmg) && !(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
-            score = 120;
-
-        // don't use wish if already in effect
+        // unless wish is already in effect
         if (gWishFutureKnock.wishCounter[battlerAtk] != 0)
-            return score;
-
-        // always use Wish if in range of: counter + 2x Trump Card in light screen
-        if(komalaHp <= 123 && !(gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
-            score = 120;
-
-        // always use Wish if in range of: 3x Trump Card in light screen + grassy healing
-        if(komalaHp <= 98 && (gFieldStatuses & STATUS_FIELD_GRASSY_TERRAIN))
-            score = 120;
-
-        // use wish when below 100% and Light screen ends next turn
-        if(komalaHp < gBattleMons[battlerKomala].maxHP && gSideTimers[GetBattlerSide(battlerAtk)].lightscreenTimer <= 2)
-            score = 120;
-
-        // alternate wish and TR when both light screen and tinkaton are gone
-        if(tinkatonHp == 0 && gSideTimers[GetBattlerSide(battlerAtk)].lightscreenTimer <= 1)
-            score = 120;
+            score -= 80;
     }
+
+    // click EQ if it ends the battle
+    if(gBattleMons[battlerDef].species == SPECIES_DUNSPARCE
+       && gBattleMons[battlerDef].hp <= EQ_DAMAGE
+       && move == MOVE_EARTHQUAKE){
+        score += 100;
+    }
+
     return score;
 }
 

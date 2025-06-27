@@ -16924,22 +16924,22 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_TRAINER3
 
-Komala (M) @ Air Balloon 
+Komala @ Snowball  
 Ability: Comatose  
-Level: 45  
-EVs: 252 HP / 252 Spe  
-Bold Nature  
-IVs: 0 Atk / 0 SpD  
-- Bulldoze  
-- Wish
+Level: 40  
+EVs: 228 HP  
+Modest Nature  
+IVs: 15 SpD  
+- Earthquake  
+- Wish  
 
-Tinkaton (F) 
-Ability: Pickpocket  
-Level: 31  
-EVs: 252 SpD / 252 Spe  
-Timid Nature  
-IVs: 0 Atk  
-- Light Screen
+Klefki  
+Ability: Magician  
+Level: 26  
+EVs: 252 HP / 252 SpD  
+Sassy Nature  
+IVs: 0 Spe  
+- Flash Cannon  
 
 
 === TRAINER_CUSTOM_TRAINER4 ===
@@ -16952,7 +16952,7 @@ Double Battle: No
 
 Iron Bundle @ Booster Energy  
 Ability: Quark Drive  
-Level: 65  
+Level: 63  
 EVs: 252 SpA / 252 Spe  
 Timid Nature  
 IVs: 0 Atk  
