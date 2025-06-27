@@ -4,7 +4,7 @@ const LOCALID_TABLETS_COOK_NPC = 3
 const LOCALID_RARE_CANDY = 4
 const LOCALID_TRAPINCH = 5
 const LOCALID_TABLET2 = 6
-const LOCALID_2000_CASH = 7
+const LOCALID_NURSE = 7
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -39,6 +39,8 @@ script EscapeRoom_EggCave_SetLostItemVars{
 }
 
 
+////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
+
 
 script EscapeRoom_EventScript_TrapinchBlocksPlayer{
     // triggered by trigger tile
@@ -46,23 +48,21 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
 
     // if Trapinch not yet ran from
     if(flag(FLAG_RAN_FROM_TRAPINCH) == FALSE){
-        
-        // move Trapinch
+
+        // move Trapinch 1 for single battle
         applymovement(LOCALID_TRAPINCH, TrapinchMoveIn)
         waitmovement(LOCALID_TRAPINCH)
-
-        // face trapinch
         applymovement(OBJ_EVENT_ID_PLAYER, PlayerFaceUp)
         waitmovement(OBJ_EVENT_ID_PLAYER)
 
         // play sound
         playmoncry(SPECIES_TRAPINCH, CRY_MODE_ENCOUNTER)
         delay(40)
-	    waitmoncry
+        waitmoncry
 
         // do battle
         call(EscapeRoom_EventScript_TrapinchBattle)
-
+        
         ////// if battle won (ran away) ////// 
 
         // remove Trapinch 
@@ -75,9 +75,14 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
         // set flags and prevent future trigger
         setvar(VAR_EGGCAVE_MAPSCRIPT_TRAPINCH_TRIGGER, 1)
         setflag(FLAG_RAN_FROM_TRAPINCH)
+
+        // execute nurse script
+        delay(30)
+        call(EscapeRoom_EventScript_RescueNurse)
     }
     releaseall
 }
+
 
 movement PlayerFaceUp{
     face_up
@@ -99,21 +104,21 @@ script EscapeRoom_EventScript_TrapinchBattle{
         clearflag(FLAG_TOGGLE_BAG_USE)
     }
 
-    // set annihilape battle
     createmon(
         side=1,
         slot=0,
         species=SPECIES_TRAPINCH,
-        level=80,
+        level=90,
         nature=3, // adamant
         abilityNum=1, // arena trap
         gender=1,
         move1=MOVE_EARTHQUAKE
         // evs
-        hpEv=4,
+        hpEv=0,
         defEv=0,
         atkEv=252, 
-        spDefEv=252,
+        spDefEv=4,
+        speedEv=252,
         // ivs
         hpIv=31,
         atkIv=31,
@@ -126,6 +131,92 @@ script EscapeRoom_EventScript_TrapinchBattle{
     releaseall
 }
 
+script EscapeRoom_EventScript_RescueNurse{
+    // move to player
+    playse(SE_PIN)
+    applymovement(LOCALID_NURSE, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_NURSE)
+    delay(30)
+    applymovement(LOCALID_NURSE, MoveNurseToPlayer)
+    waitmovement(LOCALID_NURSE)
+
+    // face to nurse
+    applymovement(OBJ_EVENT_ID_PLAYER, PlayerFaceLeft)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+
+    // scenario: no heal required
+    msgbox(NurseMessage1, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // givemoney
+    addmoney(2000)
+    lockall
+    message(MoneyReceived)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+    delay(15)
+    closemessage
+    delay(5)
+    
+    // check if heal required
+    partymonhasfainted
+    lockall
+    if(var(VAR_RESULT) != PARTY_SIZE){
+        // scenario: heal player
+        msgbox(NurseMessageHeal1, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        special(HealPlayerParty)
+        playse(SE_USE_ITEM)
+        lockall
+        waitse
+        delay(10)
+    }
+    
+    // message
+    msgbox(NurseMessage2, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // move player aside
+    applymovement(OBJ_EVENT_ID_PLAYER, MovePlayerAside)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+
+    // move away
+    applymovement(LOCALID_NURSE, MoveNurseAway)
+    waitmovement(LOCALID_NURSE)
+
+    // remove object
+    playse(SE_EXIT)
+    delay(5)
+    removeobject(LOCALID_NURSE)
+    setflag(FLAG_NURSE_RESCUED)
+    waitse
+}
+
+movement MoveNurseToPlayer{
+    face_up
+    walk_fast_up
+    face_right
+    walk_fast_right
+}
+
+movement MoveNurseAway {
+    walk_fast_right * 3
+    face_down
+    walk_fast_down
+}
+
+movement MovePlayerAside {
+    face_up
+    walk_up
+    face_down
+}
+
+movement PlayerFaceLeft {
+    face_left
+}
+
+
 script EscapeRoom_EggCave_EventScript_FindRareCandy{
     lockall
     finditem(ITEM_RARE_CANDY)
@@ -134,14 +225,35 @@ script EscapeRoom_EggCave_EventScript_FindRareCandy{
     releaseall
 }
 
-script EscapeRoom_EggCave_EventScript_Find2000Cash{
-    lockall
-    addmoney(2000)
-    message("{PLAYER} received ¥2.000!")
-    playfanfare(MUS_OBTAIN_ITEM)
-    waitfanfare
-    removeobject(LOCALID_2000_CASH)
-    setflag(FLAG_2000_CASH_OBTAINED)
-    releaseall
+// script EscapeRoom_EggCave_EventScript_Find2000Cash{
+//     lockall
+//     addmoney(2000)
+//     message("{PLAYER} received ¥2.000!")
+//     playfanfare(MUS_OBTAIN_ITEM)
+//     waitfanfare
+//     removeobject(LOCALID_2000_CASH)
+//     setflag(FLAG_2000_CASH_OBTAINED)
+//     releaseall
+// }
+
+
+text NurseMessage1{
+    "Thank you so much!\n"
+    "That Trapinch would not let me out!\p"
+    "I don't know what I would've done if\n"
+    "it weren't for you.\p"
+    "Here, take this.\n"
+    "Call it a rescue reward!"
 }
 
+text NurseMessageHeal1{
+    "Let me fix you up as well."
+}
+
+text NurseMessage2{
+    "Take care!"
+}
+
+text MoneyReceived{
+    "{PLAYER} received ¥2.000!"
+}
