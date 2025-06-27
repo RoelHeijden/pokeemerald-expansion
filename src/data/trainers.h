@@ -42385,7 +42385,7 @@ F_TRAINER_FEMALE |
 #line 16954
             .ability = ABILITY_QUARK_DRIVE,
 #line 16955
-            .lvl = 65,
+            .lvl = 63,
 #line 16957
             .nature = NATURE_TIMID,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,

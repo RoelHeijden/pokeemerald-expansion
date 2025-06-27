@@ -83,7 +83,6 @@ script EscapeRoom_MapScript_OnResumeScripts{
     getpartysize
     if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
         setflag(FLAG_ZERAORA_CAUGHT)
-        setflag(FLAG_CUSTAP_SOLD_OUT)
 
         // prevent Custap restore after catching zera
         clearflag(FLAG_RECOVERED_CUSTAP)
@@ -296,7 +295,6 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         gender=1, // female
         move1=MOVE_NATURE_POWER,
         move2=MOVE_GRASS_KNOT,
-        // move2=MOVE_SKILL_SWAP,
         move3=MOVE_GRASSY_TERRAIN,
         move4=MOVE_CAMOUFLAGE,
         // EVs:
@@ -1024,17 +1022,14 @@ script EscapeRoom_ZeraoraHintNPC{
 
 script EscapeRoom_TabletsHintNPC{
     lock
-    if(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
+    if(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
         msgbox(FourTabletsHintMessage1, MSGBOX_NPC)
     }
-    elif(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
+    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
         msgbox(FourTabletsHintMessage2, MSGBOX_NPC)
     }
-    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
-        msgbox(FourTabletsHintMessage3, MSGBOX_NPC)
-    }
     else{
-        msgbox(FourTabletsHintMessage4, MSGBOX_NPC)
+        msgbox(FourTabletsHintMessage3, MSGBOX_NPC)
     }
     releaseall
 }
@@ -1211,6 +1206,9 @@ script EscapeRoom_EventScript_Trainer3PostBattle{
     // set flag to keep it moved away
     setflag(FLAG_TRAINER3_DEFEATED)
 
+    // set custap sold out (until Liepard obtained)
+    setflag(FLAG_CUSTAP_SOLD_OUT)
+
     // heal 
     call(EscapeRoom_EventScript_PostMatchHeal)
 
@@ -1279,7 +1277,6 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
         }
     }
 
-    // setflag(FLAG_CUSTAP_SOLD_OUT) // prevent custap lines in trainer7?
     setflag(FLAG_TRAINER6_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
@@ -1745,10 +1742,10 @@ script EscapeRoom_EventScript_MapSwitch4{
 
 script EscapeRoom_EventScript_CheckSwitchesCorrect{
     if(
-        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Bag
-        var(VAR_MAP_SWITCH_2) == 0 &&  // north -- Trainer card
-        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Pokedex
-        var(VAR_MAP_SWITCH_4) == 3     // west  -- Pokemon screen
+        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Pokemon screen contest moves
+        var(VAR_MAP_SWITCH_2) == 2 &&  // south -- Bag
+        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Pokedex pokemon size
+        var(VAR_MAP_SWITCH_4) == 3     // west  -- Save menu
     ){
         call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
     }
@@ -2531,23 +2528,23 @@ text FourTabletsHintMessage1{
     "I wonder what they do."
 }
 
-text FourTabletsHintMessage2{
-    "I'm so done with this search...\p"
-    "Maybe it's time to just kick back and\n"
-    "stare at the waves for a while."
-}
+// text FourTabletsHintMessage2{
+//     "I'm so done with this search...\p"
+//     "Maybe it's time to just kick back and\n"
+//     "stare at the waves for a while."
+// }
 
-text FourTabletsHintMessage3{
+text FourTabletsHintMessage2{
     "Wait...\n"
     "You actually found all four!?\p"
     "I suppose now I can stop looking and\n"
     "get back to my regular job.\p"
     "Not sure what we're serving today.\n"
-    "I'll have to look through the menus."
+    "I'll have to go through the menus."
 }
 
-text FourTabletsHintMessage4{
-    "Did you feel that earthquake?"
+text FourTabletsHintMessage3{
+    "Was that an earthquake?"
 }
 
 // Dusknoir mail hint NPC
