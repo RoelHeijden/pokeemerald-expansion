@@ -8187,7 +8187,8 @@ static void BestowItem(u32 battlerAtk, u32 battlerDef)
 // Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
 static bool32 TrySymbiosis(u32 battler, u32 itemId)
 {
-    if (!gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen
+    // CHANGED: made an exception for Snowball
+    if ((!gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen || itemId == ITEM_SNOWBALL)
         && gBattleStruct->changedItems[battler] == ITEM_NONE
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_BUTTON
         && GetBattlerHoldEffect(battler, TRUE) != HOLD_EFFECT_EJECT_PACK
