@@ -47,7 +47,7 @@ EscapeRoom_EventScript_TrapinchBlocksPlayer::
 # 48 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	goto_if_unset FLAG_RAN_FROM_TRAPINCH, EscapeRoom_EventScript_TrapinchBlocksPlayer_2
 EscapeRoom_EventScript_TrapinchBlocksPlayer_1:
-# 78 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 79 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
@@ -69,92 +69,94 @@ EscapeRoom_EventScript_TrapinchBlocksPlayer_2:
 # 64 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	call EscapeRoom_EventScript_TrapinchBattle
 # 69 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	fadescreen FADE_TO_BLACK
+	playse SE_EXIT
 # 70 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setflag FLAG_HIDE_TRAPINCH
+	fadescreen FADE_TO_BLACK
 # 71 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	removeobject 5
+	setflag FLAG_HIDE_TRAPINCH
 # 72 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	removeobject 5
+# 73 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	fadescreen FADE_FROM_BLACK
-# 75 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setvar VAR_EGGCAVE_MAPSCRIPT_TRAPINCH_TRIGGER, 1
 # 76 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	setvar VAR_EGGCAVE_MAPSCRIPT_TRAPINCH_TRIGGER, 1
+# 77 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	setflag FLAG_RAN_FROM_TRAPINCH
 	goto EscapeRoom_EventScript_TrapinchBlocksPlayer_1
 
 
-# 81 "data/maps/EscapeRoom_EggCave/scripts.pory"
-PlayerFaceUp:
 # 82 "data/maps/EscapeRoom_EggCave/scripts.pory"
+PlayerFaceUp:
+# 83 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_up
 	step_end
 
-# 85 "data/maps/EscapeRoom_EggCave/scripts.pory"
-TrapinchMoveIn:
 # 86 "data/maps/EscapeRoom_EggCave/scripts.pory"
+TrapinchMoveIn:
+# 87 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_down
-# 87 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 88 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_faster_down
-# 87 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 88 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_faster_down
 	step_end
 
 EscapeRoom_EventScript_TrapinchBattle::
-# 91 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 92 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
-# 94 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 95 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	backupplayerparty
-# 97 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 98 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	goto_if_set FLAG_TOGGLE_BAG_USE, EscapeRoom_EventScript_TrapinchBattle_2
 EscapeRoom_EventScript_TrapinchBattle_1:
-# 102 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 103 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	createmon side = 1, slot = 0, species = SPECIES_TRAPINCH, level = 80, nature = 3, abilityNum = 1, gender = 1, move1 = MOVE_EARTHQUAKE hpEv = 4, defEv = 0, atkEv = 252, spDefEv = 252, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 124 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	dowildbattle
 # 125 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	dowildbattle
+# 126 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_EventScript_TrapinchBattle_2:
-# 98 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 99 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	clearflag FLAG_TOGGLE_BAG_USE
 	goto EscapeRoom_EventScript_TrapinchBattle_1
 
 
 EscapeRoom_EggCave_EventScript_FindRareCandy::
-# 129 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	lockall
 # 130 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	finditem ITEM_RARE_CANDY
+	lockall
 # 131 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	removeobject 4
+	finditem ITEM_RARE_CANDY
 # 132 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setflag FLAG_RARE_CANDY_OBTAINED
+	removeobject 4
 # 133 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	setflag FLAG_RARE_CANDY_OBTAINED
+# 134 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EggCave_EventScript_Find2000Cash::
-# 137 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	lockall
 # 138 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	addmoney 2000
+	lockall
 # 139 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	message EscapeRoom_EggCave_EventScript_Find2000Cash_Text_0
+	addmoney 2000
 # 140 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
+	message EscapeRoom_EggCave_EventScript_Find2000Cash_Text_0
 # 141 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	waitfanfare
+	playfanfare MUS_OBTAIN_ITEM
 # 142 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	removeobject 7
+	waitfanfare
 # 143 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setflag FLAG_2000_CASH_OBTAINED
+	removeobject 7
 # 144 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	setflag FLAG_2000_CASH_OBTAINED
+# 145 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EggCave_EventScript_Find2000Cash_Text_0:
-# 139 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 140 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "{PLAYER} received ¥2.000!$"

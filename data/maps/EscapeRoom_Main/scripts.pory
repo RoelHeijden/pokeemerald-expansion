@@ -17,11 +17,13 @@ const LOCALID_TRAINER4 = 14
 const LOCALID_NURSE2 = 15
 const LOCALID_HINT_GUY2 = 16
 const LOCALID_ANTI_SOFTLOCK_GUY2 = 17
-const LOCALID_GLASSES_GUY = 18
+// const LOCALID_GLASSES_GUY = 18
+const LOCALID_LIEPARD = 18
 const LOCALID_SMEARGLE_NPC = 19
 const LOCALID_TRAINER5 = 20
 const LOCALID_CUT_TREE = 21
-const LOCALID_LOST_GLASSES = 22
+// const LOCALID_LOST_GLASSES = 22
+const LOCALID_LIEPARD_COLLAR = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
 const LOCALID_ROCK_SMASH_NPC = 25
@@ -481,13 +483,18 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 
 // LOST GLASSES GUY (LIEPARD TRADE)
 
-script EscapeRoom_EventScript_LostGlassesNPC{
+script EscapeRoom_EventScript_LiepardNPC{
     lock
     faceplayer
-    msgbox(LostGlassesNPCmainMessage, MSGBOX_AUTOCLOSE)
 
-    // if lost glasses obtained
-    checkitem(ITEM_WISE_GLASSES)
+    // play sound
+    playmoncry(SPECIES_TRAPINCH, CRY_MODE_NORMAL)
+    msgbox(LiepardNPCmainMessage, MSGBOX_AUTOCLOSE)
+    waitmoncry
+    waitmessage
+
+    // if Liepard Collar obtained
+    checkitem(ITEM_POWER_LENS)
     if(var(VAR_RESULT) == TRUE){
 
         // sanity check - check for Aipom in party
@@ -501,27 +508,55 @@ script EscapeRoom_EventScript_LostGlassesNPC{
             end
         }
 
+        lockall
+        delay(5)
+        msgbox(LiepardCollorFoundMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        lockall
+        delay(20)
+
         // display exclamation mark
         playse(SE_PIN)
-        applymovement(LOCALID_GLASSES_GUY, Common_Movement_ExclamationMark)
-        waitmovement(LOCALID_GLASSES_GUY)
+        applymovement(LOCALID_LIEPARD, Common_Movement_ExclamationMark)
+        waitmovement(LOCALID_LIEPARD)
+        lockall
+        delay(20)
+
+        // move Liepard around
+        applymovement(LOCALID_LIEPARD, LiepardMovement1)
+        waitmovement(LOCALID_LIEPARD)
+        applymovement(LOCALID_LIEPARD, LiepardMovement2)
+        waitmovement(LOCALID_LIEPARD)
+        delay(20)
+
+        playmoncry(SPECIES_TRAPINCH, CRY_MODE_NORMAL)
+        applymovement(LOCALID_LIEPARD, LiepardMovement3)
+        waitmovement(LOCALID_LIEPARD)
+        delay(2)
+        applymovement(LOCALID_LIEPARD, LiepardMovement4)
+        waitmovement(LOCALID_LIEPARD)
+        delay(2)
+        applymovement(LOCALID_LIEPARD, LiepardMovement5)
+        waitmovement(LOCALID_LIEPARD)
+        delay(2)
+        applymovement(LOCALID_LIEPARD, LiepardMovement6)
+        waitmovement(LOCALID_LIEPARD)
+        delay(50)
         lockall
 
-        msgbox(LostGlassesNPCGlassesFoundMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
+        // remove Liepard
+	    fadescreen(FADE_TO_BLACK)
+        setflag(FLAG_HIDE_LIEPARD_NPC)
+        removeobject(LOCALID_LIEPARD)
+        fadescreen(FADE_FROM_BLACK)
+
+        // obtain liepard
         call(EscapeRoom_EventScript_ObtainLiepard)
         lockall
-        removeitem(ITEM_WISE_GLASSES)
-        msgbox(LostGlassesNPCendMessage, MSGBOX_AUTOCLOSE)
-        waitmessage 
-
-        // walk away
-        applymovement(LOCALID_GLASSES_GUY, EscapeRoom_Movement_LostGlassesNPC)
-        waitmovement(LOCALID_GLASSES_GUY)
-        delay(30)
-        removeobject(LOCALID_GLASSES_GUY)
+        removeitem(ITEM_POWER_LENS)
 
         // reset spawn and heal location
+        delay(40)
         call(EscapeRoom_EventScript_RelocateNurseNPC)
 
         // re allow Custap Berry
@@ -531,14 +566,34 @@ script EscapeRoom_EventScript_LostGlassesNPC{
     end
 }
 
+movement LiepardMovement1 {
+    walk_fast_left * 2
+}
+movement LiepardMovement2 {
+    walk_fast_right * 2
+}
+movement LiepardMovement3 {
+    face_up
+}
+movement LiepardMovement4 {
+    face_left
+}
+movement LiepardMovement5 {
+    face_down
+}
+movement LiepardMovement6 {
+    face_right
+}
+
 script EscapeRoom_EventScript_ObtainLiepard{
     lockall
     givemon(
         SPECIES_LIEPARD,
         40,
+        ball=ITEM_FRIEND_BALL,
         abilityNum=2, // Prankster
         nature=17, // Quiet 
-        gender=0, 
+        gender=MON_FEMALE,
         move1=MOVE_ASSIST,
         move2=MOVE_TRICK,
         move3=MOVE_ROCK_SMASH,
@@ -555,14 +610,27 @@ script EscapeRoom_EventScript_ObtainLiepard{
         spAtkIv=31,
         spDefIv=31
     )    
-    message(LiepardObtainMessage)
     playfanfare(MUS_OBTAIN_ITEM)
+    message(LiepardObtainMessage)
     waitfanfare
+    waitmessage
+
+	msgbox(NicknameThisPokemonMessage, MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        // getpartysize
+        // subvar(VAR_RESULT, 1)
+        // copyvar(VAR_0x8004, VAR_RESULT)
+
+        call(Common_EventScript_NameReceivedPartyMon)
+        // fadescreen(FADE_TO_BLACK)
+        // special(ChangePokemonNickname)
+        // waitstate
+    }
+    closemessage
+
 }
 
-movement EscapeRoom_Movement_LostGlassesNPC{
-    walk_left * 8
-}
 
 // MOVING NURSE
 
@@ -618,8 +686,6 @@ movement EscapeRoom_Movement_PlayerMoveAway{
 movement EscapeRoom_Movement2_Nurse1NPC{
     walk_faster_left * 9
 }
-
-
 
 // MART NPCS
 
@@ -939,14 +1005,16 @@ script EscapeRoom_ZeraoraHintNPC{
         msgbox(ZeraoraHintMessage, MSGBOX_DEFAULT)
     }
     else{
-        if(flag(FLAG_WHITE_HERB_OBTAINED) == TRUE){
-            msgbox(ZeraoraHintPostCatchMessage, MSGBOX_DEFAULT)
+        if(flag(FLAG_WHITE_HERB_OBTAINED) == FALSE){
+            msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_DEFAULT)
             waitmessage
             giveitem(ITEM_WHITE_HERB)
             setflag(FLAG_WHITE_HERB_OBTAINED)
+            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_DEFAULT)
+            waitmessage
         }
         else{
-            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_DEFAULT)
+            msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_DEFAULT)
             waitmessage
         }
     }
@@ -1084,8 +1152,6 @@ script EscapeRoom_EventScript_Trainer9{
     waitmessage
     end
 }
-
-
 
 
 //// POST BATTLE SCRIPTS ////
@@ -1488,11 +1554,11 @@ script EscapeRoom_EventScript_FindCustapBerry{
     releaseall
 }
 
-script EscapeRoom_EventScript_FindLostGlasses{
+script EscapeRoom_EventScript_FindLiepardCollar{
     lockall
-    finditem(ITEM_WISE_GLASSES)
-    removeobject(LOCALID_LOST_GLASSES)
-    setflag(FLAG_LOST_GLASSES_OBTAINED)
+    finditem(ITEM_POWER_LENS)
+    removeobject(LOCALID_LIEPARD_COLLAR)
+    setflag(FLAG_LIEPARD_COLLAR_OBTAINED)
     releaseall
 }
 
@@ -2098,7 +2164,7 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     delay(50)
-    playse(SE_M_HAZE)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
+    playse(SE_M_SWEET_SCENT)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
     special(DoSealedChamberShakingEffect_Short)
     delay(10)
     special(DoSealedChamberShakingEffect_Short)
@@ -2189,7 +2255,8 @@ text GravestoneClick1Message{
 }
 
 text GravestoneClick2Message{
-    "A spirit stirs.\nYou sense a presence." 
+    "The air grows cold.\n"
+    "You feel a spirit nearby."
 }
 
 text GravestoneClick3Message{
@@ -2419,17 +2486,22 @@ text ZeraoraHintMessage{
     "Will you show me the Zeraora if you do\n"
     "manage to capture it?\p"
     "I've always wanted to see one up close."
-    // "It kind of just gives up after a while."
 }
 
-text ZeraoraHintPostCatchMessage{
-    "Wow, you actually caught the Zeraora!\n"
-    "I can't believe my eyes!\p"
-    "You've made a dream come true...\n"
-    "Take this! It's the least I can do."
+text ZeraoraHintPostCatchMessage1{
+    "Wow, you actually caught the Zeraora!\p"
+    "I can't believe my eyes!\n"
+    "You've made a dream come true...\p"
+    "Here, take this!"
+    
 }
 
 text ZeraoraHintPostCatchMessage2{
+    // "Good luck on your journey!"
+    "It's the least I can do."
+}
+
+text ZeraoraHintPostCatchMessage3{
     "I'll never forget this day."
 }
 
@@ -2487,26 +2559,25 @@ text DusknoirStoleMyMailMsg{
 }
 
 
-// LOST GLASSES NPC
-text LostGlassesNPCmainMessage{
-    "Have you seen my glasses?\n"
-    "I can't see without them!" 
-}
-
-text LostGlassesNPCGlassesFoundMessage{
-    "You've found them!\p"
-    "I guess I no longer need this\n"
-    "seeing-eye leopard...\p"
-    "..."
-}
+// LIEPARD NPC
 
 text LiepardObtainMessage{
     "{PLAYER} received a Liepard!"
 }
 
-text LostGlassesNPCendMessage{
-    "See you around!"
+text LiepardNPCmainMessage{
+    "Ryaaowr!" 
 }
+
+text LiepardCollorFoundMessage{
+    "You give Liepard the collar."
+}
+
+text NicknameThisPokemonMessage{
+    "Do you want to give a nickname to\n"
+	"this Liepard?"
+}
+
 
 // ONE-WAY ROCK SMASH NPC
 text RockSmashNPCstuck{

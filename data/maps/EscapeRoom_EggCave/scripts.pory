@@ -66,6 +66,7 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
         ////// if battle won (ran away) ////// 
 
         // remove Trapinch 
+        playse(SE_EXIT)
         fadescreen(FADE_TO_BLACK)
         setflag(FLAG_HIDE_TRAPINCH)
         removeobject(LOCALID_TRAPINCH)

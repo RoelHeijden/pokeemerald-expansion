@@ -4475,6 +4475,10 @@ $(OBJEVENTGFXDIR)/pokemon_old/annihilape.4bpp: %.4bpp: %.png
 $(OBJEVENTGFXDIR)/pokemon_old/trapinch.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 4 -mheight 4
 
+# ADDED
+$(OBJEVENTGFXDIR)/pokemon_old/liepard.4bpp: %.4bpp: %.png
+	$(GFX) $< $@ -mwidth 4 -mheight 4
+
 
 $(MISCGFXDIR)/emotes.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 2 -mheight 2

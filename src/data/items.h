@@ -7493,25 +7493,41 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_PowerBelt,
     },
 
+    // [ITEM_POWER_LENS] =
+    // {
+    //     .name = _("Power Lens"),
+    //     .pluralName = _("Power Lenses"),
+    //     .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
+    //     .holdEffect = HOLD_EFFECT_POWER_ITEM,
+    //     .holdEffectParam = POWER_ITEM_BOOST,
+    //     .description = COMPOUND_STRING(
+    //         "Hold item that pro-\n"
+    //         "motes Sp. Atk gain,\n"
+    //         "but reduces Speed."),
+    //     .pocket = POCKET_ITEMS,
+    //     .type = ITEM_USE_BAG_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    //     .secondaryId = STAT_SPATK,
+    //     .flingPower = 70,
+    //     .iconPic = gItemIcon_PowerLens,
+    //     .iconPalette = gItemIconPalette_PowerLens,
+    // },
     [ITEM_POWER_LENS] =
     {
-        .name = _("Power Lens"),
-        .pluralName = _("Power Lenses"),
-        .price = (I_PRICE >= GEN_9) ? 10000 : 3000,
-        .holdEffect = HOLD_EFFECT_POWER_ITEM,
-        .holdEffectParam = POWER_ITEM_BOOST,
+        .name = _("Liepard Collar"),
+        .price = 0,
         .description = COMPOUND_STRING(
-            "Hold item that pro-\n"
-            "motes Sp. Atk gain,\n"
-            "but reduces Speed."),
+            "A stylish collar\n"
+            "that helps form a\n"
+            "bond with Liepard."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-        .secondaryId = STAT_SPATK,
-        .flingPower = 70,
+        .flingPower = 30,
         .iconPic = gItemIcon_PowerLens,
         .iconPalette = gItemIconPalette_PowerLens,
     },
+
 
     [ITEM_POWER_BAND] =
     {
@@ -8452,6 +8468,23 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_ShellBell,
         .iconPalette = gItemIconPalette_Shell,
     },
+    // [ITEM_SHELL_BELL] =
+    // {
+    //     .name = _("Liepard Collar"),
+    //     .price = 0,
+    //     .description = COMPOUND_STRING(
+    //         "A stylish collar\n"
+    //         "that helps form a\n"
+    //         "bond with Liepard."),
+    //     .pocket = POCKET_ITEMS,
+    //     .type = ITEM_USE_BAG_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    //     .flingPower = 30,
+    //     .iconPic = gItemIcon_ShellBell,
+    //     .iconPalette = gItemIconPalette_Shell,
+    // },
+
+
 
     [ITEM_WIDE_LENS] =
     {
@@ -8490,33 +8523,17 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_MuscleBand,
     },
 
-    // [ITEM_WISE_GLASSES] =
-    // {
-    //     .name = _("Wise Glasses"),
-    //     .pluralName = _("Wise Glasses"),
-    //     .price = (I_PRICE >= GEN_9) ? 8000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
-    //     .holdEffect = HOLD_EFFECT_WISE_GLASSES,
-    //     .holdEffectParam = 10,
-    //     .description = COMPOUND_STRING(
-    //         "A pair of glasses\n"
-    //         "that ups the power\n"
-    //         "of special moves."),
-    //     .pocket = POCKET_ITEMS,
-    //     .type = ITEM_USE_BAG_MENU,
-    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    //     .flingPower = 10,
-    //     .iconPic = gItemIcon_WiseGlasses,
-    //     .iconPalette = gItemIconPalette_WiseGlasses,
-    // },
     [ITEM_WISE_GLASSES] =
     {
-        .name = _("Lost Glasses"),
-        .pluralName = _("Lost Glasses"),
-        .price = 0,
+        .name = _("Wise Glasses"),
+        .pluralName = _("Wise Glasses"),
+        .price = (I_PRICE >= GEN_9) ? 8000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
+        .holdEffect = HOLD_EFFECT_WISE_GLASSES,
+        .holdEffectParam = 10,
         .description = COMPOUND_STRING(
-            "A pair of glasses.\n"
-            "Someone must have\n"
-            "lost these."),
+            "A pair of glasses\n"
+            "that ups the power\n"
+            "of special moves."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8524,6 +8541,22 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_WiseGlasses,
         .iconPalette = gItemIconPalette_WiseGlasses,
     },
+    // [ITEM_WISE_GLASSES] =
+    // {
+    //     .name = _("Lost Glasses"),
+    //     .pluralName = _("Lost Glasses"),
+    //     .price = 0,
+    //     .description = COMPOUND_STRING(
+    //         "A pair of glasses.\n"
+    //         "Someone must have\n"
+    //         "lost these."),
+    //     .pocket = POCKET_ITEMS,
+    //     .type = ITEM_USE_BAG_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    //     .flingPower = 10,
+    //     .iconPic = gItemIcon_WiseGlasses,
+    //     .iconPalette = gItemIconPalette_WiseGlasses,
+    // },
 
     [ITEM_EXPERT_BELT] =
     {

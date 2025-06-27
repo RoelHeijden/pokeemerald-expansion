@@ -381,6 +381,9 @@ const u16 gObjectEventPal_Annihilape[] = INCBIN_U16("graphics/object_events/pale
 const u32 gObjectEventPic_TrapinchOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/trapinch.4bpp");
 const u16 gObjectEventPal_Trapinch[] = INCBIN_U16("graphics/object_events/palettes/trapinch.gbapal");
 
+// ADDED
+const u32 gObjectEventPic_LiepardOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/liepard.4bpp");
+const u16 gObjectEventPal_Liepard[] = INCBIN_U16("graphics/object_events/palettes/liepard.gbapal");
 
 
 const u32 gObjectEventPic_VigorothMover[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/vigoroth_mover.4bpp");

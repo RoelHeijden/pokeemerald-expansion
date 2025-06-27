@@ -49,7 +49,7 @@
 #define FLAG_CUSTAP_BERRY_OBTAINED          0x24
 #define FLAG_ETHER_SOLD_OUT                 0x25
 #define FLAG_2000_CASH_OBTAINED             0x26
-#define FLAG_LOST_GLASSES_OBTAINED          0x27
+#define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
 #define FLAG_GRAVESTONE_CHECK1              0x29
 #define FLAG_GRAVESTONE_CHECK2              0x2A
@@ -57,7 +57,7 @@
 #define FLAG_GRAVESTONE_CHECK4              0x2C 
 #define FLAG_HIDE_ANNIHILAPE                0x2D
 #define FLAG_ZERA_TRADED                    0x2E
-#define FLAG_HIDE_LOST_GLASSES_NPC          0x2F
+#define FLAG_HIDE_LIEPARD_NPC               0x2F
 #define FLAG_FERRO_TRADE_ACCEPTED           0x30
 #define FLAG_FLORGES_TRADE_ACCEPTED         0x31 
 #define FLAG_DUNSPARCE_TRADE_ACCEPTED       0x32
