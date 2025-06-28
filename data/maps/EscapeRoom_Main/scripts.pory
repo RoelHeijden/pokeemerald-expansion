@@ -1112,10 +1112,11 @@ script EscapeRoom_EventScript_Trainer5{
         end
     }
 
-    trainerbattle_single(
+    trainerbattle_double(
         TRAINER_CUSTOM_TRAINER5, 
         Trainer5_Intro, 
         Trainer5_Outro, 
+        DoubleBattle_NotEnoughMons,
         event_script=EscapeRoom_EventScript_Trainer5PostBattle,
     )
     msgbox(Trainer5_PostBattle, MSGBOX_AUTOCLOSE)
@@ -2480,7 +2481,7 @@ text ZeraoraHintMessage{
     "Have you seen the Zeraora around here?\p"
     "I've seen people try to catch it but no\n"
     "one's been able to get its HP below 50%.\p"
-    "Will you show me the Zeraora if you do\n"
+    "Will you show me your Zeraora if you do\n"
     "manage to capture it?\p"
     "I've always wanted to see one up close."
 }
@@ -2588,8 +2589,8 @@ text RockSmashNPCFarewellMsg{
 // SHOP NPCS
 text MartNPC_AskToShop{
     "Welcome to my shop.\p"
-    "Don't worry, all items can be sold back\n"
-    "for the same price."
+    "Don't worry, all items can be sold for\n"
+    "the same price."
 }
 
 text MartNPC_SayGoodbye{

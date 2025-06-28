@@ -66,12 +66,16 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
         ////// if battle won (ran away) ////// 
 
         // remove Trapinch 
-        playse(SE_EXIT)
+        lockall
         fadescreen(FADE_TO_BLACK)
         setflag(FLAG_HIDE_TRAPINCH)
         removeobject(LOCALID_TRAPINCH)
         fadescreen(FADE_FROM_BLACK)
 
+        // trapinch went away message
+        msgbox(TrapinchWentAway, MSGBOX_AUTOCLOSE)
+        waitmessage
+        
         // set flags and prevent future trigger
         setvar(VAR_EGGCAVE_MAPSCRIPT_TRAPINCH_TRIGGER, 1)
         setflag(FLAG_RAN_FROM_TRAPINCH)
@@ -134,6 +138,8 @@ script EscapeRoom_EventScript_TrapinchBattle{
 script EscapeRoom_EventScript_RescueNurse{
     // move to player
     playse(SE_PIN)
+    applymovement(LOCALID_NURSE, MoveNurseFaceRight)
+    waitmovement(LOCALID_NURSE)
     applymovement(LOCALID_NURSE, Common_Movement_ExclamationMark)
     waitmovement(LOCALID_NURSE)
     delay(30)
@@ -154,28 +160,30 @@ script EscapeRoom_EventScript_RescueNurse{
     message(MoneyReceived)
     playfanfare(MUS_OBTAIN_ITEM)
     waitfanfare
-    delay(15)
+    delay(10)
     closemessage
-    delay(5)
     
     // check if heal required
     partymonhasfainted
     lockall
+
+    // scenario: heal player
     if(var(VAR_RESULT) != PARTY_SIZE){
-        // scenario: heal player
-        msgbox(NurseMessageHeal1, MSGBOX_AUTOCLOSE)
-        waitmessage
+        msgbox(NurseMessageHeal1, MSGBOX_DEFAULT)
 
         special(HealPlayerParty)
         playse(SE_USE_ITEM)
         lockall
         waitse
         delay(10)
+        waitmessage
     }
+    lockall
     
     // message
     msgbox(NurseMessage2, MSGBOX_AUTOCLOSE)
     waitmessage
+    
 
     // move player aside
     applymovement(OBJ_EVENT_ID_PLAYER, MovePlayerAside)
@@ -193,11 +201,15 @@ script EscapeRoom_EventScript_RescueNurse{
     waitse
 }
 
+movement MoveNurseFaceRight {
+    face_right
+}
+
 movement MoveNurseToPlayer{
     face_up
     walk_fast_up
     face_right
-    walk_fast_right
+    walk_fast_right * 2
 }
 
 movement MoveNurseAway {
@@ -225,21 +237,16 @@ script EscapeRoom_EggCave_EventScript_FindRareCandy{
     releaseall
 }
 
-// script EscapeRoom_EggCave_EventScript_Find2000Cash{
-//     lockall
-//     addmoney(2000)
-//     message("{PLAYER} received ¥2.000!")
-//     playfanfare(MUS_OBTAIN_ITEM)
-//     waitfanfare
-//     removeobject(LOCALID_2000_CASH)
-//     setflag(FLAG_2000_CASH_OBTAINED)
-//     releaseall
-// }
+////// TEXT ///////
 
+text TrapinchWentAway{
+    "The Trapinch disappeared into the\n"
+    "ground."
+}
 
 text NurseMessage1{
     "Thank you so much!\n"
-    "That Trapinch would not let me out!\p"
+    "That Pokémon would not let me out!\p"
     "I don't know what I would've done if\n"
     "it weren't for you.\p"
     "Here, take this.\n"
@@ -247,7 +254,9 @@ text NurseMessage1{
 }
 
 text NurseMessageHeal1{
-    "Let me fix you up as well."
+    "It also looks like your Pokémon got\n"
+    "hurt in battle.\p"
+    "Allow me to fix that."
 }
 
 text NurseMessage2{
