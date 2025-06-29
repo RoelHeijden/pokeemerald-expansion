@@ -151,10 +151,11 @@ script HikerSellAbilityCapsule{
 text RockSmashNPCsellDrugs{
     "Hey kid, wanna buy some dru- OH HEY!\p"
 
-    "You smashed that rock for me, so I will\n"
-    "give you a special offer.\p"
+    "You're the one who smashed that rock\n"
+    "for me, aren't you?\p"
 
-    "An Ability Capsule for only ¥525.\n"
+    "For you I've got a special offer!\n"
+    "An Ability Capsule for only ¥525.\l"
     "What do you say?"
 }
 
@@ -171,6 +172,5 @@ text RockSmashNPCsellAcceptedMessage{
 }
 
 text RockSmashNPCFinalMessage{
-    "I'm not making a lot of sales today in\n"
-    "this cave..."
+    "Move along now."
 }

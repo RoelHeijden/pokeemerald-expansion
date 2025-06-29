@@ -361,7 +361,8 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
-    additem(ITEM_ETHER)
+    additem(ITEM_LEPPA_BERRY)
+    additem(ITEM_POWER_LENS) // REMOVE
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -987,9 +988,9 @@ script EscapeRoom_TryBuySpaceItemNPC{
                 waitfanfare
                 delay(10)
 
-                // // final message?
-                // msgbox(SpaceItemNPCSellAcceptedMessage, MSGBOX_NPC)
-                // waitmessage
+                // trade accepted message
+                msgbox(SpaceItemNPCSellAcceptedMessage, MSGBOX_NPC)
+                waitmessage
             }
             // sell declined
             else{
@@ -2620,7 +2621,7 @@ text SpaceItemNPCInitialMessage_has_item{
 }
 
 text SpaceItemNPCSellAcceptedMessage{
-    "Thanks a lot."
+    "I'll take good care of it."
 }
 
 text SpaceItemNPCSellDeclinedMessage{
@@ -2628,7 +2629,7 @@ text SpaceItemNPCSellDeclinedMessage{
 }
 
 text SpaceItemNPCPostSellMessage{
-    "Where did you even get this?"
+    "Where did you even find this shard?"
 }
 
 text MoneyReceived2000{

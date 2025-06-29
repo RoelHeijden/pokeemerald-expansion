@@ -239,7 +239,8 @@ script EscapeRoom_EggCave_EventScript_FindRareCandy{
 ////// TEXT ///////
 
 text TrapinchWentAway{
-    "Trapinch disappeared into the ground."
+    "The Trapinch disappeared into the\n"
+    "ground."
 }
 
 text NurseMessage1{

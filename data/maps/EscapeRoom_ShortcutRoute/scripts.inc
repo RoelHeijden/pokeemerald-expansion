@@ -209,24 +209,24 @@ HikerSellAbilityCapsule_9:
 RockSmashNPCsellDrugs::
 # 151 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Hey kid, wanna buy some dru- OH HEY!\p"
-	.string "You broke that rock for me, so I will\n"
-	.string "give you a special offer.\p"
-	.string "An Ability Capsule for only ¥525.\n"
+	.string "You're the one who smashed that rock\n"
+	.string "for me, aren't you?\p"
+	.string "For you I've got a special offer!\n"
+	.string "An Ability Capsule for only ¥525.\l"
 	.string "What do you say?$"
 
 RockSmashNPCsellDeclined::
-# 161 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 162 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "You know where to find me.$"
 
 RockSmashNPCnotEnoughMoney::
-# 165 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 166 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Come back when you have the money.$"
 
 RockSmashNPCsellAcceptedMessage::
-# 169 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 170 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Pleasure doing business.$"
 
 RockSmashNPCFinalMessage::
-# 173 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	.string "I'm not making a lot of sales today in\n"
-	.string "this cave...$"
+# 174 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	.string "Move along now.$"
