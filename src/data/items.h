@@ -1515,7 +1515,7 @@ const struct Item gItemsInfo[] =
     [ITEM_ABILITY_CAPSULE] =
     {
         .name = HANDLE_EXPANDED_ITEM_NAME("AbilityCapsle", "Ability Capsule"),
-        .price = 3125,
+        .price = 0,
         .holdEffectParam = 0,
         .description = COMPOUND_STRING(
             "Switches a Poké-\n"
@@ -2674,7 +2674,7 @@ const struct Item gItemsInfo[] =
         .name = _("Stardust"),
         .pluralName = _("Stardust"),
         // .price = (I_PRICE >= GEN_7) ? 3000 * TREASURE_FACTOR: 2000,
-        .price = 2000, // CHANGED
+        .price = 0, // CHANGED
         .description = COMPOUND_STRING(
             "Beautiful red sand.\n"
             "Can be sold at a\n"
@@ -2706,7 +2706,8 @@ const struct Item gItemsInfo[] =
     [ITEM_COMET_SHARD] =
     {
         .name = _("Comet Shard"),
-        .price = (I_PRICE <= GEN_5) ? 0 : ((I_PRICE == GEN_6) ? 30000 : ((I_PRICE == GEN_7) ? 60000 : 25000 * TREASURE_FACTOR)),
+        // .price = (I_PRICE <= GEN_5) ? 0 : ((I_PRICE == GEN_6) ? 30000 : ((I_PRICE == GEN_7) ? 60000 : 25000 * TREASURE_FACTOR)),
+        .price = 0,
         .description = COMPOUND_STRING(
             "A comet's shard.\n"
             "It would sell for a\n"
@@ -10916,7 +10917,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_SLEEP_TALK] = 
     {
         .name = _("TM27"),
-        .price = 2000,
+        .price = 1000,
         .description = COMPOUND_STRING(
             "User performs one\n"
             "of its own moves\n" 

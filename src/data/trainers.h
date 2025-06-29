@@ -42361,9 +42361,9 @@ F_TRAINER_FEMALE |
 #line 16946
         .trainerName = _("Ace"),
 #line 16947
-        .trainerClass = TRAINER_CLASS_TRIATHLETE,
+        .trainerClass = TRAINER_CLASS_DOME_ACE,
 #line 16948
-        .trainerPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
+        .trainerPic = TRAINER_PIC_DOME_ACE_TUCKER,
         .encounterMusic_gender = 
 #line 16950
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -42400,7 +42400,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER5] =
     {
 #line 16963
-        .trainerName = _("Rocky"),
+        .trainerName = _("Barry J."),
 #line 16964
         .trainerClass = TRAINER_CLASS_RICH_BOY,
 #line 16965
@@ -42479,7 +42479,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_RAYQUAZA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16995
-            .heldItem = ITEM_STARDUST,
+            .heldItem = ITEM_COMET_SHARD,
 #line 16997
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16998
@@ -42501,7 +42501,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER9] =
     {
 #line 17002
-        .trainerName = _("Ton & Tey"),
+        .trainerName = _("Tey & Ton"),
 #line 17003
         .trainerClass = TRAINER_CLASS_TWINS,
 #line 17004

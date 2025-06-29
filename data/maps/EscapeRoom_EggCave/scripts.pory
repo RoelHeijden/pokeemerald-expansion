@@ -161,7 +161,6 @@ script EscapeRoom_EventScript_RescueNurse{
     playfanfare(MUS_OBTAIN_ITEM)
     waitfanfare
     delay(10)
-    closemessage
     
     // check if heal required
     partymonhasfainted
@@ -240,8 +239,7 @@ script EscapeRoom_EggCave_EventScript_FindRareCandy{
 ////// TEXT ///////
 
 text TrapinchWentAway{
-    "The Trapinch disappeared into the\n"
-    "ground."
+    "Trapinch disappeared into the ground."
 }
 
 text NurseMessage1{

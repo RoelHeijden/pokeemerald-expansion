@@ -11,18 +11,16 @@ const LOCALID_ULTRA_BALL_NPC = 8
 const LOCALID_TRAINER9_R = 9
 const LOCALID_TRAINER9_L = 10
 const LOCALID_MARANGA_BERRY = 11
-const LOCALID_CUSTAP_BERRY = 12
+const LOCALID_SPACE_ITEM_NPC = 12
 const LOCALID_TRAINER6 = 13
 const LOCALID_TRAINER4 = 14
 const LOCALID_NURSE2 = 15
 const LOCALID_HINT_GUY2 = 16
 const LOCALID_ANTI_SOFTLOCK_GUY2 = 17
-// const LOCALID_GLASSES_GUY = 18
 const LOCALID_LIEPARD = 18
 const LOCALID_SMEARGLE_NPC = 19
 const LOCALID_TRAINER5 = 20
 const LOCALID_CUT_TREE = 21
-// const LOCALID_LOST_GLASSES = 22
 const LOCALID_LIEPARD_COLLAR = 22
 const LOCALID_TRAINER1 = 23
 const LOCALID_DUNSPARCE_BUYER = 24
@@ -128,9 +126,9 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
     }
 
-    // check if Rayquaza's Stardust is succesfully stolen
-    if(flag(FLAG_STARDUST_STOLEN) == FALSE){
-        call(EscapeRoom_MapScripts_CheckStardustStolen)
+    // check if Rayquaza's Comet Shard is succesfully stolen
+    if(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
+        call(EscapeRoom_MapScripts_CheckSpaceItemStolen)
     }
 
     // disable bag use 
@@ -226,22 +224,22 @@ script EscapeRoom_MapScripts_RemoveFerroCustap{
     }
 }
 
-script EscapeRoom_MapScripts_CheckStardustStolen{
-    checkitem(ITEM_STARDUST) // in bag
+script EscapeRoom_MapScripts_CheckSpaceItemStolen{
+    checkitem(ITEM_COMET_SHARD) // in bag
     if(var(VAR_RESULT) == TRUE){
-        setflag(FLAG_STARDUST_STOLEN)
+        setflag(FLAG_SPACE_ITEM_STOLEN)
     }
     checkpartyitem(0) // held by pokemon slot 1
-    if(var(VAR_0x8005) == ITEM_STARDUST) {
-        setflag(FLAG_STARDUST_STOLEN)
+    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+        setflag(FLAG_SPACE_ITEM_STOLEN)
     }
     checkpartyitem(1) // held by pokemon slot 2
-    if(var(VAR_0x8005) == ITEM_STARDUST) {
-        setflag(FLAG_STARDUST_STOLEN)
+    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+        setflag(FLAG_SPACE_ITEM_STOLEN)
     }
     checkpartyitem(2) // held by pokemon slot 3
-    if(var(VAR_0x8005) == ITEM_STARDUST) {
-        setflag(FLAG_STARDUST_STOLEN)
+    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+        setflag(FLAG_SPACE_ITEM_STOLEN)
     }
 }
 
@@ -272,6 +270,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_GetItems)
     call(EscapeRoom_MapScripts_TurnOfBagUse)
     setflag(FLAG_HIDE_ANNIHILAPE)
+    setflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
     removeobject(LOCALID_NURSE_DUMMY)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
@@ -711,17 +710,16 @@ script EscapeRoom_EventScript_Shop2NPC{
 }
 
 mart EscapeRoom_Shop1_items{
-    ITEM_CUSTAP_BERRY       // 2000
+    ITEM_CUSTAP_BERRY       // 2000  sold out between trainer3 and Liepard
     ITEM_FLOAT_STONE        // 2000
     ITEM_RING_TARGET        // 2000 
     ITEM_ESCAPE_ROPE        // 2000  
 }
 
 mart EscapeRoom_Shop2_items{
-    ITEM_ABILITY_CAPSULE    // 3125
     ITEM_CUSTAP_BERRY       // 2000
     ITEM_MENTAL_HERB        // 2000
-    ITEM_TM27               // 2000
+    ITEM_TM27               // 1000
 }
 
 
@@ -932,8 +930,9 @@ script EscapeRoom_MoveRockSmashNPC{
     setflag(FLAG_HIDE_ROCKSMASH_NPC)
     waitse
 
+    clearflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setflag(FLAG_ROCK_SMASH_GUY_MOVED)
-    setflag(FLAG_MENTAL_HERB_SOLD_OUT)
+    // setflag(FLAG_MENTAL_HERB_SOLD_OUT)
 }
 
 movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
@@ -950,6 +949,61 @@ movement RockSmashNPCMovesUp {
 movement RockSmashNPCMovesAway {
     walk_right * 3
     face_up
+}
+
+
+// SPACE ITEM BUY NPC //
+script EscapeRoom_TryBuySpaceItemNPC{
+    lock
+
+    // can still sell item
+    if(flag(FLAG_SPACE_ITEM_SOLD) == FALSE){
+
+        // check if player has the item
+        checkitem(ITEM_COMET_SHARD)
+
+        // player does not have item
+        if(var(VAR_RESULT) == FALSE){
+            // initial message 
+            msgbox(SpaceItemNPCInitialMessage_no_item, MSGBOX_NPC)
+            waitmessage
+        }
+        // player has the item
+        else{
+            // ask sell item
+            faceplayer
+            msgbox(SpaceItemNPCInitialMessage_has_item, MSGBOX_YESNO)
+
+            // sell accepted
+            if(var(VAR_RESULT) == YES){
+                removeitem(ITEM_COMET_SHARD)
+                setflag(FLAG_SPACE_ITEM_SOLD)
+
+                // give money
+                addmoney(2000)
+                lockall
+                message(MoneyReceived2000)
+                playfanfare(MUS_OBTAIN_ITEM)
+                waitfanfare
+                delay(10)
+
+                // // final message?
+                // msgbox(SpaceItemNPCSellAcceptedMessage, MSGBOX_NPC)
+                // waitmessage
+            }
+            // sell declined
+            else{
+                msgbox(SpaceItemNPCSellDeclinedMessage, MSGBOX_NPC)
+                waitmessage
+            }
+        }
+    }
+    // item already sold
+    else{
+        msgbox(SpaceItemNPCPostSellMessage, MSGBOX_NPC)
+        waitmessage
+    }
+    releaseall
 }
 
 
@@ -1543,14 +1597,6 @@ script EscapeRoom_EventScript_TradeAipomForSmeargle{
 
 
 //// ITEMS ////
-
-script EscapeRoom_EventScript_FindCustapBerry{
-    lockall
-    finditem(ITEM_CUSTAP_BERRY)
-    removeobject(LOCALID_CUSTAP_BERRY)
-    setflag(FLAG_CUSTAP_BERRY_OBTAINED)
-    releaseall
-}
 
 script EscapeRoom_EventScript_FindLiepardCollar{
     lockall
@@ -2557,6 +2603,42 @@ text DusknoirStoleMyMailMsg{
 }
 
 
+// Space Item buy NPC
+
+text SpaceItemNPCInitialMessage_no_item{
+    "I like to collect rare materials from\n"
+    "outer space.\p"
+    "Please come to me if you ever happen\n"
+    "to find any."
+}
+
+text SpaceItemNPCInitialMessage_has_item{
+    "I like to collect rare materials from\n"
+    "outer space.\p"
+    "Would you sell me your Comet Shard?\n"
+    "I can offer you ¥2.000."
+}
+
+text SpaceItemNPCSellAcceptedMessage{
+    "Thanks a lot."
+}
+
+text SpaceItemNPCSellDeclinedMessage{
+    "Ah, maybe next time."
+}
+
+text SpaceItemNPCPostSellMessage{
+    "Where did you even get this?"
+}
+
+text MoneyReceived2000{
+    "{PLAYER} received ¥2.000!"
+}
+
+
+
+
+
 // LIEPARD NPC
 
 text LiepardObtainMessage{
@@ -2826,7 +2908,7 @@ text Trainer3FinalWords{
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
-    "Exhausted already?"
+    "I feel exhausted already."
 }
 
 text Trainer4_Outro{

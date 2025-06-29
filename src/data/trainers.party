@@ -16944,8 +16944,8 @@ IVs: 0 Spe
 
 === TRAINER_CUSTOM_TRAINER4 ===
 Name: Ace
-Class: Triathlete
-Pic: Running Triathlete M
+Class: Dome Ace
+Pic: Dome Ace Tucker
 Gender: Male
 Music: Intense
 Double Battle: No
@@ -16960,7 +16960,7 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER5 ===
-Name: Rocky
+Name: Barry J.
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
@@ -16992,14 +16992,14 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Rayquaza @ Stardust
+Rayquaza @ Comet Shard
 Ability: Air Lock  
 EVs: 252 Atk / 252 Spe  
 - Earthquake
 
 
 === TRAINER_CUSTOM_TRAINER9 ===
-Name: Ton & Tey
+Name: Tey & Ton
 Class: Twins
 Pic: Twins
 Gender: Male

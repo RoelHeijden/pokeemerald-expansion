@@ -168,131 +168,129 @@ EscapeRoom_EventScript_RescueNurse::
 	waitfanfare
 # 163 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	delay 10
-# 164 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	closemessage
-# 167 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 166 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	partymonhasfainted
-# 168 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 167 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
-# 171 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 170 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
 	goto_if_ne EscapeRoom_EventScript_RescueNurse_2
 EscapeRoom_EventScript_RescueNurse_1:
-# 181 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 180 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
-# 184 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 183 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	msgbox NurseMessage2, MSGBOX_AUTOCLOSE
-# 185 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 184 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitmessage
-# 189 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 188 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, MovePlayerAside
-# 190 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 189 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 193 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 192 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	applymovement 7, MoveNurseAway
-# 194 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 193 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitmovement 7
-# 197 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 196 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	playse SE_EXIT
-# 198 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 197 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	delay 5
-# 199 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 198 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	removeobject 7
-# 200 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 199 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	setflag FLAG_NURSE_RESCUED
-# 201 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 200 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitse
 	return
 
 EscapeRoom_EventScript_RescueNurse_2:
-# 172 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 171 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	msgbox NurseMessageHeal1, MSGBOX_DEFAULT
-# 174 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 173 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	special HealPlayerParty
-# 175 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 174 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	playse SE_USE_ITEM
-# 176 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 175 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
-# 177 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 176 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitse
-# 178 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 177 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	delay 10
-# 179 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 178 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_RescueNurse_1
 
 
-# 204 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 203 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MoveNurseFaceRight:
-# 205 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 204 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_right
 	step_end
 
-# 208 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 207 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MoveNurseToPlayer:
-# 209 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 208 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_up
-# 210 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 209 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_up
-# 211 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 210 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_right
-# 212 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 211 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
-# 212 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 211 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
 	step_end
 
-# 215 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 214 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MoveNurseAway:
-# 216 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 215 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	walk_fast_right
+# 215 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	walk_fast_right
+# 215 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
 # 216 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	walk_fast_right
-# 216 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	walk_fast_right
-# 217 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_down
-# 218 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 217 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_down
 	step_end
 
-# 221 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 220 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MovePlayerAside:
-# 222 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 221 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_up
-# 223 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 222 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_up
-# 224 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 223 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_down
 	step_end
 
-# 227 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 226 "data/maps/EscapeRoom_EggCave/scripts.pory"
 PlayerFaceLeft:
-# 228 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 227 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_left
 	step_end
 
 EscapeRoom_EggCave_EventScript_FindRareCandy::
-# 233 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 232 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
-# 234 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 233 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	finditem ITEM_RARE_CANDY
-# 235 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 234 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	removeobject 4
-# 236 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 235 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	setflag FLAG_RARE_CANDY_OBTAINED
-# 237 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 236 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
 
 TrapinchWentAway::
-# 242 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	.string "The Trapinch disappeared into\n"
-	.string "the ground.$"
+# 241 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	.string "The Trapinch disappeared into the\n"
+	.string "ground.$"
 
 NurseMessage1::
-# 247 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 246 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "Thank you so much!\n"
 	.string "That Pokémon would not let me out!\p"
 	.string "I don't know what I would've done if\n"
@@ -301,15 +299,15 @@ NurseMessage1::
 	.string "Call it a rescue reward!$"
 
 NurseMessageHeal1::
-# 256 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 255 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "It also looks like your Pokémon got\n"
 	.string "hurt in battle.\p"
 	.string "Allow me to fix that.$"
 
 NurseMessage2::
-# 262 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 261 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "Take care!$"
 
 MoneyReceived::
-# 266 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 265 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "{PLAYER} received ¥2.000!$"

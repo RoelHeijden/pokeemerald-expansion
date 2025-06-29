@@ -46,7 +46,7 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_CUSTAP_BERRY_OBTAINED          0x24
+#define FLAG_SPACE_ITEM_SOLD                    0x24
 #define FLAG_ETHER_SOLD_OUT                 0x25
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
@@ -74,7 +74,7 @@
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
 #define FLAG_ANNIHILAPE_HINT_RECEIVED       0x3E  
 #define FLAG_RARE_CANDY_OBTAINED            0x3F  
-#define FLAG_STARDUST_STOLEN                0x40  
+#define FLAG_SPACE_ITEM_STOLEN                0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
 #define FLAG_ME_FIRST_CHOICE_LOCK           0x42
 #define FLAG_TRAINER1_DEFEATED              0x43  
@@ -1234,8 +1234,8 @@
 #define FLAG_HIDE_TRAPINCH                                          0x49F  
 #define FLAG_RECOVERED_BERRY_JUICE                                  0x4A0  
 #define FLAG_NURSE_RESCUED                                          0x4A1 
-#define FLAG_UNUSED_0x4A2                                           0x4A2
-#define FLAG_UNUSED_0x4A3                                           0x4A3 // Unused Flag
+#define FLAG_HIDE_ROCKSMASH_TUNNEL_NPC                                           0x4A2
+#define FLAG_ABILITY_CAPSULE_BOUGHT                                           0x4A3  
 #define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag
 #define FLAG_UNUSED_0x4A5                                           0x4A5 // Unused Flag
 #define FLAG_UNUSED_0x4A6                                           0x4A6 // Unused Flag

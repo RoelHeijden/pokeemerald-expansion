@@ -5,6 +5,7 @@ const LOCALID_ROCK1 = 3
 const LOCALID_ROCK2 = 4
 const LOCALID_ROCK3 = 5
 const LOCALID_ROCK4 = 6
+const LOCALID_DRUG_HIKER = 7
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -105,4 +106,71 @@ script CheckIfBerryJuiceObtained{
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
+script HikerSellAbilityCapsule{
+    lock
+    faceplayer
+    if(flag(FLAG_ABILITY_CAPSULE_BOUGHT) == FALSE){
 
+        // ask buy drugs
+        msgbox(RockSmashNPCsellDrugs, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check enough money
+            checkmoney(525)
+            if(var(VAR_RESULT) == FALSE){
+                // not enough money message
+                msgbox(RockSmashNPCnotEnoughMoney, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            // give Ability Capsule
+            giveitem(ITEM_ABILITY_CAPSULE)
+
+            // final message
+            msgbox(RockSmashNPCsellAcceptedMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+
+            setflag(FLAG_ABILITY_CAPSULE_BOUGHT)
+        }
+        else{
+            // sell declined message
+            msgbox(RockSmashNPCsellDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    else{
+        // final message
+        msgbox(RockSmashNPCFinalMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
+}
+
+text RockSmashNPCsellDrugs{
+    "Hey kid, wanna buy some dru- OH HEY!\p"
+
+    "You smashed that rock for me, so I will\n"
+    "give you a special offer.\p"
+
+    "An Ability Capsule for only ¥525.\n"
+    "What do you say?"
+}
+
+text RockSmashNPCsellDeclined{
+    "You know where to find me."
+}
+
+text RockSmashNPCnotEnoughMoney{
+    "Come back when you have the money."
+}
+
+text RockSmashNPCsellAcceptedMessage{
+    "Pleasure doing business."
+}
+
+text RockSmashNPCFinalMessage{
+    "I'm not making a lot of sales today in\n"
+    "this cave..."
+}
