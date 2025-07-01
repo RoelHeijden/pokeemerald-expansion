@@ -263,5 +263,5 @@ text NurseMessage2{
 }
 
 text MoneyReceived{
-    "{PLAYER} received ¥2.000!"
+    "{PLAYER} received ¥2000!"
 }

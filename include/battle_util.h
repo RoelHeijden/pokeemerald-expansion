@@ -229,6 +229,8 @@ void SetShellSideArmCategory(void);
 bool32 MoveIsAffectedBySheerForce(u32 move);
 bool32 TestIfSheerForceAffected(u32 battler, u16 move);
 void TryRestoreHeldItems(void);
+bool32 PartyBackupChanged(void); // ADDED
+bool8 AddLostItem(u16 itemId); // ADDED
 bool32 CanStealItem(u32 battlerStealing, u32 battlerItem, u16 item);
 void TrySaveExchangedItem(u32 battler, u16 stolenItem);
 bool32 IsPartnerMonFromSameTrainer(u32 battler);

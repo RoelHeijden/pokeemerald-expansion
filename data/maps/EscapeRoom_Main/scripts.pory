@@ -55,13 +55,10 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScript_GameStartScripts
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
-        VAR_REMOVE_HELD_ITEM, 1: EscapeRoom_MapScripts_RemoveHeldItem
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
     ] 
 }
-
-// MAIN //
 
 script EscapeRoom_MapScript_OnTransitionScripts{
     // set annihilape hint npc movement
@@ -78,42 +75,7 @@ script EscapeRoom_MapScript_OnTransitionScripts{
 
 script EscapeRoom_MapScript_OnResumeScripts{
     // check if pokemon caught -- sets flag if true
-    getpartysize
-    if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
-        setflag(FLAG_ZERAORA_CAUGHT)
-
-        // prevent Custap restore after catching zera
-        clearflag(FLAG_RECOVERED_CUSTAP)
-        setflag(FLAG_REMOVE_FERRO_CUSTAP)
-        setvar(VAR_REMOVE_HELD_ITEM, 1)
-
-        // prevent recovered item message
-        clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
-    }
-
-
-    // check if Liepard succesfully sacked vs Dusknoir
-    // prevent mental herb recovery if so
-    getpartysize
-    if (var(VAR_RESULT) == 2){
-        partymonhasfainted
-        if(var(VAR_0x8004) == SPECIES_LIEPARD){
-            setflag(FLAG_LIEPARD_SACKED)
-        }
-    }
-    if(flag(FLAG_LIEPARD_SACKED) && flag(FLAG_MENTAL_HERB_USED_FOR_SACK) == FALSE){
-        // make sure this happens only once
-        setflag(FLAG_MENTAL_HERB_USED_FOR_SACK)
-
-        // prevent mental herb restore after succesful sack vs Dusknoir
-        clearflag(FLAG_RECOVERED_MENTAL_HERB)
-        setflag(FLAG_REMOVE_LIEPARD_MENTAL_HERB)
-        setvar(VAR_REMOVE_HELD_ITEM, 1)
-
-        // prevent recovered item message
-        clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
-        clearflag(FLAG_RECOVERED_FLUNG_ITEM)
-    }
+    call(EscapeRoom_MapScripts_CheckIfPokemonCaught)
 
     // check for ball return -- sets frame table var if true
     if(flag(FLAG_BALL_USED) && !flag(FLAG_ZERAORA_CAUGHT)){
@@ -136,7 +98,57 @@ script EscapeRoom_MapScript_OnResumeScripts{
         setflag(FLAG_TOGGLE_BAG_USE)
     }
     
-    // set var for pre-damage restore
+    // check if ask pre-damage restore
+    // sets var if true
+    call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
+} 
+
+script EscapeRoom_MapScript_OnWarpIntoScripts{
+    // set NPC facing
+}
+
+
+//// ON TRANSITION ////
+
+
+//// ON RESUME ////
+
+script EscapeRoom_MapScripts_CheckIfPokemonCaught{
+    // check if pokemon caught -- sets flag if true
+    getpartysize
+    if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
+        setflag(FLAG_ZERAORA_CAUGHT)
+
+        // prevent Custap and Leppa restore after catching zera
+        removelostitem(ITEM_CUSTAP_BERRY)
+        removelostitem(ITEM_LEPPA_BERRY)
+
+        // prevent recovered item message
+        clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+    }
+}
+
+script EscapeRoom_MapScripts_CheckSpaceItemStolen{
+    checkitem(ITEM_COMET_SHARD) // in bag
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_SPACE_ITEM_STOLEN)
+    }
+    checkpartyitem(0) // held by pokemon slot 1
+    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+        setflag(FLAG_SPACE_ITEM_STOLEN)
+    }
+    checkpartyitem(1) // held by pokemon slot 2
+    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+        setflag(FLAG_SPACE_ITEM_STOLEN)
+    }
+    checkpartyitem(2) // held by pokemon slot 3
+    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+        setflag(FLAG_SPACE_ITEM_STOLEN)
+    }
+}
+
+script EscapeRoom_MapScripts_CheckIfAskPreDamage{
+    // trainer battle
     if(flag(FLAG_PLAYER_JUST_LOST) == TRUE){
         partybackupisdifferent
         if(var(VAR_RESULT) == TRUE){
@@ -145,22 +157,23 @@ script EscapeRoom_MapScript_OnResumeScripts{
         clearflag(FLAG_PLAYER_JUST_LOST)
     }
 
-    // set ask pre damage reset
+    // zera catch sequence (to include pre damage on win)
     if(flag(FLAG_JUST_HAD_ZERA_BATTLE) == TRUE && flag(FLAG_ZERAORA_CAUGHT) == FALSE){
         partybackupisdifferent
         if(var(VAR_RESULT) == TRUE){
             setvar(VAR_ASK_RESET_PREDAMAGE, 1)
+            
+            // flag to prevent dupe items (returned via backup)
+            setflag(FLAG_ZERA_FIGHT_BACKUP_CHECK)
         }
         clearflag(FLAG_JUST_HAD_ZERA_BATTLE)
     }
-} 
 
-script EscapeRoom_MapScript_OnWarpIntoScripts{
-    // set NPC facing
+    // other wild battles are currently skipped (no relevant pre damage scenarios)
 }
 
 
-// OTHER //
+//// ON FRAME //// 
 
 script EscapeRoom_MapScripts_FindBallAferUse{
     lockall
@@ -186,72 +199,41 @@ script EscapeRoom_MapScripts_RetrievedItemMessage{
     releaseall
 }
 
-script EscapeRoom_MapScripts_RemoveHeldItem{
-    // remove ferrothon custap post zera catch
-    if(flag(FLAG_REMOVE_FERRO_CUSTAP) == TRUE){
-        clearflag(FLAG_REMOVE_FERRO_CUSTAP)
-        call(EscapeRoom_MapScripts_RemoveFerroCustap)
-    }
-
-    // remove liepard mental herb after liepard sack
-    if(flag(FLAG_REMOVE_LIEPARD_MENTAL_HERB) == TRUE){
-        clearflag(FLAG_REMOVE_LIEPARD_MENTAL_HERB)
-        call(EscapeRoom_MapScripts_RemoveLiepardMentalHerb)
-    }
-
-    setvar(VAR_REMOVE_HELD_ITEM, 0)
-}
-
-script EscapeRoom_MapScripts_RemoveLiepardMentalHerb{
-    checkpartymon(SPECIES_LIEPARD)
-    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
-    if(var(VAR_TEMP_0) != PARTY_SIZE){
-        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
-        if(var(VAR_0x8005) == ITEM_MENTAL_HERB){
-            removepartyitem(VAR_TEMP_0)
-        }
-    }
-}
-
-script EscapeRoom_MapScripts_RemoveFerroCustap{
-    checkpartymon(SPECIES_FERROTHORN)
-    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
-    if(var(VAR_TEMP_0) != PARTY_SIZE){
-        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
-        if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
-            removepartyitem(VAR_TEMP_0)
-        }
-    }
-}
-
-script EscapeRoom_MapScripts_CheckSpaceItemStolen{
-    checkitem(ITEM_COMET_SHARD) // in bag
-    if(var(VAR_RESULT) == TRUE){
-        setflag(FLAG_SPACE_ITEM_STOLEN)
-    }
-    checkpartyitem(0) // held by pokemon slot 1
-    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
-        setflag(FLAG_SPACE_ITEM_STOLEN)
-    }
-    checkpartyitem(1) // held by pokemon slot 2
-    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
-        setflag(FLAG_SPACE_ITEM_STOLEN)
-    }
-    checkpartyitem(2) // held by pokemon slot 3
-    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
-        setflag(FLAG_SPACE_ITEM_STOLEN)
-    }
-}
-
 script EscapeRoom_MapScripts_AskResetPredamage{
     lockall
     msgbox(AskResetPredamageMessage, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
         restoreplayerparty
         msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
+
+        // prevent zera fight item dupes via backup + lostItems
+        if(flag(FLAG_ZERA_FIGHT_BACKUP_CHECK) == TRUE){
+            clearflag(FLAG_ZERA_FIGHT_BACKUP_CHECK)
+            call(EscapeRoom_MapScripts_RemoveDuplicateLeppaCustap)
+        }
     }
     setvar(VAR_ASK_RESET_PREDAMAGE, 0)
     releaseall
+}
+
+script EscapeRoom_MapScripts_RemoveDuplicateLeppaCustap{
+    // check if pokemon 1 carries custap/leppa
+    checkpartyitem(0)
+    if(var(VAR_0x8005) == ITEM_LEPPA_BERRY){
+        removelostitem(ITEM_LEPPA_BERRY)
+    }
+    if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
+        removelostitem(ITEM_CUSTAP_BERRY)
+    }
+
+    // check if pokemon 2 carries custap/leppa
+    checkpartyitem(1)
+    if(var(VAR_0x8005) == ITEM_LEPPA_BERRY){
+        removelostitem(ITEM_LEPPA_BERRY)
+    }
+    if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
+        removelostitem(ITEM_CUSTAP_BERRY)
+    }
 }
 
 script EscapeRoom_MapScripts_CheckIfRockSmashed{
@@ -259,6 +241,8 @@ script EscapeRoom_MapScripts_CheckIfRockSmashed{
     setvar(VAR_ROCK_SMASH_NPC_STATE, 0)
 }
 
+
+//// ON WARP ////
 
 
 //// MAP START ////
@@ -442,6 +426,8 @@ script EscapeRoom_EventScript_AncientWallBackroomSign{
 
 //// MAIN NPCS ////
 
+// NURSE
+
 script EscapeRoom_Nurse_Heal_Pokemon{
     lockall
     faceplayer
@@ -455,6 +441,9 @@ script EscapeRoom_Nurse_Heal_Pokemon{
     }
     releaseall
 }
+
+
+// HINTS NPC
 
 script EscapeRoom_EventScript_HintsNPC{
     faceplayer
@@ -470,17 +459,131 @@ script EscapeRoom_EventScript_HintsNPC{
     releaseall
 }
 
+
+// ANTI SOFTLOCK GUY
+
+
+
+script EscapeRoom_EventScript_AntiSoftlockGuy1{
+    // check if mental herb may not be returned
+    // dont return from softlock guy 1 after trainer4, until rock2 smashed
+    if(flag(FLAG_TRAINER4_DEFEATED) && !flag(FLAG_ROCK_SMASH_GUY_MOVED)){
+        setflag(FLAG_DONT_RETURN_MENTAL_HERB)
+    }
+    call(EscapeRoom_EventScript_AntiSoftlockGuy)
+
+    // clear mental herb flag
+    clearflag(FLAG_DONT_RETURN_MENTAL_HERB)
+}
+
+script EscapeRoom_EventScript_AntiSoftlockGuy2{
+    call(EscapeRoom_EventScript_AntiSoftlockGuy)
+}
+
 script EscapeRoom_EventScript_AntiSoftlockGuy{
     faceplayer
     lockall
 
-    // if no potential softlocks:
-    msgbox(AntiSoftlockIntroMessage, MSGBOX_DEFAULT)
-    msgbox(AntiSoftlockNoActionMessage, MSGBOX_DEFAULT)
+    // return items lost in battle
+    msgbox(AntiSoftlockRestoreLostItems, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        call(EscapeRoom_EventScript_ReturnLostItems)
+    }
+
+    // return items lost outside of battle
+    // - Leppa Berry
+    // - Berry Juice
+    // - Escape Rope
+
+    // undo rare candy
+    // undo exp candy
+    // undo TM Sleep Talk
+    // undo TM Skill Swap
+    // undo HM Cut
+
+
+    // // if no potential softlocks:
+    // msgbox(AntiSoftlockIntroMessage, MSGBOX_DEFAULT)
+    // msgbox(AntiSoftlockNoActionMessage, MSGBOX_DEFAULT)
     releaseall
 }
 
-// LOST GLASSES GUY (LIEPARD TRADE)
+
+script EscapeRoom_EventScript_ReturnLostItems{
+    // clear flags
+    clearflag(FLAG_TEMP_1) // determines if item was restored at all
+    clearflag(FLAG_TEMP_2) // determine if it's Ring Target Ape special case
+
+    // leppa berry
+    isitemlost(ITEM_LEPPA_BERRY)
+    if(var(VAR_RESULT) == TRUE){
+        removelostitem(ITEM_LEPPA_BERRY)
+        giveitem(ITEM_LEPPA_BERRY)
+        setflag(FLAG_TEMP_1)
+    }
+
+    // custap berry
+    isitemlost(ITEM_CUSTAP_BERRY)
+    if(var(VAR_RESULT) == TRUE){
+        removelostitem(ITEM_CUSTAP_BERRY)
+        giveitem(ITEM_CUSTAP_BERRY)
+        setflag(FLAG_TEMP_1)
+    }
+
+    // mental herb
+    isitemlost(ITEM_MENTAL_HERB)
+    if(var(VAR_RESULT) == TRUE && flag(FLAG_DONT_RETURN_MENTAL_HERB) == FALSE){
+        removelostitem(ITEM_MENTAL_HERB)
+        giveitem(ITEM_MENTAL_HERB)
+        setflag(FLAG_TEMP_1)
+    }
+
+    // ring target
+    isitemlost(ITEM_RING_TARGET)   // REVISIT -- check specific flag and reset to rare candy pre-damage only?
+    if(var(VAR_RESULT) == TRUE){
+        removelostitem(ITEM_RING_TARGET)
+        giveitem(ITEM_RING_TARGET)
+        setflag(FLAG_TEMP_1)  
+
+        // special case: only heal Aipom during Ring Target Ape sequence
+        if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
+            setflag(FLAG_TEMP_2)
+        }
+    }
+
+    // at least one item was restored
+    // heal party and message
+    if(flag(FLAG_TEMP_1) == TRUE){
+
+        // if special Ring Target Ape case: heal Aipom only
+        if(flag(FLAG_TEMP_2) == TRUE){
+            // heal Aipom
+            healpartymon(SPECIES_AIPOM)
+
+            // message
+            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+            waitmessage
+        }
+        // any other case: heal entire party
+        else{
+            special(HealPlayerParty)
+
+            // message
+            msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
+            waitmessage
+        }
+    }
+    // no items to restore
+    // message
+    else{
+        msgbox(AntiSoftlockNoItemsReturned, MSGBOX_DEFAULT)
+        waitmessage
+    }
+
+}
+
+
+// LIEPARD
 
 script EscapeRoom_EventScript_LiepardNPC{
     lock
@@ -686,40 +789,25 @@ movement EscapeRoom_Movement2_Nurse1NPC{
     walk_faster_left * 9
 }
 
-// MART NPCS
+// MART NPC
 
-script EscapeRoom_EventScript_Shop1NPC{
+script EscapeRoom_EventScript_ShopNPC{
     lockall
     faceplayer
     msgbox(MartNPC_AskToShop, MSGBOX_DEFAULT)
     waitmessage
-    pokemart(EscapeRoom_Shop1_items)
+    pokemart(EscapeRoom_Shop_items)
     msgbox(MartNPC_SayGoodbye, MSGBOX_AUTOCLOSE)
     waitmessage
     releaseall
 }
 
-script EscapeRoom_EventScript_Shop2NPC{
-    lockall
-    faceplayer
-    msgbox(MartNPC_AskToShop, MSGBOX_DEFAULT)
-    waitmessage
-    pokemart(EscapeRoom_Shop2_items)
-    msgbox(MartNPC_SayGoodbye, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-}
-
-mart EscapeRoom_Shop1_items{
+mart EscapeRoom_Shop_items{
     ITEM_CUSTAP_BERRY       // 2000  sold out between trainer3 and Liepard
+    ITEM_ESCAPE_ROPE        // 2000  
+    ITEM_MENTAL_HERB        // 2000
     ITEM_FLOAT_STONE        // 2000
     ITEM_RING_TARGET        // 2000 
-    ITEM_ESCAPE_ROPE        // 2000  
-}
-
-mart EscapeRoom_Shop2_items{
-    ITEM_CUSTAP_BERRY       // 2000
-    ITEM_MENTAL_HERB        // 2000
     ITEM_TM27               // 1000
 }
 
@@ -931,9 +1019,12 @@ script EscapeRoom_MoveRockSmashNPC{
     setflag(FLAG_HIDE_ROCKSMASH_NPC)
     waitse
 
+    // flags
     clearflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setflag(FLAG_ROCK_SMASH_GUY_MOVED)
-    // setflag(FLAG_MENTAL_HERB_SOLD_OUT)
+    
+    // prevent Mental Herb restore
+    removelostitem(ITEM_MENTAL_HERB)
 }
 
 movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
@@ -1217,7 +1308,6 @@ script EscapeRoom_EventScript_Trainer1PostBattle{
     clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
 
     // prevent white herb restore after winning
-    clearflag(FLAG_RECOVERED_WHITE_HERB)
     checkpartymon(SPECIES_ZERAORA)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
@@ -1237,7 +1327,6 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
     clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
 
     // prevent maranga restore after winning
-    clearflag(FLAG_RECOVERED_MARANGA)
     checkpartymon(SPECIES_FLORGES)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
@@ -1251,6 +1340,21 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
 }
 
 script EscapeRoom_EventScript_Trainer3PostBattle{
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+
+    // prevent ring target being restored via anti softlock guy
+    removelostitem(ITEM_RING_TARGET)
+
+    // keep Ring Target as held item
+    checkpartymon(SPECIES_FLORGES)
+    if(var(VAR_RESULT) == 0){
+        givepartyitem(ITEM_RING_TARGET, 0)
+    }
+    elif(var(VAR_RESULT) == 1){
+        givepartyitem(ITEM_RING_TARGET, 1)
+    }
+
     // move away from door
     lockall
     msgbox(Trainer3FinalWords, MSGBOX_AUTOCLOSE)
@@ -1280,25 +1384,24 @@ movement EscapeRoom_Movement_Trainer3End{
 
 script EscapeRoom_EventScript_Trainer4PostBattle{
     setflag(FLAG_TRAINER4_DEFEATED)
-    setflag(FLAG_ETHER_SOLD_OUT)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
     // prevent recovered item message
     clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
-    clearflag(FLAG_RECOVERED_FLUNG_ITEM)
 
-    // prevent Liepard's Berry Juice restore after winning
-    clearflag(FLAG_RECOVERED_BERRY_JUICE)
-    checkpartymon(SPECIES_LIEPARD)
-    copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
-    if(var(VAR_TEMP_0) != PARTY_SIZE){
-        checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
+    // dont restore Berry Juice if consumed in battle
+    if(flag(FLAG_BERRY_JUICE_CONSUMED) == TRUE){
+        checkpartyitem(0)
         if(var(VAR_0x8005) == ITEM_BERRY_JUICE){
-            removepartyitem(VAR_TEMP_0)
+            removepartyitem(0)
         }
-    } 
+        checkpartyitem(1)
+        if(var(VAR_0x8005) == ITEM_BERRY_JUICE){
+            removepartyitem(1)
+        }
+    }
 
     setflag(FLAG_TRAINER5_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
@@ -1307,10 +1410,11 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
 script EscapeRoom_EventScript_Trainer6PostBattle{
     // prevent recovered item message
     clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
-    clearflag(FLAG_RECOVERED_FLUNG_ITEM)
+
+    // remove item from lostItems?
+    removelostitem(ITEM_CUSTAP_BERRY)
 
     // prevent custap restore after winning
-    clearflag(FLAG_RECOVERED_CUSTAP)
     checkpartymon(SPECIES_AIPOM)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
@@ -1320,15 +1424,12 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
         }
     }
 
-    // TODO: change Goggles to new item
-
-    // prevent Goggles restore after winning
-    clearflag(FLAG_RECOVERED_GOGGLES)
+    // prevent full heal restore after winning
     checkpartymon(SPECIES_LIEPARD)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
-        if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
+        if(var(VAR_0x8005) == ITEM_FULL_HEAL){
             removepartyitem(VAR_TEMP_0)
         }
     }
@@ -2512,6 +2613,23 @@ text AntiSoftlockNoActionMessage{
     "now."
 }
 
+text AntiSoftlockRestoreLostItems{
+    "Do you want to recover any lost items?\n"
+    "This may require healing your party."
+}
+
+text AntiSoftlockNoItemsReturned{
+    "There were no items to return."
+}
+
+text AntiSoftlockPartyHealed{
+    "Your party Pokémon got healed."
+}
+
+text AntiSoftlockSomeOfPartyHealed{
+    "Some of your party Pokémon got healed."
+}
+
 
 // ULTRA BALL QUIZ NPC
 text UltraBallQuizStart{
@@ -2617,7 +2735,7 @@ text SpaceItemNPCInitialMessage_has_item{
     "I like to collect rare materials from\n"
     "outer space.\p"
     "Would you sell me your Comet Shard?\n"
-    "I can offer you ¥2.000."
+    "I can offer you ¥2000."
 }
 
 text SpaceItemNPCSellAcceptedMessage{
@@ -2633,7 +2751,7 @@ text SpaceItemNPCPostSellMessage{
 }
 
 text MoneyReceived2000{
-    "{PLAYER} received ¥2.000!"
+    "{PLAYER} received ¥2000!"
 }
 
 

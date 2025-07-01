@@ -159,12 +159,12 @@ HikerSellAbilityCapsule::
 	faceplayer
 # 112 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_ABILITY_CAPSULE_BOUGHT, HikerSellAbilityCapsule_2
-# 145 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 147 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCFinalMessage, MSGBOX_AUTOCLOSE
-# 146 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 148 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	waitmessage
 HikerSellAbilityCapsule_1:
-# 148 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 150 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	releaseall
 	return
 
@@ -174,25 +174,27 @@ HikerSellAbilityCapsule_2:
 # 116 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq HikerSellAbilityCapsule_5
-# 139 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 141 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCsellDeclined, MSGBOX_AUTOCLOSE
-# 140 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 142 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	waitmessage
 	goto HikerSellAbilityCapsule_1
 
 HikerSellAbilityCapsule_5:
 # 119 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	checkmoney 525
+	checkmoney 1025
 # 120 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_RESULT, FALSE
 	goto_if_eq HikerSellAbilityCapsule_9
-# 129 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 128 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	removemoney 1025
+# 131 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	giveitem ITEM_ABILITY_CAPSULE
-# 132 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 134 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCsellAcceptedMessage, MSGBOX_AUTOCLOSE
-# 133 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	waitmessage
 # 135 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	waitmessage
+# 137 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_ABILITY_CAPSULE_BOUGHT
 	goto HikerSellAbilityCapsule_1
 
@@ -207,26 +209,26 @@ HikerSellAbilityCapsule_9:
 
 
 RockSmashNPCsellDrugs::
-# 151 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 153 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Hey kid, wanna buy some dru- OH HEY!\p"
 	.string "You're the one who smashed that rock\n"
 	.string "for me, aren't you?\p"
 	.string "For you I've got a special offer!\n"
-	.string "An Ability Capsule for only ¥525.\l"
+	.string "An Ability Capsule for only ¥1025.\l"
 	.string "What do you say?$"
 
 RockSmashNPCsellDeclined::
-# 162 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 164 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "You know where to find me.$"
 
 RockSmashNPCnotEnoughMoney::
-# 166 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 168 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Come back when you have the money.$"
 
 RockSmashNPCsellAcceptedMessage::
-# 170 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 172 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Pleasure doing business.$"
 
 RockSmashNPCFinalMessage::
-# 174 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 176 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Move along now.$"

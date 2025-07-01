@@ -46,8 +46,8 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_SPACE_ITEM_SOLD                    0x24
-#define FLAG_ETHER_SOLD_OUT                 0x25
+#define FLAG_SPACE_ITEM_SOLD                0x24
+#define FLAG_BERRY_JUICE_CONSUMED           0x25
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
@@ -64,11 +64,11 @@
 #define FLAG_AIPOM_TRADE_ACCEPTED           0x33 
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_GOGGLES_SNATCHED               0x35 
-#define FLAG_RECOVERED_WHITE_HERB           0x36 
-#define FLAG_RECOVERED_MARANGA              0x37  
-#define FLAG_RECOVERED_CUSTAP               0x38  
-#define FLAG_ZERAORA_CAUGHT                 0x39
-#define FLAG_REMOVE_FERRO_CUSTAP            0x3A
+#define FLAG_DONT_RETURN_MENTAL_HERB        0x36   
+#define FLAG_UNUSED_0x37                    0x37  // unused
+#define FLAG_UNUSED_0x38                    0x38  // unused
+#define FLAG_ZERA_FIGHT_BACKUP_CHECK        0x39
+#define FLAG_ZERAORA_CAUGHT                 0x3A
 #define FLAG_HIDE_NURSE1_NPC                0x3B 
 #define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
@@ -1224,18 +1224,18 @@
 #define FLAG_HIDE_SMASH_ROCK2                                       0x495 // one-way rock
 #define FLAG_ROCK_SMASH_GUY_MOVED                                   0x496
 #define FLAG_END_ESCAPE_ROOM                                        0x497
-#define FLAG_RECOVERED_MENTAL_HERB                                  0x498 
-#define FLAG_RECOVERED_GOGGLES                                      0x499 
-#define FLAG_RECOVERED_FLUNG_ITEM                                   0x49A 
-#define FLAG_REMOVE_LIEPARD_MENTAL_HERB                             0x49B
-#define FLAG_MENTAL_HERB_USED_FOR_SACK                              0x49C 
-#define FLAG_LIEPARD_SACKED                                         0x49D 
+#define FLAG_UNUSED_0x498                                           0x498 // Unused
+#define FLAG_UNUSED_0x499                                           0x499 // Unused
+#define FLAG_UNUSED_0x49A                                           0x49A // Unused
+#define FLAG_UNUSED_0x49B                                           0x49B // Unused
+#define FLAG_UNUSED_0x49C                                           0x49C // Unused
+#define FLAG_UNUSED_0x49D                                           0x49D // Unused
 #define FLAG_RAN_FROM_TRAPINCH                                      0x49E
 #define FLAG_HIDE_TRAPINCH                                          0x49F  
-#define FLAG_RECOVERED_BERRY_JUICE                                  0x4A0  
+#define FLAG_UNUSED_0x4A0                                           0x4A0  // Unused
 #define FLAG_NURSE_RESCUED                                          0x4A1 
-#define FLAG_HIDE_ROCKSMASH_TUNNEL_NPC                                           0x4A2
-#define FLAG_ABILITY_CAPSULE_BOUGHT                                           0x4A3  
+#define FLAG_HIDE_ROCKSMASH_TUNNEL_NPC                              0x4A2
+#define FLAG_ABILITY_CAPSULE_BOUGHT                                 0x4A3  
 #define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag
 #define FLAG_UNUSED_0x4A5                                           0x4A5 // Unused Flag
 #define FLAG_UNUSED_0x4A6                                           0x4A6 // Unused Flag

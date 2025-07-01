@@ -310,4 +310,4 @@ NurseMessage2::
 
 MoneyReceived::
 # 265 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	.string "{PLAYER} received ¥2.000!$"
+	.string "{PLAYER} received ¥2000!$"

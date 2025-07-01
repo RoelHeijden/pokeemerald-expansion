@@ -7849,7 +7849,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         moneyReward = 500;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER5){
-        moneyReward = 0;  // RICH BOY - money battle
+        moneyReward = 500;  // RICH BOY - money battle
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER6){
         moneyReward = 500;

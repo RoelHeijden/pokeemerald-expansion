@@ -1187,7 +1187,6 @@
 	.byte 0xfe
 	.endm
 
-
 	@ makes a backup of a given pokemon's moveset.
 	@ takes a var as input.
 	@ VAR_RESULT is set to FALSE if a backup is already active. TRUE otherwise.
@@ -1203,6 +1202,19 @@
 	.2byte \species
 	.endm
 
+	@ checks if item is listed in the lostitems struct
+	@ VAR_RESULT is set to TRUE if it's in, FALSE otherwise.
+	.macro isitemlost item:req
+	.byte 0xc9
+	.2byte \item
+	.endm
+
+	@ removes item from the lostitems struct
+	@ VAR_RESULT is set to TRUE if succesful, FALSE otherwise.
+	.macro removelostitem item:req
+	.byte 0xca
+	.2byte \item
+	.endm
 
 	@ Checks if at least one Pokemon in the player's party knows the specified move. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that knows the move. If not, VAR_RESULT is set to PARTY_SIZE.
@@ -1341,6 +1353,13 @@
 	@ VAR_RESULT will be set to MON_GIVEN_TO_PARTY, MON_GIVEN_TO_PC, or MON_CANT_GIVE depending on the outcome.
 	.macro giveaipomegg
 	.byte 0xf8
+	.endm
+
+	@ Heals one specified pokemon species in the player party.
+	@ VAR_RESULT returns the slot of the healed Pokemon. PART_SIZE if not found.
+	.macro healpartymon species:req
+	.byte 0xd0
+	.2byte \species
 	.endm
 
 

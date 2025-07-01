@@ -2355,6 +2355,64 @@ bool8 ScrCmd_givepartyitem(struct ScriptContext *ctx)
 
 
 
+// ADDED
+bool8 ScrCmd_isitemlost(struct ScriptContext *ctx)
+{
+    u16 itemId = ScriptReadHalfword(ctx);
+    gSpecialVar_Result = FALSE;
+
+    for (int i = 0; i < MAX_LOST_ITEMS; i++)
+    {
+        if (gSaveBlock3Ptr->lostItemsTracker.lostItems[i] == itemId){
+            gSpecialVar_Result = TRUE;
+            break;
+        }
+    }
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_removelostitem(struct ScriptContext *ctx)
+{
+    u16 itemId = ScriptReadHalfword(ctx);
+    gSpecialVar_Result = FALSE;
+
+    for (int i = 0; i < MAX_LOST_ITEMS; i++)
+    {
+        if (gSaveBlock3Ptr->lostItemsTracker.lostItems[i] == itemId)
+        {
+            gSaveBlock3Ptr->lostItemsTracker.lostItems[i] = ITEM_NONE;
+            gSpecialVar_Result = TRUE;
+            break;
+        }
+    }
+    return FALSE;
+}
+
+
+// ADDED
+bool8 ScrCmd_healpartymon(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    u8 i;
+    struct Pokemon *mon;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i];
+        if (GetMonData(mon, MON_DATA_SPECIES, NULL) == species &&
+            GetMonData(mon, MON_DATA_IS_EGG, NULL) == FALSE)
+        {
+            HealPokemon(mon);
+            gSpecialVar_Result = i; // return slot index
+            return FALSE;
+        }
+    }
+
+    gSpecialVar_Result = PARTY_SIZE; // not found
+    return FALSE;
+}
+
 
 // ADDED
 bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)

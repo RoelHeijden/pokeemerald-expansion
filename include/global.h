@@ -176,8 +176,16 @@ struct Time
 };
 
 
+// ADDED
+#define MAX_LOST_ITEMS 8 
+struct LostItemsTracker
+{
+    u16 lostItems[MAX_LOST_ITEMS];
+};
+
 struct SaveBlock3
 {
+    struct LostItemsTracker lostItemsTracker; // ADDED
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
 #endif
@@ -930,6 +938,8 @@ struct MysteryGiftSave
     u32 trainerIds[2][5]; // Saved ids for 10 trainers, 5 each for battles and trades
 }; // 0x36C 0x3598
 
+
+
 // For external event data storage. The majority of these may have never been used.
 // In Emerald, the only known used fields are the PokeCoupon and BoxRS ones, but hacking the distribution discs allows Emerald to receive events and set the others
 struct ExternalEventData
@@ -1098,5 +1108,6 @@ struct MapPosition
     s16 y;
     s8 elevation;
 };
+
 
 #endif // GUARD_GLOBAL_H

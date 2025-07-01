@@ -116,7 +116,7 @@ script HikerSellAbilityCapsule{
         if(var(VAR_RESULT) == YES){
 
             // check enough money
-            checkmoney(525)
+            checkmoney(1025)
             if(var(VAR_RESULT) == FALSE){
                 // not enough money message
                 msgbox(RockSmashNPCnotEnoughMoney, MSGBOX_AUTOCLOSE)
@@ -124,6 +124,8 @@ script HikerSellAbilityCapsule{
                 releaseall
                 end
             }
+
+            removemoney(1025)
 
             // give Ability Capsule
             giveitem(ITEM_ABILITY_CAPSULE)
@@ -155,7 +157,7 @@ text RockSmashNPCsellDrugs{
     "for me, aren't you?\p"
 
     "For you I've got a special offer!\n"
-    "An Ability Capsule for only ¥525.\l"
+    "An Ability Capsule for only ¥1025.\l"
     "What do you say?"
 }
 

@@ -11377,77 +11377,103 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
 //     }
 // }
 
+
 // ADDED
-// also restore certain items (berries)
 void TryRestoreHeldItems(void)
 {
     u32 i;
     bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & BATTLE_TYPE_TRAINER;
 
+    // clear flag at start
+    FlagClear(FLAG_BERRY_JUICE_CONSUMED);
+
+    // collect the original items of all pokemon
+    u16 originalItems[PARTY_SIZE];
+    for (i = 0; i < PARTY_SIZE; i++)
+        originalItems[i] = gBattleStruct->itemLost[B_SIDE_PLAYER][i].originalItem;
+
+    // collect the current items of all pokemon
+    u16 currentItems[PARTY_SIZE];
+    for (i = 0; i < PARTY_SIZE; i++)
+        currentItems[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+
+    // iterate party pokemon
     for (i = 0; i < PARTY_SIZE; i++)
     {
+        u16 currentItem = currentItems[i];
+        u16 originalItem = originalItems[i];
+
+        // prevent duplicate items after double battles (e.g. via self Trick)
+        // remove item if:
+        // - mon's currentItem != originalItem
+        // - mon's currentItem is in other mon's originalItems
+        if (currentItem != ITEM_NONE && currentItem != originalItem)
+        {
+            for (u32 j = 0; j < PARTY_SIZE; j++)
+            {
+                // check if item matches original item of other pokemon
+                if (j != i && currentItem == originalItems[j])
+                {
+                    // remove item to prevent duplicate
+                    u16 none = ITEM_NONE;
+                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &none);
+                    break;
+                }
+            }
+        }
+
+        // item recovery section
         if (B_RESTORE_HELD_BATTLE_ITEMS >= GEN_9 || gBattleStruct->itemLost[B_SIDE_PLAYER][i].stolen || returnNPCItems)
         {
             u16 lostItem = gBattleStruct->itemLost[B_SIDE_PLAYER][i].originalItem;
 
-            // Check if the item is one of the explicitly allowed ones
-            bool32 isAllowedSpecialItem =
-                lostItem == ITEM_CUSTAP_BERRY ||
-                lostItem == ITEM_MARANGA_BERRY;
-
-            // Skip restoring berries unless it's one of the special cases, and mon isn't already holding it
-            if (ItemId_GetPocket(lostItem) == POCKET_BERRIES &&
-                !isAllowedSpecialItem &&
-                GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM) != lostItem)
+            // Restore item if it’s valid and not already held
+            if (lostItem != ITEM_NONE || returnNPCItems) 
             {
-                lostItem = ITEM_NONE;
-            }
-
-            // Restore item if it’s valid, not a general berry (unless allowed), and not already held
-            if ((lostItem != ITEM_NONE || returnNPCItems) && 
-                (ItemId_GetPocket(lostItem) != POCKET_BERRIES || isAllowedSpecialItem))
-            {
-                // ADDED
                 // check if item actually consumed
-                u16 currentHeldItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-                if (currentHeldItem != lostItem){
-                    // set flags for messaging ingame
+                if (currentItem != lostItem){
 
                     // dont recover prev item if current held item is the stolen berry juice
-                    if(currentHeldItem == ITEM_BERRY_JUICE && gLastFlungItem == ITEM_SAFETY_GOGGLES)
+                    if(currentItem == ITEM_BERRY_JUICE && gLastFlungItem == ITEM_SAFETY_GOGGLES)
                         return;
 
-                    // following flags are used to remove the held items if needed (e.g. after consuming and winning)
-                    // if item was flung
-                    if (lostItem == gLastFlungItem){
-                        FlagSet(FLAG_RECOVERED_FLUNG_ITEM);
+                    // Check if the item is one that requires a heal before returning
+                    bool32 returnItemRequiresHeal =
+                        lostItem == ITEM_CUSTAP_BERRY ||
+                        lostItem == ITEM_LEPPA_BERRY ||
+                        lostItem == ITEM_MENTAL_HERB ||
+                        lostItem == ITEM_RING_TARGET;
 
-                        if (lostItem == ITEM_MENTAL_HERB){
-                            FlagSet(FLAG_RECOVERED_MENTAL_HERB);
-                        }
-                        else if (lostItem == ITEM_SAFETY_GOGGLES){
-                            FlagSet(FLAG_RECOVERED_GOGGLES);
-                        }
-                        else if (lostItem == ITEM_BERRY_JUICE){
-                            FlagSet(FLAG_RECOVERED_BERRY_JUICE);
-                        }
+                    // compare current mon state with backup
+                    // if:
+                    // - HP is differnt (or if PP was gained, via Leppa) 
+                    // - and the item requires a heal to return
+                    // - and not lost the battle
+                    // don't recover item, but instead store the item as lostItem
+                    if(PartyBackupChanged() && returnItemRequiresHeal && !(FlagGet(FLAG_PLAYER_JUST_LOST))){
+                        // store item
+                        AddLostItem(lostItem);
 
-                    }
-                    // if item was not flung (but lost in another way)
-                    else if (lostItem == ITEM_WHITE_HERB){
-                        FlagSet(FLAG_RECOVERED_WHITE_HERB);
-                    }
-                    else if (lostItem == ITEM_CUSTAP_BERRY){
-                        FlagSet(FLAG_RECOVERED_CUSTAP);
-                    }
-                    else if (lostItem == ITEM_MARANGA_BERRY){
-                        FlagSet(FLAG_RECOVERED_MARANGA);
-                    }
-                    else if (lostItem == ITEM_BERRY_JUICE){
-                        FlagSet(FLAG_RECOVERED_BERRY_JUICE);
+                        // prevent item recovery
+                        return;
                     }
 
-                    // set main flag
+                    // check if Berry Juice is actually consumed (and not held by a partner pokemon)
+                    if(lostItem == ITEM_BERRY_JUICE){
+                        bool8 berryJuiceStillHeld = FALSE;
+                        for (u8 j = 0; j < PARTY_SIZE; j++)
+                        {
+                            if (currentItems[j] == ITEM_BERRY_JUICE)
+                            {
+                                berryJuiceStillHeld = TRUE;
+                                break;
+                            }
+                        }
+                        if (!berryJuiceStillHeld)
+                            FlagSet(FLAG_BERRY_JUICE_CONSUMED);
+                    }
+
+                    // set return message flag
                     FlagSet(FLAG_DO_RECOVERED_ITEM_MESSAGE);
 
                     // restore item
@@ -11458,6 +11484,59 @@ void TryRestoreHeldItems(void)
     }
 }
 
+
+// ADDED
+bool32 PartyBackupChanged(void)
+{
+    if (!gPartyBackupInUse){
+        return FALSE; // no backup to compare with
+    }
+    for (int i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *curMon = &gPlayerParty[i];
+        struct Pokemon *backupMon = &gPlayerPartyBackup[i];
+
+        u16 species = GetMonData(curMon, MON_DATA_SPECIES);
+        if (species == SPECIES_NONE)
+            continue;
+
+        // Check HP difference
+        u16 curHP = GetMonData(curMon, MON_DATA_HP);
+        u16 backupHP = GetMonData(backupMon, MON_DATA_HP);
+        if (curHP != backupHP)
+            return TRUE;
+        
+        // Check for gained PP
+        for (int j = 0; j < MAX_MON_MOVES; j++)
+        {
+            u8 curPP = GetMonData(curMon, MON_DATA_PP1 + j);
+            u8 backupPP = GetMonData(backupMon, MON_DATA_PP1 + j);
+
+            if (curPP > backupPP)
+                return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
+// ADDED
+bool8 AddLostItem(u16 itemId)
+{
+    for (int i = 0; i < MAX_LOST_ITEMS; i++)
+    {
+        if (gSaveBlock3Ptr->lostItemsTracker.lostItems[i] == itemId)
+            return FALSE; // already in list
+
+        if (gSaveBlock3Ptr->lostItemsTracker.lostItems[i] == ITEM_NONE)
+        {
+            gSaveBlock3Ptr->lostItemsTracker.lostItems[i] = itemId;
+            return TRUE;
+        }
+    }
+    return FALSE; // list full
+}
 
 
 
