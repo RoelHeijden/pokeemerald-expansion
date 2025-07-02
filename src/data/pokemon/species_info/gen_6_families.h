@@ -1806,10 +1806,16 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     {
         FLORGES_MISC_INFO(Red, 0),
         .description = COMPOUND_STRING(
-            "This Pokémon creates an\n"
-            "impressive flower garden in its territory. It\n"
-            "draws forth the power of the red\n"
-            "flowers around its neck."),
+            "Grass Knot can be deleted once\n"
+            "Zeraora has been caught.\n"
+            "\n"
+            "Camouflage is spooky. Run!"
+        ),
+        // .description = COMPOUND_STRING(
+        //     "This Pokémon creates an\n"
+        //     "impressive flower garden in its territory. It\n"
+        //     "draws forth the power of the red\n"
+        //     "flowers around its neck."),
     },
     [SPECIES_FLORGES_YELLOW_FLOWER] =
     {

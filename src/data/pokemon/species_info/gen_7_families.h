@@ -6854,7 +6854,8 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "It approaches its enemies at the speed\n"
             "of lightning, then tears them limb from\n"
-            "limb with its sharp claws."),
+            "limb with its sharp claws."
+            " Can be healed\nwith nature power and plasma fists."),  // ADDED
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,

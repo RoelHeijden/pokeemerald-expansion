@@ -110,6 +110,11 @@ static void ClearPokedexFlags(void)
     gUnusedPokedexU8 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
+
+    // ADDED
+    // set Zoroak pokedex flag to seen
+    // u16 zoroakId = 571;
+    // GetSetPokedexFlag(zoroakId, FLAG_SET_SEEN);
 }
 
 void ClearAllContestWinnerPics(void)
