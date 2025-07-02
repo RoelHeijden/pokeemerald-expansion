@@ -511,7 +511,6 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     // undo other actions
     // TODO:
     // - trades
-    // - trainer5
     elif(var(VAR_RESULT) == 2){
         call(EscapeRoom_EventScript_UndoOtherActions)
     }
@@ -519,6 +518,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     releaseall
 }
 
+// return items
 
 script EscapeRoom_EventScript_ReturnLostItems{
     // clear flags
@@ -563,14 +563,14 @@ script EscapeRoom_EventScript_ReturnLostItems{
     }
 
     // special case: Full Heal (lost at trainer5)
-    if(flag(FLAG_FULL_HEAL_CONSUMED)){
+    if(flag(FLAG_FULL_HEAL_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_FULL_HEAL_CONSUMED)
         giveitem(ITEM_FULL_HEAL)
         setflag(FLAG_TEMP_1)  
     }
 
     // special case: Safety Goggles (lost at trainer5)
-    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
+    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
         giveitem(ITEM_SAFETY_GOGGLES)
         setflag(FLAG_TEMP_1)  
@@ -580,7 +580,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     // heal party and message
     if(flag(FLAG_TEMP_1) == TRUE){
 
-        // if special Ring Target Ape case: heal Aipom only
+        // special case: if Ring Target Ape -> heal Aipom only
         if(flag(FLAG_TEMP_2) == TRUE){
             // heal Aipom
             healpartymon(SPECIES_AIPOM)
@@ -607,10 +607,14 @@ script EscapeRoom_EventScript_ReturnLostItems{
 
 }
 
+// undo item
+
 script EscapeRoom_EventScript_UndoUsedItems{
     msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
     waitmessage
 }
+
+// undo event
 
 script EscapeRoom_EventScript_UndoOtherActions{
     // trainer5 rematch
@@ -629,7 +633,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
         waitmessage
     }
 }
-
 
 script EscapeRoom_EventScript_SetTrainer5Rematch{
     // take all money
@@ -1330,10 +1333,12 @@ script EscapeRoom_EventScript_Trainer5{
         end
     }
 
-    // clear item return flags
-    clearflag(FLAG_BERRY_JUICE_CONSUMED)
-    clearflag(FLAG_FULL_HEAL_CONSUMED)
-    clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+    // clear item return flags before the battle
+    if(!flag(FLAG_TRAINER5_DEFEATED)){
+        clearflag(FLAG_BERRY_JUICE_CONSUMED)
+        clearflag(FLAG_FULL_HEAL_CONSUMED)
+        clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+    }
 
     // battle
     trainerbattle_double(
@@ -2734,7 +2739,7 @@ text AntiSoftlockNoItemToUndo{
 }
 
 text AntiSoftlockNoActionsToUndo{
-    "There currently are no actions that\n"
+    "There currently are no events that\n"
     "can be undone."
 }
 

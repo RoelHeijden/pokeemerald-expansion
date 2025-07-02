@@ -11470,9 +11470,9 @@ void TryRestoreHeldItems(void)
                     // items should only be removed after winning if they're not just swapped around
                     if (lostItemActuallyConsumed){
                         if(lostItem == ITEM_BERRY_JUICE)
-                            FlagSet(FLAG_FULL_HEAL_CONSUMED);
-                        if(lostItem == ITEM_FULL_HEAL)
                             FlagSet(FLAG_BERRY_JUICE_CONSUMED);
+                        if(lostItem == ITEM_FULL_HEAL)
+                            FlagSet(FLAG_FULL_HEAL_CONSUMED);
                         if(lostItem == ITEM_SAFETY_GOGGLES)
                             FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
                     }

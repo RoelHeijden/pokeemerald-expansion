@@ -1854,5 +1854,5 @@ const u8 gText_PainSplit[] = _("Pain Split");
 const u8 gText_DestinyBond[] = _("Destiny Bond");
 const u8 gText_ShadowSneak[] = _("Shadow Sneak");
 const u8 gText_ReturnLostItems[] = _("Return Lost Items");
-const u8 gText_UndoUsedItems[] = _("Undo: Used Item");
-const u8 gText_UndoOtherAction[] = _("Undo: Other");
+const u8 gText_UndoUsedItems[] = _("Undo Used Item");
+const u8 gText_UndoOtherAction[] = _("Undo Event");
