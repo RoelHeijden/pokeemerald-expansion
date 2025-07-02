@@ -128,7 +128,7 @@
 #define MULTI_SPLIT_BOND                   117
 #define MULTI_DISABLE_SNEAK                118
 #define MULTI_SPLIT_SNEAK                  119
-#define MULTI_BOND_SNEAK                   120
+#define MULTI_SOFTLOCK_GUY                 120
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0

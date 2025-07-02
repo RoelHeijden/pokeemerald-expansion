@@ -237,7 +237,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkpartymon						@ 0xea
 	.4byte ScrCmd_checktutormoveslearned		    @ 0xeb
 	.4byte ScrCmd_replacemove		 			    @ 0xec
-	.4byte ScrCmd_replacemovebox		 			@ 0xed
+	.4byte ScrCmd_softlockguymovebox		 		@ 0xed
 	.4byte ScrCmd_checkentirepartyfainted		 	@ 0xee
 	.4byte ScrCmd_setparty1hp		 			    @ 0xef
 	.4byte ScrCmd_checkpartymonlevel		 		@ 0xf0

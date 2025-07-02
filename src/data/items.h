@@ -10917,7 +10917,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_SLEEP_TALK] = 
     {
         .name = _("TM27"),
-        .price = 1000,
+        .price = 2000,
         .description = COMPOUND_STRING(
             "User performs one\n"
             "of its own moves\n" 

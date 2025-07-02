@@ -897,7 +897,7 @@
 	.endm
 
 	@ Displays a multichoicebox for the replace move move tutor script.
-	.macro replacemovebox x:req, y:req, ignoreBPress:req
+	.macro softlockguymovebox x:req, y:req, ignoreBPress:req
 	.byte 0xed
 	.byte \x
 	.byte \y
@@ -2254,7 +2254,7 @@
 	MSGBOX_AUTOCLOSE = 6
 	MSGBOX_GETPOINTS = 9
 	MSGBOX_POKENAV = 10
-	MSGBOX_REPLACEMOVE = 11
+	MSGBOX_SOFTLOCK_GUY = 11
 
 	YES = 1
 	NO  = 0

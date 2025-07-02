@@ -808,10 +808,12 @@ static const struct MenuAction MultichoiceList_SplitSneak[] =
     {gText_ShadowSneak},
 };
 
-static const struct MenuAction MultichoiceList_BondSneak[] =
+static const struct MenuAction MultichoiceList_SoftlockGuy[] =
 {
-    {gText_DestinyBond},
-    {gText_ShadowSneak},
+    {gText_ReturnLostItems},
+    {gText_UndoUsedItems},
+    {gText_UndoOtherAction},
+    // {gText_LowerCaseCancel},
 };
 
 
@@ -948,7 +950,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SPLIT_BOND]                 = MULTICHOICE(MultichoiceList_SplitBond),
     [MULTI_DISABLE_SNEAK]              = MULTICHOICE(MultichoiceList_DisableSneak),
     [MULTI_SPLIT_SNEAK]                = MULTICHOICE(MultichoiceList_SplitSneak),
-    [MULTI_BOND_SNEAK]                 = MULTICHOICE(MultichoiceList_BondSneak),
+    [MULTI_SOFTLOCK_GUY]               = MULTICHOICE(MultichoiceList_SoftlockGuy),
 };
 
 const u8 *const gStdStrings[] =

@@ -3060,4 +3060,9 @@ extern const u8 gText_PainSplit[];
 extern const u8 gText_DestinyBond[];
 extern const u8 gText_ShadowSneak[];
 
+extern const u8 gText_ReturnLostItems[];
+extern const u8 gText_UndoUsedItems[];
+extern const u8 gText_UndoOtherAction[];
+extern const u8 gText_LowerCaseCancel[];
+
 #endif // GUARD_STRINGS_H

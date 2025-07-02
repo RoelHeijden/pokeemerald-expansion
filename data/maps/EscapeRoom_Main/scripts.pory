@@ -301,7 +301,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move1=MOVE_STEEL_ROLLER,
         move2=MOVE_BLOCK,
         move3=MOVE_INGRAIN,
-        move4=MOVE_GRAVITY,
+        move4=MOVE_SUNNY_DAY,
         // EVs:
         hpEv=0, 
         atkEv=252,
@@ -484,27 +484,38 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     faceplayer
     lockall
 
-    // return items lost in battle
-    msgbox(AntiSoftlockRestoreLostItems, MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES){
+    msgbox(AntiSoftlockIntroMessage, MSGBOX_SOFTLOCK_GUY)
+
+    // return lost items 
+    // TODO:
+    // - Leppa Berry (out of battle)
+    // - Berry Juice (out of battle)
+    // - Escape Rope
+    if(var(VAR_RESULT) == 0){
+        // msgbox(AntiSoftlockRestoreLostItems, MSGBOX_AUTOCLOSE)
+        // waitmessage
         call(EscapeRoom_EventScript_ReturnLostItems)
     }
 
-    // return items lost outside of battle
-    // - Leppa Berry
-    // - Berry Juice
-    // - Escape Rope
+    // undo used items
+    // TODO:
+    // - rare candy
+    // - exp candy
+    // - TM Sleep Talk
+    // - TM Skill Swap
+    // - HM Cut
+    elif(var(VAR_RESULT) == 1){
+        call(EscapeRoom_EventScript_UndoUsedItems)
+    }
 
-    // undo rare candy
-    // undo exp candy
-    // undo TM Sleep Talk
-    // undo TM Skill Swap
-    // undo HM Cut
+    // undo other actions
+    // TODO:
+    // - trades
+    // - trainer5
+    elif(var(VAR_RESULT) == 2){
+        call(EscapeRoom_EventScript_UndoOtherActions)
+    }
 
-
-    // // if no potential softlocks:
-    // msgbox(AntiSoftlockIntroMessage, MSGBOX_DEFAULT)
-    // msgbox(AntiSoftlockNoActionMessage, MSGBOX_DEFAULT)
     releaseall
 }
 
@@ -551,6 +562,20 @@ script EscapeRoom_EventScript_ReturnLostItems{
         }
     }
 
+    // special case: Full Heal (lost at trainer5)
+    if(flag(FLAG_FULL_HEAL_CONSUMED)){
+        clearflag(FLAG_FULL_HEAL_CONSUMED)
+        giveitem(ITEM_FULL_HEAL)
+        setflag(FLAG_TEMP_1)  
+    }
+
+    // special case: Safety Goggles (lost at trainer5)
+    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
+        clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+        giveitem(ITEM_SAFETY_GOGGLES)
+        setflag(FLAG_TEMP_1)  
+    }
+
     // at least one item was restored
     // heal party and message
     if(flag(FLAG_TEMP_1) == TRUE){
@@ -580,6 +605,53 @@ script EscapeRoom_EventScript_ReturnLostItems{
         waitmessage
     }
 
+}
+
+script EscapeRoom_EventScript_UndoUsedItems{
+    msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
+    waitmessage
+}
+
+script EscapeRoom_EventScript_UndoOtherActions{
+    // trainer5 rematch
+    if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
+        msgbox(AntiSoftlockAskUndoTrainer5, MSGBOX_YESNO)
+        waitmessage
+        if(var(VAR_RESULT) == YES){
+            msgbox(AntiSoftlockTrainer5Undone, MSGBOX_AUTOCLOSE)
+            waitmessage
+            call(EscapeRoom_EventScript_SetTrainer5Rematch)
+        }
+    }
+    // no actions to be undone
+    else{
+        msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+}
+
+
+script EscapeRoom_EventScript_SetTrainer5Rematch{
+    // take all money
+    removemoney(99999)
+
+    // return items
+    if(flag(FLAG_FULL_HEAL_CONSUMED)){
+        clearflag(FLAG_FULL_HEAL_CONSUMED)
+        giveitem(ITEM_FULL_HEAL)
+    }
+    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
+        clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+        giveitem(ITEM_SAFETY_GOGGLES)
+    }
+    if(flag(FLAG_BERRY_JUICE_CONSUMED)){
+        clearflag(FLAG_BERRY_JUICE_CONSUMED)
+        giveitem(ITEM_BERRY_JUICE)
+    }
+
+    // reset trainer flag
+    cleartrainerflag(TRAINER_CUSTOM_TRAINER5)
+    clearflag(FLAG_TRAINER5_DEFEATED)
 }
 
 
@@ -1072,9 +1144,9 @@ script EscapeRoom_TryBuySpaceItemNPC{
                 setflag(FLAG_SPACE_ITEM_SOLD)
 
                 // give money
-                addmoney(2000)
+                addmoney(3000)
                 lockall
-                message(MoneyReceived2000)
+                message(MoneyReceived3000)
                 playfanfare(MUS_OBTAIN_ITEM)
                 waitfanfare
                 delay(10)
@@ -1258,6 +1330,12 @@ script EscapeRoom_EventScript_Trainer5{
         end
     }
 
+    // clear item return flags
+    clearflag(FLAG_BERRY_JUICE_CONSUMED)
+    clearflag(FLAG_FULL_HEAL_CONSUMED)
+    clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+
+    // battle
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER5, 
         Trainer5_Intro, 
@@ -1391,7 +1469,7 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
     // prevent recovered item message
     clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
 
-    // dont restore Berry Juice if consumed in battle
+    // dont restore Berry Juice if consumed (or tricked to opp) in battle
     if(flag(FLAG_BERRY_JUICE_CONSUMED) == TRUE){
         checkpartyitem(0)
         if(var(VAR_0x8005) == ITEM_BERRY_JUICE){
@@ -1399,6 +1477,30 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
         checkpartyitem(1)
         if(var(VAR_0x8005) == ITEM_BERRY_JUICE){
+            removepartyitem(1)
+        }
+    }
+
+    // dont restore full heal if consumed (flung) in battle
+    if(flag(FLAG_FULL_HEAL_CONSUMED) == TRUE){
+        checkpartyitem(0)
+        if(var(VAR_0x8005) == ITEM_FULL_HEAL){
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_0x8005) == ITEM_FULL_HEAL){
+            removepartyitem(1)
+        }
+    }
+
+    // dont restore safety googles if consumed (flung) in battle
+    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED) == TRUE){
+        checkpartyitem(0)
+        if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
             removepartyitem(1)
         }
     }
@@ -2402,7 +2504,7 @@ text GravestoneClick1Message{
 
 text GravestoneClick2Message{
     "The air grows cold.\n"
-    "You feel a spirit nearby."
+    "A spirit makes its presence known."
 }
 
 text GravestoneClick3Message{
@@ -2604,31 +2706,49 @@ text AntiSoftlockIntroMessage{
     "Hi, I'm the anti-softlock guy.\p"
     "I can roll back actions that have the\n"
     "possibility to get you softlocked.\p"
-    "However, I will NOT specify whether you\n"
-    "are actually softlocked or not."
-}
-
-text AntiSoftlockNoActionMessage{
-    "There's nothing I can do for you right\n"
-    "now."
+    "What would you like to do?"
 }
 
 text AntiSoftlockRestoreLostItems{
-    "Do you want to recover any lost items?\n"
-    "This may require healing your party."
+    // "Be aware that returning certain items\n"
+    // "may involve healing your party."
+    "(This may heal your party)"
 }
 
 text AntiSoftlockNoItemsReturned{
-    "There were no items to return."
+    "There currently are no items that can\n"
+    "be returned."
 }
 
 text AntiSoftlockPartyHealed{
-    "Your party Pokémon got healed."
+    "Your party Pokémon were healed."
 }
 
 text AntiSoftlockSomeOfPartyHealed{
     "Some of your party Pokémon got healed."
 }
+
+text AntiSoftlockNoItemToUndo{
+    "There currently are no item uses that\n"
+    "can be undone."
+}
+
+text AntiSoftlockNoActionsToUndo{
+    "There currently are no actions that\n"
+    "can be undone."
+}
+
+text AntiSoftlockAskUndoTrainer5{
+    "Would you like to undo your previous\n"
+    "trainer battle win?\p"
+    "Any money earned or items lost during\n"
+    "battle will be returned as well."
+}
+
+text AntiSoftlockTrainer5Undone{
+    "The battle has been undone."
+}
+
 
 
 // ULTRA BALL QUIZ NPC
@@ -2725,17 +2845,19 @@ text DusknoirStoleMyMailMsg{
 // Space Item buy NPC
 
 text SpaceItemNPCInitialMessage_no_item{
-    "I like to collect rare materials from\n"
-    "outer space.\p"
+    "I have a fascination with rare and\n"
+    "unusual materials.\p"
+
     "Please come to me if you ever happen\n"
-    "to find any."
+    "to find anything worth my attention."
 }
 
 text SpaceItemNPCInitialMessage_has_item{
-    "I like to collect rare materials from\n"
-    "outer space.\p"
-    "Would you sell me your Comet Shard?\n"
-    "I can offer you ¥2000."
+    "Incredible...\n"
+    "Is that a Comet Shard?\p"
+
+    "I'd love to study that up close.\n"
+    "Would you sell it to me ¥3000?"
 }
 
 text SpaceItemNPCSellAcceptedMessage{
@@ -2747,11 +2869,11 @@ text SpaceItemNPCSellDeclinedMessage{
 }
 
 text SpaceItemNPCPostSellMessage{
-    "Where did you even find this shard?"
+    "Where did you even get this shard?"
 }
 
-text MoneyReceived2000{
-    "{PLAYER} received ¥2000!"
+text MoneyReceived3000{
+    "{PLAYER} received ¥3000!"
 }
 
 

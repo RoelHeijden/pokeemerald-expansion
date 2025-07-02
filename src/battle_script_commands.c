@@ -6178,6 +6178,9 @@ static void Cmd_moveend(void)
                 gBattlescriptCurrInstr = BattleScript_MagicianActivates;
                 gSpecialStatuses[gBattlerAttacker].preventLifeOrbDamage = TRUE;
                 effect = TRUE;
+
+                // ADDED
+                FlagSet(FLAG_MAGICIAN_STOLE_ITEM);
             }
             gBattleScripting.moveendState++;
             break;

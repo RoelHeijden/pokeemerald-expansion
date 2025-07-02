@@ -1404,30 +1404,13 @@ bool8 ScrCmd_yesnobox(struct ScriptContext *ctx)
 }
 
 // ADDED
-bool8 ScrCmd_replacemovebox(struct ScriptContext *ctx)
+bool8 ScrCmd_softlockguymovebox(struct ScriptContext *ctx)
 {
     u8 left = ScriptReadByte(ctx);
     u8 top = ScriptReadByte(ctx);
     bool8 ignoreBPress = ScriptReadByte(ctx);
 
-    u8 multichoiceId = 0;
-
-    u16 move1 = VarGet(VAR_0x800A);
-    u16 move2 = VarGet(VAR_0x800B);
-
-    if(move1 == MOVE_DISABLE && move2 == MOVE_PAIN_SPLIT)
-        multichoiceId = MULTI_DISABLE_SPLIT;
-    if(move1 == MOVE_DISABLE && move2 == MOVE_DESTINY_BOND)
-        multichoiceId = MULTI_DISABLE_BOND;
-    if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_DESTINY_BOND)
-        multichoiceId = MULTI_SPLIT_BOND;
-
-    if(move1 == MOVE_DISABLE && move2 == MOVE_SHADOW_SNEAK)
-        multichoiceId = MULTI_DISABLE_SNEAK;
-    if(move1 == MOVE_PAIN_SPLIT && move2 == MOVE_SHADOW_SNEAK)
-        multichoiceId = MULTI_SPLIT_SNEAK;
-    if(move1 == MOVE_DESTINY_BOND && move2 == MOVE_SHADOW_SNEAK)
-        multichoiceId = MULTI_BOND_SNEAK;
+    u8 multichoiceId = MULTI_SOFTLOCK_GUY;
 
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {

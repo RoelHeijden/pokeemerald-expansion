@@ -27,10 +27,10 @@ Std_MsgboxYesNo:
 	yesnobox 20, 8
 	return
 
-Std_MsgboxReplaceMove:
+Std_MsgboxSoftlockGuy:
 	message NULL
 	waitmessage
-	replacemovebox 30, 8, FALSE
+	softlockguymovebox 30, 6, FALSE
 	return
 
 Std_MsgboxGetPoints:

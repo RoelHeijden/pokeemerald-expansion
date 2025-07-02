@@ -47,7 +47,7 @@
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
 #define FLAG_SPACE_ITEM_SOLD                0x24
-#define FLAG_BERRY_JUICE_CONSUMED           0x25
+#define FLAG_UNUSED_0x25                    0x25 // unused
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
@@ -65,7 +65,7 @@
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_GOGGLES_SNATCHED               0x35 
 #define FLAG_DONT_RETURN_MENTAL_HERB        0x36   
-#define FLAG_UNUSED_0x37                    0x37  // unused
+#define FLAG_MAGICIAN_STOLE_ITEM            0x37
 #define FLAG_UNUSED_0x38                    0x38  // unused
 #define FLAG_ZERA_FIGHT_BACKUP_CHECK        0x39
 #define FLAG_ZERAORA_CAUGHT                 0x3A
@@ -657,9 +657,9 @@
 #define FLAG_LIEPARD_MOVE_DELETED       0x265 
 #define FLAG_DUNSPARCE_MOVE_DELETED     0x266 
 #define FLAG_SMEARGLE_MOVE_DELETED      0x267 
-#define FLAG_UNUSED_0x268  0x268 // Unused Flag
-#define FLAG_UNUSED_0x269  0x269 // Unused Flag
-#define FLAG_UNUSED_0x26A  0x26A // Unused Flag
+#define FLAG_FULL_HEAL_CONSUMED         0x268
+#define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
+#define FLAG_BERRY_JUICE_CONSUMED       0x26A
 #define FLAG_UNUSED_0x26B  0x26B // Unused Flag
 #define FLAG_UNUSED_0x26C  0x26C // Unused Flag
 #define FLAG_UNUSED_0x26D  0x26D // Unused Flag

@@ -11384,9 +11384,6 @@ void TryRestoreHeldItems(void)
     u32 i;
     bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & BATTLE_TYPE_TRAINER;
 
-    // clear flag at start
-    FlagClear(FLAG_BERRY_JUICE_CONSUMED);
-
     // collect the original items of all pokemon
     u16 originalItems[PARTY_SIZE];
     for (i = 0; i < PARTY_SIZE; i++)
@@ -11458,23 +11455,33 @@ void TryRestoreHeldItems(void)
                         return;
                     }
 
-                    // check if Berry Juice is actually consumed (and not held by a partner pokemon)
-                    if(lostItem == ITEM_BERRY_JUICE){
-                        bool8 berryJuiceStillHeld = FALSE;
-                        for (u8 j = 0; j < PARTY_SIZE; j++)
+                    // check if lost item was actually consumed (i.e. not held by any current mon)
+                    bool8 lostItemActuallyConsumed = TRUE;
+                    for (u8 j = 0; j < PARTY_SIZE; j++)
+                    {
+                        if (currentItems[j] == lostItem)
                         {
-                            if (currentItems[j] == ITEM_BERRY_JUICE)
-                            {
-                                berryJuiceStillHeld = TRUE;
-                                break;
-                            }
+                            lostItemActuallyConsumed = FALSE;
+                            break;
                         }
-                        if (!berryJuiceStillHeld)
-                            FlagSet(FLAG_BERRY_JUICE_CONSUMED);
                     }
 
-                    // set return message flag
-                    FlagSet(FLAG_DO_RECOVERED_ITEM_MESSAGE);
+                    // specific item checks for trainer 5
+                    // items should only be removed after winning if they're not just swapped around
+                    if (lostItemActuallyConsumed){
+                        if(lostItem == ITEM_BERRY_JUICE)
+                            FlagSet(FLAG_FULL_HEAL_CONSUMED);
+                        if(lostItem == ITEM_FULL_HEAL)
+                            FlagSet(FLAG_BERRY_JUICE_CONSUMED);
+                        if(lostItem == ITEM_SAFETY_GOGGLES)
+                            FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
+                    }
+
+                    // set return message flag if not stolen via Magician (stolen items are always returned)
+                    if(!FlagGet(FLAG_MAGICIAN_STOLE_ITEM))
+                        FlagSet(FLAG_DO_RECOVERED_ITEM_MESSAGE);
+                    // reset flag
+                    FlagClear(FLAG_MAGICIAN_STOLE_ITEM);
 
                     // restore item
                     SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &lostItem);
