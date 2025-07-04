@@ -182,7 +182,6 @@ script EscapeRoom_EventScript_RescueNurse{
     // message
     msgbox(NurseMessage2, MSGBOX_AUTOCLOSE)
     waitmessage
-    
 
     // move player aside
     applymovement(OBJ_EVENT_ID_PLAYER, MovePlayerAside)
@@ -198,6 +197,9 @@ script EscapeRoom_EventScript_RescueNurse{
     removeobject(LOCALID_NURSE)
     setflag(FLAG_NURSE_RESCUED)
     waitse
+
+    // trigger nurse spawn script at section 1
+    setvar(VAR_SPAWN_IN_RESCUED_NURSE, 1)
 }
 
 movement MoveNurseFaceRight {

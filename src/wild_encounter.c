@@ -967,7 +967,6 @@ void RockSmashWildEncounter(void)
         return;
     }
 
-
     if (headerId != HEADER_NONE)
     {
         const struct WildPokemonInfo *wildPokemonInfo = gWildMonHeaders[headerId].rockSmashMonsInfo;

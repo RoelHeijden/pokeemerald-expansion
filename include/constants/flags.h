@@ -66,7 +66,7 @@
 #define FLAG_GOGGLES_SNATCHED               0x35 
 #define FLAG_DONT_RETURN_MENTAL_HERB        0x36   
 #define FLAG_MAGICIAN_STOLE_ITEM            0x37
-#define FLAG_UNUSED_0x38                    0x38  // unused
+#define FLAG_RARE_CANDY_USED                0x38
 #define FLAG_ZERA_FIGHT_BACKUP_CHECK        0x39
 #define FLAG_ZERAORA_CAUGHT                 0x3A
 #define FLAG_HIDE_NURSE1_NPC                0x3B 
@@ -660,10 +660,10 @@
 #define FLAG_FULL_HEAL_CONSUMED         0x268
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
-#define FLAG_UNUSED_0x26B  0x26B // Unused Flag
-#define FLAG_UNUSED_0x26C  0x26C // Unused Flag
-#define FLAG_UNUSED_0x26D  0x26D // Unused Flag
-#define FLAG_UNUSED_0x26E  0x26E // Unused Flag
+#define FLAG_UNUSED_0x26B               0x26B  // Unused Flag
+#define FLAG_UNUSED_0x26C               0x26C  // Unused Flag
+#define FLAG_UNUSED_0x26D               0x26D  // Unused Flag  
+#define FLAG_HIDE_RESCUED_NURSE_NPC     0x26E
 #define FLAG_UNUSED_0x26F  0x26F // Unused Flag
 #define FLAG_UNUSED_0x270  0x270 // Unused Flag
 #define FLAG_UNUSED_0x271  0x271 // Unused Flag

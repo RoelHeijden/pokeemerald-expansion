@@ -165,7 +165,33 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 15,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_RESPAWN_SET_AT_NURSE1",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetRespawn2"
+    },
+    {
+      "type": "trigger",
+      "x": 14,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_RESPAWN_SET_AT_NURSE1",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetRespawn2"
+    },
+    {
+      "type": "trigger",
+      "x": 16,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_RESPAWN_SET_AT_NURSE1",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetRespawn2"
+    }
   ],
   "bg_events": [
     {

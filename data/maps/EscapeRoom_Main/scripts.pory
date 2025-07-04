@@ -33,7 +33,7 @@ const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_DUSKNOIR_MAIL_NPC = 33
-const _DUMMY_4 = 34
+const LOCALID_RESCUED_NURSE = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
 const _DUMMY_7 = 37
@@ -57,6 +57,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
+        VAR_SPAWN_IN_RESCUED_NURSE, 1: EscapeRoom_MapScripts_SpawnInRescuedNurse
     ] 
 }
 
@@ -109,6 +110,7 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
 
 
 //// ON TRANSITION ////
+
 
 
 //// ON RESUME ////
@@ -242,6 +244,19 @@ script EscapeRoom_MapScripts_CheckIfRockSmashed{
 }
 
 
+script EscapeRoom_MapScripts_SpawnInRescuedNurse{
+    addobject(LOCALID_RESCUED_NURSE)
+    clearflag(FLAG_HIDE_RESCUED_NURSE_NPC)
+
+    // prevent triggering this script a second time
+    setvar(VAR_SPAWN_IN_RESCUED_NURSE, 0)
+
+    // second spawn point now available. Allow toggle via trigger tiles
+    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
+    setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
+}
+
+
 //// ON WARP ////
 
 
@@ -257,6 +272,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     setflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
     removeobject(LOCALID_NURSE_DUMMY)
+    removeobject(LOCALID_RESCUED_NURSE)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
 }
 
@@ -340,7 +356,7 @@ script EscapeRoom_MapScripts_GetBadges{
 }
 
 script EscapeRoom_MapScripts_SetRespawn{
-    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE)
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
 }
 
 script EscapeRoom_MapScripts_GetItems{
@@ -358,6 +374,30 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
+
+// RESPAWN CHANGES //
+
+script EscapeRoom_EventScript_SetRespawn1{
+    if(flag(FLAG_RAN_FROM_TRAPINCH)){
+        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
+        setvar(VAR_RESPAWN_SET_AT_NURSE1, 1)
+        setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
+    }
+}
+
+script EscapeRoom_EventScript_SetRespawn2{
+    if(flag(FLAG_RAN_FROM_TRAPINCH)){
+        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+        setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
+        setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
+    }
+    
+}
+
+script EscapeRoom_EventScript_RespawnChangeMessage{
+    msgbox(RespawnChangeMessage, MSGBOX_DEFAULT)
+    waitmessage
+}
 
 //// SIGNS //// 
 
@@ -462,8 +502,6 @@ script EscapeRoom_EventScript_HintsNPC{
 
 // ANTI SOFTLOCK GUY
 
-
-
 script EscapeRoom_EventScript_AntiSoftlockGuy1{
     // check if mental herb may not be returned
     // dont return from softlock guy 1 after trainer4, until rock2 smashed
@@ -499,7 +537,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 
     // undo used items
     // TODO:
-    // - rare candy
+    // - rare candy (clear FLAG_RARE_CANDY_USED)
     // - exp candy
     // - TM Sleep Talk
     // - TM Skill Swap
@@ -522,8 +560,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 
 script EscapeRoom_EventScript_ReturnLostItems{
     // clear flags
-    clearflag(FLAG_TEMP_1) // determines if item was restored at all
-    clearflag(FLAG_TEMP_2) // determine if it's Ring Target Ape special case
+    clearflag(FLAG_TEMP_1) // determines if any item was restored at all
 
     // leppa berry
     isitemlost(ITEM_LEPPA_BERRY)
@@ -550,16 +587,11 @@ script EscapeRoom_EventScript_ReturnLostItems{
     }
 
     // ring target
-    isitemlost(ITEM_RING_TARGET)   // REVISIT -- check specific flag and reset to rare candy pre-damage only?
+    isitemlost(ITEM_RING_TARGET)
     if(var(VAR_RESULT) == TRUE){
         removelostitem(ITEM_RING_TARGET)
         giveitem(ITEM_RING_TARGET)
         setflag(FLAG_TEMP_1)  
-
-        // special case: only heal Aipom during Ring Target Ape sequence
-        if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
-            setflag(FLAG_TEMP_2)
-        }
     }
 
     // special case: Full Heal (lost at trainer5)
@@ -580,8 +612,8 @@ script EscapeRoom_EventScript_ReturnLostItems{
     // heal party and message
     if(flag(FLAG_TEMP_1) == TRUE){
 
-        // special case: if Ring Target Ape -> heal Aipom only
-        if(flag(FLAG_TEMP_2) == TRUE){
+        // special case: if Ape sequence -> heal Aipom only
+        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
             // heal Aipom
             healpartymon(SPECIES_AIPOM)
 
@@ -812,8 +844,6 @@ script EscapeRoom_EventScript_ObtainLiepard{
 // MOVING NURSE
 
 script EscapeRoom_EventScript_RelocateNurseNPC{
-    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
-
     // player stops
     playse(SE_PIN)
     applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
@@ -842,6 +872,9 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     // remove nurse 1
     removeobject(LOCALID_NURSE1) 
     setflag(FLAG_HIDE_NURSE1_NPC)
+
+    // change respawn
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
 }
 
 movement EscapeRoom_Movement_PlayerFaceRight{
@@ -2443,6 +2476,10 @@ text SomethingsGoneWrongMessage{
     "You may have found an unintended\n"
     "solution that broke the game.\p"
     "Consider contacting Ketchupplant."
+}
+
+text RespawnChangeMessage{
+    "Your respawn location was changed."
 }
 
 // SIGNS
