@@ -1171,6 +1171,16 @@
 	.endm
 
 
+	@ check if the specified Pokémon has 0 PP for the given move.
+	@ VAR_RESULT is TRUE if that pokemons move has 0 pp.
+	.macro checkmonmove0pp species:req, move:req
+	.byte 0xcb
+	.2byte \species
+	.2byte \move
+	.endm
+
+
+
 	@ makes a backup of the players current party pokemon.
 	.macro backupplayerparty
 	.byte 0xfc

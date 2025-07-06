@@ -1960,6 +1960,42 @@ bool8 SrcCmd_monhas0pp(struct ScriptContext *ctx)
 
 
 // ADDED
+bool8 ScrCmd_checkmonmove0pp(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    u16 moveId = ScriptReadHalfword(ctx);
+    struct Pokemon *mon;
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        mon = &gPlayerParty[i];
+        if (species == GetMonData(mon, MON_DATA_SPECIES))
+        {
+            for (u8 j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
+                u8 pp = GetMonData(mon, MON_DATA_PP1 + j);
+
+                if (move == moveId)
+                {
+                    gSpecialVar_Result = (pp == 0);
+                    return FALSE;
+                }
+            }
+            // move not found on this mon
+            gSpecialVar_Result = FALSE;
+            return FALSE;
+        }
+    }
+
+    // species not found in party
+    gSpecialVar_Result = FALSE;
+    return FALSE;
+}
+
+
+
+// ADDED
 // sets the PP of the given move to 0 for the first party mon matching the species
 bool8 SrcCmd_setmonmove0pp(struct ScriptContext *ctx)
 {

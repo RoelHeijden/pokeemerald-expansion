@@ -587,7 +587,15 @@ script EscapeRoom_EventScript_ReturnLostItems{
     if(flag(FLAG_RETURN_LEPPA_BERRY)){
         giveitem(ITEM_LEPPA_BERRY)
         clearflag(FLAG_RETURN_LEPPA_BERRY)
-        setflag(FLAG_TEMP_1)
+
+        // only heal if Camouflage has 1/1 pp
+        checkmonmove0pp(SPECIES_FLORGES, MOVE_CAMOUFLAGE)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_TEMP_2) // no heal if Camouflage has 0/1 pp
+        }
+        else{
+            setflag(FLAG_TEMP_1)
+        }
     }
 
     //// BATTLE ITEMS ////
@@ -597,7 +605,15 @@ script EscapeRoom_EventScript_ReturnLostItems{
     if(var(VAR_RESULT) == TRUE){
         removelostitem(ITEM_LEPPA_BERRY)
         giveitem(ITEM_LEPPA_BERRY)
-        setflag(FLAG_TEMP_1)
+        
+        // only heal if Camouflage has 1/1 pp
+        checkmonmove0pp(SPECIES_FLORGES, MOVE_CAMOUFLAGE)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_TEMP_2) // no heal if Camouflage has 0/1 pp
+        }
+        else{
+            setflag(FLAG_TEMP_1)
+        }
     }
 
     // custap berry
@@ -2795,7 +2811,7 @@ text AntiSoftlockIntroMessage{
 }
 
 text AntiSoftlockOutro{
-    "Alright."
+    "Alright then."
 }
 
 text AntiSoftlockNoItemsReturned{

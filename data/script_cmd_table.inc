@@ -199,11 +199,11 @@ gScriptCmdTable::
 	.4byte ScrCmd_setescapewarp                     @ 0xc4
 	.4byte ScrCmd_waitmoncry                        @ 0xc5
 	.4byte ScrCmd_bufferboxname                     @ 0xc6
-	.4byte ScrCmd_backupmonmoveset		    			@ 0xc7
-	.4byte ScrCmd_restoremonmoveset						@ 0xc8
-	.4byte ScrCmd_isitemlost								  @ 0xc9
-	.4byte ScrCmd_removelostitem                              @ 0xca
-	.4byte ScrCmd_nop1                              @ 0xcb
+	.4byte ScrCmd_backupmonmoveset		    		@ 0xc7
+	.4byte ScrCmd_restoremonmoveset					@ 0xc8
+	.4byte ScrCmd_isitemlost						@ 0xc9
+	.4byte ScrCmd_removelostitem                    @ 0xca
+	.4byte ScrCmd_checkmonmove0pp                   @ 0xcb
 	.4byte ScrCmd_nop1                              @ 0xcc
 	.4byte ScrCmd_setmodernfatefulencounter         @ 0xcd
 	.4byte ScrCmd_checkmodernfatefulencounter       @ 0xce
