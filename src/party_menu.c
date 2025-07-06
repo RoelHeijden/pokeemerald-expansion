@@ -4626,6 +4626,13 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_SELECT);
         if (!IsItemFlute(gSpecialVar_ItemId) && gSpecialVar_ItemId != ITEM_FLUFFY_TAIL) { // ADDED fluffy tail (wild battle forfeit) to not be consumed
+
+            // ADDED
+            // set berry juice return flag
+            if(gSpecialVar_ItemId == ITEM_BERRY_JUICE){
+                FlagSet(FLAG_RETURN_BERRY_JUICE);
+            }
+
             RemoveBagItem(gSpecialVar_ItemId, 1);
         }
         ScheduleBgCopyTilemapToVram(2);
@@ -4683,8 +4690,9 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
         if (!IsItemFlute(item))
         {
             PlaySE(SE_USE_ITEM);
-            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM && item != ITEM_FLUFFY_TAIL)  // ADDED - fluffy tail case
+            if (gPartyMenu.action != PARTY_ACTION_REUSABLE_ITEM && item != ITEM_FLUFFY_TAIL){  // ADDED - fluffy tail case
                 RemoveBagItem(item, 1);
+            }
         }
         else
         {
@@ -4699,6 +4707,12 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             AnimatePartySlot(gPartyMenu.slotId, 1);
             PartyMenuModifyHP(taskId, gPartyMenu.slotId, 1, GetMonData(mon, MON_DATA_HP) - hp, Task_DisplayHPRestoredMessage);
             ResetHPTaskData(taskId, 0, hp);
+
+            // ADDED
+            // berry juice return flag
+            if(item ==ITEM_BERRY_JUICE)
+                FlagSet(FLAG_RETURN_BERRY_JUICE);
+
             return;
         }
         else
@@ -5235,6 +5249,12 @@ static void TryUseItemOnMove(u8 taskId)
             gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data1;
             gPartyMenuUseExitCallback = TRUE;
             RemoveBagItem(gSpecialVar_ItemId, 1);
+
+            // ADDED
+            // Leppa berry return flag -- in battle
+            if(gSpecialVar_ItemId == ITEM_LEPPA_BERRY)
+                FlagSet(FLAG_RETURN_LEPPA_BERRY);
+
             ScheduleBgCopyTilemapToVram(2);
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
         }
@@ -5256,6 +5276,11 @@ static void TryUseItemOnMove(u8 taskId)
         }
         else
         {
+            // ADDED
+            // Leppa berry return flag -- out of battle
+            if(item == ITEM_LEPPA_BERRY)
+                FlagSet(FLAG_RETURN_LEPPA_BERRY);
+
             gPartyMenuUseExitCallback = TRUE;
             PlaySE(SE_USE_ITEM);
             RemoveBagItem(item, 1);

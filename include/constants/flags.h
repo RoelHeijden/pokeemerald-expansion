@@ -660,11 +660,11 @@
 #define FLAG_FULL_HEAL_CONSUMED         0x268
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
-#define FLAG_UNUSED_0x26B               0x26B  // Unused Flag
-#define FLAG_UNUSED_0x26C               0x26C  // Unused Flag
-#define FLAG_UNUSED_0x26D               0x26D  // Unused Flag  
-#define FLAG_HIDE_RESCUED_NURSE_NPC     0x26E
-#define FLAG_UNUSED_0x26F  0x26F // Unused Flag
+#define FLAG_HIDE_RESCUED_NURSE_NPC     0x26B  
+#define FLAG_RETURN_LEPPA_BERRY         0x26C 
+#define FLAG_RETURN_BERRY_JUICE         0x26D   
+#define FLAG_RETURN_ESCAPE_ROPE         0x26E
+#define FLAG_LIEPARD_OBTAINED           0x26F
 #define FLAG_UNUSED_0x270  0x270 // Unused Flag
 #define FLAG_UNUSED_0x271  0x271 // Unused Flag
 #define FLAG_UNUSED_0x272  0x272 // Unused Flag

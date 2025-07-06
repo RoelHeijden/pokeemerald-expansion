@@ -121,6 +121,9 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
     if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
         setflag(FLAG_ZERAORA_CAUGHT)
 
+        // prevent leppa recovery if used
+        clearflag(FLAG_RETURN_LEPPA_BERRY)
+
         // prevent Custap and Leppa restore after catching zera
         removelostitem(ITEM_CUSTAP_BERRY)
         removelostitem(ITEM_LEPPA_BERRY)
@@ -363,6 +366,8 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
     additem(ITEM_POWER_LENS) // REMOVE
+    additem(ITEM_BERRY_JUICE) // REMOVE
+    additem(ITEM_SAFETY_GOGGLES) // REMOVE
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -525,19 +530,13 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     msgbox(AntiSoftlockIntroMessage, MSGBOX_SOFTLOCK_GUY)
 
     // return lost items 
-    // TODO:
-    // - Leppa Berry (out of battle)
-    // - Berry Juice (out of battle)
-    // - Escape Rope
     if(var(VAR_RESULT) == 0){
-        // msgbox(AntiSoftlockRestoreLostItems, MSGBOX_AUTOCLOSE)
-        // waitmessage
         call(EscapeRoom_EventScript_ReturnLostItems)
     }
 
     // undo used items
     // TODO:
-    // - rare candy (clear FLAG_RARE_CANDY_USED)
+    // - rare candy (clear FLAG_RARE_CANDY_USED), ItemUseCB_RareCandy
     // - exp candy
     // - TM Sleep Talk
     // - TM Skill Swap
@@ -553,6 +552,11 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
         call(EscapeRoom_EventScript_UndoOtherActions)
     }
 
+    // B press
+    else{
+        msgbox(AntiSoftlockOutro, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
     releaseall
 }
 
@@ -560,7 +564,33 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 
 script EscapeRoom_EventScript_ReturnLostItems{
     // clear flags
-    clearflag(FLAG_TEMP_1) // determines if any item was restored at all
+    clearflag(FLAG_TEMP_1) // an item was returned and heal required
+    clearflag(FLAG_TEMP_2) // an item was returned, no heal
+
+    //// FIELD ITEMS ////
+
+    // escape rope
+    if(flag(FLAG_RETURN_ESCAPE_ROPE)){
+        giveitem(ITEM_ESCAPE_ROPE)
+        clearflag(FLAG_RETURN_ESCAPE_ROPE)
+        setflag(FLAG_TEMP_2) // no heal
+    }
+
+    // berry juice
+    if(flag(FLAG_RETURN_BERRY_JUICE)){
+        giveitem(ITEM_BERRY_JUICE)
+        clearflag(FLAG_RETURN_BERRY_JUICE)
+        setflag(FLAG_TEMP_1)
+    }
+
+    // leppa berry
+    if(flag(FLAG_RETURN_LEPPA_BERRY)){
+        giveitem(ITEM_LEPPA_BERRY)
+        clearflag(FLAG_RETURN_LEPPA_BERRY)
+        setflag(FLAG_TEMP_1)
+    }
+
+    //// BATTLE ITEMS ////
 
     // leppa berry
     isitemlost(ITEM_LEPPA_BERRY)
@@ -594,6 +624,8 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_1)  
     }
 
+    //// SPECIAL CASES ////
+
     // special case: Full Heal (lost at trainer5)
     if(flag(FLAG_FULL_HEAL_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_FULL_HEAL_CONSUMED)
@@ -608,9 +640,11 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_1)  
     }
 
+    //// HEAL AND MESSAGES ////
+
     // at least one item was restored
     // heal party and message
-    if(flag(FLAG_TEMP_1) == TRUE){
+    if(flag(FLAG_TEMP_1) || flag(FLAG_TEMP_2)){
 
         // special case: if Ape sequence -> heal Aipom only
         if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
@@ -622,12 +656,15 @@ script EscapeRoom_EventScript_ReturnLostItems{
             waitmessage
         }
         // any other case: heal entire party
-        else{
+        elif(flag(FLAG_TEMP_1) == TRUE){
             special(HealPlayerParty)
 
             // message
             msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
             waitmessage
+        }
+        else{
+            // only flag_temp_2 was true. Do nothing else
         }
     }
     // no items to restore
@@ -763,6 +800,7 @@ script EscapeRoom_EventScript_LiepardNPC{
         call(EscapeRoom_EventScript_ObtainLiepard)
         lockall
         removeitem(ITEM_POWER_LENS)
+        setflag(FLAG_LIEPARD_OBTAINED)
 
         // reset spawn and heal location
         delay(40)
@@ -770,6 +808,9 @@ script EscapeRoom_EventScript_LiepardNPC{
 
         // re allow Custap Berry
         clearflag(FLAG_CUSTAP_SOLD_OUT)
+
+        // prevent escape rope return via anti-softlock guy
+        clearflag(FLAG_RETURN_ESCAPE_ROPE)
     }
     releaseall
     end
@@ -2748,13 +2789,13 @@ text AntiSoftlockIntroMessage{
     "Hi, I'm the anti-softlock guy.\p"
     "I can roll back actions that have the\n"
     "possibility to get you softlocked.\p"
+    "Heads up, certain rollbacks will also\n"
+    "include healing your party.\p"
     "What would you like to do?"
 }
 
-text AntiSoftlockRestoreLostItems{
-    // "Be aware that returning certain items\n"
-    // "may involve healing your party."
-    "(This may heal your party)"
+text AntiSoftlockOutro{
+    "Alright."
 }
 
 text AntiSoftlockNoItemsReturned{
@@ -2776,8 +2817,8 @@ text AntiSoftlockNoItemToUndo{
 }
 
 text AntiSoftlockNoActionsToUndo{
-    "There currently are no events that\n"
-    "can be undone."
+    "There currently are no other events\n"
+    "that can be undone."
 }
 
 text AntiSoftlockAskUndoTrainer5{

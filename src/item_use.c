@@ -1062,6 +1062,10 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope;
         SetUpItemUseOnFieldCallback(taskId);
+
+        // ADDED
+        // Escape Rope return flag
+        FlagSet(FLAG_RETURN_ESCAPE_ROPE);
     }
     else
     {
