@@ -288,6 +288,24 @@ const struct ContestEffect gContestEffects[] =
         .appeal = 30,
         .jam = 0,
     },
+    [CONTEST_EFFECT_SKILL_SWAP_HINT] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
+        .appeal = 10,
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_GRASSY_TERRAIN_HINT] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_WORSEN,
+        .appeal = 30,
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_SLEEP_TALK_HINT] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_WORSEN,
+        .appeal = 30,
+        .jam = 0,
+    },
 };
 
 void (*const gContestEffectFuncs[])(void) =

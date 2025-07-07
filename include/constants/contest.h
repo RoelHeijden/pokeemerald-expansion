@@ -145,6 +145,9 @@
 #define CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS     45
 #define CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED             46
 #define CONTEST_EFFECT_DONT_EXCITE_AUDIENCE                     47
+#define CONTEST_EFFECT_SKILL_SWAP_HINT                          48 // ADDED
+#define CONTEST_EFFECT_GRASSY_TERRAIN_HINT                      49 // ADDED
+#define CONTEST_EFFECT_SLEEP_TALK_HINT                          50 // ADDED
 
 // Each of the above effects is grouped into one of these effect type categories
 // Only a few of these get checked by the AI, the rest go unused
