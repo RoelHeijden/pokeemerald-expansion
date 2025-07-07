@@ -546,8 +546,6 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     }
 
     // undo other actions
-    // TODO:
-    // - trades
     elif(var(VAR_RESULT) == 2){
         call(EscapeRoom_EventScript_UndoOtherActions)
     }
@@ -605,7 +603,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     if(var(VAR_RESULT) == TRUE){
         removelostitem(ITEM_LEPPA_BERRY)
         giveitem(ITEM_LEPPA_BERRY)
-        
+
         // only heal if Camouflage has 1/1 pp
         checkmonmove0pp(SPECIES_FLORGES, MOVE_CAMOUFLAGE)
         if(var(VAR_RESULT) == TRUE){
@@ -712,6 +710,34 @@ script EscapeRoom_EventScript_UndoOtherActions{
             call(EscapeRoom_EventScript_SetTrainer5Rematch)
         }
     }
+
+    // trade: ferro -> dunsparce
+    elif(flag(FLAG_FERRO_TRADE_ACCEPTED) && !flag(FLAG_TRAINER3_DEFEATED)){
+        msgbox(AntiSoftlockAskUndoFerroTrade, MSGBOX_YESNO)
+        waitmessage
+        if(var(VAR_RESULT) == YES){
+            call(EscapeRoom_EventScript_UndoFerroTrade)
+        }
+    }
+
+    // trade: florges -> egg
+    elif(flag(FLAG_FLORGES_TRADE_ACCEPTED) && !flag(FLAG_LIEPARD_OBTAINED)){
+        msgbox(AntiSoftlockAskUndoFlorgesTrade, MSGBOX_YESNO)
+        waitmessage
+        if(var(VAR_RESULT) == YES){
+            call(EscapeRoom_EventScript_UndoFlorgesTrade)
+        }
+    }
+
+    // trade: aipom -> smeargle
+    elif(flag(FLAG_AIPOM_TRADE_ACCEPTED)){
+        msgbox(AntiSoftlockAskUndoAipomTrade, MSGBOX_YESNO)
+        waitmessage
+        if(var(VAR_RESULT) == YES){
+            call(EscapeRoom_EventScript_UndoAipomTrade)
+        }
+    }
+
     // no actions to be undone
     else{
         msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_AUTOCLOSE)
@@ -740,6 +766,26 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
     // reset trainer flag
     cleartrainerflag(TRAINER_CUSTOM_TRAINER5)
     clearflag(FLAG_TRAINER5_DEFEATED)
+}
+
+script EscapeRoom_EventScript_UndoFerroTrade{
+    removemon(SPECIES_DUNSPARCE)
+
+    // TBD
+}
+
+script EscapeRoom_EventScript_UndoFlorgesTrade{
+    removemon(SPECIES_AIPOM)
+    // remove egg
+
+    // TBD
+}
+
+script EscapeRoom_EventScript_UndoAipomTrade{
+    msgbox("TBD", MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // TBD
 }
 
 
@@ -2848,7 +2894,20 @@ text AntiSoftlockTrainer5Undone{
     "The battle has been undone."
 }
 
+text AntiSoftlockAskUndoFerroTrade{
+    "Would you like to undo your latest\n"
+    "Pokémon trade and get back Ferrothorn?"
+}
 
+text AntiSoftlockAskUndoFlorgesTrade{
+    "Would you like to undo your latest\n"
+    "Pokémon trade and get back Florges?"
+}
+
+text AntiSoftlockAskUndoAipomTrade{
+    "Would you like to undo your latest\n"
+    "Pokémon trade and get back Aipom?"
+}
 
 // ULTRA BALL QUIZ NPC
 text UltraBallQuizStart{

@@ -2114,8 +2114,8 @@ bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
     // check if backup already exists
     for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
     {
-        if (sMonMovesetBackup[i].valid &&
-            sMonMovesetBackup[i].species == species)
+        if (gSaveBlock3Ptr->movesetBackupData.slots[i].valid &&
+            gSaveBlock3Ptr->movesetBackupData.slots[i].species == species)
         {
             // backup exists — update PP for matching moves
             for (int j = 0; j < MAX_MON_MOVES; j++)
@@ -2127,9 +2127,9 @@ bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
                 // search for the move in backup
                 for (int k = 0; k < MAX_MON_MOVES; k++)
                 {
-                    if (sMonMovesetBackup[i].moves[k] == move)
+                    if (gSaveBlock3Ptr->movesetBackupData.slots[i].moves[k] == move)
                     {
-                        sMonMovesetBackup[i].pp[k] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
+                        gSaveBlock3Ptr->movesetBackupData.slots[i].pp[k] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
                         break;
                     }
                 }
@@ -2143,17 +2143,17 @@ bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
     // no backup — create new one
     for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
     {
-        if (!sMonMovesetBackup[i].valid)
+        if (!gSaveBlock3Ptr->movesetBackupData.slots[i].valid)
         {
-            sMonMovesetBackup[i].species = species;
+            gSaveBlock3Ptr->movesetBackupData.slots[i].species = species;
 
             for (int j = 0; j < MAX_MON_MOVES; j++)
             {
-                sMonMovesetBackup[i].moves[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + j);
-                sMonMovesetBackup[i].pp[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
+                gSaveBlock3Ptr->movesetBackupData.slots[i].moves[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + j);
+                gSaveBlock3Ptr->movesetBackupData.slots[i].pp[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
             }
 
-            sMonMovesetBackup[i].valid = TRUE;
+            gSaveBlock3Ptr->movesetBackupData.slots[i].valid = TRUE;
             gSpecialVar_Result = TRUE;
             break;
         }
@@ -2185,8 +2185,8 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
     // find matching backup entry
     for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
     {
-        if (sMonMovesetBackup[i].valid &&
-            sMonMovesetBackup[i].species == species)
+        if (gSaveBlock3Ptr->movesetBackupData.slots[i].valid &&
+            gSaveBlock3Ptr->movesetBackupData.slots[i].species == species)
         {
             // check if current total PP is 0
             u32 totalCurrentPP = 0;
@@ -2196,7 +2196,7 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
             // restore only deleted moves
             for (int j = 0; j < MAX_MON_MOVES; j++)
             {
-                u16 backupMove = sMonMovesetBackup[i].moves[j];
+                u16 backupMove = gSaveBlock3Ptr->movesetBackupData.slots[i].moves[j];
                 if (backupMove == MOVE_NONE)
                     continue;
 
@@ -2221,7 +2221,7 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
                         if (currentMove == MOVE_NONE)
                         {
                             SetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + k, &backupMove);
-                            SetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + k, &sMonMovesetBackup[i].pp[j]);
+                            SetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + k, &gSaveBlock3Ptr->movesetBackupData.slots[i].pp[j]);
 
                             if (totalCurrentPP == 0)
                             {
@@ -2234,7 +2234,7 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
                 }
             }
             
-            sMonMovesetBackup[i].valid = FALSE;
+            gSaveBlock3Ptr->movesetBackupData.slots[i].valid = FALSE;
             gSpecialVar_Result = TRUE;
             break;
         }
