@@ -1163,21 +1163,6 @@
 	.2byte \move
 	.endm
 
-	@ Returns True if the specified pokemon is all out of pp.
-	@ VAR_RESULT is set to FALSE if the species was not found in the player party.
-	.macro monhas0pp species:req
-	.byte 0xfa
-	.2byte \species
-	.endm
-
-	@ Sets the move of a party mon to 0 pp.
-	@ VAR_RESULT is set to FALSE if the species was not found in the player party, or the move was not found.
-	.macro setmonmove0pp species:req, move:req
-	.byte 0xfb
-	.2byte \species
-	.2byte \move
-	.endm
-
 
 	@ check if the specified Pokémon has 0 PP for the given move.
 	@ VAR_RESULT is TRUE if that pokemons move has 0 pp.
@@ -1311,25 +1296,6 @@
 	.2byte \species
 	.endm
 
-	@ Check which ofo the tutor moves a species the party has learned.
-	@ VAR_RESULT: moveId of the first tutor move.
-	@ VAR_0x8004: moveId of the secod tutor move.
-	.macro checktutormoveslearned species:req
-	.byte 0xeb
-	.2byte \species
-	.endm
-
-	@ Checks if the entire player party has fainted or not.
-	@ VAR_RESULT: True if enire party has fainted, False otherwise.
-	.macro checkentirepartyfainted
-	.byte 0xee
-	.endm
-
-	@ Sets the HP of the first party pokemon to 1 hp.
-	.macro setparty1hp
-	.byte 0xef
-	.endm
-
 	@ Checks if at least one Pokemon in the player's party is the specified level. If so, VAR_RESULT is set to the
 	@ (zero-indexed) slot number of the first Pokemon that has the level. If not, VAR_RESULT is set to PARTY_SIZE.
 	@ VAR_0x8004 is also set to this Pokemon's species.
@@ -1343,13 +1309,6 @@
 	.macro levelDownMon species:req
 	.byte 0xf1
 	.2byte \species
-	.endm
-
-	@ Checks how many moves a pokemon has learned given a party slot.
-	@ VAR_RESULT is set to the amount of moves.
-	.macro checkpartymonmoves slot:req
-    .byte 0xf2
-    .2byte \slot
 	.endm
 
 	@ takes vars as inputs

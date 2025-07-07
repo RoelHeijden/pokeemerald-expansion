@@ -1945,42 +1945,6 @@ bool8 SrcCmd_addmonmove(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
-// ADDED
-// check if all pp is 0
-bool8 SrcCmd_monhas0pp(struct ScriptContext *ctx)
-{
-    u16 species = ScriptReadHalfword(ctx);
-    struct Pokemon *mon;
-
-    for (u8 i = 0; i < PARTY_SIZE; i++)
-    {
-        mon = &gPlayerParty[i];
-        if (species == GetMonData(mon, MON_DATA_SPECIES))
-        {
-            bool8 allMovesZeroPP = TRUE;
-
-            for (u8 j = 0; j < MAX_MON_MOVES; j++)
-            {
-                u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
-                u8 pp = GetMonData(mon, MON_DATA_PP1 + j);
-
-                if (move != MOVE_NONE && pp != 0)
-                {
-                    allMovesZeroPP = FALSE;
-                    break;
-                }
-            }
-            gSpecialVar_Result = allMovesZeroPP;
-            return FALSE;
-        }
-    }
-    // species not found in party
-    gSpecialVar_Result = FALSE;
-    return FALSE;
-}
-
-
 // ADDED
 bool8 ScrCmd_checkmonmove0pp(struct ScriptContext *ctx)
 {
@@ -2014,39 +1978,6 @@ bool8 ScrCmd_checkmonmove0pp(struct ScriptContext *ctx)
     gSpecialVar_Result = FALSE;
     return FALSE;
 }
-
-
-
-// ADDED
-// sets the PP of the given move to 0 for the first party mon matching the species
-bool8 SrcCmd_setmonmove0pp(struct ScriptContext *ctx)
-{
-    u16 species = ScriptReadHalfword(ctx);
-    u16 move = ScriptReadHalfword(ctx);
-    struct Pokemon *mon;
-
-    for (u8 i = 0; i < PARTY_SIZE; i++)
-    {
-        mon = &gPlayerParty[i];
-        if (GetMonData(mon, MON_DATA_SPECIES) == species)
-        {
-            for (u8 j = 0; j < MAX_MON_MOVES; j++)
-            {
-                if (move == GetMonData(mon, MON_DATA_MOVE1 + j))
-                {
-                    SetMonData(mon, MON_DATA_PP1 + j, &((u8){0}));
-                    gSpecialVar_Result = TRUE;
-                    return FALSE; 
-                }
-            }
-            gSpecialVar_Result = FALSE;
-            return FALSE; // species found, but move not found
-        }
-    }
-    gSpecialVar_Result = FALSE;
-    return FALSE; // species not found
-}
-
 
 // ADDED
 bool8 ScrCmd_backupplayerparty(struct ScriptContext *ctx)
@@ -2120,8 +2051,6 @@ bool8 ScrCmd_partybackupisdifferent(struct ScriptContext *ctx)
     return FALSE; 
 }
 
-
-
 // ADDED
 bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
 {
@@ -2183,7 +2112,6 @@ bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
 
     return FALSE;
 }
-
 
 // ADDED
 bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
@@ -2264,8 +2192,7 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
-
+// ADDED
 bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
 {
     u8 i;
@@ -2291,8 +2218,6 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
     }
     return FALSE;
 }
-
-
 
 // ADDED
 // get moveslot of learned move
@@ -2394,8 +2319,6 @@ bool8 ScrCmd_givepartyitem(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
-
 // ADDED
 bool8 ScrCmd_isitemlost(struct ScriptContext *ctx)
 {
@@ -2430,7 +2353,6 @@ bool8 ScrCmd_removelostitem(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
 // ADDED
 bool8 ScrCmd_healpartymon(struct ScriptContext *ctx)
 {
@@ -2453,7 +2375,6 @@ bool8 ScrCmd_healpartymon(struct ScriptContext *ctx)
     gSpecialVar_Result = PARTY_SIZE; // not found
     return FALSE;
 }
-
 
 // ADDED
 bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)
@@ -2502,55 +2423,6 @@ bool8 ScrCmd_checkpartymon(struct ScriptContext *ctx)
 }
 
 // ADDED
-bool8 ScrCmd_checktutormoveslearned(struct ScriptContext *ctx)
-{
-    // tutor moves
-    u16 tutorMoves[] = {
-        MOVE_DISABLE, 
-        MOVE_PAIN_SPLIT, 
-        MOVE_DESTINY_BOND,
-        MOVE_SHADOW_SNEAK
-        };
-
-    u16 species = VarGet(ScriptReadHalfword(ctx)); 
-    size_t numMoves = ARRAY_COUNT(tutorMoves);
-    u16 learnedMoves[2] = {MOVE_NONE, MOVE_NONE}; // init with no moves found
-    u8 i, j, k;
-
-    // iterate through the party to find the specified species
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == species)
-        {
-            // get the mon's moves
-            u16 moves[MAX_MON_MOVES];
-            for (j = 0; j < MAX_MON_MOVES; j++)
-                moves[j] = GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, NULL);
-
-            // compare mon's moves with tutor moves
-            for (j = 0; j < numMoves; j++)
-            {
-                for (k = 0; k < MAX_MON_MOVES; k++)
-                {
-                    if (moves[k] == tutorMoves[j])
-                    {
-                        if (learnedMoves[0] == MOVE_NONE)
-                            learnedMoves[0] = tutorMoves[j];
-                        else if (learnedMoves[1] == MOVE_NONE)
-                            learnedMoves[1] = tutorMoves[j];
-                    }
-                }
-            }
-            break; 
-        }
-    }
-    gSpecialVar_Result = learnedMoves[0]; 
-    gSpecialVar_0x8004 = learnedMoves[1];
-
-    return FALSE; 
-}
-
-// ADDED
 // remove a move from a party Pokémon, with VARs as arguments
 bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
 {
@@ -2580,41 +2452,6 @@ bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
         }
     }
     return FALSE; 
-}
-
-// ADDED
-bool8 ScrCmd_checkentirepartyfainted(struct ScriptContext *ctx)
-{
-    s32 i;
-    bool8 allFainted = TRUE;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
-        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
-        {
-            u8 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
-            if (hp > 0)
-            {
-                allFainted = FALSE;
-                break;
-            }
-        }
-    }
-    gSpecialVar_Result = allFainted;
-    return FALSE;
-}
-
-// ADDED
-bool8 ScrCmd_setparty1hp(struct ScriptContext *ctx)
-{
-    u16 species = GetMonData(&gPlayerParty[0], MON_DATA_SPECIES, NULL);
-    if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[0], MON_DATA_IS_EGG, NULL))
-    {
-        u16 hp = 1;
-        SetMonData(&gPlayerParty[0], MON_DATA_HP, &hp);
-    }
-    return FALSE;
 }
 
 // ADDED
@@ -2733,40 +2570,6 @@ static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
     SetMonData(mon, MON_DATA_PP1 + slotTo, &ppFrom);
     SetMonData(mon, MON_DATA_PP1 + slotFrom, &ppTo);
     SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
-}
-
-// ADDED
-bool8 ScrCmd_checkpartymonmoves(struct ScriptContext *ctx)
-{
-    u8 slot = VarGet(ScriptReadHalfword(ctx));
-    struct Pokemon *mon;
-    u16 move;
-    u8 learnedMoves = 0;
-
-    if (slot >= PARTY_SIZE)
-    {
-        gSpecialVar_Result = 0; // invalid slot
-        return FALSE;
-    }
-
-    mon = &gPlayerParty[slot];
-    if (GetMonData(mon, MON_DATA_SPECIES, NULL) == SPECIES_NONE || GetMonData(mon, MON_DATA_IS_EGG, NULL))
-    {
-        gSpecialVar_Result = 0; // no valid Pokémon in the slot
-        return FALSE;
-    }
-
-    // count the number of moves the Pokémon knows
-    for (u8 i = 0; i < MAX_MON_MOVES; i++)
-    {
-        move = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
-        if (move != MOVE_NONE)
-            learnedMoves++;
-    }
-
-    gSpecialVar_Result = learnedMoves;
-
-    return FALSE;
 }
 
 // ADDED
