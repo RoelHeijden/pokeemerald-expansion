@@ -3065,4 +3065,7 @@ extern const u8 gText_UndoUsedItems[];
 extern const u8 gText_UndoOtherAction[];
 extern const u8 gText_LowerCaseCancel[];
 
+extern const u8 gText_DeleteMove[];
+extern const u8 gText_RestoreMove[];
+
 #endif // GUARD_STRINGS_H

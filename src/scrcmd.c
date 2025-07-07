@@ -77,6 +77,9 @@ static void DynamicMultichoiceSortList(struct ListMenuItem *items, u32 count);
 // ADDED
 static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom);
 
+// ADDED
+void MonToBoxMon(const struct Pokemon *src, struct BoxPokemon *dest);
+
 
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
@@ -1423,6 +1426,25 @@ bool8 ScrCmd_softlockguymovebox(struct ScriptContext *ctx)
     }
 }
 
+// ADDED
+bool8 ScrCmd_movedeleterbox(struct ScriptContext *ctx)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
+
+    u8 multichoiceId = MULTI_MOVE_DELETER;
+
+    if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    {
+        ScriptContext_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
 
 
 
@@ -2821,30 +2843,67 @@ bool8 ScrCmd_addgametime(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
 // ADDED
-bool8 ScrCmd_showicemap(struct ScriptContext *ctx)
-{
-    u8 x = 6;
-    u8 y = 0;
+// backup first matching party mon of species to PC Box 0 Slot 0
+bool8 ScrCmd_backupmontopc(struct ScriptContext *ctx)                               
+{                                                                       
+    u16 species = ScriptReadHalfword(ctx);
+    u8 i;
 
-    ScriptMenu_ShowCustomPic(x, y);
+    gSpecialVar_Result = FALSE;
+                                  
+    for (i = 0; i < PARTY_SIZE; i++)                                
+    {                                                                   
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == species) 
+        {                                                           
+            // send to PC    
+            MonToBoxMon(&gPlayerParty[i], &gPokemonStoragePtr->boxes[0][0]); 
+
+            // remove held item from backup
+            SetBoxMonData(&gPokemonStoragePtr->boxes[0][0], MON_DATA_HELD_ITEM, &(u16){ITEM_NONE});
+
+            gSpecialVar_Result = TRUE;                             
+            break;                                                      
+        }
+    } 
     return FALSE;
 }
 
 // ADDED
-bool8 ScrCmd_hideicemap(struct ScriptContext *ctx)
+// copy mon to pc
+void MonToBoxMon(const struct Pokemon *src, struct BoxPokemon *dest)
 {
-    // The hide function returns a pointer to a function
-    // that returns true once all the pics are hidden
-    bool8 (*func)(void) = ScriptMenu_HideCustomPic();
-
-    if (func == NULL)
-        return FALSE;
-
-    SetupNativeScript(ctx, func);
-    return TRUE;
+    *dest = src->box;
 }
+
+
+// ADDED
+// restore backup from PC Box 0 Slot 0 to first empty party slot
+bool8 ScrCmd_restoremonfrompc(struct ScriptContext *ctx)
+{  
+    u16 species = ScriptReadHalfword(ctx);
+    u8 i;
+
+    gSpecialVar_Result = FALSE;
+
+    struct BoxPokemon *backup = &gPokemonStoragePtr->boxes[0][0]; 
+    if (GetBoxMonData(backup, MON_DATA_SPECIES) == species) 
+    {       
+        for (i = 0; i < PARTY_SIZE; i++) 
+        {    
+            if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE)
+            {  
+                // restore from PC
+                BoxMonToMon(backup, &gPlayerParty[i]);  
+
+                gSpecialVar_Result = TRUE; 
+                break;  
+            }   
+        } 
+    }  
+    return FALSE;
+}
+
 
 
 

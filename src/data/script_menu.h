@@ -816,6 +816,13 @@ static const struct MenuAction MultichoiceList_SoftlockGuy[] =
     // {gText_LowerCaseCancel},
 };
 
+static const struct MenuAction MultichoiceList_MoveDeleter[] =
+{
+    {gText_DeleteMove},
+    {gText_RestoreMove},
+    // {gText_LowerCaseCancel},
+};
+
 
 static const struct MenuAction MultichoiceList_Exit[] =
 {
@@ -951,6 +958,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_DISABLE_SNEAK]              = MULTICHOICE(MultichoiceList_DisableSneak),
     [MULTI_SPLIT_SNEAK]                = MULTICHOICE(MultichoiceList_SplitSneak),
     [MULTI_SOFTLOCK_GUY]               = MULTICHOICE(MultichoiceList_SoftlockGuy),
+    [MULTI_MOVE_DELETER]               = MULTICHOICE(MultichoiceList_MoveDeleter),
 };
 
 const u8 *const gStdStrings[] =

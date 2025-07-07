@@ -770,22 +770,42 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
 
 script EscapeRoom_EventScript_UndoFerroTrade{
     removemon(SPECIES_DUNSPARCE)
+    restoremonfrompc(SPECIES_FERROTHORN)
 
-    // TBD
+    // message
+    message(PlayerObtainedFerrothornMessage)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+
+    // allow trade again
+    clearflag(FLAG_FERRO_TRADE_ACCEPTED)
 }
 
 script EscapeRoom_EventScript_UndoFlorgesTrade{
     removemon(SPECIES_AIPOM)
-    // remove egg
+    removemon(SPECIES_EGG)
+    restoremonfrompc(SPECIES_FLORGES)
 
-    // TBD
+    // message
+    message(PlayerObtainedFlorgesMessage)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+
+    // allow trade again
+    clearflag(FLAG_FLORGES_TRADE_ACCEPTED)
 }
 
 script EscapeRoom_EventScript_UndoAipomTrade{
-    msgbox("TBD", MSGBOX_AUTOCLOSE)
-    waitmessage
+    removemon(SPECIES_SMEARGLE) // CHANGE
+    restoremonfrompc(SPECIES_AIPOM)
 
-    // TBD
+    // message
+    message(PlayerObtainedAipomMessage)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+
+    // allow trade again
+    clearflag(FLAG_AIPOM_TRADE_ACCEPTED)
 }
 
 
@@ -1028,12 +1048,7 @@ mart EscapeRoom_Shop_items{
 script EscapeRoom_MoveDeleterNPC{
     lockall
     faceplayer
-    msgbox(AskDeleteMove, MSGBOX_DEFAULT)
-
-    // ask menu: delete a move / restore moveset
-    dynmultichoice(20, 8, FALSE, 6, 0, 0, 
-    "Delete a move", 
-    "Restore deleted moves")
+    msgbox(AskDeleteMove, MSGBOX_MOVE_DELETER)
 
     // standard move deleter script
     if(var(VAR_RESULT) == 0){
@@ -1723,8 +1738,27 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
 
     // post trade 
     if(flag(FLAG_FERRO_TRADE_ACCEPTED) == TRUE){
-        msgbox(FerroTradePostTrade, MSGBOX_NPC)
-        waitmessage
+
+        // allow retrade
+        if(!flag(FLAG_TRAINER3_DEFEATED)){
+            msgbox(FerroTradeAskRetrade, MSGBOX_YESNO)
+            waitmessage
+            if(var(VAR_RESULT) == YES){
+                call(EscapeRoom_EventScript_UndoFerroTrade)
+
+                msgbox(FerroTradeUndoAccepted, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            else{
+                msgbox(FerroTradeUndoDeclined, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+        // final script
+        else{
+            msgbox(FerroTradePostTrade, MSGBOX_NPC)
+            waitmessage
+        }
     }
     else{
         // ask trade
@@ -1740,6 +1774,9 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
                 releaseall
                 end
             }
+
+            // make Ferrothorn backup in pc
+            backupmontopc(SPECIES_FERROTHORN)
 
             // trade pokemon
             removemon(SPECIES_FERROTHORN)
@@ -1791,8 +1828,27 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
 
     // post trade 
     if(flag(FLAG_FLORGES_TRADE_ACCEPTED) == TRUE){
-        msgbox(FlorgesTradePostTrade, MSGBOX_NPC)
-        waitmessage
+        
+        // ask undo trade
+        if(!flag(FLAG_LIEPARD_OBTAINED)){
+            msgbox(FlorgesTradeAskRetrade, MSGBOX_YESNO)
+            waitmessage
+            if(var(VAR_RESULT) == YES){
+                call(EscapeRoom_EventScript_UndoFlorgesTrade)
+
+                msgbox(FlorgesTradeUndoAccepted, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            else{
+                msgbox(FlorgesTradeUndoDeclined, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+        // final script
+        else{
+            msgbox(FlorgesTradePostTrade, MSGBOX_NPC)
+            waitmessage
+        } 
     }
     else{
         // ask trade
@@ -1808,6 +1864,9 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
                 releaseall
                 end
             }
+
+            // make Florges backup in pc
+            backupmontopc(SPECIES_FLORGES)
 
             // trade pokemon
             removemon(SPECIES_FLORGES)
@@ -1877,8 +1936,27 @@ script EscapeRoom_EventScript_TradeAipomForSmeargle{
 
     // post trade 
     if(flag(FLAG_AIPOM_TRADE_ACCEPTED) == TRUE){
-        msgbox(AipomTradePostTrade, MSGBOX_NPC)
-        waitmessage
+
+        // ask undo trade
+        if(flag(FLAG_AIPOM_TRADE_ACCEPTED)){            // CHANGE FLAG CONDITION
+            msgbox(AipomTradeAskRetrade, MSGBOX_YESNO)
+            waitmessage
+            if(var(VAR_RESULT) == YES){
+                call(EscapeRoom_EventScript_UndoAipomTrade)
+
+                msgbox(AipomTradeUndoAccepted, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            else{
+                msgbox(AipomTradeUndoDeclined, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+        // final script
+        else{
+            msgbox(AipomTradePostTrade, MSGBOX_NPC)
+            waitmessage
+        }
     }
     else{
         // ask trade
@@ -1894,6 +1972,9 @@ script EscapeRoom_EventScript_TradeAipomForSmeargle{
                 releaseall
                 end
             }
+
+            // make Aipom backup in pc
+            backupmontopc(SPECIES_AIPOM)
 
             // trade pokemon
             removemon(SPECIES_AIPOM)
@@ -3162,6 +3243,23 @@ text FerroTradePostTrade{
     "I love this Ferrothorn!"
 }
 
+text PlayerObtainedFerrothornMessage{
+    "{PLAYER} received a Ferrothorn!"
+}
+
+text FerroTradeAskRetrade{
+    "Do you want to undo our trade and get\n"
+    "back your Ferrothorn?"
+}
+
+text FerroTradeUndoAccepted{
+    "Just come back whenever you want to\n"
+    "trade again."
+}
+
+text FerroTradeUndoDeclined{
+    "Works for me!"
+}
 
 // TRADE NPC 3 - Florges Egg
 text AskFlorgesEggTrade{
@@ -3186,6 +3284,22 @@ text FlorgesTradePostTrade{
     "Do I sense regret?"
 }
 
+text PlayerObtainedFlorgesMessage{
+    "{PLAYER} received a Florges!" 
+}
+
+text FlorgesTradeAskRetrade{
+    "Do you want to undo our trade and get\n"
+    "back your Florges?"
+}
+
+text FlorgesTradeUndoAccepted{
+    "There you go."
+}
+
+text FlorgesTradeUndoDeclined{
+    "As you wish."
+}
 
 // TRADE NPC 4 - Dunsparce Money
 text AskDunsparceMoneyTrade{
@@ -3228,6 +3342,23 @@ text AipomTradeDeclined{
 
 text AipomTradePostTrade{
     "TBD (post trade)"
+}
+
+text PlayerObtainedAipomMessage{
+    "{PLAYER} received an Aipom!" 
+}
+
+text AipomTradeAskRetrade{
+    "Do you want to undo our trade and get\n"
+    "back your Aipom?"
+}
+
+text AipomTradeUndoAccepted{
+    "I'm here if you change your mind."
+}
+
+text AipomTradeUndoDeclined{
+    "Understood."
 }
 
 

@@ -193,7 +193,7 @@ struct MonMovesBackup
     u8 pp[MAX_MON_MOVES];     // 1 x 4 = 4 bytes
     bool8 valid;              // 1 byte
 };
-#define MAX_BACKUP_SLOTS 4
+#define MAX_BACKUP_SLOTS 6
 struct MovesetBackupData
 {
     struct MonMovesBackup slots[MAX_BACKUP_SLOTS];
@@ -201,10 +201,10 @@ struct MovesetBackupData
 
 
 
-struct SaveBlock3 
+struct SaveBlock3 // 116 bytes total
 {
-    struct LostItemsTracker lostItemsTracker; // ADDED   - 6 x 2 bytes
-    struct MovesetBackupData movesetBackupData; // ADDED - 4 x 16 bytes
+    struct LostItemsTracker lostItemsTracker; // ADDED   - 6 x 2 = 12 bytes
+    struct MovesetBackupData movesetBackupData; // ADDED - 6 x 15 = 90 bytes
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
 #endif

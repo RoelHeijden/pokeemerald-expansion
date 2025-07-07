@@ -33,6 +33,12 @@ Std_MsgboxSoftlockGuy:
 	softlockguymovebox 30, 6, FALSE
 	return
 
+Std_MsgboxMoveDeleter:
+	message NULL
+	waitmessage
+	movedeleterbox 30, 8, FALSE
+	return
+
 Std_MsgboxGetPoints:
 	message NULL
 	playfanfare MUS_OBTAIN_B_POINTS

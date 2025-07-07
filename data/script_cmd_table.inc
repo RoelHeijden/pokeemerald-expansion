@@ -121,7 +121,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_hidemonpic                        @ 0x76
 	.4byte ScrCmd_showcontestpainting               @ 0x77
 	.4byte ScrCmd_braillemessage                    @ 0x78
-	.4byte ScrCmd_nop1                              @ 0x79
+	.4byte ScrCmd_backupmontopc                     @ 0x79
 	.4byte ScrCmd_giveegg                           @ 0x7a
 	.4byte ScrCmd_setmonmove                        @ 0x7b
 	.4byte ScrCmd_checkpartymove                    @ 0x7c
@@ -204,7 +204,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_isitemlost						@ 0xc9
 	.4byte ScrCmd_removelostitem                    @ 0xca
 	.4byte ScrCmd_checkmonmove0pp                   @ 0xcb
-	.4byte ScrCmd_nop1                              @ 0xcc
+	.4byte ScrCmd_restoremonfrompc                  @ 0xcc
 	.4byte ScrCmd_setmodernfatefulencounter         @ 0xcd
 	.4byte ScrCmd_checkmodernfatefulencounter       @ 0xce
 	.4byte ScrCmd_trywondercardscript               @ 0xcf
@@ -246,8 +246,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_getpartymonmove					@ 0xf3
 	.4byte ScrCmd_bufferplaytimeandhints			@ 0xf4
 	.4byte ScrCmd_addgametime						@ 0xf5
-	.4byte ScrCmd_showicemap						@ 0xf6
-	.4byte ScrCmd_hideicemap						@ 0xf7
+	.4byte ScrCmd_movedeleterbox					@ 0xf6
+	.4byte ScrCmd_nop1						@ 0xf7
 	.4byte SrcCmd_giveaipomegg						@ 0xf8
 	.4byte SrcCmd_addmonmove						@ 0xf9
 	.4byte SrcCmd_monhas0pp							@ 0xfa

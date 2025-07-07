@@ -896,9 +896,17 @@
 	.byte \y
 	.endm
 
-	@ Displays a multichoicebox for the replace move move tutor script.
+	@ Displays a multichoicebox for the anti softlock guy script.
 	.macro softlockguymovebox x:req, y:req, ignoreBPress:req
 	.byte 0xed
+	.byte \x
+	.byte \y
+	.byte \ignoreBPress
+	.endm
+
+	@ Displays a multichoicebox for the move deleter tutor script.
+	.macro movedeleterbox x:req, y:req, ignoreBPress:req
+	.byte 0xf6
 	.byte \x
 	.byte \y
 	.byte \ignoreBPress
@@ -1180,6 +1188,21 @@
 	.endm
 
 
+	@ backs up a pokemon to the first slot of the pc.
+	@ held items are ignored when making the backup.
+	@ VAR_RESULT is TRUE if the species was found.
+	.macro backupmontopc species:req
+	.byte 0x79
+	.2byte \species
+	.endm
+
+	@ restores the pokemon from the first slot of the pc to the party.
+	@ VAR_RESULT is TRUE if the species was found.
+	.macro restoremonfrompc species:req
+	.byte 0xcc
+	.2byte \species
+	.endm
+
 
 	@ makes a backup of the players current party pokemon.
 	.macro backupplayerparty
@@ -1347,16 +1370,6 @@
 	.macro addgametime time:req
 	.byte 0xf5
 	.2byte \time
-	.endm
-
-	@ shows the ice puzzle map. image is hardcoded.
-	.macro showicemap
-	.byte 0xf6
-	.endm
-
-	@ hides the ice puzzle map. 
-	.macro hideicemap
-	.byte 0xf7
 	.endm
 
 	@ Gives the player a specific Snubbull Egg for the escape room map.
@@ -2265,6 +2278,7 @@
 	MSGBOX_GETPOINTS = 9
 	MSGBOX_POKENAV = 10
 	MSGBOX_SOFTLOCK_GUY = 11
+	MSGBOX_MOVE_DELETER = 12
 
 	YES = 1
 	NO  = 0
