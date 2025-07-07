@@ -9040,10 +9040,14 @@ const struct Item gItemsInfo[] =
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("SafetyGoggles", "Safety Goggles"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_SAFETY_GOGGLES,
+        // .description = COMPOUND_STRING(
+        //     "Protect from\n"
+        //     "weather damage and\n"
+        //     "powder moves."),
         .description = COMPOUND_STRING(
-            "Protect from\n"
-            "weather damage and\n"
-            "powder moves."),
+            "Protects from\n"
+            "weather and powder.\n"
+            "Use for juice."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

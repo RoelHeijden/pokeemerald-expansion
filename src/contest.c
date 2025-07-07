@@ -738,8 +738,8 @@ const u8 *const gContestEffectDescriptionPointers[] =
     [CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS]  = COMPOUND_STRING("Badly startles all POKéMON\nthat made good appeals."),
     [CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED]          = COMPOUND_STRING("The appeal works best the\nmore the crowd is excited."),
     [CONTEST_EFFECT_DONT_EXCITE_AUDIENCE]                  = COMPOUND_STRING("Temporarily stops the\ncrowd from growing excited."),
-    [CONTEST_EFFECT_SKILL_SWAP_HINT]                       = COMPOUND_STRING("To beat trainer:\nUse on the second turn."), // ADDED
-    [CONTEST_EFFECT_GRASSY_TERRAIN_HINT]                   = COMPOUND_STRING("To beat trainer:\nUse on the first turn."), // ADDED
+    [CONTEST_EFFECT_SKILL_SWAP_HINT]                       = COMPOUND_STRING("Lightningrod is annoying.\nUse Skill Swap!"), // ADDED
+    [CONTEST_EFFECT_GRASSY_TERRAIN_HINT]                   = COMPOUND_STRING("The appeal works best on\nturn 1 in trainer battles."), // ADDED
     [CONTEST_EFFECT_SLEEP_TALK_HINT]                       = COMPOUND_STRING("Incompatible with Assist."), // ADDED
 };
 

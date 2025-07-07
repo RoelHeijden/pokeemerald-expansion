@@ -2938,7 +2938,7 @@ text AntiSoftlockIntroMessage{
 }
 
 text AntiSoftlockOutro{
-    "Alright then."
+    "Alright, see you soon."
 }
 
 text AntiSoftlockNoItemsReturned{
