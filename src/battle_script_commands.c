@@ -14887,85 +14887,79 @@ static void Cmd_assistattackselect(void)
     }
 
     // ADDED
-    // hardcode assist RNG move selection for Lucario battle
-    // pick conversion2 if only conversion2 and surf on turn 2
+    // hardcode assist RNG move selection for certain battles
     if (chooseableMovesNo)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
 
-        // // Special case 1: Surf + Conversion 2 vs Lucario on turn 2
-        // // only Surf and Conversion 2 are available
-        // // only on turn 2
-        // // only if the opponent is lucario
-        // if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter == 1)
-        // {
-        //     bool8 hasSurf = FALSE, hasConversion2 = FALSE;
-        //     for (int i = 0; i < MAX_MON_MOVES; i++)
-        //     {
-        //         if (validMoves[i] == MOVE_SURF)
-        //             hasSurf = TRUE;
-        //         else if (validMoves[i] == MOVE_CONVERSION_2)
-        //             hasConversion2 = TRUE;
-        //     }
-
-        //     if (hasSurf && hasConversion2)
-        //     {
-        //         // Check if the opponent is Lucario
-        //         u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
-        //         if (gBattleMons[opponent].species == SPECIES_LUCARIO)
-        //         {
-        //             gCalledMove = MOVE_CONVERSION_2;
-        //             gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
-        //             gBattlescriptCurrInstr = cmd->nextInstr;
-        //             TRY_FREE_AND_SET_NULL(validMoves);
-        //             return;
-        //         }
-        //     }
-        // }
-
-        // ADDED
-        // special case 2: Ice Fang + Endeavor vs Mega Rayquaza
-        // only Ice Fang and Endeavor available
-        // only if opponent is mega rayqyaza
-        // on turn 1: Endeavor, on turn 2: Ice Fang
-        if (chooseableMovesNo == 2 && gBattleResults.battleTurnCounter <= 1)
+        // case 1: Taunt + Fling vs Dusknoir
+        // choose Fling if: 
+        // - 2 available Assist moves (Taunt, Fling).
+        // - Turn 2.
+        // - Opponent is Dusknoir.
+        // - held item is Mental Herb.
+        if (chooseableMovesNo == 2
+            && gBattleResults.battleTurnCounter == 1 // turn is zero indexed
+            && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species == SPECIES_DUSKNOIR
+            && gBattleMons[gBattlerAttacker].item == ITEM_MENTAL_HERB)
         {
-            bool8 hasIceFang = FALSE, hasEndeavor = FALSE;
-            for (int i = 0; i < MAX_MON_MOVES; i++)
+            bool8 hasFling = FALSE, hasTaunt = FALSE;
+            for (int i = 0; i < chooseableMovesNo; i++)
             {
-                if (validMoves[i] == MOVE_ICE_FANG)
-                    hasIceFang = TRUE;
-                else if (validMoves[i] == MOVE_ENDEAVOR)
-                    hasEndeavor = TRUE;
+                if (validMoves[i] == MOVE_FLING)
+                    hasFling = TRUE;
+                if (validMoves[i] == MOVE_TAUNT)
+                    hasTaunt = TRUE;
             }
 
-            if (hasIceFang && hasEndeavor)
+            if (hasFling && hasTaunt)
             {
-                u8 opponent = BATTLE_OPPOSITE(gBattlerAttacker);
-                if (gBattleMons[opponent].species == SPECIES_RAYQUAZA)
-                {
-                    // On turn 1, use Endeavor; turn 2, use Ice Fang
-                    u16 chosenMove = (gBattleResults.battleTurnCounter == 0)
-                        ? MOVE_ENDEAVOR
-                        : MOVE_ICE_FANG;
-
-                    gCalledMove = chosenMove;
-                    gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
-                    gBattlescriptCurrInstr = cmd->nextInstr;
-                    TRY_FREE_AND_SET_NULL(validMoves);
-                    return;
-                }
+                u16 chosenMove = MOVE_FLING;
+                gCalledMove = chosenMove;
+                gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+                gBattlescriptCurrInstr = cmd->nextInstr;
+                TRY_FREE_AND_SET_NULL(validMoves);
+                return;
             }
         }
 
+        // case 2: Endeavor + Fling vs Rayquaza
+        // choose Fling if: 
+        // - 2 available Assist moves (Endeavor, Fling).
+        // - Turn 2.
+        // - Opponent is Rayquaza.
+        // - held item is Full Heal.
+        if (chooseableMovesNo == 2 
+            && gBattleResults.battleTurnCounter == 1 // turn is zero indexed
+            && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species == SPECIES_RAYQUAZA
+            && gBattleMons[gBattlerAttacker].item == ITEM_FULL_HEAL)
+        {
+            bool8 hasFling = FALSE, hasEndeavor = FALSE;
+            for (int i = 0; i < chooseableMovesNo; i++)
+            {
+                if (validMoves[i] == MOVE_FLING)
+                    hasFling = TRUE;
+                if (validMoves[i] == MOVE_ENDEAVOR)
+                    hasEndeavor = TRUE;
+            }
 
-
+            if (hasFling && hasEndeavor)
+            {
+                u16 chosenMove = MOVE_FLING;
+                gCalledMove = chosenMove;
+                gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+                gBattlescriptCurrInstr = cmd->nextInstr;
+                TRY_FREE_AND_SET_NULL(validMoves);
+                return;
+            }
+        }
 
         // Default random selection
         gCalledMove = validMoves[Random() % chooseableMovesNo];
         gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
+    // original code
     // if (chooseableMovesNo)
     // {
     //     gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
