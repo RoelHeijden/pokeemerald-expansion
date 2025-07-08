@@ -2229,6 +2229,11 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
              && (move == MOVE_TAUNT || move == MOVE_CUT)
              && !FlagGet(FLAG_ABILITY_CAPSULE_BOUGHT))
         return WOULD_SOFTLOCK;
+    // Aipom cannot learn Cut
+    // this patches a line vs trainer6
+    else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_AIPOM 
+             && move == MOVE_CUT)
+        return CANNOT_LEARN_MOVE;
     // ADDED
     // check if mon has a deleted move (that could still be restored)
     else if ((species == SPECIES_AIPOM && FlagGet(FLAG_AIPOM_MOVE_DELETED)) ||
