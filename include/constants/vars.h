@@ -120,7 +120,7 @@
 #define VAR_RETRIEVED_HELD_ITEM                          0x4064 // ADDED
 #define VAR_RESPAWN_SET_AT_NURSE1                                0x4065 
 #define VAR_RESPAWN_SET_AT_NURSE2                                0x4066 
-#define VAR_SPAWN_IN_RESCUED_NURSE                               0x4067 
+#define VAR_ROUTE108_STATE                               0x4067 // Unused Var
 #define VAR_ROUTE109_STATE                               0x4068 // Unused Var
 #define VAR_ROUTE110_STATE                               0x4069
 #define VAR_ROUTE111_STATE                               0x406A // Unused Var

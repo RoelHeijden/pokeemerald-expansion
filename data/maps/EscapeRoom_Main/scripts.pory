@@ -33,7 +33,7 @@ const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_DUSKNOIR_MAIL_NPC = 33
-const LOCALID_RESCUED_NURSE = 34
+const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
 const _DUMMY_7 = 37
@@ -57,7 +57,6 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
-        VAR_SPAWN_IN_RESCUED_NURSE, 1: EscapeRoom_MapScripts_SpawnInRescuedNurse
     ] 
 }
 
@@ -153,7 +152,7 @@ script EscapeRoom_MapScripts_CheckSpaceItemStolen{
 }
 
 script EscapeRoom_MapScripts_CheckIfAskPreDamage{
-    // trainer battle
+    // lost battles
     if(flag(FLAG_PLAYER_JUST_LOST) == TRUE){
         partybackupisdifferent
         if(var(VAR_RESULT) == TRUE){
@@ -174,7 +173,7 @@ script EscapeRoom_MapScripts_CheckIfAskPreDamage{
         clearflag(FLAG_JUST_HAD_ZERA_BATTLE)
     }
 
-    // other wild battles are currently skipped (no relevant pre damage scenarios)
+    // other wild battles are currently skipped on wins (no relevant pre damage scenarios)
 }
 
 
@@ -206,18 +205,43 @@ script EscapeRoom_MapScripts_RetrievedItemMessage{
 
 script EscapeRoom_MapScripts_AskResetPredamage{
     lockall
-    msgbox(AskResetPredamageMessage, MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES){
-        restoreplayerparty
-        msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
 
-        // prevent zera fight item dupes via backup + lostItems
-        if(flag(FLAG_ZERA_FIGHT_BACKUP_CHECK) == TRUE){
-            clearflag(FLAG_ZERA_FIGHT_BACKUP_CHECK)
-            call(EscapeRoom_MapScripts_RemoveDuplicateLeppaCustap)
+    // reset var
+    setvar(VAR_ASK_RESET_PREDAMAGE, 0)
+
+    // during Ape sequence: reset requires warp to other location
+    if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+        msgbox(AskResetPredamageAndWarpMessage, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            // reset pre-damage
+            restoreplayerparty
+            msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+
+            // warp player
+            warpteleport(MAP_ESCAPE_ROOM_MAIN, 48, 17)
+        }
+        else{
+            // change spawn location toggle to spawn2
+            setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
+            setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
         }
     }
-    setvar(VAR_ASK_RESET_PREDAMAGE, 0)
+    // normal predamage reset
+    else{
+        msgbox(AskResetPredamageMessage, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            // reset pre-damage
+            restoreplayerparty
+            msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
+
+            // prevent zera fight item dupes via backup + lostItems
+            if(flag(FLAG_ZERA_FIGHT_BACKUP_CHECK) == TRUE){
+                clearflag(FLAG_ZERA_FIGHT_BACKUP_CHECK)
+                call(EscapeRoom_MapScripts_RemoveDuplicateLeppaCustap)
+            }
+        }
+    }
     releaseall
 }
 
@@ -247,19 +271,6 @@ script EscapeRoom_MapScripts_CheckIfRockSmashed{
 }
 
 
-script EscapeRoom_MapScripts_SpawnInRescuedNurse{
-    addobject(LOCALID_RESCUED_NURSE)
-    clearflag(FLAG_HIDE_RESCUED_NURSE_NPC)
-
-    // prevent triggering this script a second time
-    setvar(VAR_SPAWN_IN_RESCUED_NURSE, 0)
-
-    // second spawn point now available. Allow toggle via trigger tiles
-    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
-    setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
-}
-
-
 //// ON WARP ////
 
 
@@ -275,7 +286,6 @@ script EscapeRoom_MapScript_GameStartScripts{
     setflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
     removeobject(LOCALID_NURSE_DUMMY)
-    removeobject(LOCALID_RESCUED_NURSE)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
 }
 
@@ -366,8 +376,8 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
     additem(ITEM_POWER_LENS) // REMOVE
-    additem(ITEM_BERRY_JUICE) // REMOVE
     additem(ITEM_SAFETY_GOGGLES) // REMOVE
+    additem(ITEM_HM01) // REMOVE
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -383,26 +393,15 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 // RESPAWN CHANGES //
 
 script EscapeRoom_EventScript_SetRespawn1{
-    if(flag(FLAG_RAN_FROM_TRAPINCH)){
-        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
-        setvar(VAR_RESPAWN_SET_AT_NURSE1, 1)
-        setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
-    }
+    setvar(VAR_RESPAWN_SET_AT_NURSE1, 1)
+    setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
 }
 
 script EscapeRoom_EventScript_SetRespawn2{
-    if(flag(FLAG_RAN_FROM_TRAPINCH)){
-        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
-        setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
-        setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
-    }
-    
+    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
+    setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
 }
 
-script EscapeRoom_EventScript_RespawnChangeMessage{
-    msgbox(RespawnChangeMessage, MSGBOX_DEFAULT)
-    waitmessage
-}
 
 //// SIGNS //// 
 
@@ -998,6 +997,9 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
 
     // change respawn
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+    // allow trigger tiles to toggle spawn indicator
+    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
+    setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
 }
 
 movement EscapeRoom_Movement_PlayerFaceRight{
@@ -3214,6 +3216,12 @@ text HeldItemRecoveredMessage{
 text AskResetPredamageMessage{
     "Want to set your Pokémon's HP and move\n"
     "PP back to their pre-battle state?"
+}
+
+text AskResetPredamageAndWarpMessage{
+    "Want to set your Pokémon's HP and move\n"
+    "PP back to their pre-battle state\l"
+    "and return to the previous location?"
 }
 
 text PreDamagedStateRestoredMessage{

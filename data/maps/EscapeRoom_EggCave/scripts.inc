@@ -200,8 +200,6 @@ EscapeRoom_EventScript_RescueNurse_1:
 	setflag FLAG_NURSE_RESCUED
 # 199 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitse
-# 202 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setvar VAR_SPAWN_IN_RESCUED_NURSE, 1
 	return
 
 EscapeRoom_EventScript_RescueNurse_2:
@@ -222,77 +220,77 @@ EscapeRoom_EventScript_RescueNurse_2:
 	goto EscapeRoom_EventScript_RescueNurse_1
 
 
-# 205 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 202 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MoveNurseFaceRight:
+# 203 "data/maps/EscapeRoom_EggCave/scripts.pory"
+	face_right
+	step_end
+
 # 206 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	face_right
-	step_end
-
-# 209 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MoveNurseToPlayer:
-# 210 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 207 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_up
-# 211 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 208 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_up
-# 212 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 209 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_right
-# 213 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 210 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
-# 213 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 210 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
 	step_end
 
-# 216 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 213 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MoveNurseAway:
-# 217 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 214 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
-# 217 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 214 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
-# 217 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 214 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_right
-# 218 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 215 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_down
-# 219 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 216 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_fast_down
 	step_end
 
-# 222 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 219 "data/maps/EscapeRoom_EggCave/scripts.pory"
 MovePlayerAside:
-# 223 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 220 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_up
-# 224 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 221 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	walk_up
-# 225 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 222 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_down
 	step_end
 
-# 228 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 225 "data/maps/EscapeRoom_EggCave/scripts.pory"
 PlayerFaceLeft:
-# 229 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 226 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	face_left
 	step_end
 
 EscapeRoom_EggCave_EventScript_FindRareCandy::
-# 234 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 231 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
-# 235 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 232 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	finditem ITEM_RARE_CANDY
-# 236 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 233 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	removeobject 4
-# 237 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 234 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	setflag FLAG_RARE_CANDY_OBTAINED
-# 238 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 235 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return
 
 
 TrapinchWentAway::
-# 243 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 240 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "The Trapinch disappeared into the\n"
 	.string "ground.$"
 
 NurseMessage1::
-# 248 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 245 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "Thank you so much!\n"
 	.string "That Pokémon would not let me out!\p"
 	.string "I don't know what I would've done if\n"
@@ -301,15 +299,15 @@ NurseMessage1::
 	.string "Call it a rescue reward!$"
 
 NurseMessageHeal1::
-# 257 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 254 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "It also looks like your Pokémon got\n"
 	.string "hurt in battle.\p"
 	.string "Allow me to fix that.$"
 
 NurseMessage2::
-# 263 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 260 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "Take care!$"
 
 MoneyReceived::
-# 267 "data/maps/EscapeRoom_EggCave/scripts.pory"
+# 264 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	.string "{PLAYER} received ¥2000!$"
