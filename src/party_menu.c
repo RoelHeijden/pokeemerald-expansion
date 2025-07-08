@@ -2226,8 +2226,8 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
     // Liepard can learn Cut after Ability Capsule is obtained
     // At that point Copycat is no longer required (and softlocks are managable)
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD 
-             && (move == MOVE_TAUNT || move == MOVE_CUT)
-             && !FlagGet(FLAG_ABILITY_CAPSULE_BOUGHT))
+             && (move == MOVE_TAUNT)) //|| move == MOVE_CUT)
+            //  && !FlagGet(FLAG_ABILITY_CAPSULE_BOUGHT))
         return WOULD_SOFTLOCK;
     // Aipom cannot learn Cut
     // this patches a line vs trainer6
