@@ -14892,47 +14892,16 @@ static void Cmd_assistattackselect(void)
     {
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
 
-        // case 1: Taunt + Fling vs Dusknoir
-        // choose Fling if: 
-        // - 2 available Assist moves (Taunt, Fling).
-        // - Turn 2.
-        // - Opponent is Dusknoir.
-        // - held item is Mental Herb.
-        if (chooseableMovesNo == 2
-            && gBattleResults.battleTurnCounter == 1 // turn is zero indexed
-            && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species == SPECIES_DUSKNOIR
-            && gBattleMons[gBattlerAttacker].item == ITEM_MENTAL_HERB)
-        {
-            bool8 hasFling = FALSE, hasTaunt = FALSE;
-            for (int i = 0; i < chooseableMovesNo; i++)
-            {
-                if (validMoves[i] == MOVE_FLING)
-                    hasFling = TRUE;
-                if (validMoves[i] == MOVE_TAUNT)
-                    hasTaunt = TRUE;
-            }
-
-            if (hasFling && hasTaunt)
-            {
-                u16 chosenMove = MOVE_FLING;
-                gCalledMove = chosenMove;
-                gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
-                gBattlescriptCurrInstr = cmd->nextInstr;
-                TRY_FREE_AND_SET_NULL(validMoves);
-                return;
-            }
-        }
-
-        // case 2: Endeavor + Fling vs Rayquaza
+        // case: Endeavor + Fling vs Rayquaza
         // choose Fling if: 
         // - 2 available Assist moves (Endeavor, Fling).
         // - Turn 2.
         // - Opponent is Rayquaza.
-        // - held item is Full Heal.
+        // - held item is Safety Goggles.
         if (chooseableMovesNo == 2 
             && gBattleResults.battleTurnCounter == 1 // turn is zero indexed
             && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species == SPECIES_RAYQUAZA
-            && gBattleMons[gBattlerAttacker].item == ITEM_FULL_HEAL)
+            && gBattleMons[gBattlerAttacker].item == ITEM_SAFETY_GOGGLES)
         {
             bool8 hasFling = FALSE, hasEndeavor = FALSE;
             for (int i = 0; i < chooseableMovesNo; i++)
@@ -15131,8 +15100,8 @@ static void Cmd_pickup(void)
                             // SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &sPickupTable[j].itemId);
 
                             // CHANGED
-                            // always get a Full Heal
-                            u16 item = ITEM_FULL_HEAL;
+                            // always get a Sun Stone
+                            u16 item = ITEM_SUN_STONE;
                             SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
                             break;
                         }

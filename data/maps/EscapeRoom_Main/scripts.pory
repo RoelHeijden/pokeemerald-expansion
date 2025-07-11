@@ -133,20 +133,20 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
 }
 
 script EscapeRoom_MapScripts_CheckSpaceItemStolen{
-    checkitem(ITEM_COMET_SHARD) // in bag
+    checkitem(ITEM_MOON_STONE) // in bag
     if(var(VAR_RESULT) == TRUE){
         setflag(FLAG_SPACE_ITEM_STOLEN)
     }
     checkpartyitem(0) // held by pokemon slot 1
-    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+    if(var(VAR_0x8005) == ITEM_MOON_STONE) {
         setflag(FLAG_SPACE_ITEM_STOLEN)
     }
     checkpartyitem(1) // held by pokemon slot 2
-    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+    if(var(VAR_0x8005) == ITEM_MOON_STONE) {
         setflag(FLAG_SPACE_ITEM_STOLEN)
     }
     checkpartyitem(2) // held by pokemon slot 3
-    if(var(VAR_0x8005) == ITEM_COMET_SHARD) {
+    if(var(VAR_0x8005) == ITEM_MOON_STONE) {
         setflag(FLAG_SPACE_ITEM_STOLEN)
     }
 }
@@ -375,9 +375,9 @@ script EscapeRoom_MapScripts_SetRespawn{
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
-    additem(ITEM_POWER_LENS) // REMOVE
+    // additem(ITEM_POWER_LENS) // REMOVE
     additem(ITEM_SAFETY_GOGGLES) // REMOVE
-    additem(ITEM_HM01) // REMOVE
+    // additem(ITEM_HM01) // REMOVE
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -639,18 +639,25 @@ script EscapeRoom_EventScript_ReturnLostItems{
 
     //// SPECIAL CASES ////
 
-    // special case: Full Heal (lost at trainer5)
-    if(flag(FLAG_FULL_HEAL_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
-        clearflag(FLAG_FULL_HEAL_CONSUMED)
-        giveitem(ITEM_FULL_HEAL)
-        setflag(FLAG_TEMP_1)  
+    // special case: Dusk Stone (lost at trainer5)
+    if(flag(FLAG_DUSK_STONE_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+        clearflag(FLAG_DUSK_STONE_CONSUMED)
+        giveitem(ITEM_DUSK_STONE)
+        setflag(FLAG_TEMP_2)  // no heal
+    }
+
+    // special case: Toxic Orb (lost at trainer5)
+    if(flag(FLAG_TOXIC_ORB_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+        clearflag(FLAG_TOXIC_ORB_CONSUMED)
+        giveitem(ITEM_TOXIC_ORB)
+        setflag(FLAG_TEMP_2)  // no heal
     }
 
     // special case: Safety Goggles (lost at trainer5)
     if(flag(FLAG_SAFETY_GOGGLES_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
         giveitem(ITEM_SAFETY_GOGGLES)
-        setflag(FLAG_TEMP_1)  
+        setflag(FLAG_TEMP_2)  // no heal
     }
 
     //// HEAL AND MESSAGES ////
@@ -745,13 +752,17 @@ script EscapeRoom_EventScript_UndoOtherActions{
 }
 
 script EscapeRoom_EventScript_SetTrainer5Rematch{
-    // take all money
+    // take all money (player has 0 money at start of battle)
     removemoney(99999)
 
     // return items
-    if(flag(FLAG_FULL_HEAL_CONSUMED)){
-        clearflag(FLAG_FULL_HEAL_CONSUMED)
-        giveitem(ITEM_FULL_HEAL)
+    if(flag(FLAG_DUSK_STONE_CONSUMED)){
+        clearflag(FLAG_DUSK_STONE_CONSUMED)
+        giveitem(ITEM_DUSK_STONE)
+    }
+    if(flag(FLAG_TOXIC_ORB_CONSUMED)){
+        clearflag(FLAG_TOXIC_ORB_CONSUMED)
+        giveitem(ITEM_TOXIC_ORB)
     }
     if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
@@ -930,12 +941,12 @@ script EscapeRoom_EventScript_ObtainLiepard{
         move3=MOVE_ROCK_SMASH,
         move4=MOVE_COPYCAT,
         // EVs:
-        atkEv=252, 
+        atkEv=0, 
         spAtkEv=252,
         speedEv=0,
         // IVs:
         hpIv=31,
-        atkIv=31,
+        atkIv=0, // 0 attack for shuckle sequence
         defIv=31,
         speedIv=0,
         spAtkIv=31,
@@ -1272,58 +1283,105 @@ movement RockSmashNPCMovesAway {
 }
 
 
-// SPACE ITEM BUY NPC //
-script EscapeRoom_TryBuySpaceItemNPC{
+// STONE BUY NPC //
+script EscapeRoom_TryBuyStonesPC{
     lock
 
-    // can still sell item
-    if(flag(FLAG_SPACE_ITEM_SOLD) == FALSE){
-
-        // check if player has the item
-        checkitem(ITEM_COMET_SHARD)
-
-        // player does not have item
-        if(var(VAR_RESULT) == FALSE){
-            // initial message 
-            msgbox(SpaceItemNPCInitialMessage_no_item, MSGBOX_NPC)
-            waitmessage
-        }
-        // player has the item
-        else{
-            // ask sell item
-            faceplayer
-            msgbox(SpaceItemNPCInitialMessage_has_item, MSGBOX_YESNO)
-
-            // sell accepted
-            if(var(VAR_RESULT) == YES){
-                removeitem(ITEM_COMET_SHARD)
-                setflag(FLAG_SPACE_ITEM_SOLD)
-
-                // give money
-                addmoney(3000)
-                lockall
-                message(MoneyReceived3000)
-                playfanfare(MUS_OBTAIN_ITEM)
-                waitfanfare
-                delay(10)
-
-                // trade accepted message
-                msgbox(SpaceItemNPCSellAcceptedMessage, MSGBOX_NPC)
-                waitmessage
-            }
-            // sell declined
-            else{
-                msgbox(SpaceItemNPCSellDeclinedMessage, MSGBOX_NPC)
-                waitmessage
-            }
-        }
-    }
-    // item already sold
-    else{
-        msgbox(SpaceItemNPCPostSellMessage, MSGBOX_NPC)
+    if(flag(FLAG_TOXIC_ORB_OBTAINED)){
+        // post script message
+        msgbox(StonesBuyNPCPostSellMessage, MSGBOX_NPC)
         waitmessage
     }
+    else{
+        // Sun Stone
+        checkitem(ITEM_SUN_STONE)
+        if(var(VAR_RESULT) == TRUE){
+            call(EscapeRoom_TryBuyStonesPC_TryBuySunStone)
+            end
+        }
+
+        // Moon Stone
+        checkitem(ITEM_MOON_STONE)
+        if(var(VAR_RESULT) == TRUE){
+            call(EscapeRoom_TryBuyStonesPC_TryBuyMoonStone)
+            end
+        }
+
+        // Dusk Stone
+        checkitem(ITEM_DUSK_STONE)
+        if(var(VAR_RESULT) == TRUE){
+            call(EscapeRoom_TryBuyStonesPC_TryBuyDuskStone)
+            end
+        }
+
+        // player has none of the trade items
+        msgbox(StonesBuyNPCInitialMessage_no_item, MSGBOX_NPC)
+        waitmessage
+    }
+
     releaseall
+}
+
+script EscapeRoom_TryBuyStonesPC_TryBuySunStone{
+    faceplayer
+    msgbox(StonesBuyNPCInitialMessage_has_SunStone, MSGBOX_YESNO)
+
+    if(var(VAR_RESULT) == YES){
+        removeitem(ITEM_SUN_STONE)
+        addmoney(1500)
+        lockall
+        message(MoneyReceived1500)
+        playfanfare(MUS_OBTAIN_ITEM)
+        waitfanfare
+        delay(10)
+
+        msgbox(StonesBuyNPCSellAcceptedMessage, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        msgbox(StonesBuyNPCSellDeclinedMessage, MSGBOX_NPC)
+        waitmessage
+    }
+}
+
+script EscapeRoom_TryBuyStonesPC_TryBuyMoonStone{
+    faceplayer
+    msgbox(StonesBuyNPCInitialMessage_has_MoonStone, MSGBOX_YESNO)
+
+    if(var(VAR_RESULT) == YES){
+        removeitem(ITEM_MOON_STONE)
+        addmoney(1500)
+        lockall
+        message(MoneyReceived1500)
+        playfanfare(MUS_OBTAIN_ITEM)
+        waitfanfare
+        delay(10)
+
+        msgbox(StonesBuyNPCSellAcceptedMessage, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        msgbox(StonesBuyNPCSellDeclinedMessage, MSGBOX_NPC)
+        waitmessage
+    }
+}
+
+script EscapeRoom_TryBuyStonesPC_TryBuyDuskStone{
+    faceplayer
+    msgbox(StonesBuyNPCInitialMessage_has_DuskStone, MSGBOX_YESNO)
+
+    if(var(VAR_RESULT) == YES){
+        removeitem(ITEM_DUSK_STONE)
+        giveitem(ITEM_TOXIC_ORB, 1)
+        setflag(FLAG_TOXIC_ORB_OBTAINED)
+
+        msgbox(StonesBuyNPCSellAcceptedMessage_ToxicOrb, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        msgbox(StonesBuyNPCSellDeclinedMessage, MSGBOX_NPC)
+        waitmessage
+    }
 }
 
 
@@ -1408,12 +1466,6 @@ script EscapeRoom_TabletsHintNPC{
     releaseall
 }
 
-script EscapeRoom_DusknoirStoleMyMailNPC{
-    lock
-    msgbox(DusknoirStoleMyMailMsg, MSGBOX_NPC)
-    releaseall
-}
-
 
 //// TRAINERS ////
 
@@ -1489,7 +1541,8 @@ script EscapeRoom_EventScript_Trainer5{
     // clear item return flags before the battle
     if(!flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
-        clearflag(FLAG_FULL_HEAL_CONSUMED)
+        clearflag(FLAG_DUSK_STONE_CONSUMED)
+        clearflag(FLAG_TOXIC_ORB_CONSUMED)
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
     }
 
@@ -1639,14 +1692,26 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
     }
 
-    // dont restore full heal if consumed (flung) in battle
-    if(flag(FLAG_FULL_HEAL_CONSUMED) == TRUE){
+    // dont restore dusk stone if consumed (flung) in battle
+    if(flag(FLAG_DUSK_STONE_CONSUMED) == TRUE){
         checkpartyitem(0)
-        if(var(VAR_0x8005) == ITEM_FULL_HEAL){
+        if(var(VAR_0x8005) == ITEM_DUSK_STONE){
             removepartyitem(0)
         }
         checkpartyitem(1)
-        if(var(VAR_0x8005) == ITEM_FULL_HEAL){
+        if(var(VAR_0x8005) == ITEM_DUSK_STONE){
+            removepartyitem(1)
+        }
+    }
+
+    // dont restore toxic orb if consumed (flung) in battle
+    if(flag(FLAG_TOXIC_ORB_CONSUMED) == TRUE){
+        checkpartyitem(0)
+        if(var(VAR_0x8005) == ITEM_TOXIC_ORB){
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_0x8005) == ITEM_TOXIC_ORB){
             removepartyitem(1)
         }
     }
@@ -1684,12 +1749,12 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
         }
     }
 
-    // prevent full heal restore after winning
+    // prevent safety goggles restore after winning
     checkpartymon(SPECIES_LIEPARD)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
-        if(var(VAR_0x8005) == ITEM_FULL_HEAL){
+        if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
             removepartyitem(VAR_TEMP_0)
         }
     }
@@ -3055,12 +3120,6 @@ text FourTabletsHintMessage1{
     "I wonder what they do."
 }
 
-// text FourTabletsHintMessage2{
-//     "I'm so done with this search...\p"
-//     "Maybe it's time to just kick back and\n"
-//     "stare at the waves for a while."
-// }
-
 text FourTabletsHintMessage2{
     "Wait...\n"
     "You actually found all four!?\p"
@@ -3074,51 +3133,56 @@ text FourTabletsHintMessage3{
     "Was that an earthquake?"
 }
 
-// Dusknoir mail hint NPC
-
-text DusknoirStoleMyMailMsg{
-    "A Dusknoir stole my mail!\p"
-    "To be honest, I don't really mind.\n"
-    "It's just a bit strange." 
-}
-
 
 // Space Item buy NPC
 
-text SpaceItemNPCInitialMessage_no_item{
-    "I have a fascination with rare and\n"
-    "unusual materials.\p"
+text StonesBuyNPCInitialMessage_no_item{
+    "I'm obsessed with collecting rare and\n"
+    "unusual stones.\p"
 
-    "Please come to me if you ever happen\n"
-    "to find anything worth my attention."
+    "Please come to me if you ever find\n"
+    "anything worth my attention."
 }
 
-text SpaceItemNPCInitialMessage_has_item{
+text StonesBuyNPCInitialMessage_has_SunStone{
     "Incredible...\n"
-    "Is that a Comet Shard?\p"
-
-    "I'd love to study that up close.\n"
-    "Would you sell it to me ¥3000?"
+    "Is that a Sun Stone?\p"
+    "Would you sell it to me ¥1500?"
 }
 
-text SpaceItemNPCSellAcceptedMessage{
+text StonesBuyNPCInitialMessage_has_MoonStone{
+    "Incredible...\n"
+    "Is that a Moon Stone?\p"
+    "Would you sell it to me ¥1500?"
+}
+
+text StonesBuyNPCInitialMessage_has_DuskStone{
+    "Incredible...\n"
+    "Is that a Dusk Stone?\p"
+    "...\p"
+    "I may have ran out of money...\p"
+    "Would you trade it for a Toxic Orb?" 
+}
+
+text StonesBuyNPCSellAcceptedMessage{
     "I'll take good care of it."
 }
 
-text SpaceItemNPCSellDeclinedMessage{
+text StonesBuyNPCSellAcceptedMessage_ToxicOrb{
+    "I'm sure the orb will serve you well."
+}
+
+text StonesBuyNPCSellDeclinedMessage{
     "Ah, maybe next time."
 }
 
-text SpaceItemNPCPostSellMessage{
-    "Where did you even get this shard?"
+text StonesBuyNPCPostSellMessage{
+    "I think I've got enough for now."
 }
 
-text MoneyReceived3000{
-    "{PLAYER} received ¥3000!"
+text MoneyReceived1500{
+    "{PLAYER} received ¥1500!"
 }
-
-
-
 
 
 // LIEPARD NPC
@@ -3220,8 +3284,8 @@ text AskResetPredamageMessage{
 
 text AskResetPredamageAndWarpMessage{
     "Want to set your Pokémon's HP and move\n"
-    "PP back to their pre-battle state\l"
-    "and return to the previous location?"
+    "PP back to their pre-battle state and\l"
+    "return to the previous location?"
 }
 
 text PreDamagedStateRestoredMessage{

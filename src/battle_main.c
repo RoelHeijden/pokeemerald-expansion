@@ -1988,7 +1988,7 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
 
             // ADDED
             // trainer 5 item removed after it's been stolen one
-            if (partyData[i].species == SPECIES_RAYQUAZA && partyData[i].heldItem == ITEM_COMET_SHARD)
+            if (partyData[i].species == SPECIES_RAYQUAZA && partyData[i].heldItem == ITEM_MOON_STONE)
             {
                 if (FlagGet(FLAG_SPACE_ITEM_STOLEN) == TRUE)
                 {

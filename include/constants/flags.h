@@ -46,7 +46,7 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_SPACE_ITEM_SOLD                0x24
+#define FLAG_TOXIC_ORB_OBTAINED             0x24
 #define FLAG_UNUSED_0x25                    0x25 // unused
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
@@ -74,7 +74,7 @@
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
 #define FLAG_ANNIHILAPE_HINT_RECEIVED       0x3E  
 #define FLAG_RARE_CANDY_OBTAINED            0x3F  
-#define FLAG_SPACE_ITEM_STOLEN                0x40  
+#define FLAG_SPACE_ITEM_STOLEN              0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
 #define FLAG_ME_FIRST_CHOICE_LOCK           0x42
 #define FLAG_TRAINER1_DEFEATED              0x43  
@@ -90,7 +90,7 @@
 #define FLAG_SHUCKLE_SMASH_ROCK1             0x4C 
 #define FLAG_SHUCKLE_SMASH_ROCK2             0x4D  
 #define FLAG_SHUCKLE_SMASH_ROCK3             0x4E
-#define FLAG_SHUCKLE_SMASH_ROCK4             0x4F 
+#define FLAG_DUSK_STONE_OBTAINED             0x4F  
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -657,10 +657,10 @@
 #define FLAG_LIEPARD_MOVE_DELETED       0x265 
 #define FLAG_DUNSPARCE_MOVE_DELETED     0x266 
 #define FLAG_SMEARGLE_MOVE_DELETED      0x267 
-#define FLAG_FULL_HEAL_CONSUMED         0x268
+#define FLAG_DUSK_STONE_CONSUMED        0x268
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
-#define FLAG_UNUSED_0x26B               0x26B  // unused
+#define FLAG_TOXIC_ORB_CONSUMED        0x26B   
 #define FLAG_RETURN_LEPPA_BERRY         0x26C 
 #define FLAG_RETURN_BERRY_JUICE         0x26D   
 #define FLAG_RETURN_ESCAPE_ROPE         0x26E

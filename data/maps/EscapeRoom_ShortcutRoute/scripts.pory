@@ -4,7 +4,7 @@ const LOCALID_MAP_SWITCH3 = 2
 const LOCALID_ROCK1 = 3
 const LOCALID_ROCK2 = 4
 const LOCALID_ROCK3 = 5
-const LOCALID_ROCK4 = 6
+const LOCALID_DUSK_STONE = 6
 const LOCALID_DRUG_HIKER = 7
 
 
@@ -78,7 +78,6 @@ script ResetShuckleSmashRocks{
         clearflag(FLAG_SHUCKLE_SMASH_ROCK1)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK2)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK3)
-        clearflag(FLAG_SHUCKLE_SMASH_ROCK4)
     }
 }
 
@@ -149,6 +148,15 @@ script HikerSellAbilityCapsule{
     }
     releaseall
 }
+
+script FindDuskStoneItem{
+    lockall
+    finditem(ITEM_DUSK_STONE)
+    removeobject(LOCALID_DUSK_STONE)
+    setflag(FLAG_DUSK_STONE_OBTAINED)
+    releaseall
+}
+
 
 text RockSmashNPCsellDrugs{
     "Hey kid, wanna buy some dru- OH HEY!\p"

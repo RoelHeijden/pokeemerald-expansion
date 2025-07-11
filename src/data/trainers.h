@@ -42479,7 +42479,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_RAYQUAZA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16995
-            .heldItem = ITEM_COMET_SHARD,
+            .heldItem = ITEM_MOON_STONE,
 #line 16997
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 16998

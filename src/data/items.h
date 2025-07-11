@@ -3902,7 +3902,8 @@ const struct Item gItemsInfo[] =
     [ITEM_SUN_STONE] =
     {
         .name = _("Sun Stone"),
-        .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        // .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        .price = 0,
         .description = sEvolutionStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -3916,7 +3917,8 @@ const struct Item gItemsInfo[] =
     [ITEM_MOON_STONE] =
     {
         .name = _("Moon Stone"),
-        .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        // .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        .price = 0,
         .description = sEvolutionStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -3944,7 +3946,8 @@ const struct Item gItemsInfo[] =
     [ITEM_DUSK_STONE] =
     {
         .name = _("Dusk Stone"),
-        .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        // .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
+        .price = 0,
         .description = sEvolutionStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
@@ -7960,10 +7963,14 @@ const struct Item gItemsInfo[] =
         // .price = (I_PRICE >= GEN_9) ? 15000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
         .price = 0,
         .holdEffect = HOLD_EFFECT_TOXIC_ORB,
+        // .description = COMPOUND_STRING(
+        //     "A bizarre orb that\n"
+        //     "badly poisons the\n"
+        //     "holder in battle."),
         .description = COMPOUND_STRING(
             "A bizarre orb that\n"
-            "badly poisons the\n"
-            "holder in battle."),
+            "poisons the holder.\n"
+            "Shuckle hates it."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -9040,14 +9047,10 @@ const struct Item gItemsInfo[] =
         .pluralName = HANDLE_EXPANDED_ITEM_NAME("SafetyGoggles", "Safety Goggles"),
         .price = 0,
         .holdEffect = HOLD_EFFECT_SAFETY_GOGGLES,
-        // .description = COMPOUND_STRING(
-        //     "Protect from\n"
-        //     "weather damage and\n"
-        //     "powder moves."),
         .description = COMPOUND_STRING(
-            "Protects from\n"
-            "weather and powder.\n"
-            "Use for juice."),
+            "Protect from\n"
+            "weather damage and\n"
+            "powder moves."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

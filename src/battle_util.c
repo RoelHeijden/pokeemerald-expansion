@@ -11471,8 +11471,10 @@ void TryRestoreHeldItems(void)
                     if (lostItemActuallyConsumed){
                         if(lostItem == ITEM_BERRY_JUICE)
                             FlagSet(FLAG_BERRY_JUICE_CONSUMED);
-                        if(lostItem == ITEM_FULL_HEAL)
-                            FlagSet(FLAG_FULL_HEAL_CONSUMED);
+                        if(lostItem == ITEM_DUSK_STONE) 
+                            FlagSet(FLAG_DUSK_STONE_CONSUMED);
+                        if(lostItem == ITEM_TOXIC_ORB)
+                            FlagSet(FLAG_TOXIC_ORB_CONSUMED);
                         if(lostItem == ITEM_SAFETY_GOGGLES)
                             FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
                     }
