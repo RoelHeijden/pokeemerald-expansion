@@ -7518,7 +7518,7 @@ const struct Item gItemsInfo[] =
     // },
     [ITEM_POWER_LENS] =
     {
-        .name = _("Liepard Collar"),
+        .name = _("Liepard's Collar"),
         .price = 0,
         .description = COMPOUND_STRING(
             "A stylish collar\n"
@@ -7963,14 +7963,10 @@ const struct Item gItemsInfo[] =
         // .price = (I_PRICE >= GEN_9) ? 15000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
         .price = 0,
         .holdEffect = HOLD_EFFECT_TOXIC_ORB,
-        // .description = COMPOUND_STRING(
-        //     "A bizarre orb that\n"
-        //     "badly poisons the\n"
-        //     "holder in battle."),
         .description = COMPOUND_STRING(
             "A bizarre orb that\n"
-            "poisons the holder.\n"
-            "Shuckle hates it."),
+            "badly poisons the\n"
+            "holder in battle."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,

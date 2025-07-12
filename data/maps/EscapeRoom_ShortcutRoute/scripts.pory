@@ -60,6 +60,7 @@ script CheckResetRocks{
     call(ResetShuckleSmashRocks)
 }
 
+
 script ResetSmashRock1{
     // reset rock smash rock1 untill rock2 is cleared (prevent potential softlock)
     if(!(flag(FLAG_HIDE_SMASH_ROCK1) && flag(FLAG_HIDE_SMASH_ROCK2))){
@@ -78,6 +79,8 @@ script ResetShuckleSmashRocks{
         clearflag(FLAG_SHUCKLE_SMASH_ROCK1)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK2)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK3)
+        clearflag(FLAG_SHUCKLE_SMASH_ROCK4)
+        clearflag(FLAG_SHUCKLE_SMASH_ROCK5)
     }
 }
 
@@ -85,11 +88,11 @@ script CheckIfBerryJuiceObtained{
     if(flag(FLAG_BERRY_JUICE_OBTAINED) == FALSE){
         // check held items for berry juice (only 2 pokemon party at this stage)
         checkpartyitem(0)
-        if(var(VAR_0x8005) == ITEM_BERRY_JUICE) {  // if item in party slot 0
+        if(var(VAR_0x8005) == ITEM_BERRY_JUICE){  // if item in party slot 0
             setflag(FLAG_BERRY_JUICE_OBTAINED)
         }
         checkpartyitem(1)
-        if(var(VAR_0x8005) == ITEM_BERRY_JUICE) {  // if item in party slot 1
+        if(var(VAR_0x8005) == ITEM_BERRY_JUICE){  // if item in party slot 1
             setflag(FLAG_BERRY_JUICE_OBTAINED)
         }
 
@@ -98,6 +101,21 @@ script CheckIfBerryJuiceObtained{
         if(var(VAR_RESULT) == TRUE){
             setflag(FLAG_BERRY_JUICE_OBTAINED)
         }
+
+        // // dont recover Iron Ball if Berry Juice was obtained (Shuckle battle)
+        // if(flag(FLAG_BERRY_JUICE_OBTAINED)){
+        //     checkpartyitem(0)
+        //     if(var(VAR_0x8005) == ITEM_IRON_BALL){
+        //         removepartyitem(0)
+        //         clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+        //     }
+        //     checkpartyitem(1)
+        //     if(var(VAR_0x8005) == ITEM_IRON_BALL){
+        //         removepartyitem(1)
+        //         clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+        //     }
+        //     removeitem(ITEM_IRON_BALL)
+        // }
     }
 }
 

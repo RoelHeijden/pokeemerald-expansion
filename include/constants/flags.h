@@ -46,7 +46,7 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_TOXIC_ORB_OBTAINED             0x24
+#define FLAG_IRON_BALL_OBTAINED             0x24
 #define FLAG_UNUSED_0x25                    0x25 // unused
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
@@ -660,13 +660,13 @@
 #define FLAG_DUSK_STONE_CONSUMED        0x268
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
-#define FLAG_TOXIC_ORB_CONSUMED        0x26B   
+#define FLAG_IRON_BALL_CONSUMED        0x26B   
 #define FLAG_RETURN_LEPPA_BERRY         0x26C 
 #define FLAG_RETURN_BERRY_JUICE         0x26D   
 #define FLAG_RETURN_ESCAPE_ROPE         0x26E
 #define FLAG_LIEPARD_OBTAINED           0x26F
-#define FLAG_UNUSED_0x270  0x270 // Unused Flag
-#define FLAG_UNUSED_0x271  0x271 // Unused Flag
+#define FLAG_SHUCKLE_SMASH_ROCK4          0x270 
+#define FLAG_SHUCKLE_SMASH_ROCK5        0x271 
 #define FLAG_UNUSED_0x272  0x272 // Unused Flag
 #define FLAG_UNUSED_0x273  0x273 // Unused Flag
 #define FLAG_UNUSED_0x274  0x274 // Unused Flag

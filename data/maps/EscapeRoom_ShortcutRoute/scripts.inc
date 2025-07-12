@@ -75,153 +75,157 @@ CheckResetRocks::
 
 
 ResetSmashRock1::
-# 65 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 66 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_HIDE_SMASH_ROCK1, ResetSmashRock1_1
-# 65 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 66 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_HIDE_SMASH_ROCK2, ResetSmashRock1_1
 	return
 
 ResetSmashRock1_1:
-# 66 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 67 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_HIDE_SMASH_ROCK2, ResetSmashRock1_5
-# 70 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 71 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_HIDE_SMASH_ROCK1
 	return
 
 ResetSmashRock1_5:
-# 67 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 68 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	clearflag FLAG_HIDE_SMASH_ROCK1
 	return
 
 
 ResetShuckleSmashRocks::
-# 77 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 78 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_BERRY_JUICE_OBTAINED, ResetShuckleSmashRocks_1
 	return
 
 ResetShuckleSmashRocks_1:
-# 78 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	clearflag FLAG_SHUCKLE_SMASH_ROCK1
 # 79 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	clearflag FLAG_SHUCKLE_SMASH_ROCK2
+	clearflag FLAG_SHUCKLE_SMASH_ROCK1
 # 80 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	clearflag FLAG_SHUCKLE_SMASH_ROCK2
+# 81 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	clearflag FLAG_SHUCKLE_SMASH_ROCK3
+# 82 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	clearflag FLAG_SHUCKLE_SMASH_ROCK4
+# 83 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	clearflag FLAG_SHUCKLE_SMASH_ROCK5
 	return
 
 
 CheckIfBerryJuiceObtained::
-# 85 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 88 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_BERRY_JUICE_OBTAINED, CheckIfBerryJuiceObtained_1
 	return
 
 CheckIfBerryJuiceObtained_1:
-# 87 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 90 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	checkpartyitem 0
-# 88 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 91 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_0x8005, ITEM_BERRY_JUICE
 	goto_if_eq CheckIfBerryJuiceObtained_4
 CheckIfBerryJuiceObtained_3:
-# 91 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 94 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	checkpartyitem 1
-# 92 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 95 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_0x8005, ITEM_BERRY_JUICE
 	goto_if_eq CheckIfBerryJuiceObtained_7
 CheckIfBerryJuiceObtained_6:
-# 97 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 100 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	checkitem ITEM_BERRY_JUICE
-# 98 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 101 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq CheckIfBerryJuiceObtained_9
 	return
 
 CheckIfBerryJuiceObtained_4:
-# 89 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 92 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_BERRY_JUICE_OBTAINED
 	goto CheckIfBerryJuiceObtained_3
 
 CheckIfBerryJuiceObtained_7:
-# 93 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 96 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_BERRY_JUICE_OBTAINED
 	goto CheckIfBerryJuiceObtained_6
 
 CheckIfBerryJuiceObtained_9:
-# 99 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 102 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_BERRY_JUICE_OBTAINED
 	return
 
 
 HikerSellAbilityCapsule::
-# 109 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 127 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	lock
-# 110 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 128 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	faceplayer
-# 111 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 129 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_ABILITY_CAPSULE_BOUGHT, HikerSellAbilityCapsule_2
-# 146 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 164 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCFinalMessage, MSGBOX_AUTOCLOSE
-# 147 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 165 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	waitmessage
 HikerSellAbilityCapsule_1:
-# 149 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 167 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	releaseall
 	return
 
 HikerSellAbilityCapsule_2:
-# 114 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 132 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCsellDrugs, MSGBOX_YESNO
-# 115 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 133 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq HikerSellAbilityCapsule_5
-# 140 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 158 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCsellDeclined, MSGBOX_AUTOCLOSE
-# 141 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 159 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	waitmessage
 	goto HikerSellAbilityCapsule_1
 
 HikerSellAbilityCapsule_5:
-# 118 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 136 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	checkmoney 1025
-# 119 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 137 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_RESULT, FALSE
 	goto_if_eq HikerSellAbilityCapsule_9
-# 127 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 145 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	removemoney 1025
-# 130 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 148 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	giveitem ITEM_ABILITY_CAPSULE
-# 133 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 151 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCsellAcceptedMessage, MSGBOX_AUTOCLOSE
-# 134 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 152 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	waitmessage
-# 136 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 154 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_ABILITY_CAPSULE_BOUGHT
 	goto HikerSellAbilityCapsule_1
 
 HikerSellAbilityCapsule_9:
-# 121 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 139 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	msgbox RockSmashNPCnotEnoughMoney, MSGBOX_AUTOCLOSE
-# 122 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 140 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	waitmessage
-# 123 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 141 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	releaseall
 	end
 
 
 FindDuskStoneItem::
-# 153 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 171 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	lockall
-# 154 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 172 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	finditem ITEM_DUSK_STONE
-# 155 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 173 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	removeobject 6
-# 156 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 174 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_DUSK_STONE_OBTAINED
-# 157 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 175 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	releaseall
 	return
 
 
 RockSmashNPCsellDrugs::
-# 161 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 179 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Hey kid, wanna buy some dru- OH HEY!\p"
 	.string "You're the one who smashed that rock\n"
 	.string "for me, aren't you?\p"
@@ -230,17 +234,17 @@ RockSmashNPCsellDrugs::
 	.string "What do you say?$"
 
 RockSmashNPCsellDeclined::
-# 172 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 190 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "You know where to find me.$"
 
 RockSmashNPCnotEnoughMoney::
-# 176 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 194 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Come back when you have the money.$"
 
 RockSmashNPCsellAcceptedMessage::
-# 180 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 198 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Pleasure doing business.$"
 
 RockSmashNPCFinalMessage::
-# 184 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+# 202 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	.string "Move along now.$"

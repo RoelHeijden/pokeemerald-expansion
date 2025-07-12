@@ -498,13 +498,13 @@ static void CreateWildMon(u16 species, u8 level)
             species = SPECIES_SHUCKLE;
             heldItem = ITEM_BERRY_JUICE;
 
-            level = 21;
+            level = 9;
             abilityNum = 1;
             gender = MON_MALE;
             nature = NATURE_BOLD;
             move1 = MOVE_KNOCK_OFF;
 
-            hpIv=13;  // 42 hp. prevent 22hp Endeavor doing 50%
+            hpIv=31; 
             atkIv=0;
             defIv=31;
             speedIv=31; 
@@ -952,7 +952,7 @@ void RockSmashWildEncounter(void)
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
     // ADDED
-    u8 GUARANTEED_ENCOUNTER_NUM = 4;
+    u8 GUARANTEED_ENCOUNTER_NUM = 6;
 
     // ADDED
     // increment encounter var after every rock smashed in shortcut tunnel

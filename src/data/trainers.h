@@ -42317,7 +42317,7 @@ F_TRAINER_FEMALE |
 #line 16927
             .heldItem = ITEM_SNOWBALL,
 #line 16930
-            .ev = TRAINER_PARTY_EVS(228, 0, 0, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(228, 0, 252, 0, 0, 0),
 #line 16932
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 15),
 #line 16928

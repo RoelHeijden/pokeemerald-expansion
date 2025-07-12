@@ -11430,8 +11430,8 @@ void TryRestoreHeldItems(void)
                 // check if item actually consumed
                 if (currentItem != lostItem){
 
-                    // dont recover prev item if current held item is the stolen berry juice
-                    if(currentItem == ITEM_BERRY_JUICE && gLastFlungItem == ITEM_SAFETY_GOGGLES)
+                    // dont restore item if berry juice stolen via Iron Ball
+                    if(currentItem == ITEM_BERRY_JUICE && lostItem == ITEM_IRON_BALL)
                         return;
 
                     // Check if the item is one that requires a heal before returning
@@ -11473,8 +11473,8 @@ void TryRestoreHeldItems(void)
                             FlagSet(FLAG_BERRY_JUICE_CONSUMED);
                         if(lostItem == ITEM_DUSK_STONE) 
                             FlagSet(FLAG_DUSK_STONE_CONSUMED);
-                        if(lostItem == ITEM_TOXIC_ORB)
-                            FlagSet(FLAG_TOXIC_ORB_CONSUMED);
+                        if(lostItem == ITEM_IRON_BALL)
+                            FlagSet(FLAG_IRON_BALL_CONSUMED);
                         if(lostItem == ITEM_SAFETY_GOGGLES)
                             FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
                     }

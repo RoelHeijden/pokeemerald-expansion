@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const LOCALID_DUSKNOIR_MAIL_NPC = 33
+const _DUMMY_3 = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -75,7 +75,9 @@ script EscapeRoom_MapScript_OnTransitionScripts{
 
 script EscapeRoom_MapScript_OnResumeScripts{
     // check if pokemon caught -- sets flag if true
-    call(EscapeRoom_MapScripts_CheckIfPokemonCaught)
+    if(!flag(FLAG_ZERAORA_CAUGHT)){
+        call(EscapeRoom_MapScripts_CheckIfPokemonCaught)
+    }
 
     // check for ball return -- sets frame table var if true
     if(flag(FLAG_BALL_USED) && !flag(FLAG_ZERAORA_CAUGHT)){
@@ -117,7 +119,7 @@ script EscapeRoom_MapScript_OnWarpIntoScripts{
 script EscapeRoom_MapScripts_CheckIfPokemonCaught{
     // check if pokemon caught -- sets flag if true
     getpartysize
-    if (var(VAR_RESULT) >= 3 && !flag(FLAG_ZERAORA_CAUGHT)){
+    if (var(VAR_RESULT) >= 3){
         setflag(FLAG_ZERAORA_CAUGHT)
 
         // prevent leppa recovery if used
@@ -375,9 +377,9 @@ script EscapeRoom_MapScripts_SetRespawn{
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
-    // additem(ITEM_POWER_LENS) // REMOVE
+
     additem(ITEM_SAFETY_GOGGLES) // REMOVE
-    // additem(ITEM_HM01) // REMOVE
+    additem(ITEM_HM01) // REMOVE
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -577,7 +579,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     if(flag(FLAG_RETURN_BERRY_JUICE)){
         giveitem(ITEM_BERRY_JUICE)
         clearflag(FLAG_RETURN_BERRY_JUICE)
-        setflag(FLAG_TEMP_1)
+        setflag(FLAG_TEMP_2)  // no heal
     }
 
     // leppa berry
@@ -646,10 +648,10 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_2)  // no heal
     }
 
-    // special case: Toxic Orb (lost at trainer5)
-    if(flag(FLAG_TOXIC_ORB_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
-        clearflag(FLAG_TOXIC_ORB_CONSUMED)
-        giveitem(ITEM_TOXIC_ORB)
+    // special case: Iron Ball (lost at trainer5)
+    if(flag(FLAG_IRON_BALL_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+        clearflag(FLAG_IRON_BALL_CONSUMED)
+        giveitem(ITEM_IRON_BALL)
         setflag(FLAG_TEMP_2)  // no heal
     }
 
@@ -760,9 +762,9 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
         clearflag(FLAG_DUSK_STONE_CONSUMED)
         giveitem(ITEM_DUSK_STONE)
     }
-    if(flag(FLAG_TOXIC_ORB_CONSUMED)){
-        clearflag(FLAG_TOXIC_ORB_CONSUMED)
-        giveitem(ITEM_TOXIC_ORB)
+    if(flag(FLAG_IRON_BALL_CONSUMED)){
+        clearflag(FLAG_IRON_BALL_CONSUMED)
+        giveitem(ITEM_IRON_BALL)
     }
     if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
@@ -1008,6 +1010,9 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
 
     // change respawn
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+    msgbox(RespawnChangeMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
     // allow trigger tiles to toggle spawn indicator
     setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
     setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
@@ -1032,6 +1037,7 @@ movement EscapeRoom_Movement_PlayerMoveAway{
 movement EscapeRoom_Movement2_Nurse1NPC{
     walk_faster_left * 9
 }
+
 
 // MART NPC
 
@@ -1191,6 +1197,7 @@ script EscapeRoom_MoveRestoredSound{
     waitse
 }
 
+
 // ULTRA BALL QUIZ NPC
 
 script EscapeRoom_UltraBallNPC{
@@ -1287,7 +1294,7 @@ movement RockSmashNPCMovesAway {
 script EscapeRoom_TryBuyStonesPC{
     lock
 
-    if(flag(FLAG_TOXIC_ORB_OBTAINED)){
+    if(flag(FLAG_IRON_BALL_OBTAINED)){
         // post script message
         msgbox(StonesBuyNPCPostSellMessage, MSGBOX_NPC)
         waitmessage
@@ -1372,10 +1379,10 @@ script EscapeRoom_TryBuyStonesPC_TryBuyDuskStone{
 
     if(var(VAR_RESULT) == YES){
         removeitem(ITEM_DUSK_STONE)
-        giveitem(ITEM_TOXIC_ORB, 1)
-        setflag(FLAG_TOXIC_ORB_OBTAINED)
+        giveitem(ITEM_IRON_BALL)
+        setflag(FLAG_IRON_BALL_OBTAINED)
 
-        msgbox(StonesBuyNPCSellAcceptedMessage_ToxicOrb, MSGBOX_NPC)
+        msgbox(StonesBuyNPCSellAcceptedMessage_IronBall, MSGBOX_NPC)
         waitmessage
     }
     else{
@@ -1542,7 +1549,7 @@ script EscapeRoom_EventScript_Trainer5{
     if(!flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
         clearflag(FLAG_DUSK_STONE_CONSUMED)
-        clearflag(FLAG_TOXIC_ORB_CONSUMED)
+        clearflag(FLAG_IRON_BALL_CONSUMED)
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
     }
 
@@ -1704,14 +1711,14 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
     }
 
-    // dont restore toxic orb if consumed (flung) in battle
-    if(flag(FLAG_TOXIC_ORB_CONSUMED) == TRUE){
+    // dont restore iron ball if consumed (flung) in battle
+    if(flag(FLAG_IRON_BALL_CONSUMED) == TRUE){
         checkpartyitem(0)
-        if(var(VAR_0x8005) == ITEM_TOXIC_ORB){
+        if(var(VAR_0x8005) == ITEM_IRON_BALL){
             removepartyitem(0)
         }
         checkpartyitem(1)
-        if(var(VAR_0x8005) == ITEM_TOXIC_ORB){
+        if(var(VAR_0x8005) == ITEM_IRON_BALL){
             removepartyitem(1)
         }
     }
@@ -3147,13 +3154,13 @@ text StonesBuyNPCInitialMessage_no_item{
 text StonesBuyNPCInitialMessage_has_SunStone{
     "Incredible...\n"
     "Is that a Sun Stone?\p"
-    "Would you sell it to me ¥1500?"
+    "Would you sell it to me for ¥1500?"
 }
 
 text StonesBuyNPCInitialMessage_has_MoonStone{
     "Incredible...\n"
     "Is that a Moon Stone?\p"
-    "Would you sell it to me ¥1500?"
+    "Would you sell it to me for ¥1500?"
 }
 
 text StonesBuyNPCInitialMessage_has_DuskStone{
@@ -3161,15 +3168,15 @@ text StonesBuyNPCInitialMessage_has_DuskStone{
     "Is that a Dusk Stone?\p"
     "...\p"
     "I may have ran out of money...\p"
-    "Would you trade it for a Toxic Orb?" 
+    "Would you trade it for an Iron Ball?" 
 }
 
 text StonesBuyNPCSellAcceptedMessage{
     "I'll take good care of it."
 }
 
-text StonesBuyNPCSellAcceptedMessage_ToxicOrb{
-    "I'm sure the orb will serve you well."
+text StonesBuyNPCSellAcceptedMessage_IronBall{
+    "I'm sure the ball will serve you well."
 }
 
 text StonesBuyNPCSellDeclinedMessage{
@@ -3474,8 +3481,6 @@ text ZeraCutTradeAccepted{
 
 // TRAINER 2 - Dracozolt 
 text Trainer2_Intro{
-    // "Roots run deep where secrets lie,\n"
-    // "cut the path, or walk on by."
     "The land may hide its fiercest face,\n"
     "beneath the calm of leafy grace."
 }
@@ -3510,7 +3515,7 @@ text Trainer3FinalWords{
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
-    "I feel exhausted already."
+    "Ugh.. I feel exhausted already."
 }
 
 text Trainer4_Outro{
