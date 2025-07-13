@@ -11459,7 +11459,7 @@ void TryRestoreHeldItems(void)
                         AddLostItem(lostItem);
 
                         // prevent item recovery
-                        return;
+                        continue;
                     }
 
                     // check if lost item was actually consumed (i.e. not held by any current mon)
