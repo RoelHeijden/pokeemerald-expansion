@@ -7011,6 +7011,13 @@ static u32 ItemRestorePp(u32 battler, u32 itemId, bool32 execute)
 
             PREPARE_MOVE_BUFFER(gBattleTextBuff1, move);
 
+
+            // ADDED
+            // first set gbattlerattacker correctly
+            // this fixes the leppa berry animation bug
+            gBattlerAttacker = battler;
+            gBattleScripting.battler = battler;
+
             if (execute)
             {
                 BattleScriptExecute(BattleScript_BerryPPHealEnd2);
