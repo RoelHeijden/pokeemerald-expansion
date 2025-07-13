@@ -997,6 +997,13 @@ static void HandleMoveSwitching(u32 battler)
             moveInfo->maxPp[gMoveSelectionCursor[battler]] = moveInfo->maxPp[gMultiUsePlayerCursor];
             moveInfo->maxPp[gMultiUsePlayerCursor] = i;
 
+            // ADDED
+            // make sure the Mimic max. 5 pp is swapped to the new position as well
+            bool8 tempIsMimic = gDisableStructs[battler].isMimicCopied[gMoveSelectionCursor[battler]];
+            gDisableStructs[battler].isMimicCopied[gMoveSelectionCursor[battler]] = gDisableStructs[battler].isMimicCopied[gMultiUsePlayerCursor];
+            gDisableStructs[battler].isMimicCopied[gMultiUsePlayerCursor] = tempIsMimic;
+
+
             if (gDisableStructs[battler].mimickedMoves & gBitTable[gMoveSelectionCursor[battler]])
             {
                 gDisableStructs[battler].mimickedMoves &= (~gBitTable[gMoveSelectionCursor[battler]]);
