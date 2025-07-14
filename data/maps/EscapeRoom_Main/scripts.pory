@@ -57,6 +57,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
+        VAR_DO_ERROR_MESSAGE, 1: EscapeRoom_MapScripts_DoErrorMessage
     ] 
 }
 
@@ -131,6 +132,33 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
 
         // prevent recovered item message
         clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+
+
+        // ERROR CHECK
+        // - 1000 money
+        // - custap used
+        // - lepap used
+        checkpartyitem(0)
+        copyvar(VAR_0x8006, VAR_0x8005)
+        checkpartyitem(1)
+        copyvar(VAR_0x8007, VAR_0x8005)
+
+        checkitem(ITEM_LEPPA_BERRY)
+        copyvar(VAR_TEMP_4, VAR_RESULT)
+
+        checkitem(ITEM_CUSTAP_BERRY)
+        copyvar(VAR_TEMP_5, VAR_RESULT)
+
+        checkexactmoney(1000)
+        if(var(VAR_RESULT) == FALSE 
+            || (var(VAR_0x8006) == ITEM_CUSTAP_BERRY || var(VAR_0x8007) == ITEM_CUSTAP_BERRY)
+            || (var(VAR_0x8006) == ITEM_LEPPA_BERRY || var(VAR_0x8007) == ITEM_LEPPA_BERRY)
+            || var(VAR_TEMP_4) == TRUE
+            || var(VAR_TEMP_5) == TRUE)
+        {
+            // do error message
+            setvar(VAR_DO_ERROR_MESSAGE, 1)
+        }
     }
 }
 
@@ -272,6 +300,13 @@ script EscapeRoom_MapScripts_CheckIfRockSmashed{
     setvar(VAR_ROCK_SMASH_NPC_STATE, 0)
 }
 
+script EscapeRoom_MapScripts_DoErrorMessage{
+    setvar(VAR_DO_ERROR_MESSAGE, 0)
+    lockall
+    msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
 
 //// ON WARP ////
 
@@ -378,8 +413,10 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
 
-    additem(ITEM_SAFETY_GOGGLES) // REMOVE
-    additem(ITEM_HM01) // REMOVE
+    // additem(ITEM_SAFETY_GOGGLES) // REMOVE
+    // additem(ITEM_HM01) // REMOVE 
+    // additem(ITEM_LEPPA_BERRY)
+    // additem(ITEM_CUSTAP_BERRY)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -560,7 +597,6 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 }
 
 // return items
-
 script EscapeRoom_EventScript_ReturnLostItems{
     // clear flags
     clearflag(FLAG_TEMP_1) // an item was returned and heal required
@@ -699,14 +735,12 @@ script EscapeRoom_EventScript_ReturnLostItems{
 }
 
 // undo item
-
 script EscapeRoom_EventScript_UndoUsedItems{
     msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
     waitmessage
 }
 
 // undo event
-
 script EscapeRoom_EventScript_UndoOtherActions{
     // trainer5 rematch
     if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
@@ -828,7 +862,7 @@ script EscapeRoom_EventScript_LiepardNPC{
     faceplayer
 
     // play sound
-    playmoncry(SPECIES_TRAPINCH, CRY_MODE_NORMAL)
+    playmoncry(SPECIES_LIEPARD, CRY_MODE_NORMAL)
     msgbox(LiepardNPCmainMessage, MSGBOX_AUTOCLOSE)
     waitmoncry
     waitmessage
@@ -836,17 +870,6 @@ script EscapeRoom_EventScript_LiepardNPC{
     // if Liepard Collar obtained
     checkitem(ITEM_POWER_LENS)
     if(var(VAR_RESULT) == TRUE){
-
-        // sanity check - check for Aipom in party
-        checkpartymon(SPECIES_AIPOM)
-        if(var(VAR_RESULT) == PARTY_SIZE)
-        {
-            lock
-            msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
-            waitmessage
-            releaseall
-            end
-        }
 
         lockall
         delay(5)
@@ -869,7 +892,7 @@ script EscapeRoom_EventScript_LiepardNPC{
         waitmovement(LOCALID_LIEPARD)
         delay(20)
 
-        playmoncry(SPECIES_TRAPINCH, CRY_MODE_NORMAL)
+        playmoncry(SPECIES_LIEPARD, CRY_MODE_NORMAL)
         applymovement(LOCALID_LIEPARD, LiepardMovement3)
         waitmovement(LOCALID_LIEPARD)
         delay(2)
@@ -895,6 +918,27 @@ script EscapeRoom_EventScript_LiepardNPC{
         lockall
         removeitem(ITEM_POWER_LENS)
         setflag(FLAG_LIEPARD_OBTAINED)
+
+
+        // ERROR CHECK
+        // - 500 money
+        // - trainer 1 defeated
+        // - trainer 2 defeated
+        // - trainer 3 defeated
+        // - Aipom obtained
+        // - escape rope used
+        checkexactmoney(500)
+        if(var(VAR_RESULT) == FALSE 
+            || !flag(FLAG_TRAINER1_DEFEATED) 
+            || !flag(FLAG_TRAINER2_DEFEATED) 
+            || !flag(FLAG_TRAINER3_DEFEATED) 
+            || !flag(FLAG_FLORGES_TRADE_ACCEPTED)
+            || !flag(FLAG_RETURN_ESCAPE_ROPE))
+        {
+            msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+
 
         // reset spawn and heal location
         delay(40)
@@ -1001,7 +1045,7 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     // move nurse out of screen
     applymovement(LOCALID_NURSE_DUMMY, EscapeRoom_Movement2_Nurse1NPC)
     waitmovement(LOCALID_NURSE_DUMMY)
-    delay(30)
+    delay(20)
     removeobject(LOCALID_NURSE_DUMMY)
 
     // remove nurse 1
@@ -1271,6 +1315,32 @@ script EscapeRoom_MoveRockSmashNPC{
     
     // prevent Mental Herb restore
     removelostitem(ITEM_MENTAL_HERB)
+
+
+    // ERROR CHECK
+    // - 0 money
+    // - trainer 4 defeated
+    // - mental herb used
+    checkpartyitem(0)
+    copyvar(VAR_0x8006, VAR_0x8005)
+    checkpartyitem(1)
+    copyvar(VAR_0x8007, VAR_0x8005)
+
+    checkitem(ITEM_MENTAL_HERB)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+
+    checkexactmoney(0)
+    if(var(VAR_RESULT) == FALSE
+        || !flag(FLAG_TRAINER4_DEFEATED)
+        || (var(VAR_0x8006) == ITEM_MENTAL_HERB || var(VAR_0x8007) == ITEM_MENTAL_HERB)
+        || var(VAR_TEMP_4) == TRUE)
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+    }
+
 }
 
 movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
@@ -1610,12 +1680,41 @@ script EscapeRoom_EventScript_Trainer1PostBattle{
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
         if(var(VAR_0x8005) == ITEM_WHITE_HERB){
             removepartyitem(VAR_TEMP_0)
+            setflag(FLAG_WHITE_HERB_USED)
         }
     }
 
     setflag(FLAG_TRAINER1_DEFEATED)
+
+
+    // ERROR CHECK
+    // - 1500 money
+    // - safety goggles kept
+    // - white herb used
+    checkpartyitem(0)
+    copyvar(VAR_0x8006, VAR_0x8005)
+    checkpartyitem(1)
+    copyvar(VAR_0x8007, VAR_0x8005)
+    checkpartyitem(2)
+    copyvar(VAR_0x8008, VAR_0x8005)
+    checkexactmoney(1500)
+    if(var(VAR_RESULT) == FALSE 
+        || !(var(VAR_0x8006) == ITEM_SAFETY_GOGGLES || var(VAR_0x8007) == ITEM_SAFETY_GOGGLES || var(VAR_0x8008) == ITEM_SAFETY_GOGGLES)
+        || !flag(FLAG_WHITE_HERB_USED))
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+
+    // heal and ask Zera trade
     call(EscapeRoom_EventScript_PostMatchHeal)
     call(EscapeRoom_EventScript_TradeZeraForHMCut)
+
+    releaseall
+    end
+
 }
 
 script EscapeRoom_EventScript_Trainer2PostBattle{
@@ -1629,10 +1728,29 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
         if(var(VAR_0x8005) == ITEM_MARANGA_BERRY){
             removepartyitem(VAR_TEMP_0)
+            setflag(FLAG_MARANGA_BERRY_USED)
         }
     }
     setflag(FLAG_TRAINER2_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // ERROR CHECK
+    // - 2000 money
+    // - trainer 1 defeated
+    // - maranga used
+    // - Zera obtained
+    checkexactmoney(2000)
+    if(var(VAR_RESULT) == FALSE 
+        || !flag(FLAG_TRAINER1_DEFEATED) 
+        || !flag(FLAG_MARANGA_BERRY_USED)
+        || !flag(FLAG_ZERAORA_CAUGHT))
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
+    end
 }
 
 script EscapeRoom_EventScript_Trainer3PostBattle{
@@ -1668,6 +1786,21 @@ script EscapeRoom_EventScript_Trainer3PostBattle{
     // heal 
     call(EscapeRoom_EventScript_PostMatchHeal)
 
+    // ERROR CHECK
+    // - 500 money
+    // - trainer 1 defeated
+    // - trainer 2 defeated
+    // - Ferro obtained
+    checkexactmoney(500)
+    if(var(VAR_RESULT) == FALSE 
+        || !flag(FLAG_TRAINER1_DEFEATED) 
+        || !flag(FLAG_TRAINER2_DEFEATED) 
+        || !flag(FLAG_FERRO_TRADE_ACCEPTED))
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
     releaseall
     end
 }
@@ -1681,6 +1814,25 @@ movement EscapeRoom_Movement_Trainer3End{
 script EscapeRoom_EventScript_Trainer4PostBattle{
     setflag(FLAG_TRAINER4_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // ERROR CHECK
+    // - 500 or 2000 money
+    // TODO: - Sleep Talk Dunsparce obtained
+    checkexactmoney(500)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+    checkexactmoney(2000)
+    copyvar(VAR_TEMP_5, VAR_RESULT)
+    // tbd
+    if(var(VAR_TEMP_4) == FALSE && var(VAR_TEMP_5) == FALSE) 
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
+    end
+
+
 }
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
@@ -1768,6 +1920,34 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
 
     setflag(FLAG_TRAINER6_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+
+    // ERROR CHECK
+    // - 500 money
+    // - trainer 4 & 5 defeated
+    // - custap used
+    // - safety goggles used
+    checkpartyitem(0)
+    copyvar(VAR_0x8006, VAR_0x8005)
+    checkpartyitem(1)
+    copyvar(VAR_0x8007, VAR_0x8005)
+
+    checkitem(ITEM_SAFETY_GOGGLES)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+
+    checkexactmoney(500)
+    if(var(VAR_RESULT) == FALSE
+        || !flag(FLAG_TRAINER4_DEFEATED)
+        || !flag(FLAG_TRAINER5_DEFEATED)
+        || (var(VAR_0x8006) == ITEM_CUSTAP_BERRY || var(VAR_0x8007) == ITEM_CUSTAP_BERRY)
+        || (var(VAR_0x8006) == ITEM_SAFETY_GOGGLES || var(VAR_0x8007) == ITEM_SAFETY_GOGGLES)
+        || var(VAR_TEMP_4) == TRUE)
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+    }
 }
 
 script EscapeRoom_EventScript_Trainer9PostBattle{
@@ -1783,7 +1963,8 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
     msgbox(AskZeraCutTradeMessage, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
 
-        // check if pokemon in party
+
+        // check if Zera in party (sanity check)
         checkpartymon(SPECIES_ZERAORA)
         if(var(VAR_RESULT) == PARTY_SIZE)
         {
@@ -1792,6 +1973,7 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
             releaseall
             end
         }
+
 
         // trade pokemon
         setflag(FLAG_ZERA_TRADED)
@@ -1839,7 +2021,7 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
         msgbox(AskFerroDunsparceTrade, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
 
-            // check if pokemon in party
+            // check if Ferrothorn in party (sanity check)
             checkpartymon(SPECIES_FERROTHORN)
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
@@ -2732,7 +2914,7 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
 text SomethingsGoneWrongMessage{
     "Something has gone wrong.\p"
     "You may have found an unintended\n"
-    "solution that broke the game.\p"
+    "solution that can break the game.\p"
     "Consider contacting Ketchupplant."
 }
 
@@ -3444,7 +3626,7 @@ text AipomTradeUndoDeclined{
 // BATTLES - OTHER
 text DoubleBattle_NotEnoughMons{
     "Want to battle?\n"
-    "You should bring a second POKéMON."
+    "You should bring a second Pokémon."
 }
 
 
@@ -3564,9 +3746,9 @@ text Trainer6_PostBattle{
 }
 
 
-// TRAINER 9 - ??? ??? (unbeatable double)
+// TRAINER 9 - Lucario Lucario (unbeatable double)
 text Trainer9_Intro{
-    "TBD"
+    "Don't get your hopes up."
 }
 
 text Trainer9_Outro{

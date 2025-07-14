@@ -17,6 +17,7 @@ mapscripts EscapeRoom_ShortcutRoute_MapScripts {
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+        VAR_DO_ERROR_MESSAGE, 1: EscapeRoom_MapScripts_DoErrorMessage
     ] 
 }
 
@@ -80,7 +81,6 @@ script ResetShuckleSmashRocks{
         clearflag(FLAG_SHUCKLE_SMASH_ROCK2)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK3)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK4)
-        clearflag(FLAG_SHUCKLE_SMASH_ROCK5)
     }
 }
 
@@ -102,20 +102,28 @@ script CheckIfBerryJuiceObtained{
             setflag(FLAG_BERRY_JUICE_OBTAINED)
         }
 
-        // // dont recover Iron Ball if Berry Juice was obtained (Shuckle battle)
-        // if(flag(FLAG_BERRY_JUICE_OBTAINED)){
-        //     checkpartyitem(0)
-        //     if(var(VAR_0x8005) == ITEM_IRON_BALL){
-        //         removepartyitem(0)
-        //         clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
-        //     }
-        //     checkpartyitem(1)
-        //     if(var(VAR_0x8005) == ITEM_IRON_BALL){
-        //         removepartyitem(1)
-        //         clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
-        //     }
-        //     removeitem(ITEM_IRON_BALL)
-        // }
+
+
+        if(flag(FLAG_BERRY_JUICE_OBTAINED) == TRUE){
+            // ERROR CHECK
+            // - trainer 4 defeated
+            // - iron ball used
+            checkpartyitem(0)
+            copyvar(VAR_0x8006, VAR_0x8005)
+            checkpartyitem(1)
+            copyvar(VAR_0x8007, VAR_0x8005)
+
+            checkitem(ITEM_IRON_BALL)
+            copyvar(VAR_TEMP_4, VAR_RESULT)
+
+            if(!flag(FLAG_TRAINER4_DEFEATED)
+                || (var(VAR_0x8006) == ITEM_IRON_BALL || var(VAR_0x8007) == ITEM_IRON_BALL)
+                || var(VAR_TEMP_4) == TRUE)
+            {
+                // do error message
+                setvar(VAR_DO_ERROR_MESSAGE, 1)
+            }
+        }
     }
 }
 
@@ -152,6 +160,31 @@ script HikerSellAbilityCapsule{
             waitmessage
 
             setflag(FLAG_ABILITY_CAPSULE_BOUGHT)
+
+
+            // ERROR CHECK
+            // - 0 money
+            // - trainer 5 defeated
+            // - berry juice used
+            checkpartyitem(0)
+            copyvar(VAR_0x8006, VAR_0x8005)
+            checkpartyitem(1)
+            copyvar(VAR_0x8007, VAR_0x8005)
+
+            checkitem(ITEM_BERRY_JUICE)
+            copyvar(VAR_TEMP_4, VAR_RESULT)
+
+            checkexactmoney(0)
+            if(var(VAR_RESULT) == FALSE
+                || !flag(FLAG_TRAINER5_DEFEATED)
+                || (var(VAR_0x8006) == ITEM_BERRY_JUICE || var(VAR_0x8007) == ITEM_BERRY_JUICE)
+                || var(VAR_TEMP_4) == TRUE)
+            {
+                lockall
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+            }
         }
         else{
             // sell declined message

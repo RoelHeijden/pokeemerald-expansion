@@ -1510,6 +1510,12 @@
 	.byte \disable
 	.endm
 
+	@ Checks if the player has money == value. VAR_RESULT is set to TRUE if the player has enough money, or FALSE if they do not.
+	.macro checkexactmoney value:req
+	.byte 0xeb
+	.4byte \value
+	.endm
+
 	@ Creates a window showing how much money the player has.
 	@ If 'disable' is set to anything but 0 then this command does nothing.
 	.macro showmoneybox x:req, y:req, disable=0

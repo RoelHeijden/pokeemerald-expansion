@@ -47,7 +47,7 @@
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
 #define FLAG_IRON_BALL_OBTAINED             0x24
-#define FLAG_UNUSED_0x25                    0x25 // unused
+#define FLAG_MARANGA_BERRY_USED             0x25  
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
 #define FLAG_MARANGA_BERRY_OBTAINED         0x28
@@ -666,7 +666,7 @@
 #define FLAG_RETURN_ESCAPE_ROPE         0x26E
 #define FLAG_LIEPARD_OBTAINED           0x26F
 #define FLAG_SHUCKLE_SMASH_ROCK4          0x270 
-#define FLAG_SHUCKLE_SMASH_ROCK5        0x271 
+#define FLAG_UNUSED_0x271               0x271 // Unused Flag
 #define FLAG_UNUSED_0x272  0x272 // Unused Flag
 #define FLAG_UNUSED_0x273  0x273 // Unused Flag
 #define FLAG_UNUSED_0x274  0x274 // Unused Flag
@@ -1224,7 +1224,7 @@
 #define FLAG_HIDE_SMASH_ROCK2                                       0x495 // one-way rock
 #define FLAG_ROCK_SMASH_GUY_MOVED                                   0x496
 #define FLAG_END_ESCAPE_ROOM                                        0x497
-#define FLAG_UNUSED_0x498                                           0x498 // Unused
+#define FLAG_WHITE_HERB_USED                                           0x498  
 #define FLAG_UNUSED_0x499                                           0x499 // Unused
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused

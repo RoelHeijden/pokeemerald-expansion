@@ -2707,6 +2707,14 @@ bool8 ScrCmd_restoremonfrompc(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+bool8 ScrCmd_checkexactmoney(struct ScriptContext *ctx)
+{
+    u32 amount = ScriptReadWord(ctx);
+
+    gSpecialVar_Result = GetMoney(&gSaveBlock1Ptr->money) == amount;
+    return FALSE;
+}
 
 
 

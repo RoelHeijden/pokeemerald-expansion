@@ -952,7 +952,7 @@ void RockSmashWildEncounter(void)
     u16 headerId = GetCurrentMapWildMonHeaderId();
 
     // ADDED
-    u8 GUARANTEED_ENCOUNTER_NUM = 6;
+    u8 GUARANTEED_ENCOUNTER_NUM = 5;
 
     // ADDED
     // increment encounter var after every rock smashed in shortcut tunnel
