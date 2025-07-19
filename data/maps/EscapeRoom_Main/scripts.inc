@@ -4822,7 +4822,7 @@ AipomTradeUndoDeclined::
 DoubleBattle_NotEnoughMons::
 # 3627 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to battle?\n"
-	.string "You should bring a second POKéMON.$"
+	.string "You should bring a second Pokémon.$"
 
 Trainer1_Intro::
 # 3634 "data/maps/EscapeRoom_Main/scripts.pory"
