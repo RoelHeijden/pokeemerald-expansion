@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const _DUMMY_3 = 33
+const LOCALID_MAIL_HINT_NPC = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -413,10 +413,8 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
 
-    // additem(ITEM_SAFETY_GOGGLES) // REMOVE
-    // additem(ITEM_HM01) // REMOVE 
-    // additem(ITEM_LEPPA_BERRY)
-    // additem(ITEM_CUSTAP_BERRY)
+    // additem(ITEM_SAFETY_GOGGLES)
+    // additem(ITEM_HM01)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -1543,6 +1541,12 @@ script EscapeRoom_TabletsHintNPC{
     releaseall
 }
 
+script EscapeRoom_DusknoirStoleMyMailNPC{
+    lock
+    msgbox(DusknoirStoleMyMailMsg, MSGBOX_NPC)
+    releaseall
+}
+
 
 //// TRAINERS ////
 
@@ -1919,6 +1923,7 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     }
 
     setflag(FLAG_TRAINER6_DEFEATED)
+    clearflag(FLAG_MENTAL_HERB_SOLD_OUT)
     call(EscapeRoom_EventScript_PostMatchHeal)
 
 
@@ -2176,6 +2181,10 @@ script EscapeRoom_EventScript_SellDunsparce{
             msgbox(AskDunsparceReturnAcceptedMessage, MSGBOX_DEFAULT)
             waitmessage
             giveitem(ITEM_TM12) // TM TAUNT
+
+            // bye bye dunsparce msg
+            msgbox(ByeByeDunsparce, MSGBOX_AUTOCLOSE)
+            waitmessage
         }
         // trade declined
         else{
@@ -3323,6 +3332,15 @@ text FourTabletsHintMessage3{
 }
 
 
+// Dusknoir mail hint NPC
+
+text DusknoirStoleMyMailMsg{
+    "A Dusknoir stole my mail!\p"
+    "To be honest, I don't really mind.\n"
+    "It's just a bit strange." 
+}
+
+
 // Space Item buy NPC
 
 text StonesBuyNPCInitialMessage_no_item{
@@ -3402,6 +3420,7 @@ text RockSmashNPCstuck{
 text RockSmashNPCFarewellMsg{
     "What took you so long?"
 }
+
 
 // SHOP NPCS
 text MartNPC_AskToShop{
@@ -3573,6 +3592,10 @@ text AskDunsparceReturnAcceptedMessage{
     "Omg you found her!!\p"
     "Thank you so much!\n"
     "Here, have this."
+}
+
+text ByeByeDunsparce{
+    "Bye-bye Dunsparce."
 }
 
 text DunsparceTradeDeclined{

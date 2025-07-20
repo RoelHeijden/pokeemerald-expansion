@@ -542,7 +542,7 @@ static void CreateWildMon(u16 species, u8 level)
             }
             else{
                 species = SPECIES_DUSKNOIR;
-                heldItem = ITEM_NONE;
+                heldItem = ITEM_DREAM_MAIL;
                 level = 72;
                 abilityNum = 0; // pressure
                 gender = 0;  // male
