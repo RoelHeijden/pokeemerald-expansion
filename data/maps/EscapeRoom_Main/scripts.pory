@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const LOCALID_MAIL_HINT_NPC = 33
+const LOCALID_MAIL_HINT_NPC = 33 // currently not in the game
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -1063,19 +1063,16 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
 movement EscapeRoom_Movement_PlayerFaceRight{
     face_right
 }
-
 movement EscapeRoom_Movement1_Nurse1NPC{
     walk_fast_down
     walk_faster_left * 6
     walk_faster_up
     walk_faster_left
 }
-
 movement EscapeRoom_Movement_PlayerMoveAway{
     walk_up
     face_down
 }
-
 movement EscapeRoom_Movement2_Nurse1NPC{
     walk_faster_left * 9
 }
