@@ -42420,7 +42420,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_MEOWTH_ALOLA,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16974
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 76, 0, 252, 0, 0),
 #line 16976
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 16972

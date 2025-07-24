@@ -682,10 +682,10 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_2)  // no heal
     }
 
-    // special case: Iron Ball (lost at trainer5)
-    if(flag(FLAG_IRON_BALL_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
-        clearflag(FLAG_IRON_BALL_CONSUMED)
-        giveitem(ITEM_IRON_BALL)
+    // special case: Jaboca Berry (lost at trainer5)
+    if(flag(FLAG_JABOCA_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+        clearflag(FLAG_JABOCA_CONSUMED)
+        giveitem(ITEM_JABOCA_BERRY)
         setflag(FLAG_TEMP_2)  // no heal
     }
 
@@ -794,9 +794,9 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
         clearflag(FLAG_DUSK_STONE_CONSUMED)
         giveitem(ITEM_DUSK_STONE)
     }
-    if(flag(FLAG_IRON_BALL_CONSUMED)){
-        clearflag(FLAG_IRON_BALL_CONSUMED)
-        giveitem(ITEM_IRON_BALL)
+    if(flag(FLAG_JABOCA_CONSUMED)){
+        clearflag(FLAG_JABOCA_CONSUMED)
+        giveitem(ITEM_JABOCA_BERRY)
     }
     if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
@@ -985,12 +985,12 @@ script EscapeRoom_EventScript_ObtainLiepard{
         move3=MOVE_ROCK_SMASH,
         move4=MOVE_COPYCAT,
         // EVs:
-        atkEv=0, 
+        atkEv=252, 
         spAtkEv=252,
         speedEv=0,
         // IVs:
         hpIv=31,
-        atkIv=0, // 0 attack for shuckle sequence
+        atkIv=31,
         defIv=31,
         speedIv=0,
         spAtkIv=31,
@@ -1094,10 +1094,10 @@ script EscapeRoom_EventScript_ShopNPC{
 mart EscapeRoom_Shop_items{
     ITEM_CUSTAP_BERRY       // 2000  sold out between trainer3 and Liepard
     ITEM_ESCAPE_ROPE        // 2000  
-    ITEM_MENTAL_HERB        // 2000
+    ITEM_MENTAL_HERB        // 2000  sold out between ability capsule and trainer6
     ITEM_FLOAT_STONE        // 2000
     ITEM_RING_TARGET        // 2000 
-    ITEM_TM27               // 1000
+    ITEM_TM27               // 2000 
 }
 
 
@@ -1359,7 +1359,7 @@ movement RockSmashNPCMovesAway {
 script EscapeRoom_TryBuyStonesPC{
     lock
 
-    if(flag(FLAG_IRON_BALL_OBTAINED)){
+    if(flag(FLAG_JABOCA_OBTAINED)){
         // post script message
         msgbox(StonesBuyNPCPostSellMessage, MSGBOX_NPC)
         waitmessage
@@ -1444,10 +1444,10 @@ script EscapeRoom_TryBuyStonesPC_TryBuyDuskStone{
 
     if(var(VAR_RESULT) == YES){
         removeitem(ITEM_DUSK_STONE)
-        giveitem(ITEM_IRON_BALL)
-        setflag(FLAG_IRON_BALL_OBTAINED)
+        giveitem(ITEM_JABOCA_BERRY)
+        setflag(FLAG_JABOCA_OBTAINED)
 
-        msgbox(StonesBuyNPCSellAcceptedMessage_IronBall, MSGBOX_NPC)
+        msgbox(StonesBuyNPCSellAcceptedMessage_JabocaBerry, MSGBOX_NPC)
         waitmessage
     }
     else{
@@ -1620,7 +1620,7 @@ script EscapeRoom_EventScript_Trainer5{
     if(!flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
         clearflag(FLAG_DUSK_STONE_CONSUMED)
-        clearflag(FLAG_IRON_BALL_CONSUMED)
+        clearflag(FLAG_JABOCA_CONSUMED)
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
     }
 
@@ -1864,14 +1864,14 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
     }
 
-    // dont restore iron ball if consumed (flung) in battle
-    if(flag(FLAG_IRON_BALL_CONSUMED) == TRUE){
+    // dont restore jaboca berry if consumed (flung) in battle
+    if(flag(FLAG_JABOCA_CONSUMED) == TRUE){
         checkpartyitem(0)
-        if(var(VAR_0x8005) == ITEM_IRON_BALL){
+        if(var(VAR_0x8005) == ITEM_JABOCA_BERRY){
             removepartyitem(0)
         }
         checkpartyitem(1)
-        if(var(VAR_0x8005) == ITEM_IRON_BALL){
+        if(var(VAR_0x8005) == ITEM_JABOCA_BERRY){
             removepartyitem(1)
         }
     }
@@ -3365,15 +3365,15 @@ text StonesBuyNPCInitialMessage_has_DuskStone{
     "Is that a Dusk Stone?\p"
     "...\p"
     "I may have ran out of money...\p"
-    "Would you trade it for an Iron Ball?" 
+    "Would you trade it for a Jaboca Berry?" 
 }
 
 text StonesBuyNPCSellAcceptedMessage{
     "I'll take good care of it."
 }
 
-text StonesBuyNPCSellAcceptedMessage_IronBall{
-    "I'm sure the ball will serve you well."
+text StonesBuyNPCSellAcceptedMessage_JabocaBerry{
+    "I'm sure the berry will serve you well."
 }
 
 text StonesBuyNPCSellDeclinedMessage{

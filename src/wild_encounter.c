@@ -498,18 +498,18 @@ static void CreateWildMon(u16 species, u8 level)
             species = SPECIES_SHUCKLE;
             heldItem = ITEM_BERRY_JUICE;
 
-            level = 9;
+            level = 17;
             abilityNum = 1;
             gender = MON_MALE;
-            nature = NATURE_BOLD;
+            nature = NATURE_MODEST;
             move1 = MOVE_KNOCK_OFF;
 
             hpIv=31; 
             atkIv=0;
-            defIv=31;
-            speedIv=31; 
-            spAtkIv=31;
-            spDefIv=31;
+            defIv=0;
+            speedIv=0; 
+            spAtkIv=0;
+            spDefIv=0;
         }
         else if(gWildMonHeaders[headerId].mapNum == MAP_ESCAPE_ROOM_MAIN)
         {

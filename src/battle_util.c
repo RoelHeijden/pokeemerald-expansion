@@ -11438,7 +11438,7 @@ void TryRestoreHeldItems(void)
                 if (currentItem != lostItem){
 
                     // dont restore item if berry juice stolen via Iron Ball
-                    if(currentItem == ITEM_BERRY_JUICE && lostItem == ITEM_IRON_BALL)
+                    if(currentItem == ITEM_BERRY_JUICE && lostItem == ITEM_JABOCA_BERRY)
                         return;
 
                     // Check if the item is one that requires a heal before returning
@@ -11480,8 +11480,8 @@ void TryRestoreHeldItems(void)
                             FlagSet(FLAG_BERRY_JUICE_CONSUMED);
                         if(lostItem == ITEM_DUSK_STONE) 
                             FlagSet(FLAG_DUSK_STONE_CONSUMED);
-                        if(lostItem == ITEM_IRON_BALL)
-                            FlagSet(FLAG_IRON_BALL_CONSUMED);
+                        if(lostItem == ITEM_JABOCA_BERRY)
+                            FlagSet(FLAG_JABOCA_CONSUMED);
                         if(lostItem == ITEM_SAFETY_GOGGLES)
                             FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
                     }

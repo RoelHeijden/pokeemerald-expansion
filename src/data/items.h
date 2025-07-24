@@ -10413,7 +10413,8 @@ const struct Item gItemsInfo[] =
     {
         .name = _("Jaboca Berry"),
         .pluralName = _("Jaboca Berries"),
-        .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        // .price = (I_BERRY_PRICE >= GEN_8) ? 80 : 20,
+        .price = 0,
         .holdEffect = HOLD_EFFECT_JABOCA_BERRY,
         .description = COMPOUND_STRING(
             "If hit by a physical\n"
