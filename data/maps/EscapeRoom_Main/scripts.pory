@@ -559,6 +559,10 @@ script EscapeRoom_EventScript_AntiSoftlockGuy2{
     call(EscapeRoom_EventScript_AntiSoftlockGuy)
 }
 
+script EscapeRoom_EventScript_AntiSoftlockGuy3{
+    call(EscapeRoom_EventScript_AntiSoftlockGuy)
+}
+
 script EscapeRoom_EventScript_AntiSoftlockGuy{
     faceplayer
     lockall
@@ -2483,6 +2487,7 @@ script EscapeRoom_EventScript_CheckSwitchesCorrect{
         var(VAR_MAP_SWITCH_4) == 3     // west  -- Save menu
     ){
         call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
+        setflag(FLAG_HIDE_ANNIHILAPE) // remove Annihilape
     }
 }
 

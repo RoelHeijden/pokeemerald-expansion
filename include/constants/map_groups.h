@@ -10,6 +10,7 @@
 #define MAP_ESCAPE_ROOM_ANNIHILAPES_LAIR (1 | (0 << 8))
 #define MAP_ESCAPE_ROOM_SHORTCUT_ROUTE   (2 | (0 << 8))
 #define MAP_ESCAPE_ROOM_EGG_CAVE         (3 | (0 << 8))
+#define MAP_ESCAPE_ROOM_HIDDEN_DUNGEON   (4 | (0 << 8))
 
 // gMapGroup_TownsAndRoutes
 #define MAP_PETALBURG_CITY      (0 | (1 << 8))

@@ -4450,6 +4450,16 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/EscapeRoom_EggCave/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_EggCave/map.bin"
+    },
+    {
+      "id": "LAYOUT_ESCAPE_ROOM_HIDDEN_DUNGEON",
+      "name": "EscapeRoom_HiddenDungeon_Layout",
+      "width": 55,
+      "height": 35,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Cave",
+      "border_filepath": "data/layouts/EscapeRoom_HiddenDungeon/border.bin",
+      "blockdata_filepath": "data/layouts/EscapeRoom_HiddenDungeon/map.bin"
     }
   ]
 }

@@ -3,12 +3,23 @@
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_AnnihilapesLair_MapScripts {
+    MAP_SCRIPT_ON_LOAD: SpawnDungeonEntranceOnLoad
     MAP_SCRIPT_ON_RESUME: EscapeRoom_AnnihilapesLair_MapScript_OnResumeScripts
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
     ] 
+}
+
+// manually set wall locations if used
+script SpawnDungeonEntranceOnLoad{
+    if(flag(FLAG_MAP_SWITCHES_SOLVED) == TRUE){
+        setmetatile(6, 0, METATILE_MeteorFalls_CaveEntrance_Top, TRUE)
+        setmetatile(5, 1, METATILE_MeteorFalls_CaveEntrance_Left, TRUE)
+        setmetatile(6, 1, METATILE_MeteorFalls_CaveEntrance_Bottom, FALSE)
+        setmetatile(7, 1, METATILE_MeteorFalls_CaveEntrance_Right, TRUE) 
+    }
 }
 
 

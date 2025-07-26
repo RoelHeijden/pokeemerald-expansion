@@ -40,7 +40,8 @@
     "EscapeRoom_Main",
     "EscapeRoom_AnnihilapesLair",
     "EscapeRoom_ShortcutRoute",
-    "EscapeRoom_EggCave"
+    "EscapeRoom_EggCave",
+    "EscapeRoom_HiddenDungeon"
   ],
   "gMapGroup_TownsAndRoutes": [
     "PetalburgCity",
