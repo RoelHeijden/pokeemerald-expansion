@@ -11145,6 +11145,16 @@ void ClearIllusionMon(u32 battler)
 u32 GetIllusionMonSpecies(u32 battler)
 {
     struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
+
+    // ADDED
+    // unlock pokemon in pokedex as seen
+    u8 side = GetBattlerSide(battler);
+    if (side == B_SIDE_OPPONENT)
+    {
+        u16 species = GetMonData(illusionMon, MON_DATA_SPECIES);
+        GetSetPokedexFlag(species, FLAG_SET_SEEN);
+    }
+
     if (illusionMon != NULL)
         return GetMonData(illusionMon, MON_DATA_SPECIES);
     return SPECIES_NONE;
@@ -11190,7 +11200,7 @@ bool32 SetIllusionMon(struct Pokemon *mon, u32 battler)
             return TRUE;
         }
     }
-
+    
     return FALSE;
 }
 
