@@ -255,6 +255,7 @@ script EscapeRoom_MapScripts_AskResetPredamage{
             // change spawn location toggle to spawn2
             setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
             setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
+            setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
         }
     }
     // normal predamage reset
@@ -407,6 +408,7 @@ script EscapeRoom_MapScripts_GetBadges{
 
 script EscapeRoom_MapScripts_SetRespawn{
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
+    call(EscapeRoom_EventScript_SetRespawn1)
 }
 
 script EscapeRoom_MapScripts_GetItems{
@@ -432,11 +434,30 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 script EscapeRoom_EventScript_SetRespawn1{
     setvar(VAR_RESPAWN_SET_AT_NURSE1, 1)
     setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
+    setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
+
+    // respawn never actually sey to location 1 again
+    // method used to track player position (for item return cases)
 }
 
 script EscapeRoom_EventScript_SetRespawn2{
     setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
     setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
+    setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
+
+    // set respawn to section 2
+    if(flag(FLAG_LIEPARD_OBTAINED)){
+        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+    }
+}
+
+script EscapeRoom_EventScript_SetRespawn3{
+    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
+    setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
+    setvar(VAR_RESPAWN_SET_AT_NURSE3, 1)
+
+    // set respawn to section 3
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE3)
 }
 
 
@@ -1062,6 +1083,7 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     // allow trigger tiles to toggle spawn indicator
     setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
     setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
+    setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
 }
 
 movement EscapeRoom_Movement_PlayerFaceRight{

@@ -208,7 +208,24 @@
     }
   ],
   "coord_events": [
-
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_RESPAWN_SET_AT_NURSE3",
+      "var_value": "0",
+      "script": "EscapeRoom_EventScript_SetRespawn3"
+    },
+    {
+      "type": "trigger",
+      "x": 11,
+      "y": 24,
+      "elevation": 0,
+      "var": "VAR_RESPAWN_SET_AT_NURSE1",
+      "var_value": "0",
+      "script": "EscapeRoom_EventScript_SetRespawn1"
+    }
   ],
   "bg_events": [
     {
