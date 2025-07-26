@@ -53,6 +53,10 @@
 #include "malloc.h"
 #include "constants/event_objects.h"
 
+// added
+#include "pokedex.h"
+
+
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(struct ScriptContext *ctx);
 
@@ -1894,7 +1898,6 @@ bool8 SrcCmd_giveaipomegg(struct ScriptContext *ctx)
     gSpecialVar_Result = ScriptGiveAipomEgg();
     return FALSE;
 }
-
 
 bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
 {

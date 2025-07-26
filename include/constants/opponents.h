@@ -864,15 +864,20 @@
 #define TRAINER_CUSTOM_TRAINER4             858
 #define TRAINER_CUSTOM_TRAINER5             859
 #define TRAINER_CUSTOM_TRAINER6             860
-#define TRAINER_CUSTOM_TRAINER9             861
+#define TRAINER_CUSTOM_TRAINER7A            861
+#define TRAINER_CUSTOM_TRAINER7B            862
+#define TRAINER_CUSTOM_TRAINER8             863
+#define TRAINER_CUSTOM_TRAINER9             864
+#define TRAINER_CUSTOM_TRAINER10            865
+#define TRAINER_CUSTOM_TRAINER11            866
 
 
 // NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      862
-#define MAX_TRAINERS_COUNT                  864
+#define TRAINERS_COUNT                      867
+#define MAX_TRAINERS_COUNT                  870  // changed from 864
 #define TRAINER_PARTNER(partner)           (MAX_TRAINERS_COUNT + partner)
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H

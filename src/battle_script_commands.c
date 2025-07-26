@@ -7857,14 +7857,20 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     if(trainerId == TRAINER_CUSTOM_TRAINER6){
         moneyReward = 500;
     }
-    // if(trainerId == TRAINER_CUSTOM_TRAINER7){
-    //     moneyReward = 500;
-    // }
-    // if(trainerId == TRAINER_CUSTOM_TRAINER8){
-    //     moneyReward = 500;
-    // }
+    if(trainerId == TRAINER_CUSTOM_TRAINER7A){
+        moneyReward = 500;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER8){
+        moneyReward = 500;
+    }
     if(trainerId == TRAINER_CUSTOM_TRAINER9){
         moneyReward = 500;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER10){
+        moneyReward = 500;
+    }
+    if(trainerId == TRAINER_CUSTOM_TRAINER11){
+        moneyReward = 0;  // final battle
     }
 
     return moneyReward;

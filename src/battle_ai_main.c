@@ -64,6 +64,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer10(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -91,7 +92,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [20] = AI_Trainer3,              // AI_FLAG_TRAINER3
     [21] = AI_Trainer5,              // AI_FLAG_TRAINER5
     [22] = AI_Trainer9,              // AI_FLAG_TRAINER9
-    [23] = NULL,                     // Unused
+    [23] = AI_Trainer10,             // AI_FLAG_TRAINER10
     [24] = NULL,                     // Unused
     [25] = NULL,                     // Unused
     [26] = NULL,                     // Unused
@@ -5523,4 +5524,16 @@ static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 }
 
 
+// trainer10 (loudred ditto)
+static s32 AI_Trainer10(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+
+    // always use Energy Ball with Ditto if available. Hidden Power as fallback just in case
+    if(gBattleMons[battlerAtk].species == SPECIES_DITTO){
+        if(move == MOVE_ENERGY_BALL)
+            score += 50;
+        if(move == MOVE_HIDDEN_POWER)
+            score += 20;
+    }
+    return score;
+}
 

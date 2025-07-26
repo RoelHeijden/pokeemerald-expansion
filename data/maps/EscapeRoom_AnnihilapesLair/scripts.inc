@@ -33,49 +33,49 @@ SpawnDungeonEntranceOnLoad_1:
 
 
 EscapeRoom_AnnihilapesLair_MapScript_OnResumeScripts::
-# 31 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 27 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	call EscapeRoom_AnnihilapesLair_ReturnBall
-# 32 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 28 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	call EscapeRoom_AnnihilapesLair_DisableBagUse
-# 33 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 29 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	call EscapeRoom_AnnihilapesLair_SetLostItemVars
 	return
 
 
 EscapeRoom_AnnihilapesLair_ReturnBall::
-# 38 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 34 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	goto_if_set FLAG_BALL_USED, EscapeRoom_AnnihilapesLair_ReturnBall_2
 	return
 
 EscapeRoom_AnnihilapesLair_ReturnBall_1:
-# 39 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 35 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	setvar VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1
 	return
 
 EscapeRoom_AnnihilapesLair_ReturnBall_2:
-# 38 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 34 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	goto_if_unset FLAG_ZERAORA_CAUGHT, EscapeRoom_AnnihilapesLair_ReturnBall_1
 	return
 
 
 EscapeRoom_AnnihilapesLair_DisableBagUse::
-# 45 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 41 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	goto_if_unset FLAG_TOGGLE_BAG_USE, EscapeRoom_AnnihilapesLair_DisableBagUse_1
 	return
 
 EscapeRoom_AnnihilapesLair_DisableBagUse_1:
-# 46 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 42 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	setflag FLAG_TOGGLE_BAG_USE
 	return
 
 
 EscapeRoom_AnnihilapesLair_SetLostItemVars::
-# 52 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 48 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	goto_if_set FLAG_DO_RECOVERED_ITEM_MESSAGE, EscapeRoom_AnnihilapesLair_SetLostItemVars_1
 	return
 
 EscapeRoom_AnnihilapesLair_SetLostItemVars_1:
-# 54 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 50 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	setvar VAR_RETRIEVED_HELD_ITEM, 1
 	return
 

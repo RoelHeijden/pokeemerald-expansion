@@ -50,8 +50,9 @@
 #define AI_FLAG_TRAINER3               (1 << 20)  // AI for double trainer3 (komala tinkaton)
 #define AI_FLAG_TRAINER5               (1 << 21)  // AI for double trainer5 (meowth onix)
 #define AI_FLAG_TRAINER9               (1 << 22)  // AI for single trainer9 (lucario lucario)
+#define AI_FLAG_TRAINER10               (1 << 23)  // AI for single trainer10 (loudred ditto)
 
-#define AI_FLAG_COUNT                       23
+#define AI_FLAG_COUNT                       24
 
 // 'other' ai logic flags
 #define AI_FLAG_DYNAMIC_FUNC          (1 << 28)  // Create custom AI functions for specific battles via "setdynamicaifunc" cmd

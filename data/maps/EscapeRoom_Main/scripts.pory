@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const LOCALID_MAIL_HINT_NPC = 33
+const _DUMMY_3 = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -1654,6 +1654,45 @@ script EscapeRoom_EventScript_Trainer6{
     end
 }
 
+script EscapeRoom_EventScript_Trainer7A{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER7A, 
+        Trainer7A_Intro, 
+        Trainer7A_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer7APostBattle,
+    )
+
+    msgbox(Trainer7A_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer7B{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER7B, 
+        Trainer7B_Intro, 
+        Trainer7B_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer7BPostBattle,
+    )
+
+    msgbox(Trainer7B_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer8{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER8, 
+        Trainer8_Intro, 
+        Trainer8_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer8PostBattle,
+    )
+
+    msgbox(Trainer8_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
 script EscapeRoom_EventScript_Trainer9{
     trainerbattle_double(
         TRAINER_CUSTOM_TRAINER9, 
@@ -1663,6 +1702,32 @@ script EscapeRoom_EventScript_Trainer9{
         event_script=EscapeRoom_EventScript_Trainer9PostBattle,
     )
     msgbox(Trainer9_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer10{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER10, 
+        Trainer10_Intro, 
+        Trainer10_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer10PostBattle,
+    )
+
+    msgbox(Trainer10_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
+script EscapeRoom_EventScript_Trainer11{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER11, 
+        Trainer11_Intro, 
+        Trainer11_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer11PostBattle,
+    )
+
+    msgbox(Trainer11_PostBattle, MSGBOX_AUTOCLOSE)
     waitmessage
     end
 }
@@ -1956,8 +2021,33 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     }
 }
 
+script EscapeRoom_EventScript_Trainer7APostBattle{
+    setflag(FLAG_TRAINER7A_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Trainer7BPostBattle{
+    setflag(FLAG_TRAINER7B_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Trainer8PostBattle{
+    setflag(FLAG_TRAINER8_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
 script EscapeRoom_EventScript_Trainer9PostBattle{
     setflag(FLAG_TRAINER9_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Trainer10PostBattle{
+    setflag(FLAG_TRAINER10_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
+script EscapeRoom_EventScript_Trainer11PostBattle{
+    setflag(FLAG_TRAINER11_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 }
 
@@ -3330,7 +3420,7 @@ text FourTabletsHintMessage2{
 }
 
 text FourTabletsHintMessage3{
-    "Was that an earthquake?"
+    "What was that earthquake!?"
 }
 
 
@@ -3771,6 +3861,48 @@ text Trainer6_PostBattle{
 }
 
 
+// TRAINER 7A
+text Trainer7A_Intro{
+    "TBD"
+}
+
+text Trainer7A_Outro{
+    "You cheated."
+}
+
+text Trainer7A_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 7B
+text Trainer7B_Intro{
+    "something something poor sight"
+}
+
+text Trainer7B_Outro{
+    "You cheated."
+}
+
+text Trainer7B_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 8
+text Trainer8_Intro{
+    "TBD"
+}
+
+text Trainer8_Outro{
+    "You cheated."
+}
+
+text Trainer8_PostBattle{
+    "Fock off."
+}
+
+
 // TRAINER 9 - Lucario Lucario (unbeatable double)
 text Trainer9_Intro{
     "Don't get your hopes up."
@@ -3785,6 +3917,32 @@ text Trainer9_PostBattle{
 }
 
 
+// TRAINER 10
+text Trainer10_Intro{
+    "TBD"
+}
+
+text Trainer10_Outro{
+    "You cheated."
+}
+
+text Trainer10_PostBattle{
+    "Fock off."
+}
+
+
+// TRAINER 11
+text Trainer11_Intro{
+    "TBD"
+}
+
+text Trainer11_Outro{
+    "You cheated."
+}
+
+text Trainer11_PostBattle{
+    "Fock off."
+}
 
 
 

@@ -16998,6 +16998,58 @@ EVs: 252 Atk / 252 Spe
 - Earthquake
 
 
+=== TRAINER_CUSTOM_TRAINER7A ===
+Name: aaaaa7a
+Class: Bug Catcher
+Pic: Bug Catcher
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Shedinja  
+Ability: Wonder Guard  
+Level: 17  
+- Facade  
+
+
+=== TRAINER_CUSTOM_TRAINER7B ===
+Name: aaaaa7b
+Class: Expert
+Pic: Expert F
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Garchomp  
+Ability: Sand Veil  
+Level: 60  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+- Earthquake  
+
+
+=== TRAINER_CUSTOM_TRAINER8 ===
+Name: aaaaa8
+Class: Psychic
+Pic: Psychic M
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Zoroark @ Toxic Orb  
+Ability: Illusion  
+Level: 20  
+Quiet Nature  
+IVs: 0 Atk / 0 Spe  
+- Night Shade  
+
+Dusclops  
+Ability: Frisk  
+Level: 5  
+IVs: 0 Atk  
+- Memento  
+
+
 === TRAINER_CUSTOM_TRAINER9 ===
 Name: Tey & Ton
 Class: Twins
@@ -17021,5 +17073,44 @@ EVs: 252 Atk / 252 Spe
 Adamant Nature  
 - Close Combat  
 
+
+=== TRAINER_CUSTOM_TRAINER10 ===
+Name: aaaaa10
+Class: Youngster
+Pic: Youngster
+Gender: Male
+Music: Intense
+Double Battle: No
+AI: AI_FLAG_TRAINER10
+
+Loudred  
+Ability: Soundproof  
+Level: 42  
+Hardy Nature  
+- Shadow Ball  
+
+Ditto  
+Ability: Imposter  
+Level: 60  
+EVs: 252 HP  
+IVs: 30 Atk  
+- Transform  
+
+
+=== TRAINER_CUSTOM_TRAINER11 ===
+Name: aaaaa11
+Class: Champion
+Pic: Champion Wallace
+Gender: Male
+Music: Intense
+Double Battle: Yes
+
+Unown  
+Ability: Levitate  
+- Psychic
+
+Unown  
+Ability: Levitate  
+- Psychic 
 
 
