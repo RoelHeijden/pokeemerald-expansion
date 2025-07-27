@@ -416,7 +416,7 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_LEPPA_BERRY)
 
     // additem(ITEM_SAFETY_GOGGLES)
-    // additem(ITEM_HM01)
+    additem(ITEM_HM01)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -794,15 +794,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
         }
     }
 
-    // trade: aipom -> smeargle
-    elif(flag(FLAG_AIPOM_TRADE_ACCEPTED)){
-        msgbox(AntiSoftlockAskUndoAipomTrade, MSGBOX_YESNO)
-        waitmessage
-        if(var(VAR_RESULT) == YES){
-            call(EscapeRoom_EventScript_UndoAipomTrade)
-        }
-    }
-
     // no actions to be undone
     else{
         msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_AUTOCLOSE)
@@ -862,19 +853,6 @@ script EscapeRoom_EventScript_UndoFlorgesTrade{
 
     // allow trade again
     clearflag(FLAG_FLORGES_TRADE_ACCEPTED)
-}
-
-script EscapeRoom_EventScript_UndoAipomTrade{
-    removemon(SPECIES_SMEARGLE) // CHANGE
-    restoremonfrompc(SPECIES_AIPOM)
-
-    // message
-    message(PlayerObtainedAipomMessage)
-    playfanfare(MUS_OBTAIN_ITEM)
-    waitfanfare
-
-    // allow trade again
-    clearflag(FLAG_AIPOM_TRADE_ACCEPTED)
 }
 
 
@@ -1132,6 +1110,16 @@ mart EscapeRoom_Shop_items{
 script EscapeRoom_MoveDeleterNPC{
     lockall
     faceplayer
+
+    // stop deleting moves once Cacnea is obtained
+    if(flag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)){
+        msgbox(MoveDeleterOutOfBusiness, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+
     msgbox(AskDeleteMove, MSGBOX_MOVE_DELETER)
 
     // standard move deleter script
@@ -2308,37 +2296,18 @@ script EscapeRoom_EventScript_SellDunsparce{
     releaseall
 }
 
-script EscapeRoom_EventScript_TradeAipomForSmeargle{
+script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
     lock
     faceplayer
 
     // post trade 
-    if(flag(FLAG_AIPOM_TRADE_ACCEPTED) == TRUE){
-
-        // ask undo trade
-        if(flag(FLAG_AIPOM_TRADE_ACCEPTED)){            // CHANGE FLAG CONDITION
-            msgbox(AipomTradeAskRetrade, MSGBOX_YESNO)
-            waitmessage
-            if(var(VAR_RESULT) == YES){
-                call(EscapeRoom_EventScript_UndoAipomTrade)
-
-                msgbox(AipomTradeUndoAccepted, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-            else{
-                msgbox(AipomTradeUndoDeclined, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-        }
-        // final script
-        else{
-            msgbox(AipomTradePostTrade, MSGBOX_NPC)
-            waitmessage
-        }
+    if(flag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED) == TRUE){
+        msgbox(CacneaTradePostTrade, MSGBOX_NPC)
+        waitmessage
     }
     else{
         // ask trade
-        msgbox(AskAipomSmeargleTrade, MSGBOX_YESNO)
+        msgbox(AskCacneaTrade, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
 
             // check if pokemon in party
@@ -2350,47 +2319,54 @@ script EscapeRoom_EventScript_TradeAipomForSmeargle{
                 releaseall
                 end
             }
-
-            // make Aipom backup in pc
-            backupmontopc(SPECIES_AIPOM)
+            checkpartymon(SPECIES_LIEPARD)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
 
             // trade pokemon
             removemon(SPECIES_AIPOM)
+            removemon(SPECIES_LIEPARD)
             lockall
             givemon(
-                SPECIES_SMEARGLE,
-                5,
-                abilityNum=0, // own tempo
-                nature=18, // Bashful
+                SPECIES_CACNEA,
+                41,
+                abilityNum=2, // water absorb
+                nature=18,    // Bashful
                 gender=0, 
-                move1=MOVE_SURF,
+                move1=MOVE_HIDDEN_POWER,
                 move2=MOVE_NONE,
                 move3=MOVE_NONE,
                 move4=MOVE_NONE,
                 // EVs:
                 hpEv=0, 
-                spAtkEv=0,
+                defEv=252,
+                speedEv=140, // scarf ditto outspeed primeape/annihilape
                 // IVs:
                 hpIv=31,
-                atkIv=31,
+                atkIv=30,    // hp psychic
                 defIv=31,
-                speedIv=31,
+                speedIv=30,  // hp psychic
                 spAtkIv=31,
                 spDefIv=31
             )
             lockall
-            setflag(FLAG_AIPOM_TRADE_ACCEPTED)
+            setflag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)
 
-            message(SmeargleReceivedMessage)
+            message(CacneaReceivedMessage)
             playfanfare(MUS_OBTAIN_ITEM)
             lockall
             waitfanfare
-            msgbox(AipomTradeAccepted, MSGBOX_AUTOCLOSE)
+            msgbox(CacneaTradeAccepted, MSGBOX_AUTOCLOSE)
             waitmessage
         }
         // trade declined
         else{
-            msgbox(AipomTradeDeclined, MSGBOX_AUTOCLOSE)
+            msgbox(CacneaTradeDeclined, MSGBOX_AUTOCLOSE)
             waitmessage
         }
     }
@@ -3555,6 +3531,12 @@ text AskDeleteMove{
     "Hi, what would you like to do?"
 }
 
+text MoveDeleterOutOfBusiness{
+    "I'm sorry, my service is not\n"
+    "available anymore.\p"
+    "I can no longer assist you."
+}
+
 text MoveDeleterComeAgain{
     "Please come again!"
 }
@@ -3722,42 +3704,27 @@ text DunsparceTradePostTrade{
 
 
 // TRADE NPC 5 - Aipom Smeargle
-text AskAipomSmeargleTrade{
+text AskCacneaTrade{
     "TBD (start trade)"
 }
 
-text SmeargleReceivedMessage{
-    "{PLAYER} received a Smeargle!"
+text CacneaReceivedMessage{
+    "{PLAYER} received a Cacnea!"
 }
 
-text AipomTradeAccepted{
-    "Bye-bye Aipom."
+text CacneaTradeAccepted{
+    "Bye-bye Aipom.\p"
+    "Bye-bye Liepard."
 }
 
-text AipomTradeDeclined{
-    "Ahh, that's too bad!"
+text CacneaTradeDeclined{
+    "TBD (trade declined)"
 }
 
-text AipomTradePostTrade{
+text CacneaTradePostTrade{
     "TBD (post trade)"
 }
 
-text PlayerObtainedAipomMessage{
-    "{PLAYER} received an Aipom!" 
-}
-
-text AipomTradeAskRetrade{
-    "Do you want to undo our trade and get\n"
-    "back your Aipom?"
-}
-
-text AipomTradeUndoAccepted{
-    "I'm here if you change your mind."
-}
-
-text AipomTradeUndoDeclined{
-    "Understood."
-}
 
 
 // BATTLES - OTHER
