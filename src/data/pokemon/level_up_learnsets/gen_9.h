@@ -1482,7 +1482,7 @@ static const struct LevelUpMove sPrimeapeLevelUpLearnset[] = {
 
 #if P_GEN_9_CROSS_EVOS
 static const struct LevelUpMove sAnnihilapeLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_SHADOW_PUNCH),
+    // LEVEL_UP_MOVE( 0, MOVE_SHADOW_PUNCH),  CHANGED
     LEVEL_UP_MOVE( 1, MOVE_SCRATCH),
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_COUNTER),
@@ -8650,7 +8650,7 @@ static const struct LevelUpMove sCacneaLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sCacturneLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_SPIKY_SHIELD),
+    // LEVEL_UP_MOVE( 0, MOVE_SPIKY_SHIELD),  CHANGED
     LEVEL_UP_MOVE( 1, MOVE_POISON_STING),
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_ABSORB),
