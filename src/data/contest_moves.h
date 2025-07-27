@@ -306,6 +306,12 @@ const struct ContestEffect gContestEffects[] =
         .appeal = 30,
         .jam = 0,
     },
+    [CONTEST_EFFECT_ENERGY_BALL_HINT] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_WORSEN,
+        .appeal = 30,
+        .jam = 0,
+    },
 };
 
 void (*const gContestEffectFuncs[])(void) =

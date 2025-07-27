@@ -148,6 +148,7 @@
 #define CONTEST_EFFECT_SKILL_SWAP_HINT                          48 // ADDED
 #define CONTEST_EFFECT_GRASSY_TERRAIN_HINT                      49 // ADDED
 #define CONTEST_EFFECT_SLEEP_TALK_HINT                          50 // ADDED
+#define CONTEST_EFFECT_ENERGY_BALL_HINT                         51 // ADDED
 
 // Each of the above effects is grouped into one of these effect type categories
 // Only a few of these get checked by the AI, the rest go unused
