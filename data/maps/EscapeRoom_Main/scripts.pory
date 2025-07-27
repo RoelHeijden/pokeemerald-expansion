@@ -1119,7 +1119,6 @@ script EscapeRoom_MoveDeleterNPC{
         end
     }
 
-
     msgbox(AskDeleteMove, MSGBOX_MOVE_DELETER)
 
     // standard move deleter script
@@ -2335,6 +2334,7 @@ script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
             givemon(
                 SPECIES_CACNEA,
                 41,
+                item=ITEM_RARE_CANDY // REMOVE!
                 abilityNum=2, // water absorb
                 nature=18,    // Bashful
                 gender=0, 
@@ -3532,8 +3532,8 @@ text AskDeleteMove{
 }
 
 text MoveDeleterOutOfBusiness{
-    "I'm sorry, my service is not\n"
-    "available anymore.\p"
+    "I'm sorry, my service is not available\n"
+    "anymore.\p"
     "I can no longer assist you."
 }
 

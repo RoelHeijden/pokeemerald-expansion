@@ -1,0 +1,87 @@
+const LOCALID_PRIMEAPE_BALL = 9
+
+
+////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
+
+mapscripts EscapeRoom_HiddenDungeon_MapScripts {
+    MAP_SCRIPT_ON_RESUME: EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts
+
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
+        VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+        VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
+    ] 
+}
+
+
+
+script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
+    call(EscapeRoom_HiddenDungeon_DisableBagUse)
+    call(EscapeRoom_HiddenDungeon_SetLostItemVars)
+    call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
+} 
+
+
+script EscapeRoom_HiddenDungeon_DisableBagUse{
+    // disable bag use 
+    if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
+        setflag(FLAG_TOGGLE_BAG_USE)
+    }
+}
+
+script EscapeRoom_HiddenDungeon_SetLostItemVars{
+    // check if held item was retrieved -- sets frame table var if true
+    if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
+    {
+        setvar(VAR_RETRIEVED_HELD_ITEM, 1)
+    }
+}
+
+
+
+
+////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
+
+
+script EscapeRoom_HiddenDungeon_FindPrimeape{
+    lockall
+    givemon(
+        SPECIES_PRIMEAPE,
+        44,
+        ball=ITEM_POKE_BALL,
+        item=ITEM_RARE_CANDY,
+        abilityNum=2, // Defiant
+        nature=15, // Modest 
+        gender=MON_FEMALE,
+        move1=MOVE_ENCORE,
+        move2=MOVE_RAGE_FIST,
+        move3=MOVE_COUNTER,
+        move4=MOVE_NONE,
+        // EVs:
+        atkEv=0, 
+        spAtkEv=0,
+        speedEv=0,
+        // IVs:
+        hpIv=31,
+        atkIv=31,
+        defIv=31,
+        speedIv=0, // underspeed dusknoir
+        spAtkIv=31,
+        spDefIv=31
+    )   
+
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(PrimeapeObtainMessage)
+    waitfanfare
+    waitmessage
+
+    removeobject(LOCALID_PRIMEAPE_BALL)
+    setflag(FLAG_PRIMEAPE_OBTAINED)
+    releaseall
+}
+
+
+text PrimeapeObtainMessage{
+    "{PLAYER} received a Primeape!"
+}
+

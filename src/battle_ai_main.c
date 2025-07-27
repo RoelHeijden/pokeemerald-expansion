@@ -5506,19 +5506,9 @@ static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 
 // trainer 9 (lucario lucario)
 static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
-    // prioritize certain targets
-    if(gBattleMons[battlerDef].species == SPECIES_POOCHYENA)
-        score += 50;
-    if(gBattleMons[battlerDef].species == SPECIES_LIEPARD)
-        score += 40;
-    if(gBattleMons[battlerDef].species == SPECIES_DUNSPARCE)
-        score += 30;
-    if(gBattleMons[battlerDef].species == SPECIES_FERROTHORN)
-        score += 20;
-    if(gBattleMons[battlerDef].species == SPECIES_FLORGES)
-        score += 10;
-    if(gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
-        score += 0;
+    // dont hit annihilape
+    if(gBattleMons[battlerDef].species == SPECIES_ANNIHILAPE)
+        score -= 20;
 
     return score;
 }
@@ -5527,13 +5517,15 @@ static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 // trainer10 (loudred ditto)
 static s32 AI_Trainer10(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 
-    // always use Energy Ball with Ditto if available. Hidden Power as fallback just in case
-    if(gBattleMons[battlerAtk].species == SPECIES_DITTO){
-        if(move == MOVE_ENERGY_BALL)
+    // always use Energy Ball with Ditto if available
+    // Hidden Power as fallback just in case
+    if(move == MOVE_ENERGY_BALL){
             score += 50;
-        if(move == MOVE_HIDDEN_POWER)
-            score += 20;
     }
+    if(move == MOVE_HIDDEN_POWER){ 
+        score += 20;
+    }
+    
     return score;
 }
 

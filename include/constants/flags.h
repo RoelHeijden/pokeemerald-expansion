@@ -46,7 +46,7 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_JABOCA_OBTAINED             0x24
+#define FLAG_JABOCA_OBTAINED                0x24
 #define FLAG_MARANGA_BERRY_USED             0x25  
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
@@ -671,8 +671,8 @@
 #define FLAG_TRAINER8_DEFEATED          0x273 
 #define FLAG_TRAINER10_DEFEATED         0x274 
 #define FLAG_TRAINER11_DEFEATED         0x275 
-#define FLAG_UNUSED_0x276  0x276 // Unused Flag
-#define FLAG_UNUSED_0x277  0x277 // Unused Flag
+#define FLAG_PRIMEAPE_OBTAINED          0x276  
+#define FLAG_HIDE_PRIMEAPE_BALL         0x277  
 #define FLAG_UNUSED_0x278  0x278 // Unused Flag
 #define FLAG_UNUSED_0x279  0x279 // Unused Flag
 #define FLAG_UNUSED_0x27A  0x27A // Unused Flag

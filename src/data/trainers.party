@@ -17008,7 +17008,7 @@ Double Battle: No
 
 Shedinja  
 Ability: Wonder Guard  
-Level: 17  
+Level: 15 
 - Facade  
 
 
@@ -17047,7 +17047,7 @@ Dusclops
 Ability: Frisk  
 Level: 5  
 IVs: 0 Atk  
-- Memento  
+- Night Shade
 
 
 === TRAINER_CUSTOM_TRAINER9 ===
@@ -17068,10 +17068,11 @@ Adamant Nature
 
 Lucario (F)  
 Ability: Inner Focus  
-Level: 70  
+Level: 71  
 EVs: 252 Atk / 252 Spe  
 Adamant Nature  
-- Close Combat  
+IVs: 25 Def  
+- Close Combat 
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
@@ -17086,10 +17087,11 @@ AI: AI_FLAG_TRAINER10
 Loudred  
 Ability: Soundproof  
 Level: 42  
-Hardy Nature  
+EVs: 188 Spe  
+Timid Nature  
 - Shadow Ball  
 
-Ditto  
+Ditto @ Choice Scarf  
 Ability: Imposter  
 Level: 60  
 EVs: 252 HP  
