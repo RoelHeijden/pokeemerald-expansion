@@ -7,7 +7,7 @@ const LOCALID_TRAINER2 = 4
 const LOCALID_TRAINER3 = 5
 const LOCALID_DUNSPARCE_GUY = 6
 const LOCALID_MOVE_DELETER = 7
-const LOCALID_ULTRA_BALL_NPC = 8
+const LOCALID_SECRET_POWER_NPC = 8
 const LOCALID_TRAINER9_R = 9
 const LOCALID_TRAINER9_L = 10
 const LOCALID_MARANGA_BERRY = 11
@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const _DUMMY_3 = 33
+const LOCALID_RARE_CANDY2 = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -368,7 +368,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         move1=MOVE_STEEL_ROLLER,
         move2=MOVE_BLOCK,
         move3=MOVE_INGRAIN,
-        move4=MOVE_SUNNY_DAY,
+        move4=MOVE_SLEEP_TALK,
         // EVs:
         hpEv=0, 
         atkEv=252,
@@ -416,7 +416,7 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_LEPPA_BERRY)
 
     // additem(ITEM_SAFETY_GOGGLES)
-    additem(ITEM_HM01)
+    // additem(ITEM_HM01)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -599,7 +599,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     // TODO:
     // - rare candy (clear FLAG_RARE_CANDY_USED), ItemUseCB_RareCandy
     // - exp candy
-    // - TM Sleep Talk
+    // - TM Thief (remove Snowball!)
     // - TM Skill Swap
     // - HM Cut
     elif(var(VAR_RESULT) == 1){
@@ -1101,7 +1101,7 @@ mart EscapeRoom_Shop_items{
     ITEM_MENTAL_HERB        // 2000  sold out between ability capsule and trainer6
     ITEM_FLOAT_STONE        // 2000
     ITEM_RING_TARGET        // 2000 
-    ITEM_TM27               // 2000 
+    ITEM_TM46               // 2000 
 }
 
 
@@ -1250,28 +1250,38 @@ script EscapeRoom_MoveRestoredSound{
 }
 
 
-// ULTRA BALL QUIZ NPC
+// ZERAORA NPC
 
-script EscapeRoom_UltraBallNPC{
+script EscapeRoom_ZeraoraHintNPC{
     lock
     faceplayer
-    if(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
-        // start quiz
-        msgbox(UltraBallQuizStart, MSGBOX_DEFAULT)
-
-        // TODO: quiz
-
-        // give ultra ball
-        giveitem(ITEM_ULTRA_BALL)
-        setflag(FLAG_POKE_BALL_OBTAINED)
+    if(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
+        if(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
+            msgbox(ZeraoraHintMessage1, MSGBOX_DEFAULT)
+            giveitem(ITEM_ULTRA_BALL)
+            setflag(FLAG_POKE_BALL_OBTAINED)
+        }
+        else{
+            msgbox(ZeraoraHintMessage2, MSGBOX_DEFAULT)
+        }
     }
     else{
-        // post script message
-        msgbox(UltaBallQuizPostScript, MSGBOX_DEFAULT)
-
+        if(flag(FLAG_WHITE_HERB_OBTAINED) == FALSE){
+            msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_DEFAULT)
+            waitmessage
+            giveitem(ITEM_WHITE_HERB)
+            setflag(FLAG_WHITE_HERB_OBTAINED)
+            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_DEFAULT)
+            waitmessage
+        }
+        else{
+            msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_DEFAULT)
+            waitmessage
+        }
     }
     releaseall
 }
+
 
 
 // ONE-WAY ROCK SMASH NPC
@@ -1369,6 +1379,7 @@ movement RockSmashNPCMovesAway {
 
 
 // STONE BUY NPC //
+
 script EscapeRoom_TryBuyStonesPC{
     lock
 
@@ -1512,29 +1523,6 @@ script EscapeRoom_AnnihilapeHintNPC{
 
 movement face_npc_up{
     face_up
-}
-
-script EscapeRoom_ZeraoraHintNPC{
-    lock
-    faceplayer
-    if(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
-        msgbox(ZeraoraHintMessage, MSGBOX_DEFAULT)
-    }
-    else{
-        if(flag(FLAG_WHITE_HERB_OBTAINED) == FALSE){
-            msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_DEFAULT)
-            waitmessage
-            giveitem(ITEM_WHITE_HERB)
-            setflag(FLAG_WHITE_HERB_OBTAINED)
-            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_DEFAULT)
-            waitmessage
-        }
-        else{
-            msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_DEFAULT)
-            waitmessage
-        }
-    }
-    releaseall
 }
 
 script EscapeRoom_TabletsHintNPC{
@@ -1896,7 +1884,7 @@ script EscapeRoom_EventScript_Trainer4PostBattle{
 
     // ERROR CHECK
     // - 500 or 2000 money
-    // TODO: - Sleep Talk Dunsparce obtained
+    // TODO: -  Thief  Dunsparce obtained
     checkexactmoney(500)
     copyvar(VAR_TEMP_4, VAR_RESULT)
     checkexactmoney(2000)
@@ -2345,7 +2333,7 @@ script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
                 // EVs:
                 hpEv=0, 
                 defEv=252,
-                speedEv=140, // scarf ditto outspeed primeape/annihilape
+                speedEv=252, // scarf ditto outspeed primeape/annihilape
                 // IVs:
                 hpIv=31,
                 atkIv=30,    // hp psychic
@@ -2383,6 +2371,14 @@ script EscapeRoom_EventScript_FindLiepardCollar{
     finditem(ITEM_POWER_LENS)
     removeobject(LOCALID_LIEPARD_COLLAR)
     setflag(FLAG_LIEPARD_COLLAR_OBTAINED)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindRareCandy2{
+    lockall
+    finditem(ITEM_RARE_CANDY)
+    removeobject(LOCALID_RARE_CANDY2)
+    setflag(FLAG_RARE_CANDY2_OBTAINED)
     releaseall
 }
 
@@ -3356,26 +3352,26 @@ text UltaBallQuizPostScript{
 
 
 // ZERA HINT NPC
-text ZeraoraHintMessage{
-    "Have you seen the Zeraora around here?\p"
-    "I've seen people try to catch it but no\n"
-    "one's been able to get its HP below 50%.\p"
-    "Will you show me your Zeraora if you do\n"
-    "manage to capture it?\p"
-    "I've always wanted to see one up close."
+text ZeraoraHintMessage1{
+    "I love seeing rare Pokémon up close.\p"
+    "If you ever manage to catch something\n"
+    "unusual, do show me!"
+}
+
+text ZeraoraHintMessage2{
+    "You know, Pokémon become much easier\n"
+    "to catch if their HP drops below 50%."
 }
 
 text ZeraoraHintPostCatchMessage1{
-    "Wow, you actually caught the Zeraora!\p"
-    "I can't believe my eyes!\n"
-    "You've made a dream come true...\p"
-    "Here, take this!"
-    
+    "You managed to catch a Zeraora!?\p"
+    "Unbelievable... I've always dreamed of\n"
+    "seeing one up close!\p"
+    "Here, take this."
 }
 
 text ZeraoraHintPostCatchMessage2{
-    // "Good luck on your journey!"
-    "It's the least I can do."
+    "Something tells me it'll come in handy."
 }
 
 text ZeraoraHintPostCatchMessage3{
@@ -3403,8 +3399,8 @@ text AnnihilapeHintMessage{
 
 // TABLETS HINT NPC
 text FourTabletsHintMessage1{
-    "Do you see that strange tablet?\n"
-    "I'm looking for more of them!\p"
+    "Do you see that strange tablet?\p"
+    "I'm looking for more of them!\n"
     "I wonder what they do."
 }
 
@@ -3866,7 +3862,7 @@ text Trainer7A_PostBattle{
 
 // TRAINER 7B
 text Trainer7B_Intro{
-    "something something poor sight"
+    "Well aren't you a sight for sore eyes?"
 }
 
 text Trainer7B_Outro{

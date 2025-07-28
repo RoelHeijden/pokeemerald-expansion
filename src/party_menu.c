@@ -2222,6 +2222,7 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
         return CANNOT_LEARN_MOVE;
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
+
     // ADDED - check if Liepard and Taunt or Cut
     // Liepard can learn Cut after Ability Capsule is obtained
     // At that point Copycat is no longer required (and softlocks are managable)
@@ -2229,11 +2230,20 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
              && (move == MOVE_TAUNT)) //|| move == MOVE_CUT)
             //  && !FlagGet(FLAG_ABILITY_CAPSULE_BOUGHT))
         return WOULD_SOFTLOCK;
+
     // Aipom cannot learn Cut
     // this patches a line vs trainer6
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_AIPOM 
              && move == MOVE_CUT)
         return CANNOT_LEARN_MOVE;
+
+    // Primeape/Annihilape cannot learn Thief
+    // this patches a line vs trainer10
+    else if ((GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_PRIMEAPE 
+             || GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_ANNIHILAPE)
+             && move == MOVE_THIEF)
+        return CANNOT_LEARN_MOVE;
+
     // ADDED
     // check if mon has a deleted move (that could still be restored)
     else if ((species == SPECIES_AIPOM && FlagGet(FLAG_AIPOM_MOVE_DELETED)) ||

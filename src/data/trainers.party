@@ -16994,12 +16994,14 @@ Double Battle: No
 
 Rayquaza @ Moon Stone
 Ability: Air Lock  
-EVs: 252 Atk / 252 Spe  
-- Earthquake
+EVs: 252 SpA / 252 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Earth Power
 
 
 === TRAINER_CUSTOM_TRAINER7A ===
-Name: aaaaa7a
+Name: t7a
 Class: Bug Catcher
 Pic: Bug Catcher
 Gender: Male
@@ -17013,23 +17015,23 @@ Level: 15
 
 
 === TRAINER_CUSTOM_TRAINER7B ===
-Name: aaaaa7b
+Name: t7b
 Class: Expert
 Pic: Expert F
 Gender: Male
 Music: Intense
 Double Battle: No
 
-Garchomp  
-Ability: Sand Veil  
-Level: 60  
-EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-- Earthquake  
+Sableye @ Toxic Orb  
+Ability: Keen Eye  
+Level: 65  
+EVs: 192 HP / 48 Def / 144 SpD / 124 Spe  
+Bold Nature  
+- Dazzling Gleam
 
 
 === TRAINER_CUSTOM_TRAINER8 ===
-Name: aaaaa8
+Name: t8
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -17059,13 +17061,6 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_TRAINER9
 
-Lucario (M)  
-Ability: Inner Focus  
-Level: 70  
-EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-- Close Combat  
-
 Lucario (F)  
 Ability: Inner Focus  
 Level: 71  
@@ -17074,9 +17069,16 @@ Adamant Nature
 IVs: 25 Def  
 - Close Combat 
 
+Lucario (M)  
+Ability: Inner Focus  
+Level: 70  
+EVs: 252 Atk / 252 Spe  
+Adamant Nature  
+- Close Combat  
+
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: aaaaa10
+Name: t10
 Class: Youngster
 Pic: Youngster
 Gender: Male
@@ -17087,7 +17089,7 @@ AI: AI_FLAG_TRAINER10
 Loudred  
 Ability: Soundproof  
 Level: 42  
-EVs: 188 Spe  
+EVs: 252 Spe  
 Timid Nature  
 - Shadow Ball  
 
@@ -17100,7 +17102,7 @@ IVs: 30 Atk
 
 
 === TRAINER_CUSTOM_TRAINER11 ===
-Name: aaaaa11
+Name: t11
 Class: Champion
 Pic: Champion Wallace
 Gender: Male

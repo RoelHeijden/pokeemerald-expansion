@@ -11206,7 +11206,7 @@ const struct Item gItemsInfo[] =
     [ITEM_TM_THIEF] =
     {
         .name = _("TM46"),
-        .price = 3000,
+        .price = 2000, // changed
         .description = COMPOUND_STRING(
             "While attacking,\n"
             "it may steal the\n"

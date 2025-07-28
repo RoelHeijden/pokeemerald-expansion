@@ -42501,7 +42501,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7A] =
     {
 #line 17002
-        .trainerName = _("aaaaa7a"),
+        .trainerName = _("t7a"),
 #line 17003
         .trainerClass = TRAINER_CLASS_BUG_CATCHER,
 #line 17004
@@ -42537,7 +42537,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7B] =
     {
 #line 17016
-        .trainerName = _("aaaaa7b"),
+        .trainerName = _("t7b"),
 #line 17017
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 17018
@@ -42552,22 +42552,24 @@ F_TRAINER_FEMALE |
         {
             {
 #line 17023
-            .species = SPECIES_GARCHOMP,
+            .species = SPECIES_SABLEYE,
             .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17023
+            .heldItem = ITEM_TOXIC_ORB,
 #line 17026
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+            .ev = TRAINER_PARTY_EVS(192, 0, 48, 124, 0, 144),
 #line 17028
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17024
-            .ability = ABILITY_SAND_VEIL,
+            .ability = ABILITY_KEEN_EYE,
 #line 17025
-            .lvl = 60,
+            .lvl = 65,
 #line 17027
-            .nature = NATURE_ADAMANT,
+            .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17028
-                MOVE_EARTHQUAKE,
+                MOVE_DAZZLING_GLEAM,
             },
             },
         },
@@ -42576,7 +42578,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER8] =
     {
 #line 17032
-        .trainerName = _("aaaaa8"),
+        .trainerName = _("t8"),
 #line 17033
         .trainerClass = TRAINER_CLASS_PSYCHIC,
 #line 17034
@@ -42651,37 +42653,37 @@ F_TRAINER_FEMALE |
 #line 17062
             .species = SPECIES_LUCARIO,
 #line 17062
-            .gender = TRAINER_MON_MALE,
+            .gender = TRAINER_MON_FEMALE,
 #line 17065
             .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
 #line 17067
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .iv = TRAINER_PARTY_IVS(31, 31, 25, 31, 31, 31),
 #line 17063
             .ability = ABILITY_INNER_FOCUS,
 #line 17064
-            .lvl = 70,
+            .lvl = 71,
 #line 17066
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17067
+#line 17068
                 MOVE_CLOSE_COMBAT,
             },
             },
             {
-#line 17069
-            .species = SPECIES_LUCARIO,
-#line 17069
-            .gender = TRAINER_MON_FEMALE,
-#line 17072
-            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
-#line 17074
-            .iv = TRAINER_PARTY_IVS(31, 31, 25, 31, 31, 31),
 #line 17070
-            .ability = ABILITY_INNER_FOCUS,
-#line 17071
-            .lvl = 71,
+            .species = SPECIES_LUCARIO,
+#line 17070
+            .gender = TRAINER_MON_MALE,
 #line 17073
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0),
+#line 17075
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17071
+            .ability = ABILITY_INNER_FOCUS,
+#line 17072
+            .lvl = 70,
+#line 17074
             .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
@@ -42695,7 +42697,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER10] =
     {
 #line 17079
-        .trainerName = _("aaaaa10"),
+        .trainerName = _("t10"),
 #line 17080
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
 #line 17081
@@ -42715,7 +42717,7 @@ F_TRAINER_FEMALE |
             .species = SPECIES_LOUDRED,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 17090
-            .ev = TRAINER_PARTY_EVS(0, 0, 0, 188, 0, 0),
+            .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 0, 0),
 #line 17092
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17088
@@ -42757,7 +42759,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER11] =
     {
 #line 17103
-        .trainerName = _("aaaaa11"),
+        .trainerName = _("t11"),
 #line 17104
         .trainerClass = TRAINER_CLASS_CHAMPION,
 #line 17105
