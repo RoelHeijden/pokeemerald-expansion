@@ -678,8 +678,8 @@
 #define FLAG_MENTAL_HERB_SACK_ACTIVE    0x27A
 #define FLAG_LIEPARD_SACKED             0x27B 
 #define FLAG_MENTAL_HERB_IS_LOST        0x27C  
-#define FLAG_UNUSED_0x27D  0x27D // Unused Flag
-#define FLAG_UNUSED_0x27E  0x27E // Unused Flag
+#define FLAG_SECRET_POWER_LEARNED       0x27D  
+#define FLAG_THIEF_REPLACED             0x27E 
 #define FLAG_UNUSED_0x27F  0x27F // Unused Flag
 #define FLAG_UNUSED_0x280  0x280 // Unused Flag
 #define FLAG_UNUSED_0x281  0x281 // Unused Flag

@@ -106,16 +106,16 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_MAN_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
       "x": 82,
       "y": 17,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_NONE",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
+      "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+      "movement_range_x": 7,
+      "movement_range_y": 5,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "NULL",
+      "script": "EscapeRoom_SecretGarden_SecretPowerNPC",
       "flag": "0"
     },
     {
@@ -249,7 +249,7 @@
       "flag": "FLAG_HIDE_LIEPARD_NPC"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_GIRL_2",
+      "graphics_id": "OBJ_EVENT_GFX_GIRL_1",
       "x": 57,
       "y": 22,
       "elevation": 0,
@@ -432,8 +432,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_ITEM_BALL",
-      "x": 82,
-      "y": 12,
+      "x": 75,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -442,6 +442,19 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_FindRareCandy2",
       "flag": "FLAG_HIDE_RARE_CANDY2"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_GENTLEMAN",
+      "x": 83,
+      "y": 8,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -495,8 +508,8 @@
       "dest_warp_id": "3"
     },
     {
-      "x": 86,
-      "y": 11,
+      "x": 80,
+      "y": 7,
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
       "dest_warp_id": "7"
@@ -520,6 +533,24 @@
       "var": "VAR_RESPAWN_SET_AT_NURSE2",
       "var_value": "0",
       "script": "EscapeRoom_EventScript_SetRespawn2"
+    },
+    {
+      "type": "trigger",
+      "x": 82,
+      "y": 8,
+      "elevation": 0,
+      "var": "VAR_SECRET_GARDEN_TRIGGER",
+      "var_value": "0",
+      "script": "EscapeRoom_SecretGarden_GateEntryNPC_KeepOut"
+    },
+    {
+      "type": "trigger",
+      "x": 82,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_SECRET_GARDEN_TRIGGER",
+      "var_value": "0",
+      "script": "EscapeRoom_SecretGarden_GateEntryNPC_KickOut"
     }
   ],
   "bg_events": [

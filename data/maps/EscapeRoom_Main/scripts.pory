@@ -33,12 +33,26 @@ const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_RARE_CANDY2 = 33
-const _DUMMY_4 = 34
+const LOCALID_SECRETGARDEN_GUARD = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
 const _DUMMY_9 = 39
+
+
+movement _face_down {
+    face_down
+}
+movement _face_up {
+    face_up
+}
+movement _face_right {
+    face_right
+}
+movement _face_left {
+    face_left
+}
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -1121,7 +1135,7 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     waitmovement(LOCALID_NURSE_DUMMY)
 
     // dialogue and move player
-    applymovement(OBJ_EVENT_ID_PLAYER, EscapeRoom_Movement_PlayerFaceRight)
+    applymovement(OBJ_EVENT_ID_PLAYER, _face_right)
     waitmovement(OBJ_EVENT_ID_PLAYER)
     msgbox(RunningNurseMessage, MSGBOX_NPC)
     waitmessage
@@ -1149,9 +1163,6 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
 }
 
-movement EscapeRoom_Movement_PlayerFaceRight{
-    face_right
-}
 movement EscapeRoom_Movement1_Nurse1NPC{
     walk_fast_down
     walk_faster_left * 6
@@ -1367,15 +1378,13 @@ script EscapeRoom_ZeraoraHintNPC{
     releaseall
 }
 
-
-
 // ONE-WAY ROCK SMASH NPC
 
 script EscapeRoom_RockSmashNPC{
     lock
     msgbox(RockSmashNPCstuck, MSGBOX_NPC)
     waitmessage
-    applymovement(LOCALID_ROCK_SMASH_NPC, face_npc_up)
+    applymovement(LOCALID_ROCK_SMASH_NPC, _face_up)
     waitmovement(LOCALID_ROCK_SMASH_NPC)
     releaseall
 }
@@ -1451,12 +1460,10 @@ movement EscapeRoom_Movement_PlayerMoveAwayFromRock {
     walk_down
     face_up
 }
-
 movement RockSmashNPCMovesUp {
     walk_up
     face_right
 }
-
 movement RockSmashNPCMovesAway {
     walk_right * 3
     face_up
@@ -1566,6 +1573,250 @@ script EscapeRoom_TryBuyStonesPC_TryBuyDuskStone{
 }
 
 
+// SECRET POWER NPC //
+
+script EscapeRoom_SecretGarden_SecretPowerNPC{
+    lockall
+    faceplayer
+
+
+    // REMOVE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    if(flag(FLAG_UNUSED_0x295) == FALSE){
+        giveitem(ITEM_TM46)
+        setflag(FLAG_UNUSED_0x295)
+    }
+
+
+    // end if Secret Power already learned
+    if(flag(FLAG_SECRET_POWER_LEARNED)){
+        msgbox(SecretGardenNPC_EndOfScriptMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        releaseall
+        end
+    }
+
+    // start message
+    msgbox(SecretGardenNPC_AskLovePlants, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == NO){
+        msgbox(SecretGardenNPC_PlantLove_No, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        // no Thief in party
+        checkpartymove(MOVE_THIEF)
+        if(var(VAR_RESULT) == PARTY_SIZE){
+            msgbox(SecretGardenNPC_PlantLove_Yes, MSGBOX_AUTOCLOSE)
+            waitmessage
+            lockall
+
+            // teach Secret Power
+            call(EscapeRoom_SecretGarden_TeachSecretPower)
+            
+            msgbox(SecretGardenNPC_PostTeachMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // Pokémon knows Thief
+        else{
+            msgbox(SecretGardenNPC_PlantLove_Yes, MSGBOX_AUTOCLOSE)
+            waitmessage
+            lockall
+
+            // ask remove Thief
+            msgbox(SecretGardenNPC_PlantLove_Yes_Thief, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                // teach Secret Power
+                call(EscapeRoom_SecretGarden_TeachSecretPower)
+                
+                msgbox(SecretGardenNPC_PostTeachMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            else{
+                msgbox(SecretGardenNPC_TeachDeclinedMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+        }
+    }
+    releaseall
+}
+
+script EscapeRoom_SecretGarden_TeachSecretPower{
+    // remove Thief
+    checkpartymove(MOVE_THIEF)
+    if(var(VAR_RESULT) != PARTY_SIZE){
+        if(var(VAR_RESULT) == 0){
+            replacemove(0, MOVE_THIEF, MOVE_NONE)
+        }
+        elif(var(VAR_RESULT) == 1){
+            replacemove(1, MOVE_THIEF, MOVE_NONE)
+        }
+        setflag(FLAG_THIEF_REPLACED)
+    }
+
+    // teach Secret Power - Cacnea
+    checkpartymon(SPECIES_CACNEA)
+    if(var(VAR_RESULT) != PARTY_SIZE){
+        addmonmove(SPECIES_CACNEA, MOVE_SECRET_POWER)
+        
+        playfanfare(MUS_LEVEL_UP)
+        msgbox(CacneaLearnedSecretPower, MSGBOX_AUTOCLOSE)
+        waitfanfare
+        lockall
+    }
+    // teach Secret Power - Cacturne
+    checkpartymon(SPECIES_CACTURNE)
+    if(var(VAR_RESULT) != PARTY_SIZE){
+        addmonmove(SPECIES_CACTURNE, MOVE_SECRET_POWER)
+        
+        playfanfare(MUS_LEVEL_UP)
+        msgbox(CacturneLearnedSecretPower, MSGBOX_AUTOCLOSE)
+        waitfanfare
+        lockall
+    }
+
+    // set flag
+    setflag(FLAG_SECRET_POWER_LEARNED)
+}
+
+// SECRET GARDEN GUARD //
+
+script EscapeRoom_SecretGarden_GateEntryNPC_KeepOut{
+    lockall
+
+    // exclamation mark
+    playse(SE_PIN)
+    applymovement(LOCALID_SECRETGARDEN_GUARD, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_SECRETGARDEN_GUARD)
+    applymovement(LOCALID_SECRETGARDEN_GUARD, _face_left)
+    waitmovement(LOCALID_SECRETGARDEN_GUARD)
+    delay(25)
+
+    // message
+    msgbox(SecretGardenGuardKeepOut, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // player move left
+    applymovement(OBJ_EVENT_ID_PLAYER, SecretGarden_PlayerMoveLeft)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+
+    releaseall
+}
+
+script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
+    lockall
+
+    // exclamation mark
+    playse(SE_PIN)
+    applymovement(LOCALID_SECRETGARDEN_GUARD, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_SECRETGARDEN_GUARD)
+    applymovement(LOCALID_SECRETGARDEN_GUARD, _face_down)
+    waitmovement(LOCALID_SECRETGARDEN_GUARD)
+    delay(30)
+
+    applymovement(LOCALID_SECRETGARDEN_GUARD, SecretGarden_NPC_move_down)
+    waitmovement(LOCALID_SECRETGARDEN_GUARD)
+    applymovement(OBJ_EVENT_ID_PLAYER, _face_right)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+
+    // player gets spotted message
+    msgbox(SecretGardenGuardSpotted, MSGBOX_AUTOCLOSE)
+    waitmessage
+    
+    // move NPC and player up
+    applymovement(LOCALID_SECRETGARDEN_GUARD, SecretGarden_NPC_move_up)
+    applymovement(OBJ_EVENT_ID_PLAYER, SecretGarden_PlayerMoveUp)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    lockall // to be sure
+
+    // follow up message
+    if(flag(FLAG_SECRET_POWER_LEARNED) == FALSE){
+        msgbox(SecretGardenGuardStayOut, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        msgbox(SecretGardenGuardRemoveSecretPower, MSGBOX_AUTOCLOSE)
+        waitmessage
+        lockall
+
+        // remove secret power
+        checkpartymove(MOVE_SECRET_POWER)
+        if(var(VAR_RESULT) == 0){
+            replacemove(0, MOVE_SECRET_POWER, MOVE_NONE)
+        }
+        elif(var(VAR_RESULT) == 1){
+            replacemove(1, MOVE_SECRET_POWER, MOVE_NONE)
+        }
+        clearflag(FLAG_SECRET_POWER_LEARNED)
+
+
+        // add back Thief is necessary
+        clearflag(FLAG_TEMP_2)
+        if(flag(FLAG_THIEF_REPLACED)){
+            addmonmove(SPECIES_CACNEA, MOVE_THIEF)
+            addmonmove(SPECIES_CACTURNE, MOVE_THIEF)
+            clearflag(FLAG_THIEF_REPLACED)
+            setflag(FLAG_TEMP_2)
+        }
+
+        // secret power removed message
+        checkpartymon(SPECIES_CACNEA)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            playse(SE_SUCCESS)
+            waitse
+            msgbox(CacneaForgotSecretPower, MSGBOX_AUTOCLOSE)
+            waitmessage
+            lockall
+
+            // thief restored message
+            if(flag(FLAG_TEMP_2)){
+                msgbox(CacneaThiefRestored, MSGBOX_AUTOCLOSE)
+                waitmessage
+                lockall
+            }
+        }
+        checkpartymon(SPECIES_CACTURNE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            playse(SE_SUCCESS)
+            waitse
+            msgbox(CacturneForgotSecretPower, MSGBOX_AUTOCLOSE)
+            waitmessage
+            lockall
+
+            // thief restored message
+            if(flag(FLAG_TEMP_2)){
+                msgbox(CacturneThiefRestored, MSGBOX_AUTOCLOSE)
+                waitmessage
+                lockall
+            }
+        }
+    }
+
+    // move player away
+    applymovement(OBJ_EVENT_ID_PLAYER, SecretGarden_PlayerMoveLeft)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+
+    releaseall
+}
+
+movement SecretGarden_NPC_move_down {
+    walk_fast_down * 2
+    face_left
+}
+movement SecretGarden_NPC_move_up {
+    face_up
+    walk_up * 2
+    face_left
+}
+movement SecretGarden_PlayerMoveUp {
+    face_up
+    walk_up * 2
+    face_right
+}
+movement SecretGarden_PlayerMoveLeft {
+    face_left
+    walk_left
+}
+
+
 //// RANDOM HINT NPCS ////
 
 script EscapeRoom_AnnihilapeHintNPC{
@@ -1581,7 +1832,7 @@ script EscapeRoom_AnnihilapeHintNPC{
             faceplayer
             msgbox(AnnihilapeHintNoMessage2, MSGBOX_AUTOCLOSE)
             waitmessage
-            applymovement(LOCALID_APE_HINT_NPC, face_npc_up)
+            applymovement(LOCALID_APE_HINT_NPC, _face_up)
             waitmovement(LOCALID_APE_HINT_NPC)
         }
         // if ape has spawned
@@ -1604,10 +1855,6 @@ script EscapeRoom_AnnihilapeHintNPC{
         msgbox(AnnihilapeHintMessage, MSGBOX_NPC)
     }
     releaseall
-}
-
-movement face_npc_up{
-    face_up
 }
 
 script EscapeRoom_TabletsHintNPC{
@@ -3593,6 +3840,101 @@ text RockSmashNPCFarewellMsg{
 }
 
 
+// SECRET GARDEN
+// secret power npc
+text SecretGardenNPC_AskLovePlants{
+    "I love plants!\p"
+    "Do you love plants?"
+}
+
+text SecretGardenNPC_PlantLove_No{
+    "Aw, that's too bad."
+}
+
+text SecretGardenNPC_PlantLove_Yes{
+    "Of course you do!\p"
+
+    "Let me teach your cactus how to find\n"
+    "power in any terrain.\p"
+
+    "It's a gift from the secret garden."
+}
+
+text SecretGardenNPC_PlantLove_Yes_Thief{
+    "Oh... your Pokémon knows Thief.\p"
+
+    "Hmmm...\p"
+
+    "The garden usually doesn't share its\n"
+    "secrets with those who steal.\p"
+
+    "I'm willing to make an exception, but\n"
+    "Thief will be forgotten.\l"
+    "Is that alright?"
+
+    // "I'll still teach your cactus, but Thief\n"
+    // "will be forgotten. Is that alright?"
+}
+
+text SecretGardenNPC_TeachDeclinedMessage{
+    "It's up to you."
+}
+
+text SecretGardenNPC_PostTeachMessage{
+    "Don't tell anyone I shared this move\n"
+    "with you!"
+}
+
+text SecretGardenNPC_EndOfScriptMessage{
+    "It's our little secret."
+}
+
+text CacneaLearnedSecretPower{
+    "Cacnea learned Secret Power!"
+}
+
+text CacturneLearnedSecretPower{
+    "Cacturne learned Secret Power!"
+}
+
+// guard
+text SecretGardenGuardKeepOut{
+    "You've found our secret garden!\p"
+    "I cannot let you enter, sorry."
+}
+
+text SecretGardenGuardSpotted{
+    "How did you get in there!?"
+}
+
+text SecretGardenGuardStayOut{
+    "Stay out of our garden!"
+}
+
+text SecretGardenGuardRemoveSecretPower{
+    "I cannot let you leave with that what\n"
+    "belongs to the garden.\p"
+    "I will have to take Secret Power away\n"
+    "from your Pokémon."
+}
+
+text CacneaForgotSecretPower{
+    "Cacnea's Secret Power was removed."
+}
+
+text CacturneForgotSecretPower{
+    "Cacturne's Secret Power was removed."
+}
+
+text CacneaThiefRestored{
+    "Cacnea's Thief was restored."
+}
+
+text CacturneThiefRestored{
+    "Cacturne's Thief was restored."
+}
+
+
 // SHOP NPCS
 text MartNPC_AskToShop{
     "Welcome to my shop.\p"
@@ -3901,7 +4243,7 @@ text Trainer5_Intro{
 }
 
 text Trainer5_Outro{
-    "Did you have enough?"
+    "Was that enough?"
 }
 
 text Trainer5_PostBattle{
