@@ -160,7 +160,7 @@ script HikerSellAbilityCapsule{
             waitmessage
 
             setflag(FLAG_ABILITY_CAPSULE_BOUGHT)
-            setflag(FLAG_MENTAL_HERB_SOLD_OUT)
+            // setflag(FLAG_MENTAL_HERB_SOLD_OUT)
 
 
             // ERROR CHECK

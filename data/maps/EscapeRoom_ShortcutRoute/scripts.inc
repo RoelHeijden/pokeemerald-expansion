@@ -232,8 +232,6 @@ HikerSellAbilityCapsule_5:
 	waitmessage
 # 162 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_ABILITY_CAPSULE_BOUGHT
-# 163 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	setflag FLAG_MENTAL_HERB_SOLD_OUT
 # 170 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	checkpartyitem 0
 # 171 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"

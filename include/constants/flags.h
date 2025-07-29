@@ -64,7 +64,7 @@
 #define FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED   0x33 
 #define FLAG_MAP_SWITCHES_SOLVED            0x34
 #define FLAG_GOGGLES_SNATCHED               0x35 
-#define FLAG_DONT_RETURN_MENTAL_HERB        0x36   
+#define FLAG_AT_SOFTLOCK_GUY_1              0x36   
 #define FLAG_MAGICIAN_STOLE_ITEM            0x37
 #define FLAG_RARE_CANDY_USED                0x38
 #define FLAG_ZERA_FIGHT_BACKUP_CHECK        0x39
@@ -675,9 +675,9 @@
 #define FLAG_HIDE_PRIMEAPE_BALL         0x277  
 #define FLAG_HIDE_RARE_CANDY2           0x278  
 #define FLAG_RARE_CANDY2_OBTAINED       0x279  
-#define FLAG_UNUSED_0x27A  0x27A // Unused Flag
-#define FLAG_UNUSED_0x27B  0x27B // Unused Flag
-#define FLAG_UNUSED_0x27C  0x27C // Unused Flag
+#define FLAG_MENTAL_HERB_SACK_ACTIVE    0x27A
+#define FLAG_LIEPARD_SACKED             0x27B 
+#define FLAG_MENTAL_HERB_IS_LOST        0x27C  
 #define FLAG_UNUSED_0x27D  0x27D // Unused Flag
 #define FLAG_UNUSED_0x27E  0x27E // Unused Flag
 #define FLAG_UNUSED_0x27F  0x27F // Unused Flag

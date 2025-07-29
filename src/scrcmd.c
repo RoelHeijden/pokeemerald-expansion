@@ -2406,6 +2406,35 @@ bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)
 }
 
 // ADDED
+bool8 ScrCmd_checkpartymonfullhp(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    s32 i;
+
+    gSpecialVar_Result = FALSE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == species
+            && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
+        {
+            u16 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
+            u16 maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP, NULL);
+
+            if (hp == maxHp)
+            {
+                gSpecialVar_Result = TRUE;
+                break;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+
+
+// ADDED
 bool8 ScrCmd_checkpartymon(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx)); 

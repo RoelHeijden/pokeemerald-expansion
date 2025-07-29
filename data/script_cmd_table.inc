@@ -238,7 +238,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_checkexactmoney		            @ 0xeb
 	.4byte ScrCmd_replacemove		 			    @ 0xec
 	.4byte ScrCmd_softlockguymovebox		 		@ 0xed
-	.4byte ScrCmd_nop1		 	            @ 0xee
+	.4byte ScrCmd_checkpartymonfullhp		 	    @ 0xee
 	.4byte ScrCmd_nop1		 			    @ 0xef
 	.4byte ScrCmd_checkpartymonlevel		 		@ 0xf0
 	.4byte ScrCmd_levelDownMon						@ 0xf1

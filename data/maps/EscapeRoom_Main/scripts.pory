@@ -61,6 +61,8 @@ mapscripts EscapeRoom_Main_MapScripts {
     ] 
 }
 
+
+
 script EscapeRoom_MapScript_OnTransitionScripts{
     // set annihilape hint npc movement
     if(flag(FLAG_HIDE_ANNIHILAPE) == FALSE){
@@ -89,6 +91,11 @@ script EscapeRoom_MapScript_OnResumeScripts{
     if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
     {
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
+    }
+
+    // check if mental herb sack used
+    if(flag(FLAG_DUNSPARCE_TRADE_ACCEPTED) == TRUE && flag(FLAG_TRAINER6_DEFEATED) == FALSE){
+        call(EscapeRoom_MapScripts_CheckIfMentalHerbSackUsed)
     }
 
     // check if Rayquaza's Comet Shard is succesfully stolen
@@ -204,6 +211,46 @@ script EscapeRoom_MapScripts_CheckIfAskPreDamage{
     }
 
     // other wild battles are currently skipped on wins (no relevant pre damage scenarios)
+}
+
+script EscapeRoom_MapScripts_CheckIfMentalHerbSackUsed{
+    // check if Mental Herb was not already lost, or Liepard not already sacked 
+    // (these should be set at the same time for the main Herb Sack flag to be set)
+    clearflag(FLAG_TEMP_1)
+    if(flag(FLAG_LIEPARD_SACKED) || flag(FLAG_MENTAL_HERB_IS_LOST)){
+        setflag(FLAG_TEMP_1)
+    }
+
+    // check if Liepard sacked
+    partymonhasfainted
+    if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_LIEPARD){
+        setflag(FLAG_LIEPARD_SACKED)
+    }
+    else{
+        clearflag(FLAG_LIEPARD_SACKED)
+    }
+
+    // check if mental herb lost
+    isitemlost(ITEM_MENTAL_HERB)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_MENTAL_HERB_IS_LOST)
+    }
+    else{
+        clearflag(FLAG_MENTAL_HERB_IS_LOST)
+    }
+
+
+    // mental herb has been used to sack Liepard
+    // FLAG_TEMP_1 == one flag was already set at the start
+    if(flag(FLAG_LIEPARD_SACKED) && flag(FLAG_MENTAL_HERB_IS_LOST) && !flag(FLAG_TEMP_1)){  
+        setflag(FLAG_MENTAL_HERB_SACK_ACTIVE)
+    }
+
+    // clear flag if Liepard fully healed (i.e. not Rare Candy heal)
+    checkpartymonfullhp(SPECIES_LIEPARD)
+    if(var(VAR_RESULT) == TRUE && flag(FLAG_MENTAL_HERB_SACK_ACTIVE)){
+        clearflag(FLAG_MENTAL_HERB_SACK_ACTIVE)
+    }
 }
 
 
@@ -415,7 +462,6 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
     additem(ITEM_LEPPA_BERRY)
 
-    // additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_HM01)
 }
 
@@ -565,15 +611,9 @@ script EscapeRoom_EventScript_HintsNPC{
 // ANTI SOFTLOCK GUY
 
 script EscapeRoom_EventScript_AntiSoftlockGuy1{
-    // check if mental herb may not be returned
-    // dont return from softlock guy 1 after trainer4, until rock2 smashed
-    if(flag(FLAG_TRAINER4_DEFEATED) && !flag(FLAG_ROCK_SMASH_GUY_MOVED)){
-        setflag(FLAG_DONT_RETURN_MENTAL_HERB)
-    }
+    setflag(FLAG_AT_SOFTLOCK_GUY_1)
     call(EscapeRoom_EventScript_AntiSoftlockGuy)
-
-    // clear mental herb flag
-    clearflag(FLAG_DONT_RETURN_MENTAL_HERB)
+    clearflag(FLAG_AT_SOFTLOCK_GUY_1)
 }
 
 script EscapeRoom_EventScript_AntiSoftlockGuy2{
@@ -597,7 +637,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
 
     // undo used items
     // TODO:
-    // - rare candy (clear FLAG_RARE_CANDY_USED), ItemUseCB_RareCandy
+    // - rare candy (in ape sequence: heal aipom) (clear FLAG_RARE_CANDY_USED ?), ItemUseCB_RareCandy
     // - exp candy
     // - TM Thief (remove Snowball!)
     // - TM Skill Swap
@@ -624,6 +664,8 @@ script EscapeRoom_EventScript_ReturnLostItems{
     // clear flags
     clearflag(FLAG_TEMP_1) // an item was returned and heal required
     clearflag(FLAG_TEMP_2) // an item was returned, no heal
+    clearflag(FLAG_TEMP_3) // mental herb return while mental herb sack active
+
 
     //// FIELD ITEMS ////
 
@@ -656,6 +698,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
         }
     }
 
+
     //// BATTLE ITEMS ////
 
     // leppa berry
@@ -684,10 +727,22 @@ script EscapeRoom_EventScript_ReturnLostItems{
 
     // mental herb
     isitemlost(ITEM_MENTAL_HERB)
-    if(var(VAR_RESULT) == TRUE && flag(FLAG_DONT_RETURN_MENTAL_HERB) == FALSE){
-        removelostitem(ITEM_MENTAL_HERB)
-        giveitem(ITEM_MENTAL_HERB)
-        setflag(FLAG_TEMP_1)
+    if(var(VAR_RESULT) == TRUE){
+
+        // dont return if in section 1 during first mental herb sack line
+        if(flag(FLAG_AT_SOFTLOCK_GUY_1) && flag(FLAG_DUNSPARCE_TRADE_ACCEPTED) && !flag(FLAG_ROCK_SMASH_GUY_MOVED)){
+            // fallthrough
+        }
+        else{
+            removelostitem(ITEM_MENTAL_HERB)
+            giveitem(ITEM_MENTAL_HERB)
+            setflag(FLAG_TEMP_1)
+
+            // if mental herb used for dusknoir sack is active
+            if(flag(FLAG_MENTAL_HERB_SACK_ACTIVE)){
+                setflag(FLAG_TEMP_3)
+            }
+        }
     }
 
     // ring target
@@ -698,7 +753,8 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_1)  
     }
 
-    //// SPECIAL CASES ////
+
+    //// SPECIAL CASES TRAINER5 ////
 
     // special case: Dusk Stone (lost at trainer5)
     if(flag(FLAG_DUSK_STONE_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
@@ -721,20 +777,38 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_2)  // no heal
     }
 
+
     //// HEAL AND MESSAGES ////
 
     // at least one item was restored
     // heal party and message
     if(flag(FLAG_TEMP_1) || flag(FLAG_TEMP_2)){
 
-        // special case: if Ape sequence -> heal Aipom only
+        // special case: if Ape sequence
         if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
-            // heal Aipom
-            healpartymon(SPECIES_AIPOM)
 
-            // message
-            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
-            waitmessage
+            // if mental herb retrieved during a mental herb dusknoir sack line (FLAG_TEMP_3)
+            if(flag(FLAG_TEMP_3)){
+                // heal entire party
+                special(HealPlayerParty)
+
+                // message
+                msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
+                waitmessage
+
+                // warp back to section 2
+                warpteleport(MAP_ESCAPE_ROOM_MAIN, 20, 11)
+                waitstate
+
+            }
+            // heal Aipom only
+            else{
+                healpartymon(SPECIES_AIPOM)
+
+                // message
+                msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+                waitmessage
+            }
         }
         // any other case: heal entire party
         elif(flag(FLAG_TEMP_1) == TRUE){
@@ -1986,7 +2060,7 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     }
 
     setflag(FLAG_TRAINER6_DEFEATED)
-    clearflag(FLAG_MENTAL_HERB_SOLD_OUT)
+    // clearflag(FLAG_MENTAL_HERB_SOLD_OUT)
     call(EscapeRoom_EventScript_PostMatchHeal)
 
 

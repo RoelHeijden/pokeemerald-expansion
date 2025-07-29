@@ -1289,6 +1289,13 @@
     .byte 0xe9
 	.endm
 
+	@ Checks if a specified party pokemon has full HP or not.
+	@ VAR_RESULT is set to TRUE if at full hp.
+	.macro checkpartymonfullhp species
+	.byte 0xee 
+	.2byte \species
+	.endm
+
 	@ Check if a species exists in the party and return its first slot
 	@ VAR_RESULT: Slot number where the species is found. PARTY_SIZE if not found.
 	.macro checkpartymon species:req
