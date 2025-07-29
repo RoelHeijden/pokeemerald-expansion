@@ -2461,7 +2461,7 @@ bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
     u8 partyIndex = VarGet(ScriptReadHalfword(ctx));
     u16 moveId_old = VarGet(ScriptReadHalfword(ctx));
     u16 moveId_new = VarGet(ScriptReadHalfword(ctx));
-    u8 slot;
+    u8 slot, i, j;
 
     gSpecialVar_Result = MAX_MON_MOVES;
 
@@ -2472,19 +2472,35 @@ bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
 
         if (species && !GetMonData(mon, MON_DATA_IS_EGG))
         {
+            // Replace move
             for (slot = 0; slot < MAX_MON_MOVES; slot++)
             {
                 if (GetMonData(mon, MON_DATA_MOVE1 + slot) == moveId_old)
                 {
                     ScriptSetMonMoveSlot(partyIndex, moveId_new, slot);
-                    gSpecialVar_Result = slot; 
+                    gSpecialVar_Result = slot;
                     break;
+                }
+            }
+
+            // Reorder: move all MOVE_NONE to the end
+            for (i = 0; i < MAX_MON_MOVES - 1; i++)
+            {
+                for (j = 0; j < MAX_MON_MOVES - 1 - i; j++)
+                {
+                    u16 move1 = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
+                    u16 move2 = GetMonData(mon, MON_DATA_MOVE1 + j + 1, NULL);
+
+                    if (move1 == MOVE_NONE && move2 != MOVE_NONE)
+                        ShiftMoveSlot(mon, j, j + 1);
                 }
             }
         }
     }
-    return FALSE; 
+
+    return FALSE;
 }
+
 
 // ADDED
 bool8 ScrCmd_checkpartymonlevel(struct ScriptContext *ctx)
