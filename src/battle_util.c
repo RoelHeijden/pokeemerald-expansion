@@ -11456,7 +11456,8 @@ void TryRestoreHeldItems(void)
                         lostItem == ITEM_CUSTAP_BERRY ||
                         lostItem == ITEM_LEPPA_BERRY ||
                         lostItem == ITEM_MENTAL_HERB ||
-                        lostItem == ITEM_RING_TARGET;
+                        lostItem == ITEM_RING_TARGET ||
+                        lostItem == ITEM_JABOCA_BERRY;
 
                     // compare current mon state with backup
                     // if:

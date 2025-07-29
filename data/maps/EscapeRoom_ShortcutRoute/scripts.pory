@@ -100,8 +100,8 @@ script CheckIfBerryJuiceObtained{
         checkitem(ITEM_BERRY_JUICE)
         if(var(VAR_RESULT) == TRUE){
             setflag(FLAG_BERRY_JUICE_OBTAINED)
+            removelostitem(ITEM_JABOCA_BERRY)
         }
-
 
 
         if(flag(FLAG_BERRY_JUICE_OBTAINED) == TRUE){

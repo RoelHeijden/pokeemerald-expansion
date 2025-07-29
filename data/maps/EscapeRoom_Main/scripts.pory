@@ -753,6 +753,14 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_1)  
     }
 
+    // Jaboca Berry
+    isitemlost(ITEM_JABOCA_BERRY)
+    if(var(VAR_RESULT) == TRUE){
+        removelostitem(ITEM_JABOCA_BERRY)
+        giveitem(ITEM_JABOCA_BERRY)
+        setflag(FLAG_TEMP_1)  
+    }
+
 
     //// SPECIAL CASES TRAINER5 ////
 
@@ -884,10 +892,6 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
         clearflag(FLAG_DUSK_STONE_CONSUMED)
         giveitem(ITEM_DUSK_STONE)
     }
-    if(flag(FLAG_JABOCA_CONSUMED)){
-        clearflag(FLAG_JABOCA_CONSUMED)
-        giveitem(ITEM_JABOCA_BERRY)
-    }
     if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
         giveitem(ITEM_SAFETY_GOGGLES)
@@ -895,6 +899,13 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
     if(flag(FLAG_BERRY_JUICE_CONSUMED)){
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
         giveitem(ITEM_BERRY_JUICE)
+    }
+    // Jaboca can also be stored via the central lost item method
+    isitemlost(ITEM_JABOCA_BERRY)
+    if(flag(FLAG_JABOCA_CONSUMED) || var(VAR_RESULT) == TRUE){
+        clearflag(FLAG_JABOCA_CONSUMED)
+        giveitem(ITEM_JABOCA_BERRY)
+        removelostitem(ITEM_JABOCA_BERRY)
     }
 
     // reset trainer flag

@@ -154,6 +154,8 @@ CheckIfBerryJuiceObtained_7:
 CheckIfBerryJuiceObtained_10:
 # 102 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_BERRY_JUICE_OBTAINED
+# 103 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
+	removelostitem ITEM_JABOCA_BERRY
 	goto CheckIfBerryJuiceObtained_9
 
 CheckIfBerryJuiceObtained_12:
