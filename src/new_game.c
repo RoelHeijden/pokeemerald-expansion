@@ -49,6 +49,7 @@
 // added these
 #include "constants/flags.h"
 #include "game_options.h"
+#include "constants/decorations.h"
 
 
 
@@ -110,11 +111,6 @@ static void ClearPokedexFlags(void)
     gUnusedPokedexU8 = 0;
     memset(&gSaveBlock1Ptr->dexCaught, 0, sizeof(gSaveBlock1Ptr->dexCaught));
     memset(&gSaveBlock1Ptr->dexSeen, 0, sizeof(gSaveBlock1Ptr->dexSeen));
-
-    // ADDED
-    // set Zoroak pokedex flag to seen
-    // u16 zoroakId = 571;
-    // GetSetPokedexFlag(zoroakId, FLAG_SET_SEEN);
 }
 
 void ClearAllContestWinnerPics(void)
@@ -217,10 +213,28 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+
     // added these
     SetDefaultOptions();
     FlagSet(FLAG_SYS_B_DASH);
     FlagSet(FLAG_DISABLE_BATTLE_RNG);
+
+    DecorationAdd(DECOR_SOLID_BOARD);
+
+    DecorationAdd(DECOR_SPIKES_MAT);
+    DecorationAdd(DECOR_GRASS_CUSHION);
+    DecorationAdd(DECOR_GREEN_POSTER);
+
+    DecorationAdd(DECOR_TROPICAL_PLANT);
+    DecorationAdd(DECOR_BIG_PLANT);
+    DecorationAdd(DECOR_GORGEOUS_PLANT);
+
+    DecorationAdd(DECOR_DITTO_DOLL); // named: Cacnea doll 
+    DecorationAdd(DECOR_LOTAD_DOLL);
+    DecorationAdd(DECOR_TREECKO_DOLL);
+    DecorationAdd(DECOR_VENUSAUR_DOLL);
+
+
 }
 
 static void ResetMiniGamesRecords(void)
