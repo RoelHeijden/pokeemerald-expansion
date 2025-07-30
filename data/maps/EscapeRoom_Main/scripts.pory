@@ -1354,33 +1354,38 @@ script EscapeRoom_MoveRestoredSound{
 
 script EscapeRoom_ZeraoraHintNPC{
     lock
-    faceplayer
+
     if(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
         if(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
-            msgbox(ZeraoraHintMessage1, MSGBOX_DEFAULT)
+            msgbox(ZeraoraHintMessage1, MSGBOX_NPC)
+            waitmessage
+            lock
             giveitem(ITEM_ULTRA_BALL)
             setflag(FLAG_POKE_BALL_OBTAINED)
         }
         else{
-            msgbox(ZeraoraHintMessage2, MSGBOX_DEFAULT)
+            msgbox(ZeraoraHintMessage2, MSGBOX_NPC)
         }
     }
     else{
         if(flag(FLAG_WHITE_HERB_OBTAINED) == FALSE){
-            msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_DEFAULT)
+            msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_NPC)
             waitmessage
+            lock
             giveitem(ITEM_WHITE_HERB)
             setflag(FLAG_WHITE_HERB_OBTAINED)
-            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_DEFAULT)
+            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_NPC)
             waitmessage
         }
         else{
-            msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_DEFAULT)
+            msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_NPC)
             waitmessage
         }
     }
+
     releaseall
 }
+
 
 // ONE-WAY ROCK SMASH NPC
 
@@ -1816,39 +1821,23 @@ movement SecretGarden_PlayerMoveLeft {
 //// RANDOM HINT NPCS ////
 
 script EscapeRoom_AnnihilapeHintNPC{
-    lockall
+    lock
 
     // initial message
-    if(flag(FLAG_ANNIHILAPE_HINT_RECEIVED) == FALSE){
-        // standard message
-        if(flag(FLAG_HIDE_ANNIHILAPE) == TRUE){
-            msgbox(AnnihilapeHintNoMessage1, MSGBOX_AUTOCLOSE)
-            waitmessage
-            delay(20)
-            faceplayer
-            msgbox(AnnihilapeHintNoMessage2, MSGBOX_AUTOCLOSE)
-            waitmessage
-            applymovement(LOCALID_APE_HINT_NPC, _face_up)
-            waitmovement(LOCALID_APE_HINT_NPC)
-        }
-        // if ape has spawned
-        else{
-            faceplayer
-
-            // esclamation mark
-            playse(SE_PIN)
-            applymovement(LOCALID_APE_HINT_NPC, Common_Movement_ExclamationMark)
-            waitmovement(LOCALID_APE_HINT_NPC)
-            delay(30)
-
-            msgbox(AnnihilapeHintMessage, MSGBOX_NPC)
-            setflag(FLAG_ANNIHILAPE_HINT_RECEIVED)
-        }
-    }
-    // post script message
-    else{
+    if(flag(FLAG_HIDE_ANNIHILAPE) == TRUE){
+        msgbox(AnnihilapeHintNoMessage1, MSGBOX_AUTOCLOSE)
+        waitmessage
+        delay(20)
         faceplayer
+        msgbox(AnnihilapeHintNoMessage2, MSGBOX_AUTOCLOSE)
+        waitmessage
+        applymovement(LOCALID_APE_HINT_NPC, _face_up)
+        waitmovement(LOCALID_APE_HINT_NPC)
+    }
+    // if ape has spawned
+    else{
         msgbox(AnnihilapeHintMessage, MSGBOX_NPC)
+        waitmessage
     }
     releaseall
 }

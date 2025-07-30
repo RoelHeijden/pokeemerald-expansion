@@ -31,128 +31,128 @@ EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts_1:
 
 
 EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts::
-# 29 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 28 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	call EscapeRoom_HiddenDungeon_DisableBagUse
-# 30 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 29 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	call EscapeRoom_HiddenDungeon_SetLostItemVars
-# 31 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 30 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	call EscapeRoom_MapScripts_CheckIfAskPreDamage
-# 32 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 31 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	call EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained
 	return
 
 
 EscapeRoom_HiddenDungeon_DisableBagUse::
-# 37 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 36 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_unset FLAG_TOGGLE_BAG_USE, EscapeRoom_HiddenDungeon_DisableBagUse_1
 	return
 
 EscapeRoom_HiddenDungeon_DisableBagUse_1:
-# 38 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 37 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_TOGGLE_BAG_USE
 	return
 
 
 EscapeRoom_HiddenDungeon_SetLostItemVars::
-# 44 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 43 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_set FLAG_DO_RECOVERED_ITEM_MESSAGE, EscapeRoom_HiddenDungeon_SetLostItemVars_1
 	return
 
 EscapeRoom_HiddenDungeon_SetLostItemVars_1:
-# 46 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 45 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setvar VAR_RETRIEVED_HELD_ITEM, 1
 	return
 
 
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained::
-# 51 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 50 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_set FLAG_SECRET_POWER_LEARNED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2
 	return
 
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_1:
-# 52 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 51 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_SECRET_POWER_COMPLETED
-# 53 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 52 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	clearflag FLAG_SECRET_POWER_LEARNED
 	return
 
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2:
-# 51 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 50 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_unset FLAG_SECRET_POWER_COMPLETED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_1
 	return
 
 
 EscapeRoom_HiddenDungeon_DungeonGuard::
-# 64 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 63 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	lockall
-# 65 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 64 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	faceplayer
-# 67 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 66 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_set FLAG_DUNGEON_ENTRY_GRANTED, EscapeRoom_HiddenDungeon_DungeonGuard_2
-# 74 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 73 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardIntro, MSGBOX_AUTOCLOSE
-# 75 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 74 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 78 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 77 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkitem ITEM_RAINBOW_PASS
-# 79 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 78 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_DungeonGuard_5
 EscapeRoom_HiddenDungeon_DungeonGuard_1:
-# 97 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 96 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_HiddenDungeon_DungeonGuard_2:
-# 69 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 68 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardPostEntry, MSGBOX_AUTOCLOSE
-# 70 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 69 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 	goto EscapeRoom_HiddenDungeon_DungeonGuard_1
 
 EscapeRoom_HiddenDungeon_DungeonGuard_5:
-# 82 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 81 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardShowCard, MSGBOX_AUTOCLOSE
-# 83 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 82 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 86 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 85 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE
-# 87 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 86 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 90 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 89 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	applymovement 11, GuardMoveAway
-# 91 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 90 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmovement 11
-# 92 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 91 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	copyobjectxytoperm 11
-# 94 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 93 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_DUNGEON_ENTRY_GRANTED
 	goto EscapeRoom_HiddenDungeon_DungeonGuard_1
 
 
-# 100 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 99 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 GuardMoveAway:
-# 101 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 100 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_left
-# 102 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 101 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	walk_left
-# 103 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 102 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_right
 	step_end
 
 DungeonGuardIntro::
-# 107 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 106 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
 	.string "I'll need to see an entry card, or you\n"
 	.string "are not getting through.$"
 
 DungeonGuardShowCard::
-# 113 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "You hold up the entry card with minimal\n"
-	.string "confidence.$"
+# 112 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "(You hold up your entry card with\n"
+	.string "minimal confidence.)$"
 
 DungeonGuardGivesEntry::
-# 118 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 117 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hmmm...\p"
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
@@ -161,6 +161,6 @@ DungeonGuardGivesEntry::
 	.string "Go on through.$"
 
 DungeonGuardPostEntry::
-# 127 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 126 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "You're not a normal guest are you?\p"
 	.string "Don't cause any trouble$"

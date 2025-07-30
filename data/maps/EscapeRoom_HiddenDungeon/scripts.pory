@@ -24,7 +24,6 @@ script EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts{
     }
 }
 
-
 script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
     call(EscapeRoom_HiddenDungeon_DisableBagUse)
     call(EscapeRoom_HiddenDungeon_SetLostItemVars)
@@ -111,8 +110,8 @@ text DungeonGuardIntro{
 }
 
 text DungeonGuardShowCard{
-    "You hold up the entry card with minimal\n"
-    "confidence."
+    "(You hold up your rainbow-colored entry\n"
+    "card with minimal confidence.)"
 }
 
 text DungeonGuardGivesEntry{
