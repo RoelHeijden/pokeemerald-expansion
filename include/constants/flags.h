@@ -681,7 +681,7 @@
 #define FLAG_SECRET_POWER_LEARNED       0x27D  
 #define FLAG_THIEF_REPLACED             0x27E 
 #define FLAG_SECRET_POWER_COMPLETED     0x27F 
-#define FLAG_UNUSED_0x280               0x280  // unused
+#define FLAG_DUNGEON_ENTRY_GRANTED      0x280  
 #define FLAG_UNUSED_0x281               0x281  // unused
 #define FLAG_PLAYER_JUST_LOST           0x282 
 #define FLAG_JUST_HAD_ZERA_BATTLE       0x283  

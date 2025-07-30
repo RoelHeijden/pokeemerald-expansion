@@ -12992,12 +12992,16 @@ const struct Item gItemsInfo[] =
 
     [ITEM_CARD_KEY] =
     {
-        .name = _("Card Key"),
+        // .name = _("Card Key"),
+        .name = _("Entry Card?"),
         .price = 0,
+        // .description = COMPOUND_STRING(
+        //     "A card-type door\n"
+        //     "key used in Silph\n"
+        //     "Co's office."),
         .description = COMPOUND_STRING(
-            "A card-type door\n"
-            "key used in Silph\n"
-            "Co's office."),
+            "A very official\n"
+            "looking card."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

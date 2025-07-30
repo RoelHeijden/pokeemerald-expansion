@@ -782,21 +782,21 @@ script EscapeRoom_EventScript_ReturnLostItems{
     //// SPECIAL CASES TRAINER5 ////
 
     // special case: Dusk Stone (lost at trainer5)
-    if(flag(FLAG_DUSK_STONE_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+    if(flag(FLAG_DUSK_STONE_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
         clearflag(FLAG_DUSK_STONE_CONSUMED)
         giveitem(ITEM_DUSK_STONE)
         setflag(FLAG_TEMP_2)  // no heal
     }
 
     // special case: Jaboca Berry (lost at trainer5)
-    if(flag(FLAG_JABOCA_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+    if(flag(FLAG_JABOCA_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
         clearflag(FLAG_JABOCA_CONSUMED)
         giveitem(ITEM_JABOCA_BERRY)
         setflag(FLAG_TEMP_2)  // no heal
     }
 
     // special case: Safety Goggles (lost at trainer5)
-    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED)){
+    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
         giveitem(ITEM_SAFETY_GOGGLES)
         setflag(FLAG_TEMP_2)  // no heal
@@ -2309,6 +2309,7 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
         checkpartyitem(VAR_TEMP_0) // sets item in VAR_0x8005
         if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
             removepartyitem(VAR_TEMP_0)
+            clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
         }
     }
 
@@ -2649,6 +2650,7 @@ script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
             givemon(
                 SPECIES_CACNEA,
                 41,
+                item=ITEM_CARD_KEY, // Entry Card
                 abilityNum=2, // water absorb
                 nature=18,    // Bashful
                 gender=0, 
@@ -2707,7 +2709,6 @@ script EscapeRoom_EventScript_FindRareCandy2{
     setflag(FLAG_RARE_CANDY2_OBTAINED)
     releaseall
 }
-
 
 script EscapeRoom_EventScript_FindPrimeape{
     lockall

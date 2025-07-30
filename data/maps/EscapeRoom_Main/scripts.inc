@@ -981,18 +981,18 @@ EscapeRoom_EventScript_ReturnLostItems_25:
 	goto_if_eq EscapeRoom_EventScript_ReturnLostItems_36
 EscapeRoom_EventScript_ReturnLostItems_35:
 # 785 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_DUSK_STONE_CONSUMED, EscapeRoom_EventScript_ReturnLostItems_42
+	goto_if_set FLAG_DUSK_STONE_CONSUMED, EscapeRoom_EventScript_ReturnLostItems_43
 EscapeRoom_EventScript_ReturnLostItems_40:
 # 792 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_JABOCA_CONSUMED, EscapeRoom_EventScript_ReturnLostItems_47
-EscapeRoom_EventScript_ReturnLostItems_45:
+	goto_if_set FLAG_JABOCA_CONSUMED, EscapeRoom_EventScript_ReturnLostItems_50
+EscapeRoom_EventScript_ReturnLostItems_47:
 # 799 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_SAFETY_GOGGLES_CONSUMED, EscapeRoom_EventScript_ReturnLostItems_52
-EscapeRoom_EventScript_ReturnLostItems_50:
+	goto_if_set FLAG_SAFETY_GOGGLES_CONSUMED, EscapeRoom_EventScript_ReturnLostItems_57
+EscapeRoom_EventScript_ReturnLostItems_54:
 # 810 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TEMP_1, EscapeRoom_EventScript_ReturnLostItems_55
+	goto_if_set FLAG_TEMP_1, EscapeRoom_EventScript_ReturnLostItems_61
 # 810 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TEMP_2, EscapeRoom_EventScript_ReturnLostItems_55
+	goto_if_set FLAG_TEMP_2, EscapeRoom_EventScript_ReturnLostItems_61
 # 853 "data/maps/EscapeRoom_Main/scripts.pory"
 	msgbox AntiSoftlockNoItemsReturned, MSGBOX_DEFAULT
 # 854 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -1125,48 +1125,63 @@ EscapeRoom_EventScript_ReturnLostItems_41:
 
 EscapeRoom_EventScript_ReturnLostItems_42:
 # 785 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TRAINER5_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_41
+	goto_if_unset FLAG_TRAINER6_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_41
 	goto EscapeRoom_EventScript_ReturnLostItems_40
 
-EscapeRoom_EventScript_ReturnLostItems_46:
+EscapeRoom_EventScript_ReturnLostItems_43:
+# 785 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_TRAINER5_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_42
+	goto EscapeRoom_EventScript_ReturnLostItems_40
+
+EscapeRoom_EventScript_ReturnLostItems_48:
 # 793 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_JABOCA_CONSUMED
 # 794 "data/maps/EscapeRoom_Main/scripts.pory"
 	giveitem ITEM_JABOCA_BERRY
 # 795 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_TEMP_2
-	goto EscapeRoom_EventScript_ReturnLostItems_45
+	goto EscapeRoom_EventScript_ReturnLostItems_47
 
-EscapeRoom_EventScript_ReturnLostItems_47:
+EscapeRoom_EventScript_ReturnLostItems_49:
 # 792 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TRAINER5_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_46
-	goto EscapeRoom_EventScript_ReturnLostItems_45
+	goto_if_unset FLAG_TRAINER6_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_48
+	goto EscapeRoom_EventScript_ReturnLostItems_47
 
-EscapeRoom_EventScript_ReturnLostItems_51:
+EscapeRoom_EventScript_ReturnLostItems_50:
+# 792 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_TRAINER5_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_49
+	goto EscapeRoom_EventScript_ReturnLostItems_47
+
+EscapeRoom_EventScript_ReturnLostItems_55:
 # 800 "data/maps/EscapeRoom_Main/scripts.pory"
 	clearflag FLAG_SAFETY_GOGGLES_CONSUMED
 # 801 "data/maps/EscapeRoom_Main/scripts.pory"
 	giveitem ITEM_SAFETY_GOGGLES
 # 802 "data/maps/EscapeRoom_Main/scripts.pory"
 	setflag FLAG_TEMP_2
-	goto EscapeRoom_EventScript_ReturnLostItems_50
+	goto EscapeRoom_EventScript_ReturnLostItems_54
 
-EscapeRoom_EventScript_ReturnLostItems_52:
+EscapeRoom_EventScript_ReturnLostItems_56:
 # 799 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TRAINER5_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_51
-	goto EscapeRoom_EventScript_ReturnLostItems_50
+	goto_if_unset FLAG_TRAINER6_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_55
+	goto EscapeRoom_EventScript_ReturnLostItems_54
 
-EscapeRoom_EventScript_ReturnLostItems_55:
+EscapeRoom_EventScript_ReturnLostItems_57:
+# 799 "data/maps/EscapeRoom_Main/scripts.pory"
+	goto_if_set FLAG_TRAINER5_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_56
+	goto EscapeRoom_EventScript_ReturnLostItems_54
+
+EscapeRoom_EventScript_ReturnLostItems_61:
 # 813 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_RAN_FROM_TRAPINCH, EscapeRoom_EventScript_ReturnLostItems_65
-EscapeRoom_EventScript_ReturnLostItems_63:
+	goto_if_set FLAG_RAN_FROM_TRAPINCH, EscapeRoom_EventScript_ReturnLostItems_71
+EscapeRoom_EventScript_ReturnLostItems_69:
 # 839 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TEMP_1, EscapeRoom_EventScript_ReturnLostItems_61
+	goto_if_set FLAG_TEMP_1, EscapeRoom_EventScript_ReturnLostItems_67
 	return
 
-EscapeRoom_EventScript_ReturnLostItems_60:
+EscapeRoom_EventScript_ReturnLostItems_66:
 # 816 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_set FLAG_TEMP_3, EscapeRoom_EventScript_ReturnLostItems_69
+	goto_if_set FLAG_TEMP_3, EscapeRoom_EventScript_ReturnLostItems_75
 # 831 "data/maps/EscapeRoom_Main/scripts.pory"
 	healpartymon SPECIES_AIPOM
 # 834 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -1175,7 +1190,7 @@ EscapeRoom_EventScript_ReturnLostItems_60:
 	waitmessage
 	return
 
-EscapeRoom_EventScript_ReturnLostItems_61:
+EscapeRoom_EventScript_ReturnLostItems_67:
 # 840 "data/maps/EscapeRoom_Main/scripts.pory"
 	special HealPlayerParty
 # 843 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -1184,18 +1199,18 @@ EscapeRoom_EventScript_ReturnLostItems_61:
 	waitmessage
 	return
 
-EscapeRoom_EventScript_ReturnLostItems_64:
+EscapeRoom_EventScript_ReturnLostItems_70:
 # 813 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESPAWN_SET_AT_NURSE1, 1
-	goto_if_eq EscapeRoom_EventScript_ReturnLostItems_60
-	goto EscapeRoom_EventScript_ReturnLostItems_63
+	goto_if_eq EscapeRoom_EventScript_ReturnLostItems_66
+	goto EscapeRoom_EventScript_ReturnLostItems_69
 
-EscapeRoom_EventScript_ReturnLostItems_65:
+EscapeRoom_EventScript_ReturnLostItems_71:
 # 813 "data/maps/EscapeRoom_Main/scripts.pory"
-	goto_if_unset FLAG_TRAINER6_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_64
-	goto EscapeRoom_EventScript_ReturnLostItems_63
+	goto_if_unset FLAG_TRAINER6_DEFEATED, EscapeRoom_EventScript_ReturnLostItems_70
+	goto EscapeRoom_EventScript_ReturnLostItems_69
 
-EscapeRoom_EventScript_ReturnLostItems_69:
+EscapeRoom_EventScript_ReturnLostItems_75:
 # 818 "data/maps/EscapeRoom_Main/scripts.pory"
 	special HealPlayerParty
 # 821 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -3738,12 +3753,12 @@ EscapeRoom_EventScript_TradeAipomLiepardForCacnea::
 # 2625 "data/maps/EscapeRoom_Main/scripts.pory"
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_EventScript_TradeAipomLiepardForCacnea_5
-# 2683 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox CacneaTradeDeclined, MSGBOX_AUTOCLOSE
 # 2684 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox CacneaTradeDeclined, MSGBOX_AUTOCLOSE
+# 2685 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 EscapeRoom_EventScript_TradeAipomLiepardForCacnea_1:
-# 2687 "data/maps/EscapeRoom_Main/scripts.pory"
+# 2688 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
@@ -3772,22 +3787,22 @@ EscapeRoom_EventScript_TradeAipomLiepardForCacnea_5:
 # 2648 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
 # 2649 "data/maps/EscapeRoom_Main/scripts.pory"
-	givemon SPECIES_CACNEA, 41, abilityNum = 2, nature = 18, gender = 0, move1 = MOVE_HIDDEN_POWER, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 0, defEv = 252, speedEv = 252, hpIv = 31, atkIv = 30, defIv = 31, speedIv = 30, spAtkIv = 31, spDefIv = 31
-# 2671 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
+	givemon SPECIES_CACNEA, 41, item = ITEM_CARD_KEY, abilityNum = 2, nature = 18, gender = 0, move1 = MOVE_HIDDEN_POWER, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 0, defEv = 252, speedEv = 252, hpIv = 31, atkIv = 30, defIv = 31, speedIv = 30, spAtkIv = 31, spDefIv = 31
 # 2672 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED
-# 2674 "data/maps/EscapeRoom_Main/scripts.pory"
-	message CacneaReceivedMessage
-# 2675 "data/maps/EscapeRoom_Main/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 2676 "data/maps/EscapeRoom_Main/scripts.pory"
 	lockall
+# 2673 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED
+# 2675 "data/maps/EscapeRoom_Main/scripts.pory"
+	message CacneaReceivedMessage
+# 2676 "data/maps/EscapeRoom_Main/scripts.pory"
+	playfanfare MUS_OBTAIN_ITEM
 # 2677 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitfanfare
+	lockall
 # 2678 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox CacneaTradeAccepted, MSGBOX_AUTOCLOSE
+	waitfanfare
 # 2679 "data/maps/EscapeRoom_Main/scripts.pory"
+	msgbox CacneaTradeAccepted, MSGBOX_AUTOCLOSE
+# 2680 "data/maps/EscapeRoom_Main/scripts.pory"
 	waitmessage
 	goto EscapeRoom_EventScript_TradeAipomLiepardForCacnea_1
 
@@ -3811,29 +3826,29 @@ EscapeRoom_EventScript_TradeAipomLiepardForCacnea_12:
 
 
 EscapeRoom_EventScript_FindLiepardCollar::
-# 2696 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 2697 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_POWER_LENS
+	lockall
 # 2698 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 22
+	finditem ITEM_POWER_LENS
 # 2699 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_LIEPARD_COLLAR_OBTAINED
+	removeobject 22
 # 2700 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_LIEPARD_COLLAR_OBTAINED
+# 2701 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_EventScript_FindRareCandy2::
-# 2704 "data/maps/EscapeRoom_Main/scripts.pory"
-	lockall
 # 2705 "data/maps/EscapeRoom_Main/scripts.pory"
-	finditem ITEM_RARE_CANDY
+	lockall
 # 2706 "data/maps/EscapeRoom_Main/scripts.pory"
-	removeobject 16
+	finditem ITEM_RARE_CANDY
 # 2707 "data/maps/EscapeRoom_Main/scripts.pory"
-	setflag FLAG_RARE_CANDY2_OBTAINED
+	removeobject 16
 # 2708 "data/maps/EscapeRoom_Main/scripts.pory"
+	setflag FLAG_RARE_CANDY2_OBTAINED
+# 2709 "data/maps/EscapeRoom_Main/scripts.pory"
 	releaseall
 	return
 

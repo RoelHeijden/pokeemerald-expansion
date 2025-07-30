@@ -1,10 +1,12 @@
 
+const LOCALID_DUNGEON_GUARD = 11
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_HiddenDungeon_MapScripts {
     MAP_SCRIPT_ON_RESUME: EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts
+    MAP_SCRIPT_ON_TRANSITION: EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
@@ -13,6 +15,14 @@ mapscripts EscapeRoom_HiddenDungeon_MapScripts {
     ] 
 }
 
+
+script EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts{
+    // keep dungeon guard moved from the door
+    if(flag(FLAG_DUNGEON_ENTRY_GRANTED)){
+        setobjectxyperm(LOCALID_DUNGEON_GUARD, 4, 8)
+        setobjectmovementtype(LOCALID_DUNGEON_GUARD, MOVEMENT_TYPE_FACE_RIGHT)
+    }
+}
 
 
 script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
@@ -50,5 +60,68 @@ script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
 
 
 
+script EscapeRoom_HiddenDungeon_DungeonGuard{
+    lockall
+    faceplayer
 
+    if(flag(FLAG_DUNGEON_ENTRY_GRANTED)){
+        // post script message
+        msgbox(DungeonGuardPostEntry, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        // intro message
+        msgbox(DungeonGuardIntro, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // check card
+        checkitem(ITEM_CARD_KEY)
+        if(var(VAR_RESULT) == TRUE){
+
+            // show card message
+            message(DungeonGuardShowCard)
+            waitmessage
+            msgbox(DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE)
+            waitmessage
+
+            // move NPC away
+            applymovement(LOCALID_DUNGEON_GUARD, GuardMoveAway)
+            waitmovement(LOCALID_DUNGEON_GUARD)
+            copyobjectxytoperm(LOCALID_DUNGEON_GUARD)
+            
+            setflag(FLAG_DUNGEON_ENTRY_GRANTED)
+        }
+    }
+    releaseall
+}
+
+movement GuardMoveAway {
+    face_left
+    walk_left
+    face_right
+}
+
+
+text DungeonGuardIntro{
+    "Access to this zone is restricted.\p"
+    "Show me your entry card, or you're not\n"
+    "getting through."
+}
+
+
+text DungeonGuardShowCard{
+    "You show your entry card."
+}
+
+text DungeonGuardGivesEntry{
+    "...\p"
+    "This doesn't look like one of our usual\n"
+    "entry cards.\p"
+    "But hey, looks legit enough to me!"
+}
+
+text DungeonGuardPostEntry{
+    "You're not a normal guest are you?\p"
+    "Don't cause any trouble"
+}
 
