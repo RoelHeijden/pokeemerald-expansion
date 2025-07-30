@@ -480,6 +480,7 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_LEPPA_BERRY)
 
     // additem(ITEM_HM01)
+    // additem(ITEM_SAFETY_GOGGLES)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -2650,7 +2651,7 @@ script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
             givemon(
                 SPECIES_CACNEA,
                 41,
-                item=ITEM_CARD_KEY, // Entry Card
+                item=ITEM_RAINBOW_PASS, // Entry Card
                 abilityNum=2, // water absorb
                 nature=18,    // Bashful
                 gender=0, 
@@ -3906,16 +3907,14 @@ text SecretGardenNPC_PlantLove_No{
 text SecretGardenNPC_PlantLove_Yes{
     "Of course you do!\p"
 
-    "Let me teach your cactus how to find\n"
-    "power in any terrain.\p"
+    "Let me teach your cactus how to use\n"
+    "the power of its surroundings.\p"
 
     "It's a gift from the secret garden."
 }
 
 text SecretGardenNPC_PlantLove_Yes_Thief{
     "Oh... your Pokémon knows Thief.\p"
-
-    "Hmmm...\p"
 
     "The garden usually doesn't share its\n"
     "secrets with those who steal.\p"
@@ -4148,7 +4147,7 @@ text FlorgesTradeDeclined{
 }
 
 text FlorgesTradePostTrade{
-    "Do I sense regret?"
+    "You're doing great."
 }
 
 text PlayerObtainedFlorgesMessage{

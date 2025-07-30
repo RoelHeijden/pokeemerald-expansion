@@ -6416,11 +6416,16 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Cactus"),
         .height = 4,
         .weight = 513,
+        // .description = COMPOUND_STRING(
+        //     "Cacnea live in deserts with virtually no\n"
+        //     "rainfall. It battles by swinging its thick,\n"
+        //     "spiked arms. Once a year, a yellow flower\n"
+        //     "blooms."),
         .description = COMPOUND_STRING(
             "Cacnea live in deserts with virtually no\n"
             "rainfall. It battles by swinging its thick,\n"
-            "spiked arms. Once a year, a yellow flower\n"
-            "blooms."),
+            "spiked arms. At some point it likes to\n"
+            "steal an item."), // ADDED
         .pokemonScale = 455,
         .pokemonOffset = 20,
         .trainerScale = 256,

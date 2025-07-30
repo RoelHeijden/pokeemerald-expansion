@@ -267,7 +267,7 @@
       "width": 40,
       "height": 140,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_Mauville",
+      "secondary_tileset": "gTileset_BattleArena",
       "border_filepath": "data/layouts/Route111/border.bin",
       "blockdata_filepath": "data/layouts/Route111/map.bin"
     },
@@ -4434,8 +4434,8 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_SHORTCUT_ROUTE",
       "name": "EscapeRoom_ShortcutRoute_Layout",
-      "width": 55,
-      "height": 30,
+      "width": 39,
+      "height": 25,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/EscapeRoom_ShortcutRoute/border.bin",

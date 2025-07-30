@@ -75,12 +75,14 @@ script EscapeRoom_HiddenDungeon_DungeonGuard{
         waitmessage
 
         // check card
-        checkitem(ITEM_CARD_KEY)
+        checkitem(ITEM_RAINBOW_PASS)
         if(var(VAR_RESULT) == TRUE){
 
             // show card message
-            message(DungeonGuardShowCard)
+            msgbox(DungeonGuardShowCard, MSGBOX_AUTOCLOSE)
             waitmessage
+
+            // entry given message
             msgbox(DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE)
             waitmessage
 
@@ -104,20 +106,22 @@ movement GuardMoveAway {
 
 text DungeonGuardIntro{
     "Access to this zone is restricted.\p"
-    "Show me your entry card, or you're not\n"
-    "getting through."
+    "I'll need to see an entry card, or you\n"
+    "are not getting through."
 }
 
-
 text DungeonGuardShowCard{
-    "You show your entry card."
+    "You hold up the entry card with minimal\n"
+    "confidence."
 }
 
 text DungeonGuardGivesEntry{
-    "...\p"
+    "Hmmm...\p"
     "This doesn't look like one of our usual\n"
     "entry cards.\p"
-    "But hey, looks legit enough to me!"
+    "...\p"
+    "I've seen worse.\n"
+    "Go on through."
 }
 
 text DungeonGuardPostEntry{

@@ -13001,7 +13001,8 @@ const struct Item gItemsInfo[] =
         //     "Co's office."),
         .description = COMPOUND_STRING(
             "A very official\n"
-            "looking card."),
+            "looking entry\n"
+            "card"),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
@@ -13061,13 +13062,18 @@ const struct Item gItemsInfo[] =
 
     [ITEM_RAINBOW_PASS] =
     {
-        .name = _("Rainbow Pass"),
-        .pluralName = _("Rainbow Passes"),
+        // .name = _("Rainbow Pass"),
+        // .pluralName = _("Rainbow Passes"),
+        .name = _("Entry Card?"),
         .price = 0,
+        // .description = COMPOUND_STRING(
+        //     "For ferries serving\n"
+        //     "Vermilion and the\n"
+        //     "Sevii Islands."),
         .description = COMPOUND_STRING(
-            "For ferries serving\n"
-            "Vermilion and the\n"
-            "Sevii Islands."),
+            "A very official\n"
+            "looking entry\n"
+            "card."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

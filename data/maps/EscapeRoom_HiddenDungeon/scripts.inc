@@ -94,12 +94,12 @@ EscapeRoom_HiddenDungeon_DungeonGuard::
 # 75 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 # 78 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	checkitem ITEM_CARD_KEY
+	checkitem ITEM_RAINBOW_PASS
 # 79 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_DungeonGuard_5
 EscapeRoom_HiddenDungeon_DungeonGuard_1:
-# 93 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 97 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
@@ -116,41 +116,51 @@ EscapeRoom_HiddenDungeon_DungeonGuard_5:
 # 83 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 # 86 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	applymovement 11, GuardMoveAway
+	msgbox DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE
 # 87 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	waitmovement 11
-# 88 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	copyobjectxytoperm 11
+	waitmessage
 # 90 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	applymovement 11, GuardMoveAway
+# 91 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	waitmovement 11
+# 92 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	copyobjectxytoperm 11
+# 94 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_DUNGEON_ENTRY_GRANTED
 	goto EscapeRoom_HiddenDungeon_DungeonGuard_1
 
 
-# 96 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 100 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 GuardMoveAway:
-# 97 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 101 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_left
-# 98 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 102 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	walk_left
-# 99 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 103 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_right
 	step_end
 
 DungeonGuardIntro::
-# 103 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 107 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
-	.string "Show me your entry card, or you're\n"
-	.string "not getting through.$"
+	.string "I'll need to see an entry card, or you\n"
+	.string "are not getting through.$"
 
 DungeonGuardShowCard::
-# 109 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "You hand over your entry card.\p"
+# 113 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "You hold up the entry card with minimal\n"
+	.string "confidence.$"
+
+DungeonGuardGivesEntry::
+# 118 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "Hmmm...\p"
+	.string "This doesn't look like one of our usual\n"
+	.string "entry cards.\p"
 	.string "...\p"
-	.string "This doesn't look like one of our\n"
-	.string "usual entry cards.\p"
-	.string "But hey, looks legit enough to me!$"
+	.string "I've seen worse.\n"
+	.string "Go on through.$"
 
 DungeonGuardPostEntry::
-# 117 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "You're not a normal person are you?\p"
+# 127 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "You're not a normal guest are you?\p"
 	.string "Don't cause any trouble$"
