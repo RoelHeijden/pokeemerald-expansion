@@ -1,4 +1,4 @@
-const LOCALID_PRIMEAPE_BALL = 8
+
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -19,8 +19,8 @@ script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
     call(EscapeRoom_HiddenDungeon_DisableBagUse)
     call(EscapeRoom_HiddenDungeon_SetLostItemVars)
     call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
+    call(EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained)
 } 
-
 
 script EscapeRoom_HiddenDungeon_DisableBagUse{
     // disable bag use 
@@ -37,78 +37,18 @@ script EscapeRoom_HiddenDungeon_SetLostItemVars{
     }
 }
 
+script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
+    if(flag(FLAG_SECRET_POWER_LEARNED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
+        setflag(FLAG_SECRET_POWER_COMPLETED)
+        clearflag(FLAG_SECRET_POWER_LEARNED) // for secret garden guard messaging
+    }
+}
 
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
-script EscapeRoom_HiddenDungeon_FindPrimeape{
-    lockall
 
-    // ask pickup item
-    msgbox(PrimeapePokeballMessage, MSGBOX_YESNO)
-    if(var(VAR_RESULT) != YES){
-        releaseall
-        end
-    }
 
-    // obtain primeape
-    givemon(
-        SPECIES_PRIMEAPE,
-        44,
-        ball=ITEM_POKE_BALL,
-        abilityNum=2, // Defiant
-        nature=15, // Modest 
-        gender=MON_FEMALE,
-        move1=MOVE_TAUNT,
-        move2=MOVE_RAGE_FIST,
-        move3=MOVE_COUNTER,
-        move4=MOVE_NONE,
-        // EVs:
-        atkEv=0, 
-        spAtkEv=0,
-        speedEv=0,
-        // IVs:
-        hpIv=31,
-        atkIv=31,
-        defIv=31,
-        speedIv=31, // outspeed dusknoir
-        spAtkIv=31,
-        spDefIv=31
-    )   
-
-    // remove item
-    removeobject(LOCALID_PRIMEAPE_BALL)
-    setflag(FLAG_PRIMEAPE_OBTAINED)
-
-    // primeape obtained message
-    playfanfare(MUS_OBTAIN_ITEM)
-    message(PrimeapeObtainMessage)
-    waitfanfare
-    waitmessage
-
-    // nickname
-	msgbox(NicknameThisPokemonMessage2, MSGBOX_YESNO)
-	if(var(VAR_RESULT) == YES){
-        call(Common_EventScript_GetGiftMonPartySlot)
-        call(Common_EventScript_NameReceivedPartyMon)
-    }
-    closemessage
-    releaseall
-}
-
-text NicknameThisPokemonMessage2{
-    "Do you want to give a nickname to\n"
-	"this Primeape?"
-}
-
-text PrimeapePokeballMessage{
-    "There's a Pokémon inside the Poke Ball.\p"
-    "Do you want to pick it up?"
-}
-
-text PrimeapeObtainMessage{
-    "{PLAYER} received a Primeape!"
-}
 

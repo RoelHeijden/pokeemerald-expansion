@@ -22,6 +22,8 @@ EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts::
 	call EscapeRoom_HiddenDungeon_SetLostItemVars
 # 21 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	call EscapeRoom_MapScripts_CheckIfAskPreDamage
+# 22 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	call EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained
 	return
 
 
@@ -47,63 +49,20 @@ EscapeRoom_HiddenDungeon_SetLostItemVars_1:
 	return
 
 
-EscapeRoom_HiddenDungeon_FindPrimeape::
-# 47 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	lockall
-# 50 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox PrimeapePokeballMessage, MSGBOX_YESNO
-# 51 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	compare VAR_RESULT, YES
-	goto_if_ne EscapeRoom_HiddenDungeon_FindPrimeape_2
-# 57 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	givemon SPECIES_PRIMEAPE, 44, ball = ITEM_POKE_BALL, abilityNum = 2, nature = 15, gender = MON_FEMALE, move1 = MOVE_TAUNT, move2 = MOVE_RAGE_FIST, move3 = MOVE_COUNTER, move4 = MOVE_NONE, atkEv = 0, spAtkEv = 0, speedEv = 0, hpIv = 31, atkIv = 31, defIv = 31, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 82 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	removeobject 8
-# 83 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	setflag FLAG_PRIMEAPE_OBTAINED
-# 86 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	playfanfare MUS_OBTAIN_ITEM
-# 87 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	message PrimeapeObtainMessage
-# 88 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	waitfanfare
-# 89 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	waitmessage
-# 92 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox NicknameThisPokemonMessage2, MSGBOX_YESNO
-# 93 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	compare VAR_RESULT, YES
-	goto_if_eq EscapeRoom_HiddenDungeon_FindPrimeape_5
-EscapeRoom_HiddenDungeon_FindPrimeape_4:
-# 97 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	closemessage
-# 98 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	releaseall
+EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained::
+# 41 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	goto_if_set FLAG_SECRET_POWER_LEARNED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2
 	return
 
-EscapeRoom_HiddenDungeon_FindPrimeape_2:
-# 52 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	releaseall
-	end
+EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_1:
+# 42 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	setflag FLAG_SECRET_POWER_COMPLETED
+# 43 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	clearflag FLAG_SECRET_POWER_LEARNED
+	return
 
-EscapeRoom_HiddenDungeon_FindPrimeape_5:
-# 94 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	call Common_EventScript_GetGiftMonPartySlot
-# 95 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	call Common_EventScript_NameReceivedPartyMon
-	goto EscapeRoom_HiddenDungeon_FindPrimeape_4
+EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2:
+# 41 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	goto_if_unset FLAG_SECRET_POWER_COMPLETED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_1
+	return
 
-
-NicknameThisPokemonMessage2::
-# 101 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "Do you want to give a nickname to\n"
-	.string "this Primeape?$"
-
-PrimeapePokeballMessage::
-# 106 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "There's a Pokémon inside the Poke Ball.\p"
-	.string "Do you want to pick it up?$"
-
-PrimeapeObtainMessage::
-# 111 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "{PLAYER} received a Primeape!$"

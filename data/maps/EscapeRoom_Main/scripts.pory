@@ -32,13 +32,16 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const LOCALID_RARE_CANDY2 = 33
+const LOCALID_PRIMEAPE_BALL = 33
 const LOCALID_SECRETGARDEN_GUARD = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
 const _DUMMY_9 = 39
+
+const LOCALID_SECRET_BASE_CANDY = 16
+
 
 
 movement _face_down {
@@ -1579,14 +1582,6 @@ script EscapeRoom_SecretGarden_SecretPowerNPC{
     lockall
     faceplayer
 
-
-    // REMOVE @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    if(flag(FLAG_UNUSED_0x295) == FALSE){
-        giveitem(ITEM_TM46)
-        setflag(FLAG_UNUSED_0x295)
-    }
-
-
     // end if Secret Power already learned
     if(flag(FLAG_SECRET_POWER_LEARNED)){
         msgbox(SecretGardenNPC_EndOfScriptMessage, MSGBOX_AUTOCLOSE)
@@ -1732,7 +1727,7 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
         msgbox(SecretGardenGuardStayOut, MSGBOX_AUTOCLOSE)
         waitmessage
     }
-    else{
+    elif(!flag(FLAG_SECRET_POWER_COMPLETED)){
         msgbox(SecretGardenGuardRemoveSecretPower, MSGBOX_AUTOCLOSE)
         waitmessage
         lockall
@@ -2654,7 +2649,6 @@ script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
             givemon(
                 SPECIES_CACNEA,
                 41,
-                item=ITEM_RARE_CANDY // REMOVE!
                 abilityNum=2, // water absorb
                 nature=18,    // Bashful
                 gender=0, 
@@ -2709,8 +2703,65 @@ script EscapeRoom_EventScript_FindLiepardCollar{
 script EscapeRoom_EventScript_FindRareCandy2{
     lockall
     finditem(ITEM_RARE_CANDY)
-    removeobject(LOCALID_RARE_CANDY2)
+    removeobject(LOCALID_SECRET_BASE_CANDY)
     setflag(FLAG_RARE_CANDY2_OBTAINED)
+    releaseall
+}
+
+
+script EscapeRoom_EventScript_FindPrimeape{
+    lockall
+
+    // ask pickup item
+    msgbox(PrimeapePokeballMessage, MSGBOX_YESNO)
+    if(var(VAR_RESULT) != YES){
+        releaseall
+        end
+    }
+
+    // obtain primeape
+    givemon(
+        SPECIES_PRIMEAPE,
+        44,
+        ball=ITEM_POKE_BALL,
+        item=ITEM_RARE_CANDY,
+        abilityNum=2, // Defiant
+        nature=15, // Modest 
+        gender=MON_FEMALE,
+        move1=MOVE_TAUNT,
+        move2=MOVE_RAGE_FIST,
+        move3=MOVE_COUNTER,
+        move4=MOVE_NONE,
+        // EVs:
+        atkEv=0, 
+        spAtkEv=0,
+        speedEv=0,
+        // IVs:
+        hpIv=31,
+        atkIv=31,
+        defIv=31,
+        speedIv=31, // outspeed dusknoir
+        spAtkIv=31,
+        spDefIv=31
+    )   
+
+    // remove item
+    removeobject(LOCALID_PRIMEAPE_BALL)
+    setflag(FLAG_PRIMEAPE_OBTAINED)
+
+    // primeape obtained message
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(PrimeapeObtainMessage)
+    waitfanfare
+    waitmessage
+
+    // nickname
+	msgbox(NicknameThisPokemonMessage2, MSGBOX_YESNO)
+	if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+    closemessage
     releaseall
 }
 
@@ -3868,12 +3919,11 @@ text SecretGardenNPC_PlantLove_Yes_Thief{
     "The garden usually doesn't share its\n"
     "secrets with those who steal.\p"
 
-    "I'm willing to make an exception, but\n"
-    "Thief will be forgotten.\l"
+    "I could make an exception, but Thief\n"
+    "will be forgotten.\p"
+
     "Is that alright?"
 
-    // "I'll still teach your cactus, but Thief\n"
-    // "will be forgotten. Is that alright?"
 }
 
 text SecretGardenNPC_TeachDeclinedMessage{
@@ -3945,6 +3995,23 @@ text MartNPC_AskToShop{
 text MartNPC_SayGoodbye{
     "See ya!"
 }
+
+// PRIMEAPE ITEM BALL
+
+text PrimeapePokeballMessage{
+    "There's a Primeape inside the Poke Ball.\p"
+    "Do you want to take it?"
+}
+
+text PrimeapeObtainMessage{
+    "{PLAYER} received a Primeape!"
+}
+
+text NicknameThisPokemonMessage2{
+    "Do you want to give a nickname to\n"
+	"this Primeape?"
+}
+
 
 
 // MOVE DELETER NPC

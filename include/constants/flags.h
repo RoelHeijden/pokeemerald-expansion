@@ -680,22 +680,22 @@
 #define FLAG_MENTAL_HERB_IS_LOST        0x27C  
 #define FLAG_SECRET_POWER_LEARNED       0x27D  
 #define FLAG_THIEF_REPLACED             0x27E 
-#define FLAG_UNUSED_0x27F  0x27F // Unused Flag
-#define FLAG_UNUSED_0x280  0x280 // Unused Flag
-#define FLAG_UNUSED_0x281  0x281 // Unused Flag
-#define FLAG_UNUSED_0x282  0x282 // Unused Flag
-#define FLAG_UNUSED_0x283  0x283 // Unused Flag
-#define FLAG_UNUSED_0x284  0x284 // Unused Flag
+#define FLAG_SECRET_POWER_COMPLETED     0x27F 
+#define FLAG_UNUSED_0x280               0x280  // unused
+#define FLAG_UNUSED_0x281               0x281  // unused
+#define FLAG_PLAYER_JUST_LOST           0x282 
+#define FLAG_JUST_HAD_ZERA_BATTLE       0x283  
+#define FLAG_MENTAL_HERB_SOLD_OUT       0x284 
 #define FLAG_UNUSED_0x285  0x285 // Unused Flag
 #define FLAG_UNUSED_0x286  0x286 // Unused Flag
 #define FLAG_UNUSED_0x287  0x287 // Unused Flag
 #define FLAG_UNUSED_0x288  0x288 // Unused Flag
 #define FLAG_UNUSED_0x289  0x289 // Unused Flag
 #define FLAG_UNUSED_0x28A  0x28A // Unused Flag
-#define FLAG_PLAYER_JUST_LOST             0x28B
-#define FLAG_JUST_HAD_ZERA_BATTLE         0x28C  
-#define FLAG_UNUSED_0x28D   0x28D // Unused Flag
-#define FLAG_MENTAL_HERB_SOLD_OUT         0x28E 
+#define FLAG_UNUSED_0x28B  0x28B // Unused Flag
+#define FLAG_UNUSED_0x28C  0x28C // Unused Flag  
+#define FLAG_UNUSED_0x28D  0x28D // Unused Flag
+#define FLAG_UNUSED_0x28E  0x28E // Unused Flag 
 #define FLAG_UNUSED_0x28F  0x28F // Unused Flag
 #define FLAG_UNUSED_0x290  0x290 // Unused Flag
 #define FLAG_UNUSED_0x291  0x291 // Unused Flag
