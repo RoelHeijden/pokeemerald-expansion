@@ -403,6 +403,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_FLORGES,
         22,
+        ball=ITEM_HEAVY_BALL,
         item=ITEM_EXP_CANDY_S,
         abilityNum=2, // symbiosis
         nature=21, // gentle
@@ -2311,23 +2312,53 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     // ERROR CHECK
     // - 500 money
     // - trainer 4 & 5 defeated
-    // - custap used
-    // - safety goggles used
+    // - no held item (custap and goggles used)
+    // - no bag items
     checkpartyitem(0)
     copyvar(VAR_0x8006, VAR_0x8005)
     checkpartyitem(1)
     copyvar(VAR_0x8007, VAR_0x8005)
 
     checkitem(ITEM_SAFETY_GOGGLES)
+    copyvar(VAR_TEMP_0, VAR_RESULT)
+    checkitem(ITEM_CUSTAP_BERRY)
+    copyvar(VAR_TEMP_1, VAR_RESULT)
+
+    checkitem(ITEM_SUN_STONE)
+    copyvar(VAR_TEMP_2, VAR_RESULT)
+    checkitem(ITEM_MOON_STONE)
+    copyvar(VAR_TEMP_3, VAR_RESULT)
+    checkitem(ITEM_DUSK_STONE)
     copyvar(VAR_TEMP_4, VAR_RESULT)
+
+    checkitem(ITEM_LEPPA_BERRY)
+    copyvar(VAR_TEMP_5, VAR_RESULT)
+    checkitem(ITEM_JABOCA_BERRY)
+    copyvar(VAR_TEMP_6, VAR_RESULT)
+    checkitem(ITEM_BERRY_JUICE)
+    copyvar(VAR_TEMP_7, VAR_RESULT)
+
+    checkitem(ITEM_RING_TARGET)
+    copyvar(VAR_TEMP_8, VAR_RESULT)
+    checkitem(ITEM_MENTAL_HERB)
+    copyvar(VAR_TEMP_9, VAR_RESULT)
 
     checkexactmoney(500)
     if(var(VAR_RESULT) == FALSE
         || !flag(FLAG_TRAINER4_DEFEATED)
         || !flag(FLAG_TRAINER5_DEFEATED)
-        || (var(VAR_0x8006) == ITEM_CUSTAP_BERRY || var(VAR_0x8007) == ITEM_CUSTAP_BERRY)
-        || (var(VAR_0x8006) == ITEM_SAFETY_GOGGLES || var(VAR_0x8007) == ITEM_SAFETY_GOGGLES)
-        || var(VAR_TEMP_4) == TRUE)
+        || var(VAR_0x8006) != ITEM_NONE 
+        || var(VAR_0x8007) != ITEM_NONE
+        || var(VAR_TEMP_0) == TRUE
+        || var(VAR_TEMP_1) == TRUE
+        || var(VAR_TEMP_2) == TRUE
+        || var(VAR_TEMP_3) == TRUE
+        || var(VAR_TEMP_4) == TRUE
+        || var(VAR_TEMP_5) == TRUE
+        || var(VAR_TEMP_6) == TRUE
+        || var(VAR_TEMP_7) == TRUE
+        || var(VAR_TEMP_8) == TRUE
+        || var(VAR_TEMP_9) == TRUE)
     {
         lockall
         msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -2601,86 +2632,6 @@ script EscapeRoom_EventScript_SellDunsparce{
     releaseall
 }
 
-script EscapeRoom_EventScript_TradeAipomLiepardForCacnea{
-    lock
-    faceplayer
-
-    // post trade 
-    if(flag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED) == TRUE){
-        msgbox(CacneaTradePostTrade, MSGBOX_NPC)
-        waitmessage
-    }
-    else{
-        // ask trade
-        msgbox(AskCacneaTrade, MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-
-            // check if pokemon in party
-            checkpartymon(SPECIES_AIPOM)
-            if(var(VAR_RESULT) == PARTY_SIZE)
-            {
-                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-                releaseall
-                end
-            }
-            checkpartymon(SPECIES_LIEPARD)
-            if(var(VAR_RESULT) == PARTY_SIZE)
-            {
-                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-                releaseall
-                end
-            }
-
-            // trade pokemon
-            removemon(SPECIES_AIPOM)
-            removemon(SPECIES_LIEPARD)
-            lockall
-            givemon(
-                SPECIES_CACNEA,
-                41,
-                item=ITEM_RAINBOW_PASS, // Entry Card
-                abilityNum=2, // water absorb
-                nature=18,    // Bashful
-                gender=0, 
-                move1=MOVE_HIDDEN_POWER,
-                move2=MOVE_NONE,
-                move3=MOVE_NONE,
-                move4=MOVE_NONE,
-                // EVs:
-                hpEv=0, 
-                defEv=252,
-                speedEv=252, // scarf ditto outspeed primeape/annihilape
-                // IVs:
-                hpIv=31,
-                atkIv=30,    // hp psychic
-                defIv=31,
-                speedIv=30,  // hp psychic
-                spAtkIv=31,
-                spDefIv=31
-            )
-            lockall
-            setflag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)
-
-            message(CacneaReceivedMessage)
-            playfanfare(MUS_OBTAIN_ITEM)
-            lockall
-            waitfanfare
-            msgbox(CacneaTradeAccepted, MSGBOX_AUTOCLOSE)
-            waitmessage
-        }
-        // trade declined
-        else{
-            msgbox(CacneaTradeDeclined, MSGBOX_AUTOCLOSE)
-            waitmessage
-        }
-    }
-    releaseall
-
-
-}
-
 
 //// ITEMS ////
 
@@ -2714,7 +2665,7 @@ script EscapeRoom_EventScript_FindPrimeape{
     givemon(
         SPECIES_PRIMEAPE,
         44,
-        ball=ITEM_POKE_BALL,
+        ball=ITEM_TIMER_BALL,
         item=ITEM_RARE_CANDY,
         abilityNum=2, // Defiant
         nature=15, // Modest 
@@ -4182,30 +4133,6 @@ text DunsparceTradePostTrade{
 }
 
 
-// TRADE NPC 5 - Aipom Smeargle
-text AskCacneaTrade{
-    "TBD (start trade)"
-}
-
-text CacneaReceivedMessage{
-    "{PLAYER} received a Cacnea!"
-}
-
-text CacneaTradeAccepted{
-    "Bye-bye Aipom.\p"
-    "Bye-bye Liepard."
-}
-
-text CacneaTradeDeclined{
-    "TBD (trade declined)"
-}
-
-text CacneaTradePostTrade{
-    "TBD (post trade)"
-}
-
-
-
 // BATTLES - OTHER
 text DoubleBattle_NotEnoughMons{
     "Want to battle?\n"
@@ -4221,11 +4148,11 @@ text Trainer1_Intro{
 }
 
 text Trainer1_Outro{
-    "You cheated."
+    "We have a deal!"
 }
 
 text Trainer1_PostBattle{
-    "Fock off."
+    "I can finally add Zeraora to my Pokédex!"
 }
 
 text AskZeraCutTradeMessage{
@@ -4251,11 +4178,12 @@ text Trainer2_Intro{
 }
 
 text Trainer2_Outro{
-    "You cheated."
+    "My grass!"
 }
 
 text Trainer2_PostBattle{
-    "Fock off."
+    "Good luck with the next trainer.\n"
+    "I never quite get what he's saying."
 }
 
 
@@ -4266,11 +4194,11 @@ text Trainer3_Intro{
 }
 
 text Trainer3_Outro{
-    "You cheated."
+    "Right on, pretty exciting!"
 }
 
 text Trainer3_PostBattle{
-    "Fock off."
+    "Good luck with the escape!"
 }
 
 text Trainer3FinalWords{
@@ -4280,15 +4208,16 @@ text Trainer3FinalWords{
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
-    "Ugh.. I feel exhausted already."
+    "Exhausted already?"
 }
 
 text Trainer4_Outro{
-    "You cheated."
+    "You should get out of here."
 }
 
 text Trainer4_PostBattle{
-    "Fock off."
+    "Did you know that 5A + 2L = 525?\n"
+    "Me neither."
 }
 
 
@@ -4303,7 +4232,7 @@ text Trainer5_Outro{
 }
 
 text Trainer5_PostBattle{
-    "Fock off."
+    "Let's never do that again."
 }
 
 text Trainer5_RemoveAssistMessage{
@@ -4321,31 +4250,37 @@ text Trainer6_Intro{
 }
 
 text Trainer6_Outro{
-    "You cheated."
+    "Oh how the tablets have turned."
 }
 
 text Trainer6_PostBattle{
-    "Fock off."
+    "My birds deliver letters, not lunch.\n"
+    "Guess I need a cook."
 }
 
 
 // TRAINER 7A
 text Trainer7A_Intro{
-    "TBD"
+    "That old lady makes a move on nearly\n"
+    "everyone who walks by.\p"
+    "Honestly, I can't take it anymore.\n"
+    "I'm barely holding it together."
 }
 
 text Trainer7A_Outro{
-    "You cheated."
+    "I still think she's being two forward."
 }
 
 text Trainer7A_PostBattle{
-    "Fock off."
+    // "dusclops? sus."
+    "fwuenqru? uwu."
 }
 
 
 // TRAINER 7B
 text Trainer7B_Intro{
-    "Well aren't you a sight for sore eyes?"
+    "Hello handsome.\n"
+    "Aren't you a sight for sore eyes?"
 }
 
 text Trainer7B_Outro{
@@ -4353,49 +4288,60 @@ text Trainer7B_Outro{
 }
 
 text Trainer7B_PostBattle{
-    "Fock off."
+    "I don't think I was meant to be\n"
+    "beatable..."
 }
 
 
 // TRAINER 8
 text Trainer8_Intro{
-    "TBD"
+    "Spooky, scary skeletons,\n"
+    "send shivers down your spine.\p"
+    "Everyone's got ghost-type mons,\n"
+    "but you haven't yet fought mine."
 }
 
 text Trainer8_Outro{
-    "You cheated."
+    "Not a normal Pokémon!"
 }
 
 text Trainer8_PostBattle{
-    "Fock off."
+    "Wow, you're really strong!\n"
+    "Is there anyone you cannot beat?"
 }
 
 
 // TRAINER 9 - Lucario Lucario (unbeatable double)
 text Trainer9_Intro{
-    "Don't get your hopes up."
+    "So many trainers, but battles are rare.\n"
+    "Some pretend like we're not even there."
 }
 
 text Trainer9_Outro{
-    "You cheated."
+    "There. Only real battlers."
 }
 
 text Trainer9_PostBattle{
-    "Fock off."
+    "I somehow doubt this was your last time\n"
+    "passing through."
 }
 
 
 // TRAINER 10
 text Trainer10_Intro{
-    "TBD"
+    "I've decided to let my anger run free\n"
+    "and have it push me toward change.\p"
+    "I call it character development, but\n"
+    "perhaps it's not for everyone."
 }
 
 text Trainer10_Outro{
-    "You cheated."
+    "Whatever happened to Cacturne?"
 }
 
 text Trainer10_PostBattle{
-    "Fock off."
+    "Don't stop now.\n"
+    "You're almost there!"
 }
 
 
@@ -4405,11 +4351,11 @@ text Trainer11_Intro{
 }
 
 text Trainer11_Outro{
-    "You cheated."
+    "TBD"
 }
 
 text Trainer11_PostBattle{
-    "Fock off."
+    "TBD"
 }
 
 

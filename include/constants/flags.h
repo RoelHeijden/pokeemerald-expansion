@@ -72,7 +72,7 @@
 #define FLAG_HIDE_NURSE1_NPC                0x3B 
 #define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
-#define FLAG_UNUSED_123456969               0x3E  // unused
+#define FLAG_HIDE_CACNEA_TRADER             0x3E
 #define FLAG_RARE_CANDY_OBTAINED            0x3F  
 #define FLAG_SPACE_ITEM_STOLEN              0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  

@@ -42502,11 +42502,11 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7A] =
     {
 #line 17004
-        .trainerName = _("t7a"),
+        .trainerName = _("Ceasar"),
 #line 17005
-        .trainerClass = TRAINER_CLASS_BUG_CATCHER,
+        .trainerClass = TRAINER_CLASS_RUIN_MANIAC,
 #line 17006
-        .trainerPic = TRAINER_PIC_BUG_CATCHER,
+        .trainerPic = TRAINER_PIC_RUIN_MANIAC,
         .encounterMusic_gender = 
 #line 17008
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -42538,7 +42538,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7B] =
     {
 #line 17018
-        .trainerName = _("t7b"),
+        .trainerName = _("Peepers"),
 #line 17019
         .trainerClass = TRAINER_CLASS_EXPERT,
 #line 17020
@@ -42579,7 +42579,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER8] =
     {
 #line 17034
-        .trainerName = _("t8"),
+        .trainerName = _("Forshad"),
 #line 17035
         .trainerClass = TRAINER_CLASS_PSYCHIC,
 #line 17036
@@ -42619,7 +42619,7 @@ F_TRAINER_FEMALE |
 #line 17051
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 17049
-            .ability = ABILITY_FRISK,
+            .ability = ABILITY_PRESSURE,
 #line 17050
             .lvl = 5,
             .nature = NATURE_HARDY,
@@ -42698,11 +42698,11 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER10] =
     {
 #line 17081
-        .trainerName = _("t10"),
+        .trainerName = _("Dolly"),
 #line 17082
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
 #line 17083
-        .trainerPic = TRAINER_PIC_YOUNGSTER,
+        .trainerPic = TRAINER_PIC_SCHOOL_KID_F,
         .encounterMusic_gender = 
 #line 17085
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
@@ -42760,7 +42760,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER11] =
     {
 #line 17105
-        .trainerName = _("t11"),
+        .trainerName = _("Finale"),
 #line 17106
         .trainerClass = TRAINER_CLASS_CHAMPION,
 #line 17107

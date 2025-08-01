@@ -2256,7 +2256,7 @@ bool8 ScrCmd_checkpartyitem(struct ScriptContext *ctx)
     u16 item;
 
     gSpecialVar_Result = 0; 
-    gSpecialVar_0x8005 = 0; 
+    gSpecialVar_0x8005 = ITEM_NONE; 
 
     if (slot < PARTY_SIZE)
     {

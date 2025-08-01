@@ -17001,9 +17001,9 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER7A ===
-Name: t7a
-Class: Bug Catcher
-Pic: Bug Catcher
+Name: Ceasar
+Class: Ruin Maniac
+Pic: Ruin Maniac
 Gender: Male
 Music: Intense
 Double Battle: No
@@ -17015,7 +17015,7 @@ Level: 15
 
 
 === TRAINER_CUSTOM_TRAINER7B ===
-Name: t7b
+Name: Peepers
 Class: Expert
 Pic: Expert F
 Gender: Male
@@ -17031,7 +17031,7 @@ Bold Nature
 
 
 === TRAINER_CUSTOM_TRAINER8 ===
-Name: t8
+Name: Forshad
 Class: Psychic
 Pic: Psychic M
 Gender: Male
@@ -17046,7 +17046,7 @@ IVs: 0 Atk / 0 Spe
 - Night Shade  
 
 Dusclops  
-Ability: Frisk  
+Ability: Pressure   
 Level: 5  
 IVs: 0 Atk  
 - Night Shade
@@ -17078,9 +17078,9 @@ Adamant Nature
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: t10
+Name: Doll
 Class: Youngster
-Pic: Youngster
+Pic: School Kid F
 Gender: Male
 Music: Intense
 Double Battle: No
@@ -17102,7 +17102,7 @@ IVs: 30 Atk
 
 
 === TRAINER_CUSTOM_TRAINER11 ===
-Name: t11
+Name: Finale
 Class: Champion
 Pic: Champion Wallace
 Gender: Male

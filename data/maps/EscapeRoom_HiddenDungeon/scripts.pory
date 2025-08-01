@@ -1,4 +1,5 @@
 
+const LOCALID_CACNEA_TRADER = 6
 const LOCALID_DUNGEON_GUARD = 11
 
 
@@ -58,7 +59,97 @@ script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
+// Cacnea trade
+script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
+    lock
+    faceplayer
 
+    // post trade 
+    if(flag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED) == TRUE){
+        msgbox(CacneaTradePostTrade, MSGBOX_NPC)
+        waitmessage
+
+        // remove NPC
+        fadescreen(FADE_TO_BLACK)
+        playse(SE_EXIT)
+        delay(15)
+        removeobject(LOCALID_CACNEA_TRADER)
+        setflag(FLAG_HIDE_CACNEA_TRADER)
+        fadescreen(FADE_FROM_BLACK)
+        waitse
+    }
+    else{
+        // ask trade
+        msgbox(AskCacneaTrade, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check if pokemon in party
+            checkpartymon(SPECIES_AIPOM)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+            checkpartymon(SPECIES_LIEPARD)
+            if(var(VAR_RESULT) == PARTY_SIZE)
+            {
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            // trade pokemon
+            removemon(SPECIES_AIPOM)
+            removemon(SPECIES_LIEPARD)
+            lockall
+            givemon(
+                SPECIES_CACNEA,
+                41,
+                item=ITEM_RAINBOW_PASS, // Entry Card
+                abilityNum=2, // water absorb
+                nature=18,    // Bashful
+                gender=MON_FEMALE, 
+                move1=MOVE_HIDDEN_POWER,
+                move2=MOVE_NONE,
+                move3=MOVE_NONE,
+                move4=MOVE_NONE,
+                // EVs:
+                hpEv=0, 
+                defEv=252,
+                speedEv=252, // scarf ditto outspeed primeape/annihilape
+                // IVs:
+                hpIv=31,
+                atkIv=30,    // hp psychic
+                defIv=31,
+                speedIv=30,  // hp psychic
+                spAtkIv=31,
+                spDefIv=31
+            )
+            lockall
+            setflag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)
+
+            message(CacneaReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            lockall
+            waitfanfare
+
+            msgbox(CacneaTradeAccepted, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        // trade declined
+        else{
+            msgbox(CacneaTradeDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    releaseall
+}
+
+
+// Dungeon guard
 script EscapeRoom_HiddenDungeon_DungeonGuard{
     lockall
     faceplayer
@@ -77,10 +168,6 @@ script EscapeRoom_HiddenDungeon_DungeonGuard{
         checkitem(ITEM_RAINBOW_PASS)
         if(var(VAR_RESULT) == TRUE){
 
-            // show card message
-            msgbox(DungeonGuardShowCard, MSGBOX_AUTOCLOSE)
-            waitmessage
-
             // entry given message
             msgbox(DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE)
             waitmessage
@@ -91,6 +178,11 @@ script EscapeRoom_HiddenDungeon_DungeonGuard{
             copyobjectxytoperm(LOCALID_DUNGEON_GUARD)
             
             setflag(FLAG_DUNGEON_ENTRY_GRANTED)
+        }
+        else{
+            // intro message
+            msgbox(DungeonGuardIntro, MSGBOX_AUTOCLOSE)
+            waitmessage
         }
     }
     releaseall
@@ -103,28 +195,65 @@ movement GuardMoveAway {
 }
 
 
+////////////////////////////////////////// TEXT //////////////////////////////////////////
+
+
+// TRADE NPC 5 - Aipom Liepard Cacnea
+text AskCacneaTrade{
+    "Trying to get past the guard?\p"
+
+    "I might be able to help you out.\n"
+    "How badly do you want in?\p"
+
+    "Give me your Pokémon and I'll get you\n"
+    "in that restricted area.\p"
+
+    "You can have my Cacnea so you won't be\n"
+    "stuck without a partner.\p"
+
+    "Do we have a deal?"
+}
+
+text CacneaReceivedMessage{
+    "{PLAYER} received a Cacnea!"
+}
+
+text CacneaTradeAccepted{
+    "Bye-bye Aipom.\p"
+    "Bye-bye Liepard."
+}
+
+text CacneaTradeDeclined{
+    "Suit yourself."
+}
+
+text CacneaTradePostTrade{
+    "Hehehehe!"
+}
+
+
+// DUNGEON GUARD
+
 text DungeonGuardIntro{
     "Access to this zone is restricted.\p"
     "I'll need to see an entry card, or you\n"
     "are not getting through."
 }
 
-text DungeonGuardShowCard{
-    "(You hold up your rainbow-colored entry\n"
-    "card with minimal confidence.)"
-}
-
 text DungeonGuardGivesEntry{
+    "(You hesitantly hold up your rainbow-\n"
+    "colored entry card.)\p"
     "Hmmm...\p"
     "This doesn't look like one of our usual\n"
-    "entry cards.\p"
+    "entry cards.\p" 
     "...\p"
-    "I've seen worse.\n"
-    "Go on through."
+    "I guess this wouldn't even be the most\n"
+    "questionable card to make it through.\p"
+    "You're clear to enter."
 }
 
 text DungeonGuardPostEntry{
-    "You're not a normal guest are you?\p"
-    "Don't cause any trouble"
+    "You're not very normal, are you?\n"
+    "Just don't cause any trouble"
 }
 
