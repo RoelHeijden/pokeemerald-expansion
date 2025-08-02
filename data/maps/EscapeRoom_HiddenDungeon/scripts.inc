@@ -280,7 +280,7 @@ DungeonGuardGivesEntry::
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
 	.string "...\p"
-	.string "I guess this wouldn't even be the most\n"
+	.string "I suppose this wouldn't be the most\n"
 	.string "questionable card to make it through.\p"
 	.string "You're clear to enter.$"
 

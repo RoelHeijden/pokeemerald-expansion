@@ -401,35 +401,11 @@ script EscapeRoom_MapScript_GetPokedex{
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
-        SPECIES_FLORGES,
-        22,
-        ball=ITEM_HEAVY_BALL,
-        item=ITEM_EXP_CANDY_S,
-        abilityNum=2, // symbiosis
-        nature=21, // gentle
-        gender=1, // female
-        move1=MOVE_NATURE_POWER,
-        move2=MOVE_GRASS_KNOT,
-        move3=MOVE_GRASSY_TERRAIN,
-        move4=MOVE_CAMOUFLAGE,
-        // EVs:
-        hpEv=252,
-        spDefEv=252,
-        // IVs:
-        hpIv=31,
-        atkIv=0,
-        defIv=0,
-        speedIv=31,
-        spAtkIv=0,
-        spDefIv=31
-    )
-
-    givemon(
         SPECIES_FERROTHORN,
         28,
         abilityNum=2, // anticipation
         nature=4, // naughty
-        gender=0, 
+        gender=MON_MALE, 
         move1=MOVE_STEEL_ROLLER,
         move2=MOVE_BLOCK,
         move3=MOVE_INGRAIN,
@@ -446,6 +422,29 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
         speedIv=31,
         spAtkIv=31,
         spDefIv=0
+    )
+
+    givemon(
+        SPECIES_FLORGES,
+        22,
+        item=ITEM_EXP_CANDY_S,
+        abilityNum=2, // symbiosis
+        nature=21, // gentle
+        gender=MON_FEMALE,
+        move1=MOVE_NATURE_POWER,
+        move2=MOVE_GRASS_KNOT,
+        move3=MOVE_GRASSY_TERRAIN,
+        move4=MOVE_CAMOUFLAGE,
+        // EVs:
+        hpEv=252,
+        spDefEv=252,
+        // IVs:
+        hpIv=31,
+        atkIv=0,
+        defIv=0,
+        speedIv=31,
+        spAtkIv=0,
+        spDefIv=31
     )
 
     setflag(FLAG_SYS_POKEMON_GET)
@@ -824,7 +823,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
                 waitmessage
 
                 // warp back to section 2
-                warpteleport(MAP_ESCAPE_ROOM_MAIN, 20, 11)
+                warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
                 waitstate
 
             }
@@ -1082,7 +1081,8 @@ script EscapeRoom_EventScript_ObtainLiepard{
     lockall
     givemon(
         SPECIES_LIEPARD,
-        40,
+        // 40,
+        100, // CHANGE BACK
         ball=ITEM_FRIEND_BALL,
         abilityNum=2, // Prankster
         nature=17, // Quiet 
@@ -3608,8 +3608,11 @@ text AntiSoftlockIntroMessage{
     "Hi, I'm the anti-softlock guy.\p"
     "I can roll back actions that have the\n"
     "possibility to get you softlocked.\p"
-    "Heads up, certain rollbacks will also\n"
-    "include healing your party.\p"
+
+    "Certain rollbacks may also include\n"
+    "resetting your Pokémon's HP, move PP,\l"
+    "or even your location.\p"
+
     "What would you like to do?"
 }
 
@@ -3666,21 +3669,12 @@ text AntiSoftlockAskUndoAipomTrade{
     "Pokémon trade and get back Aipom?"
 }
 
-// ULTRA BALL QUIZ NPC
-text UltraBallQuizStart{
-    "(This will be a quiz at some point)"
-}
-
-text UltaBallQuizPostScript{
-    "Thanks for playing!"
-}
-
 
 // ZERA HINT NPC
 text ZeraoraHintMessage1{
-    "I love seeing rare Pokémon up close.\p"
+    "I love seeing rare Pokémon up close!\p"
     "If you ever manage to catch something\n"
-    "unusual, do show me!"
+    "special, be sure to show me."
 }
 
 text ZeraoraHintMessage2{
@@ -3692,7 +3686,8 @@ text ZeraoraHintPostCatchMessage1{
     "You managed to catch a Zeraora!?\p"
     "Unbelievable... I've always dreamed of\n"
     "seeing one up close!\p"
-    "Here, take this."
+    "This means so much to me.\n"
+    "Please, take this."
 }
 
 text ZeraoraHintPostCatchMessage2{
@@ -4148,11 +4143,11 @@ text Trainer1_Intro{
 }
 
 text Trainer1_Outro{
-    "We have a deal!"
+    "Let's make a deal!"
 }
 
 text Trainer1_PostBattle{
-    "I can finally add Zeraora to my Pokédex!"
+    "That's another one for the Pokédex!"
 }
 
 text AskZeraCutTradeMessage{
@@ -4178,19 +4173,20 @@ text Trainer2_Intro{
 }
 
 text Trainer2_Outro{
-    "My grass!"
+    "Cut the illusion, clear the path!"
 }
 
 text Trainer2_PostBattle{
-    "Good luck with the next trainer.\n"
-    "I never quite get what he's saying."
+    "I normally don't buy what rostic says,\n"
+    "but it's worth a shot."
 }
 
 
 // TRAINER 3 - Komala Tinkaton
 text Trainer3_Intro{
     "Rage is nearly guaranteed.\n"
-    "Try and realize getting entry takeswork."
+    "Try and resist generally easy tactics."
+    // "Try and realize getting entry takeswork."
 }
 
 text Trainer3_Outro{
@@ -4198,7 +4194,8 @@ text Trainer3_Outro{
 }
 
 text Trainer3_PostBattle{
-    "Good luck with the escape!"
+    "Every good gamer sometimes cheats a\n"
+    "puzzle exit."
 }
 
 text Trainer3FinalWords{
@@ -4212,12 +4209,11 @@ text Trainer4_Intro{
 }
 
 text Trainer4_Outro{
-    "You should get out of here."
+    "Ugh, just leave already."
 }
 
 text Trainer4_PostBattle{
-    "Did you know that 5A + 2L = 525?\n"
-    "Me neither."
+    "Did you know that 5A + 2L = 525?"
 }
 
 
@@ -4250,12 +4246,12 @@ text Trainer6_Intro{
 }
 
 text Trainer6_Outro{
-    "Oh how the tablets have turned."
+    "Oh how the tables have turned."
 }
 
 text Trainer6_PostBattle{
-    "My birds deliver letters, not lunch.\n"
-    "Guess I need a cook."
+    "Do you know where I can find a cook?\n"
+    "My birds deliver letters, not lunch."
 }
 
 
@@ -4268,7 +4264,7 @@ text Trainer7A_Intro{
 }
 
 text Trainer7A_Outro{
-    "I still think she's being two forward."
+    "Don't you think she's two forward?"
 }
 
 text Trainer7A_PostBattle{
@@ -4302,27 +4298,28 @@ text Trainer8_Intro{
 }
 
 text Trainer8_Outro{
-    "Not a normal Pokémon!"
+    "Is there anyone you can't beat?"
 }
 
 text Trainer8_PostBattle{
-    "Wow, you're really strong!\n"
-    "Is there anyone you cannot beat?"
+    "Have you been to the secret garden?\p"
+    "There's an easy way in, but is there an\n"
+    "easy way out as well?"
 }
 
 
 // TRAINER 9 - Lucario Lucario (unbeatable double)
 text Trainer9_Intro{
     "So many trainers, but battles are rare.\n"
-    "Some pretend like we're not even there."
+    "Many pretend like we're not even there."
 }
 
 text Trainer9_Outro{
-    "There. Only real battlers."
+    "Thanks. Only real battles."
 }
 
 text Trainer9_PostBattle{
-    "I somehow doubt this was your last time\n"
+    "Somehow I doubt this was your last time\n"
     "passing through."
 }
 

@@ -229,9 +229,9 @@ void NewGameInitData(void)
     DecorationAdd(DECOR_BIG_PLANT);
     DecorationAdd(DECOR_GORGEOUS_PLANT);
 
-    DecorationAdd(DECOR_DITTO_DOLL); // named: Cacnea doll 
     DecorationAdd(DECOR_LOTAD_DOLL);
     DecorationAdd(DECOR_TREECKO_DOLL);
+    DecorationAdd(DECOR_DITTO_DOLL); // named: Cacnea doll 
     DecorationAdd(DECOR_VENUSAUR_DOLL);
 
 

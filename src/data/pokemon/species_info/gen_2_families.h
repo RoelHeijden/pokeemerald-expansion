@@ -2457,8 +2457,13 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .description = COMPOUND_STRING(
             "Its tail ends with a dexterous, handlike\n"
             "appendage. However, because it uses the\n"
-            "tail so much, Aipom's real hands have\n"
-            "become rather clumsy."),
+            "tail so much, Aipom has a unique ability\n"
+            "to steal juice from other Pokémon."),
+        // .description = COMPOUND_STRING(
+        //     "Its tail ends with a dexterous, handlike\n"
+        //     "appendage. However, because it uses the\n"
+        //     "tail so much, Aipom's real hands have\n"
+        //     "become rather clumsy."),
         .pokemonScale = 363,
         .pokemonOffset = 6,
         .trainerScale = 256,

@@ -82,6 +82,10 @@ static const u8 sEvolutionStoneDesc[] = _("Makes certain\n"
                                           "species of Pokémon\n"
                                           "evolve.");
 
+static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Makes certain\n"
+                                                       "Pokémon evolve,\n"
+                                                       "card card bundle.");
+
 static const u8 sNectarDesc[]         = _("Flower nectar that\n"
                                           "changes the form\n"
                                           "of certain Pokémon.");
@@ -3904,7 +3908,8 @@ const struct Item gItemsInfo[] =
         .name = _("Sun Stone"),
         // .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
         .price = 0,
-        .description = sEvolutionStoneDesc,
+        // .description = sEvolutionStoneDesc,
+        .description = sEvolutionStoneDesc_SunStoneHint,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,

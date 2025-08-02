@@ -6416,16 +6416,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
         .categoryName = _("Cactus"),
         .height = 4,
         .weight = 513,
-        // .description = COMPOUND_STRING(
-        //     "Cacnea live in deserts with virtually no\n"
-        //     "rainfall. It battles by swinging its thick,\n"
-        //     "spiked arms. Once a year, a yellow flower\n"
-        //     "blooms."),
         .description = COMPOUND_STRING(
             "Cacnea live in deserts with virtually no\n"
             "rainfall. It battles by swinging its thick,\n"
-            "spiked arms. At some point it likes to\n"
-            "steal an item."), // ADDED
+            "spiked arms. Once a year, a yellow flower\n"
+            "blooms."),
         .pokemonScale = 455,
         .pokemonOffset = 20,
         .trainerScale = 256,
@@ -6490,6 +6485,11 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             "harsh deserts, its blood transformed into\n"
             "the same substances as sand. It is\n"
             "nocturnal, so it hunts at night."),
+        // .description = COMPOUND_STRING(
+        //     "After spending thousands of years in\n"
+        //     "harsh deserts, its blood transformed into\n"
+        //     "the same substances as sand. It is\n"
+        //     "nocturnal, so it hunts at night."),
         .pokemonScale = 327,
         .pokemonOffset = 5,
         .trainerScale = 256,

@@ -481,7 +481,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Cut"),
         .description = COMPOUND_STRING(
             "Cuts the foe with sharp\n"
-            "scythes, claws, etc."),
+            "spikes, needles, etc."),
+        // .description = COMPOUND_STRING(
+        //     "Cuts the foe with sharp\n"
+        //     "scythes, claws, etc."),
         .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_NORMAL,
@@ -1798,8 +1801,11 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Counter"),
         .description = COMPOUND_STRING(
-            "Retaliates any physical hit\n"
-            "with double the power."),
+            "Returns a physical hit with\n"
+            "double damage at the twins."),
+        // .description = COMPOUND_STRING(
+            // "Retaliates any physical hit\n"
+        //     "with double the power."),
         .effect = EFFECT_COUNTER,
         .power = 1,
         .type = TYPE_FIGHTING,
@@ -5500,7 +5506,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .mimicBanned = TRUE,
         .encoreBanned = TRUE,
         .assistBanned = TRUE,
-        .contestEffect = CONTEST_EFFECT_SLEEP_TALK_HINT,
+        .contestEffect = CONTEST_EFFECT_REPETITION_NOT_BORING,
         .contestCategory = CONTEST_CATEGORY_CUTE,
         .contestComboStarterId = 0,
         .contestComboMoves = {COMBO_STARTER_REST},

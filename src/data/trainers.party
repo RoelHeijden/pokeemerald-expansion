@@ -17038,12 +17038,13 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Zoroark @ Toxic Orb  
-Ability: Illusion  
-Level: 20  
-Quiet Nature  
-IVs: 0 Atk / 0 Spe  
-- Night Shade  
+Zoroark @ Toxic Orb
+Level: 16
+Quiet Nature
+Ability: Illusion
+EVs: 252 HP / 252 Def
+IVs: 0 Atk / 0 Spe
+- Night Shade
 
 Dusclops  
 Ability: Pressure   
@@ -17078,7 +17079,7 @@ Adamant Nature
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: Doll
+Name: Dolly
 Class: Youngster
 Pic: School Kid F
 Gender: Male
