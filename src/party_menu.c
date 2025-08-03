@@ -5270,9 +5270,10 @@ static void TryUseItemOnMove(u8 taskId)
             RemoveBagItem(gSpecialVar_ItemId, 1);
 
             // ADDED
-            // Leppa berry return flag -- in battle
-            if(gSpecialVar_ItemId == ITEM_LEPPA_BERRY)
-                FlagSet(FLAG_RETURN_LEPPA_BERRY);
+            // Ether return flag -- in battle
+            if(gSpecialVar_ItemId == ITEM_ETHER)
+                FlagSet(FLAG_RETURN_ETHER);
+
 
             ScheduleBgCopyTilemapToVram(2);
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
@@ -5297,8 +5298,9 @@ static void TryUseItemOnMove(u8 taskId)
         {
             // ADDED
             // Leppa berry return flag -- out of battle
-            if(item == ITEM_LEPPA_BERRY)
-                FlagSet(FLAG_RETURN_LEPPA_BERRY);
+            if(item == ITEM_ETHER)
+                FlagSet(FLAG_RETURN_ETHER);
+        
 
             gPartyMenuUseExitCallback = TRUE;
             PlaySE(SE_USE_ITEM);

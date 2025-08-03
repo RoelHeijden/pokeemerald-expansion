@@ -661,7 +661,7 @@
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
 #define FLAG_JABOCA_CONSUMED            0x26B   
-#define FLAG_RETURN_LEPPA_BERRY         0x26C 
+#define FLAG_RETURN_ETHER               0x26C 
 #define FLAG_RETURN_BERRY_JUICE         0x26D   
 #define FLAG_RETURN_ESCAPE_ROPE         0x26E
 #define FLAG_LIEPARD_OBTAINED           0x26F
@@ -682,7 +682,7 @@
 #define FLAG_THIEF_REPLACED             0x27E 
 #define FLAG_SECRET_POWER_COMPLETED     0x27F 
 #define FLAG_DUNGEON_ENTRY_GRANTED      0x280  
-#define FLAG_UNUSED_0x281               0x281  // unused
+#define FLAG_ETHER_BOUGHT               0x281  
 #define FLAG_PLAYER_JUST_LOST           0x282 
 #define FLAG_JUST_HAD_ZERA_BATTLE       0x283  
 #define FLAG_MENTAL_HERB_SOLD_OUT       0x284 

@@ -34,7 +34,7 @@ const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_PRIMEAPE_BALL = 33
 const LOCALID_SECRETGARDEN_GUARD = 34
-const _DUMMY_5 = 35
+const LOCALID_ETHER_NPC = 35
 const _DUMMY_6 = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
@@ -147,12 +147,11 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
     if (var(VAR_RESULT) >= 3){
         setflag(FLAG_ZERAORA_CAUGHT)
 
-        // prevent leppa recovery if used
-        clearflag(FLAG_RETURN_LEPPA_BERRY)
+        // prevent Ether recovery if used
+        clearflag(FLAG_RETURN_ETHER)
 
-        // prevent Custap and Leppa restore after catching zera
+        // prevent Custap restore after catching zera
         removelostitem(ITEM_CUSTAP_BERRY)
-        removelostitem(ITEM_LEPPA_BERRY)
 
         // prevent recovered item message
         clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
@@ -161,13 +160,13 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
         // ERROR CHECK
         // - 1000 money
         // - custap used
-        // - lepap used
+        // - ether used
         checkpartyitem(0)
         copyvar(VAR_0x8006, VAR_0x8005)
         checkpartyitem(1)
         copyvar(VAR_0x8007, VAR_0x8005)
 
-        checkitem(ITEM_LEPPA_BERRY)
+        checkitem(ITEM_ETHER)
         copyvar(VAR_TEMP_4, VAR_RESULT)
 
         checkitem(ITEM_CUSTAP_BERRY)
@@ -176,7 +175,7 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
         checkexactmoney(1000)
         if(var(VAR_RESULT) == FALSE 
             || (var(VAR_0x8006) == ITEM_CUSTAP_BERRY || var(VAR_0x8007) == ITEM_CUSTAP_BERRY)
-            || (var(VAR_0x8006) == ITEM_LEPPA_BERRY || var(VAR_0x8007) == ITEM_LEPPA_BERRY)
+            || (var(VAR_0x8006) == ITEM_ETHER || var(VAR_0x8007) == ITEM_ETHER)
             || var(VAR_TEMP_4) == TRUE
             || var(VAR_TEMP_5) == TRUE)
         {
@@ -333,28 +332,22 @@ script EscapeRoom_MapScripts_AskResetPredamage{
             // prevent zera fight item dupes via backup + lostItems
             if(flag(FLAG_ZERA_FIGHT_BACKUP_CHECK) == TRUE){
                 clearflag(FLAG_ZERA_FIGHT_BACKUP_CHECK)
-                call(EscapeRoom_MapScripts_RemoveDuplicateLeppaCustap)
+                call(EscapeRoom_MapScripts_RemoveDuplicateCustap)
             }
         }
     }
     releaseall
 }
 
-script EscapeRoom_MapScripts_RemoveDuplicateLeppaCustap{
-    // check if pokemon 1 carries custap/leppa
+script EscapeRoom_MapScripts_RemoveDuplicateCustap{
+    // check if pokemon 1 carries custap
     checkpartyitem(0)
-    if(var(VAR_0x8005) == ITEM_LEPPA_BERRY){
-        removelostitem(ITEM_LEPPA_BERRY)
-    }
     if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
         removelostitem(ITEM_CUSTAP_BERRY)
     }
 
-    // check if pokemon 2 carries custap/leppa
+    // check if pokemon 2 carries custap
     checkpartyitem(1)
-    if(var(VAR_0x8005) == ITEM_LEPPA_BERRY){
-        removelostitem(ITEM_LEPPA_BERRY)
-    }
     if(var(VAR_0x8005) == ITEM_CUSTAP_BERRY){
         removelostitem(ITEM_CUSTAP_BERRY)
     }
@@ -427,6 +420,7 @@ script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
         SPECIES_FLORGES,
         22,
+        ball=ITEM_HEAVY_BALL,
         item=ITEM_EXP_CANDY_S,
         abilityNum=2, // symbiosis
         nature=21, // gentle
@@ -477,7 +471,6 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
-    additem(ITEM_LEPPA_BERRY)
 
     // additem(ITEM_HM01)
     // additem(ITEM_SAFETY_GOGGLES)
@@ -701,10 +694,10 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_2)  // no heal
     }
 
-    // leppa berry
-    if(flag(FLAG_RETURN_LEPPA_BERRY)){
-        giveitem(ITEM_LEPPA_BERRY)
-        clearflag(FLAG_RETURN_LEPPA_BERRY)
+    // ether
+    if(flag(FLAG_RETURN_ETHER)){
+        giveitem(ITEM_ETHER)
+        clearflag(FLAG_RETURN_ETHER)
 
         // only heal if Camouflage has 1/1 pp
         checkmonmove0pp(SPECIES_FLORGES, MOVE_CAMOUFLAGE)
@@ -717,23 +710,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     }
 
 
-    //// BATTLE ITEMS ////
-
-    // leppa berry
-    isitemlost(ITEM_LEPPA_BERRY)
-    if(var(VAR_RESULT) == TRUE){
-        removelostitem(ITEM_LEPPA_BERRY)
-        giveitem(ITEM_LEPPA_BERRY)
-
-        // only heal if Camouflage has 1/1 pp
-        checkmonmove0pp(SPECIES_FLORGES, MOVE_CAMOUFLAGE)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_TEMP_2) // no heal if Camouflage has 0/1 pp
-        }
-        else{
-            setflag(FLAG_TEMP_1)
-        }
-    }
+    //// HELD BATTLE ITEMS ////
 
     // custap berry
     isitemlost(ITEM_CUSTAP_BERRY)
@@ -865,13 +842,30 @@ script EscapeRoom_EventScript_UndoUsedItems{
 
 // undo event
 script EscapeRoom_EventScript_UndoOtherActions{
+    // ether purchase
+    checkpartyitem(0)
+    copyvar(VAR_TEMP_0, VAR_0x8005)
+    checkpartyitem(1)
+    copyvar(VAR_TEMP_1, VAR_0x8005)
+    checkitem(ITEM_ETHER)
+    if((var(VAR_RESULT) == TRUE || 
+        var(VAR_TEMP_0) == ITEM_ETHER || 
+        var(VAR_TEMP_1) == ITEM_ETHER) && 
+        flag(FLAG_ETHER_BOUGHT) && !flag(FLAG_ZERAORA_CAUGHT)){
+
+        // ask undo Ether purchase
+        msgbox(AntiSoftlockAskUndoEtherPurchase, MSGBOX_YESNO)
+        waitmessage
+        if(var(VAR_RESULT) == YES){
+            call(EscapeRoom_EventScript_UndoEtherPurchase)
+        }
+    }
+
     // trainer5 rematch
-    if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
+    elif(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
         msgbox(AntiSoftlockAskUndoTrainer5, MSGBOX_YESNO)
         waitmessage
         if(var(VAR_RESULT) == YES){
-            msgbox(AntiSoftlockTrainer5Undone, MSGBOX_AUTOCLOSE)
-            waitmessage
             call(EscapeRoom_EventScript_SetTrainer5Rematch)
         }
     }
@@ -901,7 +895,41 @@ script EscapeRoom_EventScript_UndoOtherActions{
     }
 }
 
+script EscapeRoom_EventScript_UndoEtherPurchase{
+    // remove from bag
+    checkitem(ITEM_ETHER)
+    if(var(VAR_RESULT) == TRUE){
+        removeitem(ITEM_ETHER)
+    }
+
+    // remove from party
+    checkpartyitem(0)
+    if(var(VAR_0x8005) == ITEM_ETHER){
+        removepartyitem(0)
+    }
+    checkpartyitem(1)
+    if(var(VAR_0x8005) == ITEM_ETHER){
+        removepartyitem(1)
+    }
+
+    // return money
+    addmoney(500)
+    message(MoneyReceived500)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+    delay(10)
+
+    // message
+    msgbox(AntiSoftlockEtherPurchaseUndone, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    clearflag(FLAG_ETHER_BOUGHT)
+}
+
 script EscapeRoom_EventScript_SetTrainer5Rematch{
+    msgbox(AntiSoftlockTrainer5Undone, MSGBOX_AUTOCLOSE)
+    waitmessage
+
     // take all money (player has 0 money at start of battle)
     removemoney(99999)
 
@@ -957,6 +985,10 @@ script EscapeRoom_EventScript_UndoFlorgesTrade{
     // allow trade again
     clearflag(FLAG_FLORGES_TRADE_ACCEPTED)
 }
+
+
+
+
 
 
 // LIEPARD
@@ -1083,7 +1115,7 @@ script EscapeRoom_EventScript_ObtainLiepard{
         SPECIES_LIEPARD,
         // 40,
         100, // CHANGE BACK
-        ball=ITEM_FRIEND_BALL,
+        // ball=ITEM_FRIEND_BALL,
         abilityNum=2, // Prankster
         nature=17, // Quiet 
         gender=MON_FEMALE,
@@ -1863,6 +1895,49 @@ script EscapeRoom_DusknoirStoleMyMailNPC{
     releaseall
 }
 
+script EscapeRoom_EtherSellNPC{
+    lock
+    faceplayer
+    if(flag(FLAG_ETHER_BOUGHT) == FALSE){
+
+        // ask buy Ether
+        msgbox(EtherNPCbuyEther, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            // check enough money
+            checkmoney(500)
+            if(var(VAR_RESULT) == FALSE){
+                // not enough money message
+                msgbox(EtherNPCnotEnoughMoney, MSGBOX_AUTOCLOSE)
+                waitmessage
+                releaseall
+                end
+            }
+
+            removemoney(500)
+
+            // give Ether
+            giveitem(ITEM_ETHER)
+
+            // final message
+            msgbox(EtherNPCsellAcceptedMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+
+            setflag(FLAG_ETHER_BOUGHT)
+        }
+        else{
+            // sell declined message
+            msgbox(EtherNPCsellDeclined, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+    }
+    else{
+        msgbox(EtherNPCpostSellMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
+}
+
 
 //// TRAINERS ////
 
@@ -2331,7 +2406,7 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     checkitem(ITEM_DUSK_STONE)
     copyvar(VAR_TEMP_4, VAR_RESULT)
 
-    checkitem(ITEM_LEPPA_BERRY)
+    checkitem(ITEM_ETHER)
     copyvar(VAR_TEMP_5, VAR_RESULT)
     checkitem(ITEM_JABOCA_BERRY)
     copyvar(VAR_TEMP_6, VAR_RESULT)
@@ -3643,6 +3718,19 @@ text AntiSoftlockNoActionsToUndo{
     "that can be undone."
 }
 
+text AntiSoftlockAskUndoEtherPurchase{
+    "Would you like to undo your Ether\n"
+    "purchase?"
+}
+
+text MoneyReceived500{
+    "{PLAYER} received ¥500!"
+}
+
+text AntiSoftlockEtherPurchaseUndone{
+    "The Ether purchase has been undone."
+}
+
 text AntiSoftlockAskUndoTrainer5{
     "Would you like to undo your previous\n"
     "trainer battle win?\p"
@@ -3686,7 +3774,7 @@ text ZeraoraHintPostCatchMessage1{
     "You managed to catch a Zeraora!?\p"
     "Unbelievable... I've always dreamed of\n"
     "seeing one up close!\p"
-    "This means so much to me.\n"
+    "This means a lot to me.\n"
     "Please, take this."
 }
 
@@ -3695,7 +3783,8 @@ text ZeraoraHintPostCatchMessage2{
 }
 
 text ZeraoraHintPostCatchMessage3{
-    "I'll never forget this day."
+    "Your Pokédex must be looking pretty\n"
+    "good by now."
 }
 
 
@@ -3923,8 +4012,8 @@ text CacturneThiefRestored{
 // SHOP NPCS
 text MartNPC_AskToShop{
     "Welcome to my shop.\p"
-    "Don't worry, all items can be sold for\n"
-    "the same price."
+    "Don't worry, all items can be sold back\n"
+    "for the same price."
 }
 
 text MartNPC_SayGoodbye{
@@ -3947,6 +4036,30 @@ text NicknameThisPokemonMessage2{
 	"this Primeape?"
 }
 
+
+// ETHER SELL NPC
+
+text EtherNPCbuyEther{
+    "Hi there! Would you like to buy an Ether\n"
+    "for the great price of ¥500?"
+}
+
+text EtherNPCnotEnoughMoney{
+    "Oh, it looks like you don't have enough\n"
+    "money."
+}
+
+text EtherNPCsellAcceptedMessage{
+    "There you go!"
+}
+
+text EtherNPCsellDeclined{
+    "No worries, perhaps next time."
+}
+
+text EtherNPCpostSellMessage{
+    "Don't waste it all at once!"
+}
 
 
 // MOVE DELETER NPC
@@ -4142,12 +4255,14 @@ text Trainer1_Intro{
     "Win the fight and we may have a deal."
 }
 
+
 text Trainer1_Outro{
     "Let's make a deal!"
 }
 
 text Trainer1_PostBattle{
-    "That's another one for the Pokédex!"
+    "Sacrificing Pokémon is never easy, but\n"
+    "that's the price of progress."
 }
 
 text AskZeraCutTradeMessage{
@@ -4177,16 +4292,15 @@ text Trainer2_Outro{
 }
 
 text Trainer2_PostBattle{
-    "I normally don't buy what rostic says,\n"
-    "but it's worth a shot."
+    "Call me a maniac, but I love writing\n"
+    "things in 68 65 78."
 }
 
 
 // TRAINER 3 - Komala Tinkaton
 text Trainer3_Intro{
     "Rage is nearly guaranteed.\n"
-    "Try and resist generally easy tactics."
-    // "Try and realize getting entry takeswork."
+    "Try and recognize good easy tactics."
 }
 
 text Trainer3_Outro{

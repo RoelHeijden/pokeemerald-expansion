@@ -11454,7 +11454,6 @@ void TryRestoreHeldItems(void)
                     // Check if the item is one that requires a heal before returning
                     bool32 returnItemRequiresHeal =
                         lostItem == ITEM_CUSTAP_BERRY ||
-                        lostItem == ITEM_LEPPA_BERRY ||
                         lostItem == ITEM_MENTAL_HERB ||
                         lostItem == ITEM_RING_TARGET ||
                         lostItem == ITEM_JABOCA_BERRY;
