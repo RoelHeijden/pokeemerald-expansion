@@ -177,7 +177,7 @@ struct Time
 
 
 // ADDED
-#define MAX_LOST_ITEMS 6 
+#define MAX_LOST_ITEMS 4 
 struct LostItemsTracker
 {
     u16 lostItems[MAX_LOST_ITEMS];
@@ -193,18 +193,34 @@ struct MonMovesBackup
     u8 pp[MAX_MON_MOVES];     // 1 x 4 = 4 bytes
     bool8 valid;              // 1 byte
 };
-#define MAX_BACKUP_SLOTS 6
+#define MAX_BACKUP_SLOTS 4
 struct MovesetBackupData
 {
     struct MonMovesBackup slots[MAX_BACKUP_SLOTS];
 };
 
 
+// ADDED
+#define MAX_TAUGHT_MOVES 4
+
+struct TaughtMoveEntry
+{
+    u16 species;
+    u16 oldMove;
+    u16 newMove;
+};
+struct TaughtMoveLog
+{
+    struct TaughtMoveEntry entries[MAX_TAUGHT_MOVES];
+};
+
+
 
 struct SaveBlock3 // 116 bytes total
 {
-    struct LostItemsTracker lostItemsTracker; // ADDED   - 6 x 2 = 12 bytes
-    struct MovesetBackupData movesetBackupData; // ADDED - 6 x 15 = 90 bytes
+    struct TaughtMoveLog taughtMoveLog; // ADDED - 4 X 6 = 24 bytes
+    struct LostItemsTracker lostItemsTracker; // ADDED               - 4 x 2 = 8 bytes
+    struct MovesetBackupData movesetBackupData; // ADDED             - 4 x 15 = 60 bytes
 #if OW_USE_FAKE_RTC
     struct Time fakeRTC;
 #endif

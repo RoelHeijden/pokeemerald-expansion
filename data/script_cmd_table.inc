@@ -242,7 +242,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_nop1		 			    @ 0xef
 	.4byte ScrCmd_checkpartymonlevel		 		@ 0xf0
 	.4byte ScrCmd_levelDownMon						@ 0xf1
-	.4byte ScrCmd_nop1				        @ 0xf2
+	.4byte ScrCmd_replacemove2					    @ 0xf2
 	.4byte ScrCmd_getpartymonmove					@ 0xf3
 	.4byte ScrCmd_bufferplaytimeandhints			@ 0xf4
 	.4byte ScrCmd_addgametime						@ 0xf5
@@ -250,8 +250,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_nop1						@ 0xf7
 	.4byte SrcCmd_giveaipomegg						@ 0xf8
 	.4byte SrcCmd_addmonmove						@ 0xf9
-	.4byte ScrCmd_nop1						@ 0xfa
-	.4byte ScrCmd_nop1						@ 0xfb
+	.4byte ScrCmd_removetaughtmove					@ 0xfa
+	.4byte ScrCmd_istaughtmovepresent				@ 0xfb
 	.4byte ScrCmd_backupplayerparty				    @ 0xfc
 	.4byte ScrCmd_restoreplayerparty				@ 0xfd
 	.4byte ScrCmd_partybackupisdifferent			@ 0xfe

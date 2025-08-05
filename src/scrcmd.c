@@ -85,6 +85,7 @@ static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom);
 void MonToBoxMon(const struct Pokemon *src, struct BoxPokemon *dest);
 
 
+
 // This is defined in here so the optimizer can't see its value when compiling
 // script.c.
 void * const gNullScriptPtr = NULL;
@@ -1909,8 +1910,6 @@ bool8 ScrCmd_setmonmove(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
-
 // ADDED
 // add move to nearest free slot
 bool8 SrcCmd_addmonmove(struct ScriptContext *ctx)
@@ -2432,8 +2431,6 @@ bool8 ScrCmd_checkpartymonfullhp(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
-
 // ADDED
 bool8 ScrCmd_checkpartymon(struct ScriptContext *ctx)
 {
@@ -2501,6 +2498,58 @@ bool8 ScrCmd_replacemove(struct ScriptContext *ctx)
     return FALSE;
 }
 
+// ADDED
+// replace a move via species, with VARs as arguments
+bool8 ScrCmd_replacemove2(struct ScriptContext *ctx)
+{
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 moveId_old = VarGet(ScriptReadHalfword(ctx));
+    u16 moveId_new = VarGet(ScriptReadHalfword(ctx));
+    u8 slot, i, j;
+
+    // REMOVE
+    DebugPrintf("REPLACING MOVE - species: %d, oldmove: %d, newmove: %d", species, moveId_old, moveId_new);
+
+
+    gSpecialVar_Result = MAX_MON_MOVES; // default: not replaced
+
+    // find first matching species in party
+    for (u8 partyIndex = 0; partyIndex < PARTY_SIZE; partyIndex++)
+    {
+        struct Pokemon *mon = &gPlayerParty[partyIndex];
+        u16 monSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
+        if (monSpecies != SPECIES_NONE && monSpecies == species && !GetMonData(mon, MON_DATA_IS_EGG, NULL))
+        {
+            // Replace move
+            for (slot = 0; slot < MAX_MON_MOVES; slot++)
+            {
+                if (GetMonData(mon, MON_DATA_MOVE1 + slot) == moveId_old)
+                {
+                    ScriptSetMonMoveSlot(partyIndex, moveId_new, slot);
+                    gSpecialVar_Result = slot;
+                    break;
+                }
+            }
+
+            // Reorder: move all MOVE_NONE to the end
+            for (i = 0; i < MAX_MON_MOVES - 1; i++)
+            {
+                for (j = 0; j < MAX_MON_MOVES - 1 - i; j++)
+                {
+                    u16 move1 = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
+                    u16 move2 = GetMonData(mon, MON_DATA_MOVE1 + j + 1, NULL);
+
+                    if (move1 == MOVE_NONE && move2 != MOVE_NONE)
+                        ShiftMoveSlot(mon, j, j + 1);
+                }
+            }
+
+            break; // done with first matching species
+        }
+    }
+
+    return FALSE;
+}
 
 // ADDED
 bool8 ScrCmd_checkpartymonlevel(struct ScriptContext *ctx)
@@ -2727,7 +2776,6 @@ void MonToBoxMon(const struct Pokemon *src, struct BoxPokemon *dest)
     *dest = src->box;
 }
 
-
 // ADDED
 // restore backup from PC Box 0 Slot 0 to first empty party slot
 bool8 ScrCmd_restoremonfrompc(struct ScriptContext *ctx)
@@ -2763,6 +2811,55 @@ bool8 ScrCmd_checkexactmoney(struct ScriptContext *ctx)
     gSpecialVar_Result = GetMoney(&gSaveBlock1Ptr->money) == amount;
     return FALSE;
 }
+
+
+// ADDED
+bool8 ScrCmd_removetaughtmove(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    u16 newMove = ScriptReadHalfword(ctx);
+    gSpecialVar_Result = FALSE;
+
+    for (int i = 0; i < MAX_TAUGHT_MOVES; i++)
+    {
+        struct TaughtMoveEntry *e = &gSaveBlock3Ptr->taughtMoveLog.entries[i];
+        if (e->species == species && e->newMove == newMove)
+        {
+            e->species = SPECIES_NONE;
+            e->oldMove = MOVE_NONE;
+            e->newMove = MOVE_NONE;
+            gSpecialVar_Result = TRUE;
+            break;
+        }
+    }
+
+    return FALSE;
+}
+
+// ADDED
+bool8 ScrCmd_istaughtmovepresent(struct ScriptContext *ctx)
+{
+    u16 species = ScriptReadHalfword(ctx);
+    u16 newMove = ScriptReadHalfword(ctx);
+    gSpecialVar_Result = FALSE;
+    gSpecialVar_0x8004 = MOVE_NONE;
+
+    for (int i = 0; i < MAX_TAUGHT_MOVES; i++)
+    {
+        struct TaughtMoveEntry *e = &gSaveBlock3Ptr->taughtMoveLog.entries[i];
+        if (e->species == species && e->newMove == newMove)
+        {
+            gSpecialVar_Result = TRUE;
+            gSpecialVar_0x8004 = e->oldMove;
+            break;
+        }
+    }
+    return FALSE;
+}
+
+
+
+
 
 
 

@@ -1282,6 +1282,17 @@
     .2byte \move_new
 	.endm
 
+	@ Replace a given move from a party pokemon via species.
+	@ VAR_RESULT is set to the replaced moveslot.
+	.macro replacemove2 species:req, move_old:req, move_new:req
+    .byte 0xf2
+    .2byte \species
+    .2byte \move_old
+	.2byte \move_new
+	.endm
+
+	
+
 	@ Checks if party contains a fainted pokemon.
 	@ VAR_RESULT is set to slot of first fainted pokemon, to PARTY_SIZE is none.
 	@ VAR_0x8004 is set to the species of the first fainted pokemon.
@@ -1350,6 +1361,25 @@
 	.byte 0xd0
 	.2byte \species
 	.endm
+
+    @ Remove entry by species + newMove
+    @ VAR_RESULT = TRUE if removed, FALSE if not found
+    .macro removetaughtmove species:req, newmove:req
+    .byte 0xfa
+    .2byte \species
+    .2byte \newmove
+    .endm
+
+    @ Check if entry exists (species + newMove)
+	@ if exists, stores oldMove in VAR_0x8004
+    @ VAR_RESULT = TRUE if present, FALSE otherwise
+    .macro istaughtmovepresent species:req, newmove:req
+    .byte 0xfb
+    .2byte \species
+    .2byte \newmove
+    .endm
+
+
 
 
 	@ Converts STR_VAR_1, STR_VAR_2, or STR_VAR_3 to its corresponding index into sScriptStringVars (0, 1, or 2).

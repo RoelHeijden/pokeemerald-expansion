@@ -467,6 +467,7 @@ static void BufferMonSelection(void);
 static void CB_ChoosePartyMon(void); // ADDED
 static bool8 BackupMonMoveset(u16 partyslot); // ADDED
 static void Task_WaitForTextAndPlayerInput(u8 taskId); // ADDED
+static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove);
 static void Task_PartyMenuWaitForFade(u8 taskId);
 static void Task_ChooseContestMon(u8 taskId);
 static void CB2_ChooseContestMon(void);
@@ -5534,6 +5535,12 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 
     if (GiveMoveToMon(mon, move) != MON_HAS_MAX_MOVES)
     {
+        // ADDED
+        // store taught move in memory (for anti softlocks)
+        u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+        AddTaughtMove(species, MOVE_NONE, move);
+
+
         gTasks[taskId].func = Task_LearnedMove;
     }
     else
@@ -5542,6 +5549,40 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
         gTasks[taskId].func = Task_ReplaceMoveYesNo;
     }
 }
+
+
+
+// ADDED
+static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
+{
+    if (species == SPECIES_NONE || newMove == MOVE_NONE)
+        return;
+
+    // check for duplicate entry
+    for (int i = 0; i < MAX_TAUGHT_MOVES; i++)
+    {
+        struct TaughtMoveEntry *e = &gSaveBlock3Ptr->taughtMoveLog.entries[i];
+        if (e->species == species && e->newMove == newMove)
+            return;
+    }
+
+    // find empty slot
+    for (int i = 0; i < MAX_TAUGHT_MOVES; i++)
+    {
+        struct TaughtMoveEntry *e = &gSaveBlock3Ptr->taughtMoveLog.entries[i];
+        if (e->species == SPECIES_NONE)
+        {
+            e->species = species;
+            e->oldMove = oldMove;
+            e->newMove = newMove;
+            return;
+        }
+    }
+}
+
+
+
+
 
 static void Task_LearnedMove(u8 taskId)
 {
@@ -5684,6 +5725,13 @@ static void DisplayPartyMenuForgotMoveMessage(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
     u16 move = GetMonData(mon, MON_DATA_MOVE1 + GetMoveSlotToReplace());
+
+    // ADDED
+    // store taught move in memory (for anti softlocks)
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u16 newMove = gPartyMenu.data1;
+    AddTaughtMove(species, move, newMove);
+
 
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, GetMoveName(move));

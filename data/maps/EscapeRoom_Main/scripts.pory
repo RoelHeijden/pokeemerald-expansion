@@ -474,8 +474,10 @@ script EscapeRoom_MapScripts_SetRespawn{
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
 
-    // additem(ITEM_HM01)
-    // additem(ITEM_SAFETY_GOGGLES)
+    additem(ITEM_HM01)
+    additem(ITEM_TM46)
+    additem(ITEM_TM48)
+    additem(ITEM_RARE_CANDY)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -635,12 +637,6 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     }
 
     // undo used items
-    // TODO:
-    // - rare candy (in ape sequence: heal aipom) (clear FLAG_RARE_CANDY_USED ?), ItemUseCB_RareCandy
-    // - exp candy
-    // - TM Thief (remove Snowball!)
-    // - TM Skill Swap
-    // - HM Cut
     elif(var(VAR_RESULT) == 1){
         call(EscapeRoom_EventScript_UndoUsedItems)
     }
@@ -824,9 +820,56 @@ script EscapeRoom_EventScript_ReturnLostItems{
 
 // undo item
 script EscapeRoom_EventScript_UndoUsedItems{
-    msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
-    waitmessage
+    // - rare candy (in ape sequence: heal aipom) (clear FLAG_RARE_CANDY_USED ?), ItemUseCB_RareCandy
+    // - exp candy
+    // - TM Thief (remove Snowball!) (during trainer4 sequence: heal party)
+    // - TM Skill Swap
+    // - HM Cut (if Ferrothorn: reset tree)
+
+
+    // TM Skill Swap - Florges
+    istaughtmovepresent(SPECIES_LIEPARD, MOVE_THIEF)
+    if(var(VAR_RESULT) == TRUE){
+        msgbox("Liepard - Thief", MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            replacemove2(SPECIES_LIEPARD, MOVE_THIEF, VAR_0x8004)
+
+            msgbox("move replaced")
+            waitmessage
+        }
+    }
+    else{
+        msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+
+    // istaughtmovepresent(SPECIES_DUNSPARCE, MOVE_THIEF)
+    // istaughtmovepresent(SPECIES_AIPOM, MOVE_THIEF)
+    // istaughtmovepresent(SPECIES_LIEPARD, MOVE_THIEF)
+    // istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+
+    // istaughtmovepresent(SPECIES_FERROTHORN, MOVE_CUT)
+    // istaughtmovepresent(SPECIES_LIEPARD, MOVE_CUT)
+    // istaughtmovepresent(SPECIES_CACNEA, MOVE_CUT)
+
+    // istaughtmovepresent(SPECIES_AIPOM, MOVE_TAUNT)
+
+    // istaughtmovepresent(SPECIES_FLORGES, MOVE_SKILL_SWAP)
+
+
+
+    // check which items can be undone
+
+    // create dynamic option menu
+
+    // if no items to be undone: message
+    // msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
+    // waitmessage
 }
+
+
+
 
 // undo event
 script EscapeRoom_EventScript_UndoOtherActions{
@@ -973,10 +1016,6 @@ script EscapeRoom_EventScript_UndoFlorgesTrade{
     // allow trade again
     clearflag(FLAG_FLORGES_TRADE_ACCEPTED)
 }
-
-
-
-
 
 
 // LIEPARD
