@@ -43,7 +43,7 @@ gText_Birch_BoyOrGirl2::
 
 
 gText_Birch_AndYouAre::
-	.string "Welcome to Pokémon Annihilape's Lair!\p"
+	.string "Welcome to Pokémon Escape Room 2!\p"
 	.string " $"
 
 gText_Birch_BoyOrGirl::

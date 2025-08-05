@@ -85,6 +85,7 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
 
             // check if pokemon in party
             checkpartymon(SPECIES_AIPOM)
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -93,6 +94,7 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
                 end
             }
             checkpartymon(SPECIES_LIEPARD)
+            copyvar(VAR_0x8005, VAR_RESULT) // store monslot for bye-bye message - in 0x8005
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -101,7 +103,25 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
                 end
             }
 
-            // trade pokemon
+            // obtain cacnea message
+            message(CacneaReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            lockall
+            waitfanfare
+
+            // bye bye message Aipom
+            special(BufferMonNickname)
+            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
+            waitmessage
+            lockall
+
+            // bye bye message Liepard
+            copyvar(VAR_0x8004, VAR_0x8005)
+            special(BufferMonNickname)
+            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
+            waitmessage
+
+            // actually trade pokemon
             removemon(SPECIES_AIPOM)
             removemon(SPECIES_LIEPARD)
             lockall
@@ -128,16 +148,7 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
                 spAtkIv=31,
                 spDefIv=31
             )
-            lockall
             setflag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)
-
-            message(CacneaReceivedMessage)
-            playfanfare(MUS_OBTAIN_ITEM)
-            lockall
-            waitfanfare
-
-            msgbox(CacneaTradeAccepted, MSGBOX_AUTOCLOSE)
-            waitmessage
         }
         // trade declined
         else{
@@ -216,11 +227,6 @@ text AskCacneaTrade{
 
 text CacneaReceivedMessage{
     "{PLAYER} received a Cacnea!"
-}
-
-text CacneaTradeAccepted{
-    "Bye-bye Aipom.\p"
-    "Bye-bye Liepard."
 }
 
 text CacneaTradeDeclined{

@@ -686,8 +686,8 @@
 #define FLAG_PLAYER_JUST_LOST           0x282 
 #define FLAG_JUST_HAD_ZERA_BATTLE       0x283  
 #define FLAG_MENTAL_HERB_SOLD_OUT       0x284 
-#define FLAG_UNUSED_0x285  0x285 // Unused Flag
-#define FLAG_UNUSED_0x286  0x286 // Unused Flag
+#define FLAG_SET_DELETE_MOVE            0x285 
+#define FLAG_UNUSED_0x286           0x286 // Unused Flag
 #define FLAG_UNUSED_0x287  0x287 // Unused Flag
 #define FLAG_UNUSED_0x288  0x288 // Unused Flag
 #define FLAG_UNUSED_0x289  0x289 // Unused Flag

@@ -464,6 +464,9 @@ static void Task_MultiPartnerPartySlideIn(u8);
 static void SlideMultiPartyMenuBoxSpritesOneStep(u8);
 static void Task_WaitAfterMultiPartnerPartySlideIn(u8);
 static void BufferMonSelection(void);
+static void CB_ChoosePartyMon(void); // ADDED
+static bool8 BackupMonMoveset(u16 partyslot); // ADDED
+static void Task_WaitForTextAndPlayerInput(u8 taskId); // ADDED
 static void Task_PartyMenuWaitForFade(u8 taskId);
 static void Task_ChooseContestMon(u8 taskId);
 static void CB2_ChooseContestMon(void);
@@ -1416,6 +1419,36 @@ u8 GetPartyMenuType(void)
 
 void Task_HandleChooseMonInput(u8 taskId)
 {
+    // if move was selected: delete move
+    if(FlagGet(FLAG_SET_DELETE_MOVE)){
+
+        // backupmonmoveset
+        BackupMonMoveset(VarGet(VAR_MOVE_DELETE_MONSLOT_BACKUP));
+
+        // play sound
+        PlaySE(SE_SUCCESS); 
+
+        // move deleted message
+        gSpecialVar_0x8004 = VarGet(VAR_MOVE_DELETE_MONSLOT_BACKUP);
+        gSpecialVar_0x8005 = VarGet(VAR_MOVE_DELETER_CHOSEN_SLOT);
+        BufferMoveDeleterNicknameAndMove();
+        StringExpandPlaceholders(gStringVar4, gText_ForgetMoveCustom);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        gTasks[taskId].func = Task_WaitForTextAndPlayerInput;
+
+        // actually delete the move
+        MoveDeleterForgetMove();
+
+        // reset flag and vars
+        FlagClear(FLAG_SET_DELETE_MOVE); 
+        VarSet(VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES);
+        VarSet(VAR_MOVE_DELETE_MONSLOT_BACKUP, PARTY_SIZE);
+
+        // prevent leaking the input
+        return;
+    }     
+
+
     if (!gPaletteFade.active && MenuHelpers_ShouldWaitForLinkRecv() != TRUE)
     {
         s8 *slotPtr = GetCurrentPartySlotPtr();
@@ -1423,6 +1456,29 @@ void Task_HandleChooseMonInput(u8 taskId)
         switch (PartyMenuButtonHandler(slotPtr))
         {
         case A_BUTTON: // Selected mon
+
+            // ADDED
+            // dont select mon if only 1 move left
+            gSpecialVar_0x8004 = *slotPtr;
+            GetNumMovesSelectedMonHas();
+            if (gSpecialVar_Result <= 1)
+            {
+                // button sound
+                PlaySE(SE_SELECT);
+
+                // remove "choose pokemon" window
+                PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+
+                // display message
+                BufferMoveDeleterNicknameAndMove();
+                StringExpandPlaceholders(gStringVar4, gText_MonHas1MoveLeft);
+                DisplayPartyMenuMessage(gStringVar4, TRUE);
+                gTasks[taskId].func = Task_WaitForTextAndPlayerInput;
+
+                // prevent HandleChooseMonSelection call
+                return; 
+            }
+
             HandleChooseMonSelection(taskId, slotPtr);
             break;
         case B_BUTTON: // Selected Cancel / pressed B
@@ -1438,6 +1494,12 @@ void Task_HandleChooseMonInput(u8 taskId)
         }
     }
 }
+
+
+
+
+
+
 
 static s8 *GetCurrentPartySlotPtr(void)
 {
@@ -1936,6 +1998,31 @@ static void Task_ReturnToChooseMonAfterText(u8 taskId)
         }
     }
 }
+
+
+// ADDED
+static void Task_WaitForTextAndPlayerInput(u8 taskId)
+{
+    if (!RunTextPrintersRetIsActive(WIN_MSG))
+    {
+        if (JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            ClearStdWindowAndFrameToTransparent(WIN_MSG, FALSE);
+            ClearWindowTilemap(WIN_MSG);
+
+            if (MenuHelpers_IsLinkActive())
+                gTasks[taskId].func = Task_WaitForLinkAndReturnToChooseMon;
+            else
+            {
+                DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
+                gTasks[taskId].func = Task_HandleChooseMonInput;
+            }
+        }
+    }
+}
+
+
 
 static void DisplayGaveHeldItemMessage(struct Pokemon *mon, u16 item, bool8 keepOpen, u8 unused)
 {
@@ -7762,6 +7849,23 @@ static void Task_ChoosePartyMon(u8 taskId)
     }
 }
 
+// ADDED
+// choose party mon as callback
+static void CB_ChoosePartyMon(void)
+{
+    // check if move needs to be deleted (happens in Task_HandleChooseMonInput)
+    if(VarGet(VAR_MOVE_DELETER_CHOSEN_SLOT) != MAX_MON_MOVES &&
+       VarGet(VAR_MOVE_DELETE_MONSLOT_BACKUP) != PARTY_SIZE)
+    {
+        FlagSet(FLAG_SET_DELETE_MOVE);
+    }
+
+    // store last selected slot
+    gPartyMenu.slotId = VarGet(VAR_MOVE_DELETE_MONSLOT_BACKUP);
+
+    InitPartyMenu(PARTY_MENU_TYPE_CHOOSE_MON, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE, TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, BufferMonSelection);
+}
+
 static void BufferMonSelection(void)
 {
     gFieldCallback2 = CB2_FadeFromPartyMenu;
@@ -7770,22 +7874,73 @@ static void BufferMonSelection(void)
     if (gSpecialVar_0x8004 >= PARTY_SIZE){
         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
 
-    // CHANGED/ADDED
-        // set OW callback only if nothing chosen (B press)
+    // CHANGED/ADDED //
+        // backup chosen slot
+        VarSet(VAR_MOVE_DELETE_MONSLOT_BACKUP, gSpecialVar_0x8004);
         SetMainCallback2(CB2_ReturnToField);
     }
     else{
         // backup chosen slot
         VarSet(VAR_MOVE_DELETE_MONSLOT_BACKUP, gSpecialVar_0x8004);
-
-        // go straight to move delete script if mon selected
-        GetNumMovesSelectedMonHas();
-        if(gSpecialVar_Result > 1){
-            SetMainCallback2(MoveDeleterChooseMoveToForget);}
-        else
-            SetMainCallback2(CB2_ReturnToField);
+        SetMainCallback2(MoveDeleterChooseMoveToForget);
     }
 }
+
+
+// ADDED
+// copy of the backupMonMoveset scripting method
+static bool8 BackupMonMoveset(u16 partyslot)
+{
+    if (partyslot >= PARTY_SIZE)
+        return FALSE;
+
+    u16 species = GetMonData(&gPlayerParty[partyslot], MON_DATA_SPECIES);
+
+    for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
+    {
+        if (gSaveBlock3Ptr->movesetBackupData.slots[i].valid &&
+            gSaveBlock3Ptr->movesetBackupData.slots[i].species == species)
+        {
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+            {
+                u16 move = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + j);
+                if (move == MOVE_NONE)
+                    continue;
+
+                for (int k = 0; k < MAX_MON_MOVES; k++)
+                {
+                    if (gSaveBlock3Ptr->movesetBackupData.slots[i].moves[k] == move)
+                    {
+                        gSaveBlock3Ptr->movesetBackupData.slots[i].pp[k] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
+                        break;
+                    }
+                }
+            }
+            return TRUE;
+        }
+    }
+
+    for (int i = 0; i < MAX_BACKUP_SLOTS; i++)
+    {
+        if (!gSaveBlock3Ptr->movesetBackupData.slots[i].valid)
+        {
+            gSaveBlock3Ptr->movesetBackupData.slots[i].species = species;
+
+            for (int j = 0; j < MAX_MON_MOVES; j++)
+            {
+                gSaveBlock3Ptr->movesetBackupData.slots[i].moves[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_MOVE1 + j);
+                gSaveBlock3Ptr->movesetBackupData.slots[i].pp[j] = GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
+            }
+
+            gSaveBlock3Ptr->movesetBackupData.slots[i].valid = TRUE;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+
 
 
 
@@ -7856,7 +8011,9 @@ static void Task_BattlePyramidChooseMonHeldItems(u8 taskId)
 
 void MoveDeleterChooseMoveToForget(void)
 {
-    ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
+    // CHANGED
+    // ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB2_ReturnToField);
+    ShowPokemonSummaryScreen(SUMMARY_MODE_SELECT_MOVE, gPlayerParty, gSpecialVar_0x8004, gPlayerPartyCount - 1, CB_ChoosePartyMon);
     gFieldCallback = FieldCB_ContinueScriptHandleMusic;
 }
 

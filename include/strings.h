@@ -2164,6 +2164,8 @@ extern const u8 gText_NotAble2[];
 extern const u8 gText_Learned[];
 extern const u8 gText_WouldSoftlock[]; // ADDED
 extern const u8 gText_FixMovesFirst[]; // ADDED
+extern const u8 gText_ForgetMoveCustom[]; // ADDED
+extern const u8 gText_MonHas1MoveLeft[]; // ADDED
 extern const u8 gText_Have[];
 extern const u8 gText_DontHave[];
 extern const u8 gText_Take[];

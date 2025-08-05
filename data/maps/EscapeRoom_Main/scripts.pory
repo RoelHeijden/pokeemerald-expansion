@@ -382,6 +382,8 @@ script EscapeRoom_MapScript_GameStartScripts{
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
     removeobject(LOCALID_NURSE_DUMMY)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 1)
+    setvar(VAR_MOVE_DELETE_MONSLOT_BACKUP, 6)  // PARTY_SIZE
+    setvar(VAR_MOVE_DELETER_CHOSEN_SLOT, 4)    // MAX_MON_MOVES
 }
 
 script EscapeRoom_MapScript_GetPokedex{
@@ -564,20 +566,6 @@ script EscapeRoom_EventScript_EndSign{
 script EscapeRoom_EventScript_AnnihilapeStatue{
     lockall
     msgbox(AnnihilapeStatueMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-}
-
-script EscapeRoom_EventScript_AncientWallSign{
-    lockall
-    msgbox(MysteriousWallSign, MSGBOX_AUTOCLOSE)
-    waitmessage
-    releaseall
-}
-
-script EscapeRoom_EventScript_AncientWallBackroomSign{
-    lockall
-    msgbox(MysteriousWallBackroomSign, MSGBOX_AUTOCLOSE)
     waitmessage
     releaseall
 }
@@ -1113,9 +1101,7 @@ script EscapeRoom_EventScript_ObtainLiepard{
     lockall
     givemon(
         SPECIES_LIEPARD,
-        // 40,
-        100, // CHANGE BACK
-        // ball=ITEM_FRIEND_BALL,
+        40,
         abilityNum=2, // Prankster
         nature=17, // Quiet 
         gender=MON_FEMALE,
@@ -1261,62 +1247,23 @@ script EscapeRoom_MoveDeleterNPC{
     // restore moves
     elif(var(VAR_RESULT) == 1){
         call(EscapeRoom_RestoreMoveset)
+        releaseall
+        end
     }
-    // cancel or B press
-    else{
-        msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
-    }
+
+    // goodbye message
+    msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
     releaseall
 }
 
 script EscapeRoom_ChooseMoveToDelete{
-    // reset mon slot var
-    setvar(VAR_MOVE_DELETE_MONSLOT_BACKUP, 6)
+    // reset mon and move slot vars
+    setvar(VAR_MOVE_DELETE_MONSLOT_BACKUP, 6)  // PARTY_SIZE
+    setvar(VAR_MOVE_DELETER_CHOSEN_SLOT, 4)    // MAX_MON_MOVES
 
     // choose mon
 	special(ChoosePartyMon)
 	waitstate
-
-    // somewhere this got overwritten. Set it back
-    copyvar(VAR_0x8004, VAR_MOVE_DELETE_MONSLOT_BACKUP)
-
-    // end if no mon chosen
-	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
-        msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
-        releaseall
-        end
-    }
-
-    // end if mon only has 1 move
-    special(GetNumMovesSelectedMonHas)
-    if (var(VAR_RESULT) == 1) {
-        msgbox(MoveDeleterOnlyOneMove, MSGBOX_AUTOCLOSE)
-        releaseall
-        end
-    }
-
-    // end if no mon chosen
-	if (var(VAR_MOVE_DELETER_CHOSEN_SLOT) == MAX_MON_MOVES) {
-        msgbox(MoveDeleterComeAgain, MSGBOX_AUTOCLOSE)
-        releaseall
-        end
-    }
-
-    // make moveset backup
-    backupmonmoveset(VAR_0x8004)
-
-    // buffer move 
-    copyvar(VAR_0x8005, VAR_MOVE_DELETER_CHOSEN_SLOT)
-    setvar(VAR_MOVE_DELETER_CHOSEN_SLOT, MAX_MON_MOVES)
-    special(BufferMoveDeleterNicknameAndMove)
-
-    // delete move
-    special(MoveDeleterForgetMove)
-    playse(SE_SUCCESS)  // CHANGED
-    // playse(SE_SHOP)
-    waitse
-    msgbox(MoveDeleterMoveDeleted, MSGBOX_AUTOCLOSE)
-    end
 }
 
 script EscapeRoom_RestoreMoveset{
@@ -1329,7 +1276,12 @@ script EscapeRoom_RestoreMoveset{
         call(EscapeRoom_MoveRestoredSound)
         clearflag(FLAG_TEMP_5)
         clearflag(FLAG_LIEPARD_MOVE_DELETED)
-        msgbox(LiepardMovesRestoredMessage, MSGBOX_DEFAULT)
+
+        // moves restored message
+        checkpartymon(SPECIES_LIEPARD)
+        copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
+        special(BufferMonNickname)
+        msgbox(MovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
     }
 
@@ -1339,7 +1291,12 @@ script EscapeRoom_RestoreMoveset{
         call(EscapeRoom_MoveRestoredSound)
         clearflag(FLAG_TEMP_5)
         clearflag(FLAG_AIPOM_MOVE_DELETED)
-        msgbox(AipomMovesRestoredMessage, MSGBOX_DEFAULT)
+
+        // moves restored message
+        checkpartymon(SPECIES_AIPOM)
+        copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
+        special(BufferMonNickname)
+        msgbox(MovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
     }
 
@@ -1349,17 +1306,12 @@ script EscapeRoom_RestoreMoveset{
         call(EscapeRoom_MoveRestoredSound)
         clearflag(FLAG_TEMP_5)
         clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
-        msgbox(DunsparceMovesRestoredMessage, MSGBOX_DEFAULT)
-        waitmessage
-    }
 
-    // Smeargle
-    restoremonmoveset(SPECIES_SMEARGLE)
-    if(var(VAR_RESULT) == TRUE){
-        call(EscapeRoom_MoveRestoredSound)
-        clearflag(FLAG_TEMP_5)
-        clearflag(FLAG_SMEARGLE_MOVE_DELETED)
-        msgbox(SmeargleMovesRestoredMessage, MSGBOX_DEFAULT)
+        // moves restored message
+        checkpartymon(SPECIES_DUNSPARCE)
+        copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
+        special(BufferMonNickname)
+        msgbox(MovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
     }
 
@@ -1373,11 +1325,11 @@ script EscapeRoom_RestoreMoveset{
 }
 
 script EscapeRoom_MoveRestoredSound{
-    delay(10)
+    delay(5)
     playse(SE_NOTE_E)
-    delay(7)
+    delay(5)
     playse(SE_NOTE_G)
-    delay(7)
+    delay(5)
     playse(SE_NOTE_C_HIGH)
     waitse
 }
@@ -1686,26 +1638,23 @@ script EscapeRoom_SecretGarden_TeachSecretPower{
         setflag(FLAG_THIEF_REPLACED)
     }
 
-    // teach Secret Power - Cacnea
+    // buffer pokemon name and teach move
     checkpartymon(SPECIES_CACNEA)
     if(var(VAR_RESULT) != PARTY_SIZE){
+        copyvar(VAR_0x8004, VAR_RESULT) // store monslot
         addmonmove(SPECIES_CACNEA, MOVE_SECRET_POWER)
-        
-        playfanfare(MUS_LEVEL_UP)
-        msgbox(CacneaLearnedSecretPower, MSGBOX_AUTOCLOSE)
-        waitfanfare
-        lockall
     }
-    // teach Secret Power - Cacturne
     checkpartymon(SPECIES_CACTURNE)
     if(var(VAR_RESULT) != PARTY_SIZE){
+        copyvar(VAR_0x8004, VAR_RESULT) // store monslot
         addmonmove(SPECIES_CACTURNE, MOVE_SECRET_POWER)
-        
-        playfanfare(MUS_LEVEL_UP)
-        msgbox(CacturneLearnedSecretPower, MSGBOX_AUTOCLOSE)
-        waitfanfare
-        lockall
     }
+
+    playfanfare(MUS_LEVEL_UP)
+    special(BufferMonNickname)
+    msgbox(MonLearnedSecretPower, MSGBOX_AUTOCLOSE)
+    waitfanfare
+    lockall
 
     // set flag
     setflag(FLAG_SECRET_POWER_LEARNED)
@@ -1782,7 +1731,7 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
         clearflag(FLAG_SECRET_POWER_LEARNED)
 
 
-        // add back Thief is necessary
+        // add back Thief if necessary
         clearflag(FLAG_TEMP_2)
         if(flag(FLAG_THIEF_REPLACED)){
             addmonmove(SPECIES_CACNEA, MOVE_THIEF)
@@ -1794,33 +1743,25 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
         // secret power removed message
         checkpartymon(SPECIES_CACNEA)
         if(var(VAR_RESULT) != PARTY_SIZE){
-            playse(SE_SUCCESS)
-            waitse
-            msgbox(CacneaForgotSecretPower, MSGBOX_AUTOCLOSE)
-            waitmessage
-            lockall
-
-            // thief restored message
-            if(flag(FLAG_TEMP_2)){
-                msgbox(CacneaThiefRestored, MSGBOX_AUTOCLOSE)
-                waitmessage
-                lockall
-            }
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
         }
         checkpartymon(SPECIES_CACTURNE)
         if(var(VAR_RESULT) != PARTY_SIZE){
-            playse(SE_SUCCESS)
-            waitse
-            msgbox(CacturneForgotSecretPower, MSGBOX_AUTOCLOSE)
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        }
+
+        playse(SE_SUCCESS)
+        waitse
+        special(BufferMonNickname)
+        msgbox(MonForgotSecretPower, MSGBOX_AUTOCLOSE)
+        waitmessage
+        lockall
+
+        // thief restored message
+        if(flag(FLAG_TEMP_2)){
+            msgbox(MonThiefRestored, MSGBOX_AUTOCLOSE)
             waitmessage
             lockall
-
-            // thief restored message
-            if(flag(FLAG_TEMP_2)){
-                msgbox(CacturneThiefRestored, MSGBOX_AUTOCLOSE)
-                waitmessage
-                lockall
-            }
         }
     }
 
@@ -2483,6 +2424,7 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
 
         // check if Zera in party (sanity check)
         checkpartymon(SPECIES_ZERAORA)
+        copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
         if(var(VAR_RESULT) == PARTY_SIZE)
         {
             msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -2491,13 +2433,17 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
             end
         }
 
+        // get Cut
+        giveitem(ITEM_HM01)
 
-        // trade pokemon
+        // bye bye message
+        special(BufferMonNickname)
+        msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // remove pokemon
         setflag(FLAG_ZERA_TRADED)
         removemon(SPECIES_ZERAORA)
-        giveitem(ITEM_HM01)
-        msgbox(ZeraCutTradeAccepted, MSGBOX_AUTOCLOSE)
-        waitmessage
     }
     else{
         msgbox(ZeraCutTradeDeclined, MSGBOX_AUTOCLOSE)
@@ -2540,6 +2486,7 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
 
             // check if Ferrothorn in party (sanity check)
             checkpartymon(SPECIES_FERROTHORN)
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -2551,7 +2498,19 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
             // make Ferrothorn backup in pc
             backupmontopc(SPECIES_FERROTHORN)
 
-            // trade pokemon
+            // received message
+            message(DunsparceReceivedMessage)
+            playfanfare(MUS_OBTAIN_ITEM)
+            waitfanfare
+
+            lockall
+
+            // bye bye message
+            special(BufferMonNickname)
+            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
+            waitmessage
+
+            // actually trade pokemon
             removemon(SPECIES_FERROTHORN)
             givemon(
                 SPECIES_DUNSPARCE,
@@ -2577,13 +2536,6 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
             )
             setflag(FLAG_FERRO_TRADE_ACCEPTED)
 
-            message(DunsparceReceivedMessage)
-            playfanfare(MUS_OBTAIN_ITEM)
-            waitfanfare
-
-            lockall
-            msgbox(FerroTradeAccepted, MSGBOX_AUTOCLOSE)
-            waitmessage
         }
         // trade declined
         else{
@@ -2630,6 +2582,7 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
 
             // check if pokemon in party
             checkpartymon(SPECIES_FLORGES)
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -2641,17 +2594,21 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
             // make Florges backup in pc
             backupmontopc(SPECIES_FLORGES)
 
-            // trade pokemon
-            removemon(SPECIES_FLORGES)
-            giveaipomegg
-            setflag(FLAG_FLORGES_TRADE_ACCEPTED)
-
+            // get egg message
             message(EggReceivedMessage)
             playfanfare(MUS_OBTAIN_ITEM)
             waitfanfare
             lockall
-            msgbox(FlorgesTradeAccepted, MSGBOX_AUTOCLOSE)
+
+            // bye bye message
+            special(BufferMonNickname)
+            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
             waitmessage
+
+            // actually trade pokemon
+            removemon(SPECIES_FLORGES)
+            giveaipomegg
+            setflag(FLAG_FLORGES_TRADE_ACCEPTED)
         }
         // trade declined
         else{
@@ -2678,6 +2635,7 @@ script EscapeRoom_EventScript_SellDunsparce{
 
             // check if pokemon in party
             checkpartymon(SPECIES_DUNSPARCE)
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
             if(var(VAR_RESULT) == PARTY_SIZE)
             {
                 msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
@@ -2686,17 +2644,19 @@ script EscapeRoom_EventScript_SellDunsparce{
                 end
             }
 
-            // trade pokemon
-            removemon(SPECIES_DUNSPARCE)
-            setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
-
+            // message
             msgbox(AskDunsparceReturnAcceptedMessage, MSGBOX_DEFAULT)
             waitmessage
             giveitem(ITEM_TM12) // TM TAUNT
 
-            // bye bye dunsparce msg
-            msgbox(ByeByeDunsparce, MSGBOX_AUTOCLOSE)
+            // bye bye message
+            special(BufferMonNickname)
+            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
             waitmessage
+
+            // remove pokemon
+            removemon(SPECIES_DUNSPARCE)
+            setflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
         }
         // trade declined
         else{
@@ -2729,12 +2689,12 @@ script EscapeRoom_EventScript_FindRareCandy2{
 script EscapeRoom_EventScript_FindPrimeape{
     lockall
 
-    // ask pickup item
-    msgbox(PrimeapePokeballMessage, MSGBOX_YESNO)
-    if(var(VAR_RESULT) != YES){
-        releaseall
-        end
-    }
+    // // ask pickup item
+    // msgbox(PrimeapePokeballMessage, MSGBOX_YESNO)
+    // if(var(VAR_RESULT) != YES){
+    //     releaseall
+    //     end
+    // }
 
     // obtain primeape
     givemon(
@@ -3348,6 +3308,11 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
         checkpartymove(MOVE_SNATCH)
         if(var(VAR_RESULT) != PARTY_SIZE && var(VAR_0x8004) == SPECIES_ZERAORA){
 
+            // set nickname to var
+            checkpartymon(SPECIES_ZERAORA)
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
+            special(BufferMonNickname)
+
             // ask snatch goggles
             msgbox(Goggles_Statue_AskSnatch, MSGBOX_YESNO)
             if(var(VAR_RESULT) == YES){
@@ -3417,6 +3382,10 @@ text RespawnChangeMessage{
     "Your respawn location was changed."
 }
 
+text ByeByeMonDynamic{
+    "Bye-bye, {STR_VAR_1}."
+}
+
 // SIGNS
 text SignMessage1{
     "TBD"
@@ -3437,16 +3406,6 @@ text EndEscapeRoomSignMessage{
     "Hints used: {STR_VAR_2}.\p"
     "Thank you for playing.\n"
     " - Roel"
-}
-
-text MysteriousWallSign{
-    // "There are four mysterious markings that\n"
-    // "seem to point in various directions.\p"
-    "What a weird looking wall."
-}
-
-text MysteriousWallBackroomSign{
-    "bliep bloop (TBD)"
 }
 
 text MoveDeleterSignMessage{
@@ -3510,8 +3469,8 @@ text Goggles_Statue_AskSnatch{
     "There's a pair of goggles attached to\n"
     "the gravestone, radiating a strange,\l"
     "ominous energy.\p"    
-    "Do you want Zeraora to try and snatch\n"
-    "the goggles for you?"
+    "Do you want {STR_VAR_1} to try and\n"
+    "snatch the goggles for you?"
 }
 
 text GogglesAlreadySnatchedMessage{
@@ -3520,13 +3479,14 @@ text GogglesAlreadySnatchedMessage{
 }
 
 text GogglesSnatchStart{
-    "Zeraora carefully detaches the goggles\n"
-    "from the gravestone." 
+    "{STR_VAR_1} carefully detaches the\n"
+    "goggles from the gravestone." 
 }
 
 text GogglesCurseHappens{
-    "A curse was cast upon Zeraora!\p"
-    "Something happened to Zeraora's moves."
+    "A curse was cast upon {STR_VAR_1}!\p"
+    "Something happened to\n"
+    "{STR_VAR_1}'s moves."
 }
 
 
@@ -3752,11 +3712,6 @@ text AntiSoftlockAskUndoFlorgesTrade{
     "Pokémon trade and get back Florges?"
 }
 
-text AntiSoftlockAskUndoAipomTrade{
-    "Would you like to undo your latest\n"
-    "Pokémon trade and get back Aipom?"
-}
-
 
 // ZERA HINT NPC
 text ZeraoraHintMessage1{
@@ -3963,12 +3918,8 @@ text SecretGardenNPC_EndOfScriptMessage{
     "It's our little secret."
 }
 
-text CacneaLearnedSecretPower{
-    "Cacnea learned Secret Power!"
-}
-
-text CacturneLearnedSecretPower{
-    "Cacturne learned Secret Power!"
+text MonLearnedSecretPower{
+    "{STR_VAR_1} learned Secret Power!"
 }
 
 // guard
@@ -3992,20 +3943,12 @@ text SecretGardenGuardRemoveSecretPower{
     "from your Pokémon."
 }
 
-text CacneaForgotSecretPower{
-    "Cacnea's Secret Power was removed."
+text MonForgotSecretPower{
+    "{STR_VAR_1}'s Secret Power was removed."
 }
 
-text CacturneForgotSecretPower{
-    "Cacturne's Secret Power was removed."
-}
-
-text CacneaThiefRestored{
-    "Cacnea's Thief was restored."
-}
-
-text CacturneThiefRestored{
-    "Cacturne's Thief was restored."
+text MonThiefRestored{
+    "{STR_VAR_1}'s Thief was restored."
 }
 
 
@@ -4028,7 +3971,7 @@ text PrimeapePokeballMessage{
 }
 
 text PrimeapeObtainMessage{
-    "{PLAYER} received a Primeape!"
+    "{PLAYER} found a Primeape!"
 }
 
 text NicknameThisPokemonMessage2{
@@ -4079,28 +4022,8 @@ text MoveDeleterComeAgain{
     "Please come again!"
 }
 
-text MoveDeleterMoveDeleted{
-	"{STR_VAR_1}'s {STR_VAR_2} was removed!"
-}
-
-text MoveDeleterOnlyOneMove{
-    "That Pokémon has only one move left."
-}
-
-text AipomMovesRestoredMessage{
-    "Aipom's moves were restored!"
-}
-
-text LiepardMovesRestoredMessage{
-    "Liepard's moves were restored!"
-}
-
-text DunsparceMovesRestoredMessage{
-    "Dunsparce's moves were restored!"
-}
-
-text SmeargleMovesRestoredMessage{
-    "Smeargle's moves were restored!"
+text MovesRestoredMessage{
+    "{STR_VAR_1}'s moves were restored!"
 }
 
 text NoMovesRestoredMessage{
@@ -4145,10 +4068,6 @@ text DunsparceReceivedMessage{
     "{PLAYER} received a Dunsparce!"
 }
 
-text FerroTradeAccepted{
-    "Bye-bye Ferrothorn."
-}
-
 text FerroTradeDeclined{
     "Some other time perhaps."
 }
@@ -4184,10 +4103,6 @@ text AskFlorgesEggTrade{
 
 text EggReceivedMessage{
     "{PLAYER} received an EGG!" 
-}
-
-text FlorgesTradeAccepted{
-    "Bye-bye Florges."
 }
 
 text FlorgesTradeDeclined{
@@ -4228,10 +4143,6 @@ text AskDunsparceReturnAcceptedMessage{
     "Here, have this."
 }
 
-text ByeByeDunsparce{
-    "Bye-bye Dunsparce."
-}
-
 text DunsparceTradeDeclined{
     "Hmm..."
 }
@@ -4255,7 +4166,6 @@ text Trainer1_Intro{
     "Win the fight and we may have a deal."
 }
 
-
 text Trainer1_Outro{
     "Let's make a deal!"
 }
@@ -4274,10 +4184,6 @@ text AskZeraCutTradeMessage{
 
 text ZeraCutTradeDeclined{
     "Come back if you change your mind."
-}
-
-text ZeraCutTradeAccepted{
-    "Bye-bye Zeraora."
 }
 
 
