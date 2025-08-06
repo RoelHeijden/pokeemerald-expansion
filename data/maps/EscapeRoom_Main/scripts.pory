@@ -629,7 +629,13 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     faceplayer
     lockall
 
-    msgbox(AntiSoftlockIntroMessage, MSGBOX_SOFTLOCK_GUY)
+    msgbox(AntiSoftlockIntroMessage, MSGBOX_DEFAULT)
+    waitmessage
+    call(EscapeRoom_EventScript_AntiSoftlockGuy_part2)
+}
+
+script EscapeRoom_EventScript_AntiSoftlockGuy_part2{
+    msgbox(AntiSoftlockIntroMessage2, MSGBOX_SOFTLOCK_GUY)
 
     // return lost items 
     if(var(VAR_RESULT) == 0){
@@ -653,6 +659,8 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
     }
     releaseall
 }
+
+
 
 // return items
 script EscapeRoom_EventScript_ReturnLostItems{
@@ -827,48 +835,243 @@ script EscapeRoom_EventScript_UndoUsedItems{
     // - HM Cut (if Ferrothorn: reset tree)
 
 
-    // TM Skill Swap - Florges
+    // check Thief
+    istaughtmovepresent(SPECIES_DUNSPARCE, MOVE_THIEF)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_THIEF)
+        setvar(VAR_0x8005, SPECIES_DUNSPARCE)
+        setvar(VAR_0x8006, MOVE_THIEF)
+    }
+    istaughtmovepresent(SPECIES_AIPOM, MOVE_THIEF)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_THIEF)
+        setvar(VAR_0x8005, SPECIES_AIPOM)
+        setvar(VAR_0x8006, MOVE_THIEF)
+    }
     istaughtmovepresent(SPECIES_LIEPARD, MOVE_THIEF)
     if(var(VAR_RESULT) == TRUE){
-        msgbox("Liepard - Thief", MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-            replacemove2(SPECIES_LIEPARD, MOVE_THIEF, VAR_0x8004)
-
-            msgbox("move replaced")
-            waitmessage
-        }
+        setflag(FLAG_CAN_UNDO_THIEF)
+        setvar(VAR_0x8005, SPECIES_LIEPARD)
+        setvar(VAR_0x8006, MOVE_THIEF)
     }
+    istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_THIEF)
+        setvar(VAR_0x8005, SPECIES_CACNEA)
+        setvar(VAR_0x8006, MOVE_THIEF)
+    }
+
+    // check Cut
+    istaughtmovepresent(SPECIES_FERROTHORN, MOVE_CUT)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_CUT)
+        setvar(VAR_0x8007, SPECIES_FERROTHORN)
+        setvar(VAR_0x8008, MOVE_CUT)
+    }
+    istaughtmovepresent(SPECIES_LIEPARD, MOVE_CUT)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_CUT)
+        setvar(VAR_0x8007, SPECIES_LIEPARD)
+        setvar(VAR_0x8008, MOVE_CUT)
+    }
+    istaughtmovepresent(SPECIES_CACNEA, MOVE_CUT)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_CUT)
+        setvar(VAR_0x8007, SPECIES_CACNEA)
+        setvar(VAR_0x8008, MOVE_CUT)
+    }
+
+    // check Skill Swap
+    istaughtmovepresent(SPECIES_FLORGES, MOVE_SKILL_SWAP)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_SKILL_SWAP)
+        setvar(VAR_0x8007, SPECIES_FLORGES)
+        setvar(VAR_0x8008, MOVE_SKILL_SWAP)
+    }
+    
+
+    // check Exp Candy
+    // setflag(FLAG_CAN_UNDO_EXP_CANDY)
+
+
+    // check Rare Candy
+    // setflag(FLAG_CAN_UNDO_RARE_CANDY)
+
+
+
+    // create and handle choice options 
+    call(EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice)
+
+    // clear flags
+    clearflag(FLAG_CAN_UNDO_THIEF)
+    clearflag(FLAG_CAN_UNDO_CUT)
+    clearflag(FLAG_CAN_UNDO_SKILL_SWAP)
+    clearflag(FLAG_CAN_UNDO_EXP_CANDY)
+    clearflag(FLAG_CAN_UNDO_RARE_CANDY)
+}
+
+script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
+
+    //// MULTI CHOICE ////
+    // Thief, Cut, Rare Candy
+    if(flag(FLAG_CAN_UNDO_THIEF) && flag(FLAG_CAN_UNDO_CUT) && flag(FLAG_CAN_UNDO_RARE_CANDY)){
+        dynmultichoice(30, 6, FALSE, 6, 0, 0, OptionUndoThief, OptionUndoCut, OptionUndoRareCandy) 
+        goto(DecodeMultiChoice)
+    }
+    // Thief, Cut
+    elif(flag(FLAG_CAN_UNDO_THIEF) && flag(FLAG_CAN_UNDO_CUT)){
+        dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoThief, OptionUndoCut)        
+        goto(DecodeMultiChoice)
+    }
+    // Thief, Rare Candy
+    elif(flag(FLAG_CAN_UNDO_THIEF) && flag(FLAG_CAN_UNDO_RARE_CANDY)){
+        dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoThief, OptionUndoRareCandy)   
+        goto(DecodeMultiChoice)
+    }
+    // Cut, Rare Candy
+    elif(flag(FLAG_CAN_UNDO_CUT) && flag(FLAG_CAN_UNDO_RARE_CANDY)){
+        dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoCut, OptionUndoRareCandy)  
+        goto(DecodeMultiChoice)
+    }
+    // Thief, Exp Candy
+    elif(flag(FLAG_CAN_UNDO_THIEF) && flag(FLAG_CAN_UNDO_EXP_CANDY)){
+        dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoThief, OptionUndoExpCandy) 
+        goto(DecodeMultiChoice)
+    }
+    // Skill Swap, Exp Candy
+    elif(flag(FLAG_CAN_UNDO_SKILL_SWAP) && flag(FLAG_CAN_UNDO_EXP_CANDY)){
+        dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoSkillSwap, OptionUndoExpCandy) 
+        goto(DecodeMultiChoice)
+    }
+
+    //// SINGLE CHOICE ////
+    // Thief
+    elif(flag(FLAG_CAN_UNDO_THIEF)){
+        setflag(FLAG_UNDOING_MOVE_THIEF)
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+        return
+    }
+    // Cut
+    elif(flag(FLAG_CAN_UNDO_CUT)){
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+        return
+    }
+    // Skill Swap
+    elif(flag(FLAG_CAN_UNDO_SKILL_SWAP)){
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+        return
+    }
+    // Rare Candy
+    elif(flag(FLAG_CAN_UNDO_RARE_CANDY)){
+        call(EscapeRoom_EventScript_UndoRareCandy)
+        return
+    }
+    // Exp Candy
+    elif(flag(FLAG_CAN_UNDO_EXP_CANDY)){
+        call(EscapeRoom_EventScript_UndoExpCandy)
+        return
+    }
+
+    // no items to be undone
     else{
         msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
         waitmessage
+        return
     }
 
+    // decode multi choice selected option
+    // fixed order: Thief, Cut, Skill Swap, Rare Candy, Exp Candy
+    DecodeMultiChoice:
+        if (flag(FLAG_CAN_UNDO_THIEF)) {
+            if (var(VAR_RESULT) == 0) {
+                setflag(FLAG_UNDOING_MOVE_THIEF)
+                call(EscapeRoom_EventScript_UndoMoveTeach)
+                return
+            }
+            subvar(VAR_RESULT, 1)
+        }
+        if (flag(FLAG_CAN_UNDO_CUT)) {
+            if (var(VAR_RESULT) == 0) {
+                call(EscapeRoom_EventScript_UndoMoveTeach)
+                return
+            }
+            subvar(VAR_RESULT, 1)
+        }
+        if (flag(FLAG_CAN_UNDO_SKILL_SWAP)) {
+            if (var(VAR_RESULT) == 0) {
+                call(EscapeRoom_EventScript_UndoMoveTeach)
+                return
+            }
+            subvar(VAR_RESULT, 1)
+        }
+        if (flag(FLAG_CAN_UNDO_RARE_CANDY)) {
+            if (var(VAR_RESULT) == 0) {
+                call(EscapeRoom_EventScript_UndoRareCandy)
+                return
+            }
+            subvar(VAR_RESULT, 1)
+        }
+        if (flag(FLAG_CAN_UNDO_EXP_CANDY)) {
+            if (var(VAR_RESULT) == 0) {
+                call(EscapeRoom_EventScript_UndoExpCandy)
+                return
+            }
+            subvar(VAR_RESULT, 1)
+        }
 
-    // istaughtmovepresent(SPECIES_DUNSPARCE, MOVE_THIEF)
-    // istaughtmovepresent(SPECIES_AIPOM, MOVE_THIEF)
-    // istaughtmovepresent(SPECIES_LIEPARD, MOVE_THIEF)
-    // istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+        // none of the options chosen: B Press
+        // clear flags
+        clearflag(FLAG_CAN_UNDO_THIEF)
+        clearflag(FLAG_CAN_UNDO_CUT)
+        clearflag(FLAG_CAN_UNDO_SKILL_SWAP)
+        clearflag(FLAG_CAN_UNDO_EXP_CANDY)
+        clearflag(FLAG_CAN_UNDO_RARE_CANDY)
 
-    // istaughtmovepresent(SPECIES_FERROTHORN, MOVE_CUT)
-    // istaughtmovepresent(SPECIES_LIEPARD, MOVE_CUT)
-    // istaughtmovepresent(SPECIES_CACNEA, MOVE_CUT)
-
-    // istaughtmovepresent(SPECIES_AIPOM, MOVE_TAUNT)
-
-    // istaughtmovepresent(SPECIES_FLORGES, MOVE_SKILL_SWAP)
-
-
-
-    // check which items can be undone
-
-    // create dynamic option menu
-
-    // if no items to be undone: message
-    // msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
-    // waitmessage
+        // loop back to initial option menu
+        call(EscapeRoom_EventScript_AntiSoftlockGuy_part2)
 }
 
+script EscapeRoom_EventScript_UndoMoveTeach{
 
+    // use other vars if restoring Thief
+    if(flag(FLAG_UNDOING_MOVE_THIEF)){
+        clearflag(FLAG_UNDOING_MOVE_THIEF)
+        copyvar(VAR_0x8007, VAR_0x8005)
+        copyvar(VAR_0x8008, VAR_0x8006)
+    }
+
+    // buffer VAR_0x8007 and VAR_0x8008
+    bufferspeciesname(STR_VAR_1, VAR_0x8007)
+    buffermovename(STR_VAR_2, VAR_0x8008)
+
+    // ask undo message 
+    msgbox(AskUndoMoveTeachDynamic, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        replacemove2(VAR_0x8007, VAR_0x8008, VAR_0x8004)
+        removetaughtmove(VAR_0x8007, VAR_0x8008)
+
+        // message
+        call(EscapeRoom_MoveRestoredSound)
+        msgbox(MoveTeachUndoneMessage, MSGBOX_DEFAULT)
+        waitmessage
+
+        // return item
+        if(var(VAR_0x8008) == MOVE_THIEF){
+            giveitem(ITEM_TM46)
+        }
+        elif(var(VAR_0x8008) == MOVE_SKILL_SWAP){
+            giveitem(ITEM_TM48)
+        }
+    }
+}
+
+script EscapeRoom_EventScript_UndoRareCandy{
+
+}
+
+script EscapeRoom_EventScript_UndoExpCandy{
+
+}
 
 
 // undo event
@@ -3685,14 +3888,20 @@ text AntiSoftlockIntroMessage{
 
     "Certain rollbacks may also include\n"
     "resetting your Pokémon's HP, move PP,\l"
-    "or even your location.\p"
+    "or even your location."
 
+    // "What would you like to do?"
+}
+
+text AntiSoftlockIntroMessage2{
     "What would you like to do?"
 }
 
 text AntiSoftlockOutro{
     "Alright, see you soon."
 }
+
+// return item
 
 text AntiSoftlockNoItemsReturned{
     "There currently are no items that can\n"
@@ -3707,10 +3916,43 @@ text AntiSoftlockSomeOfPartyHealed{
     "Some of your party Pokémon got healed."
 }
 
+// undo item
+
 text AntiSoftlockNoItemToUndo{
     "There currently are no item uses that\n"
     "can be undone."
 }
+
+text AntiSoftlockItemUndoWhichItem{
+    "What would you like to undo?"
+}
+
+text OptionUndoThief{
+    "Undo TM Thief use"
+}
+text OptionUndoCut{
+    "Undo HM Cut use"
+}
+text OptionUndoSkillSwap{
+    "Undo TM Skill Swap use"
+}
+text OptionUndoRareCandy{
+    "Undo Rare Candy use"
+}
+text OptionUndoExpCandy{
+    "Undo Exp Candy use"
+}
+
+text AskUndoMoveTeachDynamic{
+    "Do you want to undo teaching\n"
+    "{STR_VAR_2} to {STR_VAR_1}?"
+}
+
+text MoveTeachUndoneMessage{
+    "{STR_VAR_1}'s moveset was restored."
+}
+
+// undo action
 
 text AntiSoftlockNoActionsToUndo{
     "There currently are no other events\n"

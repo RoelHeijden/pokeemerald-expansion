@@ -5551,10 +5551,13 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 }
 
 
-
 // ADDED
 static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
 {
+    // only store: Thief, Cut, or Skill Swap
+    if(newMove != MOVE_THIEF && newMove != MOVE_CUT && newMove != MOVE_SKILL_SWAP)
+        return;
+
     if (species == SPECIES_NONE || newMove == MOVE_NONE)
         return;
 
@@ -5579,8 +5582,6 @@ static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
         }
     }
 }
-
-
 
 
 

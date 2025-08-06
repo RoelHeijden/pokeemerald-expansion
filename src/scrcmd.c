@@ -2507,10 +2507,6 @@ bool8 ScrCmd_replacemove2(struct ScriptContext *ctx)
     u16 moveId_new = VarGet(ScriptReadHalfword(ctx));
     u8 slot, i, j;
 
-    // REMOVE
-    DebugPrintf("REPLACING MOVE - species: %d, oldmove: %d, newmove: %d", species, moveId_old, moveId_new);
-
-
     gSpecialVar_Result = MAX_MON_MOVES; // default: not replaced
 
     // find first matching species in party
@@ -2814,10 +2810,11 @@ bool8 ScrCmd_checkexactmoney(struct ScriptContext *ctx)
 
 
 // ADDED
+// can take VARs as arguments
 bool8 ScrCmd_removetaughtmove(struct ScriptContext *ctx)
 {
-    u16 species = ScriptReadHalfword(ctx);
-    u16 newMove = ScriptReadHalfword(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 newMove = VarGet(ScriptReadHalfword(ctx));
     gSpecialVar_Result = FALSE;
 
     for (int i = 0; i < MAX_TAUGHT_MOVES; i++)
@@ -2837,12 +2834,12 @@ bool8 ScrCmd_removetaughtmove(struct ScriptContext *ctx)
 }
 
 // ADDED
+// can take VARs as arguments
 bool8 ScrCmd_istaughtmovepresent(struct ScriptContext *ctx)
 {
-    u16 species = ScriptReadHalfword(ctx);
-    u16 newMove = ScriptReadHalfword(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 newMove = VarGet(ScriptReadHalfword(ctx));
     gSpecialVar_Result = FALSE;
-    gSpecialVar_0x8004 = MOVE_NONE;
 
     for (int i = 0; i < MAX_TAUGHT_MOVES; i++)
     {

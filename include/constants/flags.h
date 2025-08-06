@@ -687,12 +687,12 @@
 #define FLAG_JUST_HAD_ZERA_BATTLE       0x283  
 #define FLAG_MENTAL_HERB_SOLD_OUT       0x284 
 #define FLAG_SET_DELETE_MOVE            0x285 
-#define FLAG_UNUSED_0x286               0x286 // Unused Flag
-#define FLAG_UNUSED_0x287  0x287 // Unused Flag
-#define FLAG_UNUSED_0x288  0x288 // Unused Flag
-#define FLAG_UNUSED_0x289  0x289 // Unused Flag
-#define FLAG_UNUSED_0x28A  0x28A // Unused Flag
-#define FLAG_UNUSED_0x28B  0x28B // Unused Flag
+#define FLAG_CAN_UNDO_THIEF             0x286 
+#define FLAG_CAN_UNDO_CUT               0x287 
+#define FLAG_CAN_UNDO_SKILL_SWAP        0x288 
+#define FLAG_CAN_UNDO_RARE_CANDY        0x289 
+#define FLAG_CAN_UNDO_EXP_CANDY         0x28A
+#define FLAG_UNDOING_MOVE_THIEF         0x28B 
 #define FLAG_UNUSED_0x28C  0x28C // Unused Flag  
 #define FLAG_UNUSED_0x28D  0x28D // Unused Flag
 #define FLAG_UNUSED_0x28E  0x28E // Unused Flag 
