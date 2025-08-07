@@ -30,6 +30,7 @@ script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
     call(EscapeRoom_HiddenDungeon_SetLostItemVars)
     call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
     call(EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained)
+    call(EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained)
 } 
 
 script EscapeRoom_HiddenDungeon_DisableBagUse{
@@ -50,6 +51,29 @@ script EscapeRoom_HiddenDungeon_SetLostItemVars{
 script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
     if(flag(FLAG_SECRET_POWER_LEARNED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
         setflag(FLAG_SECRET_POWER_COMPLETED)
+    }
+}
+
+script EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained{
+    if(!flag(FLAG_TOXIC_ORB_OBTAINED)){
+        checkpartyitem(0)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
+            setflag(FLAG_TOXIC_ORB_OBTAINED)
+        }
+        checkpartyitem(1)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
+            setflag(FLAG_TOXIC_ORB_OBTAINED)
+        }
+        checkitem(ITEM_TOXIC_ORB)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_TOXIC_ORB_OBTAINED)
+        }
+
+        // if toxic orb succesfully obtained
+        if(flag(FLAG_TOXIC_ORB_OBTAINED)){
+            // remove Cacnea Thief undo
+            removetaughtmove(SPECIES_CACNEA, MOVE_THIEF)
+        }
     }
 }
 

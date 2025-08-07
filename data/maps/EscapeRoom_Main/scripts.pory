@@ -835,15 +835,8 @@ script EscapeRoom_EventScript_ReturnLostItems{
 
 }
 
+
 // undo item
-    // - rare candy (in ape sequence: heal aipom)
-    // - exp candy
-    // - TM Thief 
-        // - (remove Snowball!) 
-        // - (during trainer4 sequence: heal party)
-        // - (take toxic orb, heal party)
-    // - TM Skill Swap
-    // - HM Cut (if Ferrothorn: reset tree)
 script EscapeRoom_EventScript_UndoUsedItems{
     // check Thief
     // Thief can be taught to pokemon that also learn Cut, so
@@ -2502,6 +2495,8 @@ script EscapeRoom_EventScript_Trainer1PostBattle{
 
     setflag(FLAG_TRAINER1_DEFEATED)
 
+    // remove Florges Skill Swap undo
+    removetaughtmove(SPECIES_FLORGES, MOVE_SKILL_SWAP)
 
     // ERROR CHECK
     // - 1500 money
@@ -2549,6 +2544,9 @@ script EscapeRoom_EventScript_Trainer2PostBattle{
     }
     setflag(FLAG_TRAINER2_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // remove Ferrothorn Cut undo
+    removetaughtmove(SPECIES_FERROTHORN, MOVE_CUT)
 
     // ERROR CHECK
     // - 2000 money
@@ -2630,6 +2628,9 @@ movement EscapeRoom_Movement_Trainer3End{
 script EscapeRoom_EventScript_Trainer4PostBattle{
     setflag(FLAG_TRAINER4_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // remove Dunsparce Thief undo
+    removetaughtmove(SPECIES_DUNSPARCE, MOVE_THIEF)
 
     // ERROR CHECK
     // - 500 or 2000 money
@@ -2739,6 +2740,8 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     // clearflag(FLAG_MENTAL_HERB_SOLD_OUT)
     call(EscapeRoom_EventScript_PostMatchHeal)
 
+    // remove rare candy1 undo (for Liepard)
+    setvar(VAR_RARE_CANDY_1_USED_ON, SPECIES_NONE)
 
     // ERROR CHECK
     // - 500 money
@@ -2811,16 +2814,25 @@ script EscapeRoom_EventScript_Trainer7BPostBattle{
 script EscapeRoom_EventScript_Trainer8PostBattle{
     setflag(FLAG_TRAINER8_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // remove Cacnea Cut undo
+    removetaughtmove(SPECIES_CACNEA, MOVE_CUT)
 }
 
 script EscapeRoom_EventScript_Trainer9PostBattle{
     setflag(FLAG_TRAINER9_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // remove rare candy2 undo (for Annihilape)
+    setvar(VAR_RARE_CANDY_2_USED_ON, SPECIES_NONE)
 }
 
 script EscapeRoom_EventScript_Trainer10PostBattle{
     setflag(FLAG_TRAINER10_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // remove rare candy3 undo (for Cacnea)
+    setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
 }
 
 script EscapeRoom_EventScript_Trainer11PostBattle{
@@ -4146,7 +4158,7 @@ text AskUndoExpCandyDynamic{
 }
 
 text ExpCandyUndoneMessage{
-    "{STR_VAR_1} lost Exp. Points."
+    "{STR_VAR_1} lost 800 Exp. Points."
 }
 
 // undo action

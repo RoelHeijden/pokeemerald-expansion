@@ -2731,8 +2731,6 @@ bool8 ScrCmd_removeExpFromMon(struct ScriptContext *ctx)
     return FALSE;
 }
 
-
-
 // ADDED
 static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)
 {

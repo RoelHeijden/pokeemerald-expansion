@@ -1224,8 +1224,8 @@
 #define FLAG_HIDE_SMASH_ROCK2                                       0x495 // one-way rock
 #define FLAG_ROCK_SMASH_GUY_MOVED                                   0x496
 #define FLAG_END_ESCAPE_ROOM                                        0x497
-#define FLAG_WHITE_HERB_USED                                           0x498  
-#define FLAG_UNUSED_0x499                                           0x499 // Unused
+#define FLAG_WHITE_HERB_USED                                        0x498  
+#define FLAG_TOXIC_ORB_OBTAINED                                     0x499 // Unused
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused
 #define FLAG_UNUSED_0x49C                                           0x49C // Unused

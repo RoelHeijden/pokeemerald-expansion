@@ -6109,6 +6109,12 @@ static void DisplayMonNeedsToReplaceMove(u8 taskId)
 
 static void DisplayMonLearnedMove(u8 taskId, u16 move)
 {
+    // ADDED
+    // remove exp candy undo once Plasma Fists is learned
+    if(move == MOVE_PLASMA_FISTS)
+        VarSet(VAR_EXP_CANDY_USED_ON, SPECIES_NONE);
+
+
     GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
     StringCopy(gStringVar2, GetMoveName(move));
     StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
