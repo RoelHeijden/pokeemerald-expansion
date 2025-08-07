@@ -1330,6 +1330,23 @@
 	.2byte \species
 	.endm
 
+	@ Unevolves a Pokémon from one species to another.
+	@ VAR_RESULT is TRUE if success.
+	.macro unEvolveMonTo speciesfrom:req, speciesto:req
+	.byte 0xf7
+	.2byte \speciesfrom
+	.2byte \speciesto
+	.endm
+
+	@ Reduces the exp of the specified species by a specified amount.
+	@ VAR_RESULT is set to the partyslot, otherwise: PARTY_SIZE if no succesful.
+	.macro removeExpFromMon species:req, exp:req
+	.byte 0xef
+	.2byte \species
+	.2byte \exp
+	.endm
+
+
 	@ takes vars as inputs
 	@ Get the move in a specified move slot for a Pokémon in the party.
     @ VAR_RESULT is set to the move ID in the specified move slot. MOVE_NONE if invalid or empty.

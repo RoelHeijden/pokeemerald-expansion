@@ -123,10 +123,10 @@
 #define VAR_RESPAWN_SET_AT_NURSE3                                0x4067 
 #define VAR_SECRET_GARDEN_TRIGGER                                0x4068 
 #define VAR_ROUTE110_STATE                               0x4069
-#define VAR_ROUTE111_STATE                               0x406A // Unused Var
-#define VAR_ROUTE112_STATE                               0x406B // Unused Var
-#define VAR_ROUTE113_STATE                               0x406C // Unused Var
-#define VAR_ROUTE114_STATE                               0x406D // Unused Var
+#define VAR_RARE_CANDY_1_USED_ON                               0x406A 
+#define VAR_RARE_CANDY_2_USED_ON                               0x406B 
+#define VAR_RARE_CANDY_3_USED_ON                               0x406C 
+#define VAR_EXP_CANDY_USED_ON                                  0x406D
 #define VAR_ROUTE115_STATE                               0x406E // Unused Var
 #define VAR_ROUTE116_STATE                               0x406F
 #define VAR_ROUTE117_STATE                               0x4070 // Unused Var

@@ -239,7 +239,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_replacemove		 			    @ 0xec
 	.4byte ScrCmd_softlockguymovebox		 		@ 0xed
 	.4byte ScrCmd_checkpartymonfullhp		 	    @ 0xee
-	.4byte ScrCmd_nop1		 			    @ 0xef
+	.4byte ScrCmd_removeExpFromMon		 			@ 0xef
 	.4byte ScrCmd_checkpartymonlevel		 		@ 0xf0
 	.4byte ScrCmd_levelDownMon						@ 0xf1
 	.4byte ScrCmd_replacemove2					    @ 0xf2
@@ -247,7 +247,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_bufferplaytimeandhints			@ 0xf4
 	.4byte ScrCmd_addgametime						@ 0xf5
 	.4byte ScrCmd_movedeleterbox					@ 0xf6
-	.4byte ScrCmd_nop1						@ 0xf7
+	.4byte ScrCmd_unEvolveMonTo						@ 0xf7
 	.4byte SrcCmd_giveaipomegg						@ 0xf8
 	.4byte SrcCmd_addmonmove						@ 0xf9
 	.4byte ScrCmd_removetaughtmove					@ 0xfa

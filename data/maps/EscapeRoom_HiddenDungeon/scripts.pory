@@ -50,7 +50,6 @@ script EscapeRoom_HiddenDungeon_SetLostItemVars{
 script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
     if(flag(FLAG_SECRET_POWER_LEARNED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
         setflag(FLAG_SECRET_POWER_COMPLETED)
-        clearflag(FLAG_SECRET_POWER_LEARNED) // for secret garden guard messaging
     }
 }
 
@@ -111,14 +110,14 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
 
             // bye bye message Aipom
             special(BufferMonNickname)
-            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
+            msgbox(ByeByeMonDynamic, MSGBOX_DEFAULT)
             waitmessage
             lockall
 
             // bye bye message Liepard
             copyvar(VAR_0x8004, VAR_0x8005)
             special(BufferMonNickname)
-            msgbox(ByeByeMonDynamic, MSGBOX_AUTOCLOSE)
+            msgbox(ByeByeMonDynamic, MSGBOX_DEFAULT)
             waitmessage
 
             // actually trade pokemon
@@ -167,17 +166,21 @@ script EscapeRoom_HiddenDungeon_DungeonGuard{
 
     if(flag(FLAG_DUNGEON_ENTRY_GRANTED)){
         // post script message
-        msgbox(DungeonGuardPostEntry, MSGBOX_AUTOCLOSE)
+        msgbox(DungeonGuardPostEntry, MSGBOX_DEFAULT)
         waitmessage
     }
     else{
         // intro message
-        msgbox(DungeonGuardIntro, MSGBOX_AUTOCLOSE)
+        msgbox(DungeonGuardIntro, MSGBOX_DEFAULT)
         waitmessage
 
         // check card
         checkitem(ITEM_RAINBOW_PASS)
         if(var(VAR_RESULT) == TRUE){
+
+            // shows card message
+            msgbox(DungeonGuardShowsCard, MSGBOX_DEFAULT)
+            waitmessage
 
             // entry given message
             msgbox(DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE)
@@ -192,7 +195,7 @@ script EscapeRoom_HiddenDungeon_DungeonGuard{
         }
         else{
             // intro message
-            msgbox(DungeonGuardIntro, MSGBOX_AUTOCLOSE)
+            msgbox(DungeonGuardIntro, MSGBOX_DEFAULT)
             waitmessage
         }
     }
@@ -246,15 +249,18 @@ text DungeonGuardIntro{
     "are not getting through."
 }
 
-text DungeonGuardGivesEntry{
+text DungeonGuardShowsCard{
     "(You hesitantly hold up your rainbow-\n"
-    "colored entry card.)\p"
+    "colored entry card.)"
+}
+
+text DungeonGuardGivesEntry{
     "Hmmm...\p"
     "This doesn't look like one of our usual\n"
     "entry cards.\p" 
     "...\p"
-    "I suppose this wouldn't be the most\n"
-    "questionable card to make it through.\p"
+    "Honestly, I've seen stranger cards make\n"
+    "it through.\p"
     "You're clear to enter."
 }
 

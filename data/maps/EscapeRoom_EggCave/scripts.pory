@@ -151,7 +151,7 @@ script EscapeRoom_EventScript_RescueNurse{
     waitmovement(OBJ_EVENT_ID_PLAYER)
 
     // scenario: no heal required
-    msgbox(NurseMessage1, MSGBOX_AUTOCLOSE)
+    msgbox(NurseMessage1, MSGBOX_DEFAULT)
     waitmessage
 
     // givemoney
@@ -227,11 +227,11 @@ movement PlayerFaceLeft {
 }
 
 
-script EscapeRoom_EggCave_EventScript_FindRareCandy{
+script EscapeRoom_EggCave_EventScript_FindRareCandy1{
     lockall
     finditem(ITEM_RARE_CANDY)
     removeobject(LOCALID_RARE_CANDY)
-    setflag(FLAG_RARE_CANDY_OBTAINED)
+    setflag(FLAG_RARE_CANDY1_OBTAINED)
     releaseall
 }
 

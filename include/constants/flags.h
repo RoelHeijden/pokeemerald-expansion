@@ -66,14 +66,14 @@
 #define FLAG_GOGGLES_SNATCHED               0x35 
 #define FLAG_AT_SOFTLOCK_GUY_1              0x36   
 #define FLAG_MAGICIAN_STOLE_ITEM            0x37
-#define FLAG_RARE_CANDY_USED                0x38
+#define FLAG_RARE_CANDY3_OBTAINED           0x38
 #define FLAG_ZERA_FIGHT_BACKUP_CHECK        0x39
 #define FLAG_ZERAORA_CAUGHT                 0x3A
 #define FLAG_HIDE_NURSE1_NPC                0x3B 
 #define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
 #define FLAG_HIDE_CACNEA_TRADER             0x3E
-#define FLAG_RARE_CANDY_OBTAINED            0x3F  
+#define FLAG_RARE_CANDY1_OBTAINED           0x3F  
 #define FLAG_SPACE_ITEM_STOLEN              0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
 #define FLAG_ME_FIRST_CHOICE_LOCK           0x42
@@ -694,7 +694,7 @@
 #define FLAG_CAN_UNDO_EXP_CANDY         0x28A
 #define FLAG_UNDOING_MOVE_THIEF         0x28B 
 #define FLAG_ANTI_SOFTLOCK_LOOP         0x28C  
-#define FLAG_UNUSED_0x28D  0x28D // Unused Flag
+#define FLAG_IN_MOVE_DELETER_SCRIPT     0x28D
 #define FLAG_UNUSED_0x28E  0x28E // Unused Flag 
 #define FLAG_UNUSED_0x28F  0x28F // Unused Flag
 #define FLAG_UNUSED_0x290  0x290 // Unused Flag

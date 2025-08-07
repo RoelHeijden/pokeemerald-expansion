@@ -2574,9 +2574,10 @@ bool8 ScrCmd_checkpartymonlevel(struct ScriptContext *ctx)
 }
 
 // ADDED
+// takes VAR as argument
 bool8 ScrCmd_levelDownMon(struct ScriptContext *ctx)
 {
-    u16 species = ScriptReadHalfword(ctx);  
+    u16 species = VarGet(ScriptReadHalfword(ctx));  
 
     gSpecialVar_Result = PARTY_SIZE;  
 
@@ -2597,6 +2598,7 @@ bool8 ScrCmd_levelDownMon(struct ScriptContext *ctx)
                 u8 growthRate = gSpeciesInfo[currentSpecies].growthRate;
                 u32 newExp = gExperienceTables[growthRate][targetLevel];
 
+
                 // set new exp amount
                 SetMonData(mon, MON_DATA_EXP, &newExp);
 
@@ -2612,11 +2614,11 @@ bool8 ScrCmd_levelDownMon(struct ScriptContext *ctx)
                 //         moveLearned = learnset[j].move; 
                 // }
 
-                // remove move Sketch
+                // remove move Energy Ball
                 for (u8 j = 0; j < MAX_MON_MOVES; j++)
                 {
                     u16 move = GetMonData(mon, MON_DATA_MOVE1 + j, NULL);
-                    if (move == MOVE_SKETCH)
+                    if (move == MOVE_ENERGY_BALL)
                     {
                         // remove the move
                         SetMonMoveSlot(mon, MOVE_NONE, j);
@@ -2641,6 +2643,95 @@ bool8 ScrCmd_levelDownMon(struct ScriptContext *ctx)
     }
     return FALSE; 
 }
+
+// ADDED
+bool8 ScrCmd_unEvolveMonTo(struct ScriptContext *ctx)
+{
+    u16 fromSpecies = VarGet(ScriptReadHalfword(ctx)); // e.g. Cacturne
+    u16 toSpecies   = VarGet(ScriptReadHalfword(ctx)); // e.g. Cacnea
+    gSpecialVar_Result = FALSE;
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES);
+
+        if (currentSpecies == SPECIES_NONE || currentSpecies == SPECIES_EGG)
+            continue;
+
+        if (currentSpecies != fromSpecies)
+            continue;
+
+
+        // reset evolution
+        SetMonData(mon, MON_DATA_SPECIES, &toSpecies);
+        CalculateMonStats(mon);
+
+        // if mon has no nickname (nickname == species name) update it to match new species
+        u8 nickname[POKEMON_NAME_LENGTH + 1];
+        GetMonData(mon, MON_DATA_NICKNAME, nickname);
+        if (StringCompare(nickname, gSpeciesInfo[fromSpecies].speciesName) == 0)
+        {
+            StringCopy(nickname, gSpeciesInfo[toSpecies].speciesName);
+            SetMonData(mon, MON_DATA_NICKNAME, nickname);
+        }
+
+        // store back rage fist use counter
+        if(fromSpecies == SPECIES_ANNIHILAPE){
+            u16 evoTracker = 20;
+            SetMonData(mon, MON_DATA_EVOLUTION_TRACKER, &evoTracker);
+        }
+
+        gSpecialVar_Result = TRUE;
+        break;
+    }
+
+    return FALSE;
+}
+
+// ADDED
+// takes VARs as arguments
+bool8 ScrCmd_removeExpFromMon(struct ScriptContext *ctx)
+{
+    u16 species = VarGet(ScriptReadHalfword(ctx));     // 
+    u16 expToRemove = VarGet(ScriptReadHalfword(ctx)); //
+
+    gSpecialVar_Result = PARTY_SIZE;
+
+    for (u8 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gPlayerParty[i];
+        u16 currentSpecies = GetMonData(mon, MON_DATA_SPECIES, NULL);
+
+        if (currentSpecies == SPECIES_NONE || currentSpecies == SPECIES_EGG)
+            continue;
+
+        if (currentSpecies == species)
+        {
+            u8 level = GetMonData(mon, MON_DATA_LEVEL, NULL);
+            u8 growthRate = gSpeciesInfo[currentSpecies].growthRate;
+            u32 curExp = GetMonData(mon, MON_DATA_EXP, NULL);
+            u32 minExp = gExperienceTables[growthRate][level]; // Minimum EXP for current level
+
+            if (curExp > minExp)
+            {
+                u32 newExp = curExp - expToRemove;
+                if (newExp < minExp)
+                    newExp = minExp;
+
+                SetMonData(mon, MON_DATA_EXP, &newExp);
+                CalculateMonStats(mon);
+                gSpecialVar_Result = i;
+            }
+
+            break;
+        }
+    }
+
+    return FALSE;
+}
+
+
 
 // ADDED
 static void ShiftMoveSlot(struct Pokemon *mon, u8 slotTo, u8 slotFrom)

@@ -153,7 +153,7 @@ EscapeRoom_EventScript_RescueNurse::
 # 151 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
 # 154 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	msgbox NurseMessage1, MSGBOX_AUTOCLOSE
+	msgbox NurseMessage1, MSGBOX_DEFAULT
 # 155 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	waitmessage
 # 158 "data/maps/EscapeRoom_EggCave/scripts.pory"
@@ -270,7 +270,7 @@ PlayerFaceLeft:
 	face_left
 	step_end
 
-EscapeRoom_EggCave_EventScript_FindRareCandy::
+EscapeRoom_EggCave_EventScript_FindRareCandy1::
 # 231 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	lockall
 # 232 "data/maps/EscapeRoom_EggCave/scripts.pory"
@@ -278,7 +278,7 @@ EscapeRoom_EggCave_EventScript_FindRareCandy::
 # 233 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	removeobject 4
 # 234 "data/maps/EscapeRoom_EggCave/scripts.pory"
-	setflag FLAG_RARE_CANDY_OBTAINED
+	setflag FLAG_RARE_CANDY1_OBTAINED
 # 235 "data/maps/EscapeRoom_EggCave/scripts.pory"
 	releaseall
 	return

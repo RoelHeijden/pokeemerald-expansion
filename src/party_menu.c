@@ -1421,7 +1421,7 @@ u8 GetPartyMenuType(void)
 void Task_HandleChooseMonInput(u8 taskId)
 {
     // if move was selected: delete move
-    if(FlagGet(FLAG_SET_DELETE_MOVE)){
+    if(FlagGet(FLAG_SET_DELETE_MOVE) && FlagGet(FLAG_IN_MOVE_DELETER_SCRIPT)){
 
         // backupmonmoveset
         BackupMonMoveset(VarGet(VAR_MOVE_DELETE_MONSLOT_BACKUP));
@@ -1462,7 +1462,7 @@ void Task_HandleChooseMonInput(u8 taskId)
             // dont select mon if only 1 move left
             gSpecialVar_0x8004 = *slotPtr;
             GetNumMovesSelectedMonHas();
-            if (gSpecialVar_Result <= 1)
+            if (gSpecialVar_Result <= 1  && FlagGet(FLAG_IN_MOVE_DELETER_SCRIPT))
             {
                 // button sound
                 PlaySE(SE_SELECT);
@@ -2311,12 +2311,11 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
     else if (MonKnowsMove(mon, move) == TRUE)
         return ALREADY_KNOWS_MOVE;
 
-    // ADDED - check if Liepard and Taunt or Cut
-    // Liepard can learn Cut after Ability Capsule is obtained
-    // At that point Copycat is no longer required (and softlocks are managable)
+    // ADDED
+    // Liepard cannot learn Taunt
+    // patches a long term softlock
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD 
-             && (move == MOVE_TAUNT)) //|| move == MOVE_CUT)
-            //  && !FlagGet(FLAG_ABILITY_CAPSULE_BOUGHT))
+             && (move == MOVE_TAUNT))
         return WOULD_SOFTLOCK;
 
     // Aipom cannot learn Cut
@@ -5838,6 +5837,28 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
         BufferMonStatsToTaskData(mon, &ptr->data[NUM_STATS]);
+
+
+        // ADDED
+        // set Rare Candy and Exp Candy use vars
+        u16 species = GetMonData(mon, MON_DATA_SPECIES);
+        // Rare Candy
+        if(holdEffectParam == 0){
+            if(FlagGet(FLAG_RARE_CANDY3_OBTAINED)){       // secret base rare candy
+                VarSet(VAR_RARE_CANDY_3_USED_ON, species);
+            }
+            else if(FlagGet(FLAG_RARE_CANDY2_OBTAINED)){  // primeape rare candy
+                VarSet(VAR_RARE_CANDY_2_USED_ON, species);
+            }
+            else if(FlagGet(FLAG_RARE_CANDY1_OBTAINED)){  // trapinch rare candy
+                VarSet(VAR_RARE_CANDY_1_USED_ON, species);
+            }
+        }
+        // Exp Candy
+        else{
+            VarSet(VAR_EXP_CANDY_USED_ON, species);
+        }
+
     }
     else
     {
