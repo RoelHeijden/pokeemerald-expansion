@@ -51,6 +51,34 @@ script EscapeRoom_HiddenDungeon_SetLostItemVars{
 script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
     if(flag(FLAG_SECRET_POWER_LEARNED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
         setflag(FLAG_SECRET_POWER_COMPLETED)
+
+        // ERROR CHECK
+        // - 0 money
+        // - Cacnea learned Thief
+        // - Annihilape
+        // - Toxic Orb Stolen
+        // - Trainer9 defeated
+        // - Trainer10 not defeated
+        istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+        copyvar(VAR_TEMP_4, VAR_RESULT)
+        checkpartymon(SPECIES_ANNIHILAPE)
+        copyvar(VAR_TEMP_5, VAR_RESULT)
+        checkexactmoney(0)
+        if(var(VAR_RESULT) == FALSE ||
+            var(VAR_TEMP_4) == FALSE ||
+            var(VAR_TEMP_5) == PARTY_SIZE ||
+            !flag(FLAG_TOXIC_ORB_OBTAINED) ||
+            !flag(FLAG_TRAINER9_DEFEATED) ||
+            flag(FLAG_TRAINER10_DEFEATED)) 
+        {
+            lockall
+            msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+        releaseall
+
+        // remove Cacnea Thief undo
+        removetaughtmove(SPECIES_CACNEA, MOVE_THIEF)
     }
 }
 
@@ -71,8 +99,31 @@ script EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained{
 
         // if toxic orb succesfully obtained
         if(flag(FLAG_TOXIC_ORB_OBTAINED)){
-            // remove Cacnea Thief undo
-            removetaughtmove(SPECIES_CACNEA, MOVE_THIEF)
+
+            // ERROR CHECK
+            // - 0 money
+            // - Cacnea learned Thief
+            // - Annihilape
+            // - Trainer7b not defeated
+            // - Trainer9 defeated
+            // - Trainer10 not defeated
+            checkexactmoney(0)
+            copyvar(VAR_TEMP_4, VAR_RESULT) 
+            checkpartymon(SPECIES_ANNIHILAPE)
+            copyvar(VAR_TEMP_5, VAR_RESULT)
+            istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+            if(var(VAR_RESULT) == FALSE ||
+                var(VAR_TEMP_4) == FALSE ||
+                var(VAR_TEMP_5) == PARTY_SIZE ||
+                flag(FLAG_TRAINER7B_DEFEATED) ||
+                !flag(FLAG_TRAINER9_DEFEATED) ||
+                flag(FLAG_TRAINER10_DEFEATED)) 
+            {
+                lockall
+                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+                waitmessage
+            }
+            releaseall
         }
     }
 }

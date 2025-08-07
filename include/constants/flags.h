@@ -695,7 +695,7 @@
 #define FLAG_UNDOING_MOVE_THIEF         0x28B 
 #define FLAG_ANTI_SOFTLOCK_LOOP         0x28C  
 #define FLAG_IN_MOVE_DELETER_SCRIPT     0x28D
-#define FLAG_UNUSED_0x28E  0x28E // Unused Flag 
+#define FLAG_DO_WARP                    0x28E 
 #define FLAG_UNUSED_0x28F  0x28F // Unused Flag
 #define FLAG_UNUSED_0x290  0x290 // Unused Flag
 #define FLAG_UNUSED_0x291  0x291 // Unused Flag

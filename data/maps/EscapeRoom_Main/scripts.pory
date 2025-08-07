@@ -474,11 +474,12 @@ script EscapeRoom_MapScripts_SetRespawn{
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
 
-    additem(ITEM_HM01)
-    additem(ITEM_TM46)
-    additem(ITEM_TM48)
-    additem(ITEM_RARE_CANDY)
-    setflag(FLAG_RARE_CANDY1_OBTAINED)
+    // additem(ITEM_SNOWBALL, 43)
+    // additem(ITEM_HM01)
+    // additem(ITEM_TM46)
+    // additem(ITEM_TM48)
+    // additem(ITEM_RARE_CANDY)
+    // setflag(FLAG_RARE_CANDY1_OBTAINED)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -791,11 +792,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
             // if mental herb retrieved during a mental herb dusknoir sack line (FLAG_TEMP_3)
             if(flag(FLAG_TEMP_3)){
                 // heal entire party
-                special(HealPlayerParty)
-
-                // message
-                msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
-                waitmessage
+                call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
 
                 // warp back to section 2
                 warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
@@ -805,6 +802,8 @@ script EscapeRoom_EventScript_ReturnLostItems{
             // heal Aipom only
             else{
                 healpartymon(SPECIES_AIPOM)
+                playse(SE_USE_ITEM)
+                waitse
 
                 // message
                 msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
@@ -813,11 +812,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
         }
         // any other case: heal entire party
         elif(flag(FLAG_TEMP_1) == TRUE){
-            special(HealPlayerParty)
-
-            // message
-            msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
-            waitmessage
+            call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
         }
         else{
             // only flag_temp_2 was true. Do nothing else
@@ -833,6 +828,16 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_ANTI_SOFTLOCK_LOOP)
     }
 
+}
+
+script EscapeRoom_EventScript_AntiSoftlockPartyHeal{
+    special(HealPlayerParty)
+    playse(SE_USE_ITEM)
+    waitse
+
+    // message
+    msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
+    waitmessage
 }
 
 
@@ -916,6 +921,12 @@ script EscapeRoom_EventScript_UndoUsedItems{
     clearflag(FLAG_CAN_UNDO_EXP_CANDY)
     clearflag(FLAG_CAN_UNDO_RARE_CANDY)
     clearflag(FLAG_UNDOING_MOVE_THIEF)
+
+    if(flag(FLAG_DO_WARP)){
+        clearflag(FLAG_DO_WARP)
+        warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
+        waitstate
+    }
 }
 
 script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
@@ -1080,6 +1091,101 @@ script EscapeRoom_EventScript_UndoMoveTeach{
 
         msgbox(MoveTeachUndoneMessage, MSGBOX_DEFAULT)
         waitmessage
+
+
+        // heal if Thief (trainer4 pp, Secret Power Poison)
+        if(var(VAR_0x8008) == MOVE_THIEF){
+            // Ape sequence: heal aipom
+            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+                healpartymon(SPECIES_AIPOM)
+                playse(SE_USE_ITEM)
+                waitse
+
+                // message
+                msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+                waitmessage
+            }
+            // normal heal
+            else{
+                call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+            }
+            
+        }
+
+        // check snowball item return
+        if(var(VAR_0x8008) == MOVE_THIEF){
+            clearflag(FLAG_TEMP_3)
+            checkpartyitem(0)
+            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_SNOWBALL){
+                setflag(FLAG_TEMP_3)
+                removepartyitem(0)
+            }
+            checkpartyitem(1)
+            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_SNOWBALL){
+                setflag(FLAG_TEMP_3)
+                removepartyitem(1)
+            }
+
+            // remove ALL snowballs
+            CheckRemoveSnowball:
+                checkitem(ITEM_SNOWBALL)
+                if(var(VAR_RESULT) == TRUE){
+                    setflag(FLAG_TEMP_3)
+                    removeitem(ITEM_SNOWBALL, 1)
+                    goto(CheckRemoveSnowball)
+                }
+
+            // message
+            if(flag(FLAG_TEMP_3)){
+                msgbox(ItemUndoSnowballsRemoved, MSGBOX_DEFAULT)
+                waitmessage
+            }
+        }
+
+        // check Toxic Orb item return
+        // note: use in combination with heal
+        if(var(VAR_0x8008) == MOVE_THIEF){
+            clearflag(FLAG_TEMP_3)
+            checkpartyitem(0)
+            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
+                setflag(FLAG_TEMP_3)
+                removepartyitem(0)
+            }
+            checkpartyitem(1)
+            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
+                setflag(FLAG_TEMP_3)
+                removepartyitem(1)
+            }
+
+            // remove ALL Toxic Orbs
+            CheckRemoveToxicOrb:
+                checkitem(ITEM_TOXIC_ORB)
+                if(var(VAR_RESULT) == TRUE){
+                    setflag(FLAG_TEMP_3)
+                    removeitem(ITEM_TOXIC_ORB, 1)
+                    goto(CheckRemoveToxicOrb)
+                }
+
+            // message
+            if(flag(FLAG_TEMP_3)){
+                msgbox(ItemUndoToxicOrbsRemoved, MSGBOX_DEFAULT)
+                waitmessage
+
+                // clear toxic orb obtained
+                clearflag(FLAG_TOXIC_ORB_OBTAINED)
+            }
+        }
+
+
+
+        // check Cut tree reset
+        if(var(VAR_0x8008) == MOVE_CUT && var(VAR_0x8005) == SPECIES_FERROTHORN && flag(FLAG_ESCAPEROOM_TREE_CUT)){
+            addobject(LOCALID_CUT_TREE)
+            clearflag(FLAG_ESCAPEROOM_TREE_CUT)
+
+            msgbox(ItemUndoTreeGrewBack, MSGBOX_DEFAULT)
+            waitmessage
+        }
     }
 }
 
@@ -1193,7 +1299,7 @@ script EscapeRoom_EventScript_UndoRareCandy{
                 // unevolve Annihilape
                 unEvolveMonTo(SPECIES_ANNIHILAPE, SPECIES_PRIMEAPE)
             }
-            msgbox(RareCandyUndoneUnevolveMessage, MSGBOX_AUTOCLOSE)
+            msgbox(RareCandyUndoneUnevolveMessage, MSGBOX_DEFAULT)
             waitmessage
         }
 
@@ -1209,6 +1315,15 @@ script EscapeRoom_EventScript_UndoRareCandy{
         }
         elif(var(VAR_RARE_CANDY_3_USED_ON) == VAR_0x8005){
             setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
+        }
+
+        // heal party
+        call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+
+        // if ape sequence: teleport back as well
+        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+            // warp back to section 2 at end of script
+            setflag(FLAG_DO_WARP)
         }
     }
 }
@@ -2629,27 +2744,25 @@ script EscapeRoom_EventScript_Trainer4PostBattle{
     setflag(FLAG_TRAINER4_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 
-    // remove Dunsparce Thief undo
-    removetaughtmove(SPECIES_DUNSPARCE, MOVE_THIEF)
-
     // ERROR CHECK
     // - 500 or 2000 money
-    // TODO: -  Thief  Dunsparce obtained
+    // - Thief taught to Dunsparce
     checkexactmoney(500)
     copyvar(VAR_TEMP_4, VAR_RESULT)
     checkexactmoney(2000)
     copyvar(VAR_TEMP_5, VAR_RESULT)
-    // tbd
-    if(var(VAR_TEMP_4) == FALSE && var(VAR_TEMP_5) == FALSE) 
+    istaughtmovepresent(SPECIES_DUNSPARCE, MOVE_THIEF)
+    if(var(VAR_RESULT) == FALSE ||
+       (var(VAR_TEMP_4) == FALSE && var(VAR_TEMP_5) == FALSE))
     {
         lockall
         msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
         waitmessage
     }
     releaseall
-    end
-
-
+    
+    // remove Dunsparce Thief undo
+    removetaughtmove(SPECIES_DUNSPARCE, MOVE_THIEF)
 }
 
 script EscapeRoom_EventScript_Trainer5PostBattle{
@@ -2804,16 +2917,54 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
 script EscapeRoom_EventScript_Trainer7APostBattle{
     setflag(FLAG_TRAINER7A_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // ERROR CHECK
+    // - 1000 money
+    // - Trainer7b not defeated
+    checkexactmoney(1000)
+    if(var(VAR_RESULT) == FALSE ||
+       flag(FLAG_TRAINER7B_DEFEATED)) 
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
 }
 
 script EscapeRoom_EventScript_Trainer7BPostBattle{
     setflag(FLAG_TRAINER7B_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    lockall
+    msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+
 }
 
 script EscapeRoom_EventScript_Trainer8PostBattle{
     setflag(FLAG_TRAINER8_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // ERROR CHECK
+    // - 1500 money
+    // - Cacnea learned Cut
+    // - Trainer7b not defeated
+    // - Trainer10 not defeated
+    checkexactmoney(1500)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+    istaughtmovepresent(SPECIES_CACNEA, MOVE_CUT)
+    if(var(VAR_RESULT) == FALSE ||
+       var(VAR_TEMP_4) == FALSE ||
+       flag(FLAG_TRAINER7B_DEFEATED) ||
+       flag(FLAG_TRAINER10_DEFEATED)) 
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
 
     // remove Cacnea Cut undo
     removetaughtmove(SPECIES_CACNEA, MOVE_CUT)
@@ -2825,6 +2976,27 @@ script EscapeRoom_EventScript_Trainer9PostBattle{
 
     // remove rare candy2 undo (for Annihilape)
     setvar(VAR_RARE_CANDY_2_USED_ON, SPECIES_NONE)
+
+    // ERROR CHECK
+    // - 2000 money
+    // - Annihilape
+    // - Trainer7b not defeated
+    // - Trainer8 defeated
+    // - Trainer10 not defeated
+    checkexactmoney(2000)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+    checkpartymon(SPECIES_ANNIHILAPE)
+    if(var(VAR_RESULT) == PARTY_SIZE ||
+       var(VAR_TEMP_4) == FALSE ||
+       flag(FLAG_TRAINER7B_DEFEATED) ||
+       !flag(FLAG_TRAINER8_DEFEATED) ||
+       flag(FLAG_TRAINER10_DEFEATED)) 
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
 }
 
 script EscapeRoom_EventScript_Trainer10PostBattle{
@@ -2833,6 +3005,31 @@ script EscapeRoom_EventScript_Trainer10PostBattle{
 
     // remove rare candy3 undo (for Cacnea)
     setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
+
+    // ERROR CHECK
+    // - 500 money
+    // - Cacnea lvl 42
+    // - Annihilape
+    // - Trainer7b not defeated
+    // - Trainer8 defeated
+    // - Trainer9 defeated
+    checkexactmoney(500)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
+    checkpartymon(SPECIES_ANNIHILAPE)
+    copyvar(VAR_TEMP_5, VAR_RESULT)
+    checkpartymonlevel(42)
+    if(var(VAR_RESULT) == PARTY_SIZE || var(VAR_0x8004) != SPECIES_CACNEA ||
+       var(VAR_TEMP_4) == FALSE ||
+       var(VAR_TEMP_5) == PARTY_SIZE ||
+       flag(FLAG_TRAINER7B_DEFEATED) ||
+       !flag(FLAG_TRAINER8_DEFEATED) ||
+       !flag(FLAG_TRAINER9_DEFEATED)) 
+    {
+        lockall
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
 }
 
 script EscapeRoom_EventScript_Trainer11PostBattle{
@@ -3404,7 +3601,7 @@ script EscapeRoom_EventScript_AnnihilapeBattle{
         level=100,
         nature=17, // Quiet
         abilityNum=2,
-        gender=2,
+        gender=MON_FEMALE,
         move1=MOVE_MIMIC
         // evs
         hpEv=12,
@@ -4159,6 +4356,19 @@ text AskUndoExpCandyDynamic{
 
 text ExpCandyUndoneMessage{
     "{STR_VAR_1} lost 800 Exp. Points."
+}
+
+text ItemUndoSnowballsRemoved{
+    "You lost your Snowball(s)."
+}
+
+text ItemUndoToxicOrbsRemoved{
+    "You lost your Toxic Orb(s)."
+}
+
+
+text ItemUndoTreeGrewBack{
+    "The cut tree grew back."
 }
 
 // undo action
