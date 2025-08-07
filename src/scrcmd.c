@@ -2222,27 +2222,31 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
 }
 
 // ADDED
-// get moveslot of learned move
-bool8 ScrCmd_checkpartymoveslot(struct ScriptContext *ctx)
+// takes VARs
+bool8 ScrCmd_checkpartymonmove(struct ScriptContext *ctx)
 {
-    u16 i;
-    u8 slot = ScriptReadByte(ctx);
-    u16 moveId = ScriptReadHalfword(ctx); 
+    u16 species = VarGet(ScriptReadHalfword(ctx));
+    u16 moveId = VarGet(ScriptReadHalfword(ctx)); 
+    u16 i, j;
 
     gSpecialVar_Result = PARTY_SIZE;
 
-    if (slot < PARTY_SIZE)
+    for (i = 0; i < PARTY_SIZE; i++)
     {
-        u16 species = GetMonData(&gPlayerParty[slot], MON_DATA_SPECIES, NULL);
-        if (species && !GetMonData(&gPlayerParty[slot], MON_DATA_IS_EGG))
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL) == species &&
+            !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
         {
-            for (i = 0; i < MAX_MON_MOVES; i++)
+            for (j = 0; j < MAX_MON_MOVES; j++)
             {
-                if (GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + i) == moveId)
-                    gSpecialVar_Result = i;
+                if (GetMonData(&gPlayerParty[i], MON_DATA_MOVE1 + j, NULL) == moveId)
+                {
+                    gSpecialVar_Result = i; // party slot of match
+                    return FALSE;
+                }
             }
         }
     }
+
     return FALSE;
 }
 

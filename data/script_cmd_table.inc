@@ -231,7 +231,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_dynmultipush                      @ 0xe4
 	.4byte ScrCmd_checkpartyitem                    @ 0xe5
 	.4byte ScrCmd_removepartyitem                   @ 0xe6
-	.4byte ScrCmd_checkpartymoveslot                @ 0xe7
+	.4byte ScrCmd_checkpartymonmove                 @ 0xe7
 	.4byte ScrCmd_removemon	          			    @ 0xe8
 	.4byte ScrCmd_partymonhasfainted				@ 0xe9
 	.4byte ScrCmd_checkpartymon						@ 0xea

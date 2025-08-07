@@ -628,39 +628,44 @@ script EscapeRoom_EventScript_AntiSoftlockGuy3{
 script EscapeRoom_EventScript_AntiSoftlockGuy{
     faceplayer
     lockall
-
     msgbox(AntiSoftlockIntroMessage, MSGBOX_DEFAULT)
     waitmessage
-    call(EscapeRoom_EventScript_AntiSoftlockGuy_part2)
-}
 
-script EscapeRoom_EventScript_AntiSoftlockGuy_part2{
-    msgbox(AntiSoftlockIntroMessage2, MSGBOX_SOFTLOCK_GUY)
+    // separate message allows for script to cut back to the option selection
+    OptionMenuStart:
+        msgbox(AntiSoftlockIntroMessage2, MSGBOX_SOFTLOCK_GUY)
 
-    // return lost items 
-    if(var(VAR_RESULT) == 0){
-        call(EscapeRoom_EventScript_ReturnLostItems)
-    }
+        // return lost items 
+        if(var(VAR_RESULT) == 0){
+            call(EscapeRoom_EventScript_ReturnLostItems)
+        }
 
-    // undo used items
-    elif(var(VAR_RESULT) == 1){
-        call(EscapeRoom_EventScript_UndoUsedItems)
-    }
+        // undo used items
+        elif(var(VAR_RESULT) == 1){
+            call(EscapeRoom_EventScript_UndoUsedItems)
+        }
 
-    // undo other actions
-    elif(var(VAR_RESULT) == 2){
-        call(EscapeRoom_EventScript_UndoOtherActions)
-    }
+        // undo other actions
+        elif(var(VAR_RESULT) == 2){
+            call(EscapeRoom_EventScript_UndoOtherActions)
+        }
 
-    // B press
-    else{
-        msgbox(AntiSoftlockOutro, MSGBOX_AUTOCLOSE)
-        waitmessage
+        // B press
+        else{
+            msgbox(AntiSoftlockOutro, MSGBOX_AUTOCLOSE)
+            waitmessage
+            releaseall
+            end
+        }
+    
+    // presents options again
+    if(flag(FLAG_ANTI_SOFTLOCK_LOOP)){
+        clearflag(FLAG_ANTI_SOFTLOCK_LOOP)
+        goto(OptionMenuStart)
     }
     releaseall
+    end
 }
-
-
 
 // return items
 script EscapeRoom_EventScript_ReturnLostItems{
@@ -822,6 +827,9 @@ script EscapeRoom_EventScript_ReturnLostItems{
     else{
         msgbox(AntiSoftlockNoItemsReturned, MSGBOX_DEFAULT)
         waitmessage
+
+        // loop back to initial option menu
+        setflag(FLAG_ANTI_SOFTLOCK_LOOP)
     }
 
 }
@@ -836,6 +844,8 @@ script EscapeRoom_EventScript_UndoUsedItems{
 
 
     // check Thief
+    // Thief can be taught to pokemon that also learn Cut, so
+    // it uses differet VARs to store species and move
     istaughtmovepresent(SPECIES_DUNSPARCE, MOVE_THIEF)
     if(var(VAR_RESULT) == TRUE){
         setflag(FLAG_CAN_UNDO_THIEF)
@@ -908,6 +918,7 @@ script EscapeRoom_EventScript_UndoUsedItems{
     clearflag(FLAG_CAN_UNDO_SKILL_SWAP)
     clearflag(FLAG_CAN_UNDO_EXP_CANDY)
     clearflag(FLAG_CAN_UNDO_RARE_CANDY)
+    clearflag(FLAG_UNDOING_MOVE_THIEF)
 }
 
 script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
@@ -974,9 +985,11 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
 
     // no items to be undone
     else{
-        msgbox(AntiSoftlockNoItemToUndo, MSGBOX_AUTOCLOSE)
+        msgbox(AntiSoftlockNoItemToUndo, MSGBOX_DEFAULT)
         waitmessage
-        return
+
+        // prompt options again
+        goto(SetPromptOptionsAgain)
     }
 
     // decode multi choice selected option
@@ -1020,22 +1033,15 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
         }
 
         // none of the options chosen: B Press
-        // clear flags
-        clearflag(FLAG_CAN_UNDO_THIEF)
-        clearflag(FLAG_CAN_UNDO_CUT)
-        clearflag(FLAG_CAN_UNDO_SKILL_SWAP)
-        clearflag(FLAG_CAN_UNDO_EXP_CANDY)
-        clearflag(FLAG_CAN_UNDO_RARE_CANDY)
-
-        // loop back to initial option menu
-        call(EscapeRoom_EventScript_AntiSoftlockGuy_part2)
+        SetPromptOptionsAgain:
+            // loop back to initial option menu
+            setflag(FLAG_ANTI_SOFTLOCK_LOOP)
 }
 
 script EscapeRoom_EventScript_UndoMoveTeach{
 
     // use other vars if restoring Thief
     if(flag(FLAG_UNDOING_MOVE_THIEF)){
-        clearflag(FLAG_UNDOING_MOVE_THIEF)
         copyvar(VAR_0x8007, VAR_0x8005)
         copyvar(VAR_0x8008, VAR_0x8006)
     }
@@ -1047,6 +1053,16 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     // ask undo message 
     msgbox(AskUndoMoveTeachDynamic, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
+
+        // check edge case: Thief overwritten by Cut
+        if(flag(FLAG_UNDOING_MOVE_THIEF)){
+            call(EscapeRoom_EventScript_UndoMoveTeach_CutThiefEdgeCase)
+        }
+
+        // set VAR_0x8004 to the right move to replace
+        istaughtmovepresent(VAR_0x8007, VAR_0x8008)
+
+        // reset moves
         replacemove2(VAR_0x8007, VAR_0x8008, VAR_0x8004)
         removetaughtmove(VAR_0x8007, VAR_0x8008)
 
@@ -1065,14 +1081,39 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     }
 }
 
-script EscapeRoom_EventScript_UndoRareCandy{
+script EscapeRoom_EventScript_UndoMoveTeach_CutThiefEdgeCase{
+    // check if species still has the move Thief
+    checkpartymonmove(VAR_0x8007, MOVE_THIEF)
+    if(var(VAR_RESULT) == PARTY_SIZE){      // Thief not found
+        
+        // check if Cut on moveset
+        checkpartymonmove(VAR_0x8007, MOVE_CUT)
+        if(var(VAR_RESULT) != PARTY_SIZE){  // Cut found
 
+            // check if Cut in TaughtMoveEntry data
+            istaughtmovepresent(VAR_0x8007, MOVE_CUT)
+            if(var(VAR_RESULT) == TRUE){
+
+                // undo Cut teach
+                replacemove2(VAR_0x8007, MOVE_CUT, MOVE_THIEF)
+                removetaughtmove(VAR_0x8007, MOVE_CUT)
+            }
+
+            // set VAR_0x8004 back for Thief undo move
+            istaughtmovepresent(VAR_0x8007, MOVE_THIEF)
+        }
+    }
+}
+
+script EscapeRoom_EventScript_UndoRareCandy{
+    // create structure in memory to track via species
+    // undo Energy Ball teach
+    // 
 }
 
 script EscapeRoom_EventScript_UndoExpCandy{
 
 }
-
 
 // undo event
 script EscapeRoom_EventScript_UndoOtherActions{
@@ -1089,7 +1130,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
 
         // ask undo Ether purchase
         msgbox(AntiSoftlockAskUndoEtherPurchase, MSGBOX_YESNO)
-        waitmessage
         if(var(VAR_RESULT) == YES){
             call(EscapeRoom_EventScript_UndoEtherPurchase)
         }
@@ -1098,7 +1138,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
     // trainer5 rematch
     elif(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
         msgbox(AntiSoftlockAskUndoTrainer5, MSGBOX_YESNO)
-        waitmessage
         if(var(VAR_RESULT) == YES){
             call(EscapeRoom_EventScript_SetTrainer5Rematch)
         }
@@ -1107,7 +1146,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
     // trade: ferro -> dunsparce
     elif(flag(FLAG_FERRO_TRADE_ACCEPTED) && !flag(FLAG_TRAINER3_DEFEATED)){
         msgbox(AntiSoftlockAskUndoFerroTrade, MSGBOX_YESNO)
-        waitmessage
         if(var(VAR_RESULT) == YES){
             call(EscapeRoom_EventScript_UndoFerroTrade)
         }
@@ -1116,7 +1154,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
     // trade: florges -> egg
     elif(flag(FLAG_FLORGES_TRADE_ACCEPTED) && !flag(FLAG_LIEPARD_OBTAINED)){
         msgbox(AntiSoftlockAskUndoFlorgesTrade, MSGBOX_YESNO)
-        waitmessage
         if(var(VAR_RESULT) == YES){
             call(EscapeRoom_EventScript_UndoFlorgesTrade)
         }
@@ -1124,8 +1161,11 @@ script EscapeRoom_EventScript_UndoOtherActions{
 
     // no actions to be undone
     else{
-        msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_AUTOCLOSE)
+        msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_DEFAULT)
         waitmessage
+
+        // loop back to initial option menu
+        setflag(FLAG_ANTI_SOFTLOCK_LOOP)
     }
 }
 
@@ -1154,14 +1194,14 @@ script EscapeRoom_EventScript_UndoEtherPurchase{
     delay(10)
 
     // message
-    msgbox(AntiSoftlockEtherPurchaseUndone, MSGBOX_AUTOCLOSE)
+    msgbox(AntiSoftlockEtherPurchaseUndone, MSGBOX_DEFAULT)
     waitmessage
 
     clearflag(FLAG_ETHER_BOUGHT)
 }
 
 script EscapeRoom_EventScript_SetTrainer5Rematch{
-    msgbox(AntiSoftlockTrainer5Undone, MSGBOX_AUTOCLOSE)
+    msgbox(AntiSoftlockTrainer5Undone, MSGBOX_DEFAULT)
     waitmessage
 
     // take all money (player has 0 money at start of battle)

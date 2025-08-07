@@ -1265,11 +1265,12 @@
 	.2byte \slot
 	.endm
 
-	@ Checks which moveslot a move is learned given a party slot and move.
-	@ VAR_RESULT is set to the moveslot idx.
-	.macro checkpartymoveslot slot:req, move:req
+	@ Checks if a given species knows a given move.
+	@ VAR_RESULT is set to the party slot of the first species that knows the move.
+	@ it's set to PARTY_SIZE if species or move is not found.
+	.macro checkpartymonmove species:req, move:req
     .byte 0xe7
-    .byte \slot
+    .2byte \species
     .2byte \move
 	.endm
 
