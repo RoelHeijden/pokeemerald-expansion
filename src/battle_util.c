@@ -11451,6 +11451,14 @@ void TryRestoreHeldItems(void)
                     if(currentItem == ITEM_BERRY_JUICE && lostItem == ITEM_JABOCA_BERRY)
                         return;
 
+                    // Moon Stone Trick case
+                    // dont override item if traded for another one
+                    if (currentItem == ITEM_MOON_STONE && originalItem == ITEM_SAFETY_GOGGLES && !FlagGet(FLAG_SPACE_ITEM_STOLEN))
+                    {
+                        AddLostItem(ITEM_SAFETY_GOGGLES);
+                        continue;
+                    }
+
                     // Check if the item is one that requires a heal before returning
                     bool32 returnItemRequiresHeal =
                         lostItem == ITEM_CUSTAP_BERRY ||
@@ -11485,15 +11493,17 @@ void TryRestoreHeldItems(void)
 
                     // specific item checks for trainer 5
                     // items should only be removed after winning if they're not just swapped around
-                    if (lostItemActuallyConsumed){
+                    if (lostItemActuallyConsumed && !FlagGet(FLAG_TRAINER5_DEFEATED) && FlagGet(FLAG_TRAINER4_DEFEATED)){
                         if(lostItem == ITEM_BERRY_JUICE)
                             FlagSet(FLAG_BERRY_JUICE_CONSUMED);
-                        if(lostItem == ITEM_DUSK_STONE) 
-                            FlagSet(FLAG_DUSK_STONE_CONSUMED);
+                        if(lostItem == ITEM_MOON_STONE) 
+                            FlagSet(FLAG_MOON_STONE_CONSUMED);
                         if(lostItem == ITEM_JABOCA_BERRY)
                             FlagSet(FLAG_JABOCA_CONSUMED);
                         if(lostItem == ITEM_SAFETY_GOGGLES)
                             FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
+                        if(lostItem == ITEM_TM_TRICK)
+                            FlagSet(FLAG_TM_TRICK_CONSUMED);
                     }
 
                     // set return message flag if not stolen via Magician (stolen items are always returned)

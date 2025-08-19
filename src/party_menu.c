@@ -2318,6 +2318,13 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
              && (move == MOVE_TAUNT))
         return WOULD_SOFTLOCK;
 
+    // ADDED
+    // Liepard cannot learn Cut until Trick is taught
+    // patches annoying anti softlocking
+    else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_LIEPARD 
+             && (move == MOVE_CUT) && !FlagGet(FLAG_TRICK_TAUGHT))
+        return WOULD_SOFTLOCK;
+
     // Aipom cannot learn Cut
     // this patches a line vs trainer6
     else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_AIPOM 
@@ -5534,11 +5541,18 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 
     if (GiveMoveToMon(mon, move) != MON_HAS_MAX_MOVES)
     {
-        // ADDED
-        // store taught move in memory (for anti softlocks)
-        u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
-        AddTaughtMove(species, MOVE_NONE, move);
 
+        // ADDED
+        // if trick: set flag
+        // else: add move to struct
+        if(move == MOVE_TRICK){
+            FlagSet(FLAG_TRICK_TAUGHT);
+        }
+        else{
+            // store taught move in memory (for anti softlocks)
+            u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+            AddTaughtMove(species, MOVE_NONE, move);            
+        }
 
         gTasks[taskId].func = Task_LearnedMove;
     }

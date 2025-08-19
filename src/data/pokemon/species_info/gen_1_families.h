@@ -6648,8 +6648,8 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .description = COMPOUND_STRING(
             "When it becomes furious, its blood\n"
             "circulation becomes more robust, and\n"
-            "its muscles are made stronger. Yet, it\n"
-            "is not immune to poison. That's good!"),
+            "its muscles are made stronger. When fury\n"
+            "pushes it beyond its limits, it evolves."),
         .pokemonScale = 326,
         .pokemonOffset = 10,
         .trainerScale = 256,

@@ -18,7 +18,7 @@ const LOCALID_NURSE2 = 15
 const LOCALID_HINT_GUY2 = 16
 const LOCALID_ANTI_SOFTLOCK_GUY2 = 17
 const LOCALID_LIEPARD = 18
-const LOCALID_SMEARGLE_NPC = 19
+const LOCALID_SECRETGARDEN_GUARD = 19
 const LOCALID_TRAINER5 = 20
 const LOCALID_CUT_TREE = 21
 const LOCALID_LIEPARD_COLLAR = 22
@@ -33,8 +33,8 @@ const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_PRIMEAPE_BALL = 33
-const LOCALID_SECRETGARDEN_GUARD = 34
-const LOCALID_ETHER_NPC = 35
+const _DUMMY_4 = 34
+const _DUMMY_5 = 35
 const _DUMMY_6 = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
@@ -473,9 +473,11 @@ script EscapeRoom_MapScripts_SetRespawn{
 
 script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_FLUFFY_TAIL)
+    additem(ITEM_ETHER)
 
-    // additem(ITEM_SNOWBALL, 43)
-    // additem(ITEM_HM01)
+    // REMOVE
+    additem(ITEM_HM01)
+    additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_TM46)
     // additem(ITEM_TM48)
     // additem(ITEM_RARE_CANDY)
@@ -755,28 +757,45 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_1)  
     }
 
+    // Safety Goggles (only lost when tricking Moon Stone)
+    isitemlost(ITEM_SAFETY_GOGGLES)
+    if(var(VAR_RESULT) == TRUE){
+        removelostitem(ITEM_SAFETY_GOGGLES)
+        giveitem(ITEM_SAFETY_GOGGLES)
+        setflag(FLAG_TEMP_2)  // no heal
+    }
+
 
     //// SPECIAL CASES TRAINER5 ////
 
-    // special case: Dusk Stone (lost at trainer5)
-    if(flag(FLAG_DUSK_STONE_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
-        clearflag(FLAG_DUSK_STONE_CONSUMED)
-        giveitem(ITEM_DUSK_STONE)
-        setflag(FLAG_TEMP_2)  // no heal
-    }
+    if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
+        // special case: Moon Stone (lost at trainer5)
+        if(flag(FLAG_MOON_STONE_CONSUMED)){
+            clearflag(FLAG_MOON_STONE_CONSUMED)
+            giveitem(ITEM_MOON_STONE)
+            setflag(FLAG_TEMP_2)  // no heal
+        }
 
-    // special case: Jaboca Berry (lost at trainer5)
-    if(flag(FLAG_JABOCA_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
-        clearflag(FLAG_JABOCA_CONSUMED)
-        giveitem(ITEM_JABOCA_BERRY)
-        setflag(FLAG_TEMP_2)  // no heal
-    }
+        // special case: Jaboca Berry (lost at trainer5)
+        if(flag(FLAG_JABOCA_CONSUMED)){
+            clearflag(FLAG_JABOCA_CONSUMED)
+            giveitem(ITEM_JABOCA_BERRY)
+            setflag(FLAG_TEMP_2)  // no heal
+        }
 
-    // special case: Safety Goggles (lost at trainer5)
-    if(flag(FLAG_SAFETY_GOGGLES_CONSUMED) && flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
-        clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
-        giveitem(ITEM_SAFETY_GOGGLES)
-        setflag(FLAG_TEMP_2)  // no heal
+        // special case: Safety Goggles (lost at trainer5)
+        if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
+            clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+            giveitem(ITEM_SAFETY_GOGGLES)
+            setflag(FLAG_TEMP_2)  // no heal
+        }
+
+        // special case: TM Trick (lost at trainer5)
+        if(flag(FLAG_TM_TRICK_CONSUMED)){
+            clearflag(FLAG_TM_TRICK_CONSUMED)
+            giveitem(ITEM_TM38)
+            setflag(FLAG_TEMP_2)  // no heal
+        }
     }
 
 
@@ -1356,26 +1375,10 @@ script EscapeRoom_EventScript_UndoExpCandy{
 
 // undo event
 script EscapeRoom_EventScript_UndoOtherActions{
-    // ether purchase
-    checkpartyitem(0)
-    copyvar(VAR_TEMP_0, VAR_0x8005)
-    checkpartyitem(1)
-    copyvar(VAR_TEMP_1, VAR_0x8005)
-    checkitem(ITEM_ETHER)
-    if((var(VAR_RESULT) == TRUE || 
-        var(VAR_TEMP_0) == ITEM_ETHER || 
-        var(VAR_TEMP_1) == ITEM_ETHER) && 
-        flag(FLAG_ETHER_BOUGHT) && !flag(FLAG_ZERAORA_CAUGHT)){
-
-        // ask undo Ether purchase
-        msgbox(AntiSoftlockAskUndoEtherPurchase, MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-            call(EscapeRoom_EventScript_UndoEtherPurchase)
-        }
-    }
 
     // trainer5 rematch
-    elif(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
+    checkmoney(1025)
+    if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_ABILITY_CAPSULE_BOUGHT) && var(VAR_RESULT) == FALSE){
         msgbox(AntiSoftlockAskUndoTrainer5, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
             call(EscapeRoom_EventScript_SetTrainer5Rematch)
@@ -1408,37 +1411,6 @@ script EscapeRoom_EventScript_UndoOtherActions{
     }
 }
 
-script EscapeRoom_EventScript_UndoEtherPurchase{
-    // remove from bag
-    checkitem(ITEM_ETHER)
-    if(var(VAR_RESULT) == TRUE){
-        removeitem(ITEM_ETHER)
-    }
-
-    // remove from party
-    checkpartyitem(0)
-    if(var(VAR_0x8005) == ITEM_ETHER){
-        removepartyitem(0)
-    }
-    checkpartyitem(1)
-    if(var(VAR_0x8005) == ITEM_ETHER){
-        removepartyitem(1)
-    }
-
-    // return money
-    addmoney(500)
-    message(MoneyReceived500)
-    playfanfare(MUS_OBTAIN_ITEM)
-    waitfanfare
-    delay(10)
-
-    // message
-    msgbox(AntiSoftlockEtherPurchaseUndone, MSGBOX_DEFAULT)
-    waitmessage
-
-    clearflag(FLAG_ETHER_BOUGHT)
-}
-
 script EscapeRoom_EventScript_SetTrainer5Rematch{
     msgbox(AntiSoftlockTrainer5Undone, MSGBOX_DEFAULT)
     waitmessage
@@ -1447,9 +1419,9 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
     removemoney(99999)
 
     // return items
-    if(flag(FLAG_DUSK_STONE_CONSUMED)){
-        clearflag(FLAG_DUSK_STONE_CONSUMED)
-        giveitem(ITEM_DUSK_STONE)
+    if(flag(FLAG_MOON_STONE_CONSUMED)){
+        clearflag(FLAG_MOON_STONE_CONSUMED)
+        giveitem(ITEM_MOON_STONE)
     }
     if(flag(FLAG_SAFETY_GOGGLES_CONSUMED)){
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
@@ -1459,6 +1431,11 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
         giveitem(ITEM_BERRY_JUICE)
     }
+    if(flag(FLAG_TM_TRICK_CONSUMED)){
+        clearflag(FLAG_TM_TRICK_CONSUMED)
+        giveitem(ITEM_TM38)
+    }
+
     // Jaboca can also be stored via the central lost item method
     isitemlost(ITEM_JABOCA_BERRY)
     if(flag(FLAG_JABOCA_CONSUMED) || var(VAR_RESULT) == TRUE){
@@ -1627,9 +1604,9 @@ script EscapeRoom_EventScript_ObtainLiepard{
         nature=17, // Quiet 
         gender=MON_FEMALE,
         move1=MOVE_ASSIST,
-        move2=MOVE_TRICK,
+        move2=MOVE_COPYCAT,
         move3=MOVE_ROCK_SMASH,
-        move4=MOVE_COPYCAT,
+        move4=MOVE_NONE,
         // EVs:
         atkEv=252, 
         spAtkEv=252,
@@ -2012,13 +1989,6 @@ script EscapeRoom_TryBuyStonesPC{
             end
         }
 
-        // Dusk Stone
-        checkitem(ITEM_DUSK_STONE)
-        if(var(VAR_RESULT) == TRUE){
-            call(EscapeRoom_TryBuyStonesPC_TryBuyDuskStone)
-            end
-        }
-
         // player has none of the trade items
         msgbox(StonesBuyNPCInitialMessage_no_item, MSGBOX_NPC)
         waitmessage
@@ -2033,9 +2003,9 @@ script EscapeRoom_TryBuyStonesPC_TryBuySunStone{
 
     if(var(VAR_RESULT) == YES){
         removeitem(ITEM_SUN_STONE)
-        addmoney(1500)
+        addmoney(3000)
         lockall
-        message(MoneyReceived1500)
+        message(MoneyReceived3000)
         playfanfare(MUS_OBTAIN_ITEM)
         waitfanfare
         delay(10)
@@ -2055,28 +2025,6 @@ script EscapeRoom_TryBuyStonesPC_TryBuyMoonStone{
 
     if(var(VAR_RESULT) == YES){
         removeitem(ITEM_MOON_STONE)
-        addmoney(1500)
-        lockall
-        message(MoneyReceived1500)
-        playfanfare(MUS_OBTAIN_ITEM)
-        waitfanfare
-        delay(10)
-
-        msgbox(StonesBuyNPCSellAcceptedMessage, MSGBOX_NPC)
-        waitmessage
-    }
-    else{
-        msgbox(StonesBuyNPCSellDeclinedMessage, MSGBOX_NPC)
-        waitmessage
-    }
-}
-
-script EscapeRoom_TryBuyStonesPC_TryBuyDuskStone{
-    faceplayer
-    msgbox(StonesBuyNPCInitialMessage_has_DuskStone, MSGBOX_YESNO)
-
-    if(var(VAR_RESULT) == YES){
-        removeitem(ITEM_DUSK_STONE)
         giveitem(ITEM_JABOCA_BERRY)
         setflag(FLAG_JABOCA_OBTAINED)
 
@@ -2353,55 +2301,6 @@ script EscapeRoom_TabletsHintNPC{
     releaseall
 }
 
-script EscapeRoom_DusknoirStoleMyMailNPC{
-    lock
-    msgbox(DusknoirStoleMyMailMsg, MSGBOX_NPC)
-    releaseall
-}
-
-script EscapeRoom_EtherSellNPC{
-    lock
-    faceplayer
-    if(flag(FLAG_ETHER_BOUGHT) == FALSE){
-
-        // ask buy Ether
-        msgbox(EtherNPCbuyEther, MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-
-            // check enough money
-            checkmoney(500)
-            if(var(VAR_RESULT) == FALSE){
-                // not enough money message
-                msgbox(EtherNPCnotEnoughMoney, MSGBOX_AUTOCLOSE)
-                waitmessage
-                releaseall
-                end
-            }
-
-            removemoney(500)
-
-            // give Ether
-            giveitem(ITEM_ETHER)
-
-            // final message
-            msgbox(EtherNPCsellAcceptedMessage, MSGBOX_AUTOCLOSE)
-            waitmessage
-
-            setflag(FLAG_ETHER_BOUGHT)
-        }
-        else{
-            // sell declined message
-            msgbox(EtherNPCsellDeclined, MSGBOX_AUTOCLOSE)
-            waitmessage
-        }
-    }
-    else{
-        msgbox(EtherNPCpostSellMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-    releaseall
-}
-
 
 //// TRAINERS ////
 
@@ -2477,9 +2376,10 @@ script EscapeRoom_EventScript_Trainer5{
     // clear item return flags before the battle
     if(!flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
-        clearflag(FLAG_DUSK_STONE_CONSUMED)
+        clearflag(FLAG_MOON_STONE_CONSUMED)
         clearflag(FLAG_JABOCA_CONSUMED)
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
+        clearflag(FLAG_TM_TRICK_CONSUMED)
     }
 
     // battle
@@ -2781,14 +2681,14 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
     }
 
-    // dont restore dusk stone if consumed (flung) in battle
-    if(flag(FLAG_DUSK_STONE_CONSUMED) == TRUE){
+    // dont restore moon stone if consumed (flung) in battle
+    if(flag(FLAG_MOON_STONE_CONSUMED) == TRUE){
         checkpartyitem(0)
-        if(var(VAR_0x8005) == ITEM_DUSK_STONE){
+        if(var(VAR_0x8005) == ITEM_MOON_STONE){
             removepartyitem(0)
         }
         checkpartyitem(1)
-        if(var(VAR_0x8005) == ITEM_DUSK_STONE){
+        if(var(VAR_0x8005) == ITEM_MOON_STONE){
             removepartyitem(1)
         }
     }
@@ -2813,6 +2713,18 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
         checkpartyitem(1)
         if(var(VAR_0x8005) == ITEM_SAFETY_GOGGLES){
+            removepartyitem(1)
+        }
+    }
+
+    // dont restore tm trick if consumed (flung) in battle
+    if(flag(FLAG_TM_TRICK_CONSUMED) == TRUE){
+        checkpartyitem(0)
+        if(var(VAR_0x8005) == ITEM_TM38){
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_0x8005) == ITEM_TM38){
             removepartyitem(1)
         }
     }
@@ -2875,9 +2787,9 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     copyvar(VAR_TEMP_2, VAR_RESULT)
     checkitem(ITEM_MOON_STONE)
     copyvar(VAR_TEMP_3, VAR_RESULT)
-    checkitem(ITEM_DUSK_STONE)
-    copyvar(VAR_TEMP_4, VAR_RESULT)
 
+    checkitem(ITEM_TM46)
+    copyvar(VAR_TEMP_4, VAR_RESULT)
     checkitem(ITEM_ETHER)
     copyvar(VAR_TEMP_5, VAR_RESULT)
     checkitem(ITEM_JABOCA_BERRY)
@@ -4378,19 +4290,6 @@ text AntiSoftlockNoActionsToUndo{
     "that can be undone."
 }
 
-text AntiSoftlockAskUndoEtherPurchase{
-    "Would you like to undo your Ether\n"
-    "purchase?"
-}
-
-text MoneyReceived500{
-    "{PLAYER} received ¥500!"
-}
-
-text AntiSoftlockEtherPurchaseUndone{
-    "The Ether purchase has been undone."
-}
-
 text AntiSoftlockAskUndoTrainer5{
     "Would you like to undo your previous\n"
     "trainer battle win?\p"
@@ -4482,15 +4381,6 @@ text FourTabletsHintMessage3{
 }
 
 
-// Dusknoir mail hint NPC
-
-text DusknoirStoleMyMailMsg{
-    "A Dusknoir stole my mail!\p"
-    "To be honest, I don't really mind.\n"
-    "It's just a bit strange." 
-}
-
-
 // Space Item buy NPC
 
 text StonesBuyNPCInitialMessage_no_item{
@@ -4504,18 +4394,12 @@ text StonesBuyNPCInitialMessage_no_item{
 text StonesBuyNPCInitialMessage_has_SunStone{
     "Incredible...\n"
     "Is that a Sun Stone?\p"
-    "Would you sell it to me for ¥1500?"
+    "Would you sell it to me for ¥3000?"
 }
 
 text StonesBuyNPCInitialMessage_has_MoonStone{
     "Incredible...\n"
     "Is that a Moon Stone?\p"
-    "Would you sell it to me for ¥1500?"
-}
-
-text StonesBuyNPCInitialMessage_has_DuskStone{
-    "Incredible...\n"
-    "Is that a Dusk Stone?\p"
     "...\p"
     "I may have ran out of money...\p"
     "Would you trade it for a Jaboca Berry?" 
@@ -4537,8 +4421,8 @@ text StonesBuyNPCPostSellMessage{
     "I think I've got enough for now."
 }
 
-text MoneyReceived1500{
-    "{PLAYER} received ¥1500!"
+text MoneyReceived3000{
+    "{PLAYER} received ¥3000!"
 }
 
 
@@ -4677,32 +4561,6 @@ text PrimeapeObtainMessage{
 text NicknameThisPokemonMessage2{
     "Do you want to give a nickname to\n"
 	"this Primeape?"
-}
-
-
-// ETHER SELL NPC
-
-text EtherNPCbuyEther{
-    "Hi there!\p"
-    "Would you like to buy an Ether for the\n"
-    "great price of ¥500?"
-}
-
-text EtherNPCnotEnoughMoney{
-    "Oh, it looks like you don't have enough\n"
-    "money."
-}
-
-text EtherNPCsellAcceptedMessage{
-    "There you go!"
-}
-
-text EtherNPCsellDeclined{
-    "No worries, perhaps next time."
-}
-
-text EtherNPCpostSellMessage{
-    "Don't waste it all at once!"
 }
 
 
@@ -4895,12 +4753,12 @@ text Trainer2_Intro{
 }
 
 text Trainer2_Outro{
-    "Cut the illusion, clear the path!"
+    "Call me a maniac, but I love writing in\n"
+    "68 65 78."
 }
 
 text Trainer2_PostBattle{
-    "Call me a maniac, but I love writing\n"
-    "things in 68 65 78."
+    "Cut the illusion, clear the path!"
 }
 
 
@@ -5024,8 +4882,10 @@ text Trainer8_Outro{
 
 text Trainer8_PostBattle{
     "Have you been to the secret garden?\p"
-    "There's an easy way in, but is there an\n"
-    "easy way out as well?"
+    "There's an easy way in, but what's the\n"
+    "easy way out?"
+    // "There's an easy way in, but is there an\n"
+    // "easy way out as well?"
 }
 
 

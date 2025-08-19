@@ -39,7 +39,7 @@
     F(FLAMETHROWER) \
     F(SLUDGE_BOMB) \
     F(SANDSTORM) \
-    F(FIRE_BLAST) \
+    F(TRICK) \
     F(ROCK_TOMB) \
     F(AERIAL_ACE) \
     F(TORMENT) \

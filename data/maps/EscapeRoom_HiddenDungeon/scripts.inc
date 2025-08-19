@@ -345,12 +345,8 @@ EscapeRoom_HiddenDungeon_DungeonGuard::
 # 254 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_DungeonGuard_5
-# 273 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox DungeonGuardIntro, MSGBOX_DEFAULT
-# 274 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	waitmessage
 EscapeRoom_HiddenDungeon_DungeonGuard_1:
-# 277 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 272 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
@@ -381,18 +377,18 @@ EscapeRoom_HiddenDungeon_DungeonGuard_5:
 	goto EscapeRoom_HiddenDungeon_DungeonGuard_1
 
 
-# 280 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 275 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 GuardMoveAway:
-# 281 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 276 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_left
-# 282 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 277 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	walk_left
-# 283 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 278 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_right
 	step_end
 
 AskCacneaTrade::
-# 291 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 286 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Trying to get past the guard?\p"
 	.string "I might be able to help you out.\n"
 	.string "How badly do you want in?\p"
@@ -403,30 +399,30 @@ AskCacneaTrade::
 	.string "Do we have a deal?$"
 
 CacneaReceivedMessage::
-# 306 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 301 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Cacnea!$"
 
 CacneaTradeDeclined::
-# 310 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 305 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Suit yourself.$"
 
 CacneaTradePostTrade::
-# 314 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 309 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hehehehe!$"
 
 DungeonGuardIntro::
-# 321 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 316 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
 	.string "I'll need to see an entry card, or you\n"
 	.string "are not getting through.$"
 
 DungeonGuardShowsCard::
-# 327 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 322 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "(You hesitantly hold up your rainbow-\n"
 	.string "colored entry card.)$"
 
 DungeonGuardGivesEntry::
-# 332 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 327 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hmmm...\p"
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
@@ -436,6 +432,6 @@ DungeonGuardGivesEntry::
 	.string "You're clear to enter.$"
 
 DungeonGuardPostEntry::
-# 342 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 337 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "You're not very normal, are you?\n"
 	.string "Just don't cause any trouble$"

@@ -1806,7 +1806,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     {
         FLORGES_MISC_INFO(Red, 0),
         .description = COMPOUND_STRING(
-            "Grass Knot can be deleted once\n"
+            "Grass Knot should be deleted once\n"
             "Zeraora has been caught.\n"
             "\n"
             "Camouflage is spooky. Run!"

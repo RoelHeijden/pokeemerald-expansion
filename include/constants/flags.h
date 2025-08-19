@@ -90,7 +90,7 @@
 #define FLAG_SHUCKLE_SMASH_ROCK1             0x4C 
 #define FLAG_SHUCKLE_SMASH_ROCK2             0x4D  
 #define FLAG_SHUCKLE_SMASH_ROCK3             0x4E
-#define FLAG_DUSK_STONE_OBTAINED             0x4F  
+#define FLAG_TM_TRICK_OBTAINED               0x4F  
 
 // Scripts
 #define FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL  0x50
@@ -657,7 +657,7 @@
 #define FLAG_LIEPARD_MOVE_DELETED       0x265 
 #define FLAG_DUNSPARCE_MOVE_DELETED     0x266 
 #define FLAG_SMEARGLE_MOVE_DELETED      0x267 
-#define FLAG_DUSK_STONE_CONSUMED        0x268
+#define FLAG_MOON_STONE_CONSUMED        0x268
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
 #define FLAG_JABOCA_CONSUMED            0x26B   
@@ -682,7 +682,7 @@
 #define FLAG_THIEF_REPLACED             0x27E 
 #define FLAG_SECRET_POWER_COMPLETED     0x27F 
 #define FLAG_DUNGEON_ENTRY_GRANTED      0x280  
-#define FLAG_ETHER_BOUGHT               0x281  
+#define FLAG_TRICK_TAUGHT               0x281
 #define FLAG_PLAYER_JUST_LOST           0x282 
 #define FLAG_JUST_HAD_ZERA_BATTLE       0x283  
 #define FLAG_MENTAL_HERB_SOLD_OUT       0x284 
@@ -696,7 +696,7 @@
 #define FLAG_ANTI_SOFTLOCK_LOOP         0x28C  
 #define FLAG_IN_MOVE_DELETER_SCRIPT     0x28D
 #define FLAG_DO_WARP                    0x28E 
-#define FLAG_UNUSED_0x28F  0x28F // Unused Flag
+#define FLAG_TM_TRICK_CONSUMED          0x28F
 #define FLAG_UNUSED_0x290  0x290 // Unused Flag
 #define FLAG_UNUSED_0x291  0x291 // Unused Flag
 #define FLAG_UNUSED_0x292  0x292 // Unused Flag

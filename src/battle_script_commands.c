@@ -15112,13 +15112,13 @@ static void Cmd_pickup(void)
                 && heldItem == ITEM_NONE){
                 VarSet(VAR_PICKUP_COUNTER, VarGet(VAR_PICKUP_COUNTER) + 1);
             }
-            u8 PICKUP_FIGHTS_NUM = 7;
+            u8 PICKUP_FIGHTS_NUM = 5;
 
             if (ability == ABILITY_PICKUP
                 && species != SPECIES_NONE
                 && species != SPECIES_EGG
                 && heldItem == ITEM_NONE
-                && VarGet(VAR_PICKUP_COUNTER) == PICKUP_FIGHTS_NUM) // ADDED -- find item on the 7th win only
+                && VarGet(VAR_PICKUP_COUNTER) == PICKUP_FIGHTS_NUM) // ADDED -- find item on the Nth win only
                 // && (Random() % 10) == 0)
             {
                 if (isInPyramid)

@@ -268,11 +268,6 @@ script EscapeRoom_HiddenDungeon_DungeonGuard{
             
             setflag(FLAG_DUNGEON_ENTRY_GRANTED)
         }
-        else{
-            // intro message
-            msgbox(DungeonGuardIntro, MSGBOX_DEFAULT)
-            waitmessage
-        }
     }
     releaseall
 }

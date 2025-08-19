@@ -17031,18 +17031,17 @@ Bold Nature
 
 
 === TRAINER_CUSTOM_TRAINER8 ===
-Name: Forshad
+Name: Saguaro
 Class: Psychic
 Pic: Psychic M
 Gender: Male
 Music: Intense
 Double Battle: No
 
-Zoroark @ Toxic Orb
-Level: 16
+Zoroark @ Life Orb
+Level: 35
 Quiet Nature
 Ability: Illusion
-EVs: 252 HP / 252 Def
 IVs: 0 Atk / 0 Spe
 - Night Shade
 
@@ -17054,7 +17053,7 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER9 ===
-Name: Tey & Ton
+Name: Ton & Tey
 Class: Twins
 Pic: Twins
 Gender: Male
@@ -17079,7 +17078,7 @@ Adamant Nature
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: Doll
+Name: Dolly
 Class: Youngster
 Pic: School Kid F
 Gender: Male

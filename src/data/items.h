@@ -82,9 +82,14 @@ static const u8 sEvolutionStoneDesc[] = _("Makes certain\n"
                                           "species of Pokémon\n"
                                           "evolve.");
 
-static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Makes certain\n"
-                                                       "Pokémon evolve,\n"
-                                                       "card card bundle.");
+static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("How to make money.\n"
+                                                       "Step 1: Get juice.\n"
+                                                       "Step 2: Get rich.");
+// static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Makes certain\n"
+//                                                        "Pokémon evolve.\n"
+//                                                        "Step 1: Get juice.");
+                                                    // "aaaaaaaaaaaaaaaaaaa");
+
 
 static const u8 sNectarDesc[]         = _("Flower nectar that\n"
                                           "changes the form\n"
@@ -3908,8 +3913,7 @@ const struct Item gItemsInfo[] =
         .name = _("Sun Stone"),
         // .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
         .price = 0,
-        // .description = sEvolutionStoneDesc,
-        .description = sEvolutionStoneDesc_SunStoneHint,
+        .description = sEvolutionStoneDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
@@ -3924,7 +3928,8 @@ const struct Item gItemsInfo[] =
         .name = _("Moon Stone"),
         // .price = (I_PRICE >= GEN_7) ? 3000 : 2100,
         .price = 0,
-        .description = sEvolutionStoneDesc,
+        // .description = sEvolutionStoneDesc,
+        .description = sEvolutionStoneDesc_SunStoneHint,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
@@ -11088,19 +11093,33 @@ const struct Item gItemsInfo[] =
         .secondaryId = MOVE_SANDSTORM,
     },
 
-    [ITEM_TM_FIRE_BLAST] =
+    // [ITEM_TM_FIRE_BLAST] =
+    // {
+    //     .name = _("TM38"),
+    //     .price = 5500,
+    //     .description = COMPOUND_STRING(
+    //         "A powerful fire\n"
+    //         "attack that may\n"
+    //         "burn the foe."),
+    //     .importance = I_REUSABLE_TMS,
+    //     .pocket = POCKET_TM_HM,
+    //     .type = ITEM_USE_PARTY_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_TMHM,
+    //     .secondaryId = MOVE_FIRE_BLAST,
+    // },
+    [ITEM_TM_TRICK] =
     {
         .name = _("TM38"),
-        .price = 5500,
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A powerful fire\n"
-            "attack that may\n"
-            "burn the foe."),
+            "Tricks the foe\n"
+            "into trading held\n"
+            "items."),
         .importance = I_REUSABLE_TMS,
         .pocket = POCKET_TM_HM,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
-        .secondaryId = MOVE_FIRE_BLAST,
+        .secondaryId = MOVE_TRICK,
     },
 
     [ITEM_TM_ROCK_TOMB] =
