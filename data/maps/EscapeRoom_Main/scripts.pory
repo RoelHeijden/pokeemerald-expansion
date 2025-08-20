@@ -478,6 +478,7 @@ script EscapeRoom_MapScripts_GetItems{
     // REMOVE
     additem(ITEM_HM01)
     additem(ITEM_SAFETY_GOGGLES)
+    additem(ITEM_MOON_STONE)
     // additem(ITEM_TM46)
     // additem(ITEM_TM48)
     // additem(ITEM_RARE_CANDY)
@@ -659,7 +660,7 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
             msgbox(AntiSoftlockOutro, MSGBOX_AUTOCLOSE)
             waitmessage
             releaseall
-            end
+            return
         }
     
     // presents options again
@@ -668,7 +669,6 @@ script EscapeRoom_EventScript_AntiSoftlockGuy{
         goto(OptionMenuStart)
     }
     releaseall
-    end
 }
 
 // return items
@@ -706,7 +706,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
             setflag(FLAG_TEMP_2) // no heal if Camouflage has 0/1 pp
         }
         else{
-            setflag(FLAG_TEMP_1)
+            setflag(FLAG_TEMP_1) // heal
         }
     }
 
@@ -819,19 +819,28 @@ script EscapeRoom_EventScript_ReturnLostItems{
 
             }
             // heal Aipom only
-            else{
-                healpartymon(SPECIES_AIPOM)
-                playse(SE_USE_ITEM)
-                waitse
+            elif(flag(FLAG_TEMP_1)){
+                // only heal if not at 100% HP already
+                checkpartymonfullhp(SPECIES_AIPOM)
+                if(var(VAR_RESULT) == FALSE){
+                    healpartymon(SPECIES_AIPOM)
+                    playse(SE_USE_ITEM)
+                    waitse
 
-                // message
-                msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
-                waitmessage
+                    // message
+                    msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+                    waitmessage
+                }
             }
         }
         // any other case: heal entire party
         elif(flag(FLAG_TEMP_1) == TRUE){
-            call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+
+            // only heal if a mon in the party is not at 100% hp
+            checkpartyfullhp
+            if(var(VAR_RESULT) == FALSE){
+                call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+            }
         }
         else{
             // only flag_temp_2 was true. Do nothing else
@@ -1112,8 +1121,9 @@ script EscapeRoom_EventScript_UndoMoveTeach{
         waitmessage
 
 
-        // heal if Thief (trainer4 pp, Secret Power Poison)
-        if(var(VAR_0x8008) == MOVE_THIEF){
+        // heal if Thief (trainer4 pp, ape sequence Struggle PP regain, Secret Power Poison)
+        // added Cut just in case of Liepard PP recovery lines (Ape sequence)
+        if(var(VAR_0x8008) == MOVE_THIEF || var(VAR_0x8008) == MOVE_CUT){
             // Ape sequence: heal aipom
             if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
                 healpartymon(SPECIES_AIPOM)
@@ -1336,13 +1346,31 @@ script EscapeRoom_EventScript_UndoRareCandy{
             setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
         }
 
-        // heal party
-        call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
 
-        // if ape sequence: teleport back as well
-        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
-            // warp back to section 2 at end of script
-            setflag(FLAG_DO_WARP)
+        // // heal party if mons are not at 100% hp
+        // checkpartyfullhp
+        // call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+
+
+        // TEST!!
+        // heal if leveled down mon not at full HP
+        checkpartymonfullhp(VAR_0x8005)
+        if(var(VAR_RESULT) == FALSE){
+            
+            // heal leveled down mon
+            healpartymon(VAR_0x8005)
+            playse(SE_USE_ITEM)
+            waitse
+
+            // message
+            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+            waitmessage
+
+            // if ape sequence: teleport back as well
+            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+                // warp back to section 2 at end of script
+                setflag(FLAG_DO_WARP)
+            }
         }
     }
 }
@@ -4884,8 +4912,6 @@ text Trainer8_PostBattle{
     "Have you been to the secret garden?\p"
     "There's an easy way in, but what's the\n"
     "easy way out?"
-    // "There's an easy way in, but is there an\n"
-    // "easy way out as well?"
 }
 
 

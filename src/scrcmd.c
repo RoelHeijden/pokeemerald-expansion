@@ -113,10 +113,10 @@ bool8 ScrCmd_nop(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_nop1(struct ScriptContext *ctx)
-{
-    return FALSE;
-}
+// bool8 ScrCmd_nop1(struct ScriptContext *ctx)
+// {
+//     return FALSE;
+// }
 
 bool8 ScrCmd_end(struct ScriptContext *ctx)
 {
@@ -2362,7 +2362,7 @@ bool8 ScrCmd_removelostitem(struct ScriptContext *ctx)
 // ADDED
 bool8 ScrCmd_healpartymon(struct ScriptContext *ctx)
 {
-    u16 species = ScriptReadHalfword(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
     u8 i;
     struct Pokemon *mon;
 
@@ -2411,7 +2411,7 @@ bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)
 // ADDED
 bool8 ScrCmd_checkpartymonfullhp(struct ScriptContext *ctx)
 {
-    u16 species = ScriptReadHalfword(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
     s32 i;
 
     gSpecialVar_Result = FALSE;
@@ -2434,6 +2434,33 @@ bool8 ScrCmd_checkpartymonfullhp(struct ScriptContext *ctx)
 
     return FALSE;
 }
+
+// ADDED
+bool8 ScrCmd_checkpartyfullhp(struct ScriptContext *ctx)
+{
+    s32 i;
+    gSpecialVar_Result = TRUE;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES, NULL);
+
+        if (species != SPECIES_NONE && !GetMonData(&gPlayerParty[i], MON_DATA_IS_EGG, NULL))
+        {
+            u16 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
+            u16 maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP, NULL);
+
+            if (hp < maxHp)
+            {
+                gSpecialVar_Result = FALSE;
+                break;
+            }
+        }
+    }
+
+    return FALSE;
+}
+
 
 // ADDED
 bool8 ScrCmd_checkpartymon(struct ScriptContext *ctx)

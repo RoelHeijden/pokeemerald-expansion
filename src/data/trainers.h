@@ -42502,7 +42502,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER7A] =
     {
 #line 17004
-        .trainerName = _("Ceasar"),
+        .trainerName = _("Caesar"),
 #line 17005
         .trainerClass = TRAINER_CLASS_RUIN_MANIAC,
 #line 17006
@@ -42579,7 +42579,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER8] =
     {
 #line 17034
-        .trainerName = _("Saguaro"),
+        .trainerName = _("Hipo"),
 #line 17035
         .trainerClass = TRAINER_CLASS_PSYCHIC,
 #line 17036

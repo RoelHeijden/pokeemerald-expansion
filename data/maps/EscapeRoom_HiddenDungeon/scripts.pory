@@ -13,6 +13,7 @@ mapscripts EscapeRoom_HiddenDungeon_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
+        VAR_DO_SOMETHING_WRONG_MESSAGE, 1: EscapeRoom_MapScripts_SomethingWrongMessage
     ] 
 }
 
@@ -71,11 +72,8 @@ script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
             !flag(FLAG_TRAINER9_DEFEATED) ||
             flag(FLAG_TRAINER10_DEFEATED)) 
         {
-            lockall
-            msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
-            waitmessage
+            setvar(VAR_DO_SOMETHING_WRONG_MESSAGE, 1)
         }
-        releaseall
 
         // remove Cacnea Thief undo
         removetaughtmove(SPECIES_CACNEA, MOVE_THIEF)
@@ -119,13 +117,18 @@ script EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained{
                 !flag(FLAG_TRAINER9_DEFEATED) ||
                 flag(FLAG_TRAINER10_DEFEATED)) 
             {
-                lockall
-                msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
+                setvar(VAR_DO_SOMETHING_WRONG_MESSAGE, 1)
             }
-            releaseall
         }
     }
+}
+
+script EscapeRoom_MapScripts_SomethingWrongMessage{
+    lockall
+    setvar(VAR_DO_SOMETHING_WRONG_MESSAGE, 0)
+    msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
 }
 
 
