@@ -311,8 +311,10 @@ script EscapeRoom_MapScripts_AskResetPredamage{
             msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
             waitmessage
 
-            // warp player
+            // warp player to section 1
+            call(EscapeRoom_EventScript_SetRespawn1)
             warpteleport(MAP_ESCAPE_ROOM_MAIN, 48, 17)
+            waitstate
         }
         else{
             // change spawn location toggle to spawn2
@@ -477,7 +479,7 @@ script EscapeRoom_MapScripts_GetItems{
 
     // REMOVE
     additem(ITEM_HM01)
-    additem(ITEM_SAFETY_GOGGLES)
+    // additem(ITEM_SAFETY_GOGGLES)
     additem(ITEM_MOON_STONE)
     // additem(ITEM_TM46)
     // additem(ITEM_TM48)
@@ -502,7 +504,7 @@ script EscapeRoom_EventScript_SetRespawn1{
     setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
     setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
 
-    // respawn never actually sey to location 1 again
+    // respawn never actually set to location 1 again
     // method used to track player position (for item return cases)
 }
 
@@ -814,8 +816,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
                 call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
 
                 // warp back to section 2
-                warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
-                waitstate
+                call(EscapeRoom_EventScript_WarpToSection2)
 
             }
             // heal Aipom only
@@ -868,6 +869,11 @@ script EscapeRoom_EventScript_AntiSoftlockPartyHeal{
     waitmessage
 }
 
+script EscapeRoom_EventScript_WarpToSection2{
+        call(EscapeRoom_EventScript_SetRespawn2)
+        warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
+        waitstate
+}
 
 // undo item
 script EscapeRoom_EventScript_UndoUsedItems{
@@ -950,10 +956,10 @@ script EscapeRoom_EventScript_UndoUsedItems{
     clearflag(FLAG_CAN_UNDO_RARE_CANDY)
     clearflag(FLAG_UNDOING_MOVE_THIEF)
 
+    // warp back to seciton 2
     if(flag(FLAG_DO_WARP)){
         clearflag(FLAG_DO_WARP)
-        warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
-        waitstate
+        call(EscapeRoom_EventScript_WarpToSection2)
     }
 }
 
@@ -1347,29 +1353,55 @@ script EscapeRoom_EventScript_UndoRareCandy{
         }
 
 
-        // // heal party if mons are not at 100% hp
-        // checkpartyfullhp
-        // call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
-
-
-        // TEST!!
-        // heal if leveled down mon not at full HP
-        checkpartymonfullhp(VAR_0x8005)
+        // check rare candy heals if mons not all 100% hp
+        checkpartyfullhp
         if(var(VAR_RESULT) == FALSE){
-            
-            // heal leveled down mon
-            healpartymon(VAR_0x8005)
-            playse(SE_USE_ITEM)
-            waitse
 
-            // message
-            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
-            waitmessage
+            // Ape sequence
+            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED)){
+    
+                // check if Liepard has fainted
+                partymonhasfainted
+                if(var(VAR_0x8004) == SPECIES_LIEPARD){
 
-            // if ape sequence: teleport back as well
-            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
-                // warp back to section 2 at end of script
-                setflag(FLAG_DO_WARP)
+                    // heal Aipom if damaged
+                    checkpartymonfullhp(SPECIES_AIPOM)
+                    if(var(VAR_RESULT) == FALSE){
+                        healpartymon(SPECIES_AIPOM)
+                        playse(SE_USE_ITEM)
+                        waitse
+
+                        // message
+                        msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+                        waitmessage
+                    }
+                }
+
+                // if liepard alive
+                else{
+                    // heal entire party
+                    call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+
+                    // warp back if in section 1
+                    if(var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+                        setflag(FLAG_DO_WARP)  // warp back to section 2 at end of script
+                    }
+                }
+            }
+
+            // normal cases (Rare Candy 2 and 3): heal leveled down mon
+            else{
+                checkpartymonfullhp(VAR_0x8005)
+                if(var(VAR_RESULT) == FALSE){
+                    // only heal leveled down mon
+                    healpartymon(VAR_0x8005)
+                    playse(SE_USE_ITEM)
+                    waitse
+
+                    // message
+                    msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+                    waitmessage 
+                }
             }
         }
     }

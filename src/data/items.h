@@ -82,12 +82,12 @@ static const u8 sEvolutionStoneDesc[] = _("Makes certain\n"
                                           "species of Pokémon\n"
                                           "evolve.");
 
-static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Step 1: Get juice.\n"
-                                                       "Step 2: Give juice.\n"
-                                                       "Step 3: Profit.");
-// static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Makes certain\n"
-//                                                        "Pokémon evolve.\n"
-//                                                        "Snake needs juice.");
+// static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Step 1: Get juice.\n"
+//                                                        "Step 2: Give juice.\n"
+//                                                        "Step 3: Profit.");
+static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Sharing juice with\n"
+                                                       "a snake may start\n"
+                                                       "your fortune.");
 // static const u8 sEvolutionStoneDesc_SunStoneHint[] = _("Makes a Pokémon\n"
 //                                                        "evolve. Sidenote,\n"
 //                                                        "snake needs juice.");
