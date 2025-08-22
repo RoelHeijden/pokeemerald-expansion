@@ -169,27 +169,27 @@
       "x": 15,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_RESPAWN_SET_AT_NURSE2",
-      "var_value": "0",
-      "script": "EscapeRoom_EventScript_SetRespawn2"
+      "var": "VAR_LOCATED_AT_SECTION_X",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetLocationSection2"
     },
     {
       "type": "trigger",
       "x": 14,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_RESPAWN_SET_AT_NURSE2",
-      "var_value": "0",
-      "script": "EscapeRoom_EventScript_SetRespawn2"
+      "var": "VAR_LOCATED_AT_SECTION_X",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetLocationSection2"
     },
     {
       "type": "trigger",
       "x": 16,
       "y": 12,
       "elevation": 0,
-      "var": "VAR_RESPAWN_SET_AT_NURSE2",
-      "var_value": "0",
-      "script": "EscapeRoom_EventScript_SetRespawn2"
+      "var": "VAR_LOCATED_AT_SECTION_X",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetLocationSection2"
     }
   ],
   "bg_events": [

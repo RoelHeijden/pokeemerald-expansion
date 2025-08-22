@@ -697,7 +697,7 @@
 #define FLAG_IN_MOVE_DELETER_SCRIPT     0x28D
 #define FLAG_DO_WARP                    0x28E 
 #define FLAG_TM_TRICK_CONSUMED          0x28F
-#define FLAG_UNUSED_0x290  0x290 // Unused Flag
+#define FLAG_SECTION_3_SPAWN_UNLOCKED   0x290
 #define FLAG_UNUSED_0x291  0x291 // Unused Flag
 #define FLAG_UNUSED_0x292  0x292 // Unused Flag
 #define FLAG_UNUSED_0x293  0x293 // Unused Flag

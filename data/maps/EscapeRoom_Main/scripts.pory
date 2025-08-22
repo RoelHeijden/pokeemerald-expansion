@@ -303,7 +303,7 @@ script EscapeRoom_MapScripts_AskResetPredamage{
     setvar(VAR_ASK_RESET_PREDAMAGE, 0)
 
     // during Ape sequence: reset requires warp to other location
-    if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+    if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
         msgbox(AskResetPredamageAndWarpMessage, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
             // reset pre-damage
@@ -312,15 +312,11 @@ script EscapeRoom_MapScripts_AskResetPredamage{
             waitmessage
 
             // warp player to section 1
-            call(EscapeRoom_EventScript_SetRespawn1)
-            warpteleport(MAP_ESCAPE_ROOM_MAIN, 48, 17)
-            waitstate
+            call(EscapeRoom_EventScript_WarpToSection1)
         }
         else{
-            // change spawn location toggle to spawn2
-            setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
-            setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
-            setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
+            // set location tracker to section 2
+            call(EscapeRoom_EventScript_SetLocationSection2)
         }
     }
     // normal predamage reset
@@ -469,8 +465,8 @@ script EscapeRoom_MapScripts_GetBadges{
 }
 
 script EscapeRoom_MapScripts_SetRespawn{
-    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
-    call(EscapeRoom_EventScript_SetRespawn1)
+    call(EscapeRoom_EventScript_SetRespawnSection1)
+    call(EscapeRoom_EventScript_SetLocationSection1)
 }
 
 script EscapeRoom_MapScripts_GetItems{
@@ -480,7 +476,7 @@ script EscapeRoom_MapScripts_GetItems{
     // REMOVE
     additem(ITEM_HM01)
     // additem(ITEM_SAFETY_GOGGLES)
-    additem(ITEM_MOON_STONE)
+    // additem(ITEM_MOON_STONE)
     // additem(ITEM_TM46)
     // additem(ITEM_TM48)
     // additem(ITEM_RARE_CANDY)
@@ -499,33 +495,83 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 
 // RESPAWN CHANGES //
 
-script EscapeRoom_EventScript_SetRespawn1{
-    setvar(VAR_RESPAWN_SET_AT_NURSE1, 1)
-    setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
-    setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
+// locations
+script EscapeRoom_EventScript_SetLocationSection1{
+    setvar(VAR_LOCATED_AT_SECTION_X, 1)
 
-    // respawn never actually set to location 1 again
-    // method used to track player position (for item return cases)
+    lockall
+    msgbox("location 1", MSGBOX_AUTOCLOSE)
+    releaseall
 }
 
-script EscapeRoom_EventScript_SetRespawn2{
-    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
-    setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
-    setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
+script EscapeRoom_EventScript_SetLocationSection2{
+    setvar(VAR_LOCATED_AT_SECTION_X, 2)
 
-    // set respawn to section 2
-    if(flag(FLAG_LIEPARD_OBTAINED)){
-        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+    lockall
+    msgbox("location 2", MSGBOX_AUTOCLOSE)
+    releaseall
+
+    // NOTE: if used for warps, dont warp to section2 before Liepard obtained
+}
+
+script EscapeRoom_EventScript_SetLocationSection3{
+    setvar(VAR_LOCATED_AT_SECTION_X, 3)
+
+    lockall
+    msgbox("location 3", MSGBOX_AUTOCLOSE)
+    releaseall
+
+    // first time entering section 3
+    if(!flag(FLAG_SECTION_3_SPAWN_UNLOCKED)){
+        setflag(FLAG_SECTION_3_SPAWN_UNLOCKED)
     }
 }
 
-script EscapeRoom_EventScript_SetRespawn3{
-    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
-    setvar(VAR_RESPAWN_SET_AT_NURSE2, 0)
-    setvar(VAR_RESPAWN_SET_AT_NURSE3, 1)
+// respawns
+script EscapeRoom_EventScript_SetRespawnSection1{
+    setvar(VAR_RESPAWN_AT_SECTION_X, 1)
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
 
-    // set respawn to section 3
+    lockall
+    msgbox("spawn 1", MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+script EscapeRoom_EventScript_SetRespawnSection2{
+    setvar(VAR_RESPAWN_AT_SECTION_X, 2)
+    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+
+    lockall
+    msgbox("spawn 2", MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+script EscapeRoom_EventScript_SetRespawnSection3{
+    setvar(VAR_RESPAWN_AT_SECTION_X, 3)
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE3)
+
+    lockall
+    msgbox("spawn 3", MSGBOX_AUTOCLOSE)
+    releaseall
+}
+
+// warps
+script EscapeRoom_EventScript_WarpToSection1{
+        call(EscapeRoom_EventScript_SetLocationSection1)
+        warpteleport(MAP_ESCAPE_ROOM_MAIN, 48, 17)
+        waitstate
+}
+
+script EscapeRoom_EventScript_WarpToSection2{
+        call(EscapeRoom_EventScript_SetLocationSection2)
+        warpteleport(MAP_ESCAPE_ROOM_MAIN, 20, 11)
+        waitstate
+}
+
+script EscapeRoom_EventScript_WarpToSection3{
+        call(EscapeRoom_EventScript_SetLocationSection3)
+        warpteleport(MAP_ESCAPE_ROOM_HIDDEN_DUNGEON, 10, 8)
+        waitstate
 }
 
 
@@ -584,7 +630,22 @@ script EscapeRoom_EventScript_AnnihilapeStatue{
 
 // NURSE
 
-script EscapeRoom_Nurse_Heal_Pokemon{
+script EscapeRoom_Heal_Pokemon_Nurse1{
+    call(EscapeRoom_EventScript_SetRespawnSection1)
+    call(EscapeRoom_Heal_Pokemon_Nurse_Script)
+}
+
+script EscapeRoom_Heal_Pokemon_Nurse2{
+    call(EscapeRoom_EventScript_SetRespawnSection2)
+    call(EscapeRoom_Heal_Pokemon_Nurse_Script)
+}
+
+script EscapeRoom_Heal_Pokemon_Nurse3{
+    call(EscapeRoom_EventScript_SetRespawnSection3)
+    call(EscapeRoom_Heal_Pokemon_Nurse_Script)
+}
+
+script EscapeRoom_Heal_Pokemon_Nurse_Script{
     lockall
     faceplayer
     msgbox(Nurse_Ask_heal, MSGBOX_YESNO)
@@ -808,7 +869,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     if(flag(FLAG_TEMP_1) || flag(FLAG_TEMP_2)){
 
         // special case: if Ape sequence
-        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
 
             // if mental herb retrieved during a mental herb dusknoir sack line (FLAG_TEMP_3)
             if(flag(FLAG_TEMP_3)){
@@ -867,12 +928,6 @@ script EscapeRoom_EventScript_AntiSoftlockPartyHeal{
     // message
     msgbox(AntiSoftlockPartyHealed, MSGBOX_DEFAULT)
     waitmessage
-}
-
-script EscapeRoom_EventScript_WarpToSection2{
-        call(EscapeRoom_EventScript_SetRespawn2)
-        warpteleport(MAP_ESCAPE_ROOM_MAIN, 23, 11)
-        waitstate
 }
 
 // undo item
@@ -1131,7 +1186,7 @@ script EscapeRoom_EventScript_UndoMoveTeach{
         // added Cut just in case of Liepard PP recovery lines (Ape sequence)
         if(var(VAR_0x8008) == MOVE_THIEF || var(VAR_0x8008) == MOVE_CUT){
             // Ape sequence: heal aipom
-            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
                 healpartymon(SPECIES_AIPOM)
                 playse(SE_USE_ITEM)
                 waitse
@@ -1383,7 +1438,7 @@ script EscapeRoom_EventScript_UndoRareCandy{
                     call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
 
                     // warp back if in section 1
-                    if(var(VAR_RESPAWN_SET_AT_NURSE1) == 1){
+                    if(var(VAR_LOCATED_AT_SECTION_X) == 1){
                         setflag(FLAG_DO_WARP)  // warp back to section 2 at end of script
                     }
                 }
@@ -1734,14 +1789,12 @@ script EscapeRoom_EventScript_RelocateNurseNPC{
     setflag(FLAG_HIDE_NURSE1_NPC)
 
     // change respawn
-    setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
+    call(EscapeRoom_EventScript_SetRespawnSection2)
+    call(EscapeRoom_EventScript_SetLocationSection2)
+
+    // spawn change message
     msgbox(RespawnChangeMessage, MSGBOX_AUTOCLOSE)
     waitmessage
-
-    // allow trigger tiles to toggle spawn indicator
-    setvar(VAR_RESPAWN_SET_AT_NURSE1, 0)
-    setvar(VAR_RESPAWN_SET_AT_NURSE2, 1)
-    setvar(VAR_RESPAWN_SET_AT_NURSE3, 0)
 }
 
 movement EscapeRoom_Movement1_Nurse1NPC{

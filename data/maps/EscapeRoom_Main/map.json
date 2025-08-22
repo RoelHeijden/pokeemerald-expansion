@@ -50,7 +50,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_Nurse_Heal_Pokemon",
+      "script": "EscapeRoom_Heal_Pokemon_Nurse1",
       "flag": "FLAG_HIDE_NURSE1_NPC"
     },
     {
@@ -206,7 +206,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "EscapeRoom_Nurse_Heal_Pokemon",
+      "script": "EscapeRoom_Heal_Pokemon_Nurse2",
       "flag": "0"
     },
     {
@@ -508,18 +508,18 @@
       "x": 40,
       "y": 13,
       "elevation": 0,
-      "var": "VAR_RESPAWN_SET_AT_NURSE1",
-      "var_value": "0",
-      "script": "EscapeRoom_EventScript_SetRespawn1"
+      "var": "VAR_LOCATED_AT_SECTION_X",
+      "var_value": "2",
+      "script": "EscapeRoom_EventScript_SetLocationSection1"
     },
     {
       "type": "trigger",
       "x": 37,
       "y": 13,
       "elevation": 0,
-      "var": "VAR_RESPAWN_SET_AT_NURSE2",
-      "var_value": "0",
-      "script": "EscapeRoom_EventScript_SetRespawn2"
+      "var": "VAR_LOCATED_AT_SECTION_X",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_SetLocationSection2"
     },
     {
       "type": "trigger",

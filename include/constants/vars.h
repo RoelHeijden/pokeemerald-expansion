@@ -118,9 +118,9 @@
 #define VAR_ROUTE103_STATE                               0x4062 // Unused Var
 #define VAR_ROUTE104_STATE                               0x4063
 #define VAR_RETRIEVED_HELD_ITEM                          0x4064 // ADDED
-#define VAR_RESPAWN_SET_AT_NURSE1                                0x4065 
-#define VAR_RESPAWN_SET_AT_NURSE2                                0x4066 
-#define VAR_RESPAWN_SET_AT_NURSE3                                0x4067 
+#define VAR_RESPAWN_AT_SECTION_X                         0x4065 
+#define VAR_LOCATED_AT_SECTION_X                         0x4066 
+#define VAR_unused_unused                                0x4067 // unused
 #define VAR_SECRET_GARDEN_TRIGGER                                0x4068 
 #define VAR_ROUTE110_STATE                               0x4069
 #define VAR_RARE_CANDY_1_USED_ON                               0x406A 
