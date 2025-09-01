@@ -13,6 +13,7 @@ mapscripts EscapeRoom_HiddenDungeon_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
+        VAR_ASK_WARP_BACK, 1: EscapeRoom_MapScripts_AskWarpBack
         VAR_DO_SOMETHING_WRONG_MESSAGE, 1: EscapeRoom_MapScripts_SomethingWrongMessage
     ] 
 }
@@ -29,9 +30,21 @@ script EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts{
 script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
     call(EscapeRoom_HiddenDungeon_DisableBagUse)
     call(EscapeRoom_HiddenDungeon_SetLostItemVars)
-    call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
     call(EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained)
     call(EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained)
+
+    // check if ask pre-damage restore
+    // sets var if true
+    call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
+
+    // check if ask warp back to previous section
+    // sets var if true
+    call(EscapeRoom_MapScripts_CheckIfAskWarpBack)
+
+    // clear flag used in CheckIfAskPreDamage and CheckIfAskWarpBack
+    if(flag(FLAG_PLAYER_JUST_LOST)){
+        clearflag(FLAG_PLAYER_JUST_LOST)  
+    }
 } 
 
 script EscapeRoom_HiddenDungeon_DisableBagUse{

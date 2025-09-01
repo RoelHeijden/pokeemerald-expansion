@@ -73,6 +73,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
+        VAR_ASK_WARP_BACK, 1: EscapeRoom_MapScripts_AskWarpBack
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
         VAR_DO_ERROR_MESSAGE, 1: EscapeRoom_MapScripts_DoErrorMessage
     ] 
@@ -128,6 +129,15 @@ script EscapeRoom_MapScript_OnResumeScripts{
     // check if ask pre-damage restore
     // sets var if true
     call(EscapeRoom_MapScripts_CheckIfAskPreDamage)
+
+    // check if ask warp back to previous section
+    // sets var if true
+    call(EscapeRoom_MapScripts_CheckIfAskWarpBack)
+
+    // clear flag used in CheckIfAskPreDamage and CheckIfAskWarpBack
+    if(flag(FLAG_PLAYER_JUST_LOST)){
+        clearflag(FLAG_PLAYER_JUST_LOST)  
+    }
 } 
 
 script EscapeRoom_MapScript_OnWarpIntoScripts{
@@ -211,7 +221,6 @@ script EscapeRoom_MapScripts_CheckIfAskPreDamage{
         if(var(VAR_RESULT) == TRUE){
             setvar(VAR_ASK_RESET_PREDAMAGE, 1)
         }
-        clearflag(FLAG_PLAYER_JUST_LOST)
     }
 
     // zera catch sequence (to include pre damage on win)
@@ -269,6 +278,18 @@ script EscapeRoom_MapScripts_CheckIfMentalHerbSackUsed{
     }
 }
 
+script EscapeRoom_MapScripts_CheckIfAskWarpBack{
+    // if just lost a battle
+    if(flag(FLAG_PLAYER_JUST_LOST) && flag(FLAG_LIEPARD_OBTAINED)){
+
+        // check if prev player location and spawn are different
+        compare_var_to_var(VAR_LOCATED_AT_SECTION_X, VAR_RESPAWN_AT_SECTION_X)
+        goto_if_eq(Equal)
+        setvar(VAR_ASK_WARP_BACK, 1)
+    }
+    Equal:
+}
+
 
 //// ON FRAME //// 
 
@@ -302,8 +323,12 @@ script EscapeRoom_MapScripts_AskResetPredamage{
     // reset var
     setvar(VAR_ASK_RESET_PREDAMAGE, 0)
 
-    // during Ape sequence: reset requires warp to other location
-    if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
+    // check warp required
+    if(var(VAR_ASK_WARP_BACK) == 1){
+        // reset warp var
+        setvar(VAR_ASK_WARP_BACK, 0)
+
+        // ask warp and damage reset
         msgbox(AskResetPredamageAndWarpMessage, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
             // reset pre-damage
@@ -311,12 +336,12 @@ script EscapeRoom_MapScripts_AskResetPredamage{
             msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
             waitmessage
 
-            // warp player to section 1
-            call(EscapeRoom_EventScript_WarpToSection1)
+            // warp to previous 
+            call(EscapeRoom_EventScript_WarpToPreviousLocation)
         }
         else{
-            // set location tracker to section 2
-            call(EscapeRoom_EventScript_SetLocationSection2)
+            // reset location 
+            call(EscapeRoom_EventScript_SetLocationToSpawn)
         }
     }
     // normal predamage reset
@@ -336,6 +361,27 @@ script EscapeRoom_MapScripts_AskResetPredamage{
     }
     releaseall
 }
+
+script EscapeRoom_MapScripts_AskWarpBack{
+    lockall
+
+    // reset warp var
+    setvar(VAR_ASK_WARP_BACK, 0)
+
+    // ask warp
+    msgbox(AskWarpBackMessage, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        // warp to previous 
+        call(EscapeRoom_EventScript_WarpToPreviousLocation)
+    }
+    else{
+        // reset location 
+        call(EscapeRoom_EventScript_SetLocationToSpawn)
+    }
+    releaseall
+}
+
+
 
 script EscapeRoom_MapScripts_RemoveDuplicateCustap{
     // check if pokemon 1 carries custap
@@ -495,31 +541,44 @@ script EscapeRoom_MapScripts_TurnOfBagUse{
 
 // RESPAWN CHANGES //
 
+script EscapeRoom_EventScript_WarpToPreviousLocation{
+    // warp player to previous section 
+    if(var(VAR_LOCATED_AT_SECTION_X) == 1){
+        call(EscapeRoom_EventScript_WarpToSection1)
+    }
+    elif(var(VAR_LOCATED_AT_SECTION_X) == 2){
+        call(EscapeRoom_EventScript_WarpToSection2)
+    }
+    elif(var(VAR_LOCATED_AT_SECTION_X) == 3){
+        call(EscapeRoom_EventScript_WarpToSection3)
+    }
+}
+
+script EscapeRoom_EventScript_SetLocationToSpawn{
+    // set location tracker section to spawn location
+    if(var(VAR_RESPAWN_AT_SECTION_X) == 1){
+        call(EscapeRoom_EventScript_SetLocationSection1)
+    }
+    elif(var(VAR_RESPAWN_AT_SECTION_X) == 2){
+        call(EscapeRoom_EventScript_SetLocationSection2)
+    }
+    elif(var(VAR_RESPAWN_AT_SECTION_X) == 3){
+        call(EscapeRoom_EventScript_SetLocationSection3)
+    }
+}
+
+
 // locations
 script EscapeRoom_EventScript_SetLocationSection1{
     setvar(VAR_LOCATED_AT_SECTION_X, 1)
-
-    lockall
-    msgbox("location 1", MSGBOX_AUTOCLOSE)
-    releaseall
 }
 
 script EscapeRoom_EventScript_SetLocationSection2{
     setvar(VAR_LOCATED_AT_SECTION_X, 2)
-
-    lockall
-    msgbox("location 2", MSGBOX_AUTOCLOSE)
-    releaseall
-
-    // NOTE: if used for warps, dont warp to section2 before Liepard obtained
 }
 
 script EscapeRoom_EventScript_SetLocationSection3{
     setvar(VAR_LOCATED_AT_SECTION_X, 3)
-
-    lockall
-    msgbox("location 3", MSGBOX_AUTOCLOSE)
-    releaseall
 
     // first time entering section 3
     if(!flag(FLAG_SECTION_3_SPAWN_UNLOCKED)){
@@ -531,28 +590,16 @@ script EscapeRoom_EventScript_SetLocationSection3{
 script EscapeRoom_EventScript_SetRespawnSection1{
     setvar(VAR_RESPAWN_AT_SECTION_X, 1)
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
-
-    lockall
-    msgbox("spawn 1", MSGBOX_AUTOCLOSE)
-    releaseall
 }
 
 script EscapeRoom_EventScript_SetRespawnSection2{
     setvar(VAR_RESPAWN_AT_SECTION_X, 2)
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE2)
-
-    lockall
-    msgbox("spawn 2", MSGBOX_AUTOCLOSE)
-    releaseall
 }
 
 script EscapeRoom_EventScript_SetRespawnSection3{
     setvar(VAR_RESPAWN_AT_SECTION_X, 3)
     setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE3)
-
-    lockall
-    msgbox("spawn 3", MSGBOX_AUTOCLOSE)
-    releaseall
 }
 
 // warps
@@ -1011,7 +1058,7 @@ script EscapeRoom_EventScript_UndoUsedItems{
     clearflag(FLAG_CAN_UNDO_RARE_CANDY)
     clearflag(FLAG_UNDOING_MOVE_THIEF)
 
-    // warp back to seciton 2
+    // warp back to section 2
     if(flag(FLAG_DO_WARP)){
         clearflag(FLAG_DO_WARP)
         call(EscapeRoom_EventScript_WarpToSection2)
@@ -4713,7 +4760,12 @@ text HeldItemRecoveredMessage{
 }
 
 
-// PRE DAMAGE RESET
+// WARP AND PRE DAMAGE RESET
+text AskWarpBackMessage{
+    "Do you want to return to the previous\n"
+    "location?"
+}
+
 text AskResetPredamageMessage{
     "Want to set your Pokémon's HP and move\n"
     "PP back to their pre-battle state?"
@@ -4938,7 +4990,7 @@ text Trainer6_Intro{
 }
 
 text Trainer6_Outro{
-    "Oh how the tables have turned."
+    "Oh how the tablets have turned."
 }
 
 text Trainer6_PostBattle{
