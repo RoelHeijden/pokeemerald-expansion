@@ -2143,7 +2143,7 @@ bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
             // check if current total PP is 0
             u32 totalCurrentPP = 0;
             for (int j = 0; j < MAX_MON_MOVES; j++)
-                totalCurrentPP += GetMonData(&gPlayerParty[i], MON_DATA_PP1 + j);
+                totalCurrentPP += GetMonData(&gPlayerParty[partyslot], MON_DATA_PP1 + j);
 
             // restore only deleted moves
             for (int j = 0; j < MAX_MON_MOVES; j++)
