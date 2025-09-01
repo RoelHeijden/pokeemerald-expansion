@@ -2118,7 +2118,7 @@ bool8 ScrCmd_backupmonmoveset(struct ScriptContext *ctx)
 // ADDED
 bool8 ScrCmd_restoremonmoveset(struct ScriptContext *ctx)
 {
-    u16 species = ScriptReadHalfword(ctx);
+    u16 species = VarGet(ScriptReadHalfword(ctx));
     gSpecialVar_Result = FALSE;
 
     // find party slot matching the species

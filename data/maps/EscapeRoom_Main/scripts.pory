@@ -1182,6 +1182,9 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
 }
 
 script EscapeRoom_EventScript_UndoMoveTeach{
+    // clear flag used to detect temp moves being restored
+    clearflag(FLAG_TEMP_3)
+
     // use other vars if restoring Thief
     if(flag(FLAG_UNDOING_MOVE_THIEF)){
         copyvar(VAR_0x8007, VAR_0x8005)
@@ -1195,6 +1198,23 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     // ask undo message 
     msgbox(AskUndoMoveTeachDynamic, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
+
+        // restore temporarily deleted moves
+        restoremonmoveset(VAR_0x8007)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_TEMP_3) // notify for later that temp deleted moves are restored
+
+            // clear correct pokemon flag
+            if(var(VAR_0x8007) == SPECIES_LIEPARD){
+                clearflag(FLAG_LIEPARD_MOVE_DELETED)
+            }
+            if(var(VAR_0x8007) == SPECIES_AIPOM){
+                clearflag(FLAG_AIPOM_MOVE_DELETED)
+            }
+            if(var(VAR_0x8007) == SPECIES_DUNSPARCE){
+                clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
+            }
+        }
 
         // check edge case: Thief overwritten by Cut
         if(flag(FLAG_UNDOING_MOVE_THIEF)){
@@ -1220,14 +1240,31 @@ script EscapeRoom_EventScript_UndoMoveTeach{
             giveitem(ITEM_TM48)
         }
 
-        // message
+        // buffer nickname for message
         checkpartymon(VAR_0x8005) 
         copyvar(VAR_0x8004, VAR_RESULT) // set monslot in VAR_0x8004
         special(BufferMonNickname)      // buffer nickname (VAR_0x8004) to STR_VAR_1
 
+        // message if temp deleted moves were restored
+        if(flag(FLAG_TEMP_3)){
+            call(EscapeRoom_MoveRestoredSound)
+            msgbox(MovesRestoredMessage, MSGBOX_DEFAULT)
+            waitmessage
+        }
+
+        // move teach undone message
+        buffermovename(STR_VAR_2, VAR_0x8008)
         msgbox(MoveTeachUndoneMessage, MSGBOX_DEFAULT)
         waitmessage
 
+
+        // Change heals?
+        // - should Cut heal when undone?
+        //     - if regaining PP after struggle
+        // - should Thief always heal when undone?
+        //     - if Assist pp not 10/10
+        //     - if poisoned
+        //     - if regaining PP after struggle
 
         // heal if Thief (trainer4 pp, ape sequence Struggle PP regain, Secret Power Poison)
         // added Cut just in case of Liepard PP recovery lines (Ape sequence)
@@ -1248,6 +1285,7 @@ script EscapeRoom_EventScript_UndoMoveTeach{
             }
             
         }
+
 
         // check snowball item return
         if(var(VAR_0x8008) == MOVE_THIEF){
@@ -1312,8 +1350,6 @@ script EscapeRoom_EventScript_UndoMoveTeach{
                 clearflag(FLAG_TOXIC_ORB_OBTAINED)
             }
         }
-
-
 
         // check Cut tree reset
         if(var(VAR_0x8008) == MOVE_CUT && var(VAR_0x8005) == SPECIES_FERROTHORN && flag(FLAG_ESCAPEROOM_TREE_CUT)){
@@ -1981,7 +2017,6 @@ script EscapeRoom_RestoreMoveset{
         msgbox(NoMovesRestoredMessage, MSGBOX_AUTOCLOSE)
         clearflag(FLAG_TEMP_5)
     }
-
 }
 
 script EscapeRoom_MoveRestoredSound{
@@ -4403,13 +4438,14 @@ text AskUndoMoveTeachDynamic{
     "{STR_VAR_2} to {STR_VAR_1}?"
 }
 
-text MoveTeachUndoneMessage{
-    "{STR_VAR_1}'s moveset was restored."
-}
-
 text AskUndoRareCandyDynamic{
     "Do you want to undo the Rare Candy\n"
     "use on {STR_VAR_1}?"
+}
+
+text MoveTeachUndoneMessage{
+    "Teaching {STR_VAR_2} to {STR_VAR_1}\n"
+    "has been undone."
 }
 
 text RareCandyUndoneMessage{
@@ -4437,7 +4473,6 @@ text ItemUndoSnowballsRemoved{
 text ItemUndoToxicOrbsRemoved{
     "You lost your Toxic Orb(s)."
 }
-
 
 text ItemUndoTreeGrewBack{
     "The cut tree grew back."
