@@ -626,11 +626,20 @@ script EscapeRoom_EventScript_WarpToSection3{
 
 script EscapeRoom_EventScript_MainInfoSign {
     lockall
+
+    // dynmultichoice(30, 8, FALSE, 6, 0, 0, SignOptionShortInfo, SignOptionDetailedInfo) 
+    // msgbox(SignMessage1_short, MSGBOX_DEFAULT)
+    // waitmessage
+
     msgbox(SignMessageReadInfoAgain, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES)
     {
-        msgbox(SignMessage1)
-        waitmessage
+        msgbox(SignMessage1_part1, MSGBOX_YESNO) // "keep reading?"
+        if(var(VAR_RESULT) == YES)
+        {
+            msgbox(SignMessage1_part2, MSGBOX_DEFAULT)
+            waitmessage
+        }
     }
     releaseall
 }
@@ -4120,10 +4129,79 @@ text ByeByeMonDynamic{
     "Bye-bye, {STR_VAR_1}."
 }
 
+
+
 // SIGNS
-text SignMessage1{
-    "TBD"
+text SignMessage1_part1{
+    "1) The game's mechanics reflect GEN 9\n"
+    "where possible; overworld mechanics\l"
+    "are the main exception.\p"
+
+    "2) Moves & learnsets are mostly vanilla.\n"
+    "Move PP may be reduced (e.g. 5 PP Mimic)\l"
+    "to suit puzzle design.\p"
+
+    "3) Battle RNG has been disabled.\n"
+    "Outcomes are deterministic (0% or 100%)\l"
+    "with Assist as sole exception.\p"
+
+    "4) You won't get softlocked.\n"
+    "The game has an anti-softlock system\l"
+    "to undo any mistake you could make.\l"
+    "This may include side effects (such as\l"
+    "healing your party) to prevent gaining\l"
+    "an advantage via the system.\p"
+
+    "Keep reading?"
 }
+
+text SignMessage1_part2{
+    "5) There are QOL features to further\n"
+    "reduce the need for save states:\l"
+    "- Wild battles can be forfeited.\l"
+    "- Lost items may return after battle.\l"
+    "- Pre-damaged states can be restored.\l"
+    "- Losing far from the respawn lets you\l"
+    "   warp back to the battle area.\p"
+    "None of these features are required to\n"
+    "solve any of the puzzles.\p"
+
+    "6) Your party is fully healed each time\n"
+    "you beat a trainer.\p"
+
+    "7) Any Pokémon could have custom IVs or\n"
+    "EVs, including wild Pokémon.\p"
+
+    "8) EXP gain from battling has been\n"
+    "disabled.\p"
+
+    "9) There are no hidden items."
+}
+
+// text SignMessage1_short {
+//     "1) Game mechanics reflect GEN 9.\n"
+//     "2) Moves & learnsets are mostly vanilla.\p"
+
+//     "3) Battle RNG has been disabled.\n"
+//     "4) You won't get softlocked.\p"
+
+//     "5) There's no need for save states.\n"
+//     "6) Party's healed after trainer battles.\p"
+
+//     "7) Pokémon have custom IVs & EVs.\n"
+//     "8) No EXP gain from battling.\p"
+
+//     "9) There are no hidden items."
+// }
+
+// text SignOptionShortInfo{
+//     "Short"
+// }
+
+// text SignOptionDetailedInfo{
+//     "Detailed"
+// }
+
 
 text SignMessageReadInfoAgain{
     "Do you want to read the important\n"

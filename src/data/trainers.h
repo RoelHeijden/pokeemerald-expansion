@@ -42579,7 +42579,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER8] =
     {
 #line 17034
-        .trainerName = _("Hipo"),
+        .trainerName = _("Barrel"),
 #line 17035
         .trainerClass = TRAINER_CLASS_PSYCHIC,
 #line 17036

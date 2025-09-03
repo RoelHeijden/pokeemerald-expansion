@@ -134,8 +134,8 @@ static void ClearFrontierRecord(void)
 
 static void WarpToTruck(void)
 {
-    // set spawn / set respawn
-    SetWarpDestination(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 49, 17);
+    // set spawn / set respawn // spawn // respawn
+    SetWarpDestination(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 49, 18);
     WarpIntoMap();
 }
 

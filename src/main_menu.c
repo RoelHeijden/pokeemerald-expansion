@@ -236,6 +236,7 @@ static void Task_NewGameBirchSpeech_SlidePlatformAway2(u8);
 static void Task_NewGameBirchSpeech_ReshowBirchLotad(u8);
 static void Task_NewGameBirchSpeech_WaitForSpriteFadeInAndTextPrinter(u8);
 static void Task_NewGameBirchSpeech_AreYouReady(u8);
+static void Task_NewGameBirchSpeech_PrintMessagePart(u8); // ADDED
 static void Task_NewGameBirchSpeech_ShrinkPlayer(u8);
 static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *);
 static void Task_NewGameBirchSpeech_WaitForPlayerShrink(u8);
@@ -263,6 +264,9 @@ static const u32 sBirchSpeechShadowGfx[] = INCBIN_U32("graphics/birch_speech/sha
 static const u32 sBirchSpeechBgMap[] = INCBIN_U32("graphics/birch_speech/map.bin.lz");
 static const u16 sBirchSpeechBgGradientPal[] = INCBIN_U16("graphics/birch_speech/bg2.gbapal");
 static const u16 sBirchSpeechPlatformBlackPal[] = {RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK, RGB_BLACK};
+
+// ADDED
+#define tMessagePart data[10]
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
@@ -1753,11 +1757,43 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         gTasks[taskId].tPlayerSpriteId = spriteId;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
-        StringExpandPlaceholders(gStringVar4, gText_Birch_AreYouReady);
-        AddTextPrinterForMessage(TRUE);
-        gTasks[taskId].func = Task_NewGameBirchSpeech_ShrinkPlayer;
+
+        
+        // StringExpandPlaceholders(gStringVar4, gText_Birch_ImportantInfo);
+        // AddTextPrinterForMessage(TRUE);
+        // gTasks[taskId].func = Task_NewGameBirchSpeech_ShrinkPlayer;
+
+        // important info message
+        gTasks[taskId].tMessagePart = 0; // initialize part counter
+        gTasks[taskId].func = Task_NewGameBirchSpeech_PrintMessagePart;
     }
 }
+
+
+// ADDED
+static void Task_NewGameBirchSpeech_PrintMessagePart(u8 taskId)
+{
+    if (!RunTextPrintersAndIsPrinter0Active())
+    {
+        switch (gTasks[taskId].tMessagePart)
+        {
+        case 0:
+            StringExpandPlaceholders(gStringVar4, gText_Birch_ImportantInfo_part1);
+            AddTextPrinterForMessage(TRUE);
+            gTasks[taskId].tMessagePart++;
+            break;
+        case 1:
+            StringExpandPlaceholders(gStringVar4, gText_Birch_ImportantInfo_part2);
+            AddTextPrinterForMessage(TRUE);
+            gTasks[taskId].tMessagePart++;
+            break;
+        default:
+            gTasks[taskId].func = Task_NewGameBirchSpeech_ShrinkPlayer;
+            break;
+        }
+    }
+}
+
 
 static void Task_NewGameBirchSpeech_ShrinkPlayer(u8 taskId)
 {
