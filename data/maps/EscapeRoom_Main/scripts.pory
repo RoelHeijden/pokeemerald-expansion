@@ -116,7 +116,7 @@ script EscapeRoom_MapScript_OnResumeScripts{
         call(EscapeRoom_MapScripts_CheckIfMentalHerbSackUsed)
     }
 
-    // check if Rayquaza's Comet Shard is succesfully stolen
+    // check if Rayquaza's item is succesfully stolen
     if(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
         call(EscapeRoom_MapScripts_CheckSpaceItemStolen)
     }
@@ -332,9 +332,7 @@ script EscapeRoom_MapScripts_AskResetPredamage{
         msgbox(AskResetPredamageAndWarpMessage, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
             // reset pre-damage
-            restoreplayerparty
-            msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
-            waitmessage
+            call(EscapeRoom_MapScripts_ResetPredamage)
 
             // warp to previous 
             call(EscapeRoom_EventScript_WarpToPreviousLocation)
@@ -349,8 +347,7 @@ script EscapeRoom_MapScripts_AskResetPredamage{
         msgbox(AskResetPredamageMessage, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
             // reset pre-damage
-            restoreplayerparty
-            msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
+            call(EscapeRoom_MapScripts_ResetPredamage)
 
             // prevent zera fight item dupes via backup + lostItems
             if(flag(FLAG_ZERA_FIGHT_BACKUP_CHECK) == TRUE){
@@ -361,6 +358,36 @@ script EscapeRoom_MapScripts_AskResetPredamage{
     }
     releaseall
 }
+
+script EscapeRoom_MapScripts_ResetPredamage{
+    clearflag(FLAG_TEMP_1)
+    clearflag(FLAG_TEMP_2)
+
+    // check if pokemon carries Moon Stone (just stolen) 
+    checkpartyitem(0)
+    if(var(VAR_RESULT) && var(VAR_0x8005) == ITEM_MOON_STONE){
+        setflag(FLAG_TEMP_1)
+    }
+    checkpartyitem(1)
+    if(var(VAR_RESULT) && var(VAR_0x8005) == ITEM_MOON_STONE){
+        setflag(FLAG_TEMP_2)
+    }
+
+    // restore pokemon state
+    restoreplayerparty
+    msgbox(PreDamagedStateRestoredMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // return moon stone item
+    if(flag(FLAG_TEMP_1)){
+        givepartyitem(ITEM_MOON_STONE, 0) // slot 0
+    }
+    elif(flag(FLAG_TEMP_2)){
+        givepartyitem(ITEM_MOON_STONE, 1) // slot 1
+    }
+
+}
+
 
 script EscapeRoom_MapScripts_AskWarpBack{
     lockall
@@ -380,8 +407,6 @@ script EscapeRoom_MapScripts_AskWarpBack{
     }
     releaseall
 }
-
-
 
 script EscapeRoom_MapScripts_RemoveDuplicateCustap{
     // check if pokemon 1 carries custap
@@ -520,8 +545,8 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_ETHER)
 
     // REMOVE
-    // additem(ITEM_HM01)
-    // additem(ITEM_SAFETY_GOGGLES)
+    additem(ITEM_HM01)
+    additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_MOON_STONE)
     // additem(ITEM_TM46)
     // additem(ITEM_TM48)
