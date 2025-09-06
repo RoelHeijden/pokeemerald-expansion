@@ -5361,23 +5361,35 @@ static void TryUseItemOnMove(u8 taskId)
             gBattleStruct->itemMoveIndex[gBattlerInMenuId] = ptr->data1;
             gPartyMenuUseExitCallback = TRUE;
             RemoveBagItem(gSpecialVar_ItemId, 1);
+            ScheduleBgCopyTilemapToVram(2);
+            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
 
             // ADDED
             // Ether return flag -- in battle
-            if(gSpecialVar_ItemId == ITEM_ETHER)
+            if(gSpecialVar_ItemId == ITEM_ETHER){
                 FlagSet(FLAG_RETURN_ETHER);
 
+                u8 moveSlot = gBattleStruct->itemMoveIndex[gBattlerInMenuId];
+                u16 move = GetMonData(mon, MON_DATA_MOVE1 + moveSlot);
+                u16 curPp = GetMonData(mon, MON_DATA_PP1 + moveSlot, NULL);
 
-            ScheduleBgCopyTilemapToVram(2);
-            gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+                // set camouflag
+                if(move == MOVE_CAMOUFLAGE && curPp == 0)
+                    FlagSet(FLAG_CAMOUFLAGE_ETHER_USED);
+            }
         }
     }
     // Outside of battle, only PP items are used on moves.
     else
     {
-        u16 move = MOVE_NONE;
+        // u16 move = MOVE_NONE;
         s16 *moveSlot = &gPartyMenu.data1;
         u16 item = gSpecialVar_ItemId;
+
+        // ADDED
+        // record PP before item effect applied
+        u16 move = GetMonData(mon, MON_DATA_MOVE1 + *moveSlot);
+        u16 curPp = GetMonData(mon, MON_DATA_PP1 + *moveSlot, NULL);
 
         if (ExecuteTableBasedItemEffect(mon, item, ptr->slotId, *moveSlot))
         {
@@ -5389,12 +5401,6 @@ static void TryUseItemOnMove(u8 taskId)
         }
         else
         {
-            // ADDED
-            // Leppa berry return flag -- out of battle
-            if(item == ITEM_ETHER)
-                FlagSet(FLAG_RETURN_ETHER);
-        
-
             gPartyMenuUseExitCallback = TRUE;
             PlaySE(SE_USE_ITEM);
             RemoveBagItem(item, 1);
@@ -5404,6 +5410,16 @@ static void TryUseItemOnMove(u8 taskId)
             DisplayPartyMenuMessage(gStringVar4, TRUE);
             ScheduleBgCopyTilemapToVram(2);
             gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+
+            // ADDED
+            // Leppa berry return flag -- out of battle
+            if(item == ITEM_ETHER){
+                FlagSet(FLAG_RETURN_ETHER);
+
+                // set camouflag
+                if(move == MOVE_CAMOUFLAGE && curPp == 0)
+                    FlagSet(FLAG_CAMOUFLAGE_ETHER_USED);
+            }
         }
     }
 }

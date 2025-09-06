@@ -1948,11 +1948,14 @@ bool8 SrcCmd_addmonmove(struct ScriptContext *ctx)
 }
 
 // ADDED
-bool8 ScrCmd_checkmonmove0pp(struct ScriptContext *ctx)
+bool8 ScrCmd_removemovepp(struct ScriptContext *ctx)
 {
     u16 species = ScriptReadHalfword(ctx);
     u16 moveId = ScriptReadHalfword(ctx);
+    u16 amount = ScriptReadHalfword(ctx);
     struct Pokemon *mon;
+
+    gSpecialVar_Result = FALSE;
 
     for (u8 i = 0; i < PARTY_SIZE; i++)
     {
@@ -1962,24 +1965,26 @@ bool8 ScrCmd_checkmonmove0pp(struct ScriptContext *ctx)
             for (u8 j = 0; j < MAX_MON_MOVES; j++)
             {
                 u16 move = GetMonData(mon, MON_DATA_MOVE1 + j);
-                u8 pp = GetMonData(mon, MON_DATA_PP1 + j);
-
                 if (move == moveId)
                 {
-                    gSpecialVar_Result = (pp == 0);
+                    u8 pp = GetMonData(mon, MON_DATA_PP1 + j, NULL);
+                    if (pp <= amount)
+                        pp = 0;
+                    else
+                        pp -= amount;
+
+                    SetMonData(mon, MON_DATA_PP1 + j, &pp);
+
+                    gSpecialVar_Result = TRUE; 
                     return FALSE;
                 }
             }
-            // move not found on this mon
-            gSpecialVar_Result = FALSE;
             return FALSE;
         }
     }
-
-    // species not found in party
-    gSpecialVar_Result = FALSE;
     return FALSE;
 }
+
 
 // ADDED
 bool8 ScrCmd_backupplayerparty(struct ScriptContext *ctx)

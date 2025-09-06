@@ -520,7 +520,7 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_ETHER)
 
     // REMOVE
-    additem(ITEM_HM01)
+    // additem(ITEM_HM01)
     // additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_MOON_STONE)
     // additem(ITEM_TM46)
@@ -796,7 +796,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     clearflag(FLAG_TEMP_1) // an item was returned and heal required
     clearflag(FLAG_TEMP_2) // an item was returned, no heal
     clearflag(FLAG_TEMP_3) // mental herb return while mental herb sack active
-
+    clearflag(FLAG_TEMP_4) // ether return pp messaging
 
     //// FIELD ITEMS ////
 
@@ -819,14 +819,15 @@ script EscapeRoom_EventScript_ReturnLostItems{
         giveitem(ITEM_ETHER)
         clearflag(FLAG_RETURN_ETHER)
 
-        // only heal if Camouflage has 1/1 pp
-        checkmonmove0pp(SPECIES_FLORGES, MOVE_CAMOUFLAGE)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_TEMP_2) // no heal if Camouflage has 0/1 pp
+        // if ether used on 0/1 camouflage
+        if(flag(FLAG_CAMOUFLAGE_ETHER_USED)){
+            clearflag(FLAG_CAMOUFLAGE_ETHER_USED)
+
+            // remove camouflage pp
+            removemovepp(SPECIES_FLORGES, MOVE_CAMOUFLAGE, 1)
         }
-        else{
-            setflag(FLAG_TEMP_1) // heal
-        }
+        setflag(FLAG_TEMP_4) // pp message
+        setflag(FLAG_TEMP_2) // no heal
     }
 
 
@@ -962,6 +963,13 @@ script EscapeRoom_EventScript_ReturnLostItems{
         }
         else{
             // only flag_temp_2 was true. Do nothing else
+        }
+
+        // pp removed message (ether return)
+        if(flag(FLAG_TEMP_4) == TRUE){
+            // message
+            msgbox(AntiSoftlockPpRemovedMessage, MSGBOX_DEFAULT)
+            waitmessage
         }
     }
     // no items to restore
@@ -4178,30 +4186,6 @@ text SignMessage1_part2{
     "9) There are no hidden items."
 }
 
-// text SignMessage1_short {
-//     "1) Game mechanics reflect GEN 9.\n"
-//     "2) Moves & learnsets are mostly vanilla.\p"
-
-//     "3) Battle RNG has been disabled.\n"
-//     "4) You won't get softlocked.\p"
-
-//     "5) There's no need for save states.\n"
-//     "6) Party's healed after trainer battles.\p"
-
-//     "7) Pokémon have custom IVs & EVs.\n"
-//     "8) No EXP gain from battling.\p"
-
-//     "9) There are no hidden items."
-// }
-
-// text SignOptionShortInfo{
-//     "Short"
-// }
-
-// text SignOptionDetailedInfo{
-//     "Detailed"
-// }
-
 
 text SignMessageReadInfoAgain{
     "Do you want to read the important\n"
@@ -4274,7 +4258,7 @@ text Goggles_Statue_Main{
     "ominous energy.\p"   
     "I should probably avoid touching this.\p"
     "Perhaps there's a Pokémon who can\n"
-    "snatch the goggles for me."
+    "SNATCH the goggles for me."
 }
 
 text Goggles_Statue_AskSnatch{
@@ -4282,7 +4266,7 @@ text Goggles_Statue_AskSnatch{
     "the gravestone, radiating a strange,\l"
     "ominous energy.\p"    
     "Do you want {STR_VAR_1} to try and\n"
-    "snatch the goggles for you?"
+    "SNATCH the goggles for you?"
 }
 
 text GogglesAlreadySnatchedMessage{
@@ -4484,6 +4468,10 @@ text AntiSoftlockSomeOfPartyHealed{
     "Some of your party Pokémon got healed."
 }
 
+text AntiSoftlockPpRemovedMessage{
+    "Your PP may have been lowered."
+}
+
 // undo item
 
 text AntiSoftlockNoItemToUndo{
@@ -4594,7 +4582,9 @@ text ZeraoraHintMessage1{
 
 text ZeraoraHintMessage2{
     "You know, Pokémon become much easier\n"
-    "to catch if their HP drops below 50%."
+    "to catch if their HP drops below 50%.\p"
+    "Let me know when you've caught a cool\n"
+    "Pokémon!"
 }
 
 text ZeraoraHintPostCatchMessage1{

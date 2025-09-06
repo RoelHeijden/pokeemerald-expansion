@@ -203,7 +203,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_restoremonmoveset					@ 0xc8
 	.4byte ScrCmd_isitemlost						@ 0xc9
 	.4byte ScrCmd_removelostitem                    @ 0xca
-	.4byte ScrCmd_checkmonmove0pp                   @ 0xcb
+	.4byte ScrCmd_removemovepp                      @ 0xcb
 	.4byte ScrCmd_restoremonfrompc                  @ 0xcc
 	.4byte ScrCmd_setmodernfatefulencounter         @ 0xcd
 	.4byte ScrCmd_checkmodernfatefulencounter       @ 0xce
