@@ -7537,7 +7537,8 @@ const struct Item gItemsInfo[] =
             "A stylish collar\n"
             "that helps form a\n"
             "bond with Liepard."),
-        .pocket = POCKET_ITEMS,
+        // .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
         .flingPower = 30,
@@ -8193,7 +8194,8 @@ const struct Item gItemsInfo[] =
     [ITEM_SNOWBALL] =
     {
         .name = _("Snowball"),
-        .price = (I_PRICE >= GEN_9) ? 5000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
+        // .price = (I_PRICE >= GEN_9) ? 5000 : ((I_PRICE >= GEN_7) ? 4000 : 200),
+        .price = 0,
         .holdEffect = HOLD_EFFECT_SNOWBALL,
         .holdEffectParam = 0,
         .description = COMPOUND_STRING(

@@ -16899,7 +16899,7 @@ Careful Nature
 
 
 === TRAINER_CUSTOM_TRAINER2 ===
-Name: 63 75 74
+Name: 74 75 63
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Male
@@ -16907,11 +16907,12 @@ Music: Intense
 Items: Max Elixir
 Double Battle: No
 
-Dracozolt @ Ability Shield  
-Ability: Volt Absorb  
-Level: 26  
-EVs: 252 HP / 252 SpA  
-Modest Nature  
+Dracozolt @ Ability Shield
+Level: 28
+Modest Nature
+Ability: Volt Absorb
+EVs: 252 HP / 136 SpA / 32 SpD
+IVs: 0 Atk
 - Flamethrower
 
 
@@ -16944,8 +16945,8 @@ IVs: 0 Spe
 
 === TRAINER_CUSTOM_TRAINER4 ===
 Name: Ace
-Class: Dome Ace
-Pic: Dome Ace Tucker
+Class: Triathlete
+Pic: Running Triathlete M
 Gender: Male
 Music: Intense
 Double Battle: No
