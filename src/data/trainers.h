@@ -42252,7 +42252,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER2] =
     {
 #line 16902
-        .trainerName = _("74 75 63"),
+        .trainerName = _("74-75-63"),
 #line 16903
         .trainerClass = TRAINER_CLASS_HEX_MANIAC,
 #line 16904

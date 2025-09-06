@@ -545,8 +545,8 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_ETHER)
 
     // REMOVE
-    additem(ITEM_HM01)
-    additem(ITEM_SAFETY_GOGGLES)
+    // additem(ITEM_HM01)
+    // additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_MOON_STONE)
     // additem(ITEM_TM46)
     // additem(ITEM_TM48)
@@ -1144,17 +1144,17 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
     // Thief
     elif(flag(FLAG_CAN_UNDO_THIEF)){
         setflag(FLAG_UNDOING_MOVE_THIEF)
-        call(EscapeRoom_EventScript_UndoMoveTeach)
+        call(EscapeRoom_EventScript_AskUndoMoveTeach)
         return
     }
     // Cut
     elif(flag(FLAG_CAN_UNDO_CUT)){
-        call(EscapeRoom_EventScript_UndoMoveTeach)
+        call(EscapeRoom_EventScript_AskUndoMoveTeach)
         return
     }
     // Skill Swap
     elif(flag(FLAG_CAN_UNDO_SKILL_SWAP)){
-        call(EscapeRoom_EventScript_UndoMoveTeach)
+        call(EscapeRoom_EventScript_AskUndoMoveTeach)
         return
     }
     // Rare Candy
@@ -1183,21 +1183,21 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
         if (flag(FLAG_CAN_UNDO_THIEF)) {
             if (var(VAR_RESULT) == 0) {
                 setflag(FLAG_UNDOING_MOVE_THIEF)
-                call(EscapeRoom_EventScript_UndoMoveTeach)
+                call(EscapeRoom_EventScript_AskUndoMoveTeach)
                 return
             }
             subvar(VAR_RESULT, 1)
         }
         if (flag(FLAG_CAN_UNDO_CUT)) {
             if (var(VAR_RESULT) == 0) {
-                call(EscapeRoom_EventScript_UndoMoveTeach)
+                call(EscapeRoom_EventScript_AskUndoMoveTeach)
                 return
             }
             subvar(VAR_RESULT, 1)
         }
         if (flag(FLAG_CAN_UNDO_SKILL_SWAP)) {
             if (var(VAR_RESULT) == 0) {
-                call(EscapeRoom_EventScript_UndoMoveTeach)
+                call(EscapeRoom_EventScript_AskUndoMoveTeach)
                 return
             }
             subvar(VAR_RESULT, 1)
@@ -1223,10 +1223,7 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
             setflag(FLAG_ANTI_SOFTLOCK_LOOP)
 }
 
-script EscapeRoom_EventScript_UndoMoveTeach{
-    // clear flag used to detect temp moves being restored
-    clearflag(FLAG_TEMP_3)
-
+script EscapeRoom_EventScript_AskUndoMoveTeach{
     // use other vars if restoring Thief
     if(flag(FLAG_UNDOING_MOVE_THIEF)){
         copyvar(VAR_0x8007, VAR_0x8005)
@@ -1240,167 +1237,173 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     // ask undo message 
     msgbox(AskUndoMoveTeachDynamic, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+    }
+}
 
-        // restore temporarily deleted moves
-        restoremonmoveset(VAR_0x8007)
-        if(var(VAR_RESULT) == TRUE){
-            setflag(FLAG_TEMP_3) // notify for later that temp deleted moves are restored
+script EscapeRoom_EventScript_UndoMoveTeach{
+    // clear flag used to detect temp moves being restored
+    clearflag(FLAG_TEMP_3)
 
-            // clear correct pokemon flag
-            if(var(VAR_0x8007) == SPECIES_LIEPARD){
-                clearflag(FLAG_LIEPARD_MOVE_DELETED)
-            }
-            if(var(VAR_0x8007) == SPECIES_AIPOM){
-                clearflag(FLAG_AIPOM_MOVE_DELETED)
-            }
-            if(var(VAR_0x8007) == SPECIES_DUNSPARCE){
-                clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
-            }
+    // restore temporarily deleted moves
+    restoremonmoveset(VAR_0x8007)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_TEMP_3) // notify for later that temp deleted moves are restored
+
+        // clear correct pokemon flag
+        if(var(VAR_0x8007) == SPECIES_LIEPARD){
+            clearflag(FLAG_LIEPARD_MOVE_DELETED)
         }
-
-        // check edge case: Thief overwritten by Cut
-        if(flag(FLAG_UNDOING_MOVE_THIEF)){
-            call(EscapeRoom_EventScript_UndoMoveTeach_CutThiefEdgeCase)
+        if(var(VAR_0x8007) == SPECIES_AIPOM){
+            clearflag(FLAG_AIPOM_MOVE_DELETED)
         }
-
-        // set VAR_0x8004 to the right move to replace
-        istaughtmovepresent(VAR_0x8007, VAR_0x8008)
-
-        // reset moves
-        replacemove2(VAR_0x8007, VAR_0x8008, VAR_0x8004)
-        removetaughtmove(VAR_0x8007, VAR_0x8008)
-
-        // set species to another variable
-        // this fixed the message buffer bug
-        copyvar(VAR_0x8005, VAR_0x8007)
-
-        // return item
-        if(var(VAR_0x8008) == MOVE_THIEF){
-            giveitem(ITEM_TM46)
+        if(var(VAR_0x8007) == SPECIES_DUNSPARCE){
+            clearflag(FLAG_DUNSPARCE_MOVE_DELETED)
         }
-        elif(var(VAR_0x8008) == MOVE_SKILL_SWAP){
-            giveitem(ITEM_TM48)
-        }
+    }
 
-        // buffer nickname for message
-        checkpartymon(VAR_0x8005) 
-        copyvar(VAR_0x8004, VAR_RESULT) // set monslot in VAR_0x8004
-        special(BufferMonNickname)      // buffer nickname (VAR_0x8004) to STR_VAR_1
+    // check edge case: Thief overwritten by Cut
+    if(flag(FLAG_UNDOING_MOVE_THIEF)){
+        call(EscapeRoom_EventScript_UndoMoveTeach_CutThiefEdgeCase)
+    }
 
-        // message if temp deleted moves were restored
-        if(flag(FLAG_TEMP_3)){
-            call(EscapeRoom_MoveRestoredSound)
-            msgbox(MovesRestoredMessage, MSGBOX_DEFAULT)
-            waitmessage
-        }
+    // set VAR_0x8004 to the right move to replace
+    istaughtmovepresent(VAR_0x8007, VAR_0x8008)
 
-        // move teach undone message
-        buffermovename(STR_VAR_2, VAR_0x8008)
-        msgbox(MoveTeachUndoneMessage, MSGBOX_DEFAULT)
+    // reset moves
+    replacemove2(VAR_0x8007, VAR_0x8008, VAR_0x8004)
+    removetaughtmove(VAR_0x8007, VAR_0x8008)
+
+    // set species to another variable
+    // this fixed the message buffer bug
+    copyvar(VAR_0x8005, VAR_0x8007)
+
+    // return item
+    if(var(VAR_0x8008) == MOVE_THIEF){
+        giveitem(ITEM_TM46)
+    }
+    elif(var(VAR_0x8008) == MOVE_SKILL_SWAP){
+        giveitem(ITEM_TM48)
+    }
+
+    // buffer nickname for message
+    checkpartymon(VAR_0x8005) 
+    copyvar(VAR_0x8004, VAR_RESULT) // set monslot in VAR_0x8004
+    special(BufferMonNickname)      // buffer nickname (VAR_0x8004) to STR_VAR_1
+
+    // message if temp deleted moves were restored
+    if(flag(FLAG_TEMP_3)){
+        call(EscapeRoom_MoveRestoredSound)
+        msgbox(MovesRestoredMessage, MSGBOX_DEFAULT)
         waitmessage
+    }
+
+    // move teach undone message
+    buffermovename(STR_VAR_2, VAR_0x8008)
+    msgbox(MoveTeachUndoneMessage, MSGBOX_DEFAULT)
+    waitmessage
 
 
-        // Change heals?
-        // - should Cut heal when undone?
-        //     - if regaining PP after struggle
-        // - should Thief always heal when undone?
-        //     - if Assist pp not 10/10
-        //     - if poisoned
-        //     - if regaining PP after struggle
+    // Change heals?
+    // - should Cut heal when undone?
+    //     - if regaining PP after struggle
+    // - should Thief always heal when undone?
+    //     - if Assist pp not 10/10
+    //     - if poisoned
+    //     - if regaining PP after struggle
 
-        // heal if Thief (trainer4 pp, ape sequence Struggle PP regain, Secret Power Poison)
-        // added Cut just in case of Liepard PP recovery lines (Ape sequence)
-        if(var(VAR_0x8008) == MOVE_THIEF || var(VAR_0x8008) == MOVE_CUT){
-            // Ape sequence: heal aipom
-            if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
-                healpartymon(SPECIES_AIPOM)
-                playse(SE_USE_ITEM)
-                waitse
-
-                // message
-                msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
-                waitmessage
-            }
-            // normal heal
-            else{
-                call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
-            }
-            
-        }
-
-
-        // check snowball item return
-        if(var(VAR_0x8008) == MOVE_THIEF){
-            clearflag(FLAG_TEMP_3)
-            checkpartyitem(0)
-            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_SNOWBALL){
-                setflag(FLAG_TEMP_3)
-                removepartyitem(0)
-            }
-            checkpartyitem(1)
-            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_SNOWBALL){
-                setflag(FLAG_TEMP_3)
-                removepartyitem(1)
-            }
-
-            // remove ALL snowballs
-            CheckRemoveSnowball:
-                checkitem(ITEM_SNOWBALL)
-                if(var(VAR_RESULT) == TRUE){
-                    setflag(FLAG_TEMP_3)
-                    removeitem(ITEM_SNOWBALL, 1)
-                    goto(CheckRemoveSnowball)
-                }
+    // heal if Thief (trainer4 pp, ape sequence Struggle PP regain, Secret Power Poison)
+    // added Cut just in case of Liepard PP recovery lines (Ape sequence)
+    if(var(VAR_0x8008) == MOVE_THIEF || var(VAR_0x8008) == MOVE_CUT){
+        // Ape sequence: heal aipom
+        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
+            healpartymon(SPECIES_AIPOM)
+            playse(SE_USE_ITEM)
+            waitse
 
             // message
-            if(flag(FLAG_TEMP_3)){
-                msgbox(ItemUndoSnowballsRemoved, MSGBOX_DEFAULT)
-                waitmessage
-            }
-        }
-
-        // check Toxic Orb item return
-        // note: use in combination with heal
-        if(var(VAR_0x8008) == MOVE_THIEF){
-            clearflag(FLAG_TEMP_3)
-            checkpartyitem(0)
-            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
-                setflag(FLAG_TEMP_3)
-                removepartyitem(0)
-            }
-            checkpartyitem(1)
-            if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
-                setflag(FLAG_TEMP_3)
-                removepartyitem(1)
-            }
-
-            // remove ALL Toxic Orbs
-            CheckRemoveToxicOrb:
-                checkitem(ITEM_TOXIC_ORB)
-                if(var(VAR_RESULT) == TRUE){
-                    setflag(FLAG_TEMP_3)
-                    removeitem(ITEM_TOXIC_ORB, 1)
-                    goto(CheckRemoveToxicOrb)
-                }
-
-            // message
-            if(flag(FLAG_TEMP_3)){
-                msgbox(ItemUndoToxicOrbsRemoved, MSGBOX_DEFAULT)
-                waitmessage
-
-                // clear toxic orb obtained
-                clearflag(FLAG_TOXIC_ORB_OBTAINED)
-            }
-        }
-
-        // check Cut tree reset
-        if(var(VAR_0x8008) == MOVE_CUT && var(VAR_0x8005) == SPECIES_FERROTHORN && flag(FLAG_ESCAPEROOM_TREE_CUT)){
-            addobject(LOCALID_CUT_TREE)
-            clearflag(FLAG_ESCAPEROOM_TREE_CUT)
-
-            msgbox(ItemUndoTreeGrewBack, MSGBOX_DEFAULT)
+            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
             waitmessage
         }
+        // normal heal
+        else{
+            call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+        }
+        
+    }
+
+
+    // check snowball item return
+    if(var(VAR_0x8008) == MOVE_THIEF){
+        clearflag(FLAG_TEMP_3)
+        checkpartyitem(0)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_SNOWBALL){
+            setflag(FLAG_TEMP_3)
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_SNOWBALL){
+            setflag(FLAG_TEMP_3)
+            removepartyitem(1)
+        }
+
+        // remove ALL snowballs
+        CheckRemoveSnowball:
+            checkitem(ITEM_SNOWBALL)
+            if(var(VAR_RESULT) == TRUE){
+                setflag(FLAG_TEMP_3)
+                removeitem(ITEM_SNOWBALL, 1)
+                goto(CheckRemoveSnowball)
+            }
+
+        // message
+        if(flag(FLAG_TEMP_3)){
+            msgbox(ItemUndoSnowballsRemoved, MSGBOX_DEFAULT)
+            waitmessage
+        }
+    }
+
+    // check Toxic Orb item return
+    // note: use in combination with heal
+    if(var(VAR_0x8008) == MOVE_THIEF){
+        clearflag(FLAG_TEMP_3)
+        checkpartyitem(0)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
+            setflag(FLAG_TEMP_3)
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TOXIC_ORB){
+            setflag(FLAG_TEMP_3)
+            removepartyitem(1)
+        }
+
+        // remove ALL Toxic Orbs
+        CheckRemoveToxicOrb:
+            checkitem(ITEM_TOXIC_ORB)
+            if(var(VAR_RESULT) == TRUE){
+                setflag(FLAG_TEMP_3)
+                removeitem(ITEM_TOXIC_ORB, 1)
+                goto(CheckRemoveToxicOrb)
+            }
+
+        // message
+        if(flag(FLAG_TEMP_3)){
+            msgbox(ItemUndoToxicOrbsRemoved, MSGBOX_DEFAULT)
+            waitmessage
+
+            // clear toxic orb obtained
+            clearflag(FLAG_TOXIC_ORB_OBTAINED)
+        }
+    }
+
+    // check Cut tree reset
+    if(var(VAR_0x8008) == MOVE_CUT && var(VAR_0x8005) == SPECIES_FERROTHORN && flag(FLAG_ESCAPEROOM_TREE_CUT)){
+        addobject(LOCALID_CUT_TREE)
+        clearflag(FLAG_ESCAPEROOM_TREE_CUT)
+
+        msgbox(ItemUndoTreeGrewBack, MSGBOX_DEFAULT)
+        waitmessage
     }
 }
 
@@ -1690,6 +1693,15 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
 }
 
 script EscapeRoom_EventScript_UndoFerroTrade{
+    // undo move teach if Dunsparce still knows Thief
+    istaughtmovepresent(SPECIES_DUNSPARCE, MOVE_THIEF)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_DUNSPARCE)
+        setvar(VAR_0x8008, MOVE_THIEF)
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+    }
+
+    // trade mons
     removemon(SPECIES_DUNSPARCE)
     restoremonfrompc(SPECIES_FERROTHORN)
 
@@ -1703,6 +1715,15 @@ script EscapeRoom_EventScript_UndoFerroTrade{
 }
 
 script EscapeRoom_EventScript_UndoFlorgesTrade{
+    // undo move teach if Aipom still knows Thief
+    istaughtmovepresent(SPECIES_AIPOM, MOVE_THIEF)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_AIPOM)
+        setvar(VAR_0x8008, MOVE_THIEF)
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+    }
+
+    // trade mons
     removemon(SPECIES_AIPOM)
     removemon(SPECIES_EGG)
     restoremonfrompc(SPECIES_FLORGES)
