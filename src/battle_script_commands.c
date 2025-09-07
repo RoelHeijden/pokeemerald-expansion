@@ -14899,7 +14899,26 @@ static void Cmd_assistattackselect(void)
         gHitMarker &= ~HITMARKER_ATTACKSTRING_PRINTED;
 
 
-        // case 1: Taunt + Fling vs Dusknoir
+
+        // case 0: Taunt vs Dusknoir
+        // reroll once if Taunt not selected on turn 1
+        if (gBattleResults.battleTurnCounter == 0 // turn is zero indexed
+            && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species == SPECIES_DUSKNOIR)
+        {
+            u16 chosenMove = validMoves[Random() % chooseableMovesNo];
+            if (chosenMove != MOVE_TAUNT)
+            {
+                // second roll
+                chosenMove = validMoves[Random() % chooseableMovesNo];
+            }
+            gCalledMove = chosenMove;
+            gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
+            gBattlescriptCurrInstr = cmd->nextInstr;
+            TRY_FREE_AND_SET_NULL(validMoves);
+            return;
+        }
+
+        // case 1: Fling vs Dusknoir
         // choose Fling if: 
         // - 2 available Assist moves (Taunt, Fling).
         // - Turn 2.
@@ -14921,8 +14940,7 @@ static void Cmd_assistattackselect(void)
 
             if (hasFling && hasTaunt)
             {
-                u16 chosenMove = MOVE_FLING;
-                gCalledMove = chosenMove;
+                gCalledMove = MOVE_FLING;
                 gBattlerTarget = GetMoveTarget(gCalledMove, NO_TARGET_OVERRIDE);
                 gBattlescriptCurrInstr = cmd->nextInstr;
                 TRY_FREE_AND_SET_NULL(validMoves);
