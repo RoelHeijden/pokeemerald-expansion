@@ -244,6 +244,7 @@ void HandleAction_UseMove(void)
         {
             if (   //  side != GetBattlerSide(battler) &&     // REMOVED -- now it also checks for partners Lightingrod
                 *(gBattleStruct->moveTarget + gBattlerAttacker) != battler
+                && gBattleMons[battler].hp != 0   // ADDED FIX: ignore fainted mons
                 && ((GetBattlerAbility(battler) == ABILITY_LIGHTNING_ROD && moveType == TYPE_ELECTRIC)
                  || (GetBattlerAbility(battler) == ABILITY_STORM_DRAIN && moveType == TYPE_WATER))
                 && GetBattlerTurnOrderNum(battler) < var
