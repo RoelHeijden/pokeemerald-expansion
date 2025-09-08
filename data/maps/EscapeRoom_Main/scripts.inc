@@ -6202,40 +6202,8 @@ EscapeRoom_EventScript_SnatchSafetyGoggles::
 	delay 40
 # 4176 "data/maps/EscapeRoom_Main/scripts.pory"
 	finditem ITEM_SAFETY_GOGGLES
-# 4179 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_PIN
-# 4180 "data/maps/EscapeRoom_Main/scripts.pory"
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-# 4181 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmovement OBJ_EVENT_ID_PLAYER
-# 4182 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 50
-# 4183 "data/maps/EscapeRoom_Main/scripts.pory"
-	playse SE_M_SWEET_SCENT
-# 4184 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
-# 4185 "data/maps/EscapeRoom_Main/scripts.pory"
-	delay 10
-# 4186 "data/maps/EscapeRoom_Main/scripts.pory"
-	special DoSealedChamberShakingEffect_Short
-# 4187 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitse
-# 4188 "data/maps/EscapeRoom_Main/scripts.pory"
-	msgbox GogglesCurseHappens, MSGBOX_AUTOCLOSE
-# 4189 "data/maps/EscapeRoom_Main/scripts.pory"
-	waitmessage
 # 4190 "data/maps/EscapeRoom_Main/scripts.pory"
 	fadeinbgm 0
-# 4193 "data/maps/EscapeRoom_Main/scripts.pory"
-	checkpartymon SPECIES_ZERAORA
-# 4194 "data/maps/EscapeRoom_Main/scripts.pory"
-	copyvar VAR_0x8001, VAR_RESULT
-# 4195 "data/maps/EscapeRoom_Main/scripts.pory"
-	setvar VAR_0x8002, MOVE_SNATCH
-# 4196 "data/maps/EscapeRoom_Main/scripts.pory"
-	setvar VAR_0x8003, MOVE_NONE
-# 4197 "data/maps/EscapeRoom_Main/scripts.pory"
-	replacemove VAR_0x8001, VAR_0x8002, VAR_0x8003
 	return
 
 

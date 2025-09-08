@@ -4136,18 +4136,21 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
             msgbox(Goggles_Statue_AskSnatch, MSGBOX_YESNO)
             if(var(VAR_RESULT) == YES){
 
-                // only allow Goggles Snatch if Zera is lvl 43
-                checkpartymonlevel(43)
-                if(var(VAR_RESULT) != PARTY_SIZE){
-                    setflag(FLAG_GOGGLES_SNATCHED)
-                    call(EscapeRoom_EventScript_SnatchSafetyGoggles)
-                }
-                else{
-                    closemessage
-                    delay(40)
-                    msgbox(Goggles_Statue_ZeraNotReady, MSGBOX_DEFAULT)
-                    waitmessage
-                }
+                // temp
+                setflag(FLAG_GOGGLES_SNATCHED)
+                call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+                // // only allow Goggles Snatch if Zera is lvl 43
+                // checkpartymonlevel(43)
+                // if(var(VAR_RESULT) != PARTY_SIZE){
+                //     setflag(FLAG_GOGGLES_SNATCHED)
+                //     call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+                // }
+                // else{
+                //     closemessage
+                //     delay(40)
+                //     msgbox(Goggles_Statue_ZeraNotReady, MSGBOX_DEFAULT)
+                //     waitmessage
+                // }
             }
         }
         // regular message
@@ -4175,26 +4178,26 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
     delay(40)
     finditem(ITEM_SAFETY_GOGGLES)
     
-    // curse happens
-    playse(SE_PIN)
-    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
-    delay(50)
-    playse(SE_M_SWEET_SCENT)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
-    special(DoSealedChamberShakingEffect_Short)
-    delay(10)
-    special(DoSealedChamberShakingEffect_Short)
-    waitse
-    msgbox(GogglesCurseHappens, MSGBOX_AUTOCLOSE)    
-    waitmessage
+    // // curse happens
+    // playse(SE_PIN)
+    // applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+    // waitmovement(OBJ_EVENT_ID_PLAYER)
+    // delay(50)
+    // playse(SE_M_SWEET_SCENT)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
+    // special(DoSealedChamberShakingEffect_Short)
+    // delay(10)
+    // special(DoSealedChamberShakingEffect_Short)
+    // waitse
+    // msgbox(GogglesCurseHappens, MSGBOX_AUTOCLOSE)    
+    // waitmessage
     fadeinbgm(0)
 
-    // replace Snatch with Curse   
-    checkpartymon(SPECIES_ZERAORA)
-    copyvar(VAR_0x8001, VAR_RESULT)
-    setvar(VAR_0x8002, MOVE_SNATCH)
-    setvar(VAR_0x8003, MOVE_NONE)
-    replacemove(VAR_0x8001, VAR_0x8002, VAR_0x8003) 
+    // // replace Snatch with Curse   
+    // checkpartymon(SPECIES_ZERAORA)
+    // copyvar(VAR_0x8001, VAR_RESULT)
+    // setvar(VAR_0x8002, MOVE_SNATCH)
+    // setvar(VAR_0x8003, MOVE_NONE)
+    // replacemove(VAR_0x8001, VAR_0x8002, VAR_0x8003) 
 }
 
 
