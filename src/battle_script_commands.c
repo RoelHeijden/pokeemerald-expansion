@@ -15666,7 +15666,8 @@ static void Cmd_handleballthrow(void)
 
 
         // ADDED 
-        if (odds >= 56)  // catching threshold
+        // DebugPrintf("Catch odds: %d", odds); // catch odds
+        if (odds >= 59)  // catching threshold
             odds = 255;
         else
             odds = 1;

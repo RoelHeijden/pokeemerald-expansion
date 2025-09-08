@@ -16883,13 +16883,13 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 
-Togedemaru (F) @ Rocky Helmet  
+Marowak-Alola @ Rocky Helmet  
 Ability: Lightning Rod  
-Level: 59  
-EVs: 196 HP / 4 Atk / 120 Def / 188 SpD  
-Careful Nature  
+Level: 45  
+EVs: 252 HP / 48 Def / 20 SpA / 188 SpD  
+Impish Nature  
 IVs: 0 SpA  
-- Swift
+- Incinerate
 
 Toedscruel (M) @ Flame Orb  
 Ability: Mycelium Might  
@@ -16899,7 +16899,7 @@ Careful Nature
 
 
 === TRAINER_CUSTOM_TRAINER2 ===
-Name: 74-75-63
+Name: 637574
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Male
@@ -17032,7 +17032,7 @@ Bold Nature
 
 
 === TRAINER_CUSTOM_TRAINER8 ===
-Name: Barrel
+Name: Houdini
 Class: Psychic
 Pic: Psychic M
 Gender: Male

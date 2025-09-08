@@ -42202,25 +42202,24 @@ F_TRAINER_FEMALE |
         {
             {
 #line 16886
-            .species = SPECIES_TOGEDEMARU,
-#line 16886
-            .gender = TRAINER_MON_FEMALE,
+            .species = SPECIES_MAROWAK_ALOLA,
+            .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16886
             .heldItem = ITEM_ROCKY_HELMET,
 #line 16889
-            .ev = TRAINER_PARTY_EVS(196, 4, 120, 0, 0, 188),
+            .ev = TRAINER_PARTY_EVS(252, 0, 48, 0, 20, 188),
 #line 16891
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 0, 31),
 #line 16887
             .ability = ABILITY_LIGHTNING_ROD,
 #line 16888
-            .lvl = 59,
+            .lvl = 45,
 #line 16890
-            .nature = NATURE_CAREFUL,
+            .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 16892
-                MOVE_SWIFT,
+                MOVE_INCINERATE,
             },
             },
             {
@@ -42252,7 +42251,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER2] =
     {
 #line 16902
-        .trainerName = _("74-75-63"),
+        .trainerName = _("637574"),
 #line 16903
         .trainerClass = TRAINER_CLASS_HEX_MANIAC,
 #line 16904
@@ -42579,7 +42578,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER8] =
     {
 #line 17035
-        .trainerName = _("Barrel"),
+        .trainerName = _("Houdini"),
 #line 17036
         .trainerClass = TRAINER_CLASS_PSYCHIC,
 #line 17037

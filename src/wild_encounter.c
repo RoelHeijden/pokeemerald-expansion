@@ -528,14 +528,20 @@ static void CreateWildMon(u16 species, u8 level)
                 nature = NATURE_MODEST;
                 move1 = MOVE_SNATCH;
 
-                spDefEv = 36;
-
-                hpIv=0;
+                hpIv=6;
                 atkIv=0;
                 defIv=0;
                 speedIv=0;
-                spAtkIv=31;
-                spDefIv=31;
+                spAtkIv=0;
+                spDefIv=0;
+                // spDefEv = 36;
+
+                // hpIv=0;
+                // atkIv=0;
+                // defIv=0;
+                // speedIv=0;
+                // spAtkIv=31;
+                // spDefIv=31;
 
                 // set flag for pre-damage reset, even on wins against Zera
                 FlagSet(FLAG_JUST_HAD_ZERA_BATTLE);

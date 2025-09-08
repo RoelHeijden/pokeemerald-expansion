@@ -318,8 +318,7 @@ const u8 gBerryFirmnessString_VeryHard[] = _("Very hard");
 const u8 gBerryFirmnessString_SuperHard[] = _("Super hard");
 
 const u8 gText_NumberVar1Var2[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
-// const u8 gText_BerryTag[] = _("BERRY TAG");
-const u8 gText_BerryTag[] = _("CUT GRASS"); // CHANGED
+const u8 gText_BerryTag[] = _("BERRY TAG");
 const u8 gText_RedPokeblock[] = _("RED {POKEBLOCK}");
 const u8 gText_BluePokeblock[] = _("BLUE {POKEBLOCK}");
 const u8 gText_PinkPokeblock[] = _("PINK {POKEBLOCK}");

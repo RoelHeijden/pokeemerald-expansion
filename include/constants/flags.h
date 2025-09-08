@@ -85,7 +85,7 @@
 #define FLAG_TRAINER5_DEFEATED               0x47  
 #define FLAG_TRAINER6_DEFEATED               0x48
 #define FLAG_TRAINER9_DEFEATED               0x49
-#define FLAG_WHITE_HERB_OBTAINED             0x4A  
+#define FLAG_EXP_CANDY_OBTAINED              0x4A  
 #define FLAG_HIDE_ROCKSMASH_NPC              0x4B  
 #define FLAG_SHUCKLE_SMASH_ROCK1             0x4C 
 #define FLAG_SHUCKLE_SMASH_ROCK2             0x4D  
@@ -1224,7 +1224,7 @@
 #define FLAG_HIDE_SMASH_ROCK2                                       0x495 // one-way rock
 #define FLAG_ROCK_SMASH_GUY_MOVED                                   0x496
 #define FLAG_END_ESCAPE_ROOM                                        0x497
-#define FLAG_WHITE_HERB_USED                                        0x498  
+#define FLAG_ELECTRIC_SEED_USED                                     0x498  
 #define FLAG_TOXIC_ORB_OBTAINED                                     0x499 // Unused
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused

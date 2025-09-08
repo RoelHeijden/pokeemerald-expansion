@@ -6255,10 +6255,15 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 2,
         .weight = 21,
         .description = COMPOUND_STRING(
-            "The flowers all over its body bloom if it is\n"
-            "lovingly hugged and senses gratitude. It\n"
-            "dissolves toxins in the air to transform\n"
-            "ruined land into a lush field of flowers."),
+            "(This is a bug.)\n"
+            "This Pokedex entry has a habit of randomly\n"
+            "showing up for some reason. Just ignore it.\n"
+            "(Use code Ketch25 for 25% off NordVPN.)"),
+        // .description = COMPOUND_STRING(
+        //     "The flowers all over its body bloom if it is\n"
+        //     "lovingly hugged and senses gratitude. It\n"
+        //     "dissolves toxins in the air to transform\n"
+        //     "ruined land into a lush field of flowers."),
         .pokemonScale = 682,
         .pokemonOffset = 24,
         .trainerScale = 256,

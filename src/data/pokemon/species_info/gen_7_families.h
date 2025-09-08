@@ -6855,7 +6855,9 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "It approaches its enemies at the speed\n"
             "of lightning, then tears them limb from\n"
             "limb with its sharp claws."
-            " Can be healed\nwith nature power and plasma fists."),  // ADDED
+            " Can be healed\nwith nature power."),  // ADDED
+            // " Zeraora can be\n healed with nature power."),  // ADDED
+
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
