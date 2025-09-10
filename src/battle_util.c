@@ -11399,7 +11399,8 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
 // ADDED
 void TryRestoreHeldItems(void)
 {
-    // flag cleared at start, cant do in trainer poryscript method
+    // electric seed return flag cleared at start
+    // cant do in trainer poryscript method
     if(!FlagGet(FLAG_TRAINER0_DEFEATED) && FlagGet(FLAG_ZERAORA_CAUGHT))
         FlagClear(FLAG_ELECTRIC_SEED_CONSUMED);
 
