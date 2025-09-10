@@ -698,8 +698,8 @@
 #define FLAG_DO_WARP                    0x28E 
 #define FLAG_TM_TRICK_CONSUMED          0x28F
 #define FLAG_SECTION_3_SPAWN_UNLOCKED   0x290
-#define FLAG_UNUSED_0x291  0x291 // Unused Flag
-#define FLAG_UNUSED_0x292  0x292 // Unused Flag
+#define FLAG_TRAINER0_DEFEATED          0x291
+#define FLAG_ELECTRIC_SEED_CONSUMED     0x292
 #define FLAG_UNUSED_0x293  0x293 // Unused Flag
 #define FLAG_UNUSED_0x294  0x294 // Unused Flag
 #define FLAG_UNUSED_0x295  0x295 // Unused Flag

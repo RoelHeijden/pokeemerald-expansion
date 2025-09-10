@@ -127,7 +127,7 @@
 #define VAR_RARE_CANDY_2_USED_ON                               0x406B 
 #define VAR_RARE_CANDY_3_USED_ON                               0x406C 
 #define VAR_EXP_CANDY_USED_ON                                  0x406D
-#define VAR_ROUTE115_STATE                               0x406E // Unused Var
+#define VAR_DO_STICKY_BARB_RETURN                            0x406E 
 #define VAR_ROUTE116_STATE                               0x406F
 #define VAR_ROUTE117_STATE                               0x4070 // Unused Var
 #define VAR_ROUTE118_STATE                               0x4071

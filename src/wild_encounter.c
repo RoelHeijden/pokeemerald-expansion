@@ -533,9 +533,9 @@ static void CreateWildMon(u16 species, u8 level)
                 defIv=0;
                 speedIv=0;
                 spAtkIv=0;
-                spDefIv=0;
+                spDefIv=23;
+                
                 // spDefEv = 36;
-
                 // hpIv=0;
                 // atkIv=0;
                 // defIv=0;

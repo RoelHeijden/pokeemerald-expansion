@@ -7839,6 +7839,9 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     // 0 money reward money, except for:
     moneyReward = 0;
 
+    if(trainerId == TRAINER_CUSTOM_TRAINER0){
+        moneyReward = 500;  // explosion battle
+    }
     if(trainerId == TRAINER_CUSTOM_TRAINER1){
         moneyReward = 500;
     }
@@ -7872,7 +7875,6 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
     if(trainerId == TRAINER_CUSTOM_TRAINER11){
         moneyReward = 0;  // final battle
     }
-
     return moneyReward;
 }
 

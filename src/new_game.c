@@ -179,7 +179,7 @@ void NewGameInitData(void)
     ResetGabbyAndTy();
     ClearSecretBases();
     ClearBerryTrees();
-    SetMoney(&gSaveBlock1Ptr->money, 3000); // CHANGED
+    SetMoney(&gSaveBlock1Ptr->money, 2500); // CHANGED start money
     SetCoins(0);
     ResetLinkContestBoolean();
     ResetGameStats();

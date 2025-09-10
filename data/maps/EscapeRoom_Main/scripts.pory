@@ -72,6 +72,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 0: EscapeRoom_MapScript_GameStartScripts
         VAR_ESCAPE_ROOM_MAPSCRIPT_RETRIEVE_BALL, 1: EscapeRoom_MapScripts_FindBallAferUse
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+        VAR_DO_STICKY_BARB_RETURN, 1: EscapeRoom_MapScripts_ReturnStickyBarb
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
         VAR_ASK_WARP_BACK, 1: EscapeRoom_MapScripts_AskWarpBack
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
@@ -121,6 +122,12 @@ script EscapeRoom_MapScript_OnResumeScripts{
         call(EscapeRoom_MapScripts_CheckSpaceItemStolen)
     }
 
+    // check if sticky barb was stolen after trainer 0
+    // sets a var to return the item
+    if(flag(FLAG_TRAINER0_DEFEATED) == FALSE){
+        call(EscapeRoom_MapScripts_CheckStickyBarbStolen)
+    }
+
     // disable bag use 
     if(flag(FLAG_TOGGLE_BAG_USE) == FALSE){
         setflag(FLAG_TOGGLE_BAG_USE)
@@ -168,7 +175,7 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
 
 
         // ERROR CHECK
-        // - 1000 money
+        // - 500 money
         // - custap used
         // - ether used
         checkpartyitem(0)
@@ -182,7 +189,7 @@ script EscapeRoom_MapScripts_CheckIfPokemonCaught{
         checkitem(ITEM_CUSTAP_BERRY)
         copyvar(VAR_TEMP_5, VAR_RESULT)
 
-        checkexactmoney(1000)
+        checkexactmoney(500)
         if(var(VAR_RESULT) == FALSE 
             || (var(VAR_0x8006) == ITEM_CUSTAP_BERRY || var(VAR_0x8007) == ITEM_CUSTAP_BERRY)
             || (var(VAR_0x8006) == ITEM_ETHER || var(VAR_0x8007) == ITEM_ETHER)
@@ -211,6 +218,25 @@ script EscapeRoom_MapScripts_CheckSpaceItemStolen{
     checkpartyitem(2) // held by pokemon slot 3
     if(var(VAR_0x8005) == ITEM_MOON_STONE) {
         setflag(FLAG_SPACE_ITEM_STOLEN)
+    }
+}
+
+script EscapeRoom_MapScripts_CheckStickyBarbStolen{
+    checkitem(ITEM_STICKY_BARB) // in bag
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_DO_STICKY_BARB_RETURN, 1)
+    }
+    checkpartyitem(0) // held by pokemon slot 1
+    if(var(VAR_0x8005) == ITEM_STICKY_BARB) {
+        setvar(VAR_DO_STICKY_BARB_RETURN, 1)
+    }
+    checkpartyitem(1) // held by pokemon slot 2
+    if(var(VAR_0x8005) == ITEM_STICKY_BARB) {
+        setvar(VAR_DO_STICKY_BARB_RETURN, 1)
+    }
+    checkpartyitem(2) // held by pokemon slot 3
+    if(var(VAR_0x8005) == ITEM_STICKY_BARB) {
+        setvar(VAR_DO_STICKY_BARB_RETURN, 1)
     }
 }
 
@@ -317,6 +343,35 @@ script EscapeRoom_MapScripts_RetrievedItemMessage{
     releaseall
 }
 
+script EscapeRoom_MapScripts_ReturnStickyBarb{
+    setvar(VAR_DO_STICKY_BARB_RETURN, 0)
+
+    checkitem(ITEM_STICKY_BARB) // in bag
+    if(var(VAR_RESULT) == TRUE){
+        removeitem(ITEM_STICKY_BARB)
+    }
+    // check if pokemon 1 carries sticky barb
+    checkpartyitem(0)
+    if(var(VAR_0x8005) == ITEM_STICKY_BARB){
+        removepartyitem(0)
+    }
+    // check if pokemon 2 carries sticky barb
+    checkpartyitem(1)
+    if(var(VAR_0x8005) == ITEM_STICKY_BARB){
+        removepartyitem(1)
+    }
+    // check if pokemon 3 carries sticky barb
+    checkpartyitem(2)
+    if(var(VAR_0x8005) == ITEM_STICKY_BARB){
+        removepartyitem(2)
+    }
+
+    // do message
+    msgbox(HeldStickyBarbReturnedMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+}
+
 script EscapeRoom_MapScripts_AskResetPredamage{
     lockall
 
@@ -387,7 +442,6 @@ script EscapeRoom_MapScripts_ResetPredamage{
     }
 
 }
-
 
 script EscapeRoom_MapScripts_AskWarpBack{
     lockall
@@ -466,25 +520,23 @@ script EscapeRoom_MapScript_GetPokedex{
 script EscapeRoom_MapScripts_GetFirstPokemon{
     // givemon(
     //     SPECIES_ZERAORA,
-    //     43,
+    //     40,
+    //     item=ITEM_ELECTRIC_GEM
     //     abilityNum=0,
     //     nature=NATURE_MODEST,
     //     move1=MOVE_PLASMA_FISTS,
-    //     move2=MOVE_ELECTRIC_TERRAIN,
-    //     move3=MOVE_NONE,
+    //     move2=MOVE_ELECTROWEB,
+    //     move3=MOVE_SUBSTITUTE,
     //     move4=MOVE_NONE,
     //     // EVs:
-    //     hpEv=0, 
-    //     atkEv=0,
-    //     spDefEv=0, 
-    //     defEv=0,
+    //     spDefEv=252, 
     //     // IVs:
-    //     hpIv=6,
+    //     hpIv=0,
     //     atkIv=0,
     //     defIv=0,
     //     speedIv=0,
     //     spAtkIv=0,
-    //     spDefIv=0
+    //     spDefIv=31
     // )
     givemon(
         SPECIES_FERROTHORN,
@@ -933,6 +985,17 @@ script EscapeRoom_EventScript_ReturnLostItems{
     }
 
 
+    //// SPECIAL CASE TRAINER0 ////
+
+    if(flag(FLAG_TRAINER0_DEFEATED) && !flag(FLAG_TRAINER1_DEFEATED)){
+        // special case: Electric Seed (lost at trainer0)
+        if(flag(FLAG_ELECTRIC_SEED_CONSUMED)){
+            clearflag(FLAG_ELECTRIC_SEED_CONSUMED)
+            giveitem(ITEM_ELECTRIC_SEED)
+            setflag(FLAG_TEMP_2)  // no heal
+        }
+    }
+
     //// SPECIAL CASES TRAINER5 ////
 
     if(flag(FLAG_TRAINER5_DEFEATED) && !flag(FLAG_TRAINER6_DEFEATED)){
@@ -1334,25 +1397,23 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     //     - if poisoned
     //     - if regaining PP after struggle
 
-    // heal if Thief (trainer4 pp, ape sequence Struggle PP regain, Secret Power Poison)
-    // added Cut just in case of Liepard PP recovery lines (Ape sequence)
-    if(var(VAR_0x8008) == MOVE_THIEF || var(VAR_0x8008) == MOVE_CUT){
-        // Ape sequence: heal aipom
-        if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
-            healpartymon(SPECIES_AIPOM)
-            playse(SE_USE_ITEM)
-            waitse
+    // heal if move undone to prevent PP gain
+    // Ape sequence: heal aipom
+    if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
+        healpartymon(SPECIES_AIPOM)
+        playse(SE_USE_ITEM)
+        waitse
 
-            // message
-            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
-            waitmessage
-        }
-        // normal heal
-        else{
-            call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
-        }
-        
+        // message
+        msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+        waitmessage
     }
+    // normal heal
+    else{
+        call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
+    }
+        
+
 
 
     // check snowball item return
@@ -2133,19 +2194,21 @@ script EscapeRoom_ZeraoraHintNPC{
         }
     }
     else{
-        if(flag(FLAG_EXP_CANDY_OBTAINED) == FALSE){
-            msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_NPC)
-            waitmessage
-            lock
-            giveitem(ITEM_EXP_CANDY_S)
-            setflag(FLAG_EXP_CANDY_OBTAINED)
-            msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_NPC)
-            waitmessage
-        }
-        else{
-            msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_NPC)
-            waitmessage
-        }
+        msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_NPC)
+        waitmessage
+        // if(flag(FLAG_EXP_CANDY_OBTAINED) == FALSE){
+        //     msgbox(ZeraoraHintPostCatchMessage1, MSGBOX_NPC)
+        //     waitmessage
+        //     lock
+        //     giveitem(ITEM_EXP_CANDY_S)
+        //     setflag(FLAG_EXP_CANDY_OBTAINED)
+        //     msgbox(ZeraoraHintPostCatchMessage2, MSGBOX_NPC)
+        //     waitmessage
+        // }
+        // else{
+        //     msgbox(ZeraoraHintPostCatchMessage3, MSGBOX_NPC)
+        //     waitmessage
+        // }
     }
 
     releaseall
@@ -2766,6 +2829,19 @@ script EscapeRoom_EventScript_Trainer11{
     end
 }
 
+script EscapeRoom_EventScript_Trainer0{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER0, 
+        Trainer0_Intro, 
+        Trainer0_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer0PostBattle,
+    )
+
+    msgbox(Trainer0_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
+
 
 //// POST BATTLE SCRIPTS ////
 
@@ -2773,11 +2849,35 @@ script EscapeRoom_EventScript_PostMatchHeal{
     special(HealPlayerParty)
 }
 
+script EscapeRoom_EventScript_Trainer0PostBattle{
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+
+    // dont restore Electric Seed if consumed in battle
+    if(flag(FLAG_ELECTRIC_SEED_CONSUMED) == TRUE){
+        checkpartyitem(0)
+        if(var(VAR_0x8005) == ITEM_ELECTRIC_SEED){
+            removepartyitem(0)
+        }
+        checkpartyitem(1)
+        if(var(VAR_0x8005) == ITEM_ELECTRIC_SEED){
+            removepartyitem(1)
+        }
+        checkpartyitem(2)
+        if(var(VAR_0x8005) == ITEM_ELECTRIC_SEED){
+            removepartyitem(2)
+        }
+    }
+
+    setflag(FLAG_TRAINER0_DEFEATED)
+    call(EscapeRoom_EventScript_PostMatchHeal)
+}
+
 script EscapeRoom_EventScript_Trainer1PostBattle{
     // prevent recovered item message
     clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
 
-    // prevent white herb restore after winning
+    // prevent electric seed restore after winning
     checkpartymon(SPECIES_ZERAORA)
     copyvar(VAR_TEMP_0, VAR_RESULT) // copy mon slot
     if(var(VAR_TEMP_0) != PARTY_SIZE){
@@ -2796,7 +2896,7 @@ script EscapeRoom_EventScript_Trainer1PostBattle{
     // ERROR CHECK
     // - 1500 money
     // - safety goggles kept
-    // - white herb used
+    // - electric seed used
     checkpartyitem(0)
     copyvar(VAR_0x8006, VAR_0x8005)
     checkpartyitem(1)
@@ -4137,20 +4237,21 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
             if(var(VAR_RESULT) == YES){
 
                 // temp
-                setflag(FLAG_GOGGLES_SNATCHED)
-                call(EscapeRoom_EventScript_SnatchSafetyGoggles)
-                // // only allow Goggles Snatch if Zera is lvl 43
-                // checkpartymonlevel(43)
-                // if(var(VAR_RESULT) != PARTY_SIZE){
-                //     setflag(FLAG_GOGGLES_SNATCHED)
-                //     call(EscapeRoom_EventScript_SnatchSafetyGoggles)
-                // }
-                // else{
-                //     closemessage
-                //     delay(40)
-                //     msgbox(Goggles_Statue_ZeraNotReady, MSGBOX_DEFAULT)
-                //     waitmessage
-                // }
+                // setflag(FLAG_GOGGLES_SNATCHED)
+                // call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+
+                // only allow Goggles Snatch if Zera is lvl 43
+                checkpartymonlevel(43)
+                if(var(VAR_RESULT) != PARTY_SIZE){
+                    setflag(FLAG_GOGGLES_SNATCHED)
+                    call(EscapeRoom_EventScript_SnatchSafetyGoggles)
+                }
+                else{
+                    closemessage
+                    delay(40)
+                    msgbox(Goggles_Statue_ZeraNotReady, MSGBOX_DEFAULT)
+                    waitmessage
+                }
             }
         }
         // regular message
@@ -4369,8 +4470,9 @@ text GogglesCurseHappens{
 }
 
 text Goggles_Statue_ZeraNotReady{
-    "{STR_VAR_1} nearly succeeded, but a\n"
-    "strange force held the goggles still.\p"
+    "{STR_VAR_1} nearly succeeded,\n"
+    "but a strange force held the goggles\l"
+    "in place.\p"
     "Perhaps {STR_VAR_1} isn't strong\n"
     "enough just yet."
 }
@@ -4664,24 +4766,31 @@ text AntiSoftlockAskUndoFlorgesTrade{
 
 // ZERA HINT NPC
 text ZeraoraHintMessage1{
-    "I love seeing rare Pokémon up close!\p"
-    "If you ever manage to catch something\n"
-    "special, be sure to show me."
+    "I love catching rare Pokémon!\p"
+    "You'll never know when the opportunity\n"
+    "presents itself.\p"
+    "Better be ready, take this."
+    // "I love seeing rare Pokémon up close!\p"
+    // "If you ever manage to catch something\n"
+    // "special, be sure to show me."
 }
 
 text ZeraoraHintMessage2{
     "You know, Pokémon become much easier\n"
-    "to catch if their HP drops below 50%.\p"
-    "Let me know when you've caught a cool\n"
-    "Pokémon!"
+    "to catch if their HP drops below 50%."
+    // "Let me know when you've caught a cool\n"
+    // "Pokémon!"
 }
 
 text ZeraoraHintPostCatchMessage1{
-    "You managed to catch a Zeraora!?\p"
-    "Unbelievable... I've always dreamed of\n"
-    "seeing one up close!\p"
-    "This means a lot to me.\n"
-    "Please, take this."
+    "You managed to get a Zeraora!?\n"
+    "What an incredible catch.\p"
+    "Your Pokédex must be looking pretty\n"
+    "good by now."
+    // "Unbelievable... I've always dreamed of\n"
+    // "seeing one up close!"
+    // "This means a lot to me.\n"
+    // "Please, take this."
 }
 
 text ZeraoraHintPostCatchMessage2{
@@ -4951,6 +5060,11 @@ text HeldItemRecoveredMessage{
     "Your held items were restored."
 }
 
+text HeldStickyBarbReturnedMessage{
+    // "The trainer reclaimed their Sticky Barb."
+    "The Sticky Barb was given back to the\n"
+    "trainer."
+}
 
 // WARP AND PRE DAMAGE RESET
 text AskWarpBackMessage{
@@ -5072,6 +5186,20 @@ text DunsparceTradePostTrade{
 text DoubleBattle_NotEnoughMons{
     "Want to battle?\n"
     "You should bring a second Pokémon."
+}
+
+
+// TRAINER 0
+text Trainer0_Intro{
+    "..." 
+}
+
+text Trainer0_Outro{
+    "..."
+}
+
+text Trainer0_PostBattle{
+    "..."
 }
 
 
@@ -5290,10 +5418,6 @@ text Trainer11_Outro{
 text Trainer11_PostBattle{
     "TBD"
 }
-
-
-
-
 
 
 

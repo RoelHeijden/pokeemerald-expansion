@@ -7,7 +7,8 @@ const LOCALID_ROCK3 = 5
 const LOCALID_ROCK4 = 6
 const LOCALID_DRUG_HIKER = 7
 const LOCALID_TM_TRICK = 8
-
+const LOCALID_TRAINER0 = 9
+const LOCALID_EXP_CANDY = 10
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
@@ -207,6 +208,14 @@ script FindTmTrickItem{
     finditem(ITEM_TM38)
     removeobject(LOCALID_TM_TRICK)
     setflag(FLAG_TM_TRICK_OBTAINED)
+    releaseall
+}
+
+script FindExpCandy{
+    lockall
+    finditem(ITEM_EXP_CANDY_S)
+    removeobject(LOCALID_EXP_CANDY)
+    setflag(FLAG_EXP_CANDY_OBTAINED)
     releaseall
 }
 

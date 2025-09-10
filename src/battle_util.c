@@ -11399,6 +11399,10 @@ void SortBattlersBySpeed(u8 *battlers, bool32 slowToFast)
 // ADDED
 void TryRestoreHeldItems(void)
 {
+    // flag cleared at start, cant do in trainer poryscript method
+    if(!FlagGet(FLAG_TRAINER0_DEFEATED) && FlagGet(FLAG_ZERAORA_CAUGHT))
+        FlagClear(FLAG_ELECTRIC_SEED_CONSUMED);
+
     u32 i;
     bool32 returnNPCItems = B_RETURN_STOLEN_NPC_ITEMS >= GEN_5 && gBattleTypeFlags & BATTLE_TYPE_TRAINER;
 
@@ -11489,6 +11493,14 @@ void TryRestoreHeldItems(void)
                         {
                             lostItemActuallyConsumed = FALSE;
                             break;
+                        }
+                    }
+
+                    // specific item checks for trainer 0
+                    // dont restore Electric Seed if consumed
+                    if (lostItemActuallyConsumed && !FlagGet(FLAG_TRAINER0_DEFEATED) && FlagGet(FLAG_ZERAORA_CAUGHT)){
+                        if(lostItem == ITEM_ELECTRIC_SEED){
+                            FlagSet(FLAG_ELECTRIC_SEED_CONSUMED);
                         }
                     }
 

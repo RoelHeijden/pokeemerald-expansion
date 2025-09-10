@@ -16875,6 +16875,33 @@ Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
+=== TRAINER_CUSTOM_TRAINER0 ===
+Name: Tim
+Class: PYRAMID_KING
+Pic: Expert M
+Gender: Male
+Music: Intense
+Double Battle: No
+
+Pincurchin @ Choice Scarf  
+Ability: Electric Surge   
+EVs: 252 Atk / 252 Spe  
+Jolly Nature  
+- Self-Destruct
+
+Pincurchin @ Choice Scarf  
+Ability: Electric Surge  
+EVs: 252 Atk / 252 Spe  
+Jolly Nature  
+- Self-Destruct
+
+Rhyperior @ Sticky Barb  
+Ability: Solid Rock  
+EVs: 20 HP / 252 Atk / 236 Spe  
+Adamant Nature  
+- Block
+
+
 === TRAINER_CUSTOM_TRAINER1 ===
 Name: Cut Guy
 Class: Tuber M
@@ -16885,8 +16912,8 @@ Double Battle: Yes
 
 Marowak-Alola @ Rocky Helmet  
 Ability: Lightning Rod  
-Level: 45  
-EVs: 252 HP / 48 Def / 20 SpA / 188 SpD  
+Level: 47  
+EVs: 252 HP / 4 Atk / 188 Def / 64 SpD  
 Impish Nature  
 IVs: 0 SpA  
 - Incinerate
@@ -17079,7 +17106,7 @@ Adamant Nature
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: Doll
+Name: Dolly
 Class: Youngster
 Pic: School Kid F
 Gender: Male
@@ -17117,5 +17144,4 @@ Ability: Levitate
 Unown  
 Ability: Levitate  
 - Psychic 
-
 
