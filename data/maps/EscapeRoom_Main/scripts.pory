@@ -41,7 +41,7 @@ const _DUMMY_8 = 38
 const _DUMMY_9 = 39
 
 const LOCALID_SECRET_BASE_CANDY = 16
-
+const LOCALID_SECRET_SOLID_BOARD = 17
 
 
 movement _face_down {
@@ -618,6 +618,7 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_ETHER)
 
     // REMOVE
+    // additem(ITEM_TM43)
     // additem(ITEM_HM01)
     // additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_ELECTRIC_SEED)
@@ -1135,12 +1136,12 @@ script EscapeRoom_EventScript_UndoUsedItems{
     }
 
     // check Cut
-    istaughtmovepresent(SPECIES_FERROTHORN, MOVE_CUT)
-    if(var(VAR_RESULT) == TRUE){
-        setflag(FLAG_CAN_UNDO_CUT)
-        setvar(VAR_0x8007, SPECIES_FERROTHORN)
-        setvar(VAR_0x8008, MOVE_CUT)
-    }
+    // istaughtmovepresent(SPECIES_FERROTHORN, MOVE_CUT)
+    // if(var(VAR_RESULT) == TRUE){
+    //     setflag(FLAG_CAN_UNDO_CUT)
+    //     setvar(VAR_0x8007, SPECIES_FERROTHORN)
+    //     setvar(VAR_0x8008, MOVE_CUT)
+    // }
     istaughtmovepresent(SPECIES_LIEPARD, MOVE_CUT)
     if(var(VAR_RESULT) == TRUE){
         setflag(FLAG_CAN_UNDO_CUT)
@@ -3602,6 +3603,14 @@ script EscapeRoom_EventScript_FindRareCandy3{
     releaseall
 }
 
+script EscapeRoom_EventScript_FindSolidBoard{
+    lockall
+    givedecoration(DECOR_SOLID_BOARD)
+    removeobject(LOCALID_SECRET_SOLID_BOARD)
+    setflag(FLAG_SOLID_BOARD_OBTAINED)
+    releaseall
+}
+
 script EscapeRoom_EventScript_FindPrimeape{
     lockall
 
@@ -5191,22 +5200,27 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 0
 text Trainer0_Intro{
-    "..." 
+    // "It takes three to find the groove,\n"
+    // "but only one shall bear the move."
+    "You may think you are ready,\n"
+    "but you really need three.\l"
+    "Which of your Pokémon holds the key?"
 }
 
 text Trainer0_Outro{
-    "..."
+    "One down, eleven to go."
 }
 
 text Trainer0_PostBattle{
-    "..."
+    "Sharing is caring.\n"
+    "Can you see the appeal?"
 }
 
 
 // TRAINER 1 - Toedscruel Togedemaru
 text Trainer1_Intro{
     "Sharing is caring.\n"
-    "Can you see the appeal?\p"
+    "Can you see the appeal?\l"
     "Win the fight and we may have a deal."
 }
 
@@ -5269,7 +5283,8 @@ text Trainer3FinalWords{
 
 // TRAINER 4 - Iron Valiant
 text Trainer4_Intro{
-    "Exhausted already?"
+    "Exhausted already?\n"
+    "We're just getting started!"
 }
 
 text Trainer4_Outro{

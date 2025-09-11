@@ -700,7 +700,7 @@
 #define FLAG_SECTION_3_SPAWN_UNLOCKED   0x290
 #define FLAG_TRAINER0_DEFEATED          0x291
 #define FLAG_ELECTRIC_SEED_CONSUMED     0x292
-#define FLAG_UNUSED_0x293  0x293 // Unused Flag
+#define FLAG_SOLID_BOARD_OBTAINED       0x293  
 #define FLAG_UNUSED_0x294  0x294 // Unused Flag
 #define FLAG_UNUSED_0x295  0x295 // Unused Flag
 #define FLAG_UNUSED_0x296  0x296 // Unused Flag

@@ -730,6 +730,10 @@ SecretBase_Text_SkittyTV:
 
 SecretBase_Text_WouldYouLikeToMoveBases:
 	.string "You may only make one SECRET BASE.\p"
+	.string "Would you like to move your base?$"
+
+SecretBase_Text_WouldYouLikeToMoveBases_ORIGINAL:
+	.string "You may only make one SECRET BASE.\p"
 	.string "Would you like to move from the SECRET\n"
 	.string "BASE near {STR_VAR_1}?$"
 
