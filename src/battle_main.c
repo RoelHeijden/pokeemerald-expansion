@@ -5116,12 +5116,26 @@ s32 GetWhichBattlerFaster(u32 battler1, u32 battler2, bool32 ignoreChosenMoves)
     s32 strikesFirst = GetWhichBattlerFasterOrTies(battler1, battler2, ignoreChosenMoves);
     if (strikesFirst == 0)
     {
-        s32 order1 = sBattlerOrders[gBattleStruct->speedTieBreaks][battler1];
-        s32 order2 = sBattlerOrders[gBattleStruct->speedTieBreaks][battler2];
-        if (order1 < order2)
-            strikesFirst = 1;
+        // ADDED
+        // NPCs win speed ties
+        bool32 b1Npc = (battler1 == 1 || battler1 == 3);
+        bool32 b2Npc = (battler2 == 1 || battler2 == 3);
+
+        if (b1Npc && !b2Npc)
+            strikesFirst = 1;   // battler1 goes first
+        else if (b2Npc && !b1Npc)
+            strikesFirst = -1;  // battler2 goes first
         else
-            strikesFirst = -1;
+        {
+            // battlers on the same side
+            // (original code)
+            s32 order1 = sBattlerOrders[gBattleStruct->speedTieBreaks][battler1];
+            s32 order2 = sBattlerOrders[gBattleStruct->speedTieBreaks][battler2];
+            if (order1 < order2)
+                strikesFirst = 1;
+            else
+                strikesFirst = -1;
+        }
     }
     return strikesFirst;
 }
