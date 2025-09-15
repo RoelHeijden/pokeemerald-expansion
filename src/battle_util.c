@@ -5670,7 +5670,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
              && !IS_BATTLER_OF_TYPE(battler, moveType)
              && moveType != TYPE_STELLAR
              && moveType != TYPE_MYSTERY
-             && IsBattlerAlive(battler))
+             && IsBattlerAlive(battler)
+             && !(TestIfSheerForceAffected(gBattlerAttacker, gCurrentMove)))  // ADDED
             {
                 SET_BATTLER_TYPE(battler, moveType);
                 PREPARE_TYPE_BUFFER(gBattleTextBuff1, moveType);
