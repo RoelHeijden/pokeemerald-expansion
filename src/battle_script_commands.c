@@ -8027,6 +8027,12 @@ static void Cmd_jumptocalledmove(void)
     else
         gChosenMove = gCurrentMove = gCalledMove;
 
+    // special case: Hidden Power called via Assist
+    if (gCurrentMove == MOVE_HIDDEN_POWER && gCurrentMove == gCalledMove)
+    {
+        gBattleStruct->dynamicMoveType = TYPE_DARK | F_DYNAMIC_TYPE_SET;
+    }
+
     gBattlescriptCurrInstr = GET_MOVE_BATTLESCRIPT(gCurrentMove);
 }
 
