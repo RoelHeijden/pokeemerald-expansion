@@ -1,5 +1,5 @@
 
-const LOCALID_CACNEA_TRADER = 6
+const LOCALID_BAGON_TRADER = 6
 const LOCALID_DUNGEON_GUARD = 11
 
 
@@ -63,17 +63,17 @@ script EscapeRoom_HiddenDungeon_SetLostItemVars{
 }
 
 script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
-    if(flag(FLAG_SECRET_POWER_LEARNED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
+    if(flag(FLAG_SECRET_POWER_OBTAINED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
         setflag(FLAG_SECRET_POWER_COMPLETED)
 
         // ERROR CHECK
         // - 0 money
-        // - Cacnea learned Thief
-        // - Annihilape
+        // - Annihilape learned Thief
+        // - Annihilape is in party
         // - Toxic Orb Stolen
         // - Trainer9 defeated
         // - Trainer10 not defeated
-        istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+        istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_THIEF)
         copyvar(VAR_TEMP_4, VAR_RESULT)
         checkpartymon(SPECIES_ANNIHILAPE)
         copyvar(VAR_TEMP_5, VAR_RESULT)
@@ -88,8 +88,8 @@ script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
             setvar(VAR_DO_SOMETHING_WRONG_MESSAGE, 1)
         }
 
-        // remove Cacnea Thief undo
-        removetaughtmove(SPECIES_CACNEA, MOVE_THIEF)
+        // remove Annihilape Thief undo option
+        removetaughtmove(SPECIES_ANNIHILAPE, MOVE_THIEF)
     }
 }
 
@@ -113,8 +113,8 @@ script EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained{
 
             // ERROR CHECK
             // - 0 money
-            // - Cacnea learned Thief
-            // - Annihilape
+            // - Annihilape learned Thief
+            // - Annihilape still in party
             // - Trainer7b not defeated
             // - Trainer9 defeated
             // - Trainer10 not defeated
@@ -122,7 +122,7 @@ script EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained{
             copyvar(VAR_TEMP_4, VAR_RESULT) 
             checkpartymon(SPECIES_ANNIHILAPE)
             copyvar(VAR_TEMP_5, VAR_RESULT)
-            istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+            istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_THIEF)
             if(var(VAR_RESULT) == FALSE ||
                 var(VAR_TEMP_4) == FALSE ||
                 var(VAR_TEMP_5) == PARTY_SIZE ||
@@ -149,28 +149,28 @@ script EscapeRoom_MapScripts_SomethingWrongMessage{
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
 
 
-// Cacnea trade
-script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
+// Bagon trade
+script EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon{
     lock
     faceplayer
 
     // post trade 
     if(flag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED) == TRUE){
-        msgbox(CacneaTradePostTrade, MSGBOX_NPC)
+        msgbox(BagonTradePostTrade, MSGBOX_NPC)
         waitmessage
 
         // remove NPC
         fadescreen(FADE_TO_BLACK)
         playse(SE_EXIT)
         delay(15)
-        removeobject(LOCALID_CACNEA_TRADER)
-        setflag(FLAG_HIDE_CACNEA_TRADER)
+        removeobject(LOCALID_BAGON_TRADER)
+        setflag(FLAG_HIDE_BAGON_TRADER)
         fadescreen(FADE_FROM_BLACK)
         waitse
     }
     else{
         // ask trade
-        msgbox(AskCacneaTrade, MSGBOX_YESNO)
+        msgbox(AskBagonTrade, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
 
             // check if pokemon in party
@@ -193,8 +193,8 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
                 end
             }
 
-            // obtain cacnea message
-            message(CacneaReceivedMessage)
+            // obtain Bagon message
+            message(BagonReceivedMessage)
             playfanfare(MUS_OBTAIN_ITEM)
             lockall
             waitfanfare
@@ -216,33 +216,32 @@ script EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea{
             removemon(SPECIES_LIEPARD)
             lockall
             givemon(
-                SPECIES_CACNEA,
-                41,
-                item=ITEM_RAINBOW_PASS, // Entry Card
-                abilityNum=2, // water absorb
-                nature=18,    // Bashful
-                gender=MON_FEMALE, 
-                move1=MOVE_HIDDEN_POWER,
-                move2=MOVE_NONE,
+                SPECIES_BAGON,
+                34,
+                item=ITEM_RAINBOW_PASS, // entry card
+                abilityNum=2, // sheer force 
+                nature=NATURE_MODEST,
+                gender=MON_MALE,
+                move1=MOVE_HIDDEN_POWER, // psychic
+                move2=MOVE_SUBSTITUTE,
                 move3=MOVE_NONE,
                 move4=MOVE_NONE,
                 // EVs:
-                hpEv=0, 
-                defEv=252,
-                speedEv=252, // scarf ditto outspeed primeape/annihilape
-                // IVs:
-                hpIv=31,
-                atkIv=30,    // hp psychic
-                defIv=31,
-                speedIv=30,  // hp psychic
+                spAtkEv=252,
+                speedEv=252,
+                // IVs (Hidden Power Psychic: 31/30/31/31/31/30)
+                hpIv=1, // shelgon ohko'd by Jigglypuff
+                atkIv=0,
+                defIv=1,
                 spAtkIv=31,
-                spDefIv=31
+                spDefIv=31,
+                speedIv=30
             )
             setflag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)
         }
         // trade declined
         else{
-            msgbox(CacneaTradeDeclined, MSGBOX_AUTOCLOSE)
+            msgbox(BagonTradeDeclined, MSGBOX_AUTOCLOSE)
             waitmessage
         }
     }
@@ -298,8 +297,8 @@ movement GuardMoveAway {
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 
-// TRADE NPC 5 - Aipom Liepard Cacnea
-text AskCacneaTrade{
+// TRADE NPC 5 - Aipom Liepard Bagon
+text AskBagonTrade{
     "Trying to get past the guard?\p"
 
     "I might be able to help you out.\n"
@@ -308,21 +307,21 @@ text AskCacneaTrade{
     "Give me your Pokémon and I'll get you\n"
     "in that restricted area.\p"
 
-    "You can have my Cacnea so you won't be\n"
+    "You can have my Bagon so you won't be\n"
     "stuck without a partner.\p"
 
     "Do we have a deal?"
 }
 
-text CacneaReceivedMessage{
-    "{PLAYER} received a Cacnea!"
+text BagonReceivedMessage{
+    "{PLAYER} received a Bagon!"
 }
 
-text CacneaTradeDeclined{
+text BagonTradeDeclined{
     "Suit yourself."
 }
 
-text CacneaTradePostTrade{
+text BagonTradePostTrade{
     "Hehehehe!"
 }
 
@@ -351,7 +350,8 @@ text DungeonGuardGivesEntry{
 }
 
 text DungeonGuardPostEntry{
-    "You're not very normal, are you?\n"
-    "Just don't cause any trouble"
+    // "You're not very normal, are you?\n"
+    // "Just don't cause any trouble"
+    "Hm... Cute entry card though."
 }
 

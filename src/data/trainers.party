@@ -16883,19 +16883,19 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Pincurchin @ Choice Scarf  
+Pincurchin (F) @ Choice Scarf  
 Ability: Electric Surge   
 EVs: 252 Atk / 252 Spe  
 Jolly Nature  
 - Self-Destruct
 
-Pincurchin @ Choice Scarf  
+Pincurchin (M) @ Choice Scarf  
 Ability: Electric Surge  
 EVs: 252 Atk / 252 Spe  
 Jolly Nature  
 - Self-Destruct
 
-Rhyperior @ Sticky Barb  
+Rhyperior (M) @ Sticky Barb  
 Ability: Solid Rock  
 EVs: 20 HP / 252 Atk / 236 Spe  
 Adamant Nature  
@@ -16910,7 +16910,7 @@ Gender: Male
 Music: Intense
 Double Battle: Yes
 
-Marowak-Alola @ Rocky Helmet  
+Marowak-Alola (F) @ Rocky Helmet  
 Ability: Lightning Rod  
 Level: 47  
 EVs: 252 HP / 4 Atk / 188 Def / 64 SpD  
@@ -16952,7 +16952,7 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_TRAINER3
 
-Komala @ Snowball  
+Komala (M) @ Snowball  
 Ability: Comatose  
 Level: 40  
 EVs: 228 HP / 252 Def  
@@ -16961,7 +16961,7 @@ IVs: 15 SpD
 - Earthquake  
 - Wish  
 
-Klefki  
+Klefki (F)
 Ability: Magician  
 Level: 26  
 EVs: 252 HP / 252 SpD  
@@ -16996,14 +16996,14 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_TRAINER5
 
-Meowth-Alola  
-Ability: Pickup  
+Meowth-Alola (F) 
+Ability: Rattled  
 Level: 10   
 EVs: 76 Atk / 252 Spe  
 Jolly Nature  
 - Pay Day  
 
-Onix  
+Onix (F) 
 Ability: Sturdy  
 Level: 5  
 EVs: 252 Spe  
@@ -17036,7 +17036,7 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Shedinja  
+Shedinja (M) 
 Ability: Wonder Guard  
 Level: 15 
 - Facade  
@@ -17050,11 +17050,11 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Sableye @ Toxic Orb  
+Sableye (F) @ Toxic Orb  
 Ability: Keen Eye  
-Level: 65  
-EVs: 192 HP / 48 Def / 144 SpD / 124 Spe  
-Bold Nature  
+Level: 80  
+EVs: 252 HP / 84 SpA / 172 Spe  
+Timid Nature  
 - Dazzling Gleam
 
 
@@ -17066,14 +17066,14 @@ Gender: Male
 Music: Intense
 Double Battle: No
 
-Zoroark @ Life Orb
-Level: 35
-Quiet Nature
-Ability: Illusion
-IVs: 0 Atk / 0 Spe
+Zoroark (M) @ Life Orb  
+Ability: Illusion  
+Level: 25  
+Quiet Nature  
+IVs: 0 Atk / 0 Def / 0 Spe  
 - Night Shade
 
-Dusclops  
+Dusclops (M) 
 Ability: Pressure   
 Level: 5  
 IVs: 0 Atk  
@@ -17089,44 +17089,46 @@ Music: Intense
 Double Battle: Yes
 AI: AI_FLAG_TRAINER9
 
-Lucario (F)  
-Ability: Inner Focus  
-Level: 71  
+Urshifu-Rapid-Strike (F)  
+Ability: Unseen Fist  
+Level: 55  
 EVs: 252 Atk / 252 Spe  
-Adamant Nature  
-IVs: 25 Def  
-- Close Combat 
-
-Lucario (M)  
-Ability: Inner Focus  
-Level: 70  
-EVs: 252 Atk / 252 Spe  
-Adamant Nature  
+Lonely Nature  
+IVs: 15 Def  
 - Close Combat  
+
+Urshifu (M)  
+Ability: Unseen Fist  
+Level: 55   
+EVs: 252 Atk / 228 Spe  
+Lonely Nature  
+IVs: 15 Def  
+- Close Combat   
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: Dolly
+Name: Ivo
 Class: Youngster
-Pic: School Kid F
+Pic: School Kid M
 Gender: Male
 Music: Intense
 Double Battle: No
 AI: AI_FLAG_TRAINER10
 
-Loudred  
-Ability: Soundproof  
-Level: 42  
-EVs: 252 Spe  
-Timid Nature  
-- Shadow Ball  
+Sentret (F)  
+Ability: Run Away  
+EVs: 148 HP / 156 Atk / 204 Def  
+Relaxed Nature  
+IVs: 13 SpA / 1 Spe  
+- Assist  
 
-Ditto @ Choice Scarf  
-Ability: Imposter  
-Level: 60  
-EVs: 252 HP  
-IVs: 30 Atk  
-- Transform  
+Kecleon (M)  
+Ability: Color Change  
+Level: 40  
+EVs: 252 Def / 200 SpA  
+Modest Nature  
+IVs: 0 Atk / 30 SpA / 17 SpD / 30 Spe  
+- Hidden Power
 
 
 === TRAINER_CUSTOM_TRAINER11 ===
@@ -17144,4 +17146,3 @@ Ability: Levitate
 Unown  
 Ability: Levitate  
 - Psychic 
-

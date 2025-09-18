@@ -329,7 +329,7 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
     // custom Aipom egg - nature and gender
     if(species == SPECIES_AIPOM){
         // set nature & gender
-        u8 nature = NATURE_RELAXED;
+        u8 nature = NATURE_BOLD;
         u8 gender = MON_FEMALE;
         do{
             personality = Random32();
@@ -388,9 +388,9 @@ static void CreateHatchedMon(struct Pokemon *egg, struct Pokemon *temp)
 
         // set IVs
         u8 hpIv = 31; 
-        u8 atkIv = 31; 
+        u8 atkIv = 15; 
         u8 defIv = 31; 
-        u8 speedIv = 31; 
+        u8 speedIv = 0; 
         u8 spAtkIv = 31; 
         u8 spDefIv = 31; 
         SetMonData(temp, MON_DATA_HP_IV, &hpIv);

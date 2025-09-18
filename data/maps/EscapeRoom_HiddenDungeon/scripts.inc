@@ -81,14 +81,14 @@ EscapeRoom_HiddenDungeon_SetLostItemVars_1:
 
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained::
 # 66 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	goto_if_set FLAG_SECRET_POWER_LEARNED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2
+	goto_if_set FLAG_SECRET_POWER_OBTAINED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2
 	return
 
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_1:
 # 67 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_SECRET_POWER_COMPLETED
 # 76 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	istaughtmovepresent SPECIES_CACNEA, MOVE_THIEF
+	istaughtmovepresent SPECIES_ANNIHILAPE, MOVE_THIEF
 # 77 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	copyvar VAR_TEMP_4, VAR_RESULT
 # 78 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
@@ -114,7 +114,7 @@ EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_1:
 	goto_if_set FLAG_TRAINER10_DEFEATED, EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_6
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_5:
 # 92 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	removetaughtmove SPECIES_CACNEA, MOVE_THIEF
+	removetaughtmove SPECIES_ANNIHILAPE, MOVE_THIEF
 	return
 
 EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained_2:
@@ -193,7 +193,7 @@ EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained_16:
 # 124 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	copyvar VAR_TEMP_5, VAR_RESULT
 # 125 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	istaughtmovepresent SPECIES_CACNEA, MOVE_THIEF
+	istaughtmovepresent SPECIES_ANNIHILAPE, MOVE_THIEF
 # 126 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, FALSE
 	goto_if_eq EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained_18
@@ -231,30 +231,30 @@ EscapeRoom_MapScripts_SomethingWrongMessage::
 	return
 
 
-EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea::
+EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon::
 # 154 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	lock
 # 155 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	faceplayer
 # 158 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	goto_if_set FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED, EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_2
+	goto_if_set FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED, EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_2
 # 173 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox AskCacneaTrade, MSGBOX_YESNO
+	msgbox AskBagonTrade, MSGBOX_YESNO
 # 174 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, YES
-	goto_if_eq EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_5
+	goto_if_eq EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_5
+# 244 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	msgbox BagonTradeDeclined, MSGBOX_AUTOCLOSE
 # 245 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox CacneaTradeDeclined, MSGBOX_AUTOCLOSE
-# 246 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_1:
-# 249 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_1:
+# 248 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
-EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_2:
+EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_2:
 # 159 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox CacneaTradePostTrade, MSGBOX_NPC
+	msgbox BagonTradePostTrade, MSGBOX_NPC
 # 160 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 # 163 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
@@ -266,30 +266,30 @@ EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_2:
 # 166 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	removeobject 6
 # 167 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	setflag FLAG_HIDE_CACNEA_TRADER
+	setflag FLAG_HIDE_BAGON_TRADER
 # 168 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	fadescreen FADE_FROM_BLACK
 # 169 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitse
-	goto EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_1
+	goto EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_1
 
-EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_5:
+EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_5:
 # 177 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkpartymon SPECIES_AIPOM
 # 178 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	copyvar VAR_0x8004, VAR_RESULT
 # 179 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_9
+	goto_if_eq EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_9
 # 186 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkpartymon SPECIES_LIEPARD
 # 187 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	copyvar VAR_0x8005, VAR_RESULT
 # 188 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, PARTY_SIZE
-	goto_if_eq EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_12
+	goto_if_eq EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_12
 # 197 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	message CacneaReceivedMessage
+	message BagonReceivedMessage
 # 198 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	playfanfare MUS_OBTAIN_ITEM
 # 199 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
@@ -319,12 +319,12 @@ EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_5:
 # 217 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	lockall
 # 218 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	givemon SPECIES_CACNEA, 41, item = ITEM_RAINBOW_PASS, abilityNum = 2, nature = 18, gender = MON_FEMALE, move1 = MOVE_HIDDEN_POWER, move2 = MOVE_NONE, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 0, defEv = 252, speedEv = 252, hpIv = 31, atkIv = 30, defIv = 31, speedIv = 30, spAtkIv = 31, spDefIv = 31
-# 241 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	givemon SPECIES_BAGON, 34, item = ITEM_RAINBOW_PASS, abilityNum = 2, nature = NATURE_MODEST, gender = MON_MALE, move1 = MOVE_HIDDEN_POWER, move2 = MOVE_SUBSTITUTE, move3 = MOVE_NONE, move4 = MOVE_NONE, spAtkEv = 252, speedEv = 252, hpIv = 1, atkIv = 0, defIv = 1, spAtkIv = 31, spDefIv = 31, speedIv = 30
+# 240 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED
-	goto EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_1
+	goto EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_1
 
-EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_9:
+EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_9:
 # 181 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
 # 182 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
@@ -333,7 +333,7 @@ EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_9:
 	releaseall
 	end
 
-EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_12:
+EscapeRoom_HiddenDungeon_TradeAipomLiepardForBagon_12:
 # 190 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE
 # 191 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
@@ -344,99 +344,99 @@ EscapeRoom_HiddenDungeon_TradeAipomLiepardForCacnea_12:
 
 
 EscapeRoom_HiddenDungeon_DungeonGuard::
-# 255 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 254 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	lockall
-# 256 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 255 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	faceplayer
-# 258 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 257 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_set FLAG_DUNGEON_ENTRY_GRANTED, EscapeRoom_HiddenDungeon_DungeonGuard_2
-# 265 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 264 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardIntro, MSGBOX_DEFAULT
-# 266 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 265 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 269 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 268 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkitem ITEM_RAINBOW_PASS
-# 270 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 269 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_DungeonGuard_5
 EscapeRoom_HiddenDungeon_DungeonGuard_1:
-# 288 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 287 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_HiddenDungeon_DungeonGuard_2:
-# 260 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 259 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardPostEntry, MSGBOX_DEFAULT
-# 261 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 260 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 	goto EscapeRoom_HiddenDungeon_DungeonGuard_1
 
 EscapeRoom_HiddenDungeon_DungeonGuard_5:
-# 273 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 272 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardShowsCard, MSGBOX_DEFAULT
-# 274 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 273 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 277 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 276 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox DungeonGuardGivesEntry, MSGBOX_AUTOCLOSE
-# 278 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 277 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 281 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 280 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	applymovement 11, GuardMoveAway
-# 282 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 281 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmovement 11
-# 283 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 282 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	copyobjectxytoperm 11
-# 285 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 284 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_DUNGEON_ENTRY_GRANTED
 	goto EscapeRoom_HiddenDungeon_DungeonGuard_1
 
 
-# 291 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 290 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 GuardMoveAway:
-# 292 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 291 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_left
-# 293 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 292 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	walk_left
-# 294 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 293 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	face_right
 	step_end
 
-AskCacneaTrade::
-# 302 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+AskBagonTrade::
+# 301 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Trying to get past the guard?\p"
 	.string "I might be able to help you out.\n"
 	.string "How badly do you want in?\p"
 	.string "Give me your Pokémon and I'll get you\n"
 	.string "in that restricted area.\p"
-	.string "You can have my Cacnea so you won't be\n"
+	.string "You can have my Bagon so you won't be\n"
 	.string "stuck without a partner.\p"
 	.string "Do we have a deal?$"
 
-CacneaReceivedMessage::
-# 317 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "{PLAYER} received a Cacnea!$"
+BagonReceivedMessage::
+# 316 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "{PLAYER} received a Bagon!$"
 
-CacneaTradeDeclined::
-# 321 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+BagonTradeDeclined::
+# 320 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Suit yourself.$"
 
-CacneaTradePostTrade::
-# 325 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+BagonTradePostTrade::
+# 324 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hehehehe!$"
 
 DungeonGuardIntro::
-# 332 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 331 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
 	.string "I'll need to see an entry card, or you\n"
 	.string "are not getting through.$"
 
 DungeonGuardShowsCard::
-# 338 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 337 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "(You hesitantly hold up your rainbow-\n"
 	.string "colored entry card.)$"
 
 DungeonGuardGivesEntry::
-# 343 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 342 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hmmm...\p"
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
@@ -446,6 +446,5 @@ DungeonGuardGivesEntry::
 	.string "You're clear to enter.$"
 
 DungeonGuardPostEntry::
-# 353 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "You're not very normal, are you?\n"
-	.string "Just don't cause any trouble$"
+# 352 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "Hm... Cute entry card though.$"

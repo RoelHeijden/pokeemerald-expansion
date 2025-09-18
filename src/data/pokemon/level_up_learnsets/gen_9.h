@@ -9505,7 +9505,8 @@ static const struct LevelUpMove sBagonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(20, MOVE_SCARY_FACE),
     LEVEL_UP_MOVE(25, MOVE_CRUNCH),
     LEVEL_UP_MOVE(31, MOVE_DRAGON_CLAW),
-    LEVEL_UP_MOVE(35, MOVE_ZEN_HEADBUTT),
+    LEVEL_UP_MOVE(35, MOVE_FLAMETHROWER), // ADDED
+    // LEVEL_UP_MOVE(35, MOVE_ZEN_HEADBUTT),
     LEVEL_UP_MOVE(40, MOVE_FOCUS_ENERGY),
     LEVEL_UP_MOVE(45, MOVE_FLAMETHROWER),
     LEVEL_UP_MOVE(50, MOVE_OUTRAGE),
@@ -9514,7 +9515,7 @@ static const struct LevelUpMove sBagonLevelUpLearnset[] = {
 };
 
 static const struct LevelUpMove sShelgonLevelUpLearnset[] = {
-    LEVEL_UP_MOVE( 0, MOVE_PROTECT),
+    // LEVEL_UP_MOVE( 0, MOVE_PROTECT), 
     LEVEL_UP_MOVE( 1, MOVE_LEER),
     LEVEL_UP_MOVE( 1, MOVE_BITE),
     LEVEL_UP_MOVE( 1, MOVE_EMBER),
@@ -15450,7 +15451,8 @@ static const struct LevelUpMove sEspurrLevelUpLearnset[] = {
     LEVEL_UP_MOVE(21, MOVE_PSYBEAM),
     LEVEL_UP_MOVE(30, MOVE_LIGHT_SCREEN),
     LEVEL_UP_MOVE(30, MOVE_REFLECT),
-    LEVEL_UP_MOVE(33, MOVE_PSYSHOCK),
+    LEVEL_UP_MOVE(33, MOVE_PSYCHIC), // CHANGED
+    // LEVEL_UP_MOVE(33, MOVE_PSYSHOCK),
     LEVEL_UP_END
 };
 

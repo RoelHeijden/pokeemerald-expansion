@@ -72,7 +72,7 @@
 #define FLAG_HIDE_NURSE1_NPC                0x3B 
 #define FLAG_HIDE_MOVEMENT_NURSE_NPC        0x3C  
 #define FLAG_CUSTAP_SOLD_OUT                0x3D  
-#define FLAG_HIDE_CACNEA_TRADER             0x3E
+#define FLAG_HIDE_BAGON_TRADER              0x3E
 #define FLAG_RARE_CANDY1_OBTAINED           0x3F  
 #define FLAG_SPACE_ITEM_STOLEN              0x40  
 #define FLAG_MAP_SWITCH_4_FOUND             0x41  
@@ -678,7 +678,7 @@
 #define FLAG_MENTAL_HERB_SACK_ACTIVE    0x27A
 #define FLAG_LIEPARD_SACKED             0x27B 
 #define FLAG_MENTAL_HERB_IS_LOST        0x27C  
-#define FLAG_SECRET_POWER_LEARNED       0x27D  
+#define FLAG_SECRET_POWER_OBTAINED      0x27D  
 #define FLAG_THIEF_REPLACED             0x27E 
 #define FLAG_SECRET_POWER_COMPLETED     0x27F 
 #define FLAG_DUNGEON_ENTRY_GRANTED      0x280  
@@ -701,8 +701,8 @@
 #define FLAG_TRAINER0_DEFEATED          0x291
 #define FLAG_ELECTRIC_SEED_CONSUMED     0x292
 #define FLAG_SOLID_BOARD_OBTAINED       0x293  
-#define FLAG_UNUSED_0x294  0x294 // Unused Flag
-#define FLAG_UNUSED_0x295  0x295 // Unused Flag
+#define FLAG_CAN_UNDO_SECRET_POWER      0x294
+#define FLAG_CHOICE_ITEM_OBTAINED       0x295  
 #define FLAG_UNUSED_0x296  0x296 // Unused Flag
 #define FLAG_UNUSED_0x297  0x297 // Unused Flag
 #define FLAG_UNUSED_0x298  0x298 // Unused Flag

@@ -2333,10 +2333,10 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
 
     // Primeape/Annihilape cannot learn Thief
     // this patches a line vs trainer10
-    else if ((GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_PRIMEAPE 
-             || GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_ANNIHILAPE)
-             && move == MOVE_THIEF)
-        return CANNOT_LEARN_MOVE;
+    // else if ((GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_PRIMEAPE 
+    //          || GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_ANNIHILAPE)
+    //          && move == MOVE_THIEF)
+    //     return CANNOT_LEARN_MOVE;
 
     // ADDED
     // check if mon has a deleted move (that could still be restored)
@@ -5582,9 +5582,14 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 // ADDED
 static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
 {
-    // only store: Thief, Cut, or Skill Swap
-    if(newMove != MOVE_THIEF && newMove != MOVE_CUT && newMove != MOVE_SKILL_SWAP)
+    // only store: Thief, Cut, Skill Swap, or Secret Power
+    if (newMove == MOVE_THIEF 
+    || newMove == MOVE_CUT 
+    || newMove == MOVE_SKILL_SWAP 
+    || newMove == MOVE_SECRET_POWER) {
+    } else {
         return;
+    }
 
     if (species == SPECIES_NONE || newMove == MOVE_NONE)
         return;

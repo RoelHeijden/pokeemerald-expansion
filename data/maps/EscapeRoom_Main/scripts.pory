@@ -41,7 +41,8 @@ const _DUMMY_8 = 38
 const _DUMMY_9 = 39
 
 const LOCALID_SECRET_BASE_CANDY = 16
-const LOCALID_SECRET_SOLID_BOARD = 17
+const LOCALID_SECRET_SOLID_BOARD = 16
+
 
 
 movement _face_down {
@@ -518,72 +519,97 @@ script EscapeRoom_MapScript_GetPokedex{
 }
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
+    givemon(
+        SPECIES_PRIMEAPE,
+        44,
+        abilityNum=2, // Defiant
+        nature=NATURE_CALM,
+        gender=MON_MALE, 
+        move1=MOVE_RAGE_FIST,
+        move2=MOVE_TAUNT,
+        move3=MOVE_NONE,
+        move4=MOVE_NONE,
+        // EVs:
+        hpEv=252,
+        defEv=0,
+        spDefEv=8,
+        // IVs
+        hpIv=31,
+        atkIv=0, // 3x Secret Power < 25%
+        defIv=31,
+        speedIv=10,
+        spAtkIv=31,
+        spDefIv=31
+    )
+
+    givemon(
+        SPECIES_BAGON,
+        34,
+        abilityNum=2, // Sheer Force
+        nature=NATURE_MODEST,
+        gender=MON_MALE,
+        move1=MOVE_HIDDEN_POWER,  // Hidden Power [Psychic]
+        move2=MOVE_SUBSTITUTE,
+        move3=MOVE_CUT,
+        move4=MOVE_NONE,
+        // EVs:
+        spAtkEv=252,
+        speedEv=252,
+        // IVs:
+        hpIv=1,
+        atkIv=0,
+        speedIv=30,
+        spAtkIv=31,
+        defIv=1,
+        spDefIv=31
+    )
+
     // givemon(
-    //     SPECIES_ZERAORA,
-    //     40,
-    //     item=ITEM_ELECTRIC_GEM
-    //     abilityNum=0,
-    //     nature=NATURE_MODEST,
-    //     move1=MOVE_PLASMA_FISTS,
-    //     move2=MOVE_ELECTROWEB,
-    //     move3=MOVE_SUBSTITUTE,
+    //     SPECIES_FERROTHORN,
+    //     28,
+    //     abilityNum=2, // anticipation
+    //     nature=NATURE_NAUGHTY,
+    //     gender=MON_MALE, 
+    //     move1=MOVE_STEEL_ROLLER,
+    //     move2=MOVE_BLOCK,
+    //     move3=MOVE_INGRAIN,
     //     move4=MOVE_NONE,
     //     // EVs:
-    //     spDefEv=252, 
+    //     hpEv=0, 
+    //     atkEv=252,
+    //     spDefEv=0, 
+    //     defEv=0,
     //     // IVs:
     //     hpIv=0,
+    //     atkIv=31,
+    //     defIv=0,
+    //     speedIv=31,
+    //     spAtkIv=31,
+    //     spDefIv=0
+    // )
+    // givemon(
+    //     SPECIES_FLORGES,
+    //     22,
+    //     ball=ITEM_HEAVY_BALL,
+    //     item=ITEM_ELECTRIC_SEED,
+    //     abilityNum=2, // symbiosis
+    //     nature=21, // gentle
+    //     gender=MON_FEMALE,
+    //     move1=MOVE_NATURE_POWER,
+    //     move2=MOVE_GRASS_KNOT,
+    //     move3=MOVE_GRASSY_TERRAIN,
+    //     move4=MOVE_CAMOUFLAGE,
+    //     // EVs:
+    //     hpEv=252,
+    //     spDefEv=252,
+    //     // IVs:
+    //     hpIv=31,
     //     atkIv=0,
     //     defIv=0,
-    //     speedIv=0,
+    //     speedIv=31,
     //     spAtkIv=0,
     //     spDefIv=31
     // )
-    givemon(
-        SPECIES_FERROTHORN,
-        28,
-        abilityNum=2, // anticipation
-        nature=NATURE_NAUGHTY,
-        gender=MON_MALE, 
-        move1=MOVE_STEEL_ROLLER,
-        move2=MOVE_BLOCK,
-        move3=MOVE_INGRAIN,
-        move4=MOVE_NONE,
-        // EVs:
-        hpEv=0, 
-        atkEv=252,
-        spDefEv=0, 
-        defEv=0,
-        // IVs:
-        hpIv=0,
-        atkIv=31,
-        defIv=0,
-        speedIv=31,
-        spAtkIv=31,
-        spDefIv=0
-    )
-    givemon(
-        SPECIES_FLORGES,
-        22,
-        ball=ITEM_HEAVY_BALL,
-        item=ITEM_ELECTRIC_SEED,
-        abilityNum=2, // symbiosis
-        nature=21, // gentle
-        gender=MON_FEMALE,
-        move1=MOVE_NATURE_POWER,
-        move2=MOVE_GRASS_KNOT,
-        move3=MOVE_GRASSY_TERRAIN,
-        move4=MOVE_CAMOUFLAGE,
-        // EVs:
-        hpEv=252,
-        spDefEv=252,
-        // IVs:
-        hpIv=31,
-        atkIv=0,
-        defIv=0,
-        speedIv=31,
-        spAtkIv=0,
-        spDefIv=31
-    )
 
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
@@ -618,15 +644,19 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_ETHER)
 
     // REMOVE
-    // additem(ITEM_TM43)
-    // additem(ITEM_HM01)
+    additem(ITEM_HM01)
+    additem(ITEM_TM43)
+    additem(ITEM_TOXIC_ORB)
     // additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_ELECTRIC_SEED)
     // additem(ITEM_MOON_STONE)
-    // additem(ITEM_TM46)
+    additem(ITEM_TM46)
     // additem(ITEM_TM48)
-    // additem(ITEM_RARE_CANDY)
-    // setflag(FLAG_RARE_CANDY1_OBTAINED)
+    additem(ITEM_RARE_CANDY, 2)
+    setflag(FLAG_RARE_CANDY1_OBTAINED)
+    additem(ITEM_CHOICE_SPECS)
+    additem(ITEM_CHOICE_BAND)
+    additem(ITEM_CHOICE_SCARF)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -1128,30 +1158,50 @@ script EscapeRoom_EventScript_UndoUsedItems{
         setvar(VAR_0x8005, SPECIES_LIEPARD)
         setvar(VAR_0x8006, MOVE_THIEF)
     }
-    istaughtmovepresent(SPECIES_CACNEA, MOVE_THIEF)
+    istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_THIEF)
     if(var(VAR_RESULT) == TRUE){
         setflag(FLAG_CAN_UNDO_THIEF)
-        setvar(VAR_0x8005, SPECIES_CACNEA)
+        setvar(VAR_0x8005, SPECIES_ANNIHILAPE)
         setvar(VAR_0x8006, MOVE_THIEF)
     }
 
+    // check Secret Power
+    istaughtmovepresent(SPECIES_BAGON, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_SECRET_POWER)
+        setvar(VAR_0x8007, SPECIES_BAGON)
+        setvar(VAR_0x8008, MOVE_SECRET_POWER)
+    }
+    istaughtmovepresent(SPECIES_SHELGON, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_SECRET_POWER)
+        setvar(VAR_0x8007, SPECIES_SHELGON)
+        setvar(VAR_0x8008, MOVE_SECRET_POWER)
+    }
+    istaughtmovepresent(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_SECRET_POWER)
+        setvar(VAR_0x8007, SPECIES_PRIMEAPE)
+        setvar(VAR_0x8008, MOVE_SECRET_POWER)
+    }
+    istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_CAN_UNDO_SECRET_POWER)
+        setvar(VAR_0x8007, SPECIES_ANNIHILAPE)
+        setvar(VAR_0x8008, MOVE_SECRET_POWER)
+    }
+
     // check Cut
-    // istaughtmovepresent(SPECIES_FERROTHORN, MOVE_CUT)
-    // if(var(VAR_RESULT) == TRUE){
-    //     setflag(FLAG_CAN_UNDO_CUT)
-    //     setvar(VAR_0x8007, SPECIES_FERROTHORN)
-    //     setvar(VAR_0x8008, MOVE_CUT)
-    // }
     istaughtmovepresent(SPECIES_LIEPARD, MOVE_CUT)
     if(var(VAR_RESULT) == TRUE){
         setflag(FLAG_CAN_UNDO_CUT)
         setvar(VAR_0x8007, SPECIES_LIEPARD)
         setvar(VAR_0x8008, MOVE_CUT)
     }
-    istaughtmovepresent(SPECIES_CACNEA, MOVE_CUT)
+    istaughtmovepresent(SPECIES_BAGON, MOVE_CUT)
     if(var(VAR_RESULT) == TRUE){
         setflag(FLAG_CAN_UNDO_CUT)
-        setvar(VAR_0x8007, SPECIES_CACNEA)
+        setvar(VAR_0x8007, SPECIES_BAGON)
         setvar(VAR_0x8008, MOVE_CUT)
     }
 
@@ -1180,6 +1230,7 @@ script EscapeRoom_EventScript_UndoUsedItems{
 
     // clear flags
     clearflag(FLAG_CAN_UNDO_THIEF)
+    clearflag(FLAG_CAN_UNDO_SECRET_POWER)
     clearflag(FLAG_CAN_UNDO_CUT)
     clearflag(FLAG_CAN_UNDO_SKILL_SWAP)
     clearflag(FLAG_CAN_UNDO_EXP_CANDY)
@@ -1225,11 +1276,21 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
         dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoSkillSwap, OptionUndoExpCandy) 
         goto(DecodeMultiChoice)
     }
+    // Secret Power, Rare Candy
+    elif(flag(FLAG_CAN_UNDO_SECRET_POWER) && flag(FLAG_CAN_UNDO_RARE_CANDY)){
+        dynmultichoice(30, 8, FALSE, 6, 0, 0, OptionUndoSecretPower, OptionUndoRareCandy)
+        goto(DecodeMultiChoice)
+    }
 
     //// SINGLE CHOICE ////
     // Thief
     elif(flag(FLAG_CAN_UNDO_THIEF)){
         setflag(FLAG_UNDOING_MOVE_THIEF)
+        call(EscapeRoom_EventScript_AskUndoMoveTeach)
+        return
+    }
+    // Secret Power
+    elif(flag(FLAG_CAN_UNDO_SECRET_POWER)){
         call(EscapeRoom_EventScript_AskUndoMoveTeach)
         return
     }
@@ -1264,11 +1325,18 @@ script EscapeRoom_EventScript_UndoUsedItems_CreateMultichoice{
     }
 
     // decode multi choice selected option
-    // fixed order: Thief, Cut, Skill Swap, Rare Candy, Exp Candy
+    // fixed order: Thief, Secret Power, Cut, Skill Swap, Rare Candy, Exp Candy
     DecodeMultiChoice:
         if (flag(FLAG_CAN_UNDO_THIEF)) {
             if (var(VAR_RESULT) == 0) {
                 setflag(FLAG_UNDOING_MOVE_THIEF)
+                call(EscapeRoom_EventScript_AskUndoMoveTeach)
+                return
+            }
+            subvar(VAR_RESULT, 1)
+        }
+        if (flag(FLAG_CAN_UNDO_SECRET_POWER)) {
+            if (var(VAR_RESULT) == 0) {
                 call(EscapeRoom_EventScript_AskUndoMoveTeach)
                 return
             }
@@ -1316,6 +1384,35 @@ script EscapeRoom_EventScript_AskUndoMoveTeach{
         copyvar(VAR_0x8008, VAR_0x8006)
     }
 
+    // check if Bagon has evolved to Shelgon
+    if(var(VAR_0x8007) == SPECIES_BAGON){
+        checkpartymon(SPECIES_SHELGON)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_0x8007, SPECIES_SHELGON)
+        }
+    }
+    // check if Shelgon unevolved to Bagon
+    elif(var(VAR_0x8007) == SPECIES_SHELGON){
+        checkpartymon(SPECIES_BAGON)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_0x8007, SPECIES_BAGON)
+        }
+    }
+    // check if Primeape has evolved to Annihilape
+    if(var(VAR_0x8007) == SPECIES_PRIMEAPE){
+        checkpartymon(SPECIES_ANNIHILAPE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_0x8007, SPECIES_ANNIHILAPE)
+        }
+    }
+    // check if Annihilape unevolved to Primeape
+    elif(var(VAR_0x8007) == SPECIES_ANNIHILAPE){
+        checkpartymon(SPECIES_PRIMEAPE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_0x8007, SPECIES_PRIMEAPE)
+        }
+    }
+
     // buffer VAR_0x8007 and VAR_0x8008
     bufferspeciesname(STR_VAR_1, VAR_0x8007)
     buffermovename(STR_VAR_2, VAR_0x8008)
@@ -1360,6 +1457,16 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     replacemove2(VAR_0x8007, VAR_0x8008, VAR_0x8004)
     removetaughtmove(VAR_0x8007, VAR_0x8008)
 
+    // remove taught move from evolution forms as well
+    if(var(VAR_0x8007) == SPECIES_PRIMEAPE || var(VAR_0x8007) == SPECIES_ANNIHILAPE){
+        removetaughtmove(SPECIES_PRIMEAPE, VAR_0x8008)
+        removetaughtmove(SPECIES_ANNIHILAPE, VAR_0x8008)
+    }
+    if(var(VAR_0x8007) == SPECIES_BAGON || var(VAR_0x8007) == SPECIES_SHELGON){
+        removetaughtmove(SPECIES_BAGON, VAR_0x8008)
+        removetaughtmove(SPECIES_SHELGON, VAR_0x8008)
+    }
+
     // set species to another variable
     // this fixed the message buffer bug
     copyvar(VAR_0x8005, VAR_0x8007)
@@ -1367,6 +1474,9 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     // return item
     if(var(VAR_0x8008) == MOVE_THIEF){
         giveitem(ITEM_TM46)
+    }
+    elif(var(VAR_0x8008) == MOVE_SECRET_POWER){
+        giveitem(ITEM_TM43)
     }
     elif(var(VAR_0x8008) == MOVE_SKILL_SWAP){
         giveitem(ITEM_TM48)
@@ -1542,9 +1652,9 @@ script EscapeRoom_EventScript_UndoRareCandy{
     msgbox(AskUndoRareCandyDynamic, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
 
-        // check unevolve pokemon if Cacturne
-        if(var(VAR_0x8005) == SPECIES_CACNEA){
-            checkpartymon(SPECIES_CACTURNE)
+        // check unevolve pokemon if Shelgon
+        if(var(VAR_0x8005) == SPECIES_BAGON){
+            checkpartymon(SPECIES_SHELGON)
             if(var(VAR_RESULT) != PARTY_SIZE){
                 // set flag and var for unevolved message
                 setflag(FLAG_TEMP_1)
@@ -1579,16 +1689,16 @@ script EscapeRoom_EventScript_UndoRareCandy{
 
         // Pokemon unevolved rare candy undone message
         else{
-            // Cacturne
+            // Shelgon
             if(flag(FLAG_TEMP_1)){
                 // buffer names for message
-                checkpartymon(SPECIES_CACTURNE) 
+                checkpartymon(SPECIES_SHELGON) 
                 copyvar(VAR_0x8004, VAR_RESULT) 
                 special(BufferMonNickname) 
-                bufferspeciesname(STR_VAR_2, SPECIES_CACNEA)
+                bufferspeciesname(STR_VAR_2, SPECIES_BAGON)
 
-                // unevolve Cacturne
-                unEvolveMonTo(SPECIES_CACTURNE, SPECIES_CACNEA)
+                // unevolve Shelgon
+                unEvolveMonTo(SPECIES_SHELGON, SPECIES_BAGON)
             }
             // Annihilape
             if(flag(FLAG_TEMP_2)){
@@ -1607,6 +1717,17 @@ script EscapeRoom_EventScript_UndoRareCandy{
 
         // level down Pokemon
         levelDownMon(VAR_0x8005)
+
+        // remove Bagon Flamethrower
+        if(var(VAR_0x8005) == SPECIES_BAGON){
+            checkpartymove(MOVE_FLAMETHROWER)
+            if(var(VAR_RESULT) == 0){
+                replacemove(0, MOVE_FLAMETHROWER, MOVE_NONE)
+            }
+            elif(var(VAR_RESULT) == 1){
+                replacemove(1, MOVE_FLAMETHROWER, MOVE_NONE)
+            }
+        }
 
         // reset vars
         if(var(VAR_RARE_CANDY_1_USED_ON) == VAR_0x8005){
@@ -2058,7 +2179,7 @@ script EscapeRoom_EventScript_ShopNPC{
 mart EscapeRoom_Shop_items{
     ITEM_CUSTAP_BERRY       // 2000  sold out between trainer3 and Liepard
     ITEM_ESCAPE_ROPE        // 2000  
-    ITEM_MENTAL_HERB        // 2000  sold out between ability capsule and trainer6
+    ITEM_MENTAL_HERB        // 2000
     ITEM_FLOAT_STONE        // 2000
     ITEM_RING_TARGET        // 2000 
     ITEM_TM46               // 2000 
@@ -2071,7 +2192,7 @@ script EscapeRoom_MoveDeleterNPC{
     lockall
     faceplayer
 
-    // stop deleting moves once Cacnea is obtained
+    // stop deleting moves once Bagon is obtained
     if(flag(FLAG_AIPOM_LIEPARD_TRADE_ACCEPTED)){
         msgbox(MoveDeleterOutOfBusiness, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -2382,99 +2503,6 @@ script EscapeRoom_TryBuyStonesPC_TryBuyMoonStone{
 }
 
 
-// SECRET POWER NPC //
-
-script EscapeRoom_SecretGarden_SecretPowerNPC{
-    lockall
-    faceplayer
-
-    // end if Secret Power already learned
-    if(flag(FLAG_SECRET_POWER_LEARNED) || flag(FLAG_SECRET_POWER_COMPLETED)){
-        msgbox(SecretGardenNPC_EndOfScriptMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-        releaseall
-        end
-    }
-
-    // start message
-    msgbox(SecretGardenNPC_AskLovePlants, MSGBOX_YESNO)
-    if(var(VAR_RESULT) == NO){
-        msgbox(SecretGardenNPC_PlantLove_No, MSGBOX_DEFAULT)
-        waitmessage
-    }
-    else{
-        // no Thief in party
-        checkpartymove(MOVE_THIEF)
-        if(var(VAR_RESULT) == PARTY_SIZE){
-            msgbox(SecretGardenNPC_PlantLove_Yes, MSGBOX_DEFAULT)
-            waitmessage
-            lockall
-
-            // teach Secret Power
-            call(EscapeRoom_SecretGarden_TeachSecretPower)
-            
-            msgbox(SecretGardenNPC_PostTeachMessage, MSGBOX_AUTOCLOSE)
-            waitmessage
-        }
-        // Pokémon knows Thief
-        else{
-            msgbox(SecretGardenNPC_PlantLove_Yes, MSGBOX_DEFAULT)
-            waitmessage
-            lockall
-
-            // ask remove Thief
-            msgbox(SecretGardenNPC_PlantLove_Yes_Thief, MSGBOX_YESNO)
-            if(var(VAR_RESULT) == YES){
-                // teach Secret Power
-                call(EscapeRoom_SecretGarden_TeachSecretPower)
-                
-                msgbox(SecretGardenNPC_PostTeachMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-            else{
-                msgbox(SecretGardenNPC_TeachDeclinedMessage, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-        }
-    }
-    releaseall
-}
-
-script EscapeRoom_SecretGarden_TeachSecretPower{
-    // remove Thief
-    checkpartymove(MOVE_THIEF)
-    if(var(VAR_RESULT) != PARTY_SIZE){
-        if(var(VAR_RESULT) == 0){
-            replacemove(0, MOVE_THIEF, MOVE_NONE)
-        }
-        elif(var(VAR_RESULT) == 1){
-            replacemove(1, MOVE_THIEF, MOVE_NONE)
-        }
-        setflag(FLAG_THIEF_REPLACED)
-    }
-
-    // buffer pokemon name and teach move
-    checkpartymon(SPECIES_CACNEA)
-    if(var(VAR_RESULT) != PARTY_SIZE){
-        copyvar(VAR_0x8004, VAR_RESULT) // store monslot
-        addmonmove(SPECIES_CACNEA, MOVE_SECRET_POWER)
-    }
-    checkpartymon(SPECIES_CACTURNE)
-    if(var(VAR_RESULT) != PARTY_SIZE){
-        copyvar(VAR_0x8004, VAR_RESULT) // store monslot
-        addmonmove(SPECIES_CACTURNE, MOVE_SECRET_POWER)
-    }
-
-    playfanfare(MUS_LEVEL_UP)
-    special(BufferMonNickname)
-    msgbox(MonLearnedSecretPower, MSGBOX_DEFAULT)
-    waitfanfare
-    lockall
-
-    // set flag
-    setflag(FLAG_SECRET_POWER_LEARNED)
-}
-
 // SECRET GARDEN GUARD //
 
 script EscapeRoom_SecretGarden_GateEntryNPC_KeepOut{
@@ -2526,7 +2554,7 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
     lockall // to be sure
 
     // follow up message
-    if(!flag(FLAG_SECRET_POWER_LEARNED) || flag(FLAG_SECRET_POWER_COMPLETED)){
+    if(!flag(FLAG_SECRET_POWER_OBTAINED) || flag(FLAG_SECRET_POWER_COMPLETED)){
         msgbox(SecretGardenGuardStayOut, MSGBOX_AUTOCLOSE)
         waitmessage
     }
@@ -2535,49 +2563,83 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
         waitmessage
         lockall
 
-        // remove secret power
-        checkpartymove(MOVE_SECRET_POWER)
-        if(var(VAR_RESULT) == 0){
-            replacemove(0, MOVE_SECRET_POWER, MOVE_NONE)
-        }
-        elif(var(VAR_RESULT) == 1){
-            replacemove(1, MOVE_SECRET_POWER, MOVE_NONE)
-        }
-        clearflag(FLAG_SECRET_POWER_LEARNED)
+        clearflag(FLAG_TEMP_1) // will notify if Secret Power was removed as item
 
-
-        // add back Thief if necessary
-        clearflag(FLAG_TEMP_2)
-        if(flag(FLAG_THIEF_REPLACED)){
-            addmonmove(SPECIES_CACNEA, MOVE_THIEF)
-            addmonmove(SPECIES_CACTURNE, MOVE_THIEF)
-            clearflag(FLAG_THIEF_REPLACED)
-            setflag(FLAG_TEMP_2)
+        // remove TM Secret Power items
+        checkpartyitem(0)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
+            removepartyitem(0)
+            setflag(FLAG_TEMP_1)
         }
-
-        // secret power removed message
-        checkpartymon(SPECIES_CACNEA)
-        if(var(VAR_RESULT) != PARTY_SIZE){
-            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        checkpartyitem(1)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
+            removepartyitem(1)
+            setflag(FLAG_TEMP_1)
         }
-        checkpartymon(SPECIES_CACTURNE)
-        if(var(VAR_RESULT) != PARTY_SIZE){
-            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        checkitem(ITEM_TM43)
+        if(var(VAR_RESULT) == TRUE){
+            removeitem(ITEM_TM43)
+            setflag(FLAG_TEMP_1)
         }
 
-        playse(SE_SUCCESS)
-        waitse
-        special(BufferMonNickname)
-        msgbox(MonForgotSecretPower, MSGBOX_DEFAULT)
-        waitmessage
-        lockall
+        // if Secret Power not held as TM, but move is learned:
+        if(!flag(FLAG_TEMP_1)){
 
-        // thief restored message
-        if(flag(FLAG_TEMP_2)){
-            msgbox(MonThiefRestored, MSGBOX_AUTOCLOSE)
+            // check Primeape
+            checkpartymonmove(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
+            if(var(VAR_RESULT) != PARTY_SIZE){
+                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+
+                // remove taught move
+                removetaughtmove(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
+            }
+
+            // check Annihilape
+            checkpartymonmove(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
+            if(var(VAR_RESULT) != PARTY_SIZE){
+                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+
+                // remove taught move
+                removetaughtmove(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
+            }
+
+            // check Bagon
+            checkpartymonmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+            if(var(VAR_RESULT) != PARTY_SIZE){
+                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+
+                // remove taught move
+                removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+            }
+
+            // check Shelgon
+            checkpartymonmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+            if(var(VAR_RESULT) != PARTY_SIZE){
+                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+
+                // remove taught move
+                removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+            }
+
+            // do move unlearned message
+            playse(SE_SUCCESS)
+            waitse
+            special(BufferMonNickname)
+            msgbox(MonForgotSecretPower, MSGBOX_AUTOCLOSE)
             waitmessage
-            lockall
+            
+            // actually unlearn Secret Power
+            checkpartymove(MOVE_SECRET_POWER)
+            if(var(VAR_RESULT) == 0){
+                replacemove(0, MOVE_SECRET_POWER, MOVE_NONE)
+            }
+            elif(var(VAR_RESULT) == 1){
+                replacemove(1, MOVE_SECRET_POWER, MOVE_NONE)
+            }
         }
+
+        clearflag(FLAG_SECRET_POWER_OBTAINED)
+        lockall
     }
 
     // move player away
@@ -2633,7 +2695,7 @@ script EscapeRoom_AnnihilapeHintNPC{
 
 script EscapeRoom_TabletsHintNPC{
     lock
-    if(flag(FLAG_MAP_SWITCH_4_FOUND) == FALSE){
+    if(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
         msgbox(FourTabletsHintMessage1, MSGBOX_NPC)
     }
     elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
@@ -2786,8 +2848,14 @@ script EscapeRoom_EventScript_Trainer8{
         event_script=EscapeRoom_EventScript_Trainer8PostBattle,
     )
 
-    msgbox(Trainer8_PostBattle, MSGBOX_AUTOCLOSE)
-    waitmessage
+    // select choice items
+    lockall
+    if(!flag(FLAG_CHOICE_ITEM_OBTAINED)){
+        msgbox(ChoiceItemsFirstMessage, MSGBOX_DEFAULT)
+        waitmessage   
+    }
+    call(EscapeRoom_EventScript_GetChoiceItem)
+    releaseall
     end
 }
 
@@ -3242,12 +3310,12 @@ script EscapeRoom_EventScript_Trainer8PostBattle{
 
     // ERROR CHECK
     // - 1500 money
-    // - Cacnea learned Cut
+    // - Bagon learned Cut
     // - Trainer7b not defeated
     // - Trainer10 not defeated
     checkexactmoney(1500)
     copyvar(VAR_TEMP_4, VAR_RESULT)
-    istaughtmovepresent(SPECIES_CACNEA, MOVE_CUT)
+    istaughtmovepresent(SPECIES_BAGON, MOVE_CUT)
     if(var(VAR_RESULT) == FALSE ||
        var(VAR_TEMP_4) == FALSE ||
        flag(FLAG_TRAINER7B_DEFEATED) ||
@@ -3257,10 +3325,16 @@ script EscapeRoom_EventScript_Trainer8PostBattle{
         msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
         waitmessage
     }
-    releaseall
 
-    // remove Cacnea Cut undo
-    removetaughtmove(SPECIES_CACNEA, MOVE_CUT)
+    // remove Bagon Cut undo
+    removetaughtmove(SPECIES_BAGON, MOVE_CUT)
+
+    //// Choice item selection ////
+    msgbox(ChoiceItemsFirstMessage, MSGBOX_DEFAULT)
+    waitmessage   
+    call(EscapeRoom_EventScript_GetChoiceItem) // NOTE: this script can "end"
+
+    releaseall
 }
 
 script EscapeRoom_EventScript_Trainer9PostBattle{
@@ -3296,12 +3370,12 @@ script EscapeRoom_EventScript_Trainer10PostBattle{
     setflag(FLAG_TRAINER10_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
 
-    // remove rare candy3 undo (for Cacnea)
+    // remove rare candy3 undo (for Bagon)
     setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
 
     // ERROR CHECK
     // - 500 money
-    // - Cacnea lvl 42
+    // - Bagon lvl 35
     // - Annihilape
     // - Trainer7b not defeated
     // - Trainer8 defeated
@@ -3310,8 +3384,8 @@ script EscapeRoom_EventScript_Trainer10PostBattle{
     copyvar(VAR_TEMP_4, VAR_RESULT)
     checkpartymon(SPECIES_ANNIHILAPE)
     copyvar(VAR_TEMP_5, VAR_RESULT)
-    checkpartymonlevel(42)
-    if(var(VAR_RESULT) == PARTY_SIZE || var(VAR_0x8004) != SPECIES_CACNEA ||
+    checkpartymonlevel(35)
+    if(var(VAR_RESULT) == PARTY_SIZE || var(VAR_0x8004) != SPECIES_BAGON ||
        var(VAR_TEMP_4) == FALSE ||
        var(VAR_TEMP_5) == PARTY_SIZE ||
        flag(FLAG_TRAINER7B_DEFEATED) ||
@@ -3585,6 +3659,109 @@ script EscapeRoom_EventScript_SellDunsparce{
 }
 
 
+//// CHOICE ITEM SCRIPT ////
+
+script EscapeRoom_EventScript_GetChoiceItem{
+    // ask which choice item
+    msgbox(ChoiceItemsWhichOne, MSGBOX_DEFAULT)
+    waitmessage
+
+    // option menu
+    dynmultichoice(30, 6, FALSE, 6, 0, 0, OptionChoiceBand, OptionChoiceSpecs, OptionChoiceScarf) 
+
+    // decode options into VAR_0x8006
+    if(var(VAR_RESULT) == 0){
+        setvar(VAR_0x8006, ITEM_CHOICE_BAND)
+    }
+    elif(var(VAR_RESULT) == 1){
+        setvar(VAR_0x8006, ITEM_CHOICE_SPECS)
+    }
+    elif(var(VAR_RESULT) == 2){
+        setvar(VAR_0x8006, ITEM_CHOICE_SCARF)
+    }
+    else{
+        msgbox(ChoiceItemsComeAgain, MSGBOX_DEFAULT)
+        waitmessage        
+        return
+    }
+
+    // end script if the player already owns the item
+    call(EscapeRoom_EventScript_EndIfAlreadyHasChoiceItem)
+
+    // remove any other choice item
+    call(EscapeRoom_EventScript_RemoveChoiceItem)
+
+    // give the new item
+    giveitem(VAR_0x8006)
+
+    // message
+    if(flag(FLAG_CHOICE_ITEM_OBTAINED)){
+        msgbox(ChoiceItemsSwapped, MSGBOX_DEFAULT)
+        waitmessage  
+    }
+    else{
+        setflag(FLAG_CHOICE_ITEM_OBTAINED)
+    }
+}
+
+script EscapeRoom_EventScript_EndIfAlreadyHasChoiceItem{
+    clearflag(FLAG_TEMP_1)
+
+    // bag check
+    checkitem(VAR_0x8006)
+    if(var(VAR_RESULT) == TRUE){
+        setflag(FLAG_TEMP_1)
+    }
+    // party checks
+    checkpartyitem(0)
+    if(var(VAR_RESULT) == TRUE){
+        compare_var_to_var(VAR_0x8005, VAR_0x8006)
+        goto_if_ne(NotEqual1)
+        setflag(FLAG_TEMP_1)
+
+        NotEqual1:
+    }
+    checkpartyitem(1)
+    if(var(VAR_RESULT) == TRUE){
+        compare_var_to_var(VAR_0x8005, VAR_0x8006)
+        goto_if_ne(NotEqual2)
+        setflag(FLAG_TEMP_1)
+
+        NotEqual2:
+    }
+
+    // player already has the item: END
+    if(flag(FLAG_TEMP_1)){
+        msgbox(ChoiceItemsAlreadyHaveThis, MSGBOX_DEFAULT)
+        waitmessage
+        releaseall
+        end
+    }
+}
+
+script EscapeRoom_EventScript_RemoveChoiceItem{
+    removeitem(ITEM_CHOICE_BAND)
+    removeitem(ITEM_CHOICE_SPECS)
+    removeitem(ITEM_CHOICE_SCARF)
+
+    checkpartyitem(0)
+    if(var(VAR_RESULT) == TRUE && 
+      (var(VAR_0x8005) == ITEM_CHOICE_BAND || 
+       var(VAR_0x8005) == ITEM_CHOICE_SPECS ||
+       var(VAR_0x8005) == ITEM_CHOICE_SCARF)){
+        removepartyitem(0)
+    }
+
+    checkpartyitem(1)
+    if(var(VAR_RESULT) == TRUE && 
+      (var(VAR_0x8005) == ITEM_CHOICE_BAND || 
+       var(VAR_0x8005) == ITEM_CHOICE_SPECS ||
+       var(VAR_0x8005) == ITEM_CHOICE_SCARF)){
+        removepartyitem(1)
+    }
+}
+
+
 //// ITEMS ////
 
 script EscapeRoom_EventScript_FindLiepardCollar{
@@ -3628,24 +3805,24 @@ script EscapeRoom_EventScript_FindPrimeape{
         ball=ITEM_TIMER_BALL,
         item=ITEM_RARE_CANDY,
         abilityNum=2, // Defiant
-        nature=15, // Modest 
+        nature=NATURE_CALM,
         gender=MON_FEMALE,
-        move1=MOVE_TAUNT,
-        move2=MOVE_RAGE_FIST,
-        move3=MOVE_COUNTER,
+        move1=MOVE_RAGE_FIST,
+        move2=MOVE_TAUNT,
+        move3=MOVE_NONE,
         move4=MOVE_NONE,
         // EVs:
-        atkEv=0, 
-        spAtkEv=0,
-        speedEv=0,
+        hpEv=252,
+        defEv=0,
+        spDefEv=8
         // IVs:
         hpIv=31,
-        atkIv=31,
+        atkIv=0,
         defIv=31,
-        speedIv=31, // outspeed dusknoir
         spAtkIv=31,
-        spDefIv=31
-    )   
+        spDefIv=31,
+        speedIv=10
+    )  
 
     // remove item
     removeobject(LOCALID_PRIMEAPE_BALL)
@@ -3667,6 +3844,14 @@ script EscapeRoom_EventScript_FindPrimeape{
         call(Common_EventScript_NameReceivedPartyMon)
     }
     closemessage
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindTMSecretPower{
+    lockall
+    finditem(ITEM_TM43)
+    removeobject(LOCALID_SECRET_POWER_NPC)
+    setflag(FLAG_SECRET_POWER_OBTAINED)
     releaseall
 }
 
@@ -4686,6 +4871,9 @@ text AntiSoftlockItemUndoWhichItem{
 text OptionUndoThief{
     "Undo TM Thief"
 }
+text OptionUndoSecretPower{
+    "Undo TM Secret Power"
+}
 text OptionUndoCut{
     "Undo HM Cut"
 }
@@ -4840,10 +5028,10 @@ text FourTabletsHintMessage1{
 text FourTabletsHintMessage2{
     "Wait...\n"
     "You actually found all four!?\p"
-    "I suppose now I can stop looking and\n"
-    "get back to my regular job.\p"
-    "Not sure what we're serving today.\n"
-    "I'll have to go through the menus."
+    "I suppose now I can stop searching\n"
+    "and get back to my job.\p"
+    "Not sure what I'm serving today,\n"
+    "I'll have to look through the menus."
 }
 
 text FourTabletsHintMessage3{
@@ -4927,55 +5115,6 @@ text RockSmashNPCFarewellMsg{
 
 
 // SECRET GARDEN
-// secret power npc
-text SecretGardenNPC_AskLovePlants{
-    "I love plants!\p"
-    "Do you love plants?"
-}
-
-text SecretGardenNPC_PlantLove_No{
-    "Aw, that's too bad."
-}
-
-text SecretGardenNPC_PlantLove_Yes{
-    "Of course you do!\p"
-
-    "Let me teach your cactus how to use\n"
-    "the power of its surroundings.\p"
-
-    "It's a gift from the secret garden."
-}
-
-text SecretGardenNPC_PlantLove_Yes_Thief{
-    "Oh... your Pokémon knows Thief.\p"
-
-    "The garden usually doesn't share its\n"
-    "secrets with those who steal.\p"
-
-    "I could make an exception, but Thief\n"
-    "will be forgotten.\p"
-
-    "Is that alright?"
-
-}
-
-text SecretGardenNPC_TeachDeclinedMessage{
-    "It's up to you."
-}
-
-text SecretGardenNPC_PostTeachMessage{
-    "Don't tell anyone I taught you this\n"
-    "move!"
-}
-
-text SecretGardenNPC_EndOfScriptMessage{
-    "It's our little secret."
-}
-
-text MonLearnedSecretPower{
-    "{STR_VAR_1} learned Secret Power!"
-}
-
 // guard
 text SecretGardenGuardKeepOut{
     "You've found our secret garden!\p"
@@ -4993,16 +5132,11 @@ text SecretGardenGuardStayOut{
 text SecretGardenGuardRemoveSecretPower{
     "I cannot let you leave with that what\n"
     "belongs to the garden.\p"
-    "I will have to take Secret Power away\n"
-    "from your Pokémon."
+    "I'll have to take TM43 away from you."
 }
 
 text MonForgotSecretPower{
     "{STR_VAR_1}'s Secret Power was removed."
-}
-
-text MonThiefRestored{
-    "{STR_VAR_1}'s Thief was restored."
 }
 
 
@@ -5015,6 +5149,45 @@ text MartNPC_AskToShop{
 
 text MartNPC_SayGoodbye{
     "See ya!"
+}
+
+
+// CHOICE ITEM SELECTION
+text ChoiceItemsFirstMessage{
+    "Impressive, you saw right through my\n"
+    "facade!\p"
+    "I think you've earned a reward!\n"
+    "Take your pick of my Choice items.\p"
+    "You can always return if you'd like to\n"
+    "try a different one."
+}
+
+text ChoiceItemsWhichOne{
+    "Which item would you like to have?"
+}
+
+text ChoiceItemsComeAgain{
+    "Come back anytime."
+}
+
+text ChoiceItemsSwapped{
+    "You returned the other Choice item."
+}
+
+text ChoiceItemsAlreadyHaveThis{
+    "You already have this one."
+}
+
+text OptionChoiceBand{
+    "Choice Band"
+}
+
+text OptionChoiceSpecs{
+    "Choice Specs"
+}
+
+text OptionChoiceScarf{
+    "Choice Scarf"
 }
 
 // PRIMEAPE ITEM BALL
@@ -5208,12 +5381,11 @@ text Trainer0_Intro{
 }
 
 text Trainer0_Outro{
-    "One down, eleven to go."
+    "Sharing is caring!\n"
 }
 
 text Trainer0_PostBattle{
-    "Sharing is caring.\n"
-    "Can you see the appeal?"
+    "One down, eleven to go."
 }
 
 
@@ -5373,7 +5545,12 @@ text Trainer8_Intro{
     "Spooky, scary skeletons,\n"
     "send shivers down your spine.\p"
     "Everyone's got ghost-type mons,\n"
-    "but you haven't yet fought mine."
+    "you haven't yet seen mine."
+
+    // "Did you already fight the Jigglypuff?\n"
+    // "It uses Hidden Power!\p"
+    // "I'm not sure, but I think it might be\n"
+    // "Dark typing."
 }
 
 text Trainer8_Outro{
@@ -5381,9 +5558,7 @@ text Trainer8_Outro{
 }
 
 text Trainer8_PostBattle{
-    "Have you been to the secret garden?\p"
-    "There's an easy way in, but what's the\n"
-    "easy way out?"
+    "" // never used
 }
 
 
@@ -5405,14 +5580,14 @@ text Trainer9_PostBattle{
 
 // TRAINER 10
 text Trainer10_Intro{
-    "I've decided to let my anger run free\n"
-    "and have it push me toward change.\p"
-    "I call it character development, but\n"
-    "perhaps it's not for everyone."
+    "Darwinism?\n"
+    "More like schmarminism.\p"
+    "My Kecleon doesn't need to change,\n"
+    "he's fire!"
 }
 
 text Trainer10_Outro{
-    "Whatever happened to Cacturne?"
+    "What happened to Shelgon?"
 }
 
 text Trainer10_PostBattle{
