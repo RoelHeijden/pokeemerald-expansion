@@ -42815,7 +42815,7 @@ F_TRAINER_FEMALE |
 #line 17118
             .gender = TRAINER_MON_FEMALE,
 #line 17120
-            .ev = TRAINER_PARTY_EVS(148, 156, 204, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(252, 156, 60, 0, 0, 0),
 #line 17122
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 1, 13, 31),
 #line 17119
@@ -42836,7 +42836,7 @@ F_TRAINER_FEMALE |
 #line 17125
             .gender = TRAINER_MON_MALE,
 #line 17128
-            .ev = TRAINER_PARTY_EVS(0, 0, 252, 0, 200, 0),
+            .ev = TRAINER_PARTY_EVS(8, 0, 248, 0, 252, 0),
 #line 17130
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 30, 30, 17),
 #line 17126
@@ -42844,7 +42844,7 @@ F_TRAINER_FEMALE |
 #line 17127
             .lvl = 40,
 #line 17129
-            .nature = NATURE_MODEST,
+            .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17131

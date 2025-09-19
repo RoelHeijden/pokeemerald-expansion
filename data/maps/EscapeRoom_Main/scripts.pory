@@ -4894,7 +4894,7 @@ text AskUndoMoveTeachDynamic{
 
 text AskUndoRareCandyDynamic{
     "Do you want to undo the Rare Candy\n"
-    "use on {STR_VAR_1}?"
+    "used on {STR_VAR_1}?"
 }
 
 text MoveTeachUndoneMessage{
@@ -5373,11 +5373,11 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 0
 text Trainer0_Intro{
-    // "It takes three to find the groove,\n"
-    // "but only one shall bear the move."
-    "You may think you are ready,\n"
-    "but you really need three.\l"
-    "Which of your Pokémon holds the key?"
+    "It takes three to find the groove,\n"
+    "but only one can have the move."
+    // "You may think you are ready,\n"
+    // "but you really need three.\l"
+    // "Which of your Pokémon has the key?"
 }
 
 text Trainer0_Outro{
@@ -5544,8 +5544,8 @@ text Trainer7B_PostBattle{
 text Trainer8_Intro{
     "Spooky, scary skeletons,\n"
     "send shivers down your spine.\p"
-    "Everyone's got ghost-type mons,\n"
-    "you haven't yet seen mine."
+    "Ghost type mons are everywhere,\n"
+    "you still haven't seen mine."
 
     // "Did you already fight the Jigglypuff?\n"
     // "It uses Hidden Power!\p"

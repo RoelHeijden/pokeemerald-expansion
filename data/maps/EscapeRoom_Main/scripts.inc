@@ -7097,7 +7097,7 @@ AskUndoMoveTeachDynamic::
 AskUndoRareCandyDynamic::
 # 4895 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to undo the Rare Candy\n"
-	.string "use on {STR_VAR_1}?$"
+	.string "used on {STR_VAR_1}?$"
 
 MoveTeachUndoneMessage::
 # 4900 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -7524,9 +7524,8 @@ DoubleBattle_NotEnoughMons::
 
 Trainer0_Intro::
 # 5375 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "You may think you are ready,\n"
-	.string "but you really need three.\l"
-	.string "Which of your Pokémon holds the key?$"
+	.string "It takes three to find the groove,\n"
+	.string "but only one can have the move.$"
 
 Trainer0_Outro::
 # 5383 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -7674,8 +7673,8 @@ Trainer8_Intro::
 # 5544 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Spooky, scary skeletons,\n"
 	.string "send shivers down your spine.\p"
-	.string "Everyone's got ghost-type mons,\n"
-	.string "you haven't yet seen mine.$"
+	.string "Ghost type mons are everywhere,\n"
+	.string "you still have not seen mine.$"
 
 Trainer8_Outro::
 # 5556 "data/maps/EscapeRoom_Main/scripts.pory"

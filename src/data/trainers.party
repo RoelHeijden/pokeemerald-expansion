@@ -17117,16 +17117,16 @@ AI: AI_FLAG_TRAINER10
 
 Sentret (F)  
 Ability: Run Away  
-EVs: 148 HP / 156 Atk / 204 Def  
+EVs: 252 HP / 156 Atk / 60 Def  
 Relaxed Nature  
-IVs: 13 SpA / 1 Spe  
-- Assist  
+IVs: 13 SpA / 1 Spe   
+- Assist
 
 Kecleon (M)  
 Ability: Color Change  
 Level: 40  
-EVs: 252 Def / 200 SpA  
-Modest Nature  
+EVs: 8 HP / 248 Def / 252 SpA  
+Bold Nature  
 IVs: 0 Atk / 30 SpA / 17 SpD / 30 Spe  
 - Hidden Power
 

@@ -479,12 +479,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     [MOVE_CUT] =
     {
         .name = COMPOUND_STRING("Cut"),
-        // .description = COMPOUND_STRING(
-        //     "Cuts the foe with sharp\n"
-        //     "idk idk idk."),
         .description = COMPOUND_STRING(
             "Cuts the foe with sharp\n"
-            "scythes, claws, etc."),
+            "scythes, dragon claws, etc."),
+        // .description = COMPOUND_STRING(
+        //     "Cuts the foe with sharp\n"
+        //     "scythes, claws, etc."),
         .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_NORMAL,
@@ -1451,7 +1451,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 10,
         }),
-        .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        // .contestEffect = CONTEST_EFFECT_HIGHLY_APPEALING,
+        .contestEffect = CONTEST_EFFECT_ENERGY_BALL_HINT, // CHANGED
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
         .contestComboMoves = {COMBO_STARTER_SUNNY_DAY},
@@ -1801,11 +1802,8 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     {
         .name = COMPOUND_STRING("Counter"),
         .description = COMPOUND_STRING(
-            "Returns a physical hit with\n"
-            "double damage at the twins."),
-        // .description = COMPOUND_STRING(
-            // "Retaliates any physical hit\n"
-        //     "with double the power."),
+            "Retaliates any physical hit\n"
+            "with double the power."),
         .effect = EFFECT_COUNTER,
         .power = 1,
         .type = TYPE_FIGHTING,
@@ -10398,7 +10396,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
             .moveEffect = MOVE_EFFECT_SP_DEF_MINUS_1,
             .chance = 10,
         }),
-        .contestEffect = CONTEST_EFFECT_ENERGY_BALL_HINT, // ADDED
+        .contestEffect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS, // changed but forgot which was original
         .contestCategory = CONTEST_CATEGORY_BEAUTY,
         .contestComboStarterId = 0,
         .contestComboMoves = {COMBO_STARTER_GROWTH},

@@ -739,9 +739,9 @@ const u8 *const gContestEffectDescriptionPointers[] =
     [CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED]          = COMPOUND_STRING("The appeal works best the\nmore the crowd is excited."),
     [CONTEST_EFFECT_DONT_EXCITE_AUDIENCE]                  = COMPOUND_STRING("Temporarily stops the\ncrowd from growing excited."),
     [CONTEST_EFFECT_SKILL_SWAP_HINT]                       = COMPOUND_STRING("Lightningrod is annoying.\nUse Skill Swap!"), // ADDED
-    [CONTEST_EFFECT_GRASSY_TERRAIN_HINT]                   = COMPOUND_STRING("Used on turn 1 in two out\nof three trainer battles."), // ADDED
+    [CONTEST_EFFECT_GRASSY_TERRAIN_HINT]                   = COMPOUND_STRING("Used on turn 1 in two out\nof the trainer battles."), // ADDED
     [CONTEST_EFFECT_SLEEP_TALK_HINT]                       = COMPOUND_STRING("Incompatible with Assist."), // ADDED
-    [CONTEST_EFFECT_ENERGY_BALL_HINT]                      = COMPOUND_STRING("Cacturne used Energy Ball?\nThat's not right."), // ADDED
+    [CONTEST_EFFECT_ENERGY_BALL_HINT]                      = COMPOUND_STRING("Shelgon used Flamethrower!\nOh, it doesn't?"), // ADDED
 };
 
 const u8 *const gContestMoveTypeTextPointers[] =

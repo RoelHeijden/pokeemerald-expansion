@@ -223,38 +223,38 @@ void NewGameInitData(void)
     DecorationAdd(DECOR_SAND_ORNAMENT);
     DecorationAdd(DECOR_BREAKABLE_DOOR);
     // DecorationAdd(DECOR_SLIDE);
-    // DecorationAdd(DECOR_RED_TENT);
+    DecorationAdd(DECOR_RED_TENT);
 
-    DecorationAdd(DECOR_SPIKES_MAT);
-    // DecorationAdd(DECOR_SURF_MAT);
-    DecorationAdd(DECOR_ATTRACT_MAT);
+    DecorationAdd(DECOR_FIRE_BLAST_MAT);
+    DecorationAdd(DECOR_FIRE_CUSHION);
+    // DecorationAdd(DECOR_ATTRACT_MAT);
     // DecorationAdd(DECOR_GRASS_CUSHION);
 
-    DecorationAdd(DECOR_GREEN_POSTER);
-    DecorationAdd(DECOR_SEA_POSTER);
+    DecorationAdd(DECOR_RED_POSTER);
     // DecorationAdd(DECOR_CUTE_POSTER);
     // DecorationAdd(DECOR_SKY_POSTER);
 
-    DecorationAdd(DECOR_TROPICAL_PLANT);
-    DecorationAdd(DECOR_BIG_PLANT);
+    DecorationAdd(DECOR_RED_PLANT);
+    // DecorationAdd(DECOR_BIG_PLANT);
     // DecorationAdd(DECOR_GORGEOUS_PLANT);
 
     // DecorationAdd(DECOR_WYNAUT_DOLL);
-    DecorationAdd(DECOR_LOTAD_DOLL);
-    DecorationAdd(DECOR_TREECKO_DOLL);
-    DecorationAdd(DECOR_DITTO_DOLL); // named: Cacnea doll 
-    DecorationAdd(DECOR_TOTODILE_DOLL);
+    // DecorationAdd(DECOR_LOTAD_DOLL);
+    // DecorationAdd(DECOR_TOTODILE_DOLL);
+    // DecorationAdd(DECOR_DITTO_DOLL); 
+    DecorationAdd(DECOR_KECLEON_DOLL);
     // DecorationAdd(DECOR_VENUSAUR_DOLL);
-    DecorationAdd(DECOR_MEOWTH_DOLL);
+    // DecorationAdd(DECOR_MEOWTH_DOLL);
     // DecorationAdd(DECOR_DUSKULL_DOLL);
-    DecorationAdd(DECOR_REGIROCK_DOLL);
+    // DecorationAdd(DECOR_REGIROCK_DOLL);
 
-    DecorationAdd(DECOR_POKEMON_DESK);
-    DecorationAdd(DECOR_COMFORT_CHAIR);
+    // DecorationAdd(DECOR_POKEMON_DESK);
+    // DecorationAdd(DECOR_COMFORT_CHAIR);
     // DecorationAdd(DECOR_HARD_CHAIR);
 
+    DecorationAdd(DECOR_RED_BRICK);
     DecorationAdd(DECOR_RED_BALLOON);
-    DecorationAdd(DECOR_BLUE_BALLOON);
+    // DecorationAdd(DECOR_BLUE_BALLOON);
     // DecorationAdd(DECOR_YELLOW_BALLOON);
 
     // DecorationAdd(DECOR_C_LOW_NOTE_MAT);
