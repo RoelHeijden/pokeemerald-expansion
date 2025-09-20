@@ -5582,11 +5582,12 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 // ADDED
 static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
 {
-    // only store: Thief, Cut, Skill Swap, or Secret Power
+    // only store: Thief, Cut, Skill Swap, Secret Power, or Flamethrower
     if (newMove == MOVE_THIEF 
     || newMove == MOVE_CUT 
     || newMove == MOVE_SKILL_SWAP 
-    || newMove == MOVE_SECRET_POWER) {
+    || newMove == MOVE_SECRET_POWER
+    || newMove == MOVE_FLAMETHROWER) {
     } else {
         return;
     }
@@ -5615,6 +5616,17 @@ static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
         }
     }
 }
+
+
+// ADDED special
+void Special_AddTaughtMove(void)
+{
+    u16 species = gSpecialVar_0x8007;
+    u16 oldMove = gSpecialVar_0x8004;
+    u16 newMove = gSpecialVar_0x8008;
+    AddTaughtMove(species, oldMove, newMove);
+}
+
 
 
 
@@ -5765,7 +5777,6 @@ static void DisplayPartyMenuForgotMoveMessage(u8 taskId)
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
     u16 newMove = gPartyMenu.data1;
     AddTaughtMove(species, move, newMove);
-
 
     GetMonNickname(mon, gStringVar1);
     StringCopy(gStringVar2, GetMoveName(move));

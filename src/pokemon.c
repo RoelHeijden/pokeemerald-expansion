@@ -1902,6 +1902,7 @@ u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move)
         {
             SetBoxMonData(boxMon, MON_DATA_MOVE1 + i, &move);
             SetBoxMonData(boxMon, MON_DATA_PP1 + i, &gMovesInfo[move].pp);
+
             return move;
         }
         if (existingMove == move)
