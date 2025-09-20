@@ -1467,17 +1467,36 @@ script EscapeRoom_EventScript_UndoMoveTeach{
         removetaughtmove(SPECIES_SHELGON, VAR_0x8008)
     }
 
+
+
+
+
     // Bagon edge case: Secret Power overwritten by Flamethrower
     if((var(VAR_0x8007) == SPECIES_BAGON || var(VAR_0x8007) == SPECIES_SHELGON) && var(VAR_0x8008) == MOVE_SECRET_POWER){
 
         // check if Flamethrower replace Secret Power
         istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER)
         if(var(VAR_0x8004) == MOVE_SECRET_POWER){
-
             // set secret power taught move to MOVE_NONE instead of Flamethrower
             removetaughtmove(SPECIES_BAGON, MOVE_FLAMETHROWER)
         }
+        // if flamethrower replaced another move
+        elif(var(VAR_0x8004) != MOVE_NONE && var(VAR_RESULT) == TRUE){
+
+            // put back old move
+            if(var(VAR_0x8007) == SPECIES_BAGON){
+                replacemove2(SPECIES_BAGON, MOVE_FLAMETHROWER, VAR_0x8004)
+                addmonmove(SPECIES_BAGON, MOVE_FLAMETHROWER)
+            }
+            elif(var(VAR_0x8007) == SPECIES_SHELGON){
+                replacemove2(SPECIES_SHELGON, MOVE_FLAMETHROWER, VAR_0x8004)
+                addmonmove(SPECIES_SHELGON, MOVE_FLAMETHROWER)
+            }
+            removetaughtmove(SPECIES_BAGON, MOVE_FLAMETHROWER) 
+        }
     }
+
+
   
     // set species to another variable
     // this fixed the message buffer bug
@@ -1536,8 +1555,6 @@ script EscapeRoom_EventScript_UndoMoveTeach{
         call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
     }
         
-
-
 
     // check snowball item return
     if(var(VAR_0x8008) == MOVE_THIEF){
@@ -1763,7 +1780,7 @@ script EscapeRoom_EventScript_UndoRareCandy{
                 special(Special_AddTaughtMove)
             }
 
-            // if Bagon did learned Flamethrower
+            // if Bagon/shelgon did learn Flamethrower
             istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER)
             if(var(VAR_RESULT) == TRUE){
 
@@ -1780,6 +1797,36 @@ script EscapeRoom_EventScript_UndoRareCandy{
 
             // 2
             // do nothing
+
+            // 3 (special case)
+            // secret power had replaced one of the other moves
+            // prevent being left with three moves only
+            istaughtmovepresent(SPECIES_BAGON, MOVE_SECRET_POWER)
+            if(var(VAR_0x8004) != MOVE_NONE && var(VAR_RESULT) == TRUE){
+                // put back old move
+                replacemove2(SPECIES_BAGON, MOVE_SECRET_POWER, VAR_0x8004)
+                removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+
+                // add back secret power
+                addmonmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+                setvar(VAR_0x8007, SPECIES_BAGON)
+                setvar(VAR_0x8004, MOVE_NONE)
+                setvar(VAR_0x8008, MOVE_SECRET_POWER)
+                special(Special_AddTaughtMove)
+            }
+            istaughtmovepresent(SPECIES_SHELGON, MOVE_SECRET_POWER)
+            if(var(VAR_0x8004) != MOVE_NONE && var(VAR_RESULT) == TRUE){
+                // put back old move
+                replacemove2(SPECIES_BAGON, MOVE_SECRET_POWER, VAR_0x8004)
+                removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+
+                // add back secret power
+                addmonmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+                setvar(VAR_0x8007, SPECIES_BAGON)
+                setvar(VAR_0x8004, MOVE_NONE)
+                setvar(VAR_0x8008, MOVE_SECRET_POWER)
+                special(Special_AddTaughtMove)
+            }
 
             // make sure the species var is set correctly again
             setvar(VAR_0x8005, SPECIES_BAGON)
