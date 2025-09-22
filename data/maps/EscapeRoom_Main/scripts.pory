@@ -520,96 +520,51 @@ script EscapeRoom_MapScript_GetPokedex{
 
 script EscapeRoom_MapScripts_GetFirstPokemon{
     givemon(
-        SPECIES_PRIMEAPE,
-        44,
-        abilityNum=2, // Defiant
-        nature=NATURE_CALM,
+        SPECIES_FERROTHORN,
+        28,
+        abilityNum=2, // anticipation
+        nature=NATURE_NAUGHTY,
         gender=MON_MALE, 
-        move1=MOVE_RAGE_FIST,
-        move2=MOVE_TAUNT,
-        move3=MOVE_NONE,
+        move1=MOVE_STEEL_ROLLER,
+        move2=MOVE_BLOCK,
+        move3=MOVE_INGRAIN,
         move4=MOVE_NONE,
+        // EVs:
+        hpEv=0, 
+        atkEv=252,
+        spDefEv=0, 
+        defEv=0,
+        // IVs:
+        hpIv=0,
+        atkIv=31,
+        defIv=0,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=0
+    )
+    givemon(
+        SPECIES_FLORGES,
+        22,
+        ball=ITEM_HEAVY_BALL,
+        item=ITEM_ELECTRIC_SEED,
+        abilityNum=2, // symbiosis
+        nature=21, // gentle
+        gender=MON_FEMALE,
+        move1=MOVE_NATURE_POWER,
+        move2=MOVE_GRASS_KNOT,
+        move3=MOVE_GRASSY_TERRAIN,
+        move4=MOVE_CAMOUFLAGE,
         // EVs:
         hpEv=252,
-        defEv=0,
-        spDefEv=8,
-        // IVs
-        hpIv=31,
-        atkIv=0, // 3x Secret Power < 25%
-        defIv=31,
-        speedIv=10,
-        spAtkIv=31,
-        spDefIv=31
-    )
-
-    givemon(
-        SPECIES_BAGON,
-        34,
-        abilityNum=2, // Sheer Force
-        nature=NATURE_MODEST,
-        gender=MON_MALE,
-        move1=MOVE_HIDDEN_POWER,  // Hidden Power [Psychic]
-        move2=MOVE_SUBSTITUTE,
-        move3=MOVE_CUT,
-        move4=MOVE_NONE,
-        // EVs:
-        spAtkEv=252,
-        speedEv=252,
+        spDefEv=252,
         // IVs:
-        hpIv=1,
+        hpIv=31,
         atkIv=0,
-        speedIv=30,
-        spAtkIv=31,
-        defIv=1,
+        defIv=0,
+        speedIv=31,
+        spAtkIv=0,
         spDefIv=31
     )
-
-    // givemon(
-    //     SPECIES_FERROTHORN,
-    //     28,
-    //     abilityNum=2, // anticipation
-    //     nature=NATURE_NAUGHTY,
-    //     gender=MON_MALE, 
-    //     move1=MOVE_STEEL_ROLLER,
-    //     move2=MOVE_BLOCK,
-    //     move3=MOVE_INGRAIN,
-    //     move4=MOVE_NONE,
-    //     // EVs:
-    //     hpEv=0, 
-    //     atkEv=252,
-    //     spDefEv=0, 
-    //     defEv=0,
-    //     // IVs:
-    //     hpIv=0,
-    //     atkIv=31,
-    //     defIv=0,
-    //     speedIv=31,
-    //     spAtkIv=31,
-    //     spDefIv=0
-    // )
-    // givemon(
-    //     SPECIES_FLORGES,
-    //     22,
-    //     ball=ITEM_HEAVY_BALL,
-    //     item=ITEM_ELECTRIC_SEED,
-    //     abilityNum=2, // symbiosis
-    //     nature=21, // gentle
-    //     gender=MON_FEMALE,
-    //     move1=MOVE_NATURE_POWER,
-    //     move2=MOVE_GRASS_KNOT,
-    //     move3=MOVE_GRASSY_TERRAIN,
-    //     move4=MOVE_CAMOUFLAGE,
-    //     // EVs:
-    //     hpEv=252,
-    //     spDefEv=252,
-    //     // IVs:
-    //     hpIv=31,
-    //     atkIv=0,
-    //     defIv=0,
-    //     speedIv=31,
-    //     spAtkIv=0,
-    //     spDefIv=31
-    // )
 
     setflag(FLAG_SYS_POKEMON_GET)
     setvar(VAR_ESCAPE_ROOM_MAPSCRIPT_COUNTER, 2)
@@ -644,19 +599,19 @@ script EscapeRoom_MapScripts_GetItems{
     additem(ITEM_ETHER)
 
     // REMOVE
-    additem(ITEM_HM01)
-    additem(ITEM_TM43)
-    additem(ITEM_TOXIC_ORB)
+    // additem(ITEM_HM01)
+    // additem(ITEM_TM43)
+    // additem(ITEM_TOXIC_ORB)
     // additem(ITEM_SAFETY_GOGGLES)
     // additem(ITEM_ELECTRIC_SEED)
     // additem(ITEM_MOON_STONE)
-    additem(ITEM_TM46)
+    // additem(ITEM_TM46)
     // additem(ITEM_TM48)
-    additem(ITEM_RARE_CANDY, 2)
-    setflag(FLAG_RARE_CANDY1_OBTAINED)
-    additem(ITEM_CHOICE_SPECS)
-    additem(ITEM_CHOICE_BAND)
-    additem(ITEM_CHOICE_SCARF)
+    // additem(ITEM_RARE_CANDY, 2)
+    // setflag(FLAG_RARE_CANDY1_OBTAINED)
+    // additem(ITEM_CHOICE_SPECS)
+    // additem(ITEM_CHOICE_BAND)
+    // additem(ITEM_CHOICE_SCARF)
 }
 
 script EscapeRoom_MapScripts_TurnOfBagUse{
@@ -1467,14 +1422,10 @@ script EscapeRoom_EventScript_UndoMoveTeach{
         removetaughtmove(SPECIES_SHELGON, VAR_0x8008)
     }
 
-
-
-
-
-    // Bagon edge case: Secret Power overwritten by Flamethrower
+    // Bagon edge case: Secret Power was overwritten by Flamethrower
     if((var(VAR_0x8007) == SPECIES_BAGON || var(VAR_0x8007) == SPECIES_SHELGON) && var(VAR_0x8008) == MOVE_SECRET_POWER){
 
-        // check if Flamethrower replace Secret Power
+        // check if Flamethrower replaced Secret Power
         istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER)
         if(var(VAR_0x8004) == MOVE_SECRET_POWER){
             // set secret power taught move to MOVE_NONE instead of Flamethrower
@@ -1496,8 +1447,6 @@ script EscapeRoom_EventScript_UndoMoveTeach{
         }
     }
 
-
-  
     // set species to another variable
     // this fixed the message buffer bug
     copyvar(VAR_0x8005, VAR_0x8007)
@@ -1774,23 +1723,24 @@ script EscapeRoom_EventScript_UndoRareCandy{
 
                 // set secret power taught move to MOVE_NONE instead of Flamethrower
                 removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
-                setvar(VAR_0x8007, SPECIES_BAGON)  // not shelgon
+                setvar(VAR_0x8007, SPECIES_BAGON)  // not shelgon!
                 setvar(VAR_0x8004, MOVE_NONE)
                 setvar(VAR_0x8008, MOVE_SECRET_POWER)
                 special(Special_AddTaughtMove)
             }
 
-            // if Bagon/shelgon did learn Flamethrower
+            // if Bagon/shelgon learned Flamethrower for another move
             istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER)
             if(var(VAR_RESULT) == TRUE){
 
-                // 1, 3, 5
+                // 3, 5
                 // replace Flamethrower with original move
                 istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER) // set original move in VAR_0x8004
                 replacemove2(SPECIES_BAGON, MOVE_FLAMETHROWER, VAR_0x8004)
                 removetaughtmove(SPECIES_BAGON, MOVE_FLAMETHROWER)
             }
 
+            // 1
             // make sure Flamethrower is removed
             // it's not stored in taughtmove if Bagon only had 3 moves when learned
             replacemove2(SPECIES_BAGON, MOVE_FLAMETHROWER, MOVE_NONE)
@@ -2687,58 +2637,7 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
 
         // if Secret Power not held as TM, but move is learned:
         if(!flag(FLAG_TEMP_1)){
-
-            // check Primeape
-            checkpartymonmove(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
-            if(var(VAR_RESULT) != PARTY_SIZE){
-                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
-
-                // remove taught move
-                removetaughtmove(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
-            }
-
-            // check Annihilape
-            checkpartymonmove(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
-            if(var(VAR_RESULT) != PARTY_SIZE){
-                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
-
-                // remove taught move
-                removetaughtmove(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
-            }
-
-            // check Bagon
-            checkpartymonmove(SPECIES_BAGON, MOVE_SECRET_POWER)
-            if(var(VAR_RESULT) != PARTY_SIZE){
-                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
-
-                // remove taught move
-                removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
-            }
-
-            // check Shelgon
-            checkpartymonmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
-            if(var(VAR_RESULT) != PARTY_SIZE){
-                copyvar(VAR_0x8004, VAR_RESULT) // store monslot
-
-                // remove taught move
-                removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
-            }
-
-            // do move unlearned message
-            playse(SE_SUCCESS)
-            waitse
-            special(BufferMonNickname)
-            msgbox(MonForgotSecretPower, MSGBOX_AUTOCLOSE)
-            waitmessage
-            
-            // actually unlearn Secret Power
-            checkpartymove(MOVE_SECRET_POWER)
-            if(var(VAR_RESULT) == 0){
-                replacemove(0, MOVE_SECRET_POWER, MOVE_NONE)
-            }
-            elif(var(VAR_RESULT) == 1){
-                replacemove(1, MOVE_SECRET_POWER, MOVE_NONE)
-            }
+            call(EscapeRoom_EventScript_UndoSecretPowerTeach)
         }
 
         clearflag(FLAG_SECRET_POWER_OBTAINED)
@@ -2751,6 +2650,119 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
 
     releaseall
 }
+
+script EscapeRoom_EventScript_UndoSecretPowerTeach{
+    // find which pokemon learned Secret Power
+    // check bagon
+    istaughtmovepresent(SPECIES_BAGON, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_BAGON)
+
+        // check if bagon has evolved to shelgon
+        checkpartymon(SPECIES_SHELGON)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_0x8007, SPECIES_SHELGON)
+        }
+    }
+    // check shelgon
+    istaughtmovepresent(SPECIES_SHELGON, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_SHELGON)
+    }
+    // check primeape
+    istaughtmovepresent(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_PRIMEAPE)
+
+        // check if primeape has evolved to annihilape
+        checkpartymon(SPECIES_ANNIHILAPE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            setvar(VAR_0x8007, SPECIES_ANNIHILAPE)
+        }
+    }
+    // check annihilape
+    istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_ANNIHILAPE)
+    }
+
+
+    // undo secret power teach
+    // (code is taken from undomoveteach)
+    istaughtmovepresent(VAR_0x8007, MOVE_SECRET_POWER)
+    replacemove2(VAR_0x8007, MOVE_SECRET_POWER, VAR_0x8004)
+    removetaughtmove(VAR_0x8007, MOVE_SECRET_POWER)
+
+    // remove taught move from evolution forms as well
+    if(var(VAR_0x8007) == SPECIES_PRIMEAPE || var(VAR_0x8007) == SPECIES_ANNIHILAPE){
+        removetaughtmove(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
+        removetaughtmove(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
+    }
+    if(var(VAR_0x8007) == SPECIES_BAGON || var(VAR_0x8007) == SPECIES_SHELGON){
+        removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+        removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+    }
+
+    // Bagon edge case: Secret Power was overwritten by Flamethrower
+    if(var(VAR_0x8007) == SPECIES_BAGON || var(VAR_0x8007) == SPECIES_SHELGON){
+
+        // check if Flamethrower replaced Secret Power
+        istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER)
+        if(var(VAR_0x8004) == MOVE_SECRET_POWER){
+            // set secret power taught move to MOVE_NONE instead of Flamethrower
+            removetaughtmove(SPECIES_BAGON, MOVE_FLAMETHROWER)
+        }
+        // if flamethrower replaced another move
+        elif(var(VAR_0x8004) != MOVE_NONE && var(VAR_RESULT) == TRUE){
+
+            // put back old move
+            if(var(VAR_0x8007) == SPECIES_BAGON){
+                replacemove2(SPECIES_BAGON, MOVE_FLAMETHROWER, VAR_0x8004)
+                addmonmove(SPECIES_BAGON, MOVE_FLAMETHROWER)
+            }
+            elif(var(VAR_0x8007) == SPECIES_SHELGON){
+                replacemove2(SPECIES_SHELGON, MOVE_FLAMETHROWER, VAR_0x8004)
+                addmonmove(SPECIES_SHELGON, MOVE_FLAMETHROWER)
+            }
+            removetaughtmove(SPECIES_BAGON, MOVE_FLAMETHROWER) 
+        }
+    }
+
+
+    // set mon slot correctly for messaging
+    // bagon/shelgon lost secret power
+    if(var(VAR_0x8007) == SPECIES_BAGON || var(VAR_0x8007) == SPECIES_SHELGON){
+        checkpartymon(SPECIES_BAGON)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        }
+        checkpartymon(SPECIES_SHELGON)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        }
+    }
+    // primeape/annihilape lost secret power
+    if(var(VAR_0x8007) == SPECIES_PRIMEAPE || var(VAR_0x8007) == SPECIES_ANNIHILAPE){
+        checkpartymon(SPECIES_PRIMEAPE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        }
+        checkpartymon(SPECIES_ANNIHILAPE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            copyvar(VAR_0x8004, VAR_RESULT) // store monslot
+        }
+    }
+
+    // do move unlearned message
+    playse(SE_SUCCESS)
+    waitse
+    special(BufferMonNickname)
+    msgbox(MonForgotSecretPower, MSGBOX_AUTOCLOSE)
+    waitmessage
+}
+
+
+
 
 movement SecretGarden_NPC_move_down {
     walk_fast_down * 2
@@ -5476,11 +5488,14 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 0
 text Trainer0_Intro{
-    "It takes three to find the groove,\n"
-    "but only one can have the move."
-    // "You may think you are ready,\n"
-    // "but you really need three.\l"
-    // "Which of your Pokémon has the key?"
+    // "It takes three to find the groove,\n"
+    // "but only one can have the move."
+
+    "You may think you are ready,\n"
+    "but you really need three.\l"
+    "Which of your moves will be the key?"
+
+    // "Which of your Pokémon holds the key?"
 }
 
 text Trainer0_Outro{

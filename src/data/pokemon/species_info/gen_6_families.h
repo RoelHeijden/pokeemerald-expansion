@@ -1806,12 +1806,11 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     {
         FLORGES_MISC_INFO(Red, 0),
         .description = COMPOUND_STRING(
-            "Skill Swap should replace Grass Knot.\n"
+            "Skill Swap will replace Grass Knot.\n"
             "\n"
             "Camouflage is spooky. Run!"
         ),
-            // "Grass Knot should be deleted once\n"
-            // "Zeraora has been caught.\n"
+
         // .description = COMPOUND_STRING(
         //     "This Pokémon creates an\n"
         //     "impressive flower garden in its territory. It\n"
