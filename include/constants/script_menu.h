@@ -130,6 +130,8 @@
 #define MULTI_SPLIT_SNEAK                  119
 #define MULTI_SOFTLOCK_GUY                 120
 #define MULTI_MOVE_DELETER                 121
+#define MULTI_HINT_NPC                     122
+#define MULTI_MAIN_SIGN                    123
 
 // Lilycove SS Tidal Multichoice Selections
 #define SSTIDAL_SELECTION_SLATEPORT        0

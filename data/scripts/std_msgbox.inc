@@ -49,8 +49,15 @@ Std_MsgboxGetPoints:
 Std_MsgboxHintnpc:
 	message NULL
 	waitmessage
-	softlockguymovebox 30, 4, FALSE
+	hintnpcoptionbox 30, 6, FALSE
 	return
+
+Std_MsgboxMainSign:
+	message NULL
+	waitmessage
+	mainsignoptionbox 30, 8, FALSE
+	return
+
 
 EventScript_UnusedReturn:
 	return

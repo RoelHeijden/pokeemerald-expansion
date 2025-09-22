@@ -1431,6 +1431,51 @@ bool8 ScrCmd_softlockguymovebox(struct ScriptContext *ctx)
     }
 }
 
+
+// ADDED
+bool8 ScrCmd_hintnpcoptionbox(struct ScriptContext *ctx)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
+
+    u8 multichoiceId = MULTI_HINT_NPC;
+
+    if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    {
+        ScriptContext_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+
+// ADDED
+bool8 ScrCmd_mainsignoptionbox(struct ScriptContext *ctx)
+{
+    u8 left = ScriptReadByte(ctx);
+    u8 top = ScriptReadByte(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
+
+    u8 multichoiceId = MULTI_MAIN_SIGN;
+
+    if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
+    {
+        ScriptContext_Stop();
+        return TRUE;
+    }
+    else
+    {
+        return FALSE;
+    }
+}
+
+
+
+
 // ADDED
 bool8 ScrCmd_movedeleterbox(struct ScriptContext *ctx)
 {
@@ -3388,25 +3433,28 @@ bool8 ScrCmd_setdoorclosed(struct ScriptContext *ctx)
     return FALSE;
 }
 
-// Below two are functions for elevators in RS, do nothing in Emerald
-bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
-{
-    u8 UNUSED v3 = ScriptReadByte(ctx);
-    u16 UNUSED v5 = VarGet(ScriptReadHalfword(ctx));
-    u16 UNUSED v7 = VarGet(ScriptReadHalfword(ctx));
-    u16 UNUSED v9 = VarGet(ScriptReadHalfword(ctx));
 
-    //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
-    return FALSE;
-}
+// REMOVED, was unused
 
-bool8 ScrCmd_showelevmenu(struct ScriptContext *ctx)
-{
-    /*ScriptShowElevatorMenu();
-    ScriptContext_Stop();
-    return TRUE;*/
-    return FALSE;
-}
+// // Below two are functions for elevators in RS, do nothing in Emerald
+// bool8 ScrCmd_addelevmenuitem(struct ScriptContext *ctx)
+// {
+//     u8 UNUSED v3 = ScriptReadByte(ctx);
+//     u16 UNUSED v5 = VarGet(ScriptReadHalfword(ctx));
+//     u16 UNUSED v7 = VarGet(ScriptReadHalfword(ctx));
+//     u16 UNUSED v9 = VarGet(ScriptReadHalfword(ctx));
+
+//     //ScriptAddElevatorMenuItem(v3, v5, v7, v9);
+//     return FALSE;
+// }
+
+// bool8 ScrCmd_showelevmenu(struct ScriptContext *ctx)
+// {
+//     /*ScriptShowElevatorMenu();
+//     ScriptContext_Stop();
+//     return TRUE;*/
+//     return FALSE;
+// }
 
 bool8 ScrCmd_checkcoins(struct ScriptContext *ctx)
 {
@@ -3506,17 +3554,17 @@ bool8 ScrCmd_checkmodernfatefulencounter(struct ScriptContext *ctx)
     return FALSE;
 }
 
-bool8 ScrCmd_trywondercardscript(struct ScriptContext *ctx)
-{
-    const u8 *script = GetSavedRamScriptIfValid();
+// bool8 ScrCmd_trywondercardscript(struct ScriptContext *ctx)
+// {
+//     const u8 *script = GetSavedRamScriptIfValid();
 
-    if (script)
-    {
-        gRamScriptRetAddr = ctx->scriptPtr;
-        ScriptJump(ctx, script);
-    }
-    return FALSE;
-}
+//     if (script)
+//     {
+//         gRamScriptRetAddr = ctx->scriptPtr;
+//         ScriptJump(ctx, script);
+//     }
+//     return FALSE;
+// }
 
 // This warp is only used by the Union Room.
 // For the warp used by the Aqua Hideout, see DoTeleportTileWarp

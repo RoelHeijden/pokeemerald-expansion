@@ -703,8 +703,8 @@
 #define FLAG_SOLID_BOARD_OBTAINED       0x293  
 #define FLAG_CAN_UNDO_SECRET_POWER      0x294
 #define FLAG_CHOICE_ITEM_OBTAINED       0x295  
-#define FLAG_UNUSED_0x296  0x296 // Unused Flag
-#define FLAG_UNUSED_0x297  0x297 // Unused Flag
+#define FLAG_ANNIHILAPE_SPAWNED         0x296
+#define FLAG_SUN_STONE_SOLD             0x297
 #define FLAG_UNUSED_0x298  0x298 // Unused Flag
 #define FLAG_UNUSED_0x299  0x299 // Unused Flag
 #define FLAG_UNUSED_0x29A  0x29A // Unused Flag

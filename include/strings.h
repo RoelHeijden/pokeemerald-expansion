@@ -3072,4 +3072,13 @@ extern const u8 gText_LowerCaseCancel[];
 extern const u8 gText_DeleteMove[];
 extern const u8 gText_RestoreMove[];
 
+
+extern const u8 gText_SmallHint[];
+extern const u8 gText_LargeHint[];
+extern const u8 gText_Solution[];
+
+extern const u8 gText_CheckImportantInfo[];
+extern const u8 gText_CheckProgress[];
+
+
 #endif // GUARD_STRINGS_H

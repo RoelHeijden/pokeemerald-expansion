@@ -104,6 +104,7 @@ gStdScripts::
 	.4byte Std_MsgboxHintnpc           @ MSGBOX_HINTNPC
 	.4byte Std_MsgboxSoftlockGuy       @ MSGBOX_SOFTLOCK_GUY
 	.4byte Std_MsgboxMoveDeleter       @ MSGBOX_MOVE_DELETER
+	.4byte Std_MsgboxMainSign		   @ MSGBOX_MAIN_SIGN
 gStdScripts_End::
 
 	.include "data/maps/PetalburgCity/scripts.inc"

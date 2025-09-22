@@ -177,8 +177,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_waitdooranim                      @ 0xae
 	.4byte ScrCmd_setdooropen                       @ 0xaf
 	.4byte ScrCmd_setdoorclosed                     @ 0xb0
-	.4byte ScrCmd_addelevmenuitem                   @ 0xb1
-	.4byte ScrCmd_showelevmenu                      @ 0xb2
+	.4byte ScrCmd_mainsignoptionbox                 @ 0xb1
+	.4byte ScrCmd_nop                      	@ 0xb2
 	.4byte ScrCmd_checkcoins                        @ 0xb3
 	.4byte ScrCmd_addcoins                          @ 0xb4
 	.4byte ScrCmd_removecoins                       @ 0xb5
@@ -207,7 +207,7 @@ gScriptCmdTable::
 	.4byte ScrCmd_restoremonfrompc                  @ 0xcc
 	.4byte ScrCmd_setmodernfatefulencounter         @ 0xcd
 	.4byte ScrCmd_checkmodernfatefulencounter       @ 0xce
-	.4byte ScrCmd_trywondercardscript               @ 0xcf
+	.4byte ScrCmd_hintnpcoptionbox               	@ 0xcf
 	.4byte ScrCmd_healpartymon		                @ 0xd0
 	.4byte ScrCmd_warpspinenter                     @ 0xd1
 	.4byte ScrCmd_setmonmetlocation                 @ 0xd2

@@ -1790,19 +1790,24 @@
 	.2byte \y
 	.endm
 
+
+
 	@ Consumes its parameters and does nothing. It is implemented but unused in Ruby/Sapphire.
-	.macro addelevmenuitem a:req, b:req, c:req, d:req
-	.byte 0xb1
-	.byte \a
-	.2byte \b
-	.2byte \c
-	.2byte \d
-	.endm
+	@.macro addelevmenuitem a:req, b:req, c:req, d:req
+	@.byte 0xb1
+	@.byte \a
+	@.2byte \b
+	@.2byte \c
+	@.2byte \d
+	@.endm
 
 	@ Does nothing. It is implemented but unused in Ruby/Sapphire.
-	.macro showelevmenu
-	.byte 0xb2
-	.endm
+	@.macro showelevmenu
+	@.byte 0xb2
+	@.endm
+
+
+
 
 	@ Gets the number of coins the player has and stores it in the variable 'out'.
 	.macro checkcoins out:req
@@ -1992,9 +1997,27 @@
 
 	@ Jumps to the ram script saved from a Wonder Card. If there is no valid saved Wonder Card or if the
 	@ ram script is invalid then this does nothing.
-	.macro trywondercardscript
+	@.macro trywondercardscript
+	@.byte 0xcf
+	@.endm
+
+
+	@ Displays a multichoicebox for the hint NPC script.
+	.macro hintnpcoptionbox x:req, y:req, ignoreBPress:req
 	.byte 0xcf
+	.byte \x
+	.byte \y
+	.byte \ignoreBPress
 	.endm
+
+	@ Displays a multichoicebox for the main info sign.
+	.macro mainsignoptionbox x:req, y:req, ignoreBPress:req
+	.byte 0xb1
+	.byte \x
+	.byte \y
+	.byte \ignoreBPress
+	.endm
+
 
 	@ Used only in FireRed/LeafGreen, does nothing in Emerald.
 	.macro setworldmapflag worldmapflag:req
@@ -2306,9 +2329,10 @@
 	MSGBOX_YESNO = 5
 	MSGBOX_AUTOCLOSE = 6
 	MSGBOX_GETPOINTS = 9
-	MSGBOX_POKENAV = 10
+	MSGBOX_HINTNPC = 10
 	MSGBOX_SOFTLOCK_GUY = 11
 	MSGBOX_MOVE_DELETER = 12
+	MSGBOX_MAIN_SIGN = 13
 
 	YES = 1
 	NO  = 0

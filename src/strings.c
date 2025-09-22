@@ -1866,3 +1866,10 @@ const u8 gText_UndoUsedItems[] = _("Undo item use");
 const u8 gText_UndoOtherAction[] = _("Undo other");
 const u8 gText_DeleteMove[] = _("Delete a move");
 const u8 gText_RestoreMove[] = _("Restore deleted moves");
+
+const u8 gText_SmallHint[] =     _("Small hint (+15 min.)");
+const u8 gText_LargeHint[] =     _("Large hint (+30 min.)");
+const u8 gText_Solution[] =      _("Solution (+60 min.)");
+
+const u8 gText_CheckImportantInfo[] = _("Important info");
+const u8 gText_CheckProgress[] =      _("Game completion (%)");

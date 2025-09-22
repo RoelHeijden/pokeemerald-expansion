@@ -711,13 +711,10 @@ script EscapeRoom_EventScript_WarpToSection3{
 
 script EscapeRoom_EventScript_MainInfoSign {
     lockall
+    msgbox(MainSignWhatToRead, MSGBOX_MAIN_SIGN)
 
-    // dynmultichoice(30, 8, FALSE, 6, 0, 0, SignOptionShortInfo, SignOptionDetailedInfo) 
-    // msgbox(SignMessage1_short, MSGBOX_DEFAULT)
-    // waitmessage
-
-    msgbox(SignMessageReadInfoAgain, MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES)
+    // check important info
+    if(var(VAR_RESULT) == 0)
     {
         msgbox(SignMessage1_part1, MSGBOX_YESNO) // "keep reading?"
         if(var(VAR_RESULT) == YES)
@@ -726,8 +723,155 @@ script EscapeRoom_EventScript_MainInfoSign {
             waitmessage
         }
     }
+    // check game completion
+    elif(var(VAR_RESULT) == 1){    
+        if(!flag(FLAG_ANNIHILAPE_SPAWNED)){
+            msgbox(GameCompletionMessageInitial, MSGBOX_DEFAULT)
+        }
+        elif(flag(FLAG_TRAINER11_DEFEATED)){
+            msgbox(GameCompletionMessageFinal, MSGBOX_DEFAULT)
+        }
+        // default case
+        else{
+            call(EscapeRoom_EventScript_GetGameCompletion)
+            msgbox(GameCompletionMessage, MSGBOX_DEFAULT)
+        }
+    }
     releaseall
 }
+
+script EscapeRoom_EventScript_GetGameCompletion{
+    buffernumberstring(STR_VAR_1, 0)
+
+    //// SECTION 1 ////
+
+    // ape spawned
+    if(flag(FLAG_ANNIHILAPE_SPAWNED)){
+        buffernumberstring(STR_VAR_1, 2)
+    }
+
+    // zera caught
+    if(flag(FLAG_ZERAORA_CAUGHT)){
+        buffernumberstring(STR_VAR_1, 8)
+    }
+
+    // trainer 0
+    if(flag(FLAG_TRAINER0_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 12)
+    }
+
+    // trainer 1
+    if(flag(FLAG_TRAINER1_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 18)
+    }
+
+    // maranga berry
+    if(flag(FLAG_MARANGA_BERRY_OBTAINED)){
+        buffernumberstring(STR_VAR_1, 20)
+    }
+
+    // trainer 2
+    if(flag(FLAG_TRAINER2_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 23)
+    }
+
+    // trainer 3
+    if(flag(FLAG_TRAINER3_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 28)
+    }
+
+    // liepard obtained (egg puzzle)
+    if(flag(FLAG_LIEPARD_OBTAINED)){
+        buffernumberstring(STR_VAR_1, 33)
+    }
+
+
+    //// SECTION 2 ////
+
+    // sun stone sold (pickup)
+    if(flag(FLAG_SUN_STONE_SOLD)){
+        buffernumberstring(STR_VAR_1, 35)
+    }
+
+    // trainer 4
+    if(flag(FLAG_TRAINER4_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 41)
+    }
+
+    // rock smashed
+    if(flag(FLAG_ROCK_SMASH_GUY_MOVED)){
+        buffernumberstring(STR_VAR_1, 44)
+    }
+
+    // moon stone obtained
+    if(flag(FLAG_SPACE_ITEM_STOLEN)){
+        buffernumberstring(STR_VAR_1, 46)
+    }
+
+    // berry juice obtained
+    if(flag(FLAG_BERRY_JUICE_OBTAINED)){
+        buffernumberstring(STR_VAR_1, 49)
+    }
+
+    // ability capsule obtained (trainer 5 solved)
+    if(flag(FLAG_ABILITY_CAPSULE_BOUGHT)){
+        buffernumberstring(STR_VAR_1, 55)
+    }
+
+    // trapinch run
+    if(flag(FLAG_RAN_FROM_TRAPINCH)){
+        buffernumberstring(STR_VAR_1, 57)
+    }
+
+    // trainer 6
+    if(flag(FLAG_TRAINER6_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 63)
+    }
+
+    // map switches
+    if(flag(FLAG_MAP_SWITCHES_SOLVED)){
+        buffernumberstring(STR_VAR_1, 68)
+    }
+
+
+    //// SECTION 3 ////
+
+    // trainer 7a
+    if(flag(FLAG_TRAINER7A_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 73)
+    }
+
+    // trainer 8
+    if(flag(FLAG_TRAINER8_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 78)
+    }
+
+    // trainer 9
+    if(flag(FLAG_TRAINER9_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 84)
+    }  
+
+    // secret power obtained
+    if(flag(FLAG_SECRET_POWER_COMPLETED)){
+        buffernumberstring(STR_VAR_1, 89)
+    }  
+
+    // secret base rare candy
+    if(flag(FLAG_RARE_CANDY3_OBTAINED)){
+        buffernumberstring(STR_VAR_1, 91)
+    }  
+
+    // trainer 10  
+    if(flag(FLAG_TRAINER10_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 95)
+    }
+
+    // trainer 11  
+    if(flag(FLAG_TRAINER11_DEFEATED)){
+        buffernumberstring(STR_VAR_1, 100)
+    }
+}
+
 
 script EscapeRoom_EventScript_MoveDeleterSign {
     lockall
@@ -806,16 +950,32 @@ script EscapeRoom_Heal_Pokemon_Nurse_Script{
 script EscapeRoom_EventScript_HintsNPC{
     faceplayer
     lockall
-    msgbox(HintsIntroMessage, MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES){    
-        msgbox(HintsNPCWhatKindOfHintMessage)
+    msgbox(HintsIntroMessage, MSGBOX_HINTNPC)
+
+    if(var(VAR_RESULT) == 0){    // small hint
+        msgbox(HintsNPC_SmallHint)
+
         // TBD
+
+    }
+    elif(var(VAR_RESULT) == 1){    // large hint
+        msgbox(HintsNPC_LargeHint)
+
+        // TBD
+
+    }
+    elif(var(VAR_RESULT) == 2){    // solution
+        msgbox(HintsNPC_Solution)
+
+        // TBD
+
     }
     else{
         msgbox(HintsNPCNoHintMessage)
     }
     releaseall
 }
+
 
 
 // ANTI SOFTLOCK GUY
@@ -2527,6 +2687,8 @@ script EscapeRoom_TryBuyStonesPC_TryBuySunStone{
         playfanfare(MUS_OBTAIN_ITEM)
         waitfanfare
         delay(10)
+
+        setflag(FLAG_SUN_STONE_SOLD)
 
         msgbox(StonesBuyNPCSellAcceptedMessage, MSGBOX_NPC)
         waitmessage
@@ -4528,6 +4690,8 @@ script EscapeRoom_EventScript_SpawnAnnihilape{
     waitmoncry
 	waitmessage
     fadeinbgm(0)
+
+    setflag(FLAG_ANNIHILAPE_SPAWNED)
 }
 
 script EscapeRoom_EventScript_SafetyGogglesStatue{
@@ -4681,24 +4845,30 @@ text SignMessage1_part2{
     "9) There are no hidden items."
 }
 
+text MainSignWhatToRead{
+    "What would you like to check?"
+}
+
+text GameCompletionMessage{
+    "You've completed roughly {STR_VAR_1}% of the\n"
+    "game so far."
+}
+
+text GameCompletionMessageInitial{
+    "You've completed 0% of the game so far."
+}
+
+text GameCompletionMessageFinal{
+    "You've fully completed the game!"
+}
 
 text SignMessageReadInfoAgain{
     "Do you want to read the important\n"
     "information again?"
 }
 
-text EscapeRoomEndCongratz{
-    "Congratulations, you have\n"
-    "completed the escape room!"
-}
 
-text EndEscapeRoomSignMessage{
-    "Final time: {STR_VAR_1}.\n"
-    "Hints used: {STR_VAR_2}.\p"
-    "Thank you for playing.\n"
-    " - Roel"
-}
-
+// move deleter sign
 text MoveDeleterSignMessage{
     "-- Temporary Move Deleter --\p" 
 
@@ -4711,6 +4881,19 @@ text MoveDeleterSignMessage{
     "A restored move will get:\n"
     "a) the PP amount it had when deleted.\l"
     "b) 0 PP if all other moves have 0 PP."
+}
+
+// end sign
+text EscapeRoomEndCongratz{
+    "Congratulations, you have\n"
+    "completed the escape room!"
+}
+
+text EndEscapeRoomSignMessage{
+    "Final time: {STR_VAR_1}.\n"
+    "Hints used: {STR_VAR_2}.\p"
+    "Thank you for playing.\n"
+    " - Ketch"
 }
 
 
@@ -4924,16 +5107,23 @@ text HintsIntroMessage{
     "in-game clock.\p"
     "The amount will depend on the type of\n"
     "hint that you select.\p"
-    "Do you want to get a hint right now?"
+    "What kind of hint would you like to get?"
 }
 
 text HintsNPCNoHintMessage{
     "I'll be here if you need me."
 }
 
-text HintsNPCWhatKindOfHintMessage{
-    // "What kind of hint would you like?"
-    "TBD"
+text HintsNPC_SmallHint{
+    "TBD (small hint)"
+}
+
+text HintsNPC_LargeHint{
+    "TBD (large hint)"
+}
+
+text HintsNPC_Solution{
+    "TBD (solution)"
 }
 
 
