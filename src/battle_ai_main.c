@@ -5465,34 +5465,6 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     int smeargleHp = gBattleMons[battlerSmeargle].hp;
 
     bool8 smeargleHasIronBall = (gBattleMons[battlerSmeargle].item == ITEM_IRON_BALL);
-    // bool8 smeargleHasDestinyBond = TRUE;
-    // bool8 mentalHerbIntact = gBattleMons[oppSmeargle].item == ITEM_MENTAL_HERB;
-
-
-    // UNIQUE CASE AGAINST DESTINY BOND LINE
-    // self KO partner Smeargle to prevent Perish song
-    // if (smeargleHasDestinyBond 
-    //     && smeargleHasIronBall 
-    //     && (gFieldStatuses & STATUS_FIELD_TRICK_ROOM) 
-    //     && !mentalHerbIntact 
-    //     && ((moveGardy == MOVE_DISABLE && gBattleStruct->moveTarget[battlerGardy] == oppSmeargle) 
-    //         || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG))
-    // {
-    //     // only self hit if first 4 turns of TR or Super fang is already disabled
-    //     if(gFieldTimers.trickRoomTimer > 1 || gDisableStructs[oppSmeargle].disabledMove == MOVE_SUPER_FANG)
-    //     {
-    //         // if attacking battler is Scrafty: self target smeargle !
-    //         if ((battlerDef == 1 || battlerDef == 3) && (move == MOVE_DRAIN_PUNCH || move == MOVE_BRICK_BREAK)) 
-    //         {
-    //             if (move == MOVE_DRAIN_PUNCH && gLastMoves[battlerAtk] != MOVE_DRAIN_PUNCH)
-    //                 score = 130;
-    //             else if (move == MOVE_BRICK_BREAK && gLastMoves[battlerAtk] == MOVE_DRAIN_PUNCH)
-    //                 score = 130;
-    //             return score;
-    //         }
-    //     }
-    // }
-
 
 
     // DONT TARGET PARTNER 
@@ -5629,7 +5601,6 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     // NORMAL SCENARIOS
     switch (move)  
     {
-
         case MOVE_DRAIN_PUNCH:
             // avoid protect
             if (targetProtectingItself){
@@ -5709,7 +5680,7 @@ static s32 AI_Double1_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
 
                 // edge case: target smeargle if -1 scrafty puts it to 1 hp
                 if (smeargleHp == 25 && battlerDef == battlerSmeargle)
-                    score = 150;
+                    score = 151;
 
                 // target Smeargle if self pain splitting
                 if (opposingSelfPainSplit && gBattleMons[battlerDef].species == SPECIES_SMEARGLE)
@@ -5790,39 +5761,3 @@ static s32 AI_Single4_Logic(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
-//     // klefki move selecion
-//     if (gBattleMons[battlerAtk].species == SPECIES_KLEFKI){
-
-//         // if target is gardevoir
-//         if (gBattleMons[battlerDef].species == SPECIES_GARDEVOIR){
-
-//             // if Tormented
-//             if (gBattleMons[battlerDef].status2 & STATUS2_TORMENT){
-
-//                 if (move == MOVE_FLASH_CANNON){
-//                     // if smeargle KOd by Steel beam prior to this turn: use flash cannon
-//                     if (gBattleMons[battlerAtk].hp <= 14 && gBattleMons[battlerDef].hp >= 89)
-//                         score = 141;
-//                     else
-//                         score = 120;
-//                 }
-
-//                 if (move == MOVE_STEEL_BEAM) 
-//                     score = 139;
-//             }
-//             // if not Tormented yet
-//             else{
-//                 if (move == MOVE_TORMENT) 
-//                     score = 140;
-//             }
-//         }
-//         // if target is Smeargle
-//         else{
-//             if (move == MOVE_STEEL_BEAM)
-//                 score = 139;
-//             if (move == MOVE_FLASH_CANNON)
-//                 score = 120;
-//         }
-//     }
-//     return score;
-// }

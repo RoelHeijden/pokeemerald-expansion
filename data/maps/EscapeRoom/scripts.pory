@@ -1670,8 +1670,6 @@ text SmeargleMessageInitial{
     "Have you got one???\p"
     "Just seeing one would make me so happy\n"
     "I might give you my GARDEVOIR."
-    // "Come to me when you do and I might offer\n"
-    // "you my GARDEVOIR."
 }
 
 text SmeargleMessageBad{

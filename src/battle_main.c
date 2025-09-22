@@ -3062,6 +3062,11 @@ static void BattleStartClearSetData(void)
         gBattleStruct->overwrittenAbilities[i] = ABILITY_NONE;
     }
 
+    // ADDED
+    for (int i = 0; i < MAX_BATTLERS_COUNT; i++) {
+        gProtectSuccessLastTurn[i] = 0;
+    }
+
     gLastUsedMove = 0;
     gFieldStatuses = 0;
 
