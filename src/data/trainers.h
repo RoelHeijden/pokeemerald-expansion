@@ -42361,15 +42361,15 @@ F_TRAINER_FEMALE |
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 16937
             .heldItem = ITEM_ABILITY_SHIELD,
-#line 16941
-            .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 136, 32),
+#line 16940
+            .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 236, 0),
 #line 16942
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
-#line 16940
-            .ability = ABILITY_VOLT_ABSORB,
 #line 16938
-            .lvl = 28,
+            .ability = ABILITY_VOLT_ABSORB,
 #line 16939
+            .lvl = 26,
+#line 16941
             .nature = NATURE_MODEST,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
@@ -42553,7 +42553,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER6] =
     {
 #line 17016
-        .trainerName = _("R.T. Abe"),
+        .trainerName = _("Abe"),
 #line 17017
         .trainerClass = TRAINER_CLASS_BIRD_KEEPER,
 #line 17018

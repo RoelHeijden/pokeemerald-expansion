@@ -3488,6 +3488,9 @@ script EscapeRoom_EventScript_Trainer10PostBattle{
     // remove rare candy3 undo (for Bagon)
     setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
 
+    // also remove the secret power undo somehow??
+    
+
     // ERROR CHECK
     // - 500 money
     // - Bagon lvl 35
@@ -5488,18 +5491,16 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 0
 text Trainer0_Intro{
-    // "It takes three to find the groove,\n"
-    // "but only one can have the move."
+    // "You'll be ready once there are three.\n"
+    // "Which of the moves will be the key?"
 
-    "You may think you are ready,\n"
-    "but you really need three.\l"
-    "Which of your moves will be the key?"
-
-    // "Which of your Pokémon holds the key?"
+    "You think you are ready?\n"
+    "You really need three.\l"
+    "One of them might hold the key."
 }
 
 text Trainer0_Outro{
-    "..."
+    "But sharing is caring!"
 }
 
 text Trainer0_PostBattle{
@@ -5542,8 +5543,7 @@ text Trainer2_Intro{
 }
 
 text Trainer2_Outro{
-    "Call me a maniac, but I love writing in\n"
-    "686578."
+    "I love writing in 686578!"
 }
 
 text Trainer2_PostBattle{
@@ -5582,7 +5582,8 @@ text Trainer4_Outro{
 }
 
 text Trainer4_PostBattle{
-    "Did you know that 5A + 2L = 525?"
+    "Did you know 5(A->L) + 2(L->O) = 525?"
+    // "Did you know that 5A(L) + 2L(O) = 525?"
 }
 
 
@@ -5620,7 +5621,7 @@ text Trainer6_Outro{
 
 text Trainer6_PostBattle{
     "Do you know where I can find a cook?\n"
-    "My birds deliver letters, not lunch."
+    "My birds deliver goods, not dinner."
 }
 
 
@@ -5691,17 +5692,15 @@ text Trainer9_Outro{
 }
 
 text Trainer9_PostBattle{
-    "Somehow I doubt this was your last time\n"
-    "passing through."
+    "Is this your last time passing through?"
 }
 
 
 // TRAINER 10
 text Trainer10_Intro{
     "Darwinism?\n"
-    "More like schmarminism.\p"
-    "My Kecleon doesn't need to change,\n"
-    "he's fire!"
+    "More like Schmarminism...\p"
+    "Kecleon doesn't need any changes!"
 }
 
 text Trainer10_Outro{

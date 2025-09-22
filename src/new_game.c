@@ -220,8 +220,8 @@ void NewGameInitData(void)
     FlagSet(FLAG_DISABLE_BATTLE_RNG);
 
     // DecorationAdd(DECOR_SOLID_BOARD);
-    DecorationAdd(DECOR_SAND_ORNAMENT);
-    DecorationAdd(DECOR_BREAKABLE_DOOR);
+    // DecorationAdd(DECOR_SAND_ORNAMENT);
+    // DecorationAdd(DECOR_BREAKABLE_DOOR);
     // DecorationAdd(DECOR_SLIDE);
     DecorationAdd(DECOR_RED_TENT);
 
@@ -242,9 +242,10 @@ void NewGameInitData(void)
     // DecorationAdd(DECOR_LOTAD_DOLL);
     // DecorationAdd(DECOR_TOTODILE_DOLL);
     // DecorationAdd(DECOR_DITTO_DOLL); 
+    DecorationAdd(DECOR_TORCHIC_DOLL);
+    DecorationAdd(DECOR_CYNDAQUIL_DOLL);
     DecorationAdd(DECOR_KECLEON_DOLL);
-    // DecorationAdd(DECOR_VENUSAUR_DOLL);
-    // DecorationAdd(DECOR_MEOWTH_DOLL);
+    DecorationAdd(DECOR_CHARIZARD_DOLL);
     // DecorationAdd(DECOR_DUSKULL_DOLL);
     // DecorationAdd(DECOR_REGIROCK_DOLL);
 
@@ -258,10 +259,10 @@ void NewGameInitData(void)
     // DecorationAdd(DECOR_YELLOW_BALLOON);
 
     // DecorationAdd(DECOR_C_LOW_NOTE_MAT);
-    DecorationAdd(DECOR_D_NOTE_MAT);
-    DecorationAdd(DECOR_E_NOTE_MAT);
-    DecorationAdd(DECOR_F_NOTE_MAT);
-    DecorationAdd(DECOR_G_NOTE_MAT);
+    // DecorationAdd(DECOR_D_NOTE_MAT);
+    // DecorationAdd(DECOR_E_NOTE_MAT);
+    // DecorationAdd(DECOR_F_NOTE_MAT);
+    // DecorationAdd(DECOR_G_NOTE_MAT);
 }
 
 static void ResetMiniGamesRecords(void)

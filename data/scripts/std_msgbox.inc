@@ -46,10 +46,10 @@ Std_MsgboxGetPoints:
 	waitmessage
 	return
 
-@ Never used, pokenavcall is always used directly instead
-Std_MsgboxPokenav:
-	pokenavcall NULL
+Std_MsgboxHintnpc:
+	message NULL
 	waitmessage
+	softlockguymovebox 30, 4, FALSE
 	return
 
 EventScript_UnusedReturn:

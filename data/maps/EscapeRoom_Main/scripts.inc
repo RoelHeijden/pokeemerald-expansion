@@ -7815,205 +7815,202 @@ DoubleBattle_NotEnoughMons::
 
 Trainer0_Intro::
 # 5490 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "You may think you are ready,\n"
-	.string "but you really need three.\l"
-	.string "Which of your moves will be the key?$"
+	.string "You think you are ready?\n"
+	.string "You really need three.\l"
+	.string "One of them might hold the key.$"
 
 Trainer0_Outro::
-# 5501 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "...$"
+# 5499 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "But sharing is caring!$"
 
 Trainer0_PostBattle::
-# 5505 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5503 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "One down, eleven to go.$"
 
 Trainer1_Intro::
-# 5511 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5509 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Sharing is caring.\n"
 	.string "Can you see the appeal?\l"
 	.string "Win the fight and we may have a deal.$"
 
 Trainer1_Outro::
-# 5517 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5515 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's make a deal!$"
 
 Trainer1_PostBattle::
-# 5521 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5519 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Sacrificing Pokémon is never easy, but\n"
 	.string "that's the price of progress.$"
 
 AskZeraCutTradeMessage::
-# 5526 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5524 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wow, that Zeraora of yours is amazing.\n"
 	.string "I wish I had a Pokémon like that!\p"
 	.string "Would you be okay trading your Zeraora\n"
 	.string "for my HM Cut?$"
 
 ZeraCutTradeDeclined::
-# 5533 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5531 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Come back if you change your mind.$"
 
 Trainer2_Intro::
-# 5539 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5537 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The land may hide its fiercest face,\n"
 	.string "beneath the calm of leafy grace.$"
 
 Trainer2_Outro::
-# 5544 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Call me a maniac, but I love writing in\n"
-	.string "686578.$"
+# 5542 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "I love writing in 686578!$"
 
 Trainer2_PostBattle::
-# 5549 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5546 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Cut the illusion, clear the path!$"
 
 Trainer3_Intro::
-# 5555 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5552 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Rage is nearly guaranteed.\n"
 	.string "Try and recognize good easy tactics.$"
 
 Trainer3_Outro::
-# 5560 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5557 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Right on, pretty exciting!$"
 
 Trainer3_PostBattle::
-# 5564 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5561 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Every good gamer sometimes cheats a\n"
 	.string "puzzle exit.$"
 
 Trainer3FinalWords::
-# 5569 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5566 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Entry granted.$"
 
 Trainer4_Intro::
-# 5575 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5572 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Exhausted already?\n"
 	.string "We're just getting started!$"
 
 Trainer4_Outro::
-# 5580 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5577 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Ugh, just leave already.$"
 
 Trainer4_PostBattle::
-# 5584 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Did you know that 5A + 2L = 525?$"
+# 5581 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Did you know 5(A->L) + 2(L->O) = 525?$"
 
 Trainer5_Intro::
-# 5590 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5588 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That's more like it.\n"
 	.string "Let's see how much you're worth!$"
 
 Trainer5_Outro::
-# 5595 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5593 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Was that enough?$"
 
 Trainer5_PostBattle::
-# 5599 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5597 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's never do that again.$"
 
 Trainer5_RemoveAssistMessage::
-# 5603 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5601 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do I look like I need your assistance?\n"
 	.string "Try again when that move is gone.$"
 
 Trainer6_Intro::
-# 5610 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5608 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "My carrier birds are amazing!\n"
 	.string "They can bring all sorts of items.\p"
 	.string "This one might've just come back from\n"
 	.string "the moon though...$"
 
 Trainer6_Outro::
-# 5617 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5615 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Oh how the tablets have turned.$"
 
 Trainer6_PostBattle::
-# 5621 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5619 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you know where I can find a cook?\n"
-	.string "My birds deliver letters, not lunch.$"
+	.string "My birds deliver goods, not dinner.$"
 
 Trainer7A_Intro::
-# 5628 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5626 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That old lady makes a move on nearly\n"
 	.string "everyone who walks by.\p"
 	.string "Honestly, I can't take it anymore.\n"
 	.string "I'm barely holding it together.$"
 
 Trainer7A_Outro::
-# 5635 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5633 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Don't you think she's two forward?$"
 
 Trainer7A_PostBattle::
-# 5639 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5637 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "fwuenqru? uwu.$"
 
 Trainer7B_Intro::
-# 5646 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5644 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hello handsome.\n"
 	.string "Aren't you a sight for sore eyes?$"
 
 Trainer7B_Outro::
-# 5651 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5649 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer7B_PostBattle::
-# 5655 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5653 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I don't think I was meant to be\n"
 	.string "beatable...$"
 
 Trainer8_Intro::
-# 5662 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5660 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Spooky, scary skeletons,\n"
 	.string "send shivers down your spine.\p"
 	.string "Ghost type mons are everywhere,\n"
 	.string "you still haven't seen mine.$"
 
 Trainer8_Outro::
-# 5674 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5672 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Is there anyone you can't beat?$"
 
 Trainer8_PostBattle::
-# 5678 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5676 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "$"
 
 Trainer9_Intro::
-# 5684 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5682 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So many trainers, but battles are rare.\n"
 	.string "Many pretend like we're not even there.$"
 
 Trainer9_Outro::
-# 5689 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5687 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thanks. Only real battles.$"
 
 Trainer9_PostBattle::
-# 5693 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "Somehow I doubt this was your last time\n"
-	.string "passing through.$"
+# 5691 "data/maps/EscapeRoom_Main/scripts.pory"
+	.string "Is this your last time passing through?$"
 
 Trainer10_Intro::
-# 5700 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5699 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Darwinism?\n"
-	.string "More like schmarminism.\p"
-	.string "My Kecleon doesn't need to change,\n"
-	.string "he's fire!$"
+	.string "More like Schmarminism...\p"
+	.string "Kecleon doesn't need any changes!$"
 
 Trainer10_Outro::
-# 5707 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5705 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What happened to Shelgon?$"
 
 Trainer10_PostBattle::
-# 5711 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5709 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Don't stop now.\n"
 	.string "You're almost there!$"
 
 Trainer11_Intro::
-# 5718 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5716 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 Trainer11_Outro::
-# 5722 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5720 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"
 
 Trainer11_PostBattle::
-# 5726 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5724 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "TBD$"

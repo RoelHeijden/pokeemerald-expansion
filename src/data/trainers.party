@@ -16934,12 +16934,12 @@ Music: Intense
 Items: Max Elixir
 Double Battle: No
 
-Dracozolt @ Ability Shield
-Level: 28
-Modest Nature
-Ability: Volt Absorb
-EVs: 252 HP / 136 SpA / 32 SpD
-IVs: 0 Atk
+Dracozolt @ Ability Shield  
+Ability: Volt Absorb  
+Level: 26  
+EVs: 252 HP / 236 SpA  
+Modest Nature  
+IVs: 0 Atk  
 - Flamethrower
 
 
@@ -17013,7 +17013,7 @@ IVs: 0 HP / 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER6 ===
-Name: R.T. Abe
+Name: Abe
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
