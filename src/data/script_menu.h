@@ -831,8 +831,8 @@ static const struct MenuAction MultichoiceList_HintNPC[] =
 
 static const struct MenuAction MultichoiceList_MainSign[] =
 {
-    {gText_CheckImportantInfo},
     {gText_CheckProgress},
+    {gText_CheckImportantInfo},
 };
 
 

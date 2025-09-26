@@ -16944,7 +16944,7 @@ IVs: 0 Atk
 
 
 === TRAINER_CUSTOM_TRAINER3 ===
-Name: rostic
+Name: Rostic
 Class: Pokemaniac
 Pic: Pokemaniac
 Gender: Male
@@ -17113,7 +17113,6 @@ Pic: School Kid M
 Gender: Male
 Music: Intense
 Double Battle: No
-AI: AI_FLAG_TRAINER10
 
 Sentret (F)  
 Ability: Run Away  
@@ -17138,11 +17137,20 @@ Pic: Champion Wallace
 Gender: Male
 Music: Intense
 Double Battle: Yes
+AI: AI_FLAG_TRAINER11
 
-Unown  
-Ability: Levitate  
-- Psychic
+Magcargo  
+Ability: Flame Body  
+EVs: 252 HP / 140 Atk / 116 Def  
+Impish Nature  
+IVs: 26 Spe  
+- Tera Blast   
 
-Unown  
-Ability: Levitate  
-- Psychic 
+Runerigus  
+Ability: Wandering Spirit  
+Level: 95  
+EVs: 252 HP / 252 Def / 4 Spe  
+Bold Nature  
+IVs: 0 Atk  
+- Giga Impact
+

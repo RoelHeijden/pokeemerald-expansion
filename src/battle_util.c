@@ -5627,7 +5627,8 @@ u32 AbilityBattleEffects(u32 caseID, u32 battler, u32 ability, u32 special, u32 
             break;
         case ABILITY_WANDERING_SPIRIT:
             if (!(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
-             && IsBattlerAlive(gBattlerAttacker)
+            //  && IsBattlerAlive(gBattlerAttacker)  // changed
+             && (IsBattlerAlive(gBattlerAttacker) || IsBattlerAlive(gBattlerTarget)) // at least one alive
              && TARGET_TURN_DAMAGED
              && GetBattlerHoldEffect(gBattlerAttacker, TRUE) != HOLD_EFFECT_PROTECTIVE_PADS
              && IsMoveMakingContact(move, gBattlerAttacker)
@@ -8390,10 +8391,24 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
         u16 species1 = gBattleMons[battler1].species;
         u16 species2 = gBattleMons[battler2].species;
 
+        // case 1: Liepard + Aipom -> target Aipom
         if ((species1 == SPECIES_LIEPARD && species2 == SPECIES_AIPOM) ||
             (species1 == SPECIES_AIPOM && species2 == SPECIES_LIEPARD))
         {
             if (species1 == SPECIES_AIPOM)
+                targetBattler = battler1;
+            else
+                targetBattler = battler2;
+
+            *(gBattleStruct->moveTarget + gBattlerAttacker) = targetBattler;
+            return targetBattler;
+        }
+
+        // case 2: Sableye + Annihilape -> target Sableye
+        if ((species1 == SPECIES_ANNIHILAPE && species2 == SPECIES_SABLEYE) ||
+            (species1 == SPECIES_SABLEYE && species2 == SPECIES_ANNIHILAPE))
+        {
+            if (species1 == SPECIES_SABLEYE)
                 targetBattler = battler1;
             else
                 targetBattler = battler2;

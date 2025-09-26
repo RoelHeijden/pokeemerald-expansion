@@ -64,7 +64,7 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
-static s32 AI_Trainer10(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer11(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
 
 static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
@@ -92,7 +92,7 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [20] = AI_Trainer3,              // AI_FLAG_TRAINER3
     [21] = AI_Trainer5,              // AI_FLAG_TRAINER5
     [22] = AI_Trainer9,              // AI_FLAG_TRAINER9
-    [23] = AI_Trainer10,             // AI_FLAG_TRAINER10
+    [23] = AI_Trainer11,             // AI_FLAG_TRAINER11
     [24] = NULL,                     // Unused
     [25] = NULL,                     // Unused
     [26] = NULL,                     // Unused
@@ -5514,8 +5514,21 @@ static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 }
 
 
-// trainer10
-static s32 AI_Trainer10(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+// trainer11
+static s32 AI_Trainer11(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+
+    // target the pokemon with the Foresight effect
+    // otherwise: random move
+    if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT && 
+        gBattleMons[battlerDef].species != SPECIES_MAGCARGO &&
+        gBattleMons[battlerDef].species != SPECIES_RUNERIGUS)
+    {
+        score += 20;  
+    }
+    else{
+        score += (Random() % 5) - 2;  // small random bias between -2 and +2
+    }
+
     return score;
 }
 

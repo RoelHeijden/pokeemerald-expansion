@@ -42383,7 +42383,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER3] =
     {
 #line 16947
-        .trainerName = _("rostic"),
+        .trainerName = _("Rostic"),
 #line 16948
         .trainerClass = TRAINER_CLASS_POKEMANIAC,
 #line 16949
@@ -42804,104 +42804,110 @@ F_TRAINER_FEMALE |
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
 #line 17115
         .doubleBattle = FALSE,
-#line 17116
-        .aiFlags = AI_FLAG_TRAINER10,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
-#line 17118
+#line 17117
             .species = SPECIES_SENTRET,
-#line 17118
+#line 17117
             .gender = TRAINER_MON_FEMALE,
-#line 17120
-            .ev = TRAINER_PARTY_EVS(252, 156, 60, 0, 0, 0),
-#line 17122
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 1, 13, 31),
 #line 17119
-            .ability = ABILITY_RUN_AWAY,
-#line 17123
-            .lvl = 100,
+            .ev = TRAINER_PARTY_EVS(252, 156, 60, 0, 0, 0),
 #line 17121
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 1, 13, 31),
+#line 17118
+            .ability = ABILITY_RUN_AWAY,
+#line 17122
+            .lvl = 100,
+#line 17120
             .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17123
+#line 17122
                 MOVE_ASSIST,
             },
             },
             {
-#line 17125
+#line 17124
             .species = SPECIES_KECLEON,
-#line 17125
+#line 17124
             .gender = TRAINER_MON_MALE,
-#line 17128
-            .ev = TRAINER_PARTY_EVS(8, 0, 248, 0, 252, 0),
-#line 17130
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 30, 30, 17),
-#line 17126
-            .ability = ABILITY_COLOR_CHANGE,
 #line 17127
-            .lvl = 40,
+            .ev = TRAINER_PARTY_EVS(8, 0, 248, 0, 252, 0),
 #line 17129
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 30, 30, 17),
+#line 17125
+            .ability = ABILITY_COLOR_CHANGE,
+#line 17126
+            .lvl = 40,
+#line 17128
             .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17131
+#line 17130
                 MOVE_HIDDEN_POWER,
             },
             },
         },
     },
-#line 17134
+#line 17133
     [TRAINER_CUSTOM_TRAINER11] =
     {
-#line 17135
+#line 17134
         .trainerName = _("Finale"),
-#line 17136
+#line 17135
         .trainerClass = TRAINER_CLASS_CHAMPION,
-#line 17137
+#line 17136
         .trainerPic = TRAINER_PIC_CHAMPION_WALLACE,
         .encounterMusic_gender = 
-#line 17139
+#line 17138
             TRAINER_ENCOUNTER_MUSIC_INTENSE,
-#line 17140
+#line 17139
         .doubleBattle = TRUE,
+#line 17140
+        .aiFlags = AI_FLAG_TRAINER11,
         .partySize = 2,
         .party = (const struct TrainerMon[])
         {
             {
 #line 17142
-            .species = SPECIES_UNOWN,
+            .species = SPECIES_MAGCARGO,
             .gender = TRAINER_MON_RANDOM_GENDER,
 #line 17144
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+            .ev = TRAINER_PARTY_EVS(252, 140, 116, 0, 0, 0),
+#line 17146
+            .iv = TRAINER_PARTY_IVS(31, 31, 31, 26, 31, 31),
 #line 17143
-            .ability = ABILITY_LEVITATE,
-#line 17144
+            .ability = ABILITY_FLAME_BODY,
+#line 17147
             .lvl = 100,
-            .nature = NATURE_HARDY,
+#line 17145
+            .nature = NATURE_IMPISH,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17144
-                MOVE_PSYCHIC,
+#line 17147
+                MOVE_TERA_BLAST,
             },
             },
             {
-#line 17146
-            .species = SPECIES_UNOWN,
+#line 17149
+            .species = SPECIES_RUNERIGUS,
             .gender = TRAINER_MON_RANDOM_GENDER,
-#line 17148
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
-#line 17147
-            .ability = ABILITY_LEVITATE,
-#line 17148
-            .lvl = 100,
-            .nature = NATURE_HARDY,
+#line 17152
+            .ev = TRAINER_PARTY_EVS(252, 0, 252, 4, 0, 0),
+#line 17154
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
+#line 17150
+            .ability = ABILITY_WANDERING_SPIRIT,
+#line 17151
+            .lvl = 95,
+#line 17153
+            .nature = NATURE_BOLD,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17148
-                MOVE_PSYCHIC,
+#line 17155
+                MOVE_GIGA_IMPACT,
             },
             },
         },
