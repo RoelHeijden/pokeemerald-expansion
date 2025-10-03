@@ -13023,8 +13023,18 @@ static void Cmd_disablelastusedattack(void)
         PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleMons[gBattlerTarget].moves[i])
 
         gDisableStructs[gBattlerTarget].disabledMove = gBattleMons[gBattlerTarget].moves[i];
-        if (B_DISABLE_TURNS >= GEN_5)
-            gDisableStructs[gBattlerTarget].disableTimer = 4;
+        if (B_DISABLE_TURNS >= GEN_5){
+
+
+            // ADDED
+            // Disable last four turns (excluding current turn) if target has already moved this turn
+            // else three
+            gDisableStructs[gBattlerTarget].disableTimer = 5;
+            if (GetBattlerTurnOrderNum(gBattlerTarget) > GetBattlerTurnOrderNum(gBattlerAttacker))
+                gDisableStructs[gBattlerTarget].disableTimer--; 
+
+            // gDisableStructs[gBattlerTarget].disableTimer = 4;
+        }
         else if (B_DISABLE_TURNS >= GEN_4)
             gDisableStructs[gBattlerTarget].disableTimer = (Random() & 3) + 4; // 4-7 turns
         else
