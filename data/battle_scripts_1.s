@@ -1085,6 +1085,7 @@ BattleScript_EffectJungleHealing::
 	jumpifteamhealthy BS_ATTACKER, BattleScript_ButItFailed
 	attackanimation
 	waitanimation
+	copybyte gBattlerAttackerBackup, gBattlerAttacker
 	copybyte gBattlerTarget, gBattlerAttacker
 	setbyte gBattleCommunication, 0
 JungleHealing_RestoreTargetHealth:
@@ -1105,11 +1106,14 @@ BattleScript_JungleHealingCureStatus:
 	printstring STRINGID_PKMNSTATUSNORMAL
 	waitmessage B_WAIT_TIME_LONG
 BattleScript_JungleHealingTryRestoreAlly:
-	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_MoveEnd
+	jumpifbyte CMP_NOT_EQUAL, gBattleCommunication, 0x0, BattleScript_JungleHealingRestoreAttacker
 	addbyte gBattleCommunication, 1
-	jumpifnoally BS_TARGET, BattleScript_MoveEnd
+	jumpifnoally BS_TARGET, BattleScript_JungleHealingRestoreAttacker
 	setallytonexttarget JungleHealing_RestoreTargetHealth
+BattleScript_JungleHealingRestoreAttacker:
+	copybyte gBattlerAttacker, gBattlerAttackerBackup
 	goto BattleScript_MoveEnd
+
 
 BattleScript_EffectRelicSong::
 	call BattleScript_EffectHit_Ret

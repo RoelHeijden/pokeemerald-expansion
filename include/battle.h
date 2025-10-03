@@ -1068,6 +1068,7 @@ extern u16 gLastFlungItem; // ADDED
 extern u16 gLastUsedAbility;
 extern u8 gBattlerAttacker;
 extern u8 gBattlerTarget;
+extern u8 gBattlerAttackerBackup;  // ADDED THIS
 extern u8 gBattlerTargetBackup;  // ADDED THIS
 extern u8 gPerishLastToFaint;  // ADDED THIS
 extern u8 gBattlerHoldmyBeer; // ADDED
