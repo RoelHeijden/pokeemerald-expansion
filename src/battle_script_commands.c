@@ -512,6 +512,7 @@ static void Cmd_setalwayshitflag(void);
 static void Cmd_copymovepermanently(void);
 static void Cmd_trychoosesleeptalkmove(void);
 static void Cmd_setdestinybond(void);
+static void Cmd_checkdestinybondused(void); // ADDED
 static void Cmd_trysetdestinybondtohappen(void);
 static void Cmd_settailwind(void);
 static void Cmd_tryspiteppreduce(void);
@@ -831,7 +832,7 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     Cmd_jumpifhasnohp,                           //0xE3
     Cmd_jumpifnotcurrentmoveargtype,             //0xE4
     Cmd_pickup,                                  //0xE5
-    Cmd_unused3,                                 //0xE6
+    Cmd_checkdestinybondused,                            //0xE6
     Cmd_setfleeforfeit,                                 //0xE7
     Cmd_settypebasedhalvers,                     //0xE8
     Cmd_jumpifsubstituteblocks,                  //0xE9
@@ -13396,9 +13397,26 @@ static void Cmd_setdestinybond(void)
 {
     CMD_ARGS();
 
+    // ADDED
+    gDestinyBondUsed[gBattlerAttacker] = TRUE;
+
     gBattleMons[gBattlerAttacker].status2 |= STATUS2_DESTINY_BOND;
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
+
+// ADDED
+static void Cmd_checkdestinybondused(void)
+{
+    CMD_ARGS(const u8 *failInstr);
+
+    if (gDestinyBondUsed[gBattlerAttacker])
+        gBattlescriptCurrInstr = cmd->failInstr;
+    else
+        gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+
+
 
 static void TrySetDestinyBondToHappen(void)
 {

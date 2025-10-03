@@ -4055,16 +4055,19 @@ BattleScript_SleepTalkUsingMove::
 	setbyte sB_ANIM_TARGETS_HIT, 0
 	jumptocalledmove TRUE
 
+
 BattleScript_EffectDestinyBond::
-	attackcanceler
-	attackstring
-	ppreduce
-	setdestinybond
-	attackanimation
-	waitanimation
-	printstring STRINGID_PKMNTRYINGTOTAKEFOE
-	waitmessage B_WAIT_TIME_LONG
-	goto BattleScript_MoveEnd
+    attackcanceler
+    attackstring
+    ppreduce
+	checkdestinybondused BattleScript_ButItFailed
+    setdestinybond
+    attackanimation
+    waitanimation
+    printstring STRINGID_PKMNTRYINGTOTAKEFOE
+    waitmessage B_WAIT_TIME_LONG
+    goto BattleScript_MoveEnd
+
 
 BattleScript_EffectEerieSpell::
 	call BattleScript_EffectHit_Ret

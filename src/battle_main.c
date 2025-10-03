@@ -169,6 +169,7 @@ EWRAM_DATA s32 gHpDealt = 0;
 EWRAM_DATA s32 gBideDmg[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA u16 gLastUsedItem = 0;
 EWRAM_DATA u16 gLastFlungItem = 0; // ADDED
+EWRAM_DATA bool8 gDestinyBondUsed[MAX_BATTLERS_COUNT]; // ADDED
 EWRAM_DATA u16 gLastUsedAbility = 0;
 EWRAM_DATA u8 gBattlerAttacker = 0;
 EWRAM_DATA u8 gBattlerTarget = 0;
@@ -5304,6 +5305,12 @@ static void TurnValuesCleanUp(bool8 var0)
             gBattleMons[i].status2 &= ~STATUS2_SUBSTITUTE;
 
         gSpecialStatuses[i].parentalBondState = PARENTAL_BOND_OFF;
+
+
+        // ADDED: Reset Destiny Bond tracking
+        if (!(gBattleMons[i].status2 & STATUS2_DESTINY_BOND))
+            gDestinyBondUsed[i] = FALSE;
+            
     }
 
     gSideStatuses[B_SIDE_PLAYER] &= ~(SIDE_STATUS_QUICK_GUARD | SIDE_STATUS_WIDE_GUARD | SIDE_STATUS_CRAFTY_SHIELD | SIDE_STATUS_MAT_BLOCK);

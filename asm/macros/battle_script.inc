@@ -1233,8 +1233,9 @@
 	.byte 0xe5
 	.endm
 
-	.macro unused3
+	.macro checkdestinybondused failInstr:req
 	.byte 0xe6
+	.4byte \failInstr
 	.endm
 
 	.macro setfleeforfeit
