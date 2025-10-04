@@ -76,6 +76,9 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+// ADDED
+#include "move_relearner.h"
+
 enum {
     MENU_SUMMARY,
     MENU_SWITCH,
@@ -474,6 +477,7 @@ static void CB2_ChooseContestMon(void);
 static void Task_ChoosePartyMon(u8 taskId);
 static void Task_ChooseMonForMoveRelearner(u8);
 static void CB2_ChooseMonForMoveRelearner(void);
+void CB_ReturnToPartyFromRelearner(void); // ADDED
 static void Task_BattlePyramidChooseMonHeldItems(u8);
 static void ShiftMoveSlot(struct Pokemon *, u8, u8);
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
@@ -8071,9 +8075,6 @@ static bool8 BackupMonMoveset(u16 partyslot)
 
 
 
-
-
-
 void ChooseMonForMoveRelearner(void)
 {
     LockPlayerFieldControls();
@@ -8091,16 +8092,60 @@ static void Task_ChooseMonForMoveRelearner(u8 taskId)
     }
 }
 
+// static void CB2_ChooseMonForMoveRelearner(void)
+// {
+//     gSpecialVar_0x8004 = GetCursorSelectionMonId();
+//     if (gSpecialVar_0x8004 >= PARTY_SIZE)
+//         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
+//     else
+//         gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_0x8004]);
+//     gFieldCallback2 = CB2_FadeFromPartyMenu;
+//     SetMainCallback2(CB2_ReturnToField);
+// }
+
+
+// CHANGED
 static void CB2_ChooseMonForMoveRelearner(void)
 {
     gSpecialVar_0x8004 = GetCursorSelectionMonId();
+
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
+    {
+        // cancel — just go back to the party menu or field as needed
         gSpecialVar_0x8004 = PARTY_NOTHING_CHOSEN;
-    else
-        gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_0x8004]);
-    gFieldCallback2 = CB2_FadeFromPartyMenu;
-    SetMainCallback2(CB2_ReturnToField);
+        SetMainCallback2(CB2_ReturnToField);
+        ScriptContext_Enable();
+        return;
+    }
+
+    gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_0x8004]);
+
+    // if no relearnable moves, you can either return to menu or message
+    if (gSpecialVar_0x8005 == 0)
+    {
+        // e.g., show a message or just return to party menu
+        SetMainCallback2(CB2_ReturnToField);
+        ScriptContext_Enable();
+        return;
+    }
+
+
+    // directly initialize the relearner instead of going back to overworld
+    SetMainCallback2(CB2_InitLearnMove);
 }
+
+// ADDED
+void CB_ReturnToPartyFromRelearner(void)
+{
+    InitPartyMenu(PARTY_MENU_TYPE_MOVE_RELEARNER, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_AND_CLOSE,
+                  TRUE, PARTY_MSG_CHOOSE_MON, Task_HandleChooseMonInput, CB2_ChooseMonForMoveRelearner);
+}
+
+
+
+
+
+
 
 void DoBattlePyramidMonsHaveHeldItem(void)
 {

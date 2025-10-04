@@ -27,6 +27,9 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+// ADDED
+#include "party_menu.h"
+
 /*
  * Move relearner state machine
  * ------------------------
@@ -354,7 +357,7 @@ static void CreateLearnableMovesList(void);
 static void CreateUISprites(void);
 static void CB2_MoveRelearnerMain(void);
 static void Task_WaitForFadeOut(u8 taskId);
-static void CB2_InitLearnMove(void);
+void CB2_InitLearnMove(void);
 static void CB2_InitLearnMoveReturnFromSelectMove(void);
 static void InitMoveRelearnerBackgroundLayers(void);
 static void AddScrollArrows(void);
@@ -391,7 +394,7 @@ static void Task_WaitForFadeOut(u8 taskId)
     }
 }
 
-static void CB2_InitLearnMove(void)
+void CB2_InitLearnMove(void)
 {
     ResetSpriteData();
     FreeAllSpritePalettes();
@@ -682,7 +685,11 @@ static void DoMoveRelearnerMain(void)
         if (!gPaletteFade.active)
         {
             FreeMoveRelearnerResources();
-            SetMainCallback2(CB2_ReturnToField);
+            // SetMainCallback2(CB2_ReturnToField);
+
+            // CHANGED
+            // return to mon selection menu
+            SetMainCallback2(CB_ReturnToPartyFromRelearner);
         }
         break;
     case MENU_STATE_FADE_FROM_SUMMARY_SCREEN:

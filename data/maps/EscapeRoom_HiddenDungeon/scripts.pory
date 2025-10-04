@@ -457,7 +457,6 @@ script EscapeRoom_HiddenDungeon_YamaskGuy{
 }
 
 
-
 // move relearner
 script EscapeRoom_HiddenDungeon_MoveRelearner{
     lockall
@@ -471,11 +470,11 @@ script EscapeRoom_HiddenDungeon_MoveRelearner{
     special(ChooseMonForMoveRelearner)
     waitstate
 
-    // choose move
-    if(var(VAR_0x8004) != PARTY_NOTHING_CHOSEN){
-        special(TeachMoveRelearnerMove)
-        waitstate
-    }
+    // // choose move
+    // if(var(VAR_0x8004) != PARTY_NOTHING_CHOSEN){
+    //     special(TeachMoveRelearnerMove)
+    //     waitstate
+    // }
 
     // end message
     msgbox(MoveRelearnerEndMessage, MSGBOX_DEFAULT)
@@ -484,7 +483,6 @@ script EscapeRoom_HiddenDungeon_MoveRelearner{
 
     releaseall
 }
-
 
 
 
@@ -590,7 +588,7 @@ text YamaskGuyMainMessage{
 
 // move relearner
 text MoveRelearnerMainMessage{
-    "Hi, I'm your personal Move Tutor.\p"
+    "Hi, I'm your Move Tutor.\p"
     "Which of your Pokémon should I teach a\n"
     "new move?"
 }

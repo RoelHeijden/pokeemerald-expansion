@@ -2,7 +2,7 @@
   "id": "MAP_ESCAPE_ROOM_MAIN",
   "name": "EscapeRoom_Main",
   "layout": "LAYOUT_ESCAPE_ROOM_MAIN",
-  "music": "MUS_MT_PYRE_EXTERIOR",
+  "music": "MUS_ROUTE113",
   "region_map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

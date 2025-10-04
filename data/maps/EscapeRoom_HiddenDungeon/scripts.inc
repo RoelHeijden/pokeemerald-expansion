@@ -613,10 +613,6 @@ EscapeRoom_HiddenDungeon_MoveRelearner::
 	special ChooseMonForMoveRelearner
 # 472 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitstate
-# 475 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
-	goto_if_ne EscapeRoom_HiddenDungeon_MoveRelearner_2
-EscapeRoom_HiddenDungeon_MoveRelearner_1:
 # 481 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox MoveRelearnerEndMessage, MSGBOX_DEFAULT
 # 482 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
@@ -624,13 +620,6 @@ EscapeRoom_HiddenDungeon_MoveRelearner_1:
 # 485 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
-
-EscapeRoom_HiddenDungeon_MoveRelearner_2:
-# 476 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	special TeachMoveRelearnerMove
-# 477 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	waitstate
-	goto EscapeRoom_HiddenDungeon_MoveRelearner_1
 
 
 AskBagonTrade::
@@ -693,7 +682,7 @@ YamaskGuyPostTradeMessage::
 	.string "their Struggle always seems to find\l"
 	.string "the optimal target.\p"
 	.string "Don't worry, you've got everything you\n"
-	.string "need to come out victorious.\p"
+	.string "need to come out victorious!\p"
 	.string "Your Choice Specs can no longer be\n"
 	.string "exchanged, and Secret Power will be\l"
 	.string "added to the Move Tutor moves.\p"
@@ -715,7 +704,7 @@ YamaskGuyMainMessage::
 
 MoveRelearnerMainMessage::
 # 592 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	.string "Hi, I'm your personal Move Tutor.\p"
+	.string "Hi, I'm your Move Tutor.\p"
 	.string "Which of your Pokémon should I teach a\n"
 	.string "new move?$"
 

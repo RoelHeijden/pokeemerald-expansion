@@ -8408,7 +8408,7 @@ Trainer11_Outro::
 
 Trainer11_PostBattle_A::
 # 5986 "data/maps/EscapeRoom_Main/scripts.pory"
-	.string "You might want to first read the sign.$"
+	.string "Please read the sign first.$"
 
 Trainer11_PostBattle_B::
 # 5990 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -8418,7 +8418,7 @@ Trainer11_PostBattle_B::
 	.string "its creation.\p"
 	.string "If you enjoyed the experience, please\n"
 	.string "let me know by commenting on the game's\l"
-	.string "PokéCommunity post.\p"
+	.string "PokéCommunity forum post.\p"
 	.string "I'd love to to read how you did.\n"
 	.string "It truly means lot to me.\p"
 	.string "Thank you so much for playing.\n"
