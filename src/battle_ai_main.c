@@ -5517,16 +5517,64 @@ static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 // trainer11
 static s32 AI_Trainer11(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
 
-    // target the pokemon with the Foresight effect
-    // otherwise: random move
-    if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT && 
-        gBattleMons[battlerDef].species != SPECIES_MAGCARGO &&
-        gBattleMons[battlerDef].species != SPECIES_RUNERIGUS)
-    {
-        score += 20;  
+    u16 attacker_item = gBattleMons[battlerAtk].item;
+    u16 attacker_hp   = gBattleMons[battlerAtk].hp;
+    u16 attacker_maxHp = gBattleMons[battlerAtk].maxHP;
+
+
+    //// HEATRAN ////
+
+    if(gBattleMons[battlerAtk].species == SPECIES_HEATRAN){
+
+        // prioritize Body Press
+        if (move == MOVE_BODY_PRESS){
+            score += 5;
+        }
+
+        // prioritize hitting Annihilape
+        if (gBattleMons[battlerDef].species == SPECIES_ANNIHILAPE){
+            score += 10;
+        }
+
+        // target the pokemon with the Foresight effect
+        if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT)
+        {
+           score += 20;  
+        }
+
+        // avoid hitting into Destiny Bond
+        if (gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND){
+            score -= 50;
+        }
     }
-    else{
-        score += (Random() % 5) - 2;  // small random bias between -2 and +2
+
+
+    //// KECLEON ////
+
+    if(gBattleMons[battlerAtk].species == SPECIES_KECLEON){
+        // only option is Jungle Healing
+    }
+
+
+    //// SABLEYE ////
+
+    if(gBattleMons[battlerAtk].species == SPECIES_SABLEYE){
+
+        // prioritize hitting Annihilape
+        if (gBattleMons[battlerDef].species == SPECIES_ANNIHILAPE){
+            score += 10;
+        }
+        
+        // avoid hitting a pokemon who already has the Foresight status
+        if (gBattleMons[battlerDef].status2 & STATUS2_FORESIGHT)
+        {
+            score -= 40;  
+        }
+
+        // avoid hitting into Destiny Bond
+        if (gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND){
+            score -= 20;
+        }
     }
 
     return score;

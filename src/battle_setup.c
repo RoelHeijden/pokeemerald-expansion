@@ -1598,7 +1598,7 @@ void PlayTrainerEncounterMusic(void)
             music = MUS_ENCOUNTER_MAGMA;
             break;
 
-        // CHANGED: no music on twins encounter. old_couple set to swimmer music
+        // CHANGED: no music on twins encounter. Finale battle set to swimmer music
         case TRAINER_ENCOUNTER_MUSIC_SWIMMER:
             // music = MUS_ENCOUNTER_SWIMMER;
             music = MUS_DUMMY;

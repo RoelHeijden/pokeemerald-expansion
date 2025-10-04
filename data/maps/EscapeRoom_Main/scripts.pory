@@ -43,6 +43,8 @@ const _DUMMY_9 = 39
 const LOCALID_SECRET_BASE_CANDY = 16
 const LOCALID_SECRET_SOLID_BOARD = 16
 
+const LOCALID_TRAINER11 = 5
+
 
 
 movement _face_down {
@@ -112,6 +114,9 @@ script EscapeRoom_MapScript_OnResumeScripts{
     {
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
     }
+
+    // check if TM Secret power was stolen
+    call(EscapeRoom_MapScripts_CheckIfSecretPowerObtained)
 
     // check if mental herb sack used
     if(flag(FLAG_DUNSPARCE_TRADE_ACCEPTED) == TRUE && flag(FLAG_TRAINER6_DEFEATED) == FALSE){
@@ -315,6 +320,37 @@ script EscapeRoom_MapScripts_CheckIfAskWarpBack{
         setvar(VAR_ASK_WARP_BACK, 1)
     }
     Equal:
+}
+
+script EscapeRoom_MapScripts_CheckIfSecretPowerObtained{
+    if(flag(FLAG_SECRET_POWER_OBTAINED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
+        setflag(FLAG_SECRET_POWER_COMPLETED)
+
+        // ERROR CHECK
+        // - 0 money
+        // - Annihilape learned Thief
+        // - Annihilape is in party
+        // - Toxic Orb Stolen
+        // - Trainer9 defeated
+        // - Trainer10 not defeated
+        istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_THIEF)
+        copyvar(VAR_TEMP_4, VAR_RESULT)
+        checkpartymon(SPECIES_ANNIHILAPE)
+        copyvar(VAR_TEMP_5, VAR_RESULT)
+        checkexactmoney(0)
+        if(var(VAR_RESULT) == FALSE ||
+            var(VAR_TEMP_4) == FALSE ||
+            var(VAR_TEMP_5) == PARTY_SIZE ||
+            !flag(FLAG_TOXIC_ORB_OBTAINED) ||
+            !flag(FLAG_TRAINER9_DEFEATED) ||
+            flag(FLAG_TRAINER10_DEFEATED)) 
+        {
+            setvar(VAR_DO_SOMETHING_WRONG_MESSAGE, 1)
+        }
+
+        // remove Annihilape Thief undo option
+        removetaughtmove(SPECIES_ANNIHILAPE, MOVE_THIEF)
+    }
 }
 
 
@@ -709,22 +745,13 @@ script EscapeRoom_EventScript_WarpToSection3{
 
 //// SIGNS //// 
 
+// main sign
 script EscapeRoom_EventScript_MainInfoSign {
     lockall
     msgbox(MainSignWhatToRead, MSGBOX_MAIN_SIGN)
 
-    // check important info
-    if(var(VAR_RESULT) == 0)
-    {
-        msgbox(SignMessage1_part1, MSGBOX_YESNO) // "keep reading?"
-        if(var(VAR_RESULT) == YES)
-        {
-            msgbox(SignMessage1_part2, MSGBOX_DEFAULT)
-            waitmessage
-        }
-    }
     // check game completion
-    elif(var(VAR_RESULT) == 1){    
+    if(var(VAR_RESULT) == 0){    
         if(!flag(FLAG_ANNIHILAPE_SPAWNED)){
             msgbox(GameCompletionMessageInitial, MSGBOX_DEFAULT)
         }
@@ -737,6 +764,17 @@ script EscapeRoom_EventScript_MainInfoSign {
             msgbox(GameCompletionMessage, MSGBOX_DEFAULT)
         }
     }
+    // check important info
+    elif(var(VAR_RESULT) == 1)
+    {
+        msgbox(SignMessage1_part1, MSGBOX_YESNO) // "keep reading?"
+        if(var(VAR_RESULT) == YES)
+        {
+            msgbox(SignMessage1_part2, MSGBOX_DEFAULT)
+            waitmessage
+        }
+    }
+
     releaseall
 }
 
@@ -873,6 +911,7 @@ script EscapeRoom_EventScript_GetGameCompletion{
 }
 
 
+// move deleter sign
 script EscapeRoom_EventScript_MoveDeleterSign {
     lockall
     msgbox(MoveDeleterSignMessage, MSGBOX_DEFAULT)
@@ -880,6 +919,7 @@ script EscapeRoom_EventScript_MoveDeleterSign {
     releaseall
 }
 
+// end sign
 script EscapeRoom_EventScript_EndSign{
     lockall
     if(!flag(FLAG_END_ESCAPE_ROOM)){
@@ -2923,9 +2963,6 @@ script EscapeRoom_EventScript_UndoSecretPowerTeach{
     waitmessage
 }
 
-
-
-
 movement SecretGarden_NPC_move_down {
     walk_fast_down * 2
     face_left
@@ -2986,6 +3023,19 @@ script EscapeRoom_TabletsHintNPC{
 
 
 //// TRAINERS ////
+
+script EscapeRoom_EventScript_Trainer0{
+    trainerbattle_single(
+        TRAINER_CUSTOM_TRAINER0, 
+        Trainer0_Intro, 
+        Trainer0_Outro, 
+        event_script=EscapeRoom_EventScript_Trainer0PostBattle,
+    )
+
+    msgbox(Trainer0_PostBattle, MSGBOX_AUTOCLOSE)
+    waitmessage
+    end
+}
 
 script EscapeRoom_EventScript_Trainer1{
     faceplayer
@@ -3163,6 +3213,13 @@ script EscapeRoom_EventScript_Trainer10{
 }
 
 script EscapeRoom_EventScript_Trainer11{
+    // fade out music
+    if(!flag(FLAG_TRAINER11_DEFEATED)){
+        fadeoutbgm(0)
+        delay(5)
+    }
+
+    // battle
     trainerbattle_single(
         TRAINER_CUSTOM_TRAINER11, 
         Trainer11_Intro, 
@@ -3170,22 +3227,18 @@ script EscapeRoom_EventScript_Trainer11{
         event_script=EscapeRoom_EventScript_Trainer11PostBattle,
     )
 
-    msgbox(Trainer11_PostBattle, MSGBOX_AUTOCLOSE)
-    waitmessage
-    end
-}
-
-script EscapeRoom_EventScript_Trainer0{
-    trainerbattle_single(
-        TRAINER_CUSTOM_TRAINER0, 
-        Trainer0_Intro, 
-        Trainer0_Outro, 
-        event_script=EscapeRoom_EventScript_Trainer0PostBattle,
-    )
-
-    msgbox(Trainer0_PostBattle, MSGBOX_AUTOCLOSE)
-    waitmessage
-    end
+    // main final message after end sign is read
+    lockall
+    faceplayer
+    if(!flag(FLAG_END_ESCAPE_ROOM)){
+        msgbox(Trainer11_PostBattle_A, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }    
+    else{
+        msgbox(Trainer11_PostBattle_B, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
 }
 
 
@@ -3650,9 +3703,6 @@ script EscapeRoom_EventScript_Trainer10PostBattle{
     // remove rare candy3 undo (for Bagon)
     setvar(VAR_RARE_CANDY_3_USED_ON, SPECIES_NONE)
 
-    // also remove the secret power undo somehow??
-    
-
     // ERROR CHECK
     // - 500 money
     // - Bagon lvl 35
@@ -3682,6 +3732,25 @@ script EscapeRoom_EventScript_Trainer10PostBattle{
 script EscapeRoom_EventScript_Trainer11PostBattle{
     setflag(FLAG_TRAINER11_DEFEATED)
     call(EscapeRoom_EventScript_PostMatchHeal)
+
+    // prevent recovered item message
+    clearflag(FLAG_DO_RECOVERED_ITEM_MESSAGE)
+
+    // allow escaping final area again
+    setvar(VAR_FINAL_BATTLE_REACHED, 1)
+
+    // move trainer away
+    applymovement(LOCALID_TRAINER11, EscapeRoom_Movement_Trainer11End)
+    waitmovement(LOCALID_TRAINER11)
+    copyobjectxytoperm(LOCALID_TRAINER11)
+}
+
+movement EscapeRoom_Movement_Trainer11End{
+    face_up
+    walk_up * 5
+    walk_faster_up * 6
+    walk_faster_left
+    face_down
 }
 
 
@@ -3942,45 +4011,54 @@ script EscapeRoom_EventScript_SellDunsparce{
 //// CHOICE ITEM SCRIPT ////
 
 script EscapeRoom_EventScript_GetChoiceItem{
-    // ask which choice item
-    msgbox(ChoiceItemsWhichOne, MSGBOX_DEFAULT)
-    waitmessage
 
-    // option menu
-    dynmultichoice(30, 6, FALSE, 6, 0, 0, OptionChoiceBand, OptionChoiceSpecs, OptionChoiceScarf) 
+    if(!flag(FLAG_TRAINER10_DEFEATED)){
 
-    // decode options into VAR_0x8006
-    if(var(VAR_RESULT) == 0){
-        setvar(VAR_0x8006, ITEM_CHOICE_BAND)
-    }
-    elif(var(VAR_RESULT) == 1){
-        setvar(VAR_0x8006, ITEM_CHOICE_SPECS)
-    }
-    elif(var(VAR_RESULT) == 2){
-        setvar(VAR_0x8006, ITEM_CHOICE_SCARF)
+        // ask which choice item
+        msgbox(ChoiceItemsWhichOne, MSGBOX_DEFAULT)
+        waitmessage
+
+        // option menu
+        dynmultichoice(30, 6, FALSE, 6, 0, 0, OptionChoiceBand, OptionChoiceSpecs, OptionChoiceScarf) 
+
+        // decode options into VAR_0x8006
+        if(var(VAR_RESULT) == 0){
+            setvar(VAR_0x8006, ITEM_CHOICE_BAND)
+        }
+        elif(var(VAR_RESULT) == 1){
+            setvar(VAR_0x8006, ITEM_CHOICE_SPECS)
+        }
+        elif(var(VAR_RESULT) == 2){
+            setvar(VAR_0x8006, ITEM_CHOICE_SCARF)
+        }
+        else{
+            msgbox(ChoiceItemsComeAgain, MSGBOX_DEFAULT)
+            waitmessage        
+            return
+        }
+
+        // end script if the player already owns the item
+        call(EscapeRoom_EventScript_EndIfAlreadyHasChoiceItem)
+
+        // remove any other choice item
+        call(EscapeRoom_EventScript_RemoveChoiceItem)
+
+        // give the new item
+        giveitem(VAR_0x8006)
+
+        // message
+        if(flag(FLAG_CHOICE_ITEM_OBTAINED)){
+            msgbox(ChoiceItemsSwapped, MSGBOX_DEFAULT)
+            waitmessage  
+        }
+        else{
+            setflag(FLAG_CHOICE_ITEM_OBTAINED)
+        }
     }
     else{
-        msgbox(ChoiceItemsComeAgain, MSGBOX_DEFAULT)
-        waitmessage        
-        return
-    }
-
-    // end script if the player already owns the item
-    call(EscapeRoom_EventScript_EndIfAlreadyHasChoiceItem)
-
-    // remove any other choice item
-    call(EscapeRoom_EventScript_RemoveChoiceItem)
-
-    // give the new item
-    giveitem(VAR_0x8006)
-
-    // message
-    if(flag(FLAG_CHOICE_ITEM_OBTAINED)){
-        msgbox(ChoiceItemsSwapped, MSGBOX_DEFAULT)
-        waitmessage  
-    }
-    else{
-        setflag(FLAG_CHOICE_ITEM_OBTAINED)
+        // ask which choice item
+        msgbox(ChoiceItemsNoLongerAvailable, MSGBOX_DEFAULT)
+        waitmessage
     }
 }
 
@@ -4071,13 +4149,6 @@ script EscapeRoom_EventScript_FindSolidBoard{
 script EscapeRoom_EventScript_FindPrimeape{
     lockall
 
-    // // ask pickup item
-    // msgbox(PrimeapePokeballMessage, MSGBOX_YESNO)
-    // if(var(VAR_RESULT) != YES){
-    //     releaseall
-    //     end
-    // }
-
     // obtain primeape
     givemon(
         SPECIES_PRIMEAPE,
@@ -4098,7 +4169,7 @@ script EscapeRoom_EventScript_FindPrimeape{
         // IVs:
         hpIv=31,
         atkIv=0,
-        defIv=31,
+        defIv=0,  // final battle Heatran Struggle damage >63%
         spAtkIv=31,
         spDefIv=31,
         speedIv=10
@@ -4867,7 +4938,6 @@ text SignMessageReadInfoAgain{
     "information again?"
 }
 
-
 // move deleter sign
 text MoveDeleterSignMessage{
     "-- Temporary Move Deleter --\p" 
@@ -4891,9 +4961,7 @@ text EscapeRoomEndCongratz{
 
 text EndEscapeRoomSignMessage{
     "Final time: {STR_VAR_1}.\n"
-    "Hints used: {STR_VAR_2}.\p"
-    "Thank you for playing.\n"
-    " - Ketch"
+    "Hints used: {STR_VAR_2}."
 }
 
 
@@ -5470,6 +5538,11 @@ text ChoiceItemsFirstMessage{
     "try a different one."
 }
 
+text ChoiceItemsNoLongerAvailable{
+    "It seems you've made the right choice.\n"
+    "Good luck!"
+}
+
 text ChoiceItemsWhichOne{
     "Which item would you like to have?"
 }
@@ -5499,11 +5572,6 @@ text OptionChoiceScarf{
 }
 
 // PRIMEAPE ITEM BALL
-
-text PrimeapePokeballMessage{
-    "There's a Primeape inside the Poke Ball.\p"
-    "Do you want to take it?"
-}
 
 text PrimeapeObtainMessage{
     "{PLAYER} found a Primeape!"
@@ -5894,27 +5962,46 @@ text Trainer10_Intro{
 }
 
 text Trainer10_Outro{
-    "What happened to Shelgon?"
+    "What a struggle!"
 }
 
 text Trainer10_PostBattle{
-    "Don't stop now.\n"
-    "You're almost there!"
+    "So Kecleon isn't the only Pokémon with\n"
+    "the ability to change?"
 }
 
 
 // TRAINER 11
 text Trainer11_Intro{
-    "TBD"
+    "So you've finally made it to the end...\p"
+    "No more hints.\p"
+    "No more clues.\p"
+    "It's time for your final test."
 }
 
 text Trainer11_Outro{
-    "TBD"
+    "..."
 }
 
-text Trainer11_PostBattle{
-    "TBD"
+text Trainer11_PostBattle_A{
+    "Please read the sign first."
 }
 
+text Trainer11_PostBattle_B{
+ // "This has been a true passion project wi"  -- max length
+    "This game has been a true passion\n"
+    "project of mine, with an absurd amount\l"
+    "of time, effort, and care going into\l"
+    "its creation.\p"
 
+    "If you enjoyed the experience, please\n"
+    "let me know by commenting on the game's\l"
+    "PokéCommunity forum post.\p"
+
+    "I'd love to to read how you did.\n"
+    "It truly means lot to me.\p"
+
+    "Thank you so much for playing.\n"
+    " - Ketch."
+}
 

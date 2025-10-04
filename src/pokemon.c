@@ -5579,84 +5579,84 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
 
 
 // ADDED
-u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
-{
-    // moves to return
-    const u16 targetMoves[] = {
-        MOVE_DISABLE, 
-        MOVE_PAIN_SPLIT, 
-        MOVE_DESTINY_BOND,
-        MOVE_SHADOW_SNEAK,
-        };
-    u16 previousMove = VarGet(VAR_0x800A);
-    u16 learnedMoves[MAX_MON_MOVES];
-    u8 numMoves = 0;
-    int i, j;
-
-    // get current moves
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
-
-    // check if target moves already known
-    for (i = 0; i < ARRAY_COUNT(targetMoves); i++)
-    {
-        bool8 knowsMove = FALSE;
-        for (j = 0; j < MAX_MON_MOVES; j++)
-        {
-            if (learnedMoves[j] == targetMoves[i])
-            {
-                knowsMove = TRUE;
-                break;
-            }
-        }
-        // if not known, add to the relearnable moves list
-        if (!knowsMove && !(previousMove == targetMoves[i]))
-            moves[numMoves++] = targetMoves[i];
-    }
-    return numMoves;
-}
-
-
-
 // u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 // {
-//     u16 learnedMoves[4];
+//     // moves to return
+//     const u16 targetMoves[] = {
+//         MOVE_DISABLE, 
+//         MOVE_PAIN_SPLIT, 
+//         MOVE_DESTINY_BOND,
+//         MOVE_SHADOW_SNEAK,
+//         };
+//     u16 previousMove = VarGet(VAR_0x800A);
+//     u16 learnedMoves[MAX_MON_MOVES];
 //     u8 numMoves = 0;
-//     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
-//     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-//     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-//     int i, j, k;
+//     int i, j;
 
+//     // get current moves
 //     for (i = 0; i < MAX_MON_MOVES; i++)
-//         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+//         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, NULL);
 
-//     for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+//     // check if target moves already known
+//     for (i = 0; i < ARRAY_COUNT(targetMoves); i++)
 //     {
-//         u16 moveLevel;
-
-//         if (learnset[i].move == LEVEL_UP_MOVE_END)
-//             break;
-
-//         moveLevel = learnset[i].level;
-
-//         if (moveLevel <= level)
+//         bool8 knowsMove = FALSE;
+//         for (j = 0; j < MAX_MON_MOVES; j++)
 //         {
-//             for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++)
-//                 ;
-
-//             if (j == MAX_MON_MOVES)
+//             if (learnedMoves[j] == targetMoves[i])
 //             {
-//                 for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
-//                     ;
-
-//                 if (k == numMoves)
-//                     moves[numMoves++] = learnset[i].move;
+//                 knowsMove = TRUE;
+//                 break;
 //             }
 //         }
+//         // if not known, add to the relearnable moves list
+//         if (!knowsMove && !(previousMove == targetMoves[i]))
+//             moves[numMoves++] = targetMoves[i];
 //     }
-
 //     return numMoves;
 // }
+
+
+
+u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
+{
+    u16 learnedMoves[4];
+    u8 numMoves = 0;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
+    int i, j, k;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
+
+    for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+    {
+        u16 moveLevel;
+
+        if (learnset[i].move == LEVEL_UP_MOVE_END)
+            break;
+
+        moveLevel = learnset[i].level;
+
+        if (moveLevel <= level)
+        {
+            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++)
+                ;
+
+            if (j == MAX_MON_MOVES)
+            {
+                for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
+                    ;
+
+                if (k == numMoves)
+                    moves[numMoves++] = learnset[i].move;
+            }
+        }
+    }
+
+    return numMoves;
+}
 
 
 
@@ -5787,8 +5787,8 @@ u16 GetBattleBGM(void)
             return MUS_VS_AQUA_MAGMA;
         case TRAINER_CLASS_LEADER:
             return MUS_VS_GYM_LEADER;
-        case TRAINER_CLASS_CHAMPION:
-            return MUS_VS_CHAMPION;
+        // case TRAINER_CLASS_CHAMPION:
+        //     return MUS_VS_CHAMPION;
         case TRAINER_CLASS_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return MUS_VS_RIVAL;
@@ -5807,8 +5807,8 @@ u16 GetBattleBGM(void)
             return MUS_VS_FRONTIER_BRAIN;
 
         // ADDED
-        // case TRAINER_CLASS_OLD_COUPLE:
-        //     return MUS_VS_AQUA_MAGMA_LEADER;
+        case TRAINER_CLASS_CHAMPION:
+            return MUS_VS_RAYQUAZA;
 
         default:
             return MUS_VS_TRAINER;

@@ -705,7 +705,7 @@
 #define FLAG_CHOICE_ITEM_OBTAINED       0x295  
 #define FLAG_ANNIHILAPE_SPAWNED         0x296
 #define FLAG_SUN_STONE_SOLD             0x297
-#define FLAG_UNUSED_0x298  0x298 // Unused Flag
+#define FLAG_YAMASK_OBTAINED            0x298 
 #define FLAG_UNUSED_0x299  0x299 // Unused Flag
 #define FLAG_UNUSED_0x29A  0x29A // Unused Flag
 #define FLAG_UNUSED_0x29B  0x29B // Unused Flag

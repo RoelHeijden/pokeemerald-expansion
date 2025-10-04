@@ -1,6 +1,11 @@
 
+const LOCALID_TRAINER11 = 5
 const LOCALID_BAGON_TRADER = 6
 const LOCALID_DUNGEON_GUARD = 11
+const LOCALID_HINT_GUY_2 = 12
+const LOCALID_MOVE_RELEARNER = 13
+const LOCALID_YAMASK_NPC = 14
+
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -24,6 +29,12 @@ script EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts{
     if(flag(FLAG_DUNGEON_ENTRY_GRANTED)){
         setobjectxyperm(LOCALID_DUNGEON_GUARD, 4, 8)
         setobjectmovementtype(LOCALID_DUNGEON_GUARD, MOVEMENT_TYPE_FACE_RIGHT)
+    }
+
+    // keep trainer11 moved away
+    if(flag(FLAG_TRAINER11_DEFEATED)){
+        setobjectxyperm(LOCALID_TRAINER11, 59, 8)
+        setobjectmovementtype(LOCALID_TRAINER11, MOVEMENT_TYPE_FACE_DOWN)
     }
 }
 
@@ -294,6 +305,189 @@ movement GuardMoveAway {
 }
 
 
+// trigger NPC script
+script EscapeRoom_HiddenDungeon_FinaleReachedTrigger{
+    lockall
+
+    if(!flag(FLAG_YAMASK_OBTAINED)){
+
+        // exclamation mark and face to player
+        applymovement(LOCALID_YAMASK_NPC, _face_right)
+        waitmovement(LOCALID_YAMASK_NPC)
+        playse(SE_PIN)
+        applymovement(LOCALID_YAMASK_NPC, Common_Movement_ExclamationMark)
+        waitmovement(LOCALID_YAMASK_NPC)
+        delay(30)
+
+        // face player left
+        applymovement(OBJ_EVENT_ID_PLAYER, _face_left)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
+
+        // set respawn
+        setrespawn(HEAL_LOCATION_ESCAPE_ROOM_FINAL_BATTLE)
+        setvar(VAR_RESPAWN_AT_SECTION_X, 3)
+        setvar(VAR_LOCATED_AT_SECTION_X, 3)
+
+        // dialogue
+        msgbox(YamaskGuyMainMessage, MSGBOX_DEFAULT)
+        waitmessage
+
+        // trade Bagon for Yamask
+        call(EscapeRoom_HiddenDungeon_BagonYamaskTrade)
+
+        // Post dialogue ("you have everything you need!")
+        msgbox(YamaskGuyPostTradeMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // move player up
+        applymovement(OBJ_EVENT_ID_PLAYER, PlayerMoveUp)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
+
+        // remove TM Secret Power
+        call(EscapeRoom_HiddenDungeon_RemoveTMSecretPower)
+    }
+    else{
+        // face to player
+        applymovement(LOCALID_YAMASK_NPC, _face_right)
+        waitmovement(LOCALID_YAMASK_NPC)
+
+        // face player left
+        applymovement(OBJ_EVENT_ID_PLAYER, _face_left)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
+
+        // Post dialogue ("you have everything you need!")
+        msgbox(YamaskGuyPostTradeMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+
+        // move player up
+        applymovement(OBJ_EVENT_ID_PLAYER, PlayerMoveUp)
+        waitmovement(OBJ_EVENT_ID_PLAYER)
+    }
+    releaseall
+}
+
+movement PlayerMoveUp{
+    face_up
+    walk_up
+}
+
+script EscapeRoom_HiddenDungeon_BagonYamaskTrade{
+    // check if Bagon in party (sanity check)
+    checkpartymon(SPECIES_BAGON)
+    copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
+    if(var(VAR_RESULT) == PARTY_SIZE)
+    {
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        // releaseall
+        // end
+    }
+
+    // obtain Yamask message
+    message(YamaskReceivedMessage)
+    playfanfare(MUS_OBTAIN_ITEM)
+    lockall
+    waitfanfare
+
+    // bye bye message Bagon
+    special(BufferMonNickname)
+    msgbox(ByeByeMonDynamic, MSGBOX_DEFAULT)
+    waitmessage
+    lockall
+
+    // actually trade Pokemon
+    removemon(SPECIES_BAGON)
+    removemon(SPECIES_SHELGON) // also remove any Shelgon juussssttt in case
+    givemon(
+        SPECIES_YAMASK_GALAR,
+        5,
+        abilityNum=0, // wandering spirit
+        nature=NATURE_HASTY,
+        gender=MON_MALE, 
+        move1=MOVE_ASTONISH,
+        move2=MOVE_HAZE,
+        move3=MOVE_NONE,
+        move4=MOVE_NONE,
+        // EVs:
+        hpEv=0, 
+        // IVs:
+        hpIv=0,
+        atkIv=31,
+        defIv=0,
+        speedIv=31,
+        spAtkIv=31,
+        spDefIv=31
+    )
+
+    // set flag
+    setflag(FLAG_YAMASK_OBTAINED)
+}
+
+script EscapeRoom_HiddenDungeon_RemoveTMSecretPower{
+    // remove TM Secret Power
+    checkpartyitem(0)
+    if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
+        removepartyitem(0)
+    }
+    checkpartyitem(1)
+    if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
+        removepartyitem(1)
+    }
+    checkitem(ITEM_TM43)
+    if(var(VAR_RESULT) == TRUE){
+        removeitem(ITEM_TM43)
+    }
+}
+
+
+script EscapeRoom_HiddenDungeon_YamaskGuy{
+    lock
+
+    // different message post trainer 11
+    if(!flag(FLAG_TRAINER11_DEFEATED)){
+        msgbox(YamaskGuyPostTradeMessage, MSGBOX_NPC)
+        waitmessage
+    }
+    else{
+        msgbox(YamaskGuyFinalMessage, MSGBOX_NPC)
+        waitmessage
+    }
+
+    releaseall
+}
+
+
+
+// move relearner
+script EscapeRoom_HiddenDungeon_MoveRelearner{
+    lockall
+    faceplayer
+
+    // main message
+    msgbox(MoveRelearnerMainMessage, MSGBOX_DEFAULT)
+    waitmessage
+
+    // choose pokemon
+    special(ChooseMonForMoveRelearner)
+    waitstate
+
+    // choose move
+    if(var(VAR_0x8004) != PARTY_NOTHING_CHOSEN){
+        special(TeachMoveRelearnerMove)
+        waitstate
+    }
+
+    // end message
+    msgbox(MoveRelearnerEndMessage, MSGBOX_DEFAULT)
+    waitmessage
+
+
+    releaseall
+}
+
+
+
+
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 
@@ -355,3 +549,52 @@ text DungeonGuardPostEntry{
     "Hm... Cute entry card though."
 }
 
+
+// Yamask trade NPC
+text YamaskReceivedMessage{
+    "{PLAYER} received a Yamask!"
+}
+
+text YamaskGuyPostTradeMessage{
+ // "This has been a true passion project wi"  -- max length
+    "The trainer you're about to face can be\n"
+    "a bit of a cheater.\p"
+    "The Kecleon uses an illegal move and\n"
+    "their Struggle always seems to find\l"
+    "the optimal target.\p"
+
+    "Don't worry, you've got everything you\n"
+    "need to come out victorious!\p"
+
+    "Your Choice Specs can no longer be\n"
+    "exchanged, and Secret Power will be\l"
+    "added to the Move Tutor moves.\p"
+
+    "You're all set.\n"
+    "Good luck!"
+}
+
+text YamaskGuyFinalMessage{
+    "Wow... Well done!"
+}
+
+text YamaskGuyMainMessage{
+    "You're almost there!\n"
+    "Only one more challenge remains.\p"
+    "It's a tough one though...\p"
+    "Allow me to take your Bagon and provide\n"
+    "you with something more suitable.\p"
+    "You wouldn't stand a chance otherwise."
+}
+
+
+// move relearner
+text MoveRelearnerMainMessage{
+    "Hi, I'm your personal Move Tutor.\p"
+    "Which of your Pokémon should I teach a\n"
+    "new move?"
+}
+
+text MoveRelearnerEndMessage{
+    "I'll be here if you need me."
+}

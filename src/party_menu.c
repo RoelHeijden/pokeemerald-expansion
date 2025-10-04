@@ -2331,6 +2331,12 @@ static u8 CanTeachMove(struct Pokemon *mon, u16 move)
              && move == MOVE_CUT)
         return CANNOT_LEARN_MOVE;
 
+    // Yamask cannot learn Secret Power
+    else if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_YAMASK_GALAR 
+             && move == MOVE_SECRET_POWER)
+        return CANNOT_LEARN_MOVE;
+
+
     // Primeape/Annihilape cannot learn Thief
     // this patches a line vs trainer10
     // else if ((GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_PRIMEAPE 

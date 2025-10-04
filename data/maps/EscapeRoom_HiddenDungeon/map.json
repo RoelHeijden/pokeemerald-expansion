@@ -68,8 +68,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_WALLACE",
-      "x": 43,
-      "y": 6,
+      "x": 60,
+      "y": 19,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -156,6 +156,45 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_HiddenDungeon_DungeonGuard",
       "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_CONTEST_JUDGE",
+      "x": 57,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_HintsNPC",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_FAT_MAN",
+      "x": 58,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_HiddenDungeon_MoveRelearner",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_EXPERT_M",
+      "x": 59,
+      "y": 26,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_HiddenDungeon_YamaskGuy",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -214,6 +253,20 @@
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_MAIN",
       "dest_warp_id": "7"
+    },
+    {
+      "x": 43,
+      "y": 5,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
+      "dest_warp_id": "9"
+    },
+    {
+      "x": 60,
+      "y": 30,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [
@@ -234,6 +287,15 @@
       "var": "VAR_LOCATED_AT_SECTION_X",
       "var_value": "3",
       "script": "EscapeRoom_EventScript_SetLocationSection1"
+    },
+    {
+      "type": "trigger",
+      "x": 60,
+      "y": 26,
+      "elevation": 0,
+      "var": "VAR_FINAL_BATTLE_REACHED",
+      "var_value": "0",
+      "script": "EscapeRoom_HiddenDungeon_FinaleReachedTrigger"
     }
   ],
   "bg_events": [
@@ -247,8 +309,8 @@
     },
     {
       "type": "sign",
-      "x": 43,
-      "y": 7,
+      "x": 60,
+      "y": 8,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_EndSign"

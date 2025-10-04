@@ -8404,19 +8404,47 @@ u32 GetMoveTarget(u16 move, u8 setTarget)
             return targetBattler;
         }
 
-        // case 2: Sableye + Annihilape -> target Sableye
-        if ((species1 == SPECIES_ANNIHILAPE && species2 == SPECIES_SABLEYE) ||
-            (species1 == SPECIES_SABLEYE && species2 == SPECIES_ANNIHILAPE))
-        {
-            if (species1 == SPECIES_SABLEYE)
-                targetBattler = battler1;
-            else
-                targetBattler = battler2;
 
+
+
+        // case 2: 
+        // final battle has more complex Struggle targetting
+        if ((species1 == SPECIES_ANNIHILAPE && species2 == SPECIES_YAMASK_GALAR) ||
+            (species1 == SPECIES_YAMASK_GALAR && species2 == SPECIES_ANNIHILAPE))
+        {
+            u8 annihilapeBattler = (species1 == SPECIES_ANNIHILAPE)   ? battler1 : battler2;
+            u8 yamaskBattler     = (species1 == SPECIES_YAMASK_GALAR) ? battler1 : battler2;
+
+            // 1. If Heatran is the attacker: target Annihilape if at 124 HP or less and no Destiny Bond
+            if (gBattleMons[gBattlerAttacker].species == SPECIES_HEATRAN)
+            {
+                if (gBattleMons[annihilapeBattler].hp <= 124
+                && !(gBattleMons[annihilapeBattler].status2 & STATUS2_DESTINY_BOND))
+                {
+                    targetBattler = annihilapeBattler;
+                    goto set_target;
+                }
+            }
+
+            // 2. Target Yamask if it does not have Destiny Bond
+            if (!(gBattleMons[yamaskBattler].status2 & STATUS2_DESTINY_BOND))
+            {
+                targetBattler = yamaskBattler;
+                goto set_target;
+            }
+
+            // 3. Default: target Annihilape
+            targetBattler = annihilapeBattler;
+
+        set_target:
             *(gBattleStruct->moveTarget + gBattlerAttacker) = targetBattler;
             return targetBattler;
         }
     }
+
+
+
+
 
 
     if (setTarget != NO_TARGET_OVERRIDE)

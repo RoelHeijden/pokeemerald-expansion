@@ -129,7 +129,7 @@
 #define VAR_EXP_CANDY_USED_ON                                  0x406D
 #define VAR_DO_STICKY_BARB_RETURN                            0x406E 
 #define VAR_ROUTE116_STATE                               0x406F
-#define VAR_ROUTE117_STATE                               0x4070 // Unused Var
+#define VAR_FINAL_BATTLE_REACHED                               0x4070
 #define VAR_ROUTE118_STATE                               0x4071
 #define VAR_ROUTE119_STATE                               0x4072
 #define VAR_ROUTE120_STATE                               0x4073 // Unused Var
