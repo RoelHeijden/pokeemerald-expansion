@@ -5571,10 +5571,10 @@ static s32 AI_Trainer11(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
             score -= 40;  
         }
 
-        // avoid hitting into Destiny Bond
-        if (gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND){
-            score -= 20;
-        }
+        // // avoid hitting into Destiny Bond
+        // if (gBattleMons[battlerDef].status2 & STATUS2_DESTINY_BOND){
+        //     score -= 20;
+        // }
     }
 
     return score;

@@ -17139,21 +17139,21 @@ Music: Swimmer
 Double Battle: Yes
 AI: AI_FLAG_TRAINER11 / AI_FLAG_SEQUENCE_SWITCHING
 
-Heatran  
+Heatran (M)  
 Ability: Flame Body  
-EVs: 224 HP / 32 Atk / 252 Def  
+EVs: 244 HP / 32 Atk / 232 Def  
 Impish Nature  
 - Body Press  
 - Hyper Beam  
 
-Kecleon  
+Kecleon (F) 
 Ability: Protean  
-Level: 20  
-EVs: 56 HP  
-Serious Nature  
+Level: 20   
+Hasty Nature  
+IVs: 0 Def  
 - Jungle Healing  
 
-Sableye  
+Sableye (M) 
 Ability: Prankster  
 Level: 5  
 IVs: 0 Atk  

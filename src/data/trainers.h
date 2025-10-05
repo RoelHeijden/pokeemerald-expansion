@@ -42877,9 +42877,10 @@ F_TRAINER_FEMALE |
             {
 #line 17142
             .species = SPECIES_HEATRAN,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17142
+            .gender = TRAINER_MON_MALE,
 #line 17144
-            .ev = TRAINER_PARTY_EVS(224, 32, 252, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(244, 32, 232, 0, 0, 0),
 #line 17146
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17143
@@ -42898,17 +42899,16 @@ F_TRAINER_FEMALE |
             {
 #line 17149
             .species = SPECIES_KECLEON,
-            .gender = TRAINER_MON_RANDOM_GENDER,
-#line 17152
-            .ev = TRAINER_PARTY_EVS(56, 0, 0, 0, 0, 0),
-#line 17154
-            .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
+#line 17149
+            .gender = TRAINER_MON_FEMALE,
+#line 17153
+            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
 #line 17150
             .ability = ABILITY_PROTEAN,
 #line 17151
             .lvl = 20,
-#line 17153
-            .nature = NATURE_SERIOUS,
+#line 17152
+            .nature = NATURE_HASTY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17154
@@ -42918,7 +42918,8 @@ F_TRAINER_FEMALE |
             {
 #line 17156
             .species = SPECIES_SABLEYE,
-            .gender = TRAINER_MON_RANDOM_GENDER,
+#line 17156
+            .gender = TRAINER_MON_MALE,
 #line 17159
             .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 17157

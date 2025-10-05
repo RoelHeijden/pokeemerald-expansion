@@ -5539,8 +5539,7 @@ text ChoiceItemsFirstMessage{
 }
 
 text ChoiceItemsNoLongerAvailable{
-    "It seems you've made the right choice.\n"
-    "Good luck!"
+    "It seems you've made the right choice."
 }
 
 text ChoiceItemsWhichOne{
@@ -5989,17 +5988,22 @@ text Trainer11_PostBattle_A{
 
 text Trainer11_PostBattle_B{
  // "This has been a true passion project wi"  -- max length
+
+    // "This game has been a true passion\n"
+    // "project of mine, with an absurd amount\l"
+    // "of time, effort, and care going into\l"
+    // "its creation.\p"
+
     "This game has been a true passion\n"
-    "project of mine, with an absurd amount\l"
-    "of time, effort, and care going into\l"
-    "its creation.\p"
+    "project of mine.\p"
+    "An absurd amount of time, effort, and\n"
+    "care went into making it the best it\l"
+    "could possibly be.\p"
 
     "If you enjoyed the experience, please\n"
     "let me know by commenting on the game's\l"
     "PokéCommunity forum post.\p"
-
-    "I'd love to to read how you did.\n"
-    "It truly means lot to me.\p"
+    "It would really mean lot to me.\p"
 
     "Thank you so much for playing.\n"
     " - Ketch."
