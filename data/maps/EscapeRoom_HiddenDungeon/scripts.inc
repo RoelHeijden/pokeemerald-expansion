@@ -601,29 +601,29 @@ EscapeRoom_HiddenDungeon_YamaskGuy_2:
 
 
 EscapeRoom_HiddenDungeon_MoveRelearner::
-# 463 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 462 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	lockall
-# 464 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 463 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	faceplayer
-# 467 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 466 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox MoveRelearnerMainMessage, MSGBOX_DEFAULT
-# 468 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 467 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 471 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 470 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	special ChooseMonForMoveRelearner
-# 472 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 471 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitstate
-# 481 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 480 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	msgbox MoveRelearnerEndMessage, MSGBOX_DEFAULT
-# 482 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 481 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 485 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 484 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
 
 AskBagonTrade::
-# 495 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 493 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Trying to get past the guard?\p"
 	.string "I might be able to help you out.\n"
 	.string "How badly do you want in?\p"
@@ -634,30 +634,30 @@ AskBagonTrade::
 	.string "Do we have a deal?$"
 
 BagonReceivedMessage::
-# 510 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 508 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Bagon!$"
 
 BagonTradeDeclined::
-# 514 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 512 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Suit yourself.$"
 
 BagonTradePostTrade::
-# 518 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 516 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hehehehe!$"
 
 DungeonGuardIntro::
-# 525 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 523 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
 	.string "I'll need to see an entry card, or you\n"
 	.string "are not getting through.$"
 
 DungeonGuardShowsCard::
-# 531 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 529 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "(You hesitantly hold up your rainbow-\n"
 	.string "colored entry card.)$"
 
 DungeonGuardGivesEntry::
-# 536 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 534 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hmmm...\p"
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
@@ -667,15 +667,15 @@ DungeonGuardGivesEntry::
 	.string "You're clear to enter.$"
 
 DungeonGuardPostEntry::
-# 546 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 544 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hm... Cute entry card though.$"
 
 YamaskReceivedMessage::
-# 554 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 552 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Yamask!$"
 
 YamaskGuyPostTradeMessage::
-# 558 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 556 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "The trainer you're about to face can be\n"
 	.string "a bit of a cheater.\p"
 	.string "The Kecleon uses an illegal move and\n"
@@ -690,11 +690,11 @@ YamaskGuyPostTradeMessage::
 	.string "Good luck!$"
 
 YamaskGuyFinalMessage::
-# 577 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 575 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Wow... Well done!$"
 
 YamaskGuyMainMessage::
-# 581 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 579 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "You're almost there!\n"
 	.string "Only one more challenge remains.\p"
 	.string "It's a tough one though...\p"
@@ -703,11 +703,11 @@ YamaskGuyMainMessage::
 	.string "You wouldn't stand a chance otherwise.$"
 
 MoveRelearnerMainMessage::
-# 592 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 590 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hi, I'm your Move Tutor.\p"
 	.string "Which of your Pokémon should I teach a\n"
 	.string "new move?$"
 
 MoveRelearnerEndMessage::
-# 598 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 596 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "I'll be here if you need me.$"
