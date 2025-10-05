@@ -164,6 +164,10 @@ enum {
 
 #define MAX_RELEARNER_MOVES max(MAX_LEVEL_UP_MOVES, 25)
 
+// ADDED
+static bool8 gDontResetRowPos = FALSE;
+
+
 static EWRAM_DATA struct
 {
     u8 state;
@@ -407,8 +411,14 @@ void CB2_InitLearnMove(void)
     InitMoveRelearnerBackgroundLayers();
     InitMoveRelearnerWindows(FALSE);
 
-    sMoveRelearnerMenuSate.listOffset = 0;
-    sMoveRelearnerMenuSate.listRow = 0;
+    // CHANGED
+    // allow cursor to start where it was on reloads
+    if(!gDontResetRowPos){
+        sMoveRelearnerMenuSate.listOffset = 0;
+        sMoveRelearnerMenuSate.listRow = 0;
+    }
+    gDontResetRowPos = FALSE;
+
     sMoveRelearnerMenuSate.showContestInfo = FALSE;
 
     CreateLearnableMovesList();
@@ -788,9 +798,28 @@ static void DoMoveRelearnerMain(void)
         if (JOY_NEW(A_BUTTON))
         {
             PlaySE(SE_SELECT);
-            sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
-        }
+            // sMoveRelearnerStruct->state = MENU_STATE_FADE_AND_RETURN;
 
+
+            // CHANGED
+            /////// stay in move selection screen after move is taught //////
+
+            // preserve which Pokémon was being used
+            u8 monId = sMoveRelearnerStruct->partyMon;
+
+            FreeMoveRelearnerResources();
+
+            gSpecialVar_0x8004 = monId; // set before re-init
+            gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[monId]);
+
+            gDontResetRowPos = TRUE;
+
+            // only reload if more moves can still be learned
+            if (gSpecialVar_0x8005 > 0)
+                SetMainCallback2(CB2_InitLearnMove);
+            else
+                SetMainCallback2(CB_ReturnToPartyFromRelearner);
+        }
         break;
     }
 }
