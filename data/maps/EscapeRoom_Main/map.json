@@ -567,31 +567,24 @@
     },
     {
       "type": "secret_base",
-      "x": 11,
-      "y": 9,
-      "elevation": 0,
-      "secret_base_id": "SECRET_BASE_TREE4_1"
-    },
-    {
-      "type": "secret_base",
-      "x": 10,
-      "y": 9,
-      "elevation": 0,
-      "secret_base_id": "SECRET_BASE_TREE4_1"
-    },
-    {
-      "type": "secret_base",
       "x": 48,
       "y": 15,
       "elevation": 0,
-      "secret_base_id": "SECRET_BASE_TREE1_1"
+      "secret_base_id": "SECRET_BASE_TREE4_1"
     },
     {
       "type": "secret_base",
       "x": 47,
       "y": 15,
       "elevation": 0,
-      "secret_base_id": "SECRET_BASE_TREE1_1"
+      "secret_base_id": "SECRET_BASE_TREE4_1"
+    },
+    {
+      "type": "secret_base",
+      "x": 3,
+      "y": 24,
+      "elevation": 0,
+      "secret_base_id": "SECRET_BASE_BROWN_CAVE1_1"
     }
   ]
 }

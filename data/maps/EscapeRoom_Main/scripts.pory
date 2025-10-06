@@ -5388,8 +5388,10 @@ text AnnihilapeHintNoMessage2{
 text AnnihilapeHintMessage{
     "The Annihilape has returned!?\p"
     "Hmm...\p"
-    "Don't waste your strength trying to\n"
-    "defeat her."
+    "Don't waste your energy trying to catch\n"
+    "or beat her."
+    // "Don't waste your strength trying to\n"
+    // "defeat her."
     // "She'll always be back."
 }
 
@@ -5989,21 +5991,18 @@ text Trainer11_PostBattle_A{
 text Trainer11_PostBattle_B{
  // "This has been a true passion project wi"  -- max length
 
-    // "This game has been a true passion\n"
-    // "project of mine, with an absurd amount\l"
-    // "of time, effort, and care going into\l"
-    // "its creation.\p"
-
     "This game has been a true passion\n"
     "project of mine.\p"
+
     "An absurd amount of time, effort, and\n"
-    "care went into making it the best it\l"
-    "could possibly be.\p"
+    "care was put into every minor detail\l"
+    "of the game.\p"
 
     "If you enjoyed the experience, please\n"
     "let me know by commenting on the game's\l"
     "PokéCommunity forum post.\p"
-    "It would really mean lot to me.\p"
+
+    "It really does mean lot to me.\p"
 
     "Thank you so much for playing.\n"
     " - Ketch."

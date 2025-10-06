@@ -7883,17 +7883,17 @@ AnnihilapeHintMessage::
 # 5388 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The Annihilape has returned!?\p"
 	.string "Hmm...\p"
-	.string "Don't waste your strength trying to\n"
-	.string "defeat her.$"
+	.string "Don't waste your energy trying to catch\n"
+	.string "or beat her.$"
 
 FourTabletsHintMessage1::
-# 5398 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5400 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you see that strange tablet?\p"
 	.string "I'm looking for more of them!\n"
 	.string "I wonder what they do.$"
 
 FourTabletsHintMessage2::
-# 5404 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5406 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wait...\n"
 	.string "You actually found all four!?\p"
 	.string "I suppose now I can stop searching\n"
@@ -7902,24 +7902,24 @@ FourTabletsHintMessage2::
 	.string "I'll have to look through the menus.$"
 
 FourTabletsHintMessage3::
-# 5413 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5415 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What was that earthquake!?$"
 
 StonesBuyNPCInitialMessage_no_item::
-# 5420 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5422 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'm obsessed with collecting rare and\n"
 	.string "unusual stones.\p"
 	.string "Please come to me if you ever find\n"
 	.string "anything worth my attention.$"
 
 StonesBuyNPCInitialMessage_has_SunStone::
-# 5428 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5430 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Incredible...\n"
 	.string "Is that a Sun Stone?\p"
 	.string "Would you sell it to me for ¥3000?$"
 
 StonesBuyNPCInitialMessage_has_MoonStone::
-# 5434 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5436 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Incredible...\n"
 	.string "Is that a Moon Stone?\p"
 	.string "...\p"
@@ -7927,85 +7927,85 @@ StonesBuyNPCInitialMessage_has_MoonStone::
 	.string "Would you trade it for a Jaboca Berry?$"
 
 StonesBuyNPCSellAcceptedMessage::
-# 5442 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5444 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'll take good care of it.$"
 
 StonesBuyNPCSellAcceptedMessage_JabocaBerry::
-# 5446 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5448 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'm sure the berry will serve you well.$"
 
 StonesBuyNPCSellDeclinedMessage::
-# 5450 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5452 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Ah, maybe next time.$"
 
 StonesBuyNPCPostSellMessage::
-# 5454 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5456 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I think I've got enough for now.$"
 
 MoneyReceived3000::
-# 5458 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5460 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received ¥3000!$"
 
 LiepardObtainMessage::
-# 5465 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5467 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Liepard!$"
 
 LiepardNPCmainMessage::
-# 5469 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5471 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Ryaaowr!$"
 
 LiepardCollorFoundMessage::
-# 5473 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5475 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You give Liepard the collar.$"
 
 NicknameThisPokemonMessage::
-# 5477 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5479 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to give a nickname to\n"
 	.string "this Liepard?$"
 
 RockSmashNPCstuck::
-# 5484 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5486 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'm stuck!$"
 
 RockSmashNPCFarewellMsg::
-# 5488 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5490 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What took you so long?$"
 
 SecretGardenGuardKeepOut::
-# 5495 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5497 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You've found our secret garden!\p"
 	.string "I cannot let you enter, sorry.$"
 
 SecretGardenGuardSpotted::
-# 5500 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5502 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "How did you get in there!?$"
 
 SecretGardenGuardStayOut::
-# 5504 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5506 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Stay out of our garden!$"
 
 SecretGardenGuardRemoveSecretPower::
-# 5508 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5510 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I cannot let you leave with that what\n"
 	.string "belongs to the garden.\p"
 	.string "I'll have to take TM43 away from you.$"
 
 MonForgotSecretPower::
-# 5514 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5516 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{STR_VAR_1}'s Secret Power was removed.$"
 
 MartNPC_AskToShop::
-# 5520 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5522 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Welcome to my shop.\p"
 	.string "Don't worry, all items can be sold back\n"
 	.string "for the same price.$"
 
 MartNPC_SayGoodbye::
-# 5526 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5528 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "See ya!$"
 
 ChoiceItemsFirstMessage::
-# 5532 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5534 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Impressive, you saw right through my\n"
 	.string "facade!\p"
 	.string "I think you've earned a reward!\n"
@@ -8014,411 +8014,411 @@ ChoiceItemsFirstMessage::
 	.string "try a different one.$"
 
 ChoiceItemsNoLongerAvailable::
-# 5541 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5543 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "It seems you've made the right choice.$"
 
 ChoiceItemsWhichOne::
-# 5545 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5547 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Which item would you like to have?$"
 
 ChoiceItemsComeAgain::
-# 5549 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5551 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Come back anytime.$"
 
 ChoiceItemsSwapped::
-# 5553 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5555 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You returned the other Choice item.$"
 
 ChoiceItemsAlreadyHaveThis::
-# 5557 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5559 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You already have this one.$"
 
 OptionChoiceBand::
-# 5561 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5563 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Choice Band$"
 
 OptionChoiceSpecs::
-# 5565 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5567 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Choice Specs$"
 
 OptionChoiceScarf::
-# 5569 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5571 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Choice Scarf$"
 
 PrimeapeObtainMessage::
-# 5575 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5577 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} found a Primeape!$"
 
 NicknameThisPokemonMessage2::
-# 5579 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5581 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to give a nickname to\n"
 	.string "this Primeape?$"
 
 AskDeleteMove::
-# 5586 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5588 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hi, what would you like to do?$"
 
 MoveDeleterOutOfBusiness::
-# 5592 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5594 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I'm sorry, my service is not available\n"
 	.string "anymore.\p"
 	.string "I can no longer assist you.$"
 
 MoveDeleterComeAgain::
-# 5598 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5600 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Please come again!$"
 
 MovesRestoredMessage::
-# 5602 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5604 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{STR_VAR_1}'s moves were restored!$"
 
 NoMovesRestoredMessage::
-# 5606 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5608 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There were no moves to restore.$"
 
 NewBallMessage::
-# 5612 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5614 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You recover the ball.$"
 
 HeldItemRecoveredMessage::
-# 5616 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5618 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your held items were restored.$"
 
 HeldStickyBarbReturnedMessage::
-# 5620 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5622 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The Sticky Barb was given back to the\n"
 	.string "trainer.$"
 
 AskWarpBackMessage::
-# 5627 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5629 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to return to the previous\n"
 	.string "location?$"
 
 AskResetPredamageMessage::
-# 5632 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5634 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to set your Pokémon's HP and move\n"
 	.string "PP back to their pre-battle state?$"
 
 AskResetPredamageAndWarpMessage::
-# 5637 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5639 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to set your Pokémon's HP and move\n"
 	.string "PP back to their pre-battle state and\l"
 	.string "return to the previous location?$"
 
 PreDamagedStateRestoredMessage::
-# 5643 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5645 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your team's state was restored.$"
 
 AskFerroDunsparceTrade::
-# 5649 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5651 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I've found a Dunsparce on the beach.\p"
 	.string "Wanna trade it for your Ferrothorn?$"
 
 DunsparceReceivedMessage::
-# 5654 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5656 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Dunsparce!$"
 
 FerroTradeDeclined::
-# 5658 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5660 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Some other time perhaps.$"
 
 FerroTradePostTrade::
-# 5662 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5664 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I love this Ferrothorn!$"
 
 PlayerObtainedFerrothornMessage::
-# 5666 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5668 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Ferrothorn!$"
 
 FerroTradeAskRetrade::
-# 5670 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5672 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to undo our trade and get\n"
 	.string "back your Ferrothorn?$"
 
 FerroTradeUndoAccepted::
-# 5675 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5677 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Just come back whenever you want to\n"
 	.string "trade again.$"
 
 FerroTradeUndoDeclined::
-# 5680 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5682 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Works for me!$"
 
 AskFlorgesEggTrade::
-# 5685 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5687 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That's a nice Florges.\p"
 	.string "Do you want to trade it for a mystery\n"
 	.string "egg?$"
 
 EggReceivedMessage::
-# 5691 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5693 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received an EGG!$"
 
 FlorgesTradeDeclined::
-# 5695 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5697 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Okay, come back anytime.$"
 
 FlorgesTradePostTrade::
-# 5699 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5701 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You're doing great.$"
 
 PlayerObtainedFlorgesMessage::
-# 5703 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5705 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "{PLAYER} received a Florges!$"
 
 FlorgesTradeAskRetrade::
-# 5707 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5709 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you want to undo our trade and get\n"
 	.string "back your Florges?$"
 
 FlorgesTradeUndoAccepted::
-# 5712 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5714 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "There you go.$"
 
 FlorgesTradeUndoDeclined::
-# 5716 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5718 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "As you wish.$"
 
 AskDunsparceMoneyTrade::
-# 5721 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5723 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Dunsparce and I were playing near the\n"
 	.string "water when she went missing.\p"
 	.string "Have you seen my Dunsparce?$"
 
 AskDunsparceReturnAcceptedMessage::
-# 5727 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5729 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Omg you found her!!\p"
 	.string "Thank you so much!\n"
 	.string "Here, have this.$"
 
 DunsparceTradeDeclined::
-# 5733 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5735 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hmm...$"
 
 DunsparceTradePostTrade::
-# 5737 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5739 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "It's so good to be back together!$"
 
 DoubleBattle_NotEnoughMons::
-# 5743 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5745 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Want to battle?\n"
 	.string "You should bring a second Pokémon.$"
 
 Trainer0_Intro::
-# 5750 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5752 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You think you are ready?\n"
 	.string "You really need three.\l"
 	.string "One of them might hold the key.$"
 
 Trainer0_Outro::
-# 5759 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5761 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "But sharing is caring!$"
 
 Trainer0_PostBattle::
-# 5763 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5765 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "One down, eleven to go.$"
 
 Trainer1_Intro::
-# 5769 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5771 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Sharing is caring.\n"
 	.string "Can you see the appeal?\l"
 	.string "Win the fight and we may have a deal.$"
 
 Trainer1_Outro::
-# 5775 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5777 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's make a deal!$"
 
 Trainer1_PostBattle::
-# 5779 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5781 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Sacrificing Pokémon is never easy, but\n"
 	.string "that's the price of progress.$"
 
 AskZeraCutTradeMessage::
-# 5784 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5786 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wow, that Zeraora of yours is amazing.\n"
 	.string "I wish I had a Pokémon like that!\p"
 	.string "Would you be okay trading your Zeraora\n"
 	.string "for my HM Cut?$"
 
 ZeraCutTradeDeclined::
-# 5791 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5793 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Come back if you change your mind.$"
 
 Trainer2_Intro::
-# 5797 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5799 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "The land may hide its fiercest face,\n"
 	.string "beneath the calm of leafy grace.$"
 
 Trainer2_Outro::
-# 5802 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5804 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I love writing in 686578!$"
 
 Trainer2_PostBattle::
-# 5806 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5808 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Cut the illusion, clear the path!$"
 
 Trainer3_Intro::
-# 5812 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5814 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Rage is nearly guaranteed.\n"
 	.string "Try and recognize good easy tactics.$"
 
 Trainer3_Outro::
-# 5817 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5819 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Right on, pretty exciting!$"
 
 Trainer3_PostBattle::
-# 5821 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5823 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Every good gamer sometimes cheats a\n"
 	.string "puzzle exit.$"
 
 Trainer3FinalWords::
-# 5826 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5828 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Entry granted.$"
 
 Trainer4_Intro::
-# 5832 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5834 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Exhausted already?\n"
 	.string "We're just getting started!$"
 
 Trainer4_Outro::
-# 5837 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5839 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Ugh, just leave already.$"
 
 Trainer4_PostBattle::
-# 5841 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5843 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Did you know 5(A->L) + 2(L->O) = 525?$"
 
 Trainer5_Intro::
-# 5848 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5850 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That's more like it.\n"
 	.string "Let's see how much you're worth!$"
 
 Trainer5_Outro::
-# 5853 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5855 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Was that enough?$"
 
 Trainer5_PostBattle::
-# 5857 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5859 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Let's never do that again.$"
 
 Trainer5_RemoveAssistMessage::
-# 5861 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5863 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do I look like I need your assistance?\n"
 	.string "Try again when that move is gone.$"
 
 Trainer6_Intro::
-# 5868 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5870 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "My carrier birds are amazing!\n"
 	.string "They can bring all sorts of items.\p"
 	.string "This one might've just come back from\n"
 	.string "the moon though...$"
 
 Trainer6_Outro::
-# 5875 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5877 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Oh how the tablets have turned.$"
 
 Trainer6_PostBattle::
-# 5879 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5881 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Do you know where I can find a cook?\n"
 	.string "My birds deliver goods, not dinner.$"
 
 Trainer7A_Intro::
-# 5886 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5888 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "That old lady makes a move on nearly\n"
 	.string "everyone who walks by.\p"
 	.string "Honestly, I can't take it anymore.\n"
 	.string "I'm barely holding it together.$"
 
 Trainer7A_Outro::
-# 5893 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5895 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Don't you think she's two forward?$"
 
 Trainer7A_PostBattle::
-# 5897 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5899 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "fwuenqru? uwu.$"
 
 Trainer7B_Intro::
-# 5904 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5906 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Hello handsome.\n"
 	.string "Aren't you a sight for sore eyes?$"
 
 Trainer7B_Outro::
-# 5909 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5911 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You cheated.$"
 
 Trainer7B_PostBattle::
-# 5913 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5915 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I don't think I was meant to be\n"
 	.string "beatable...$"
 
 Trainer8_Intro::
-# 5920 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5922 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Spooky, scary skeletons,\n"
 	.string "send shivers down your spine.\p"
 	.string "Ghost type mons are everywhere,\n"
 	.string "you still haven't seen mine.$"
 
 Trainer8_Outro::
-# 5932 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5934 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Is there anyone you can't beat?$"
 
 Trainer8_PostBattle::
-# 5936 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5938 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "$"
 
 Trainer9_Intro::
-# 5942 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5944 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So many trainers, but battles are rare.\n"
 	.string "Many pretend like we're not even there.$"
 
 Trainer9_Outro::
-# 5947 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5949 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thanks. Only real battles.$"
 
 Trainer9_PostBattle::
-# 5951 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5953 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Is this your last time passing through?$"
 
 Trainer10_Intro::
-# 5957 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5959 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Darwinism?\n"
 	.string "More like Schmarminism...\p"
 	.string "Kecleon doesn't need any changes!$"
 
 Trainer10_Outro::
-# 5963 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5965 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What a struggle!$"
 
 Trainer10_PostBattle::
-# 5967 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5969 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So Kecleon isn't the only Pokémon with\n"
 	.string "the ability to change?$"
 
 Trainer11_Intro::
-# 5974 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5976 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So you've finally made it to the end...\p"
 	.string "No more hints.\p"
 	.string "No more clues.\p"
 	.string "It's time for your final test.$"
 
 Trainer11_Outro::
-# 5981 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5983 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "...$"
 
 Trainer11_PostBattle_A::
-# 5985 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5987 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Please read the sign first.$"
 
 Trainer11_PostBattle_B::
-# 5989 "data/maps/EscapeRoom_Main/scripts.pory"
+# 5991 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "This game has been a true passion\n"
 	.string "project of mine.\p"
 	.string "An absurd amount of time, effort, and\n"
-	.string "care went into making it the best it\l"
-	.string "could possibly be.\p"
+	.string "care was put into every minor detail\l"
+	.string "of the game.\p"
 	.string "If you enjoyed the experience, please\n"
 	.string "let me know by commenting on the game's\l"
 	.string "PokéCommunity forum post.\p"
-	.string "It would really mean lot to me.\p"
+	.string "It really does mean lot to me.\p"
 	.string "Thank you so much for playing.\n"
 	.string " - Ketch.$"

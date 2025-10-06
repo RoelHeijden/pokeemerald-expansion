@@ -12999,6 +12999,7 @@ static const struct LevelUpMove sYamaskGalarianLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_DESTINY_BOND),
     LEVEL_UP_MOVE( 1, MOVE_TRICK),
     LEVEL_UP_MOVE( 1, MOVE_TOXIC_SPIKES),
+    LEVEL_UP_MOVE( 1, MOVE_WILL_O_WISP),
     LEVEL_UP_END
 };
 

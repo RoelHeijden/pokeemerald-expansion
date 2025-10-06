@@ -63,7 +63,6 @@ script CheckResetRocks{
     call(ResetShuckleSmashRocks)
 }
 
-
 script ResetSmashRock1{
     // reset rock smash rock1 untill rock2 is cleared (prevent potential softlock)
     if(!(flag(FLAG_HIDE_SMASH_ROCK1) && flag(FLAG_HIDE_SMASH_ROCK2))){
@@ -83,6 +82,12 @@ script ResetShuckleSmashRocks{
         clearflag(FLAG_SHUCKLE_SMASH_ROCK2)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK3)
         clearflag(FLAG_SHUCKLE_SMASH_ROCK4)
+    }
+    else{
+        setflag(FLAG_SHUCKLE_SMASH_ROCK1)
+        setflag(FLAG_SHUCKLE_SMASH_ROCK2)
+        setflag(FLAG_SHUCKLE_SMASH_ROCK3)
+        setflag(FLAG_SHUCKLE_SMASH_ROCK4)
     }
 }
 
