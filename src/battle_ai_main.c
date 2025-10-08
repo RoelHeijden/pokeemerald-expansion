@@ -63,6 +63,8 @@ static s32 AI_DynamicFunc(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 // ADDED
 static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer7a(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
+static s32 AI_Trainer7b(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 static s32 AI_Trainer11(u32 battlerAtk, u32 battlerDef, u32 move, s32 score);
 
@@ -91,10 +93,10 @@ static s32 (*const sBattleAiFuncTable[])(u32, u32, u32, s32) =
     [19] = NULL,                     // Unused
     [20] = AI_Trainer3,              // AI_FLAG_TRAINER3
     [21] = AI_Trainer5,              // AI_FLAG_TRAINER5
-    [22] = AI_Trainer9,              // AI_FLAG_TRAINER9
-    [23] = AI_Trainer11,             // AI_FLAG_TRAINER11
-    [24] = NULL,                     // Unused
-    [25] = NULL,                     // Unused
+    [22] = AI_Trainer7a,             // AI_FLAG_TRAINER7A
+    [23] = AI_Trainer7b,             // AI_FLAG_TRAINER7B
+    [24] = AI_Trainer9,              // AI_FLAG_TRAINER9
+    [25] = AI_Trainer11,             // AI_FLAG_TRAINER11
     [26] = NULL,                     // Unused
     [27] = NULL,                     // Unused
     [28] = AI_DynamicFunc,          // AI_FLAG_DYNAMIC_FUNC
@@ -5492,6 +5494,7 @@ static s32 AI_Trainer3(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     return score;
 }
 
+
 // trainer5 (meowth onix)
 static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
     // determine aipom slot
@@ -5504,7 +5507,20 @@ static s32 AI_Trainer5(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
     return score;
 }
 
-// trainer 9 (lucario lucario)
+
+// unused
+static s32 AI_Trainer7a(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    return score;
+}
+
+
+// unused
+static s32 AI_Trainer7b(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
+    return score;
+}
+
+
+// trainer 9 (urshifu urshifu)
 static s32 AI_Trainer9(u32 battlerAtk, u32 battlerDef, u32 move, s32 score){
     // dont hit annihilape
     if(gBattleMons[battlerDef].species == SPECIES_ANNIHILAPE)

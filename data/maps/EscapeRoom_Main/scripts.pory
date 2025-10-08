@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const LOCALID_PRIMEAPE_BALL = 33
+const LOCALID_RARE_CANDY_2 = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -350,6 +350,9 @@ script EscapeRoom_MapScripts_CheckIfSecretPowerObtained{
 
         // remove Annihilape Thief undo option
         removetaughtmove(SPECIES_ANNIHILAPE, MOVE_THIEF)
+
+        // remove Max Revive item return
+        clearflag(FLAG_RETURN_MAX_REVIVE)
     }
 }
 
@@ -1017,7 +1020,6 @@ script EscapeRoom_EventScript_HintsNPC{
 }
 
 
-
 // ANTI SOFTLOCK GUY
 
 script EscapeRoom_EventScript_AntiSoftlockGuy1{
@@ -1113,6 +1115,13 @@ script EscapeRoom_EventScript_ReturnLostItems{
         }
         setflag(FLAG_TEMP_4) // pp message
         setflag(FLAG_TEMP_2) // no heal
+    }
+
+    // max revive
+    if(flag(FLAG_RETURN_MAX_REVIVE)){
+        giveitem(ITEM_MAX_REVIVE)
+        clearflag(FLAG_RETURN_MAX_REVIVE)
+        setflag(FLAG_TEMP_1)  // heal
     }
 
 
@@ -4146,58 +4155,6 @@ script EscapeRoom_EventScript_FindSolidBoard{
     releaseall
 }
 
-script EscapeRoom_EventScript_FindPrimeape{
-    lockall
-
-    // obtain primeape
-    givemon(
-        SPECIES_PRIMEAPE,
-        44,
-        ball=ITEM_TIMER_BALL,
-        item=ITEM_RARE_CANDY,
-        abilityNum=2, // Defiant
-        nature=NATURE_CALM,
-        gender=MON_FEMALE,
-        move1=MOVE_RAGE_FIST,
-        move2=MOVE_TAUNT,
-        move3=MOVE_NONE,
-        move4=MOVE_NONE,
-        // EVs:
-        hpEv=252,
-        defEv=0,
-        spDefEv=8
-        // IVs:
-        hpIv=31,
-        atkIv=0,
-        defIv=0,  // final battle Heatran Struggle damage >63%
-        spAtkIv=31,
-        spDefIv=31,
-        speedIv=10
-    )  
-
-    // remove item
-    removeobject(LOCALID_PRIMEAPE_BALL)
-    setflag(FLAG_PRIMEAPE_OBTAINED)
-
-    // set rare candy flag
-    setflag(FLAG_RARE_CANDY2_OBTAINED)
-
-    // primeape obtained message
-    playfanfare(MUS_OBTAIN_ITEM)
-    message(PrimeapeObtainMessage)
-    waitfanfare
-    waitmessage
-
-    // nickname
-	msgbox(NicknameThisPokemonMessage2, MSGBOX_YESNO)
-	if(var(VAR_RESULT) == YES){
-        call(Common_EventScript_GetGiftMonPartySlot)
-        call(Common_EventScript_NameReceivedPartyMon)
-    }
-    closemessage
-    releaseall
-}
-
 script EscapeRoom_EventScript_FindTMSecretPower{
     lockall
     finditem(ITEM_TM43)
@@ -4205,6 +4162,15 @@ script EscapeRoom_EventScript_FindTMSecretPower{
     setflag(FLAG_SECRET_POWER_OBTAINED)
     releaseall
 }
+
+script EscapeRoom_EventScript_FindRareCandy2{
+    lockall 
+    finditem(ITEM_RARE_CANDY)
+    setflag(FLAG_RARE_CANDY2_OBTAINED)
+    removeobject(LOCALID_RARE_CANDY_2)
+    releaseall
+}
+
 
 
 //// MAP SWITCHES ////

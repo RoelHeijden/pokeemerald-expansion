@@ -49,10 +49,12 @@
 #define AI_FLAG_SEQUENCE_SWITCHING    (1 << 19)  // AI switches in mons in exactly party order, and never switches mid-battle
 #define AI_FLAG_TRAINER3               (1 << 20)  // AI for double trainer3 (komala klefki)
 #define AI_FLAG_TRAINER5               (1 << 21)  // AI for double trainer5 (meowth onix)
-#define AI_FLAG_TRAINER9               (1 << 22)  // AI for single trainer9 (urshifu urshifu)
-#define AI_FLAG_TRAINER11               (1 << 23)  // AI for double trainer11 (margcargo runerigus)
+#define AI_FLAG_TRAINER7A              (1 << 22)  // AI for single trainer7a (shedinja)
+#define AI_FLAG_TRAINER7B              (1 << 23)  // AI for double trainer7b (indeedee gliscor)
+#define AI_FLAG_TRAINER9               (1 << 24)  // AI for single trainer9 (urshifu urshifu)
+#define AI_FLAG_TRAINER11              (1 << 25)  // AI for double trainer11 (heatran kecleon sableye)
 
-#define AI_FLAG_COUNT                       24
+#define AI_FLAG_COUNT                       26
 
 // 'other' ai logic flags
 #define AI_FLAG_DYNAMIC_FUNC          (1 << 28)  // Create custom AI functions for specific battles via "setdynamicaifunc" cmd

@@ -42648,25 +42648,25 @@ F_TRAINER_FEMALE |
         {
             {
 #line 17054
-            .species = SPECIES_SABLEYE,
+            .species = SPECIES_MUK_ALOLA,
 #line 17054
             .gender = TRAINER_MON_FEMALE,
 #line 17054
             .heldItem = ITEM_TOXIC_ORB,
 #line 17057
-            .ev = TRAINER_PARTY_EVS(252, 0, 0, 172, 84, 0),
+            .ev = TRAINER_PARTY_EVS(20, 4, 232, 236, 0, 0),
 #line 17059
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17055
-            .ability = ABILITY_KEEN_EYE,
+            .ability = ABILITY_POWER_OF_ALCHEMY,
 #line 17056
-            .lvl = 80,
+            .lvl = 55,
 #line 17058
-            .nature = NATURE_TIMID,
+            .nature = NATURE_ADAMANT,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17059
-                MOVE_DAZZLING_GLEAM,
+                MOVE_BRUTAL_SWING,
             },
             },
         },

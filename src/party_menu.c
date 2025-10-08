@@ -4755,6 +4755,12 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
                 FlagSet(FLAG_RETURN_BERRY_JUICE);
             }
 
+            // ADDED
+            // max revive return flag
+            if(gSpecialVar_ItemId ==ITEM_MAX_REVIVE){
+                FlagSet(FLAG_RETURN_MAX_REVIVE);
+            }
+
             RemoveBagItem(gSpecialVar_ItemId, 1);
         }
         ScheduleBgCopyTilemapToVram(2);
@@ -4834,6 +4840,13 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
             // berry juice return flag
             if(item ==ITEM_BERRY_JUICE)
                 FlagSet(FLAG_RETURN_BERRY_JUICE);
+
+            // ADDED
+            // max revive return flag
+            if(item ==ITEM_MAX_REVIVE){
+                FlagSet(FLAG_RETURN_MAX_REVIVE);
+            }
+
 
             return;
         }

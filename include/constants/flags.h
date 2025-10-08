@@ -706,8 +706,8 @@
 #define FLAG_ANNIHILAPE_SPAWNED         0x296
 #define FLAG_SUN_STONE_SOLD             0x297
 #define FLAG_YAMASK_OBTAINED            0x298 
-#define FLAG_UNUSED_0x299  0x299 // Unused Flag
-#define FLAG_UNUSED_0x29A  0x29A // Unused Flag
+#define FLAG_MAX_REVIVE_OBTAINED        0x299  
+#define FLAG_RETURN_MAX_REVIVE          0x29A
 #define FLAG_UNUSED_0x29B  0x29B // Unused Flag
 #define FLAG_UNUSED_0x29C  0x29C // Unused Flag
 #define FLAG_UNUSED_0x29D  0x29D // Unused Flag
