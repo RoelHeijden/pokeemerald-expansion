@@ -4424,7 +4424,7 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_ANNIHILAPES_LAIR",
       "name": "EscapeRoom_AnnihilapesLair_Layout",
-      "width": 13,
+      "width": 28,
       "height": 17,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_MeteorFalls",

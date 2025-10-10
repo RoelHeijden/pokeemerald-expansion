@@ -5,7 +5,6 @@ const LOCALID_DUNGEON_GUARD = 11
 const LOCALID_HINT_GUY_2 = 12
 const LOCALID_MOVE_RELEARNER = 13
 const LOCALID_YAMASK_NPC = 14
-const LOCALID_PRIMEAPE_BALL = 15
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -41,7 +40,7 @@ script EscapeRoom_HiddenDungeon_MapScript_OnTransitionScripts{
 script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
     call(EscapeRoom_HiddenDungeon_DisableBagUse)
     call(EscapeRoom_HiddenDungeon_SetLostItemVars)
-    call(EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained)
+    call(EscapeRoom_MapScripts_CheckIfSecretPowerObtained)
     call(EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained)
 
     // check if ask pre-damage restore
@@ -70,40 +69,6 @@ script EscapeRoom_HiddenDungeon_SetLostItemVars{
     if(flag(FLAG_DO_RECOVERED_ITEM_MESSAGE))
     {
         setvar(VAR_RETRIEVED_HELD_ITEM, 1)
-    }
-}
-
-script EscapeRoom_HiddenDungeon_CheckIfSecretPowerObtained{
-    if(flag(FLAG_SECRET_POWER_OBTAINED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
-        setflag(FLAG_SECRET_POWER_COMPLETED)
-
-        // ERROR CHECK
-        // - 0 money
-        // - Annihilape learned Thief
-        // - Annihilape is in party
-        // - Toxic Orb Stolen
-        // - Trainer9 defeated
-        // - Trainer10 not defeated
-        istaughtmovepresent(SPECIES_ANNIHILAPE, MOVE_THIEF)
-        copyvar(VAR_TEMP_4, VAR_RESULT)
-        checkpartymon(SPECIES_ANNIHILAPE)
-        copyvar(VAR_TEMP_5, VAR_RESULT)
-        checkexactmoney(0)
-        if(var(VAR_RESULT) == FALSE ||
-            var(VAR_TEMP_4) == FALSE ||
-            var(VAR_TEMP_5) == PARTY_SIZE ||
-            !flag(FLAG_TOXIC_ORB_OBTAINED) ||
-            !flag(FLAG_TRAINER9_DEFEATED) ||
-            flag(FLAG_TRAINER10_DEFEATED)) 
-        {
-            setvar(VAR_DO_SOMETHING_WRONG_MESSAGE, 1)
-        }
-
-        // remove Annihilape Thief undo option
-        removetaughtmove(SPECIES_ANNIHILAPE, MOVE_THIEF)
-
-        // remove Max Revive item return
-        clearflag(FLAG_RETURN_MAX_REVIVE)
     }
 }
 
@@ -161,59 +126,6 @@ script EscapeRoom_MapScripts_SomethingWrongMessage{
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
-
-// primeape
-script EscapeRoom_HiddenDungeon_FindPrimeape{
-    lockall
-
-    // obtain primeape
-    givemon(
-        SPECIES_PRIMEAPE,
-        44,
-        ball=ITEM_TIMER_BALL,
-        item=ITEM_MAX_REVIVE,
-        abilityNum=2, // Defiant
-        nature=NATURE_CALM,
-        gender=MON_FEMALE,
-        move1=MOVE_RAGE_FIST,
-        move2=MOVE_TAUNT,
-        move3=MOVE_NONE,
-        move4=MOVE_NONE,
-        // EVs:
-        hpEv=252,
-        defEv=0,
-        spDefEv=8
-        // IVs:
-        hpIv=31,
-        atkIv=0,
-        defIv=0,  // final battle Heatran Struggle damage >63%
-        spAtkIv=31,
-        spDefIv=31,
-        speedIv=10
-    )  
-
-    // remove item
-    removeobject(LOCALID_PRIMEAPE_BALL)
-    setflag(FLAG_PRIMEAPE_OBTAINED)
-
-    // set rare candy flag
-    setflag(FLAG_MAX_REVIVE_OBTAINED)
-
-    // primeape obtained message
-    playfanfare(MUS_OBTAIN_ITEM)
-    message(PrimeapeObtainMessage)
-    waitfanfare
-    waitmessage
-
-    // nickname
-	msgbox(NicknameThisPokemonMessage2, MSGBOX_YESNO)
-	if(var(VAR_RESULT) == YES){
-        call(Common_EventScript_GetGiftMonPartySlot)
-        call(Common_EventScript_NameReceivedPartyMon)
-    }
-    closemessage
-    releaseall
-}
 
 
 // Bagon trade

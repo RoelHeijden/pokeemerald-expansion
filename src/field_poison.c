@@ -95,8 +95,15 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             // Battle facilities have their own white out script to handle the challenge loss
             if (InBattlePyramid() | InBattlePike() || InTrainerHillChallenge())
                 gSpecialVar_Result = FLDPSN_FRONTIER_WHITEOUT;
-            else
+            else{
                 gSpecialVar_Result = FLDPSN_WHITEOUT;
+
+                // REMOVE
+                DebugPrintf("POISON WHITEOUT");
+
+                // ADDED
+                FlagSet(FLAG_FIELD_POISON_WHITEOUT);
+            }
         }
         else
         {

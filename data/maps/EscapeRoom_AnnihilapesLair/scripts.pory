@@ -1,4 +1,6 @@
 
+const LOCALID_PRIMEAPE_BALL = 14
+
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
@@ -12,7 +14,7 @@ mapscripts EscapeRoom_AnnihilapesLair_MapScripts {
     ] 
 }
 
-// manually set wall locations if used
+// manually set wall locations
 script SpawnDungeonEntranceOnLoad{
     if(flag(FLAG_MAP_SWITCHES_SOLVED) == TRUE){
         setmetatile(6, 0, METATILE_MeteorFalls_CaveEntrance_Top, TRUE)
@@ -51,3 +53,76 @@ script EscapeRoom_AnnihilapesLair_SetLostItemVars{
     }
 }
 
+
+////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
+
+
+script EscapeRoom_AnnihilapesLair_FindPrimeape{
+    lockall
+
+    // obtain primeape
+    givemon(
+        SPECIES_PRIMEAPE,
+        44,
+        ball=ITEM_TIMER_BALL,
+        item=ITEM_MAX_REVIVE,
+        abilityNum=2, // Defiant
+        nature=NATURE_CALM,
+        gender=MON_FEMALE,
+        move1=MOVE_RAGE_FIST,
+        move2=MOVE_TAUNT,
+        move3=MOVE_NONE,
+        move4=MOVE_NONE,
+        // EVs:
+        hpEv=252,
+        defEv=0,
+        spDefEv=8
+        // IVs:
+        hpIv=31,
+        atkIv=0,
+        defIv=0,  // final battle Heatran Struggle damage >63%
+        spAtkIv=31,
+        spDefIv=31,
+        speedIv=10
+    )  
+
+    // remove item
+    removeobject(LOCALID_PRIMEAPE_BALL)
+    setflag(FLAG_PRIMEAPE_OBTAINED)
+
+    // set rare candy flag
+    setflag(FLAG_MAX_REVIVE_OBTAINED)
+
+    // primeape obtained message
+    playfanfare(MUS_OBTAIN_ITEM)
+    message(PrimeapeObtainMessage)
+    waitfanfare
+    waitmessage
+
+    // nickname
+    msgbox(NicknameThisPokemonMessage2, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+        call(Common_EventScript_GetGiftMonPartySlot)
+        call(Common_EventScript_NameReceivedPartyMon)
+    }
+    closemessage
+    releaseall
+}
+
+script EscapeRoom_AnnihilapesLair_PrimeapeGrave1{
+    lockall
+    msgbox(PrimeapeGraveNothing, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+script EscapeRoom_AnnihilapesLair_PrimeapeGrave2{
+    lockall
+    msgbox(PrimeapeGraveNothing, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+text PrimeapeGraveNothing{
+    "..."
+}

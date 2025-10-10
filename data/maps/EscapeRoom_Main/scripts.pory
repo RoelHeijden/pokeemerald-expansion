@@ -323,7 +323,7 @@ script EscapeRoom_MapScripts_CheckIfAskWarpBack{
 }
 
 script EscapeRoom_MapScripts_CheckIfSecretPowerObtained{
-    if(flag(FLAG_SECRET_POWER_OBTAINED) && !flag(FLAG_SECRET_POWER_COMPLETED)){
+    if(flag(FLAG_SECRET_POWER_OBTAINED) && !flag(FLAG_SECRET_POWER_COMPLETED) && flag(FLAG_FIELD_POISON_WHITEOUT)){
         setflag(FLAG_SECRET_POWER_COMPLETED)
 
         // ERROR CHECK
@@ -354,6 +354,9 @@ script EscapeRoom_MapScripts_CheckIfSecretPowerObtained{
         // remove Max Revive item return
         clearflag(FLAG_RETURN_MAX_REVIVE)
     }
+
+    // clear field poison whiteout flag
+    clearflag(FLAG_FIELD_POISON_WHITEOUT)
 }
 
 
@@ -4912,7 +4915,8 @@ text MoveDeleterSignMessage{
     "back whenever you want.\p"
 
     "However, the move deleter cannot be\n"
-    "used to regain a move's PP.\p"
+    "used to regain a move's PP after your\l"
+    "Pokémon used Struggle.\p"
 
     "A restored move will get:\n"
     "a) the PP amount it had when deleted.\l"
