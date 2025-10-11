@@ -965,17 +965,11 @@ static bool8 PrintAllOnCardBack(void)
         PrintTradesStringOnCard();
 
         // CHANGED
-        // trainer card hints depend on stage of game
-        if(FlagGet(FLAG_TRAINER3_DEFEATED) == FALSE)
-            PrintStatOnBackOfCard(5, gText_HallOfFameDebut, sData->textNumLinkContests, sTrainerCardStatColors);
-        else if(FlagGet(FLAG_PRIMEAPE_OBTAINED) == FALSE)
-            PrintStatOnBackOfCard(5, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
-        else if(FlagGet(FLAG_TRAINER9_DEFEATED) == FALSE){
-            PrintStatOnBackOfCard(4, gText_HallOfFameDebut3A, sData->textNumLinkContests, sTrainerCardStatColors);
-            PrintStatOnBackOfCard(5, gText_HallOfFameDebut3B, sData->textNumLinkContests, sTrainerCardStatColors);
-        }
-        else
-            PrintStatOnBackOfCard(5, gText_HallOfFameDebut4, sData->textNumLinkContests, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(0, gText_HallOfFameDebut1, sData->textNumLinkContests, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(1, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(2, gText_HallOfFameDebut3, sData->textNumLinkContests, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(3, gText_HallOfFameDebut4, sData->textNumLinkContests, sTrainerCardStatColors);
+        // PrintStatOnBackOfCard(5, gText_HallOfFameDebut5, sData->textNumLinkContests, sTrainerCardStatColors);
 
         break;
     case 4:

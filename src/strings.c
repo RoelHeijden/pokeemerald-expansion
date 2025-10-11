@@ -1243,11 +1243,16 @@ const u8 gText_Points[] = _(" points"); // Unused
 const u8 gText_TrainerCardTime[] = _("TIME");
 const u8 gJPText_BattlePoints[] = _("ゲ-ムポイント"); // Unused. Name presumed, translation is Game Points
 const u8 gText_Var1sTrainerCard[] = _("{STR_VAR_1}'s TRAINER CARD");
-const u8 gText_HallOfFameDebut[] = _("Not yet.");  // CHANGED
-const u8 gText_HallOfFameDebut2[] = _("Still not yet.");  // ADDED
-const u8 gText_HallOfFameDebut3A[] = _("Not yet?");  // ADDED
-const u8 gText_HallOfFameDebut3B[] = _("Now's the time!");  // ADDED
-const u8 gText_HallOfFameDebut4[] = _("Well done.");  // ADDED
+
+const u8 gText_HallOfFameDebut[] = _("idk what the origial was");  // CHANGED
+
+const u8 gText_HallOfFameDebut1[] = _("Choice becomes a cage");  // CHANGED
+const u8 gText_HallOfFameDebut2[] = _("It lets the soul wander");  // ADDED
+const u8 gText_HallOfFameDebut3[] = _("When nature changes shape");  // ADDED
+const u8 gText_HallOfFameDebut4[] = _("Let illness end the flame");  // ADDED
+
+const u8 gText_HallOfFameDebut5[] = _("Thank me later.");  // ADDED
+
 const u8 gText_LinkBattles[] = _("LINK BATTLES");
 const u8 gText_LinkCableBattles[] = _("LINK CABLE BATTLES");
 const u8 gText_WinsLosses[] = _("W:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_1}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}  L:{COLOR RED}{SHADOW LIGHT_RED}{STR_VAR_2}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}");
