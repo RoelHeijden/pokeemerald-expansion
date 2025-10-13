@@ -26,6 +26,11 @@ void ItemUseOutOfBattle_TMHM(u8);
 void ItemUseOutOfBattle_Repel(u8);
 void ItemUseOutOfBattle_Lure(u8);
 void ItemUseOutOfBattle_EscapeRope(u8);
+void ItemUseOutOfBattle_EscapeRope2(u8); // ADDED
+void Task_UseRescueBellYesNo(u8); // ADDED
+void Task_HandleRescueBellFieldYesNoInput(u8); // ADDED
+static void Task_RescueBellYesFromBag(u8 taskId); // ADDED
+static void Task_RescueBellNoFromBag(u8 taskId); // ADDED
 void ItemUseOutOfBattle_BlackWhiteFlute(u8);
 void ItemUseOutOfBattle_EvolutionStone(u8);
 void ItemUseOutOfBattle_Berry(u8);

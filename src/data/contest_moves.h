@@ -3,7 +3,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_HIGHLY_APPEALING] =
     {
         .effectType = CONTEST_EFFECT_TYPE_APPEAL,
-        .appeal = 40,
+        .appeal = 10, // brutal swing
         .jam = 0,
     },
     [CONTEST_EFFECT_USER_MORE_EASILY_STARTLED] =
@@ -15,7 +15,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES] =
     {
         .effectType = CONTEST_EFFECT_TYPE_APPEAL,
-        .appeal = 80,
+        .appeal = 10, // final gambit
         .jam = 0,
     },
     [CONTEST_EFFECT_REPETITION_NOT_BORING] =
@@ -63,7 +63,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_STARTLE_PREV_MON] =
     {
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MON,
-        .appeal = 20,
+        .appeal = 10, // astonish
         .jam = 30,
     },
     [CONTEST_EFFECT_STARTLE_PREV_MONS] =
@@ -75,7 +75,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON] =
     {
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MON,
-        .appeal = 10,
+        .appeal = 10, // will o wisp
         .jam = 40,
     },
     [CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS] =
@@ -99,7 +99,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 30,
+        .appeal = 10, // shadow ball
         .jam = 0,
     },
     [CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION] =
@@ -117,7 +117,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL] =
     {
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
-        .appeal = 20,
+        .appeal = 10, // night shade
         .jam = 10,
     },
     [CONTEST_EFFECT_STARTLE_MONS_COOL_APPEAL] =
@@ -159,13 +159,13 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 20,
+        .appeal = 10, // fling, taunt
         .jam = 0,
     },
     [CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 30,
+        .appeal = 10, // foresight, haze
         .jam = 0,
     },
     [CONTEST_EFFECT_BADLY_STARTLES_MONS_IN_GOOD_CONDITION] =
@@ -189,7 +189,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONES] =
     {
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
-        .appeal = 10,
+        .appeal = 30, // role play
         .jam = 0,
     },
     [CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONE] =
@@ -213,7 +213,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_BETTER_IF_SAME_TYPE] =
     {
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
-        .appeal = 20,
+        .appeal = 30, // trick
         .jam = 0,
     },
     [CONTEST_EFFECT_BETTER_IF_DIFF_TYPE] =
@@ -225,7 +225,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL] =
     {
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
-        .appeal = 30,
+        .appeal = 10, // cross chop
         .jam = 0,
     },
     [CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS] =
@@ -237,7 +237,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION] =
     {
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
-        .appeal = 10,
+        .appeal = 10, // secret power
         .jam = 0,
     },
     [CONTEST_EFFECT_NEXT_APPEAL_EARLIER] =
@@ -297,19 +297,49 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_GRASSY_TERRAIN_HINT] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 30,
+        .appeal = 10,
         .jam = 0,
     },
     [CONTEST_EFFECT_SLEEP_TALK_HINT] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 30,
+        .appeal = 30, // Mimic
         .jam = 0,
     },
     [CONTEST_EFFECT_ENERGY_BALL_HINT] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 30,
+        .appeal = 10,
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_TOXIC_ORB_HINT] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_WORSEN,
+        .appeal = 10, // toxic spikes
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_SLEEP_TALK_HINT2] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_WORSEN,
+        .appeal = 10, // Thief
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS2] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_WORSEN,
+        .appeal = 30, // disable
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_HIGHLY_APPEALING2] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_APPEAL,
+        .appeal = 30, // rage fist
+        .jam = 0,
+    },
+    [CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES2] =
+    {
+        .effectType = CONTEST_EFFECT_TYPE_APPEAL,
+        .appeal = 30, // destiny bond
         .jam = 0,
     },
 };

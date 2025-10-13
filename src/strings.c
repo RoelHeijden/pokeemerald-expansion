@@ -1245,13 +1245,14 @@ const u8 gJPText_BattlePoints[] = _("ゲ-ムポイント"); // Unused. Name pres
 const u8 gText_Var1sTrainerCard[] = _("{STR_VAR_1}'s TRAINER CARD");
 
 const u8 gText_HallOfFameDebut[] = _("idk what the origial was");  // CHANGED
-
-const u8 gText_HallOfFameDebut1[] = _("Choice becomes a cage");  // CHANGED
-const u8 gText_HallOfFameDebut2[] = _("It lets the soul wander");  // ADDED
-const u8 gText_HallOfFameDebut3[] = _("When nature changes shape");  // ADDED
-const u8 gText_HallOfFameDebut4[] = _("Let illness end the flame");  // ADDED
-
 const u8 gText_HallOfFameDebut5[] = _("Thank me later.");  // ADDED
+
+// ADDED
+const u8 gText_HallOfFameDebut1[] = _("choice becomes a burden");
+const u8 gText_HallOfFameDebut2[] = _("it lets the spirit wander"); 
+const u8 gText_HallOfFameDebut3[] = _("when nature changes shape");  
+const u8 gText_HallOfFameDebut4[] = _("let sickness end the flame"); 
+
 
 const u8 gText_LinkBattles[] = _("LINK BATTLES");
 const u8 gText_LinkCableBattles[] = _("LINK CABLE BATTLES");
@@ -1888,3 +1889,5 @@ const u8 gText_Solution[] =      _("Solution (+60 min.)");
 
 const u8 gText_CheckImportantInfo[] = _("Important info");
 const u8 gText_CheckProgress[] =      _("Game completion");
+
+const u8 gText_RescueBellPrompt[] = _("Want to exit the ice puzzle?\nAny newly found items will be returned.");

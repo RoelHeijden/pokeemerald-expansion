@@ -742,6 +742,11 @@ const u8 *const gContestEffectDescriptionPointers[] =
     [CONTEST_EFFECT_GRASSY_TERRAIN_HINT]                   = COMPOUND_STRING("Used on turn 1 in two out\nof the trainer battles."), // ADDED
     [CONTEST_EFFECT_SLEEP_TALK_HINT]                       = COMPOUND_STRING("Incompatible with Assist."), // ADDED
     [CONTEST_EFFECT_ENERGY_BALL_HINT]                      = COMPOUND_STRING("Shelgon used Flamethrower!\nOh, it doesn't?"), // ADDED
+    [CONTEST_EFFECT_TOXIC_ORB_HINT]                        = COMPOUND_STRING("Makes a great appeal, but\nuse the toxic orb instead."), // ADDED
+    [CONTEST_EFFECT_SLEEP_TALK_HINT2]                      = COMPOUND_STRING("Incompatible with Assist."), // ADDED
+    [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS2]          = COMPOUND_STRING("Makes all POKéMON after\nthe user nervous."), // ADDED
+    [CONTEST_EFFECT_HIGHLY_APPEALING2]                     = COMPOUND_STRING("A highly appealing move."), // ADDED
+    [CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES2]       = COMPOUND_STRING("Makes a great appeal, but\nallows no more to the end."), // ADDED
 };
 
 const u8 *const gContestMoveTypeTextPointers[] =

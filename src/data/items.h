@@ -8295,18 +8295,32 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_QuickClaw,
     },
 
+    // [ITEM_SOOTHE_BELL] =
+    // {
+    //     .name = _("Soothe Bell"),
+    //     .price = (I_PRICE >= GEN_9) ? 5000 : ((I_PRICE >= GEN_7) ? 4000 : 100),
+    //     .holdEffect = HOLD_EFFECT_FRIENDSHIP_UP,
+    //     .description = COMPOUND_STRING(
+    //         "A hold item that\n"
+    //         "calms spirits and\n"
+    //         "fosters friendship."),
+    //     .pocket = POCKET_ITEMS,
+    //     .type = ITEM_USE_BAG_MENU,
+    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+    //     .flingPower = 10,
+    //     .iconPic = gItemIcon_SootheBell,
+    //     .iconPalette = gItemIconPalette_SootheBell,
+    // },
     [ITEM_SOOTHE_BELL] =
     {
-        .name = _("Soothe Bell"),
-        .price = (I_PRICE >= GEN_9) ? 5000 : ((I_PRICE >= GEN_7) ? 4000 : 100),
-        .holdEffect = HOLD_EFFECT_FRIENDSHIP_UP,
+        .name = _("Rescue Bell"),
+        .price = 0,
         .description = COMPOUND_STRING(
-            "A hold item that\n"
-            "calms spirits and\n"
-            "fosters friendship."),
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+            "Lets you escape\n"
+            "the ice puzzle."),
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_EscapeRope2,
         .flingPower = 10,
         .iconPic = gItemIcon_SootheBell,
         .iconPalette = gItemIconPalette_SootheBell,
@@ -8491,23 +8505,6 @@ const struct Item gItemsInfo[] =
         .iconPic = gItemIcon_ShellBell,
         .iconPalette = gItemIconPalette_Shell,
     },
-    // [ITEM_SHELL_BELL] =
-    // {
-    //     .name = _("Liepard Collar"),
-    //     .price = 0,
-    //     .description = COMPOUND_STRING(
-    //         "A stylish collar\n"
-    //         "that helps form a\n"
-    //         "bond with Liepard."),
-    //     .pocket = POCKET_ITEMS,
-    //     .type = ITEM_USE_BAG_MENU,
-    //     .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
-    //     .flingPower = 30,
-    //     .iconPic = gItemIcon_ShellBell,
-    //     .iconPalette = gItemIconPalette_Shell,
-    // },
-
-
 
     [ITEM_WIDE_LENS] =
     {

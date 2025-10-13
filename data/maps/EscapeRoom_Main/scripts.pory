@@ -18,7 +18,7 @@ const LOCALID_NURSE2 = 15
 const LOCALID_HINT_GUY2 = 16
 const LOCALID_ANTI_SOFTLOCK_GUY2 = 17
 const LOCALID_LIEPARD = 18
-const LOCALID_SECRETGARDEN_GUARD = 19
+const LOCALID_RARE_CANDY_2 = 19
 const LOCALID_TRAINER5 = 20
 const LOCALID_CUT_TREE = 21
 const LOCALID_LIEPARD_COLLAR = 22
@@ -32,7 +32,7 @@ const LOCALID_NURSE_DUMMY = 29
 const LOCALID_ZERA_HINT_NPC = 30
 const LOCALID_APE_HINT_NPC = 31
 const LOCALID_SMASH_ROCK2 = 32
-const LOCALID_RARE_CANDY_2 = 33
+const LOCALID_RESCUE_BELL = 33
 const _DUMMY_4 = 34
 const _DUMMY_5 = 35
 const _DUMMY_6 = 36
@@ -2772,64 +2772,10 @@ script EscapeRoom_TryBuyStonesPC_TryBuyMoonStone{
 
 // SECRET GARDEN GUARD //
 
-script EscapeRoom_SecretGarden_GateEntryNPC_KeepOut{
+script EscapeRoom_EscapeIcePuzzle{
     lockall
 
-    // exclamation mark
-    playse(SE_PIN)
-    applymovement(LOCALID_SECRETGARDEN_GUARD, Common_Movement_ExclamationMark)
-    waitmovement(LOCALID_SECRETGARDEN_GUARD)
-    applymovement(LOCALID_SECRETGARDEN_GUARD, _face_left)
-    waitmovement(LOCALID_SECRETGARDEN_GUARD)
-    delay(25)
-
-    // message
-    msgbox(SecretGardenGuardKeepOut, MSGBOX_AUTOCLOSE)
-    waitmessage
-
-    // player move left
-    applymovement(OBJ_EVENT_ID_PLAYER, SecretGarden_PlayerMoveLeft)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
-
-    releaseall
-}
-
-script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
-    lockall
-
-    // exclamation mark
-    playse(SE_PIN)
-    applymovement(LOCALID_SECRETGARDEN_GUARD, Common_Movement_ExclamationMark)
-    waitmovement(LOCALID_SECRETGARDEN_GUARD)
-    applymovement(LOCALID_SECRETGARDEN_GUARD, _face_down)
-    waitmovement(LOCALID_SECRETGARDEN_GUARD)
-    delay(30)
-
-    applymovement(LOCALID_SECRETGARDEN_GUARD, SecretGarden_NPC_move_down)
-    waitmovement(LOCALID_SECRETGARDEN_GUARD)
-    applymovement(OBJ_EVENT_ID_PLAYER, _face_right)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
-
-    // player gets spotted message
-    msgbox(SecretGardenGuardSpotted, MSGBOX_AUTOCLOSE)
-    waitmessage
-    
-    // move NPC and player up
-    applymovement(LOCALID_SECRETGARDEN_GUARD, SecretGarden_NPC_move_up)
-    applymovement(OBJ_EVENT_ID_PLAYER, SecretGarden_PlayerMoveUp)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
-    lockall // to be sure
-
-    // follow up message
-    if(!flag(FLAG_SECRET_POWER_OBTAINED) || flag(FLAG_SECRET_POWER_COMPLETED)){
-        msgbox(SecretGardenGuardStayOut, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-    elif(!flag(FLAG_SECRET_POWER_COMPLETED)){
-        msgbox(SecretGardenGuardRemoveSecretPower, MSGBOX_AUTOCLOSE)
-        waitmessage
-        lockall
-
+    if(!flag(FLAG_SECRET_POWER_COMPLETED)){
         clearflag(FLAG_TEMP_1) // will notify if Secret Power was removed as item
 
         // remove TM Secret Power items
@@ -2857,10 +2803,6 @@ script EscapeRoom_SecretGarden_GateEntryNPC_KickOut{
         clearflag(FLAG_SECRET_POWER_OBTAINED)
         lockall
     }
-
-    // move player away
-    applymovement(OBJ_EVENT_ID_PLAYER, SecretGarden_PlayerMoveLeft)
-    waitmovement(OBJ_EVENT_ID_PLAYER)
 
     releaseall
 }
@@ -2975,24 +2917,6 @@ script EscapeRoom_EventScript_UndoSecretPowerTeach{
     waitmessage
 }
 
-movement SecretGarden_NPC_move_down {
-    walk_fast_down * 2
-    face_left
-}
-movement SecretGarden_NPC_move_up {
-    face_up
-    walk_up * 2
-    face_left
-}
-movement SecretGarden_PlayerMoveUp {
-    face_up
-    walk_up * 2
-    face_right
-}
-movement SecretGarden_PlayerMoveLeft {
-    face_left
-    walk_left
-}
 
 
 //// RANDOM HINT NPCS ////
@@ -4171,6 +4095,14 @@ script EscapeRoom_EventScript_FindRareCandy2{
     finditem(ITEM_RARE_CANDY)
     setflag(FLAG_RARE_CANDY2_OBTAINED)
     removeobject(LOCALID_RARE_CANDY_2)
+    releaseall
+}
+
+script EscapeRoom_EventScript_FindRescueBell{
+    lockall 
+    finditem(ITEM_SOOTHE_BELL)
+    setflag(FLAG_RESCUE_BELL_OBTAINED)
+    removeobject(LOCALID_RESCUE_BELL)
     releaseall
 }
 
@@ -5462,26 +5394,7 @@ text RockSmashNPCFarewellMsg{
 }
 
 
-// SECRET GARDEN
-// guard
-text SecretGardenGuardKeepOut{
-    "You've found our secret garden!\p"
-    "I cannot let you enter, sorry."
-}
-
-text SecretGardenGuardSpotted{
-    "How did you get in there!?"
-}
-
-text SecretGardenGuardStayOut{
-    "Stay out of our garden!"
-}
-
-text SecretGardenGuardRemoveSecretPower{
-    "I cannot let you leave with that what\n"
-    "belongs to the garden.\p"
-    "I'll have to take TM43 away from you."
-}
+// ICE PUZZLE ITEM UNDOS
 
 text MonForgotSecretPower{
     "{STR_VAR_1}'s Secret Power was removed."

@@ -5060,11 +5060,17 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .categoryName = _("Spirit"),
         .height = 5,
         .weight = 15,
+        // .description = COMPOUND_STRING(
+        //     "These Pokémon arose from the spirits\n"
+        //     "of people interred in graves in past ages.\n"
+        //     "Each of them carries a mask that used\n"
+        //     "to be its face when it was human."),
+
+        // trick trick trick, monkey use mimic. 
+        // monkey use disable, trick trick trick.
         .description = COMPOUND_STRING(
-            "These Pokémon arose from the spirits\n"
-            "of people interred in graves in past ages.\n"
-            "Each of them carries a mask that used\n"
-            "to be its face when it was human."),
+            "wrbcm vzlcd ttkkn, mhnmgg xsx mkoqf.\n"
+            "mhnmgg xsx dkuielx, ttkkn tkiem buivk."), // CHANGED
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,

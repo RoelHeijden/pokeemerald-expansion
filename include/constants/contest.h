@@ -149,6 +149,12 @@
 #define CONTEST_EFFECT_GRASSY_TERRAIN_HINT                      49 // ADDED
 #define CONTEST_EFFECT_SLEEP_TALK_HINT                          50 // ADDED
 #define CONTEST_EFFECT_ENERGY_BALL_HINT                         51 // ADDED
+#define CONTEST_EFFECT_TOXIC_ORB_HINT                           52 // ADDED
+#define CONTEST_EFFECT_SLEEP_TALK_HINT2                         53 // ADDED
+#define CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS2             54 // ADDED
+#define CONTEST_EFFECT_HIGHLY_APPEALING2                        55 // ADDED
+#define CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES2          56 // ADDED
+
 
 // Each of the above effects is grouped into one of these effect type categories
 // Only a few of these get checked by the AI, the rest go unused

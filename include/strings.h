@@ -3081,5 +3081,6 @@ extern const u8 gText_Solution[];
 extern const u8 gText_CheckImportantInfo[];
 extern const u8 gText_CheckProgress[];
 
+extern const u8 gText_RescueBellPrompt[];
 
 #endif // GUARD_STRINGS_H

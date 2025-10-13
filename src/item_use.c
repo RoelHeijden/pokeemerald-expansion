@@ -1073,6 +1073,103 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
     }
 }
 
+
+
+
+// ADDED
+static void ItemUseOnFieldCB_EscapeRope2(u8 taskId)
+{
+    Overworld_ResetStateAfterDigEscRope();
+    CopyItemName(gSpecialVar_ItemId, gStringVar2);
+    StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
+    gTasks[taskId].data[0] = 0;
+    DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
+}
+
+// ADDED
+// for the rescue bell item
+void ItemUseOutOfBattle_EscapeRope2(u8 taskId)
+{
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObj->currentCoords.x;
+    s16 y = playerObj->currentCoords.y;
+
+    u8 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+    u8 mapNum   = gSaveBlock1Ptr->location.mapNum;
+    
+    bool8 isUsingRegistered = gTasks[taskId].tUsingRegisteredKeyItem;
+
+    // check for specific map and coordinate range
+    if (mapGroup == MAP_GROUP(ESCAPE_ROOM_MAIN)
+        && mapNum == MAP_NUM(ESCAPE_ROOM_MAIN)
+        && x >= 77 && y >= 18)  
+    {
+        if (isUsingRegistered)
+            DisplayItemMessageOnField(taskId, gText_RescueBellPrompt, Task_UseRescueBellYesNo);
+        else
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_RescueBellPrompt, Task_UseRescueBellYesNo);
+    }
+    else
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, isUsingRegistered);
+    }
+}
+
+// ADDED
+void Task_UseRescueBellYesNo(u8 taskId)
+{
+    if (gTasks[taskId].tUsingRegisteredKeyItem)
+    {
+        DisplayYesNoMenuDefaultYes();
+        gTasks[taskId].func = Task_HandleRescueBellFieldYesNoInput;
+    }
+    else
+    {
+        static const struct YesNoFuncTable sRescueBellYesNoFuncTable = {
+            .yesFunc = Task_RescueBellYesFromBag,
+            .noFunc = Task_RescueBellNoFromBag
+        };
+        BagMenu_YesNo(taskId, ITEMWIN_YESNO_HIGH, &sRescueBellYesNoFuncTable);
+    }
+}
+
+// ADDED
+void Task_HandleRescueBellFieldYesNoInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0: // YES
+        sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope2;
+        SetUpItemUseOnFieldCallback(taskId);
+        break;
+    case 1: // NO
+    case MENU_B_PRESSED:
+        ClearDialogWindowAndFrame(0, TRUE);
+        ScriptUnfreezeObjectEvents();
+        UnlockPlayerFieldControls();
+        DestroyTask(taskId);
+        break;
+    }
+}
+
+// ADDED
+static void Task_RescueBellYesFromBag(u8 taskId)
+{
+    sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope2;
+    SetUpItemUseOnFieldCallback(taskId);
+}
+
+// ADDED
+static void Task_RescueBellNoFromBag(u8 taskId)
+{
+    CloseItemMessage(taskId);
+}
+
+
+
+
+
+
 void ItemUseOutOfBattle_EvolutionStone(u8 taskId)
 {
     gItemUseCB = ItemUseCB_EvolutionStone;

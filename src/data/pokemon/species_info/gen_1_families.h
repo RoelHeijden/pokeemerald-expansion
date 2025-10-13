@@ -6640,16 +6640,11 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
         .categoryName = _("Pig Monkey"),
         .height = 10,
         .weight = 320,
-        // .description = COMPOUND_STRING(
-        //     "When it becomes furious, its blood\n"
-        //     "circulation becomes more robust, and\n"
-        //     "its muscles are made stronger. But it\n"
-        //     "also becomes much less intelligent."),
         .description = COMPOUND_STRING(
             "When it becomes furious, its blood\n"
             "circulation becomes more robust, and\n"
-            "its muscles are made stronger. When fury\n"
-            "pushes it beyond its limits, it evolves."),
+            "its muscles are made stronger. But it\n"
+            "also becomes much less intelligent."),
         .pokemonScale = 326,
         .pokemonOffset = 10,
         .trainerScale = 256,
