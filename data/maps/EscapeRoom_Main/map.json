@@ -520,6 +520,15 @@
       "var": "VAR_LOCATED_AT_SECTION_X",
       "var_value": "1",
       "script": "EscapeRoom_EventScript_SetLocationSection2"
+    },
+    {
+      "type": "trigger",
+      "x": 81,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_RARE_CANDY2_STOLEN_CHECK",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_CheckRareCandy2Stolen"
     }
   ],
   "bg_events": [

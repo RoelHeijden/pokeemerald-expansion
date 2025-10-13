@@ -80,6 +80,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_ASK_WARP_BACK, 1: EscapeRoom_MapScripts_AskWarpBack
         VAR_ROCK_SMASH_NPC_STATE, 1: EscapeRoom_MapScripts_CheckIfRockSmashed
         VAR_DO_ERROR_MESSAGE, 1: EscapeRoom_MapScripts_DoErrorMessage
+        VAR_JUST_ESCAPED_ICE_PUZZLE, 1: EscapeRoom_MapScripts_CheckIcePuzzleItemReturns
     ] 
 }
 
@@ -531,6 +532,93 @@ script EscapeRoom_MapScripts_DoErrorMessage{
     waitmessage
     releaseall
 }
+
+script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
+    lockall
+    setvar(VAR_JUST_ESCAPED_ICE_PUZZLE, 0)
+
+    // TM Secret Power
+    // if secret power obtained but not yet succesfully stolen
+    if(!flag(FLAG_SECRET_POWER_COMPLETED) && flag(FLAG_SECRET_POWER_OBTAINED)){
+        clearflag(FLAG_TEMP_1) // will notify if Secret Power was removed as item
+
+        // remove TM Secret Power items
+        checkpartyitem(0)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
+            removepartyitem(0)
+            setflag(FLAG_TEMP_1)
+        }
+        checkpartyitem(1)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
+            removepartyitem(1)
+            setflag(FLAG_TEMP_1)
+        }
+        checkitem(ITEM_TM43)
+        if(var(VAR_RESULT) == TRUE){
+            removeitem(ITEM_TM43)
+            setflag(FLAG_TEMP_1)
+        }
+
+        // if Secret Power not held as TM, but move is learned:
+        if(!flag(FLAG_TEMP_1)){
+            msgbox(SecretPowerTmReturned, MSGBOX_DEFAULT)
+            waitmessage
+            call(EscapeRoom_EventScript_UndoSecretPowerTeach)
+        }
+        else{
+            // only message secret power was taken away
+            msgbox(SecretPowerTmReturned, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+
+        // reset secret power item ball
+        clearflag(FLAG_SECRET_POWER_OBTAINED)
+    }
+
+    // RARE CANDY
+    // if secret power obtained but not yet succesfully stolen
+    if(!flag(FLAG_RARE_CANDY2_COMPLETED) && flag(FLAG_RARE_CANDY2_OBTAINED)){
+        setvar(VAR_RARE_CANDY2_STOLEN_CHECK, 0)
+
+        clearflag(FLAG_TEMP_2) // will notify if Secret Power was removed as item
+
+        // remove Rare Candy item
+        checkpartyitem(0)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_RARE_CANDY){
+            removepartyitem(0)
+            setflag(FLAG_TEMP_2)
+        }
+        checkpartyitem(1)
+        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_RARE_CANDY){
+            removepartyitem(1)
+            setflag(FLAG_TEMP_2)
+        }
+        checkitem(ITEM_RARE_CANDY)
+        if(var(VAR_RESULT) == TRUE){
+            removeitem(ITEM_RARE_CANDY)
+            setflag(FLAG_TEMP_2)
+        }
+
+        // if Rare Candy not held as item, but used on pokemon
+        if(!flag(FLAG_TEMP_2)){
+            msgbox(RareCandy2Returned, MSGBOX_DEFAULT)
+            waitmessage
+            call(EscapeRoom_EventScript_UndoRareCandy_IcePuzzle)
+        }
+        else{
+            // only message Rare Candy was taken away
+            msgbox(RareCandy2Returned, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
+
+        // rare candy item ball
+        clearflag(FLAG_RARE_CANDY2_OBTAINED)
+    }
+
+    releaseall
+}
+
+
 
 //// ON WARP ////
 
@@ -1868,6 +1956,10 @@ script EscapeRoom_EventScript_UndoRareCandy{
         // give back rare candy
         giveitem(ITEM_RARE_CANDY)
 
+        // message sound effect
+        playse(SE_SUCCESS)
+        waitse
+
         // normal rare candy undone message
         if(!flag(FLAG_TEMP_1) && !flag(FLAG_TEMP_2)){
             checkpartymon(VAR_0x8005) 
@@ -2770,42 +2862,7 @@ script EscapeRoom_TryBuyStonesPC_TryBuyMoonStone{
 }
 
 
-// SECRET GARDEN GUARD //
-
-script EscapeRoom_EscapeIcePuzzle{
-    lockall
-
-    if(!flag(FLAG_SECRET_POWER_COMPLETED)){
-        clearflag(FLAG_TEMP_1) // will notify if Secret Power was removed as item
-
-        // remove TM Secret Power items
-        checkpartyitem(0)
-        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
-            removepartyitem(0)
-            setflag(FLAG_TEMP_1)
-        }
-        checkpartyitem(1)
-        if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM43){
-            removepartyitem(1)
-            setflag(FLAG_TEMP_1)
-        }
-        checkitem(ITEM_TM43)
-        if(var(VAR_RESULT) == TRUE){
-            removeitem(ITEM_TM43)
-            setflag(FLAG_TEMP_1)
-        }
-
-        // if Secret Power not held as TM, but move is learned:
-        if(!flag(FLAG_TEMP_1)){
-            call(EscapeRoom_EventScript_UndoSecretPowerTeach)
-        }
-
-        clearflag(FLAG_SECRET_POWER_OBTAINED)
-        lockall
-    }
-
-    releaseall
-}
+// ICE PUZZLE ESCAPE ITEM RETURNS
 
 script EscapeRoom_EventScript_UndoSecretPowerTeach{
     // find which pokemon learned Secret Power
@@ -2917,6 +2974,184 @@ script EscapeRoom_EventScript_UndoSecretPowerTeach{
     waitmessage
 }
 
+script EscapeRoom_EventScript_UndoRareCandy_IcePuzzle{
+    // clear flags
+    clearflag(FLAG_TEMP_1)
+    clearflag(FLAG_TEMP_2)
+
+    // set species in var VAR_0x8005
+    if(var(VAR_RARE_CANDY_2_USED_ON) != SPECIES_NONE){
+        copyvar(VAR_0x8005, VAR_RARE_CANDY_2_USED_ON)
+    }
+    else{
+        msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        return
+    }
+
+    // check unevolve pokemon if Shelgon
+    if(var(VAR_0x8005) == SPECIES_BAGON){
+        checkpartymon(SPECIES_SHELGON)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+            // set flag and var for unevolved message
+            setflag(FLAG_TEMP_1)
+        }
+    }
+
+    // check unevolve pokemon if Annihilape
+    if(var(VAR_0x8005) == SPECIES_PRIMEAPE){
+        checkpartymon(SPECIES_ANNIHILAPE)
+        if(var(VAR_RESULT) != PARTY_SIZE){
+
+            // only unevolve if still at lvl 45
+            checkpartymonlevel(45) 
+            if(var(VAR_0x8004) == SPECIES_ANNIHILAPE){
+                // set flag and var for unevolved message
+                setflag(FLAG_TEMP_2)
+            }
+        }
+    }
+
+    // message sound effect
+    playse(SE_SUCCESS)
+    waitse
+
+    // normal rare candy undone message
+    if(!flag(FLAG_TEMP_1) && !flag(FLAG_TEMP_2)){
+        checkpartymon(VAR_0x8005) 
+        copyvar(VAR_0x8004, VAR_RESULT) // set monslot in VAR_0x8004
+        special(BufferMonNickname)      // buffer nickname (VAR_0x8004) to STR_VAR_1
+        msgbox(RareCandyUndoneMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+    // Pokemon unevolved rare candy undone message
+    else{
+        // Shelgon
+        if(flag(FLAG_TEMP_1)){
+            // buffer names for message
+            checkpartymon(SPECIES_SHELGON) 
+            copyvar(VAR_0x8004, VAR_RESULT) 
+            special(BufferMonNickname) 
+            bufferspeciesname(STR_VAR_2, SPECIES_BAGON)
+
+            // unevolve Shelgon
+            unEvolveMonTo(SPECIES_SHELGON, SPECIES_BAGON)
+        }
+        // Annihilape
+        if(flag(FLAG_TEMP_2)){
+            // buffer names for message
+            checkpartymon(SPECIES_ANNIHILAPE) 
+            copyvar(VAR_0x8004, VAR_RESULT) 
+            special(BufferMonNickname) 
+            bufferspeciesname(STR_VAR_2, SPECIES_PRIMEAPE)
+
+            // unevolve Annihilape
+            unEvolveMonTo(SPECIES_ANNIHILAPE, SPECIES_PRIMEAPE)
+        }
+        msgbox(RareCandyUndoneUnevolveMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+    // level down Pokemon
+    levelDownMon(VAR_0x8005)
+
+    // SPECIAL CASE: undo Bagon Flamethrower
+    if(var(VAR_0x8005) == SPECIES_BAGON){
+
+        // Possible cases:
+        // 1. Flamethrower (Secret Power not taught)  -> Remove Flamethrower (replace original move)
+        // 2. Secret Power (Flamethrower not learned) -> Do nothing
+        // 3. Secret Power and Flamethrower           -> Remove Flamethrower (replace original move)
+        // 4. Secret Power replaced Flamethrower      -> Undo Secret Power addtaughtmove for move_none
+        // 5. Flamethrower replaced Secret Power      -> Remove Flamethrower (replace original move)
+        
+        // 4
+        // check if Secret Power replaced Flamethrower
+        istaughtmovepresent(SPECIES_BAGON, MOVE_SECRET_POWER)
+        if(var(VAR_0x8004) == MOVE_FLAMETHROWER){
+
+            // set secret power taught move to MOVE_NONE instead of Flamethrower
+            removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+            setvar(VAR_0x8007, SPECIES_BAGON)
+            setvar(VAR_0x8004, MOVE_NONE)
+            setvar(VAR_0x8008, MOVE_SECRET_POWER)
+            special(Special_AddTaughtMove)
+        }
+        istaughtmovepresent(SPECIES_SHELGON, MOVE_SECRET_POWER)
+        if(var(VAR_0x8004) == MOVE_FLAMETHROWER){
+
+            // set secret power taught move to MOVE_NONE instead of Flamethrower
+            removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+            setvar(VAR_0x8007, SPECIES_BAGON)  // not shelgon!
+            setvar(VAR_0x8004, MOVE_NONE)
+            setvar(VAR_0x8008, MOVE_SECRET_POWER)
+            special(Special_AddTaughtMove)
+        }
+
+        // if Bagon/shelgon learned Flamethrower for another move
+        istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER)
+        if(var(VAR_RESULT) == TRUE){
+
+            // 3, 5
+            // replace Flamethrower with original move
+            istaughtmovepresent(SPECIES_BAGON, MOVE_FLAMETHROWER) // set original move in VAR_0x8004
+            replacemove2(SPECIES_BAGON, MOVE_FLAMETHROWER, VAR_0x8004)
+            removetaughtmove(SPECIES_BAGON, MOVE_FLAMETHROWER)
+        }
+
+        // 1
+        // make sure Flamethrower is removed
+        // it's not stored in taughtmove if Bagon only had 3 moves when learned
+        replacemove2(SPECIES_BAGON, MOVE_FLAMETHROWER, MOVE_NONE)
+
+        // 2
+        // do nothing
+
+        // 3 (special case)
+        // secret power had replaced one of the other moves
+        // prevent being left with three moves only
+        istaughtmovepresent(SPECIES_BAGON, MOVE_SECRET_POWER)
+        if(var(VAR_0x8004) != MOVE_NONE && var(VAR_RESULT) == TRUE){
+            // put back old move
+            replacemove2(SPECIES_BAGON, MOVE_SECRET_POWER, VAR_0x8004)
+            removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+
+            // add back secret power
+            addmonmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+            setvar(VAR_0x8007, SPECIES_BAGON)
+            setvar(VAR_0x8004, MOVE_NONE)
+            setvar(VAR_0x8008, MOVE_SECRET_POWER)
+            special(Special_AddTaughtMove)
+        }
+        istaughtmovepresent(SPECIES_SHELGON, MOVE_SECRET_POWER)
+        if(var(VAR_0x8004) != MOVE_NONE && var(VAR_RESULT) == TRUE){
+            // put back old move
+            replacemove2(SPECIES_BAGON, MOVE_SECRET_POWER, VAR_0x8004)
+            removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+
+            // add back secret power
+            addmonmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+            setvar(VAR_0x8007, SPECIES_BAGON)
+            setvar(VAR_0x8004, MOVE_NONE)
+            setvar(VAR_0x8008, MOVE_SECRET_POWER)
+            special(Special_AddTaughtMove)
+        }
+
+        // make sure the species var is set correctly again
+        setvar(VAR_0x8005, SPECIES_BAGON)
+    }
+
+    // reset rare candy2 used var
+    setvar(VAR_RARE_CANDY_2_USED_ON, SPECIES_NONE)
+}
+
+script EscapeRoom_EventScript_CheckRareCandy2Stolen{
+    setvar(VAR_RARE_CANDY2_STOLEN_CHECK, 0)
+    if(flag(FLAG_RARE_CANDY2_OBTAINED) && !flag(FLAG_RARE_CANDY2_COMPLETED)){
+        setflag(FLAG_RARE_CANDY2_COMPLETED)
+    }
+}
 
 
 //// RANDOM HINT NPCS ////
@@ -4095,6 +4330,10 @@ script EscapeRoom_EventScript_FindRareCandy2{
     finditem(ITEM_RARE_CANDY)
     setflag(FLAG_RARE_CANDY2_OBTAINED)
     removeobject(LOCALID_RARE_CANDY_2)
+
+    // var for the trigger tile
+    setvar(VAR_RARE_CANDY2_STOLEN_CHECK, 1)
+
     releaseall
 }
 
@@ -5395,6 +5634,16 @@ text RockSmashNPCFarewellMsg{
 
 
 // ICE PUZZLE ITEM UNDOS
+
+text SecretPowerTmReturned{
+    "TM43 Secret Power was returned to its\n"
+    "previous location."
+}
+
+text RareCandy2Returned{
+    "The Rare Candy was returned to its\n"
+    "previous location."
+}
 
 text MonForgotSecretPower{
     "{STR_VAR_1}'s Secret Power was removed."

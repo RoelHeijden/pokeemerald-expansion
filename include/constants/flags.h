@@ -710,7 +710,7 @@
 #define FLAG_RETURN_MAX_REVIVE          0x29A
 #define FLAG_FIELD_POISON_WHITEOUT      0x29B  
 #define FLAG_RESCUE_BELL_OBTAINED       0x29C  
-#define FLAG_UNUSED_0x29D  0x29D // Unused Flag
+#define FLAG_RARE_CANDY2_COMPLETED      0x29D
 #define FLAG_UNUSED_0x29E  0x29E // Unused Flag
 #define FLAG_UNUSED_0x29F  0x29F // Unused Flag
 #define FLAG_UNUSED_0x2A0  0x2A0 // Unused Flag

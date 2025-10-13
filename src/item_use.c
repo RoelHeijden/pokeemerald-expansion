@@ -1084,6 +1084,9 @@ static void ItemUseOnFieldCB_EscapeRope2(u8 taskId)
     StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);
     gTasks[taskId].data[0] = 0;
     DisplayItemMessageOnField(taskId, gStringVar4, Task_UseDigEscapeRopeOnField);
+
+    // set flag for item returns
+    VarSet(VAR_JUST_ESCAPED_ICE_PUZZLE, 1);
 }
 
 // ADDED
