@@ -632,20 +632,16 @@ YamaskGuyPostTradeMessage::
 	.string "The Kecleon uses an illegal move and\n"
 	.string "their Struggle always seems to find\l"
 	.string "the optimal target.\p"
-	.string "Don't worry, you've got everything you\n"
-	.string "need to come out victorious!\p"
-	.string "Your Choice Specs can no longer be\n"
-	.string "exchanged, and Secret Power will be\l"
-	.string "added to the Move Tutor moves.\p"
-	.string "You're all set.\n"
+	.string "Don't worry, you've got everything\n"
+	.string "needed to come out on top.\p"
 	.string "Good luck!$"
 
 YamaskGuyFinalMessage::
-# 543 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 544 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Wow... Well done!$"
 
 YamaskGuyMainMessage::
-# 547 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 548 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "You're almost there!\n"
 	.string "Only one more challenge remains.\p"
 	.string "It's a tough one though...\p"
@@ -654,11 +650,11 @@ YamaskGuyMainMessage::
 	.string "You wouldn't stand a chance otherwise.$"
 
 MoveRelearnerMainMessage::
-# 558 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 559 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hi, I'm your Move Tutor.\p"
 	.string "Which of your Pokémon should I teach a\n"
 	.string "new move?$"
 
 MoveRelearnerEndMessage::
-# 564 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 565 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "I'll be here if you need me.$"

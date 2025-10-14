@@ -1079,6 +1079,9 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 // ADDED
 static void ItemUseOnFieldCB_EscapeRope2(u8 taskId)
 {
+    // always warp to ice puzzle exit
+    SetEscapeWarp(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 79, 8); 
+
     Overworld_ResetStateAfterDigEscRope();
     CopyItemName(gSpecialVar_ItemId, gStringVar2);
     StringExpandPlaceholders(gStringVar4, gText_PlayerUsedVar2);

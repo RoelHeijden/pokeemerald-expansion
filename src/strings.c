@@ -1248,9 +1248,9 @@ const u8 gText_HallOfFameDebut[] = _("idk what the origial was");  // CHANGED
 const u8 gText_HallOfFameDebut5[] = _("Thank me later.");  // ADDED
 
 // ADDED
-const u8 gText_HallOfFameDebut1[] = _("choice becomes a cage");
+const u8 gText_HallOfFameDebut1[] = _("choice becomes a shackle");
 const u8 gText_HallOfFameDebut2[] = _("it lets the spirit wander"); 
-const u8 gText_HallOfFameDebut3[] = _("when nature changes shape");  
+const u8 gText_HallOfFameDebut3[] = _("when iron changes shape");  
 const u8 gText_HallOfFameDebut4[] = _("let sickness end the flame"); 
 
 

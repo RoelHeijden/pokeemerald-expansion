@@ -529,15 +529,16 @@ text YamaskGuyPostTradeMessage{
     "their Struggle always seems to find\l"
     "the optimal target.\p"
 
-    "Don't worry, you've got everything you\n"
-    "need to come out victorious!\p"
-
-    "Your Choice Specs can no longer be\n"
-    "exchanged, and Secret Power will be\l"
-    "added to the Move Tutor moves.\p"
-
-    "You're all set.\n"
+    "Don't worry, you've got everything\n"
+    "needed to come out on top.\p"
     "Good luck!"
+
+    // "Your Choice Specs can no longer be\n"
+    // "exchanged, and Secret Power will be\l"
+    // "added to the Move Tutor moves.\p"
+
+    // "You're all set.\n"
+    // "Good luck!"
 }
 
 text YamaskGuyFinalMessage{

@@ -8316,7 +8316,8 @@ const struct Item gItemsInfo[] =
         .name = _("Rescue Bell"),
         .price = 0,
         .description = COMPOUND_STRING(
-            "Lets you escape\n"
+            "Calls for help if\n"
+            "you're trapped in\n" 
             "the ice puzzle."),
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_FIELD,

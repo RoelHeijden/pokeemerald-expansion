@@ -4342,6 +4342,10 @@ script EscapeRoom_EventScript_FindRescueBell{
     finditem(ITEM_SOOTHE_BELL)
     setflag(FLAG_RESCUE_BELL_OBTAINED)
     removeobject(LOCALID_RESCUE_BELL)
+
+    msgbox(RescueBellExplainMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
     releaseall
 }
 
@@ -5715,6 +5719,14 @@ text NicknameThisPokemonMessage2{
 	"this Primeape?"
 }
 
+// RESCUE BELL ITEM BALL
+text RescueBellExplainMessage{
+    "Use the Rescue Bell to teleport out of\n"
+    "the ice puzzle if you're stuck.\p"
+    "When used, newly obtained items will be\n"
+    "placed back inside the ice puzzle."
+}
+
 
 // MOVE DELETER NPC
 text AskDeleteMove{
@@ -6079,7 +6091,7 @@ text Trainer9_Intro{
 }
 
 text Trainer9_Outro{
-    "Thanks. Only real battles."
+    "Try hard in every fight!"
 }
 
 text Trainer9_PostBattle{
