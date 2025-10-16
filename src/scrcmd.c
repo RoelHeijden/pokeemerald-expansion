@@ -2869,17 +2869,45 @@ bool8 ScrCmd_bufferplaytimeandhints(struct ScriptContext *ctx)
 {
     u8 *dest = gStringVar1;
 
-    // buffer the playtime hours
-    dest = ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeHours, STR_CONV_MODE_LEFT_ALIGN, 3);
-    *(dest++) = CHAR_COLON;
-    ConvertIntToDecimalStringN(dest, gSaveBlock2Ptr->playTimeMinutes, STR_CONV_MODE_LEADING_ZEROS, 2);
 
-    // buffer VAR_HINTS_USED_COUNTER into gStringVar2
-    u16 hintsUsed = VarGet(VAR_HINTS_USED_COUNTER); 
-    if (hintsUsed < 10)
-        ConvertIntToDecimalStringN(gStringVar2, hintsUsed, STR_CONV_MODE_LEFT_ALIGN, 1);
+    // lock in the final time if not already done
+    if (!FlagGet(FLAG_FINAL_TIME_FROZEN))
+    {
+        VarSet(VAR_FINAL_TIME_HOURS, gSaveBlock2Ptr->playTimeHours);
+        VarSet(VAR_FINAL_TIME_MINUTES, gSaveBlock2Ptr->playTimeMinutes);
+        FlagSet(FLAG_FINAL_TIME_FROZEN);
+    }
+
+
+    // use locked-in time
+    u16 hours = VarGet(VAR_FINAL_TIME_HOURS);
+    u16 minutes = VarGet(VAR_FINAL_TIME_MINUTES);
+
+    // buffer playtime (hours:minutes)
+    dest = ConvertIntToDecimalStringN(dest, hours, STR_CONV_MODE_LEFT_ALIGN, 3);
+    *(dest++) = CHAR_COLON;
+    ConvertIntToDecimalStringN(dest, minutes, STR_CONV_MODE_LEADING_ZEROS, 2);
+
+    // small hints
+    u16 smallHints = VarGet(VAR_SMALL_HINTS_USED_COUNTER);
+    if (smallHints < 10)
+        ConvertIntToDecimalStringN(gStringVar2, smallHints, STR_CONV_MODE_LEFT_ALIGN, 1);
     else
-        ConvertIntToDecimalStringN(gStringVar2, hintsUsed, STR_CONV_MODE_LEFT_ALIGN, 2);
+        ConvertIntToDecimalStringN(gStringVar2, smallHints, STR_CONV_MODE_LEFT_ALIGN, 2);
+
+    // large hints
+    u16 largeHints = VarGet(VAR_LARGE_HINTS_USED_COUNTER);
+    if (largeHints < 10)
+        ConvertIntToDecimalStringN(gStringVar3, largeHints, STR_CONV_MODE_LEFT_ALIGN, 1);
+    else
+        ConvertIntToDecimalStringN(gStringVar3, largeHints, STR_CONV_MODE_LEFT_ALIGN, 2);
+
+    // solutions
+    u16 solutions = VarGet(VAR_SOLUTIONS_USED_COUNTER);
+    if (solutions < 10)
+        ConvertIntToDecimalStringN(gStringVar5, solutions, STR_CONV_MODE_LEFT_ALIGN, 1);
+    else
+        ConvertIntToDecimalStringN(gStringVar5, solutions, STR_CONV_MODE_LEFT_ALIGN, 2);
 
     return FALSE;
 }

@@ -1366,7 +1366,7 @@
     .2byte \moveslot
     .endm
 
-	@ buffers the current play time to STR_VAR_1 and hints used to STR_VAR_2
+	@ buffers the current play time to STR_VAR_1 and hints used to STR_VAR_2, STR_VAR_3 and STR_VAR_5
 	.macro bufferplaytimeandhints
 	.byte 0xf4
 	.endm
