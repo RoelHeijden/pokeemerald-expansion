@@ -98,9 +98,6 @@ static void Task_TryFieldPoisonWhiteOut(u8 taskId)
             else{
                 gSpecialVar_Result = FLDPSN_WHITEOUT;
 
-                // REMOVE
-                DebugPrintf("POISON WHITEOUT");
-
                 // ADDED
                 FlagSet(FLAG_FIELD_POISON_WHITEOUT);
             }

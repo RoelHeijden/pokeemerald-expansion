@@ -3078,6 +3078,10 @@ extern const u8 gText_SmallHint[];
 extern const u8 gText_LargeHint[];
 extern const u8 gText_Solution[];
 
+extern const u8 gText_SmallHint2[];
+extern const u8 gText_LargeHint2[];
+extern const u8 gText_Solution2[];
+
 extern const u8 gText_CheckImportantInfo[];
 extern const u8 gText_CheckProgress[];
 

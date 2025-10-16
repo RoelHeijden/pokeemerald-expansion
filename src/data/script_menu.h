@@ -829,6 +829,13 @@ static const struct MenuAction MultichoiceList_HintNPC[] =
     {gText_Solution},
 };
 
+static const struct MenuAction MultichoiceList_HintNPC2[] =
+{
+    {gText_SmallHint2},
+    {gText_LargeHint2},
+    {gText_Solution2},
+};
+
 static const struct MenuAction MultichoiceList_MainSign[] =
 {
     {gText_CheckProgress},
@@ -973,6 +980,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_SOFTLOCK_GUY]               = MULTICHOICE(MultichoiceList_SoftlockGuy),
     [MULTI_MOVE_DELETER]               = MULTICHOICE(MultichoiceList_MoveDeleter),
     [MULTI_HINT_NPC]                   = MULTICHOICE(MultichoiceList_HintNPC),
+    [MULTI_HINT_NPC2]                  = MULTICHOICE(MultichoiceList_HintNPC2),
     [MULTI_MAIN_SIGN]                  = MULTICHOICE(MultichoiceList_MainSign),
 };
 

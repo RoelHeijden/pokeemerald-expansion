@@ -90,6 +90,9 @@ script EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained{
         // if toxic orb succesfully obtained
         if(flag(FLAG_TOXIC_ORB_OBTAINED)){
 
+            // used for hints
+            setflag(FLAG_TOXIC_ORB_STOLEN_AT_SOME_POINT)
+
             // ERROR CHECK
             // - 0 money
             // - Annihilape learned Thief

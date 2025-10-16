@@ -1183,7 +1183,7 @@
 #define FLAG_ITEM_MOSSDEEP_STEVENS_HOUSE_HM08                       0x46D // Unused Flag, leftover from R/S. HM08 is given to the player directly in Emerald
 #define FLAG_ITEM_ROUTE_119_NUGGET                                  0x46E
 #define FLAG_ITEM_ROUTE_104_POTION                                  0x46F
-#define FLAG_UNUSED_0x470                                           0x470 // Unused Flag
+#define FLAG_TOXIC_ORB_STOLEN_AT_SOME_POINT                         0x470
 #define FLAG_ITEM_ROUTE_103_PP_UP                                   0x471
 #define FLAG_FINAL_TIME_FROZEN                                      0x472
 #define FLAG_ITEM_ROUTE_108_STAR_PIECE                              0x473
@@ -1192,7 +1192,7 @@
 #define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
 #define FLAG_ITEM_ROUTE_113_HYPER_POTION                            0x477
 #define FLAG_ITEM_ROUTE_115_HEAL_POWDER                             0x478
-#define FLAG_UNUSED_0x479                                           0x479 // Unused Flag
+#define FLAG_RARE_CANDY_REVIVE_COMPLETED                                           0x479 // Unused Flag aaaaaaaaaaaaaaaaaaaaa
 #define FLAG_ITEM_ROUTE_116_POTION                                  0x47A
 #define FLAG_ITEM_ROUTE_119_ELIXIR_2                                0x47B
 #define FLAG_ITEM_ROUTE_120_REVIVE                                  0x47C
@@ -1225,46 +1225,50 @@
 #define FLAG_ROCK_SMASH_GUY_MOVED                                   0x496
 #define FLAG_END_ESCAPE_ROOM                                        0x497
 #define FLAG_ELECTRIC_SEED_USED                                     0x498  
-#define FLAG_TOXIC_ORB_OBTAINED                                     0x499 // Unused
-#define FLAG_UNUSED_0x49A                                           0x49A // Unused
-#define FLAG_UNUSED_0x49B                                           0x49B // Unused
-#define FLAG_UNUSED_0x49C                                           0x49C // Unused
-#define FLAG_UNUSED_0x49D                                           0x49D // Unused
+#define FLAG_TOXIC_ORB_OBTAINED                                     0x499 
+#define FLAG_NURSE_RESCUED                                          0x49A 
+#define FLAG_HIDE_ROCKSMASH_TUNNEL_NPC                              0x49B 
+#define FLAG_ABILITY_CAPSULE_BOUGHT                                 0x49C 
+#define FLAG_HIDE_TRAPINCH                                          0x49D 
 #define FLAG_RAN_FROM_TRAPINCH                                      0x49E
-#define FLAG_HIDE_TRAPINCH                                          0x49F  
-#define FLAG_UNUSED_0x4A0                                           0x4A0  // Unused
-#define FLAG_NURSE_RESCUED                                          0x4A1 
-#define FLAG_HIDE_ROCKSMASH_TUNNEL_NPC                              0x4A2
-#define FLAG_ABILITY_CAPSULE_BOUGHT                                 0x4A3  
-#define FLAG_UNUSED_0x4A4                                           0x4A4 // Unused Flag
-#define FLAG_UNUSED_0x4A5                                           0x4A5 // Unused Flag
-#define FLAG_UNUSED_0x4A6                                           0x4A6 // Unused Flag
-#define FLAG_UNUSED_0x4A7                                           0x4A7 // Unused Flag
-#define FLAG_UNUSED_0x4A8                                           0x4A8 // Unused Flag
-#define FLAG_UNUSED_0x4A9                                           0x4A9 // Unused Flag
-#define FLAG_UNUSED_0x4AA                                           0x4AA // Unused Flag
-#define FLAG_UNUSED_0x4AB                                           0x4AB // Unused Flag
-#define FLAG_UNUSED_0x4AC                                           0x4AC // Unused Flag
-#define FLAG_UNUSED_0x4AD                                           0x4AD // Unused Flag
-#define FLAG_UNUSED_0x4AE                                           0x4AE // Unused Flag
-#define FLAG_UNUSED_0x4AF                                           0x4AF // Unused Flag
-#define FLAG_UNUSED_0x4B0                                           0x4B0 // Unused Flag
-#define FLAG_UNUSED_0x4B1                                           0x4B1 // Unused Flag
-#define FLAG_UNUSED_0x4B2                                           0x4B2 // Unused Flag
-#define FLAG_UNUSED_0x4B3                                           0x4B3 // Unused Flag
-#define FLAG_UNUSED_0x4B4                                           0x4B4 // Unused Flag
-#define FLAG_UNUSED_0x4B5                                           0x4B5 // Unused Flag
-#define FLAG_UNUSED_0x4B6                                           0x4B6 // Unused Flag
-#define FLAG_UNUSED_0x4B7                                           0x4B7 // Unused Flag
-#define FLAG_UNUSED_0x4B8                                           0x4B8 // Unused Flag
-#define FLAG_UNUSED_0x4B9                                           0x4B9 // Unused Flag
-#define FLAG_UNUSED_0x4BA                                           0x4BA // Unused Flag
-#define FLAG_UNUSED_0x4BB                                           0x4BB // Unused Flag
-#define FLAG_UNUSED_0x4BC                                           0x4BC // Unused Flag
-#define FLAG_UNUSED_0x4BD                                           0x4BD // Unused Flag
-#define FLAG_UNUSED_0x4BE                                           0x4BE // Unused Flag
-#define FLAG_UNUSED_0x4BF                                           0x4BF // Unused Flag
-#define FLAG_UNUSED_0x4C0                                           0x4C0 // Unused Flag
+#define FLAG_UNUSED_0x49F                                           0x49F // Unused -- caused issues when used for rare candy revive completed flag
+#define FLAG_ZERA_PREDAMAGE_COMPLETED                               0x4A0
+#define FLAG_UNUSED_0x4A1                                           0x4A1 // Unused -- caused issues when used for rare candy revive completed flag
+
+// HINT FLAGS
+#define FLAG_HINT_ALREADY_RECEIVED               0x4A2
+#define FLAG_SOLUTION_ALREADY_RECEIVED           0x4A3 
+#define FLAG_UNUSED_0x4A4                        0x4A4 // unused
+
+#define FLAG_ANNIHILAPE_SPAWNED_SOLUTION         0x4A5 // gravestone code: 1837
+#define FLAG_ZERA_PREDAMAGE_SOLUTION             0x4A6 // float stone, gras knot, camouflage, run
+#define FLAG_ZERA_CATCH_SOLUTION                 0x4A7 // catch solution (mention Ultra ball NPC)
+#define FLAG_TRAINER0_SOLUTION                   0x4A8 // give tm skill swap
+#define FLAG_TRAINER1_SOLUTION                   0x4A9 //  -- complex battle solution --
+#define FLAG_MARANGA_BERRY_SOLUTION              0x4AA // sack vs Ape
+#define FLAG_TRAINER2_SOLUTION                   0x4AB // cut grass, nature power
+#define FLAG_TRAINER3_SOLUTION                   0x4AC //  -- complex battle solution --
+#define FLAG_EGG_SKIP_SOLUTION                   0x4AD // 2nd cave exit, Liepard collar, get egg, escape rope, skip double
+#define FLAG_SUN_STONE_SOLUTION                  0x4AE // pickup, sell item
+#define FLAG_TRAINER4_SOLUTION                   0x4AF // Thief Dunsparce, move deleter, Assist to 1 pp
+#define FLAG_TAUNT_HERB_SOLUTION                 0x4B0 // Trade Dunsparce, Taunt + Fling Mental Herb
+#define FLAG_MOON_STONE_SOLUTION                 0x4B1 // Trick Rayquaza, sell item
+#define FLAG_BERRY_JUICE_SOLUTION                0x4B2 // Shuckle rock, Endeavor Jaboca Berry, Pickup, run
+#define FLAG_TRAINER5_SOLUTION                   0x4B3 //  -- complex battle solution --
+#define FLAG_TRAPINCH_RUN_SOLUTION               0x4B4 // Runaway, run
+#define FLAG_RARE_CANDY_REVIVE_SOLUTION          0x4B5 // Taunt dusknoir, sack, run, revive with rare candy
+#define FLAG_TRAINER6_SOLUTION                   0x4B6 // pre damage solution + custap fling goggles
+#define FLAG_MAP_SWITCHES_SOLUTION               0x4B7 // hint locations
+#define FLAG_TRAINER7A_SOLUTION                  0x4B8 // trainer7b sight, move deleter, struggle
+#define FLAG_TRAINER8_SOLUTION                   0x4B9 // Use Cut to beat Dusclops (don't mention Zoroark, mention entry card)
+#define FLAG_ICEPUZZLE_RARECANDY_SOLUTION        0x4BA // Use item ball was wall, puzzle solution
+#define FLAG_TRAINER9_SOLUTION                   0x4BB // 20x Rage Fist, Evolve Annihilape, beat trainer9
+#define FLAG_TOXIC_ORB_STEAL_SOLUTION            0x4BC // Thief Muk, escape ice puzzle
+#define FLAG_SECRET_POWER_SOLUTION               0x4BD // max revive sequence vs Dusknoir
+#define FLAG_RARE_CANDY3_SOLUTION                0x4BE // secret base locations
+#define FLAG_TRAINER10_SOLUTION                  0x4BF // cancel Bagon evolution, choice specs Flamethrower
+#define FLAG_TRAINER11_SOLUTION                  0x4C0 //  -- complex battle solution --
+
 #define FLAG_UNUSED_0x4C1                                           0x4C1 // Unused Flag
 #define FLAG_UNUSED_0x4C2                                           0x4C2 // Unused Flag
 #define FLAG_UNUSED_0x4C3                                           0x4C3 // Unused Flag

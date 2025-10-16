@@ -1441,6 +1441,10 @@ bool8 ScrCmd_hintnpcoptionbox(struct ScriptContext *ctx)
 
     u8 multichoiceId = MULTI_HINT_NPC;
 
+    // different choice box when final battle is reached
+    if(FlagGet(FLAG_TRAINER10_DEFEATED))
+        multichoiceId = MULTI_HINT_NPC2;
+
     if (ScriptMenu_Multichoice(left, top, multichoiceId, ignoreBPress) == TRUE)
     {
         ScriptContext_Stop();
@@ -2465,6 +2469,7 @@ bool8 ScrCmd_checkpartymonfullhp(struct ScriptContext *ctx)
     s32 i;
 
     gSpecialVar_Result = FALSE;
+    gSpecialVar_0x8004 = 999; // this should be fine as maximum
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -2473,6 +2478,9 @@ bool8 ScrCmd_checkpartymonfullhp(struct ScriptContext *ctx)
         {
             u16 hp = GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL);
             u16 maxHp = GetMonData(&gPlayerParty[i], MON_DATA_MAX_HP, NULL);
+
+            // store current hp in var
+            gSpecialVar_0x8004 = hp;
 
             if (hp == maxHp)
             {
@@ -3053,8 +3061,28 @@ bool8 ScrCmd_istaughtmovepresent(struct ScriptContext *ctx)
 }
 
 
+// ADDED
+bool8 ScrCmd_handlehintorsolution(struct ScriptContext *ctx)
+{
+    u16 hintFlagId = ScriptReadHalfword(ctx);
+    u16 solFlagId = ScriptReadHalfword(ctx);
+    gSpecialVar_Result = TRUE;
 
+    // hint flag was already set before
+    if (FlagGet(hintFlagId)){
+        FlagSet(FLAG_HINT_ALREADY_RECEIVED);
+        gSpecialVar_Result = FALSE;
+    }
 
+    // corresponding solution flag is already set
+    if (FlagGet(solFlagId))
+        FlagSet(FLAG_SOLUTION_ALREADY_RECEIVED);
+
+    // always try to set the hint flag
+    FlagSet(hintFlagId);
+
+    return FALSE;
+}
 
 
 

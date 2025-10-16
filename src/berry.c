@@ -1954,6 +1954,11 @@ void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
 
 void RemoveBerryTree(u8 id)
 {
+    // ADDED
+    if(id == BERRY_TREE_ESCAPE_ROOM_MARANGA){
+        FlagSet(FLAG_MARANGA_BERRY_OBTAINED);
+    }
+
     gSaveBlock1Ptr->berryTrees[id] = gBlankBerryTree;
 }
 

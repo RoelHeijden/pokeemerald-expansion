@@ -1294,7 +1294,16 @@
 	.2byte \move_new
 	.endm
 
-	
+
+	@ Handles the logic for checking if a hint was alreay used or not.
+	@ sets FLAG_NEW_HINT_OR_SOLUTION_RECEIVED if the hint is new.
+	@ VAR_RESULT is set to the True if the hint had not yet been received.
+	.macro handlehintorsolution hint_flag:req, sol_flag:req
+    .byte 0xb2
+    .2byte \hint_flag
+	.2byte \sol_flag
+	.endm
+
 
 	@ Checks if party contains a fainted pokemon.
 	@ VAR_RESULT is set to slot of first fainted pokemon, to PARTY_SIZE is none.
@@ -1305,6 +1314,7 @@
 
 	@ Checks if a specified party pokemon has full HP or not.
 	@ VAR_RESULT is set to TRUE if at full hp.
+	@ VAR_0x8004 will have the amount of HP the Pokemon has.
 	.macro checkpartymonfullhp species
 	.byte 0xee 
 	.2byte \species
