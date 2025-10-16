@@ -1163,10 +1163,157 @@ script EscapeRoom_EventScript_HintsNPC{
 }
 
 script EscapeRoom_EventScript_HintsNPC_SmallHint{
-    msgbox(HintsNPC_SmallHint)
-    return
 
-    // TBD
+    //// SECTION 1 ////
+
+    // ape spawned
+    if(flag(FLAG_ANNIHILAPE_SPAWNED) == FALSE){
+        msgbox(HintsNPC_AnnihilapeSpawn_SmallHint)
+        handlehintorsolution(FLAG_ANNIHILAPE_SPAWNED_SMALL_HINT, FLAG_ANNIHILAPE_SPAWNED_SOLUTION)
+    }
+    // Zera catch predamage
+    elif(flag(FLAG_ZERA_PREDAMAGE_COMPLETED) == FALSE){
+        msgbox(HintsNPC_ZeraCatchPredamage_SmallHint)
+        handlehintorsolution(FLAG_ZERA_PREDAMAGE_COMPLETED_SMALL_HINT, FLAG_ZERA_PREDAMAGE_SOLUTION)
+    }
+    // zera caught
+    elif(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
+        msgbox(HintsNPC_ZeraoraCatch_SmallHint)
+        handlehintorsolution(FLAG_ZERAORA_CAUGHT_SMALL_HINT, FLAG_ZERA_CATCH_SOLUTION)
+    }
+    // trainer 0
+    elif(flag(FLAG_TRAINER0_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer0_SmallHint)
+        handlehintorsolution(FLAG_TRAINER0_SMALL_HINT, FLAG_TRAINER0_SOLUTION)
+    }
+    // trainer 1
+    elif(flag(FLAG_TRAINER1_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer1_SmallHint)
+        handlehintorsolution(FLAG_TRAINER1_SMALL_HINT, FLAG_TRAINER1_SOLUTION)
+    }
+    // maranga berry
+    elif(flag(FLAG_MARANGA_BERRY_OBTAINED) == FALSE){
+        msgbox(HintsNPC_MarangaBerry_SmallHint)
+        handlehintorsolution(FLAG_MARANGA_BERRY_SMALL_HINT, FLAG_MARANGA_BERRY_SOLUTION)
+    }
+    // trainer 2
+    elif(flag(FLAG_TRAINER2_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer2_SmallHint)
+        handlehintorsolution(FLAG_TRAINER2_SMALL_HINT, FLAG_TRAINER2_SOLUTION)
+    }
+    // trainer 3
+    elif(flag(FLAG_TRAINER3_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer3_SmallHint)
+        handlehintorsolution(FLAG_TRAINER3_SMALL_HINT, FLAG_TRAINER3_SOLUTION)
+    }
+    // egg puzzle
+    elif(flag(FLAG_LIEPARD_OBTAINED) == FALSE){
+        msgbox(HintsNPC_EggSkip_SmallHint)
+        handlehintorsolution(FLAG_EGG_SKIP_SMALL_HINT, FLAG_EGG_SKIP_SOLUTION)
+    }
+
+
+    //// SECTION 2 ////
+
+    // sun stone sold
+    elif(flag(FLAG_SUN_STONE_SOLD) == FALSE){
+        msgbox(HintsNPC_SunStone_SmallHint)
+        handlehintorsolution(FLAG_SUN_STONE_SMALL_HINT, FLAG_SUN_STONE_SOLUTION)
+    }
+    // trainer 4
+    elif(flag(FLAG_TRAINER4_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer4_SmallHint)
+        handlehintorsolution(FLAG_TRAINER4_SMALL_HINT, FLAG_TRAINER4_SOLUTION)
+    }
+    // taunt mental herb sack
+    elif(flag(FLAG_ROCK_SMASH_GUY_MOVED) == FALSE){
+        msgbox(HintsNPC_TauntHerb_SmallHint)
+        handlehintorsolution(FLAG_TAUNT_HERB_SMALL_HINT, FLAG_TAUNT_HERB_SOLUTION)
+    }
+    // moon stone obtained
+    elif(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
+        msgbox(HintsNPC_MoonStone_SmallHint)
+        handlehintorsolution(FLAG_MOON_STONE_SMALL_HINT, FLAG_MOON_STONE_SOLUTION)
+    }
+    // berry juice obtained
+    elif(flag(FLAG_BERRY_JUICE_OBTAINED) == FALSE){
+        msgbox(HintsNPC_BerryJuice_SmallHint)
+        handlehintorsolution(FLAG_BERRY_JUICE_SMALL_HINT, FLAG_BERRY_JUICE_SOLUTION)
+    }
+    // trainer 5
+    elif(flag(FLAG_ABILITY_CAPSULE_BOUGHT) == FALSE){
+        msgbox(HintsNPC_Trainer5_SmallHint)
+        handlehintorsolution(FLAG_TRAINER5_SMALL_HINT, FLAG_TRAINER5_SOLUTION)
+    }
+    // trapinch run
+    elif(flag(FLAG_RAN_FROM_TRAPINCH) == FALSE){
+        msgbox(HintsNPC_TrapinchRun_SmallHint)
+        handlehintorsolution(FLAG_TRAPINCH_RUN_SMALL_HINT, FLAG_TRAPINCH_RUN_SOLUTION)
+    }
+    // sack and rare candy revive
+    elif(flag(FLAG_RARE_CANDY_REVIVE_COMPLETED) == FALSE){
+        msgbox(HintsNPC_RareCandyRevive_SmallHint)
+        handlehintorsolution(FLAG_RARE_CANDY_REVIVE_SMALL_HINT, FLAG_RARE_CANDY_REVIVE_SOLUTION)
+    }
+    // trainer 6
+    elif(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer6_SmallHint)
+        handlehintorsolution(FLAG_TRAINER6_SMALL_HINT, FLAG_TRAINER6_SOLUTION)
+    }
+    // map switches
+    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
+        msgbox(HintsNPC_MapSwitches_SmallHint)
+        handlehintorsolution(FLAG_MAP_SWITCHES_SMALL_HINT, FLAG_MAP_SWITCHES_SOLUTION)
+    }
+
+
+    //// SECTION 3 ////
+
+    // trainer 7a
+    elif(flag(FLAG_TRAINER7A_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer7A_SmallHint)
+        handlehintorsolution(FLAG_TRAINER7A_SMALL_HINT, FLAG_TRAINER7A_SOLUTION)
+    }
+    // trainer 8
+    elif(flag(FLAG_TRAINER8_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer8_SmallHint)
+        handlehintorsolution(FLAG_TRAINER8_SMALL_HINT, FLAG_TRAINER8_SOLUTION)
+    }
+    // ice puzzle Rare Candy
+    elif(flag(FLAG_RARE_CANDY2_COMPLETED) == FALSE){
+        msgbox(HintsNPC_IcePuzzleRareCandy_SmallHint)
+        handlehintorsolution(FLAG_ICEPUZZLE_RARECANDY_SMALL_HINT, FLAG_ICEPUZZLE_RARECANDY_SOLUTION)
+    }
+    // trainer 9
+    elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer9_SmallHint)
+        handlehintorsolution(FLAG_TRAINER9_SMALL_HINT, FLAG_TRAINER9_SOLUTION)
+    }
+    // toxic orb steal
+    elif(flag(FLAG_TOXIC_ORB_STOLEN_AT_SOME_POINT) == FALSE && flag(FLAG_TOXIC_ORB_OBTAINED) == FALSE){
+        msgbox(HintsNPC_ToxicOrbSteal_SmallHint)
+        handlehintorsolution(FLAG_TOXIC_ORB_STEAL_SMALL_HINT, FLAG_TOXIC_ORB_STEAL_SOLUTION)
+    }
+    // secret power obtained
+    elif(flag(FLAG_SECRET_POWER_COMPLETED) == FALSE){
+        msgbox(HintsNPC_SecretPower_SmallHint)
+        handlehintorsolution(FLAG_SECRET_POWER_SMALL_HINT, FLAG_SECRET_POWER_SOLUTION)
+    }
+    // secret base rare candy
+    elif(flag(FLAG_RARE_CANDY3_OBTAINED) == FALSE){
+        msgbox(HintsNPC_RareCandy3_SmallHint)
+        handlehintorsolution(FLAG_RARE_CANDY3_SMALL_HINT, FLAG_RARE_CANDY3_SOLUTION)
+    }
+    // trainer 10
+    elif(flag(FLAG_TRAINER10_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer10_SmallHint)
+        handlehintorsolution(FLAG_TRAINER10_SMALL_HINT, FLAG_TRAINER10_SOLUTION)
+    }
+    // trainer 11
+    elif(flag(FLAG_TRAINER11_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer11_SmallHint)
+        handlehintorsolution(FLAG_TRAINER11_SMALL_HINT, FLAG_TRAINER11_SOLUTION)
+    }
 
 
     // game time added
@@ -1203,10 +1350,157 @@ script EscapeRoom_EventScript_HintsNPC_SmallHint{
 }
 
 script EscapeRoom_EventScript_HintsNPC_LargeHint{
-    msgbox(HintsNPC_LargeHint)
-    return
 
-    // TBD
+    //// SECTION 1 ////
+
+    // ape spawned
+    if(flag(FLAG_ANNIHILAPE_SPAWNED) == FALSE){
+        msgbox(HintsNPC_AnnihilapeSpawn_LargeHint)
+        handlehintorsolution(FLAG_ANNIHILAPE_SPAWNED_LARGE_HINT, FLAG_ANNIHILAPE_SPAWNED_SOLUTION)
+    }
+    // Zera catch predamage
+    elif(flag(FLAG_ZERA_PREDAMAGE_COMPLETED) == FALSE){
+        msgbox(HintsNPC_ZeraCatchPredamage_LargeHint)
+        handlehintorsolution(FLAG_ZERA_PREDAMAGE_LARGE_HINT, FLAG_ZERA_PREDAMAGE_SOLUTION)
+    }
+    // zera caught
+    elif(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
+        msgbox(HintsNPC_ZeraoraCatch_LargeHint)
+        handlehintorsolution(FLAG_ZERA_CATCH_LARGE_HINT, FLAG_ZERA_CATCH_SOLUTION)
+    }
+    // trainer 0
+    elif(flag(FLAG_TRAINER0_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer0_LargeHint)
+        handlehintorsolution(FLAG_TRAINER0_LARGE_HINT, FLAG_TRAINER0_SOLUTION)
+    }
+    // trainer 1
+    elif(flag(FLAG_TRAINER1_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer1_LargeHint)
+        handlehintorsolution(FLAG_TRAINER1_LARGE_HINT, FLAG_TRAINER1_SOLUTION)
+    }
+    // maranga berry
+    elif(flag(FLAG_MARANGA_BERRY_OBTAINED) == FALSE){
+        msgbox(HintsNPC_MarangaBerry_LargeHint)
+        handlehintorsolution(FLAG_MARANGA_BERRY_LARGE_HINT, FLAG_MARANGA_BERRY_SOLUTION)
+    }
+    // trainer 2
+    elif(flag(FLAG_TRAINER2_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer2_LargeHint)
+        handlehintorsolution(FLAG_TRAINER2_LARGE_HINT, FLAG_TRAINER2_SOLUTION)
+    }
+    // trainer 3
+    elif(flag(FLAG_TRAINER3_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer3_LargeHint)
+        handlehintorsolution(FLAG_TRAINER3_LARGE_HINT, FLAG_TRAINER3_SOLUTION)
+    }
+    // egg puzzle
+    elif(flag(FLAG_LIEPARD_OBTAINED) == FALSE){
+        msgbox(HintsNPC_EggSkip_LargeHint)
+        handlehintorsolution(FLAG_EGG_SKIP_LARGE_HINT, FLAG_EGG_SKIP_SOLUTION)
+    }
+
+
+    //// SECTION 2 ////
+
+    // sun stone sold
+    elif(flag(FLAG_SUN_STONE_SOLD) == FALSE){
+        msgbox(HintsNPC_SunStone_LargeHint)
+        handlehintorsolution(FLAG_SUN_STONE_LARGE_HINT, FLAG_SUN_STONE_SOLUTION)
+    }
+    // trainer 4
+    elif(flag(FLAG_TRAINER4_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer4_LargeHint)
+        handlehintorsolution(FLAG_TRAINER4_LARGE_HINT, FLAG_TRAINER4_SOLUTION)
+    }
+    // taunt mental herb sack
+    elif(flag(FLAG_ROCK_SMASH_GUY_MOVED) == FALSE){
+        msgbox(HintsNPC_TauntHerb_LargeHint)
+        handlehintorsolution(FLAG_TAUNT_HERB_LARGE_HINT, FLAG_TAUNT_HERB_SOLUTION)
+    }
+    // moon stone obtained
+    elif(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
+        msgbox(HintsNPC_MoonStone_LargeHint)
+        handlehintorsolution(FLAG_MOON_STONE_LARGE_HINT, FLAG_MOON_STONE_SOLUTION)
+    }
+    // berry juice obtained
+    elif(flag(FLAG_BERRY_JUICE_OBTAINED) == FALSE){
+        msgbox(HintsNPC_BerryJuice_LargeHint)
+        handlehintorsolution(FLAG_BERRY_JUICE_LARGE_HINT, FLAG_BERRY_JUICE_SOLUTION)
+    }
+    // trainer 5
+    elif(flag(FLAG_ABILITY_CAPSULE_BOUGHT) == FALSE){
+        msgbox(HintsNPC_Trainer5_LargeHint)
+        handlehintorsolution(FLAG_TRAINER5_LARGE_HINT, FLAG_TRAINER5_SOLUTION)
+    }
+    // trapinch run
+    elif(flag(FLAG_RAN_FROM_TRAPINCH) == FALSE){
+        msgbox(HintsNPC_TrapinchRun_LargeHint)
+        handlehintorsolution(FLAG_TRAPINCH_RUN_LARGE_HINT, FLAG_TRAPINCH_RUN_SOLUTION)
+    }
+    // sack and rare candy revive
+    elif(flag(FLAG_RARE_CANDY_REVIVE_COMPLETED) == FALSE){
+        msgbox(HintsNPC_RareCandyRevive_LargeHint)
+        handlehintorsolution(FLAG_RARE_CANDY_REVIVE_LARGE_HINT, FLAG_RARE_CANDY_REVIVE_SOLUTION)
+    }
+    // trainer 6
+    elif(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer6_LargeHint)
+        handlehintorsolution(FLAG_TRAINER6_LARGE_HINT, FLAG_TRAINER6_SOLUTION)
+    }
+    // map switches
+    elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
+        msgbox(HintsNPC_MapSwitches_LargeHint)
+        handlehintorsolution(FLAG_MAP_SWITCHES_LARGE_HINT, FLAG_MAP_SWITCHES_SOLUTION)
+    }
+
+
+    //// SECTION 3 ////
+
+    // trainer 7a
+    elif(flag(FLAG_TRAINER7A_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer7A_LargeHint)
+        handlehintorsolution(FLAG_TRAINER7A_LARGE_HINT, FLAG_TRAINER7A_SOLUTION)
+    }
+    // trainer 8
+    elif(flag(FLAG_TRAINER8_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer8_LargeHint)
+        handlehintorsolution(FLAG_TRAINER8_LARGE_HINT, FLAG_TRAINER8_SOLUTION)
+    }
+    // ice puzzle Rare Candy
+    elif(flag(FLAG_RARE_CANDY2_COMPLETED) == FALSE){
+        msgbox(HintsNPC_IcePuzzleRareCandy_LargeHint)
+        handlehintorsolution(FLAG_ICEPUZZLE_RARECANDY_LARGE_HINT, FLAG_ICEPUZZLE_RARECANDY_SOLUTION)
+    }
+    // trainer 9
+    elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer9_LargeHint)
+        handlehintorsolution(FLAG_TRAINER9_LARGE_HINT, FLAG_TRAINER9_SOLUTION)
+    }
+    // toxic orb steal
+    elif(flag(FLAG_TOXIC_ORB_STOLEN_AT_SOME_POINT) == FALSE && flag(FLAG_TOXIC_ORB_OBTAINED) == FALSE){
+        msgbox(HintsNPC_ToxicOrbSteal_LargeHint)
+        handlehintorsolution(FLAG_TOXIC_ORB_STEAL_LARGE_HINT, FLAG_TOXIC_ORB_STEAL_SOLUTION)
+    }
+    // secret power obtained
+    elif(flag(FLAG_SECRET_POWER_COMPLETED) == FALSE){
+        msgbox(HintsNPC_SecretPower_LargeHint)
+        handlehintorsolution(FLAG_SECRET_POWER_LARGE_HINT, FLAG_SECRET_POWER_SOLUTION)
+    }
+    // secret base rare candy
+    elif(flag(FLAG_RARE_CANDY3_OBTAINED) == FALSE){
+        msgbox(HintsNPC_RareCandy3_LargeHint)
+        handlehintorsolution(FLAG_RARE_CANDY3_LARGE_HINT, FLAG_RARE_CANDY3_SOLUTION)
+    }
+    // trainer 10
+    elif(flag(FLAG_TRAINER10_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer10_LargeHint)
+        handlehintorsolution(FLAG_TRAINER10_LARGE_HINT, FLAG_TRAINER10_SOLUTION)
+    }
+    // trainer 11
+    elif(flag(FLAG_TRAINER11_DEFEATED) == FALSE){
+        msgbox(HintsNPC_Trainer11_LargeHint)
+        handlehintorsolution(FLAG_TRAINER11_LARGE_HINT, FLAG_TRAINER11_SOLUTION)
+    }
 
 
     // game time added
@@ -1250,13 +1544,11 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         msgbox(HintsNPC_AnnihilapeSpawn_Solution)
         handlehintorsolution(FLAG_ANNIHILAPE_SPAWNED_SOLUTION, FLAG_ANNIHILAPE_SPAWNED_SOLUTION)
     }
-
     // Zera catch predamage
     elif(flag(FLAG_ZERA_PREDAMAGE_COMPLETED) == FALSE){
         msgbox(HintsNPC_ZeraCatchPredamage_Solution)
         handlehintorsolution(FLAG_ZERA_PREDAMAGE_SOLUTION, FLAG_ZERA_PREDAMAGE_SOLUTION)
     }
-
     // zera caught
     elif(flag(FLAG_ZERAORA_CAUGHT) == FALSE){
         msgbox(HintsNPC_ZeraoraCatch_Solution)
@@ -1268,38 +1560,32 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
             msgbox(HintsNPC_ZeraCatchPredamage_Solution)
         }
     }
-
     // trainer 0
     elif(flag(FLAG_TRAINER0_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer0_Solution)
         handlehintorsolution(FLAG_TRAINER0_SOLUTION, FLAG_TRAINER0_SOLUTION)
     }
-
     // trainer 1
     elif(flag(FLAG_TRAINER1_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer1_Solution)
         handlehintorsolution(FLAG_TRAINER1_SOLUTION, FLAG_TRAINER1_SOLUTION)
     }
-
     // maranga berry
     elif(flag(FLAG_MARANGA_BERRY_OBTAINED) == FALSE){
         msgbox(HintsNPC_MarangaBerry_Solution)
         handlehintorsolution(FLAG_MARANGA_BERRY_SOLUTION, FLAG_MARANGA_BERRY_SOLUTION)
     }
-
     // trainer 2
     elif(flag(FLAG_TRAINER2_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer2_Solution)
         handlehintorsolution(FLAG_TRAINER2_SOLUTION, FLAG_TRAINER2_SOLUTION)
     }
-
     // trainer 3
     elif(flag(FLAG_TRAINER3_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer3_Solution)
         handlehintorsolution(FLAG_TRAINER3_SOLUTION, FLAG_TRAINER3_SOLUTION)
     }
-
-    // liepard obtained
+    // egg puzzle
     elif(flag(FLAG_LIEPARD_OBTAINED) == FALSE){
         msgbox(HintsNPC_EggSkip_Solution)
         handlehintorsolution(FLAG_EGG_SKIP_SOLUTION, FLAG_EGG_SKIP_SOLUTION)
@@ -1313,49 +1599,41 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         msgbox(HintsNPC_SunStone_Solution)
         handlehintorsolution(FLAG_SUN_STONE_SOLUTION, FLAG_SUN_STONE_SOLUTION)
     }
-
     // trainer 4
     elif(flag(FLAG_TRAINER4_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer4_Solution)
         handlehintorsolution(FLAG_TRAINER4_SOLUTION, FLAG_TRAINER4_SOLUTION)
     }
-
-    // rock smashed
+    // taunt mental herb sack
     elif(flag(FLAG_ROCK_SMASH_GUY_MOVED) == FALSE){
         msgbox(HintsNPC_TauntHerb_Solution)
         handlehintorsolution(FLAG_TAUNT_HERB_SOLUTION, FLAG_TAUNT_HERB_SOLUTION)
     }
-
     // moon stone obtained
     elif(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
         msgbox(HintsNPC_MoonStone_Solution)
         handlehintorsolution(FLAG_MOON_STONE_SOLUTION, FLAG_MOON_STONE_SOLUTION)
     }
-
     // berry juice obtained
     elif(flag(FLAG_BERRY_JUICE_OBTAINED) == FALSE){
         msgbox(HintsNPC_BerryJuice_Solution)
         handlehintorsolution(FLAG_BERRY_JUICE_SOLUTION, FLAG_BERRY_JUICE_SOLUTION)
     }
-
-    // ability capsule obtained
+    // trainer 5
     elif(flag(FLAG_ABILITY_CAPSULE_BOUGHT) == FALSE){
         msgbox(HintsNPC_Trainer5_Solution)
         handlehintorsolution(FLAG_TRAINER5_SOLUTION, FLAG_TRAINER5_SOLUTION)
     }
-
     // trapinch run
     elif(flag(FLAG_RAN_FROM_TRAPINCH) == FALSE){
         msgbox(HintsNPC_TrapinchRun_Solution)
         handlehintorsolution(FLAG_TRAPINCH_RUN_SOLUTION, FLAG_TRAPINCH_RUN_SOLUTION)
     }
-
     // sack and rare candy revive
     elif(flag(FLAG_RARE_CANDY_REVIVE_COMPLETED) == FALSE){
         msgbox(HintsNPC_RareCandyRevive_Solution)
         handlehintorsolution(FLAG_RARE_CANDY_REVIVE_SOLUTION, FLAG_RARE_CANDY_REVIVE_SOLUTION)
     }
-
     // trainer 6
     elif(flag(FLAG_TRAINER6_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer6_Solution)
@@ -1367,7 +1645,6 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
             msgbox(HintsNPC_RareCandyRevive_Solution)
         }
     }
-
     // map switches
     elif(flag(FLAG_MAP_SWITCHES_SOLVED) == FALSE){
         msgbox(HintsNPC_MapSwitches_Solution)
@@ -1382,31 +1659,26 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         msgbox(HintsNPC_Trainer7A_Solution)
         handlehintorsolution(FLAG_TRAINER7A_SOLUTION, FLAG_TRAINER7A_SOLUTION)
     }
-
     // trainer 8
     elif(flag(FLAG_TRAINER8_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer8_Solution)
         handlehintorsolution(FLAG_TRAINER8_SOLUTION, FLAG_TRAINER8_SOLUTION)
     }
-
     // ice puzzle Rare Candy
     elif(flag(FLAG_RARE_CANDY2_COMPLETED) == FALSE){
         msgbox(HintsNPC_IcePuzzleRareCandy_Solution)
         handlehintorsolution(FLAG_ICEPUZZLE_RARECANDY_SOLUTION, FLAG_ICEPUZZLE_RARECANDY_SOLUTION)
     }
-
     // trainer 9
     elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer9_Solution)
         handlehintorsolution(FLAG_TRAINER9_SOLUTION, FLAG_TRAINER9_SOLUTION)
     }
-
     // toxic orb steal
     elif(flag(FLAG_TOXIC_ORB_STOLEN_AT_SOME_POINT) == FALSE && flag(FLAG_TOXIC_ORB_OBTAINED) == FALSE){
         msgbox(HintsNPC_ToxicOrbSteal_Solution)
         handlehintorsolution(FLAG_TOXIC_ORB_STEAL_SOLUTION, FLAG_TOXIC_ORB_STEAL_SOLUTION)
     }
-
     // secret power obtained
     elif(flag(FLAG_SECRET_POWER_COMPLETED) == FALSE){
         msgbox(HintsNPC_SecretPower_Solution)
@@ -1418,19 +1690,16 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
             msgbox(HintsNPC_ToxicOrbSteal_Solution)
         }
     }
-
     // secret base rare candy
     elif(flag(FLAG_RARE_CANDY3_OBTAINED) == FALSE){
         msgbox(HintsNPC_RareCandy3_Solution)
         handlehintorsolution(FLAG_RARE_CANDY3_SOLUTION, FLAG_RARE_CANDY3_SOLUTION)
     }
-
     // trainer 10
     elif(flag(FLAG_TRAINER10_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer10_Solution)
         handlehintorsolution(FLAG_TRAINER10_SOLUTION, FLAG_TRAINER10_SOLUTION)
     }
-
     // trainer 11
     elif(flag(FLAG_TRAINER11_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer11_Solution)
@@ -5683,6 +5952,8 @@ text RunningNurseMessage{
 
 
 // HINTS NPC
+
+// dialogue
 text HintsIntroMessage{
     "Need help? I can give you a hint at the\n"
     "cost of getting time added to your\l"
@@ -5712,7 +5983,6 @@ text HintsFinalMessage{
     "I'm no longer needed!"
 }
 
-
 text HintsNPCHintAlreadyReceivedMessage{
     "You've already received this hint so\n"
     "no time was added to your clock."
@@ -5723,6 +5993,12 @@ text HintsNPCSolutionAlreadyReceivedMessage{
     "so no time was added to your clock."
 }
 
+text HintsNPC_ReviewPreviousStep{
+    "Need a refresher on the prior step?\n"
+    "This won't add any extra time."
+}
+
+// time added
 text HintsNPC15minAddedMessage{
     "15 minutes were added to your clock."
 }
@@ -5739,130 +6015,386 @@ text HintsNPC120minAddedMessage{
     "2 hours were added to your clock."
 }
 
-text HintsNPC_SmallHint{
-    "TBD (small hint)"
+// small hints
+text HintsNPC_AnnihilapeSpawn_SmallHint{
+//  "This has been a true passion project wi"  -- max length
+    "Those gravestones seem to be placed in\n"
+    "an interesting pattern..."
 }
 
-text HintsNPC_LargeHint{
-    "TBD (large hint)"
+text HintsNPC_ZeraCatchPredamage_SmallHint{
+    "TBD (Zera catch predamage - small hint)"
 }
 
-text HintsNPC_ReviewPreviousStep{
-    "Need a refresher on the prior step?\n"
-    "This won't add any extra time."
+text HintsNPC_ZeraoraCatch_SmallHint{
+    "TBD (Zeraora - small hint)"
 }
 
+text HintsNPC_Trainer0_SmallHint{
+    "TBD (Trainer0 - small hint)"
+}
+
+text HintsNPC_Trainer1_SmallHint{
+    "TBD (Trainer1 - small hint)"
+}
+
+text HintsNPC_MarangaBerry_SmallHint{
+    "TBD (Maranga Berry - small hint)"
+}
+
+text HintsNPC_Trainer2_SmallHint{
+    "TBD (Trainer2 - small hint)"
+}
+
+text HintsNPC_Trainer3_SmallHint{
+    "TBD (Trainer3 - small hint)"
+}
+
+text HintsNPC_EggSkip_SmallHint{
+    "TBD (Egg Skip - small hint)"
+}
+
+text HintsNPC_SunStone_SmallHint{
+    "TBD (Sun Stone - small hint)"
+}
+
+text HintsNPC_Trainer4_SmallHint{
+    "TBD (Trainer4 - small hint)"
+}
+
+text HintsNPC_TauntHerb_SmallHint{
+    "TBD (Taunt Herb - small hint)"
+}
+
+text HintsNPC_MoonStone_SmallHint{
+    "TBD (Moon Stone - small hint)"
+}
+
+text HintsNPC_BerryJuice_SmallHint{
+    "TBD (Berry Juice - small hint)"
+}
+
+text HintsNPC_Trainer5_SmallHint{
+    "TBD (Trainer5 - small hint)"
+}
+
+text HintsNPC_TrapinchRun_SmallHint{
+    "TBD (Trapinch Run - small hint)"
+}
+
+text HintsNPC_RareCandyRevive_SmallHint{
+    "TBD (Rare Candy revive - small hint)"
+}
+
+text HintsNPC_Trainer6_SmallHint{
+    "TBD (Trainer6 - small hint)"
+}
+
+text HintsNPC_MapSwitches_SmallHint{
+    "TBD (Map Switches - small hint)"
+}
+
+text HintsNPC_Trainer7A_SmallHint{
+    "TBD (Trainer7A - small hint)"
+}
+
+text HintsNPC_Trainer8_SmallHint{
+    "TBD (Trainer8 - small hint)"
+}
+
+text HintsNPC_IcePuzzleRareCandy_SmallHint{
+    "TBD (Ice puzzle rare candy - small hint)"
+}
+
+text HintsNPC_Trainer9_SmallHint{
+    "TBD (Trainer9 - small hint)"
+}
+
+text HintsNPC_ToxicOrbSteal_SmallHint{
+    "TBD (Toxic Orb - small hint)"
+}
+
+text HintsNPC_SecretPower_SmallHint{
+    "TBD (Secret Power - small hint)"
+}
+
+text HintsNPC_RareCandy3_SmallHint{
+    "TBD (Rare Candy3 - small hint)"
+}
+
+text HintsNPC_Trainer10_SmallHint{
+    "TBD (Trainer10 - small hint)"
+}
+
+text HintsNPC_Trainer11_SmallHint{
+    "TBD (Trainer11 - small hint)"
+}
+
+
+// large hints
+text HintsNPC_AnnihilapeSpawn_LargeHint{
+//  "This has been a true passion project wi"  -- max length
+    "The gravestones form a numpad pattern.\p"
+    "Maybe there's a code written somewhere\n"
+    "for you to enter."
+}
+
+text HintsNPC_ZeraCatchPredamage_LargeHint{
+    "TBD (Zera catch predamage - large hint)"
+}
+
+text HintsNPC_ZeraoraCatch_LargeHint{
+    "TBD (Zeraora - large hint)"
+}
+
+text HintsNPC_Trainer0_LargeHint{
+    "TBD (Trainer0 - large hint)"
+}
+
+text HintsNPC_Trainer1_LargeHint{
+    "TBD (Trainer1 - large hint)"
+}
+
+text HintsNPC_MarangaBerry_LargeHint{
+    "TBD (Maranga Berry - large hint)"
+}
+
+text HintsNPC_Trainer2_LargeHint{
+    "TBD (Trainer2 - large hint)"
+}
+
+text HintsNPC_Trainer3_LargeHint{
+    "TBD (Trainer3 - large hint)"
+}
+
+text HintsNPC_EggSkip_LargeHint{
+    "TBD (Egg Skip - large hint)"
+}
+
+text HintsNPC_SunStone_LargeHint{
+    "TBD (Sun Stone - large hint)"
+}
+
+text HintsNPC_Trainer4_LargeHint{
+    "TBD (Trainer4 - large hint)"
+}
+
+text HintsNPC_TauntHerb_LargeHint{
+    "TBD (Taunt Herb - large hint)"
+}
+
+text HintsNPC_MoonStone_LargeHint{
+    "TBD (Moon Stone - large hint)"
+}
+
+text HintsNPC_BerryJuice_LargeHint{
+    "TBD (Berry Juice - large hint)"
+}
+
+text HintsNPC_Trainer5_LargeHint{
+    "TBD (Trainer5 - large hint)"
+}
+
+text HintsNPC_TrapinchRun_LargeHint{
+    "TBD (Trapinch Run - large hint)"
+}
+
+text HintsNPC_RareCandyRevive_LargeHint{
+    "TBD (Rare Candy revive - large hint)"
+}
+
+text HintsNPC_Trainer6_LargeHint{
+    "TBD (Trainer6 - large hint)"
+}
+
+text HintsNPC_MapSwitches_LargeHint{
+    "TBD (Map Switches - large hint)"
+}
+
+text HintsNPC_Trainer7A_LargeHint{
+    "TBD (Trainer7A - large hint)"
+}
+
+text HintsNPC_Trainer8_LargeHint{
+    "TBD (Trainer8 - large hint)"
+}
+
+text HintsNPC_IcePuzzleRareCandy_LargeHint{
+    "TBD (Ice puzzle rare candy - large hint)"
+}
+
+text HintsNPC_Trainer9_LargeHint{
+    "TBD (Trainer9 - large hint)"
+}
+
+text HintsNPC_ToxicOrbSteal_LargeHint{
+    "TBD (Toxic Orb - large hint)"
+}
+
+text HintsNPC_SecretPower_LargeHint{
+    "TBD (Secret Power - large hint)"
+}
+
+text HintsNPC_RareCandy3_LargeHint{
+    "TBD (Rare Candy3 - large hint)"
+}
+
+text HintsNPC_Trainer10_LargeHint{
+    "TBD (Trainer10 - large hint)"
+}
+
+text HintsNPC_Trainer11_LargeHint{
+    "TBD (Trainer11 - large hint)"
+}
+
+
+// solutions
+
+// gravestone code: 1837
 text HintsNPC_AnnihilapeSpawn_Solution{
-    "TBD (Ape solution)"
+//  "This has been a true passion project wi"  -- max length
+    "The gravestones form a numpad pattern\n"
+    "like: 1 2 3, 4 5 6, 7 8 9, 0.\p"
+    "Interact with them in the following\n"
+    "order: 1 8 3 7."
 }
 
 // note: this is used as reviewed step
+// float stone, gras knot, camouflage, run
 text HintsNPC_ZeraCatchPredamage_Solution{
     "TBD (Zera catch predamage solution)"
 }
 
+// catch solution (mention Ultra ball NPC)
 text HintsNPC_ZeraoraCatch_Solution{
     "TBD (Zeraora solution)"
 }
 
+// give tm skill swap
 text HintsNPC_Trainer0_Solution{
     "TBD (Trainer0 solution)"
 }
 
+//  -- complex battle solution --
 text HintsNPC_Trainer1_Solution{
     "TBD (Trainer1 solution)"
 }
 
+// sack vs Ape
 text HintsNPC_MarangaBerry_Solution{
     "TBD (Maranga Berry solution)"
 }
 
+// cut grass, nature power
 text HintsNPC_Trainer2_Solution{
     "TBD (Trainer2 solution)"
 }
 
+ //  -- complex battle solution --
 text HintsNPC_Trainer3_Solution{
     "TBD (Trainer3 solution)"
 }
 
+// 2nd cave exit, Liepard collar, get egg, escape rope, skip double
 text HintsNPC_EggSkip_Solution{
     "TBD (Egg Skip solution)"
 }
 
+// pickup, sell item
 text HintsNPC_SunStone_Solution{
     "TBD (Sun Stone solution)"
 }
 
+// Thief Dunsparce, move deleter, Assist to 1 pp
 text HintsNPC_Trainer4_Solution{
     "TBD (Trainer4 solution)"
 }
 
+// Trade Dunsparce, Taunt + Fling Mental Herb
 text HintsNPC_TauntHerb_Solution{
     "TBD (Taunt Herb solution)"
 }
 
+// Trick Rayquaza, sell item
 text HintsNPC_MoonStone_Solution{
     "TBD (Moon Stone solution)"
 }
 
+// Shuckle rock, Endeavor Jaboca Berry, Pickup, run
 text HintsNPC_BerryJuice_Solution{
     "TBD (Berry Juice solution)"
 }
 
+//  -- complex battle solution --
 text HintsNPC_Trainer5_Solution{
     "TBD (Trainer5 solution)"
 }
 
+// Runaway, run
 text HintsNPC_TrapinchRun_Solution{
     "TBD (Trapinch Run solution)"
 }
 
+
 // note: this is used as reviewed step
+// Taunt dusknoir, sack, run, revive with rare candy
 text HintsNPC_RareCandyRevive_Solution{
     "TBD (Rare Candy revive solution)"
 }
 
+// pre damage solution + custap fling goggles
 text HintsNPC_Trainer6_Solution{
     "TBD (Trainer6 solution)"
 }
 
+ // hint locations
 text HintsNPC_MapSwitches_Solution{
     "TBD (Map Switches solution)"
 }
 
+// trainer7b sight, move deleter, struggle
 text HintsNPC_Trainer7A_Solution{
     "TBD (Trainer7A solution)"
 }
 
+// Use Cut to beat Dusclops (don't mention Zoroark, mention entry card)
 text HintsNPC_Trainer8_Solution{
     "TBD (Trainer8 solution)"
 }
 
+// Use item ball was wall, puzzle solution
 text HintsNPC_IcePuzzleRareCandy_Solution{
     "TBD (Ice puzzle rare candy solution)"
 }
 
+// 20x Rage Fist, Evolve Annihilape, beat trainer9
 text HintsNPC_Trainer9_Solution{
     "TBD (Trainer9 solution)"
 }
 
+
 // note: this is used as reviewed step
+// Thief Muk, escape ice puzzle
 text HintsNPC_ToxicOrbSteal_Solution{
     "TBD (Toxic Orb solution)"
 }
 
+// max revive sequence vs Dusknoir
 text HintsNPC_SecretPower_Solution{
     "TBD (Secret Power solution)"
 }
 
+// secret base locations
 text HintsNPC_RareCandy3_Solution{
     "TBD (Rare Candy3 solution)"
 }
 
+// cancel Bagon evolution, choice specs Flamethrower
 text HintsNPC_Trainer10_Solution{
     "TBD (Trainer10 solution)"
 }
 
+//  -- complex battle solution --
 text HintsNPC_Trainer11_Solution{
     "TBD (Trainer11 solution)"
 }
@@ -6666,7 +7198,7 @@ text Trainer11_PostBattle_A{
 }
 
 text Trainer11_PostBattle_B{
- // "This has been a true passion project wi"  -- max length
+//  "This has been a true passion project wi"  -- max length
 
     "This game has been a true passion\n"
     "project of mine.\p"
