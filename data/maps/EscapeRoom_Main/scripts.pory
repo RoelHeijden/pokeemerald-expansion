@@ -1186,6 +1186,11 @@ script EscapeRoom_EventScript_HintsNPC_SmallHint{
         msgbox(HintsNPC_Trainer0_SmallHint)
         handlehintorsolution(FLAG_TRAINER0_SMALL_HINT, FLAG_TRAINER0_SOLUTION)
     }
+    // Exp Candy and Safety Goggles
+    elif(flag(FLAG_GOGGLES_SNATCHED) == FALSE){
+        msgbox(HintsNPC_SafetyGoggles_SmallHint)
+        handlehintorsolution(FLAG_SAFETY_GOGGLES_SMALL_HINT, FLAG_SAFETY_GOGGLES_SOLUTION)
+    }
     // trainer 1
     elif(flag(FLAG_TRAINER1_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer1_SmallHint)
@@ -1372,6 +1377,11 @@ script EscapeRoom_EventScript_HintsNPC_LargeHint{
     elif(flag(FLAG_TRAINER0_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer0_LargeHint)
         handlehintorsolution(FLAG_TRAINER0_LARGE_HINT, FLAG_TRAINER0_SOLUTION)
+    }
+    // Exp Candy and Safety Goggles
+    elif(flag(FLAG_GOGGLES_SNATCHED) == FALSE){
+        msgbox(HintsNPC_SafetyGoggles_LargeHint)
+        handlehintorsolution(FLAG_SAFETY_GOGGLES_LARGE_HINT, FLAG_SAFETY_GOGGLES_SOLUTION)
     }
     // trainer 1
     elif(flag(FLAG_TRAINER1_DEFEATED) == FALSE){
@@ -1565,10 +1575,21 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         msgbox(HintsNPC_Trainer0_Solution)
         handlehintorsolution(FLAG_TRAINER0_SOLUTION, FLAG_TRAINER0_SOLUTION)
     }
+    // Exp Candy and Safety Goggles
+    elif(flag(FLAG_GOGGLES_SNATCHED) == FALSE){
+        msgbox(HintsNPC_SafetyGoggles_Solution)
+        handlehintorsolution(FLAG_SAFETY_GOGGLES_SOLUTION, FLAG_SAFETY_GOGGLES_SOLUTION)
+    }
     // trainer 1
     elif(flag(FLAG_TRAINER1_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer1_Solution)
         handlehintorsolution(FLAG_TRAINER1_SOLUTION, FLAG_TRAINER1_SOLUTION)
+
+        // ask view exact sequence
+        msgbox(HintsNPC_ReviewExactSequence, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            msgbox(intsNPC_Trainer1_Solution_ExactSequence)
+        }
     }
     // maranga berry
     elif(flag(FLAG_MARANGA_BERRY_OBTAINED) == FALSE){
@@ -1735,8 +1756,6 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
     clearflag(FLAG_SOLUTION_ALREADY_RECEIVED)
     clearflag(FLAG_HINT_ALREADY_RECEIVED)
 }
-
-
 
 
 // ANTI SOFTLOCK GUY
@@ -5998,6 +6017,10 @@ text HintsNPC_ReviewPreviousStep{
     "This won't add any extra time."
 }
 
+text HintsNPC_ReviewExactSequence{
+    "Want to view the exact move sequence?"
+}
+
 // time added
 text HintsNPC15minAddedMessage{
     "15 minutes were added to your clock."
@@ -6031,27 +6054,36 @@ text HintsNPC_ZeraCatchPredamage_SmallHint{
 text HintsNPC_ZeraoraCatch_SmallHint{
     "Sometimes Zeraora blends in a little too\n"
     "well with its environment.\p"
-    "Ferrothorn likes that."
+    "Ferrothorn can take advantage of that."
 }
 
 text HintsNPC_Trainer0_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer0 - small hint)"
+    "Sticky Barbs are annoying.\p"
+    "If only Florges had an item to carry."
+}
+
+text HintsNPC_SafetyGoggles_SmallHint{
+    "An item you're missing may finally be\n"
+    "within reach."
 }
 
 text HintsNPC_Trainer1_SmallHint{
-    "TBD (Trainer1 - small hint)"
+    "Zeraora can take out Marowak but needs\n"
+    "to absorb some additional HP.\p"
+    "Can both Pokémon carry the Goggles?"
 }
 
 text HintsNPC_MarangaBerry_SmallHint{
-    "TBD (Maranga Berry - small hint)"
+    "Double battles can be difficult.\n"
+    "Is there a way to avoid them?"
 }
 
 text HintsNPC_Trainer2_SmallHint{
-    "TBD (Trainer2 - small hint)"
+    "Use Cut?"
 }
 
 text HintsNPC_Trainer3_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer3 - small hint)"
 }
 
@@ -6149,35 +6181,53 @@ text HintsNPC_ZeraCatchPredamage_LargeHint{
     "Grass Knot is great, but Florges is so\n"
     "heavy...\p"
     "Florges can run?\n"
-    "That's gonna be so spooky!"
+    "That's so spooky!"
 }
 
 text HintsNPC_ZeraoraCatch_LargeHint{
     "Block, Ingrain, Zeraora will stay.\n"
     "The Electric type stands in your way.\p"
-    "1 PP was all you need.\n"
-    "Now Ferrothorn rolls away the weed.\p"
-    "PS: throw your ball at <50%." 
+    "1 PP was all you need, now Ferrothorn\n"
+    "rolls away the weed.\p"
+    "That's when you'll catch it!" 
 }
 
 text HintsNPC_Trainer0_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer0 - large hint)"
+    "Struggling against Rhyperior?\n"
+    "TM Skill Swap is really useful!\p"
+    "Consider giving it to Florges."
+}
+
+text HintsNPC_SafetyGoggles_LargeHint{
+    "One of the gravestones is a little\n"
+    "mysterious.\p"
+    "Can Zeraora help you out?"
 }
 
 text HintsNPC_Trainer1_LargeHint{
-    "TBD (Trainer1 - large hint)"
+    "The Cut Guy is very tough!\p"
+
+    "Zeraora can beat the Marowak, but you\n"
+    "must use Volt Absorb to keep it alive.\p"
+
+    "Start the fight with Grassy Terrain,\n"
+    "then share the Goggles with Zeraora\l"
+    "once Lightningrod is removed."
 }
 
 text HintsNPC_MarangaBerry_LargeHint{
-    "TBD (Maranga Berry - large hint)"
+    "The Twins will have a difficult time\n"
+    "fighting you when one of your Pokémon\l"
+    "has already fainted."
 }
 
 text HintsNPC_Trainer2_LargeHint{
-    "TBD (Trainer2 - large hint)"
+    "Nature Power won't cut it?\n"
+    "Just remove the grass."
 }
 
 text HintsNPC_Trainer3_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer3 - large hint)"
 }
 
@@ -6290,7 +6340,6 @@ text HintsNPC_ZeraCatchPredamage_Solution_Refresher{
 }
 
 text HintsNPC_ZeraoraCatch_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "1. Use Custap Berry Block vs Zeraora\n"
     "and let it Snatch Ingrain.\p"
     "2. Switch to Florges, use the Ether on\n"
@@ -6302,29 +6351,91 @@ text HintsNPC_ZeraoraCatch_Solution{
     "Ultra Ball given by the NPC)."
 }
 
-// give tm skill swap
 text HintsNPC_Trainer0_Solution{
-    "TBD (Trainer0 solution)"
+    "You have to beat the Pincurchin\n"
+    "trainer.\p"
+    "1. Give TM Skill Swap to Florges as\n"
+    "held item.\p"
+    "2. Sack Ferrothorn and Zeraora to the\n"
+    "Selfdestructing Pincurchin.\p"
+    "3. Use Grass Knot."
 }
 
-//  -- complex battle solution --
+text HintsNPC_SafetyGoggles_Solution{
+    "Use the Exp Candy on Zeraora to reach\n"
+    "level 43.\p"
+    "Go to the graveyard and interact with\n"
+    "the bottom-left gravestone to obtain\l"
+    "the Safety Goggles."
+}
+
 text HintsNPC_Trainer1_Solution{
-    "TBD (Trainer1 solution)"
+    "You have to defeat the Toedscruel and\n"
+    "Marowak trainer.\p"
+
+    "First replace Grass Knot for Skill Swap,\n"
+    "give Florges the Safety Goggles and\l"
+    "Zeraora the Electric Seed.\p"
+
+    "To win the battle, do the following:\p"
+
+    "1. Get rid of Lightningrod by using\n"
+    "Skill Swap and switching out.\p"
+
+    "2. Pass the goggles to Zeraora via\n"
+    "Symbiosis (activate Electric Seed).\p"
+
+    "3. Turn Florges into a Grass type with\n"
+    "Camouflage.\p"
+
+    "4. Heal Zeraora with Electric type\n"
+    "Nature Power."
 }
 
-// sack vs Ape
+text intsNPC_Trainer1_Solution_ExactSequence{
+    "Lead: Florges (Safety Goggles) and\n"
+    "Zeroara (Electric Seed).\p"
+    "Turn 1: Grassy Terrain + X.\n"
+    "Turn 2: Skill Swap (Marowak) + X.\l"
+    "Turn 3: Switch to Ferrothorn + X.\l"
+
+    "Turn 4: Camouflage + Plasma Fists\l"
+    "(redirected into Toedscruel).\p"
+
+    "Turn 5: Nature Power (Zeraora) +\n"
+    "Electric Terrain.\p"
+
+    "Turn 6: Nature Power (Zeraora) +\n"
+    "Plasma Fists (Marowak).\p"
+
+    "Turn 7: X + Plasma Fists (Marowak).\n"
+    "Repeat untill Marowak faints."
+}
+
 text HintsNPC_MarangaBerry_Solution{
-    "TBD (Maranga Berry solution)"
+    "Fight the Annihilape and let it copy\n"
+    "Steel Roller.\p"
+    "Set up Grassy Terrain, switch out and\n"
+    "sack Ferrothorn, use Camouflage, and\l"
+    "run from battle.\p"
+    "You can now walk past the Twins and\n"
+    "pick the Maranga Berry."
 }
 
-// cut grass, nature power
 text HintsNPC_Trainer2_Solution{
-    "TBD (Trainer2 solution)"
+    "Give Florges the Maranga Berry, then\n"
+    "use Cut to remove the Grass tiles next\l"
+    "to the Dracozolt trainer.\p"
+    "Start the battle on a regular tile and\n"
+    "use Nature Power to win."
 }
 
  //  -- complex battle solution --
 text HintsNPC_Trainer3_Solution{
-    "TBD (Trainer3 solution)"
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
+    "Ring Target"
+    "Grassy Terrain, Skill Swap"
+    "Trump Cards, Ice Beam, Trump Card, Hex"
 }
 
 // 2nd cave exit, Liepard collar, get egg, escape rope, skip double

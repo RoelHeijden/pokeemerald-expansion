@@ -740,8 +740,7 @@
 #define FLAG_RARE_CANDY3_SMALL_HINT                    0x2B7 // secret base rare candy
 #define FLAG_TRAINER10_SMALL_HINT                      0x2B8 // trainer 10
 #define FLAG_TRAINER11_SMALL_HINT                      0x2B9 // trainer 11
-
-#define FLAG_UNUSED_0x2BA  0x2BA // Unused Flag
+#define FLAG_SAFETY_GOGGLES_SMALL_HINT                 0x2BA 
 #define FLAG_UNUSED_0x2BB  0x2BB // Unused Flag
 
 // Event Flags
@@ -1240,8 +1239,8 @@
 // HINT FLAGS
 #define FLAG_HINT_ALREADY_RECEIVED               0x4A2
 #define FLAG_SOLUTION_ALREADY_RECEIVED           0x4A3 
-#define FLAG_UNUSED_0x4A4                        0x4A4 // unused
 
+#define FLAG_SAFETY_GOGGLES_SOLUTION             0x4A4
 #define FLAG_ANNIHILAPE_SPAWNED_SOLUTION         0x4A5 
 #define FLAG_ZERA_PREDAMAGE_SOLUTION             0x4A6 
 #define FLAG_ZERA_CATCH_SOLUTION                 0x4A7 
@@ -1299,8 +1298,8 @@
 #define FLAG_RARE_CANDY3_LARGE_HINT                    0x4DA
 #define FLAG_TRAINER10_LARGE_HINT                      0x4DB
 #define FLAG_TRAINER11_LARGE_HINT                      0x4DC
+#define FLAG_SAFETY_GOGGLES_LARGE_HINT                 0x4DD
 
-#define FLAG_UNUSED_0x4DD                                           0x4DD // Unused Flag
 #define FLAG_UNUSED_0x4DE                                           0x4DE // Unused Flag
 #define FLAG_UNUSED_0x4DF                                           0x4DF // Unused Flag
 #define FLAG_UNUSED_0x4E0                                           0x4E0 // Unused Flag
