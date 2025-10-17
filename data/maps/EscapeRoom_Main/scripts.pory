@@ -1557,7 +1557,7 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         // allow review previous hint
         msgbox(HintsNPC_ReviewPreviousStep, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
-            msgbox(HintsNPC_ZeraCatchPredamage_Solution)
+            msgbox(HintsNPC_ZeraCatchPredamage_Solution_Refresher)
         }
     }
     // trainer 0
@@ -5739,10 +5739,10 @@ text EscapeRoomEndCongratz{
 }
 
 text EndEscapeRoomSignMessage{
-    "Final time: {STR_VAR_1}.\n"
-    "Small hints: {STR_VAR_2}.\l"
-    "Large hints: {STR_VAR_3}.\l"
-    "Solutions: {STR_VAR_5}."
+    "Your final time: {STR_VAR_1}.\p"
+    "Small hints used: {STR_VAR_2}.\n"
+    "Large hints used: {STR_VAR_3}.\l"
+    "Solutions used: {STR_VAR_5}."
 }
 
 
@@ -6017,20 +6017,25 @@ text HintsNPC120minAddedMessage{
 
 // small hints
 text HintsNPC_AnnihilapeSpawn_SmallHint{
-//  "This has been a true passion project wi"  -- max length
     "Those gravestones seem to be placed in\n"
     "an interesting pattern..."
 }
 
 text HintsNPC_ZeraCatchPredamage_SmallHint{
-    "TBD (Zera catch predamage - small hint)"
+    "Block is what you need,\n"
+    "but how to get the speed?\p"
+    "At the graveyard fight the ape.\n"
+    "Do ghosts always escape?"
 }
 
 text HintsNPC_ZeraoraCatch_SmallHint{
-    "TBD (Zeraora - small hint)"
+    "Sometimes Zeraora blends in a little too\n"
+    "well with its environment.\p"
+    "Ferrothorn likes that."
 }
 
 text HintsNPC_Trainer0_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer0 - small hint)"
 }
 
@@ -6133,21 +6138,30 @@ text HintsNPC_Trainer11_SmallHint{
 
 // large hints
 text HintsNPC_AnnihilapeSpawn_LargeHint{
-//  "This has been a true passion project wi"  -- max length
-    "The gravestones form a numpad pattern.\p"
-    "Maybe there's a code written somewhere\n"
+    "The gravestones represent a numpad.\n"
+    "Maybe there's a code written somewhere\l"
     "for you to enter."
 }
 
 text HintsNPC_ZeraCatchPredamage_LargeHint{
-    "TBD (Zera catch predamage - large hint)"
+    "How to pre-damage Ferrothorn for\n"
+    "Custap Berry use?\p"
+    "Grass Knot is great, but Florges is so\n"
+    "heavy...\p"
+    "Florges can run?\n"
+    "That's gonna be so spooky!"
 }
 
 text HintsNPC_ZeraoraCatch_LargeHint{
-    "TBD (Zeraora - large hint)"
+    "Block, Ingrain, Zeraora will stay.\n"
+    "The Electric type stands in your way.\p"
+    "1 PP was all you need.\n"
+    "Now Ferrothorn rolls away the weed.\p"
+    "PS: throw your ball at <50%." 
 }
 
 text HintsNPC_Trainer0_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer0 - large hint)"
 }
 
@@ -6249,25 +6263,43 @@ text HintsNPC_Trainer11_LargeHint{
 
 
 // solutions
-
-// gravestone code: 1837
 text HintsNPC_AnnihilapeSpawn_Solution{
-//  "This has been a true passion project wi"  -- max length
-    "The gravestones form a numpad pattern\n"
-    "like: 1 2 3, 4 5 6, 7 8 9, 0.\p"
+    "The gravestones form a numpad pattern:\n"
+    "1 2 3, 4 5 6, 7 8 9, 0.\p"
     "Interact with them in the following\n"
     "order: 1 8 3 7."
 }
 
-// note: this is used as reviewed step
-// float stone, gras knot, camouflage, run
 text HintsNPC_ZeraCatchPredamage_Solution{
-    "TBD (Zera catch predamage solution)"
+    "1. Give Florges a Float Stone and fight\n"
+    "the Annihilape.\p"
+    "2. Let it Mimic Grass Knot, switch to\n"
+    "Ferrothorn, then back to Florges.\p"
+    "3. Use Camouflage to turn into a Ghost\n"
+    "type and run from the battle.\p"
+    "4. Sell the Float Stone, buy a Custap\n"
+    "Berry, and give it to Ferrothorn.\p"
+    "You can now use Block against Zeraora."
 }
 
-// catch solution (mention Ultra ball NPC)
+text HintsNPC_ZeraCatchPredamage_Solution_Refresher{
+    "Pre-damage Ferrothorn by letting the\n"
+    "Annihilape use Grass Knot.\p"
+    "Give Florges a Float Stone and use\n"
+    "Camouflage to run away."
+}
+
 text HintsNPC_ZeraoraCatch_Solution{
-    "TBD (Zeraora solution)"
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
+    "1. Use Custap Berry Block vs Zeraora\n"
+    "and let it Snatch Ingrain.\p"
+    "2. Switch to Florges, use the Ether on\n"
+    "Camouflage, and let Zeraora copy both\l"
+    "Grassy Terrain and Camouflage.\p"
+    "3. Switch to Ferrothorn and use Steel\n"
+    "Roller.\p"
+    "You can now catch Zeraora (using the\n"
+    "Ultra Ball given by the NPC)."
 }
 
 // give tm skill swap
@@ -6335,7 +6367,6 @@ text HintsNPC_TrapinchRun_Solution{
     "TBD (Trapinch Run solution)"
 }
 
-
 // note: this is used as reviewed step
 // Taunt dusknoir, sack, run, revive with rare candy
 text HintsNPC_RareCandyRevive_Solution{
@@ -6371,7 +6402,6 @@ text HintsNPC_IcePuzzleRareCandy_Solution{
 text HintsNPC_Trainer9_Solution{
     "TBD (Trainer9 solution)"
 }
-
 
 // note: this is used as reviewed step
 // Thief Muk, escape ice puzzle
