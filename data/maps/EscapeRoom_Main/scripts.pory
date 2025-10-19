@@ -1605,6 +1605,12 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
     elif(flag(FLAG_TRAINER3_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer3_Solution)
         handlehintorsolution(FLAG_TRAINER3_SOLUTION, FLAG_TRAINER3_SOLUTION)
+
+        // ask view exact sequence
+        msgbox(HintsNPC_ReviewExactSequence, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            msgbox(intsNPC_Trainer3_Solution_ExactSequence)
+        }
     }
     // egg puzzle
     elif(flag(FLAG_LIEPARD_OBTAINED) == FALSE){
@@ -5011,18 +5017,21 @@ script EscapeRoom_EventScript_MapSwitch1{
         end
     }
 
+    // main message
+    msgbox(MapSwitchTablet1_Onix, MSGBOX_DEFAULT)
+
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_1) == 0){
-        msgbox(MapSwitchPointedNorthTablet1, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_1) == 1){
-        msgbox(MapSwitchPointedEastTablet1, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_1) == 2){
-        msgbox(MapSwitchPointedSouthTablet1, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_1) == 3){
-        msgbox(MapSwitchPointedWestTablet1, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
     }
 
     // change direction
@@ -5055,18 +5064,21 @@ script EscapeRoom_EventScript_MapSwitch2{
         end
     }
 
+    // main message
+    msgbox(MapSwitchTablet2_Zeraora, MSGBOX_DEFAULT)
+
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_2) == 0){
-        msgbox(MapSwitchPointedNorthTablet2, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_2) == 1){
-        msgbox(MapSwitchPointedEastTablet2, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_2) == 2){
-        msgbox(MapSwitchPointedSouthTablet2, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_2) == 3){
-        msgbox(MapSwitchPointedWestTablet2, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
     }
 
     // change direction
@@ -5098,18 +5110,21 @@ script EscapeRoom_EventScript_MapSwitch3{
         end
     }
 
+    // main message
+    msgbox(MapSwitchTablet3_Dusknoir, MSGBOX_DEFAULT)
+
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_3) == 0){
-        msgbox(MapSwitchPointedNorthTablet3, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_3) == 1){
-        msgbox(MapSwitchPointedEastTablet3, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_3) == 2){
-        msgbox(MapSwitchPointedSouthTablet3, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_3) == 3){
-        msgbox(MapSwitchPointedWestTablet3, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
     }
 
     // change direction
@@ -5146,18 +5161,21 @@ script EscapeRoom_EventScript_MapSwitch4{
         setflag(FLAG_MAP_SWITCH_4_FOUND)
     }
 
+    // main message
+    msgbox(MapSwitchTablet4_Dunsparce, MSGBOX_DEFAULT)
+
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_4) == 0){
-        msgbox(MapSwitchPointedNorthTablet4, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_4) == 1){
-        msgbox(MapSwitchPointedEastTablet4, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_4) == 2){
-        msgbox(MapSwitchPointedSouthTablet4, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
     if(var(VAR_MAP_SWITCH_4) == 3){
-        msgbox(MapSwitchPointedWestTablet4, MSGBOX_YESNO)
+        msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
     }
 
     // change direction
@@ -5180,11 +5198,12 @@ script EscapeRoom_EventScript_MapSwitch4{
 
 script EscapeRoom_EventScript_CheckSwitchesCorrect{
     if(
-        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Pokemon screen contest moves
-        var(VAR_MAP_SWITCH_2) == 2 &&  // south -- Bag
-        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Pokedex pokemon size
-        var(VAR_MAP_SWITCH_4) == 3     // west  -- Save menu
+        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Onix
+        var(VAR_MAP_SWITCH_2) == 1 &&  // east  -- Zeraora
+        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Dusknoir
+        var(VAR_MAP_SWITCH_4) == 3     // west  -- Dunsparce
     ){
+        lockall
         call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
         setflag(FLAG_HIDE_ANNIHILAPE) // remove Annihilape
     }
@@ -5846,109 +5865,51 @@ text RotatedSwitchSoundMessage{
 }
 
 text MapSwitchDoorOpened{
-    "What was that???"
+    "Something just opened..."
 }
 
 text MApSwitchesAlreadySolved{
     "The tablet is locked in place."
 }
 
-// tablet 1
-text MapSwitchPointedNorthTablet1{
-    "TABLET 1.\p"
+// engraving messages
+text MapSwitchTablet1_Onix{
+    "It's a stone tablet with an engraving\n"
+    "of an Onix."
+}
+
+text MapSwitchTablet2_Zeraora{
+    "It's a stone tablet with an engraving\n"
+    "of a Zeraora."
+}
+
+text MapSwitchTablet3_Dusknoir{
+    "It's a stone tablet with an engraving\n"
+    "of a Dusknoir."
+}
+
+text MapSwitchTablet4_Dunsparce{
+    "It's a stone tablet with an engraving\n"
+    "of a Dunsparce."
+}
+
+// direction messages
+text MapSwitchPointedNorth{
     "The tablet is pointed north.\n"
     "Do you want to change its direction?"
 }
 
-text MapSwitchPointedEastTablet1{
-    "TABLET 1.\p"
+text MapSwitchPointedEast{
     "The tablet is pointed east.\n"
     "Do you want to change its direction?"
 }
 
-text MapSwitchPointedSouthTablet1{
-    "TABLET 1.\p"
+text MapSwitchPointedSouth{
     "The tablet is pointed south.\n"
     "Do you want to change its direction?"
 }
 
-text MapSwitchPointedWestTablet1{
-    "TABLET 1.\p"
-    "The tablet is pointed west.\n"
-    "Do you want to change its direction?"
-}
-
-// tablet 2
-text MapSwitchPointedNorthTablet2{
-    "TABLET 2.\p"
-    "The tablet is pointed north.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedEastTablet2{
-    "TABLET 2.\p"
-    "The tablet is pointed east.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedSouthTablet2{
-    "TABLET 2.\p"
-    "The tablet is pointed south.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedWestTablet2{
-    "TABLET 2.\p"
-    "The tablet is pointed west.\n"
-    "Do you want to change its direction?"
-}
-
-// tablet 3
-text MapSwitchPointedNorthTablet3{
-    "TABLET 3.\p"
-    "The tablet is pointed north.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedEastTablet3{
-    "TABLET 3.\p"
-    "The tablet is pointed east.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedSouthTablet3{
-    "TABLET 3.\p"
-    "The tablet is pointed south.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedWestTablet3{
-    "TABLET 3.\p"
-    "The tablet is pointed west.\n"
-    "Do you want to change its direction?"
-}
-
-// tablet 4
-text MapSwitchPointedNorthTablet4{
-    "TABLET 4.\p"
-    "The tablet is pointed north.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedEastTablet4{
-    "TABLET 4.\p"
-    "The tablet is pointed east.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedSouthTablet4{
-    "TABLET 4.\p"
-    "The tablet is pointed south.\n"
-    "Do you want to change its direction?"
-}
-
-text MapSwitchPointedWestTablet4{
-    "TABLET 4.\p"
+text MapSwitchPointedWest{
     "The tablet is pointed west.\n"
     "Do you want to change its direction?"
 }
@@ -5966,8 +5927,6 @@ text Nurse_Heal_End{
 text RunningNurseMessage{
     "I've been relocated!"
 }
-
-
 
 
 // HINTS NPC
@@ -6083,15 +6042,16 @@ text HintsNPC_Trainer2_SmallHint{
 }
 
 text HintsNPC_Trainer3_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer3 - small hint)"
+    "Komala is asleep?\n"
+    "There's gotta be a way to use that."
 }
 
 text HintsNPC_EggSkip_SmallHint{
-    "TBD (Egg Skip - small hint)"
+    "Why would you need an egg?"
 }
 
 text HintsNPC_SunStone_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Sun Stone - small hint)"
 }
 
@@ -6227,15 +6187,23 @@ text HintsNPC_Trainer2_LargeHint{
 }
 
 text HintsNPC_Trainer3_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer3 - large hint)"
+    "Komala's type keeps Hex from landing.\n"
+    "Maybe it needs a different held item.\p"
+    "Magicians never reveal their secret,\n"
+    "but a little sharing doesn't hurt.\p"
+    "Why is Komala holding a Snowball?"
 }
 
 text HintsNPC_EggSkip_LargeHint{
-    "TBD (Egg Skip - large hint)"
+    "The Twins will have a difficult time\n"
+    "fighting you when one of your Pokémon\l"
+    "has already fainted.\p"
+    "...\p"
+    "Or when you only have one Pokémon."
 }
 
 text HintsNPC_SunStone_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Sun Stone - large hint)"
 }
 
@@ -6430,21 +6398,38 @@ text HintsNPC_Trainer2_Solution{
     "use Nature Power to win."
 }
 
- //  -- complex battle solution --
 text HintsNPC_Trainer3_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "Ring Target"
-    "Grassy Terrain, Skill Swap"
-    "Trump Cards, Ice Beam, Trump Card, Hex"
+    "Let Klefki steal your Ring Target with\n"
+    "Magician, give it Symbiosis, activate\l"
+    "Komala's Snowball, and you're now able\l"
+    "to beat it with Trump Card and Hex."
 }
 
-// 2nd cave exit, Liepard collar, get egg, escape rope, skip double
+text intsNPC_Trainer3_Solution_ExactSequence{
+    "Lead: Florges (Ring Target) and\n"
+    "Dunsparce.\p"
+    "Turn 1: Grassy Terrain + Trump Card.\n"
+    "Turn 2: Skill Swap + Trump Card.\l"
+    "Turn 3: Ice Beam (Komala).\l"
+    "Turn 4-6: Trump Card.\l"
+    "Turn 7: Hex.\l"
+    "Repeat untill Komala faints."
+}
+
 text HintsNPC_EggSkip_Solution{
-    "TBD (Egg Skip solution)"
+    "The Twins cannot fight you when one of\n"
+    "your Pokémon is an egg.\p"
+    "Buy an Escape Rope, exit and re-enter\n"
+    "the cave from where the Liepard Collar\l"
+    "was located.\p"
+    "Trade your Florges for the Pokémon egg,\n"
+    "use the Escape Rope, and you can now\l"
+    "walk past the Twins again."  
 }
 
 // pickup, sell item
 text HintsNPC_SunStone_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Sun Stone solution)"
 }
 
@@ -6756,15 +6741,11 @@ text FourTabletsHintMessage1{
 
 text FourTabletsHintMessage2{
     "Wait...\n"
-    "You actually found all four!?\p"
-    "I suppose now I can stop searching\n"
-    "and get back to my job.\p"
-    "Not sure what I'm serving today,\n"
-    "I'll have to look through the menus."
+    "You actually found all four!?"
 }
 
 text FourTabletsHintMessage3{
-    "What was that earthquake!?"
+    "What was that earthquake???"
 }
 
 
@@ -7109,11 +7090,12 @@ text Trainer0_Intro{
 }
 
 text Trainer0_Outro{
-    "But sharing is caring!"
+    "One down, eleven to go!"
 }
 
 text Trainer0_PostBattle{
-    "One down, eleven to go."
+    "Sharing is caring.\n"
+    "Can you see the appeal?"
 }
 
 
@@ -7229,8 +7211,10 @@ text Trainer6_Outro{
 }
 
 text Trainer6_PostBattle{
-    "Do you know where I can find a cook?\n"
-    "My birds deliver goods, not dinner."
+    "My birds have traveled through all\n"
+    "sorts of areas.\p"
+    "Your Pokédex would be full by now if\n"
+    "you'd done the same!"
 }
 
 
@@ -7339,8 +7323,6 @@ text Trainer11_PostBattle_A{
 }
 
 text Trainer11_PostBattle_B{
-//  "This has been a true passion project wi"  -- max length
-
     "This game has been a true passion\n"
     "project of mine.\p"
 
