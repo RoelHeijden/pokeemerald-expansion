@@ -1236,7 +1236,7 @@ script EscapeRoom_EventScript_HintsNPC_SmallHint{
         handlehintorsolution(FLAG_TAUNT_HERB_SMALL_HINT, FLAG_TAUNT_HERB_SOLUTION)
     }
     // moon stone obtained
-    elif(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
+    elif(flag(FLAG_JABOCA_OBTAINED) == FALSE){
         msgbox(HintsNPC_MoonStone_SmallHint)
         handlehintorsolution(FLAG_MOON_STONE_SMALL_HINT, FLAG_MOON_STONE_SOLUTION)
     }
@@ -1428,7 +1428,7 @@ script EscapeRoom_EventScript_HintsNPC_LargeHint{
         handlehintorsolution(FLAG_TAUNT_HERB_LARGE_HINT, FLAG_TAUNT_HERB_SOLUTION)
     }
     // moon stone obtained
-    elif(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
+    elif(flag(FLAG_JABOCA_OBTAINED) == FALSE){
         msgbox(HintsNPC_MoonStone_LargeHint)
         handlehintorsolution(FLAG_MOON_STONE_LARGE_HINT, FLAG_MOON_STONE_SOLUTION)
     }
@@ -1637,7 +1637,7 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         handlehintorsolution(FLAG_TAUNT_HERB_SOLUTION, FLAG_TAUNT_HERB_SOLUTION)
     }
     // moon stone obtained
-    elif(flag(FLAG_SPACE_ITEM_STOLEN) == FALSE){
+    elif(flag(FLAG_JABOCA_OBTAINED) == FALSE){
         msgbox(HintsNPC_MoonStone_Solution)
         handlehintorsolution(FLAG_MOON_STONE_SOLUTION, FLAG_MOON_STONE_SOLUTION)
     }
@@ -5998,6 +5998,8 @@ text HintsNPC120minAddedMessage{
 }
 
 // small hints
+//// SECTION 1 ////
+
 text HintsNPC_AnnihilapeSpawn_SmallHint{
     "Those gravestones seem to be placed in\n"
     "an interesting pattern..."
@@ -6013,12 +6015,12 @@ text HintsNPC_ZeraCatchPredamage_SmallHint{
 text HintsNPC_ZeraoraCatch_SmallHint{
     "Sometimes Zeraora blends in a little too\n"
     "well with its environment.\p"
-    "Ferrothorn can take advantage of that."
+    "Can Ferrothorn take advantage?"
 }
 
 text HintsNPC_Trainer0_SmallHint{
-    "Sticky Barbs are annoying.\p"
-    "If only Florges had an item to carry."
+    "Sticky Barbs are so annoying.\n"
+    "If only you had an item."
 }
 
 text HintsNPC_SafetyGoggles_SmallHint{
@@ -6050,24 +6052,29 @@ text HintsNPC_EggSkip_SmallHint{
     "Why would you need an egg?"
 }
 
+//// SECTION 2 ////
+
 text HintsNPC_SunStone_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Sun Stone - small hint)"
+    "You have the ability to progress!"
 }
 
 text HintsNPC_Trainer4_SmallHint{
-    "TBD (Trainer4 - small hint)"
+    "Trump Trump Trump, I feel depleted.\n"
+    "Assistable moves should be deleted."
 }
 
 text HintsNPC_TauntHerb_SmallHint{
-    "TBD (Taunt Herb - small hint)"
+    "One new move, your path will unlock.\n"
+    "Where was the first Rock Smash rock?"
 }
 
 text HintsNPC_MoonStone_SmallHint{
-    "TBD (Moon Stone - small hint)"
+    "I wonder what the carrier birds are\n"
+    "carrying today."
 }
 
 text HintsNPC_BerryJuice_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Berry Juice - small hint)"
 }
 
@@ -6090,6 +6097,8 @@ text HintsNPC_Trainer6_SmallHint{
 text HintsNPC_MapSwitches_SmallHint{
     "TBD (Map Switches - small hint)"
 }
+
+//// SECTION 3 ////
 
 text HintsNPC_Trainer7A_SmallHint{
     "TBD (Trainer7A - small hint)"
@@ -6129,6 +6138,8 @@ text HintsNPC_Trainer11_SmallHint{
 
 
 // large hints
+//// SECTION 1 ////
+
 text HintsNPC_AnnihilapeSpawn_LargeHint{
     "The gravestones represent a numpad.\n"
     "Maybe there's a code written somewhere\l"
@@ -6199,27 +6210,38 @@ text HintsNPC_EggSkip_LargeHint{
     "fighting you when one of your Pokémon\l"
     "has already fainted.\p"
     "...\p"
-    "Or when you only have one Pokémon."
+    "Or if you only have one Pokémon."
 }
 
+//// SECTION 2 ////
+
 text HintsNPC_SunStone_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Sun Stone - large hint)"
+    "You should fight some Dusknoir.\n"
+    "A certain ability might help you out."
 }
 
 text HintsNPC_Trainer4_LargeHint{
-    "TBD (Trainer4 - large hint)"
+    "Beating Iron Bundle will require some\n"
+    "preparation at the Dusknoir.\p"
+    "Assist has its move limitations, but\n"
+    "there's no pressure if you fail."
 }
 
 text HintsNPC_TauntHerb_LargeHint{
-    "TBD (Taunt Herb - large hint)"
+    "Taunted Dusknoirs Struggle twice,\n"
+    "but a single hit would be paradise.\p"
+    "You'd skip the Twins and not disturb.\n"
+    "Dusknoir just needs a soothing herb."
 }
 
 text HintsNPC_MoonStone_LargeHint{
-    "TBD (Moon Stone - large hint)"
+    "You may not be a thief, but you've got\n"
+    "a new Trick.\p"
+    "Is it possible to steal the moon?"
 }
 
 text HintsNPC_BerryJuice_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Berry Juice - large hint)"
 }
 
@@ -6242,6 +6264,8 @@ text HintsNPC_Trainer6_LargeHint{
 text HintsNPC_MapSwitches_LargeHint{
     "TBD (Map Switches - large hint)"
 }
+
+//// SECTION 3 ////
 
 text HintsNPC_Trainer7A_LargeHint{
     "TBD (Trainer7A - large hint)"
@@ -6281,6 +6305,8 @@ text HintsNPC_Trainer11_LargeHint{
 
 
 // solutions
+//// SECTION 1 ////
+
 text HintsNPC_AnnihilapeSpawn_Solution{
     "The gravestones form a numpad pattern:\n"
     "1 2 3, 4 5 6, 7 8 9, 0.\p"
@@ -6427,29 +6453,71 @@ text HintsNPC_EggSkip_Solution{
     "walk past the Twins again."  
 }
 
-// pickup, sell item
+//// SECTION 2 ////
+
 text HintsNPC_SunStone_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Sun Stone solution)"
+    "Pickup will activate once you've fought\n"
+    "a few wild Dusknoir.\p"
+    "You'll get a Sun Stone which can be\n"
+    "sold to an NPC up north."
 }
 
-// Thief Dunsparce, move deleter, Assist to 1 pp
 text HintsNPC_Trainer4_Solution{
-    "TBD (Trainer4 solution)"
+    "Iron Bundle can be defeated with two\n"
+    "200 BP Trump Cards from Dunsparce and\l"
+    "Liepard.\p"
+
+    "1. Fight the Dusknoir and bring Trump\n"
+    "Card's PP down to 1.\p"
+
+    "2. Bring Assist's PP down to 2.\p"
+
+    "3. Buy and teach TM Thief to Dunsparce.\p"
+
+    "4. Delete every move from Aipom and\n"
+    "Dunsparce except for Mimic and Thief.\p"
+
+    "5. Use Assist against Dusknoir.\n"
+    "Neither Mimic nor Thief can be called\l"
+    "by Assist, so the move will fail and\l"
+    "Pressure will have no effect.\p"
+
+    "6. Restore your movesets, then remove\n"
+    "everything again except for Mimic and\l"
+    "Trump Card.\p"
+
+    "You can now use Trump Card and Assist\n"
+    "(Trump Card) to beat the Iron Bundle."
 }
 
-// Trade Dunsparce, Taunt + Fling Mental Herb
 text HintsNPC_TauntHerb_Solution{
-    "TBD (Taunt Herb solution)"
+    "1. Talk to the NPC below the Iron Bundle\n"
+    "trainer and trade your Dunsparce for\l"
+    "TM Taunt.\p"
+    
+    "2. Teach Taunt to Aipom and delete\n"
+    "Endeavor via the Move Deleter.\p"
+    
+    "3. Buy a Mental Herb and give it to\n"
+    "Liepard.\p"
+
+    "4. Fight Dusknoir and use Assist until\n"
+    "it selects Taunt, then use it again to\l"
+    "Fling the Mental Herb.\p"
+
+    "Your Liepard will be fainted and you\n"
+    "can now walk past the Twins again."
 }
 
-// Trick Rayquaza, sell item
 text HintsNPC_MoonStone_Solution{
-    "TBD (Moon Stone solution)"
+    "Rayquaza carries a Moon Stone.\p"
+    "Use Trick to steal the Moon Stone and\n"
+    "sell it to the NPC up north."
 }
 
 // Shuckle rock, Endeavor Jaboca Berry, Pickup, run
 text HintsNPC_BerryJuice_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Berry Juice solution)"
 }
 
@@ -6478,6 +6546,8 @@ text HintsNPC_Trainer6_Solution{
 text HintsNPC_MapSwitches_Solution{
     "TBD (Map Switches solution)"
 }
+
+//// SECTION 3 ////
 
 // trainer7b sight, move deleter, struggle
 text HintsNPC_Trainer7A_Solution{
@@ -7081,21 +7151,17 @@ text DoubleBattle_NotEnoughMons{
 
 // TRAINER 0
 text Trainer0_Intro{
-    // "You'll be ready once there are three.\n"
-    // "Which of the moves will be the key?"
-
     "You think you are ready?\n"
     "You really need three.\l"
     "One of them might hold the key."
 }
 
 text Trainer0_Outro{
-    "One down, eleven to go!"
+    "But sharing is caring..."
 }
 
 text Trainer0_PostBattle{
-    "Sharing is caring.\n"
-    "Can you see the appeal?"
+    "One down, eleven to go."
 }
 
 

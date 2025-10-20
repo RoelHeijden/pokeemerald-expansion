@@ -784,7 +784,7 @@ static void DoMoveRelearnerMain(void)
     case MENU_STATE_PRINT_TEXT_THEN_FANFARE:
         if (!MoveRelearnerRunTextPrinters())
         {
-            PlayFanfare(MUS_LEVEL_UP);
+            // PlayFanfare(MUS_LEVEL_UP);  // REMOVED -- prevent double fanfare (after message shortened)
             sMoveRelearnerStruct->state = MENU_STATE_WAIT_FOR_FANFARE;
         }
         break;
@@ -802,7 +802,7 @@ static void DoMoveRelearnerMain(void)
 
 
             // CHANGED
-            /////// stay in move selection screen after move is taught //////
+            ///// stay in move selection screen after move is taught //////
 
             // preserve which Pokémon was being used
             u8 monId = sMoveRelearnerStruct->partyMon;

@@ -3247,8 +3247,15 @@ static void BufferMonTrainerMemo(void)
         {
             if (sum->metLevel == 0)
                 text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureHatchedSomewhereAt : gText_XNatureHatchedAtYZ;
-            else
+            else{
                 text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureMetSomewhereAt : gText_XNatureMetAtYZ;
+
+                // ADDED
+                // u16 species = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPECIES, NULL);
+                // if(species == SPECIES_LIEPARD){
+                //     text = (sum->metLocation >= MAPSEC_NONE) ? gText_XNatureMetSomewhereAt : gText_XNatureMetAtYZ_Hint;
+                // }
+            }
         }
         else if (sum->metLocation == METLOC_FATEFUL_ENCOUNTER)
         {

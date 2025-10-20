@@ -3872,7 +3872,7 @@ static void Task_LoadSizeScreen(u8 taskId)
 
             // ADDED
             u16 species = NationalPokedexNumToSpecies(sPokedexListItem->dexNum);
-            if(species == SPECIES_LIEPARD){
+            if(species == SPECIES_PRIMEAPE){
                 StringCopy(string, gText_SizeComparedTo2);
             }
             else{
