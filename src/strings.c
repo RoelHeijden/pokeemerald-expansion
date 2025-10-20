@@ -110,6 +110,7 @@ const u8 gText_EmptyPokedexInfo1[] = _(""); // Unused
 const u8 gText_CryOf[] = _("CRY OF");
 const u8 gText_EmptyPokedexInfo2[] = _(""); // Unused
 const u8 gText_SizeComparedTo[] = _("SIZE COMPARED TO ");
+const u8 gText_SizeComparedTo2[] = _("No pressure if you fail!"); // ADDED
 // const u8 gText_SizeComparedTo[] = _("T3: W.");
 const u8 gText_PokedexRegistration[] = _("POKéDEX registration completed.");
 const u8 gText_HTHeight[] = _("HT");
