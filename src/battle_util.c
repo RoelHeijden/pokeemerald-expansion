@@ -546,6 +546,10 @@ bool32 TryRunFromBattle(u32 battler)
         if(holdEffect == HOLD_EFFECT_CHOICE_SCARF){
             effectiveSpeed = (effectiveSpeed * 3 /  2);
         }
+        // factor in iron ball
+        if(holdEffect == HOLD_EFFECT_IRON_BALL){
+            effectiveSpeed = (effectiveSpeed / 2);
+        }
 
         if (InBattlePyramid())
         {
@@ -11506,7 +11510,7 @@ void TryRestoreHeldItems(void)
                 if (currentItem != lostItem){
 
                     // dont restore item if berry juice stolen via Iron Ball
-                    if(currentItem == ITEM_BERRY_JUICE && lostItem == ITEM_JABOCA_BERRY)
+                    if(currentItem == ITEM_BERRY_JUICE && lostItem == ITEM_IRON_BALL)
                         return;
 
                     // Moon Stone Trick case
@@ -11521,8 +11525,7 @@ void TryRestoreHeldItems(void)
                     bool32 returnItemRequiresHeal =
                         lostItem == ITEM_CUSTAP_BERRY ||
                         lostItem == ITEM_MENTAL_HERB ||
-                        lostItem == ITEM_RING_TARGET ||
-                        lostItem == ITEM_JABOCA_BERRY;
+                        lostItem == ITEM_RING_TARGET;
 
                     // compare current mon state with backup
                     // if:
@@ -11564,8 +11567,8 @@ void TryRestoreHeldItems(void)
                             FlagSet(FLAG_BERRY_JUICE_CONSUMED);
                         if(lostItem == ITEM_MOON_STONE) 
                             FlagSet(FLAG_MOON_STONE_CONSUMED);
-                        if(lostItem == ITEM_JABOCA_BERRY)
-                            FlagSet(FLAG_JABOCA_CONSUMED);
+                        if(lostItem == ITEM_IRON_BALL)
+                            FlagSet(FLAG_IRON_BALL_CONSUMED);
                         if(lostItem == ITEM_SAFETY_GOGGLES)
                             FlagSet(FLAG_SAFETY_GOGGLES_CONSUMED);
                         if(lostItem == ITEM_TM_TRICK)

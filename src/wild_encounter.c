@@ -507,7 +507,7 @@ static void CreateWildMon(u16 species, u8 level)
             hpIv=31; 
             atkIv=0;
             defIv=0;
-            speedIv=0; 
+            speedIv=31; // changed for iron ball shuckle sequence
             spAtkIv=0;
             spDefIv=0;
         }

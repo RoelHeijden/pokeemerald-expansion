@@ -46,7 +46,7 @@
 #define FLAG_DONT_REMOVE_OFFSCREEN_OBJECT   0x21
 #define FLAG_TOGGLE_BAG_USE                 0x22
 #define FLAG_POKE_BALL_OBTAINED             0x23 
-#define FLAG_JABOCA_OBTAINED                0x24
+#define FLAG_IRON_BALL_OBTAINED             0x24
 #define FLAG_MARANGA_BERRY_USED             0x25  
 #define FLAG_2000_CASH_OBTAINED             0x26
 #define FLAG_LIEPARD_COLLAR_OBTAINED        0x27
@@ -660,7 +660,7 @@
 #define FLAG_MOON_STONE_CONSUMED        0x268
 #define FLAG_SAFETY_GOGGLES_CONSUMED    0x269
 #define FLAG_BERRY_JUICE_CONSUMED       0x26A
-#define FLAG_JABOCA_CONSUMED            0x26B   
+#define FLAG_IRON_BALL_CONSUMED            0x26B   
 #define FLAG_RETURN_ETHER               0x26C 
 #define FLAG_RETURN_BERRY_JUICE         0x26D   
 #define FLAG_RETURN_ESCAPE_ROPE         0x26E

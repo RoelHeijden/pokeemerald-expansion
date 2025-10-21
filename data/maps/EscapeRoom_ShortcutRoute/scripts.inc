@@ -163,7 +163,7 @@ CheckIfBerryJuiceObtained_10:
 # 109 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	setflag FLAG_BERRY_JUICE_OBTAINED
 # 110 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	removelostitem ITEM_JABOCA_BERRY
+	removelostitem ITEM_IRON_BALL
 	goto CheckIfBerryJuiceObtained_9
 
 CheckIfBerryJuiceObtained_12:
@@ -176,16 +176,16 @@ CheckIfBerryJuiceObtained_12:
 # 121 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	copyvar VAR_0x8007, VAR_0x8005
 # 123 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	checkitem ITEM_JABOCA_BERRY
+	checkitem ITEM_IRON_BALL
 # 124 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	copyvar VAR_TEMP_4, VAR_RESULT
 # 126 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	goto_if_unset FLAG_TRAINER4_DEFEATED, CheckIfBerryJuiceObtained_14
 # 127 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	compare VAR_0x8006, ITEM_JABOCA_BERRY
+	compare VAR_0x8006, ITEM_IRON_BALL
 	goto_if_eq CheckIfBerryJuiceObtained_14
 # 127 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
-	compare VAR_0x8007, ITEM_JABOCA_BERRY
+	compare VAR_0x8007, ITEM_IRON_BALL
 	goto_if_eq CheckIfBerryJuiceObtained_14
 # 128 "data/maps/EscapeRoom_ShortcutRoute/scripts.pory"
 	compare VAR_TEMP_4, TRUE

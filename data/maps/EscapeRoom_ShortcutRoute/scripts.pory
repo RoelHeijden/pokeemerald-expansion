@@ -107,24 +107,24 @@ script CheckIfBerryJuiceObtained{
         checkitem(ITEM_BERRY_JUICE)
         if(var(VAR_RESULT) == TRUE){
             setflag(FLAG_BERRY_JUICE_OBTAINED)
-            removelostitem(ITEM_JABOCA_BERRY)
+            removelostitem(ITEM_IRON_BALL)
         }
 
 
         if(flag(FLAG_BERRY_JUICE_OBTAINED) == TRUE){
             // ERROR CHECK
             // - trainer 4 defeated
-            // - jaboca berry used
+            // - Iron Ball used
             checkpartyitem(0)
             copyvar(VAR_0x8006, VAR_0x8005)
             checkpartyitem(1)
             copyvar(VAR_0x8007, VAR_0x8005)
 
-            checkitem(ITEM_JABOCA_BERRY)
+            checkitem(ITEM_IRON_BALL)
             copyvar(VAR_TEMP_4, VAR_RESULT)
 
             if(!flag(FLAG_TRAINER4_DEFEATED)
-                || (var(VAR_0x8006) == ITEM_JABOCA_BERRY || var(VAR_0x8007) == ITEM_JABOCA_BERRY)
+                || (var(VAR_0x8006) == ITEM_IRON_BALL || var(VAR_0x8007) == ITEM_IRON_BALL)
                 || var(VAR_TEMP_4) == TRUE)
             {
                 // do error message

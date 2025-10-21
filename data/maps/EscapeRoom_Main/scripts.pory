@@ -1236,7 +1236,7 @@ script EscapeRoom_EventScript_HintsNPC_SmallHint{
         handlehintorsolution(FLAG_TAUNT_HERB_SMALL_HINT, FLAG_TAUNT_HERB_SOLUTION)
     }
     // moon stone obtained
-    elif(flag(FLAG_JABOCA_OBTAINED) == FALSE){
+    elif(flag(FLAG_IRON_BALL_OBTAINED) == FALSE){
         msgbox(HintsNPC_MoonStone_SmallHint)
         handlehintorsolution(FLAG_MOON_STONE_SMALL_HINT, FLAG_MOON_STONE_SOLUTION)
     }
@@ -1428,7 +1428,7 @@ script EscapeRoom_EventScript_HintsNPC_LargeHint{
         handlehintorsolution(FLAG_TAUNT_HERB_LARGE_HINT, FLAG_TAUNT_HERB_SOLUTION)
     }
     // moon stone obtained
-    elif(flag(FLAG_JABOCA_OBTAINED) == FALSE){
+    elif(flag(FLAG_IRON_BALL_OBTAINED) == FALSE){
         msgbox(HintsNPC_MoonStone_LargeHint)
         handlehintorsolution(FLAG_MOON_STONE_LARGE_HINT, FLAG_MOON_STONE_SOLUTION)
     }
@@ -1637,7 +1637,7 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         handlehintorsolution(FLAG_TAUNT_HERB_SOLUTION, FLAG_TAUNT_HERB_SOLUTION)
     }
     // moon stone obtained
-    elif(flag(FLAG_JABOCA_OBTAINED) == FALSE){
+    elif(flag(FLAG_IRON_BALL_OBTAINED) == FALSE){
         msgbox(HintsNPC_MoonStone_Solution)
         handlehintorsolution(FLAG_MOON_STONE_SOLUTION, FLAG_MOON_STONE_SOLUTION)
     }
@@ -1907,14 +1907,6 @@ script EscapeRoom_EventScript_ReturnLostItems{
         setflag(FLAG_TEMP_1)  
     }
 
-    // Jaboca Berry
-    isitemlost(ITEM_JABOCA_BERRY)
-    if(var(VAR_RESULT) == TRUE){
-        removelostitem(ITEM_JABOCA_BERRY)
-        giveitem(ITEM_JABOCA_BERRY)
-        setflag(FLAG_TEMP_1)  
-    }
-
     // Safety Goggles (only lost when tricking Moon Stone)
     isitemlost(ITEM_SAFETY_GOGGLES)
     if(var(VAR_RESULT) == TRUE){
@@ -1945,10 +1937,10 @@ script EscapeRoom_EventScript_ReturnLostItems{
             setflag(FLAG_TEMP_2)  // no heal
         }
 
-        // special case: Jaboca Berry (lost at trainer5)
-        if(flag(FLAG_JABOCA_CONSUMED)){
-            clearflag(FLAG_JABOCA_CONSUMED)
-            giveitem(ITEM_JABOCA_BERRY)
+        // special case: Iron Ball (lost at trainer5)
+        if(flag(FLAG_IRON_BALL_CONSUMED)){
+            clearflag(FLAG_IRON_BALL_CONSUMED)
+            giveitem(ITEM_IRON_BALL)
             setflag(FLAG_TEMP_2)  // no heal
         }
 
@@ -2893,13 +2885,9 @@ script EscapeRoom_EventScript_SetTrainer5Rematch{
         clearflag(FLAG_TM_TRICK_CONSUMED)
         giveitem(ITEM_TM38)
     }
-
-    // Jaboca can also be stored via the central lost item method
-    isitemlost(ITEM_JABOCA_BERRY)
-    if(flag(FLAG_JABOCA_CONSUMED) || var(VAR_RESULT) == TRUE){
-        clearflag(FLAG_JABOCA_CONSUMED)
-        giveitem(ITEM_JABOCA_BERRY)
-        removelostitem(ITEM_JABOCA_BERRY)
+    if(flag(FLAG_IRON_BALL_CONSUMED)){
+        clearflag(FLAG_IRON_BALL_CONSUMED)
+        giveitem(ITEM_IRON_BALL)
     }
 
     // reset trainer flag
@@ -3444,7 +3432,7 @@ movement RockSmashNPCMovesAway {
 script EscapeRoom_TryBuyStonesPC{
     lock
 
-    if(flag(FLAG_JABOCA_OBTAINED)){
+    if(flag(FLAG_IRON_BALL_OBTAINED)){
         // post script message
         msgbox(StonesBuyNPCPostSellMessage, MSGBOX_NPC)
         waitmessage
@@ -3502,10 +3490,10 @@ script EscapeRoom_TryBuyStonesPC_TryBuyMoonStone{
 
     if(var(VAR_RESULT) == YES){
         removeitem(ITEM_MOON_STONE)
-        giveitem(ITEM_JABOCA_BERRY)
-        setflag(FLAG_JABOCA_OBTAINED)
+        giveitem(ITEM_IRON_BALL)
+        setflag(FLAG_IRON_BALL_OBTAINED)
 
-        msgbox(StonesBuyNPCSellAcceptedMessage_JabocaBerry, MSGBOX_NPC)
+        msgbox(StonesBuyNPCSellAcceptedMessage_IronBall, MSGBOX_NPC)
         waitmessage
     }
     else{
@@ -3934,7 +3922,7 @@ script EscapeRoom_EventScript_Trainer5{
     if(!flag(FLAG_TRAINER5_DEFEATED)){
         clearflag(FLAG_BERRY_JUICE_CONSUMED)
         clearflag(FLAG_MOON_STONE_CONSUMED)
-        clearflag(FLAG_JABOCA_CONSUMED)
+        clearflag(FLAG_IRON_BALL_CONSUMED)
         clearflag(FLAG_SAFETY_GOGGLES_CONSUMED)
         clearflag(FLAG_TM_TRICK_CONSUMED)
     }
@@ -4296,14 +4284,14 @@ script EscapeRoom_EventScript_Trainer5PostBattle{
         }
     }
 
-    // dont restore jaboca berry if consumed (flung) in battle
-    if(flag(FLAG_JABOCA_CONSUMED) == TRUE){
+    // dont restore Iron Ball if consumed (flung) in battle
+    if(flag(FLAG_IRON_BALL_CONSUMED) == TRUE){
         checkpartyitem(0)
-        if(var(VAR_0x8005) == ITEM_JABOCA_BERRY){
+        if(var(VAR_0x8005) == ITEM_IRON_BALL){
             removepartyitem(0)
         }
         checkpartyitem(1)
-        if(var(VAR_0x8005) == ITEM_JABOCA_BERRY){
+        if(var(VAR_0x8005) == ITEM_IRON_BALL){
             removepartyitem(1)
         }
     }
@@ -4395,7 +4383,7 @@ script EscapeRoom_EventScript_Trainer6PostBattle{
     copyvar(VAR_TEMP_4, VAR_RESULT)
     checkitem(ITEM_ETHER)
     copyvar(VAR_TEMP_5, VAR_RESULT)
-    checkitem(ITEM_JABOCA_BERRY)
+    checkitem(ITEM_IRON_BALL)
     copyvar(VAR_TEMP_6, VAR_RESULT)
     checkitem(ITEM_BERRY_JUICE)
     copyvar(VAR_TEMP_7, VAR_RESULT)
@@ -6515,10 +6503,22 @@ text HintsNPC_MoonStone_Solution{
     "sell it to the NPC up north."
 }
 
-// Shuckle rock, Endeavor Jaboca Berry, Pickup, run
+// Shuckle rock, Endeavor Iron Ball, Pickup, run
 text HintsNPC_BerryJuice_Solution{
 //  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Berry Juice solution)"
+    "Give Aipom the Iron Ball and fight a\n"
+    "Shuckle at the Rock Smash rocks.\p"
+
+    "Aipom now underspeeds the Shuckle which\n"
+    "allows it to use Endeavor after it's\l"
+    "hit by Knock Off.\p"
+
+    "Use Endeavor to trigger Shuckle's Berry\n"
+    "Juice and Aipom's Pickup will activate\l"
+    "to take the Berry Juice.\p"
+    
+    "Run from the battle and you've now got\n"
+    "a Berry Juice."
 }
 
 //  -- complex battle solution --
@@ -6840,15 +6840,15 @@ text StonesBuyNPCInitialMessage_has_MoonStone{
     "Is that a Moon Stone?\p"
     "...\p"
     "I may have ran out of money...\p"
-    "Would you trade it for a Jaboca Berry?" 
+    "Would you trade it for an Iron Ball?" 
 }
 
 text StonesBuyNPCSellAcceptedMessage{
     "I'll take good care of it."
 }
 
-text StonesBuyNPCSellAcceptedMessage_JabocaBerry{
-    "I'm sure the berry will serve you well."
+text StonesBuyNPCSellAcceptedMessage_IronBall{
+    "I'm sure the ball will serve you well."
 }
 
 text StonesBuyNPCSellDeclinedMessage{
