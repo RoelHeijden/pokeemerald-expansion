@@ -1588,7 +1588,7 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         // ask view exact sequence
         msgbox(HintsNPC_ReviewExactSequence, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
-            msgbox(intsNPC_Trainer1_Solution_ExactSequence)
+            msgbox(HintsNPC_Trainer1_Solution_ExactSequence)
         }
     }
     // maranga berry
@@ -1650,6 +1650,12 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
     elif(flag(FLAG_ABILITY_CAPSULE_BOUGHT) == FALSE){
         msgbox(HintsNPC_Trainer5_Solution)
         handlehintorsolution(FLAG_TRAINER5_SOLUTION, FLAG_TRAINER5_SOLUTION)
+
+        // ask view exact sequence
+        msgbox(HintsNPC_ReviewExactSequence, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            msgbox(HintsNPC_Trainer5_Solution_ExactSequence)
+        }
     }
     // trapinch run
     elif(flag(FLAG_RAN_FROM_TRAPINCH) == FALSE){
@@ -1669,7 +1675,7 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         // allow review previous hint
         msgbox(HintsNPC_ReviewPreviousStep, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
-            msgbox(HintsNPC_RareCandyRevive_Solution)
+            msgbox(HintsNPC_Trainer6_Solution_Refresher)
         }
     }
     // map switches
@@ -6053,7 +6059,7 @@ text HintsNPC_Trainer4_SmallHint{
 
 text HintsNPC_TauntHerb_SmallHint{
     "One new move, your path will unlock.\n"
-    "Where was the first Rock Smash rock?"
+    "Where was that first Rock Smash rock?"
 }
 
 text HintsNPC_MoonStone_SmallHint{
@@ -6062,23 +6068,29 @@ text HintsNPC_MoonStone_SmallHint{
 }
 
 text HintsNPC_BerryJuice_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Berry Juice - small hint)"
+    "Are you a Rock Smash rock?\n"
+    "Because I can't move past you.\p"
+    "Such a juicy pickup line."
 }
 
 text HintsNPC_Trainer5_SmallHint{
-    "TBD (Trainer5 - small hint)"
+    "The snake so sturdy, I admire.\n"
+    "A Berry Juice, its true desire.\p"
+    "That's how Liepard hits it twice.\n"
+    "Pay Day Liepard? That's not nice."
 }
 
 text HintsNPC_TrapinchRun_SmallHint{
-    "TBD (Trapinch Run - small hint)"
+    "Run!!"
 }
 
 text HintsNPC_RareCandyRevive_SmallHint{
-    "TBD (Rare Candy revive - small hint)"
+    "Find your way back once again.\n"
+    "Such a shame that Liepard is fainted."
 }
 
 text HintsNPC_Trainer6_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer6 - small hint)"
 }
 
@@ -6229,23 +6241,41 @@ text HintsNPC_MoonStone_LargeHint{
 }
 
 text HintsNPC_BerryJuice_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Berry Juice - large hint)"
+    "Did you know Pickup has an in-battle\n"
+    "effect as well?\p"
+    "It might come in handy at the Rock\n"
+    "Smash rocks.\p"
+    "Oh, you're too fast?"
 }
 
 text HintsNPC_Trainer5_LargeHint{
-    "TBD (Trainer5 - large hint)"
+    "Insane Money Hack You Won't Believe\p"
+
+    "Step 1: Give Onix some Berry Juice.\n"
+    "Step 2: Delete the cat.\l"
+    "Step 3: Break. That. Sub!\l"
+    "Step 4: Taunt?\l"
+    "...\l"
+    "Step 8: Profit.\p"
+    
+    "Need more?\n"
+    "Just hit yourself!"
 }
 
 text HintsNPC_TrapinchRun_LargeHint{
-    "TBD (Trapinch Run - large hint)"
+    "Trapped? Just Run Away!"
 }
 
 text HintsNPC_RareCandyRevive_LargeHint{
-    "TBD (Rare Candy revive - large hint)"
+    "Taunt a Dusknoir, now we can run.\n"
+    "The other side holds all the fun!\p"
+    "A special treat revives the dead,\n"
+    "Annihilape still lies ahead.\p"
+    "Will this help beat Rayquaza?"
 }
 
 text HintsNPC_Trainer6_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer6 - large hint)"
 }
 
@@ -6374,7 +6404,7 @@ text HintsNPC_Trainer1_Solution{
     "Nature Power."
 }
 
-text intsNPC_Trainer1_Solution_ExactSequence{
+text HintsNPC_Trainer1_Solution_ExactSequence{
     "Lead: Florges (Safety Goggles) and\n"
     "Zeroara (Electric Seed).\p"
     "Turn 1: Grassy Terrain + X.\n"
@@ -6503,42 +6533,87 @@ text HintsNPC_MoonStone_Solution{
     "sell it to the NPC up north."
 }
 
-// Shuckle rock, Endeavor Iron Ball, Pickup, run
 text HintsNPC_BerryJuice_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "Give Aipom the Iron Ball and fight a\n"
     "Shuckle at the Rock Smash rocks.\p"
 
-    "Aipom now underspeeds the Shuckle which\n"
-    "allows it to use Endeavor after it's\l"
-    "hit by Knock Off.\p"
-
     "Use Endeavor to trigger Shuckle's Berry\n"
-    "Juice and Aipom's Pickup will activate\l"
-    "to take the Berry Juice.\p"
+    "Juice, then Aipom's Pickup activates\l"
+    "to recover the consumed item.\p"
     
     "Run from the battle and you've now got\n"
     "a Berry Juice."
 }
 
-//  -- complex battle solution --
 text HintsNPC_Trainer5_Solution{
-    "TBD (Trainer5 solution)"
+    "Your goal is to earn an additional ¥525\n"
+    "during battle to purchase the Ability\l"
+    "Capsule from the NPC in the cave.\p"
+
+    "Each successful Pay Day yields ¥5 per\n"
+    "level. This means you'll need five Pay\l"
+    "Days from Aipom and two from Liepard to\l"
+    "earn enough money.\p"
+
+    "Aipom can simply use five Pay Days into\n"
+    "its partner, but Liepard's setup is\l"
+    "slightly trickier.\p"
+
+    "Use Berry Juice, Pickup, Taunt, and\n"
+    "Rock Smash to get Onix back to full HP\l"
+    "without a Substitute up.\p"
+
+    "You can then Copycat Pay Day the Onix\n"
+    "twice, who'll hang on by 1 HP after the\l"
+    "first hit due to Sturdy."
 }
 
-// Runaway, run
+text HintsNPC_Trainer5_Solution_ExactSequence{
+    "Lead: Liepard (Berry Juice) and Aipom.\p"
+
+    "Turn 1: Trick (Onix) + Mimic (Meowth).\n"
+    "Turn 2: Rock Smash (Meowth) + Pay Day\l"
+    "(Liepard).\p"
+
+    "Turn 3: Rock Smash + Pay Day (Liepard).\n"
+    "Turn 4: Rock Smash + Taunt.\l"
+    "Turn 5: Trick (Aipom) + Pay Day\l"
+    "(Liepard).\p"
+
+    "Turn 6: Rock Smash + X (not Pay Day).\n"
+    "Turn 7: Trick + Pay Day (Liepard).\l"
+    "Turn 8: Copycat + Pay Day (Liepard).\l"
+    "Turn 9: Copycat + X."
+}
+
 text HintsNPC_TrapinchRun_Solution{
-    "TBD (Trapinch Run solution)"
+    "Use the Ability Capsule on Aipom to get\n"
+    "Run Away.\p"
+    "Fight the Trapinch and run away."
 }
 
-// note: this is used as reviewed step
-// Taunt dusknoir, sack, run, revive with rare candy
 text HintsNPC_RareCandyRevive_Solution{
-    "TBD (Rare Candy revive solution)"
+    "Fight Dusknoir and use Assist until it\n"
+    "selects Taunt, sack Liepard, and use\l"
+    "Aipom's Run Away to escape.\p"
+
+    "Walk past the Twins again and revive\n"
+    "Liepard by using the Rare Candy.\p"
+
+    "You can now revisit the Annihilape and\n"
+    "prepare for the Rayquaza trainer."
+}
+
+text HintsNPC_Trainer6_Solution_Refresher{
+    "Assist Taunt against a Dusknoir, sack\n"
+    "Liepard, then run away.\p"
+    "Walk past the Twins and Revive Liepard\n"
+    "with the Rare Candy." 
 }
 
 // pre damage solution + custap fling goggles
 text HintsNPC_Trainer6_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer6 solution)"
 }
 
