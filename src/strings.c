@@ -133,7 +133,8 @@ const u8 gText_DexNatTitle[] = _("NATIONAL DEX");
 // const u8 gText_DexSortNumericalTitle[] = _("NUMERICAL MODE");
 // const u8 gText_DexSortAtoZTitle[] = _("A TO Z MODE");
 // const u8 gText_DexSortHeaviestTitle[] = _("HEAVIEST MODE");
-const u8 gText_DexSortNumericalTitle[] = _("NUMERICAL MODE");
+// const u8 gText_DexSortNumericalTitle[] = _("NUMERICAL MODE");
+const u8 gText_DexSortNumericalTitle[] = _("SEEN ONLY MODE");
 const u8 gText_DexSortAtoZTitle[] = _("SEEN ONLY MODE");
 const u8 gText_DexSortHeaviestTitle[] = _("CAUGHT ONLY");
 
@@ -149,14 +150,17 @@ const u8 gText_DexSearchAlphaPQR[] = _("PQR");
 const u8 gText_DexSearchAlphaSTU[] = _("STU");
 const u8 gText_DexSearchAlphaVWX[] = _("VWX");
 const u8 gText_DexSearchAlphaYZ[] = _("YZ");
-// const u8 gText_DexSearchColorRed[] = _("RED");
-// const u8 gText_DexSearchColorBlue[] = _("BLUE");
-// const u8 gText_DexSearchColorYellow[] = _("YELLOW");
-// const u8 gText_DexSearchColorGreen[] = _("GREEN");
-const u8 gText_DexSearchColorRed[] = _("Egg"); // CHANGED
-const u8 gText_DexSearchColorBlue[] = _("Skip"); // CHANGED
-const u8 gText_DexSearchColorYellow[] = _("Double"); // CHANGED
-const u8 gText_DexSearchColorGreen[] = _("..."); // CHANGED
+
+const u8 gText_DexSearchColorRed[] = _("RED");
+const u8 gText_DexSearchColorBlue[] = _("BLUE");
+const u8 gText_DexSearchColorYellow[] = _("YELLOW");
+const u8 gText_DexSearchColorGreen[] = _("GREEN");
+
+const u8 gText_DexSearchColorEgg[] = _("Egg"); // ADDED
+const u8 gText_DexSearchColorSkip[] = _("Skip"); // ADDED
+const u8 gText_DexSearchColorDouble[] = _("Double"); // ADDED
+const u8 gText_DexSearchColorBlank[] = _("..."); // ADDED
+
 const u8 gText_DexSearchColorBlack[] = _("BLACK");
 const u8 gText_DexSearchColorBrown[] = _("BROWN");
 const u8 gText_DexSearchColorPurple[] = _("PURPLE");
@@ -168,7 +172,8 @@ const u8 gText_DexNatDescription[] = _("National edition POKéDEX");
 // const u8 gText_DexSortNumericalDescription[] = _("POKéMON are listed according to their\nnumber.");
 // const u8 gText_DexSortAtoZDescription[] = _("Spotted and owned POKéMON are listed\nalphabetically.");
 // const u8 gText_DexSortHeaviestDescription[] = _("Owned POKéMON are listed from the\nheaviest to the lightest.");
-const u8 gText_DexSortNumericalDescription[] = _("All POKéMON are listed according to their\nnumber.");
+// const u8 gText_DexSortNumericalDescription[] = _("All POKéMON are listed according to their\nnumber.");
+const u8 gText_DexSortNumericalDescription[] = _("Only spotted and owned POKéMON are\nlisted according to their number.");
 const u8 gText_DexSortAtoZDescription[] = _("Only spotted and owned POKéMON are\nlisted according to their number.");
 const u8 gText_DexSortHeaviestDescription[] = _("Only Owned POKéMON are listed\naccording to their number.");
 

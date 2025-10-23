@@ -230,16 +230,20 @@
 #define GROWTH_SLOW         5
 
 // Body colors for Pokédex search
-#define BODY_COLOR_RED      0
-#define BODY_COLOR_BLUE     1
-#define BODY_COLOR_YELLOW   2
-#define BODY_COLOR_GREEN    3
+#define BODY_COLOR_DUMMY1    0 // CHANGED
+#define BODY_COLOR_DUMMY2    1 // CHANGED
+#define BODY_COLOR_DUMMY3    2 // CHANGED
+#define BODY_COLOR_DUMMY4    3 // CHANGED
 #define BODY_COLOR_BLACK    4
 #define BODY_COLOR_BROWN    5
 #define BODY_COLOR_PURPLE   6
 #define BODY_COLOR_GRAY     7
 #define BODY_COLOR_WHITE    8
 #define BODY_COLOR_PINK     9
+#define BODY_COLOR_RED      10 // CHANGED
+#define BODY_COLOR_BLUE     11 // CHANGED
+#define BODY_COLOR_YELLOW   12 // CHANGED
+#define BODY_COLOR_GREEN    13 // CHANGED
 
 #define F_SUMMARY_SCREEN_FLIP_SPRITE 0x80
 
