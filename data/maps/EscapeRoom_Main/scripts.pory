@@ -5059,7 +5059,7 @@ script EscapeRoom_EventScript_MapSwitch2{
     }
 
     // main message
-    msgbox(MapSwitchTablet2_Zeraora, MSGBOX_DEFAULT)
+    msgbox(MapSwitchTablet2_Toedscruel, MSGBOX_DEFAULT)
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_2) == 0){
@@ -5192,10 +5192,10 @@ script EscapeRoom_EventScript_MapSwitch4{
 
 script EscapeRoom_EventScript_CheckSwitchesCorrect{
     if(
-        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Onix
-        var(VAR_MAP_SWITCH_2) == 1 &&  // east  -- Toedscruel
-        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Dusknoir
-        var(VAR_MAP_SWITCH_4) == 3     // west  -- Dunsparce
+        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Onix 0095
+        var(VAR_MAP_SWITCH_2) == 1 &&  // east  -- Toedscruel 0949
+        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Dusknoir 0477
+        var(VAR_MAP_SWITCH_4) == 3     // west  -- Dunsparce 0206
     ){
         lockall
         call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
@@ -5868,23 +5868,31 @@ text MApSwitchesAlreadySolved{
 
 // engraving messages
 text MapSwitchTablet1_Onix{
-    "It's a stone tablet with an engraving\n"
-    "of an Onix."
+    // "It's a stone tablet with an engraving\n"
+    // "of an Onix."
+    "It's a stone tablet engraved with the\n"
+    "number 95."
 }
 
-text MapSwitchTablet2_Zeraora{
-    "It's a stone tablet with an engraving\n"
-    "of a Toedscruel."
+text MapSwitchTablet2_Toedscruel{
+    // "It's a stone tablet with an engraving\n"
+    // "of a Toedscruel."
+    "It's a stone tablet engraved with the\n"
+    "number 949."
 }
 
 text MapSwitchTablet3_Dusknoir{
-    "It's a stone tablet with an engraving\n"
-    "of a Dusknoir."
+    // "It's a stone tablet with an engraving\n"
+    // "of a Dusknoir."
+    "It's a stone tablet engraved with the\n"
+    "number 477."
 }
 
 text MapSwitchTablet4_Dunsparce{
-    "It's a stone tablet with an engraving\n"
-    "of a Dunsparce."
+    // "It's a stone tablet with an engraving\n"
+    // "of a Dunsparce."
+    "It's a stone tablet engraved with the\n"
+    "number 206."
 }
 
 // direction messages
@@ -6090,17 +6098,19 @@ text HintsNPC_RareCandyRevive_SmallHint{
 }
 
 text HintsNPC_Trainer6_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    ""
+    "Ring Target Annihilape?\n"
+    "Yeah, that makes sense."
 }
 
 text HintsNPC_MapSwitches_SmallHint{
-    "TBD (Map Switches - small hint)"
+    "The tablet numbers may have something\n"
+    "to do with Pokémon..."
 }
 
 //// SECTION 3 ////
 
 text HintsNPC_Trainer7A_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer7A - small hint)"
 }
 
@@ -6245,7 +6255,7 @@ text HintsNPC_BerryJuice_LargeHint{
     "effect as well?\p"
     "It might come in handy at the Rock\n"
     "Smash rocks.\p"
-    "Oh, you're too fast?"
+    "Make sure you're not too quick!"
 }
 
 text HintsNPC_Trainer5_LargeHint{
@@ -6273,21 +6283,31 @@ text HintsNPC_RareCandyRevive_LargeHint{
     "Give your cat get a special treat."
 }
 
-
-// ape + ring target + endeavor = 3 hp
-// Endeavor and Fling
 text HintsNPC_Trainer6_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    ""
+    "You'll need to set up for Aipom to use\n"
+    "Custap Endeavor vs Rayquaza.\p"
+
+    "Oh... You want to use Endeavor against\n"
+    "a Ghost type?\p"
+
+    "It's tricky, but with the right item, it\n"
+    "might just work.\p"
+
+    "Endeavor for you, Endeavor for me."
 }
 
 text HintsNPC_MapSwitches_LargeHint{
-    "TBD (Map Switches - large hint)"
+    "Four stone tablets, have you seen?\n"
+    "The numbers Mason, what do they mean!\p"
+    "Every Pokémon has their own.\n"
+    "In numerical order they are shown.\p"
+    "Where can the Pokémon be found?"
 }
 
 //// SECTION 3 ////
 
 text HintsNPC_Trainer7A_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer7A - large hint)"
 }
 
@@ -6617,15 +6637,13 @@ text HintsNPC_Trainer6_Solution_Refresher{
 }
 
 text HintsNPC_Trainer6_Solution{
-    "You can beat the Rayquaza trainer with\n"
-    "Custap Berry Endeavor + Assist Fling,\l"
-    "which requires Aipom to be at <25% HP.\p"
+    "You can beat the Rayquaza with Custap\n"
+    "Berry Endeavor + Assist Fling, which\l"
+    "will require Aipom to be at <25% HP.\p"
 
-    "Revive Liepard with the Rare Candy,\n"
-    "then buy and give it a Ring Target.\p"
-
-    "Fight the Annihilape and pre-damage\n"
-    "Aipom via the following sequence:\p"
+    "Give Liepard a Ring Target and fight\n"
+    "the Annihilape to pre-damage Aipom\l"
+    "with the following sequence:\p"
     
     "Lead: Aipom.\n"
     "Turn 1: Endeavor.\l"
@@ -6637,29 +6655,37 @@ text HintsNPC_Trainer6_Solution{
     "Turn 7: Switch to Aipom.\l"
     "Turn 8: Run.\p"
 
-    "Sell the Ring Target, buy a Custap\n"
-    "Berry, give it to Aipom, and give the\l"
-    "Safety Goggles to Liepard.\p"
+    "Sell the Ring Target, buy a Custap for\n"
+    "Aipom, and give Liepard the Safety\l"
+    "Goggles.\p"
 
-    "Go back to the other area via the Rock\n"
-    "Smash tunnel and delete Aipom's Taunt\l"
-    "at the move deleter.\p"
+    "Return to the other area via the tunnel\n"
+    "and delete Aipom's Taunt.\p"
 
     "Start the trainer battle leading with\n"
-    "Aipom, then:\p"
-    "1. Use Endeavor (Custap activates).\n"
-    "2. Use Assist (Fling)."
+    "Aipom, then:\l"
+    "1. Use Endeavor (Custap activates).\l"
+    "2. Use Assist (Fling Safety Goggles)."
 }
 
 text HintsNPC_MapSwitches_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Map Switches solution)"
+    "Each of the four tablets is engraved\n"
+    "with the Pokédex entry number of a\l"
+    "Pokémon you've encountered.\p"
+
+    "Check that Pokémon's Pokédex entry\n"
+    "and view its encounter area.\p"
+
+    "Align each tablet to the highlighted\n"
+    "part of the map (north, east, south, or\l"
+    "west) for its corresponding Pokémon."
 }
 
 //// SECTION 3 ////
 
 // trainer7b sight, move deleter, struggle
 text HintsNPC_Trainer7A_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer7A solution)"
 }
 
