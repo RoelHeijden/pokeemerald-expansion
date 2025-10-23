@@ -712,34 +712,34 @@
 #define FLAG_RESCUE_BELL_OBTAINED       0x29C  
 #define FLAG_RARE_CANDY2_COMPLETED      0x29D
 
-#define FLAG_ANNIHILAPE_SPAWNED_SMALL_HINT             0x29E // ape spawned
-#define FLAG_ZERA_PREDAMAGE_COMPLETED_SMALL_HINT       0x29F // Zera catch predamage
-#define FLAG_ZERAORA_CAUGHT_SMALL_HINT                 0x2A0 // zera caught
-#define FLAG_TRAINER0_SMALL_HINT                       0x2A1 // trainer 0
-#define FLAG_TRAINER1_SMALL_HINT                       0x2A2 // trainer 1
-#define FLAG_MARANGA_BERRY_SMALL_HINT                  0x2A3 // maranga berry
-#define FLAG_TRAINER2_SMALL_HINT                       0x2A4 // trainer 2
-#define FLAG_TRAINER3_SMALL_HINT                       0x2A5 // trainer 3
-#define FLAG_EGG_SKIP_SMALL_HINT                       0x2A6 // egg puzzle
-#define FLAG_SUN_STONE_SMALL_HINT                      0x2A7 // sun stone sold
-#define FLAG_TRAINER4_SMALL_HINT                       0x2A8 // trainer 4
-#define FLAG_TAUNT_HERB_SMALL_HINT                     0x2A9 // taunt mental herb sack
-#define FLAG_MOON_STONE_SMALL_HINT                     0x2AA // moon stone obtained
-#define FLAG_BERRY_JUICE_SMALL_HINT                    0x2AB // berry juice obtained
-#define FLAG_TRAINER5_SMALL_HINT                       0x2AC // trainer 5
-#define FLAG_TRAPINCH_RUN_SMALL_HINT                   0x2AD // trapinch run
-#define FLAG_RARE_CANDY_REVIVE_SMALL_HINT              0x2AE // sack and rare candy revive
-#define FLAG_TRAINER6_SMALL_HINT                       0x2AF // trainer 6
-#define FLAG_MAP_SWITCHES_SMALL_HINT                   0x2B0 // map switches
-#define FLAG_TRAINER7A_SMALL_HINT                      0x2B1 // trainer 7a
-#define FLAG_TRAINER8_SMALL_HINT                       0x2B2 // trainer 8
-#define FLAG_ICEPUZZLE_RARECANDY_SMALL_HINT            0x2B3 // ice puzzle Rare Candy
-#define FLAG_TRAINER9_SMALL_HINT                       0x2B4 // trainer 9
-#define FLAG_TOXIC_ORB_STEAL_SMALL_HINT                0x2B5 // toxic orb steal
-#define FLAG_SECRET_POWER_SMALL_HINT                   0x2B6 // secret power obtained
-#define FLAG_RARE_CANDY3_SMALL_HINT                    0x2B7 // secret base rare candy
-#define FLAG_TRAINER10_SMALL_HINT                      0x2B8 // trainer 10
-#define FLAG_TRAINER11_SMALL_HINT                      0x2B9 // trainer 11
+#define FLAG_ANNIHILAPE_SPAWNED_SMALL_HINT             0x29E
+#define FLAG_ZERA_PREDAMAGE_COMPLETED_SMALL_HINT       0x29F 
+#define FLAG_ZERAORA_CAUGHT_SMALL_HINT                 0x2A0 
+#define FLAG_TRAINER0_SMALL_HINT                       0x2A1 
+#define FLAG_TRAINER1_SMALL_HINT                       0x2A2 
+#define FLAG_MARANGA_BERRY_SMALL_HINT                  0x2A3 
+#define FLAG_TRAINER2_SMALL_HINT                       0x2A4 
+#define FLAG_TRAINER3_SMALL_HINT                       0x2A5 
+#define FLAG_EGG_SKIP_SMALL_HINT                       0x2A6 
+#define FLAG_SUN_STONE_SMALL_HINT                      0x2A7 
+#define FLAG_TRAINER4_SMALL_HINT                       0x2A8
+#define FLAG_TAUNT_HERB_SMALL_HINT                     0x2A9 
+#define FLAG_MOON_STONE_SMALL_HINT                     0x2AA
+#define FLAG_BERRY_JUICE_SMALL_HINT                    0x2AB 
+#define FLAG_TRAINER5_SMALL_HINT                       0x2AC 
+#define FLAG_TRAPINCH_RUN_SMALL_HINT                   0x2AD 
+#define FLAG_RARE_CANDY_REVIVE_SMALL_HINT              0x2AE
+#define FLAG_TRAINER6_SMALL_HINT                       0x2AF
+#define FLAG_MAP_SWITCHES_SMALL_HINT                   0x2B0 
+#define FLAG_TRAINER7A_SMALL_HINT                      0x2B1 
+#define FLAG_TRAINER8_SMALL_HINT                       0x2B2 
+#define FLAG_ICEPUZZLE_RARECANDY_SMALL_HINT            0x2B3 
+#define FLAG_TRAINER9_SMALL_HINT                       0x2B4 
+#define FLAG_TOXIC_ORB_STEAL_SMALL_HINT                0x2B5
+#define FLAG_SECRET_POWER_SMALL_HINT                   0x2B6 
+#define FLAG_RARE_CANDY3_SMALL_HINT                    0x2B7 
+#define FLAG_TRAINER10_SMALL_HINT                      0x2B8 
+#define FLAG_TRAINER11_SMALL_HINT                      0x2B9
 #define FLAG_SAFETY_GOGGLES_SMALL_HINT                 0x2BA 
 #define FLAG_UNUSED_0x2BB  0x2BB // Unused Flag
 

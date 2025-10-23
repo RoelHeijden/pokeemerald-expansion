@@ -5193,7 +5193,7 @@ script EscapeRoom_EventScript_MapSwitch4{
 script EscapeRoom_EventScript_CheckSwitchesCorrect{
     if(
         var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Onix
-        var(VAR_MAP_SWITCH_2) == 1 &&  // east  -- Zeraora
+        var(VAR_MAP_SWITCH_2) == 1 &&  // east  -- Toedscruel
         var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Dusknoir
         var(VAR_MAP_SWITCH_4) == 3     // west  -- Dunsparce
     ){
@@ -5874,7 +5874,7 @@ text MapSwitchTablet1_Onix{
 
 text MapSwitchTablet2_Zeraora{
     "It's a stone tablet with an engraving\n"
-    "of a Zeraora."
+    "of a Toedscruel."
 }
 
 text MapSwitchTablet3_Dusknoir{
@@ -6074,10 +6074,10 @@ text HintsNPC_BerryJuice_SmallHint{
 }
 
 text HintsNPC_Trainer5_SmallHint{
-    "The snake so sturdy, I admire.\n"
-    "A Berry Juice, its true desire.\p"
-    "That's how Liepard hits it twice.\n"
-    "Pay Day Liepard? That's not nice."
+    "An Onix so sturdy, I admire.\n"
+    "The Berry Juice, her true desire.\p"
+    "That's how Liepard hits her twice.\n"
+    "Pay Day your partner? That's not nice."
 }
 
 text HintsNPC_TrapinchRun_SmallHint{
@@ -6085,13 +6085,13 @@ text HintsNPC_TrapinchRun_SmallHint{
 }
 
 text HintsNPC_RareCandyRevive_SmallHint{
-    "Find your way back once again.\n"
-    "Such a shame that Liepard is fainted."
+    "Can you find your way back once more?\n"
+    "Too bad Liepard will be fainted."
 }
 
 text HintsNPC_Trainer6_SmallHint{
 //  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer6 - small hint)"
+    ""
 }
 
 text HintsNPC_MapSwitches_SmallHint{
@@ -6249,17 +6249,17 @@ text HintsNPC_BerryJuice_LargeHint{
 }
 
 text HintsNPC_Trainer5_LargeHint{
-    "Insane Money Hack You Won't Believe\p"
+    "Insane Money Hack You Won't Believe:\p"
 
     "Step 1: Give Onix some Berry Juice.\n"
     "Step 2: Delete the cat.\l"
     "Step 3: Break. That. Sub!\l"
-    "Step 4: Taunt?\l"
+    "Step 4: Taunt.\l"
     "...\l"
     "Step 8: Profit.\p"
     
-    "Need more?\n"
-    "Just hit yourself!"
+    "Still not enough?\n"
+    "Just Pay Day yourself!"
 }
 
 text HintsNPC_TrapinchRun_LargeHint{
@@ -6267,16 +6267,18 @@ text HintsNPC_TrapinchRun_LargeHint{
 }
 
 text HintsNPC_RareCandyRevive_LargeHint{
-    "Taunt a Dusknoir, now we can run.\n"
+    "Taunt a Dusknoir, now you can run.\n"
     "The other side holds all the fun!\p"
-    "A special treat revives the dead,\n"
-    "Annihilape still lies ahead.\p"
-    "Will this help beat Rayquaza?"
+    "Want Liepard and the Ape to meet?\n"
+    "Give your cat get a special treat."
 }
 
+
+// ape + ring target + endeavor = 3 hp
+// Endeavor and Fling
 text HintsNPC_Trainer6_LargeHint{
 //  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer6 - large hint)"
+    ""
 }
 
 text HintsNPC_MapSwitches_LargeHint{
@@ -6598,10 +6600,13 @@ text HintsNPC_RareCandyRevive_Solution{
     "Aipom's Run Away to escape.\p"
 
     "Walk past the Twins again and revive\n"
-    "Liepard by using the Rare Candy.\p"
+    "Liepard with the Rare Candy.\p"
 
-    "You can now revisit the Annihilape and\n"
-    "prepare for the Rayquaza trainer."
+    "You can now revisit Annihilape and set\n"
+    "up for the Rayquaza trainer.\p"
+
+    "(A new hint/solution will be available\n"
+    "once Liepard is succesfully revived.)"
 }
 
 text HintsNPC_Trainer6_Solution_Refresher{
@@ -6611,14 +6616,43 @@ text HintsNPC_Trainer6_Solution_Refresher{
     "with the Rare Candy." 
 }
 
-// pre damage solution + custap fling goggles
 text HintsNPC_Trainer6_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer6 solution)"
+    "You can beat the Rayquaza trainer with\n"
+    "Custap Berry Endeavor + Assist Fling,\l"
+    "which requires Aipom to be at <25% HP.\p"
+
+    "Revive Liepard with the Rare Candy,\n"
+    "then buy and give it a Ring Target.\p"
+
+    "Fight the Annihilape and pre-damage\n"
+    "Aipom via the following sequence:\p"
+    
+    "Lead: Aipom.\n"
+    "Turn 1: Endeavor.\l"
+    "Turn 2: X (let Ape Mimic Endeavor).\l"
+    "Turn 3: Switch to Liepard.\l"
+    "Turn 4: Trick (give Ring Target).\l"
+    "Turn 5: Copycat (Endeavor).\l"
+    "Turn 6: Trick (take Ring Target).\l"
+    "Turn 7: Switch to Aipom.\l"
+    "Turn 8: Run.\p"
+
+    "Sell the Ring Target, buy a Custap\n"
+    "Berry, give it to Aipom, and give the\l"
+    "Safety Goggles to Liepard.\p"
+
+    "Go back to the other area via the Rock\n"
+    "Smash tunnel and delete Aipom's Taunt\l"
+    "at the move deleter.\p"
+
+    "Start the trainer battle leading with\n"
+    "Aipom, then:\p"
+    "1. Use Endeavor (Custap activates).\n"
+    "2. Use Assist (Fling)."
 }
 
- // hint locations
 text HintsNPC_MapSwitches_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Map Switches solution)"
 }
 
