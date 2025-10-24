@@ -672,7 +672,7 @@
 #define FLAG_TRAINER10_DEFEATED         0x274 
 #define FLAG_TRAINER11_DEFEATED         0x275 
 #define FLAG_PRIMEAPE_OBTAINED          0x276  
-#define FLAG_HIDE_PRIMEAPE_BALL         0x277  
+#define FLAG_FANFARE_NO_MUSIC_RESUME    0x277
 #define FLAG_HIDE_RARE_CANDY2           0x278  
 #define FLAG_RARE_CANDY2_OBTAINED       0x279  
 #define FLAG_MENTAL_HERB_SACK_ACTIVE    0x27A
@@ -1300,8 +1300,8 @@
 #define FLAG_TRAINER11_LARGE_HINT                      0x4DC
 #define FLAG_SAFETY_GOGGLES_LARGE_HINT                 0x4DD
 
-#define FLAG_UNUSED_0x4DE                                           0x4DE // Unused Flag
-#define FLAG_UNUSED_0x4DF                                           0x4DF // Unused Flag
+#define FLAG_GRAVE1_ROBBED                                          0x4DE
+#define FLAG_GRAVE2_ROBBED                                           0x4DF
 #define FLAG_UNUSED_0x4E0                                           0x4E0 // Unused Flag
 #define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
 #define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag

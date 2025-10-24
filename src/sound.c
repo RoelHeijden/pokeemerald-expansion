@@ -8,6 +8,7 @@
 #include "constants/cries.h"
 #include "constants/songs.h"
 #include "task.h"
+#include "event_data.h" // ADDED
 
 struct Fanfare
 {
@@ -244,7 +245,12 @@ static void Task_Fanfare(u8 taskId)
     }
     else
     {
-        m4aMPlayContinue(&gMPlayInfo_BGM);
+        // changed
+        if(!FlagGet(FLAG_FANFARE_NO_MUSIC_RESUME))
+            m4aMPlayContinue(&gMPlayInfo_BGM);
+        FlagClear(FLAG_FANFARE_NO_MUSIC_RESUME);
+        
+
         DestroyTask(taskId);
     }
 }

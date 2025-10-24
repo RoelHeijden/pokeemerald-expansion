@@ -1393,12 +1393,15 @@
 	.byte 0xf8
 	.endm
 
-	@ Heals one specified pokemon species in the player party.
+	@ Heals or faints one specified pokemon species in the player party.
 	@ VAR_RESULT returns the slot of the healed Pokemon. PART_SIZE if not found.
-	.macro healpartymon species:req
+	.macro healpartymon species:req, reverse:req
 	.byte 0xd0
 	.2byte \species
+	.2byte \reverse
 	.endm
+
+
 
     @ Remove entry by species + newMove
     @ VAR_RESULT = TRUE if removed, FALSE if not found

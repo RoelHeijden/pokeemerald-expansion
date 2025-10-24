@@ -2417,24 +2417,30 @@ bool8 ScrCmd_removelostitem(struct ScriptContext *ctx)
 bool8 ScrCmd_healpartymon(struct ScriptContext *ctx)
 {
     u16 species = VarGet(ScriptReadHalfword(ctx));
+    bool8 reverse = VarGet(ScriptReadHalfword(ctx));
+
     u8 i;
     struct Pokemon *mon;
-
     for (i = 0; i < PARTY_SIZE; i++)
     {
         mon = &gPlayerParty[i];
         if (GetMonData(mon, MON_DATA_SPECIES, NULL) == species &&
-            GetMonData(mon, MON_DATA_IS_EGG, NULL) == FALSE)
+            !GetMonData(mon, MON_DATA_IS_EGG, NULL))
         {
-            HealPokemon(mon);
-            gSpecialVar_Result = i; // return slot index
+            if (reverse)
+                SetMonData(mon, MON_DATA_HP, &((u16){0}));
+            else
+                HealPokemon(mon);
+
+            gSpecialVar_Result = i;
             return FALSE;
         }
     }
 
-    gSpecialVar_Result = PARTY_SIZE; // not found
+    gSpecialVar_Result = PARTY_SIZE;
     return FALSE;
 }
+
 
 // ADDED
 bool8 ScrCmd_partymonhasfainted(struct ScriptContext *ctx)

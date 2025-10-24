@@ -1989,7 +1989,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
                 // only heal if not at 100% HP already
                 checkpartymonfullhp(SPECIES_AIPOM)
                 if(var(VAR_RESULT) == FALSE){
-                    healpartymon(SPECIES_AIPOM)
+                    healpartymon(SPECIES_AIPOM, reverse=FALSE)
                     playse(SE_USE_ITEM)
                     waitse
 
@@ -2442,7 +2442,7 @@ script EscapeRoom_EventScript_UndoMoveTeach{
     // heal if move undone to prevent PP gain
     // Ape sequence: heal aipom
     if(flag(FLAG_RAN_FROM_TRAPINCH) && !flag(FLAG_TRAINER6_DEFEATED) && var(VAR_LOCATED_AT_SECTION_X) == 1){
-        healpartymon(SPECIES_AIPOM)
+        healpartymon(SPECIES_AIPOM, reverse=FALSE)
         playse(SE_USE_ITEM)
         waitse
 
@@ -2763,7 +2763,7 @@ script EscapeRoom_EventScript_UndoRareCandy{
                     // heal Aipom if damaged
                     checkpartymonfullhp(SPECIES_AIPOM)
                     if(var(VAR_RESULT) == FALSE){
-                        healpartymon(SPECIES_AIPOM)
+                        healpartymon(SPECIES_AIPOM, reverse=FALSE)
                         playse(SE_USE_ITEM)
                         waitse
 
@@ -2790,7 +2790,7 @@ script EscapeRoom_EventScript_UndoRareCandy{
                 checkpartymonfullhp(VAR_0x8005)
                 if(var(VAR_RESULT) == FALSE){
                     // only heal leveled down mon
-                    healpartymon(VAR_0x8005)
+                    healpartymon(VAR_0x8005, reverse=FALSE)
                     playse(SE_USE_ITEM)
                     waitse
 
@@ -5587,10 +5587,6 @@ script EscapeRoom_EventScript_SafetyGogglesStatue{
             msgbox(Goggles_Statue_AskSnatch, MSGBOX_YESNO)
             if(var(VAR_RESULT) == YES){
 
-                // temp
-                // setflag(FLAG_GOGGLES_SNATCHED)
-                // call(EscapeRoom_EventScript_SnatchSafetyGoggles)
-
                 // only allow Goggles Snatch if Zera is lvl 43
                 checkpartymonlevel(43)
                 if(var(VAR_RESULT) != PARTY_SIZE){
@@ -5630,26 +5626,26 @@ script EscapeRoom_EventScript_SnatchSafetyGoggles{
     delay(40)
     finditem(ITEM_SAFETY_GOGGLES)
     
-    // // curse happens
-    // playse(SE_PIN)
-    // applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
-    // waitmovement(OBJ_EVENT_ID_PLAYER)
-    // delay(50)
-    // playse(SE_M_SWEET_SCENT)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
-    // special(DoSealedChamberShakingEffect_Short)
-    // delay(10)
-    // special(DoSealedChamberShakingEffect_Short)
-    // waitse
-    // msgbox(GogglesCurseHappens, MSGBOX_AUTOCLOSE)    
-    // waitmessage
+    // curse happens
+    playse(SE_PIN)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    delay(50)
+    playse(SE_M_NIGHTMARE)  // alternatives: SE_M_SWEET_SCENT, SE_M_NIGHTMARE, SE_M_HAZE
+    special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+    waitse
+    msgbox(GogglesCurseHappens, MSGBOX_AUTOCLOSE)    
+    waitmessage
     fadeinbgm(0)
 
-    // // replace Snatch with Curse   
-    // checkpartymon(SPECIES_ZERAORA)
-    // copyvar(VAR_0x8001, VAR_RESULT)
-    // setvar(VAR_0x8002, MOVE_SNATCH)
-    // setvar(VAR_0x8003, MOVE_NONE)
-    // replacemove(VAR_0x8001, VAR_0x8002, VAR_0x8003) 
+    // remove Snatch with   
+    checkpartymon(SPECIES_ZERAORA)
+    copyvar(VAR_0x8001, VAR_RESULT)
+    setvar(VAR_0x8002, MOVE_SNATCH)
+    setvar(VAR_0x8003, MOVE_NONE)
+    replacemove(VAR_0x8001, VAR_0x8002, VAR_0x8003) 
 }
 
 script EscapeRoom_EventScript_AnnihilapeStatue{
@@ -6110,15 +6106,16 @@ text HintsNPC_MapSwitches_SmallHint{
 //// SECTION 3 ////
 
 text HintsNPC_Trainer7A_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer7A - small hint)"
+    "Sore eyes?\n"
+    "Hindsight is 20/20."
 }
 
 text HintsNPC_Trainer8_SmallHint{
-    "TBD (Trainer8 - small hint)"
+    "Hidden Power Normal does not exist!"
 }
 
 text HintsNPC_IcePuzzleRareCandy_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Ice puzzle rare candy - small hint)"
 }
 
@@ -6307,15 +6304,22 @@ text HintsNPC_MapSwitches_LargeHint{
 //// SECTION 3 ////
 
 text HintsNPC_Trainer7A_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer7A - large hint)"
+    "What if Peepers means it litterally?\n"
+    "Perhaps her eyes really are sore.\p"
+    "It wouldn't be strange for someone her\n"
+    "age to be a little short-sighted.\p"
+
+    "And Caesar... I totally understand his\n"
+    "struggle."
 }
 
 text HintsNPC_Trainer8_LargeHint{
-    "TBD (Trainer8 - large hint)"
+    "Dusclops is sus...\n"
+    "Is there any move you haven't used?"
 }
 
 text HintsNPC_IcePuzzleRareCandy_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Ice puzzle rare candy - large hint)"
 }
 
@@ -6407,7 +6411,7 @@ text HintsNPC_Trainer1_Solution{
     "You have to defeat the Toedscruel and\n"
     "Marowak trainer.\p"
 
-    "First replace Grass Knot for Skill Swap,\n"
+    "Replace Grass Knot with Skill Swap,\n"
     "give Florges the Safety Goggles and\l"
     "Zeraora the Electric Seed.\p"
 
@@ -6429,14 +6433,16 @@ text HintsNPC_Trainer1_Solution{
 text HintsNPC_Trainer1_Solution_ExactSequence{
     "Lead: Florges (Safety Goggles) and\n"
     "Zeroara (Electric Seed).\p"
-    "Turn 1: Grassy Terrain + X.\n"
-    "Turn 2: Skill Swap (Marowak) + X.\l"
-    "Turn 3: Switch to Ferrothorn + X.\l"
 
-    "Turn 4: Camouflage + Plasma Fists\l"
-    "(redirected into Toedscruel).\p"
+    "Turn 1: Grassy Terrain + Plasma Fists.\n"
+    "Turn 2: Skill Swap (Marowak) + Plasma\l"
+    "Fists.\p"
 
-    "Turn 5: Nature Power (Zeraora) +\n"
+    "Turn 3: Switch to Ferrothorn + Plasma\n"
+    "Fists.\p"
+
+    "Turn 4: Camouflage + Plasma Fists.\n"
+    "Turn 5: Nature Power (Zeraora) +\l"
     "Electric Terrain.\p"
 
     "Turn 6: Nature Power (Zeraora) +\n"
@@ -6673,29 +6679,40 @@ text HintsNPC_MapSwitches_Solution{
     "with the Pokédex entry number of a\l"
     "Pokémon you've encountered.\p"
 
-    "Check that Pokémon's Pokédex entry\n"
-    "and view its encounter area.\p"
+    "For each tablet, open the matching\n"
+    "Pokédex entry and check the Pokémon's\l"
+    "encounter area.\p"
 
-    "Align each tablet to the highlighted\n"
+    "Align the tablet to the highlighted\n"
     "part of the map (north, east, south, or\l"
-    "west) for its corresponding Pokémon."
+    "west)."
 }
 
 //// SECTION 3 ////
 
-// trainer7b sight, move deleter, struggle
 text HintsNPC_Trainer7A_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer7A solution)"
+    "The Muk trainer's sight radius is only\n"
+    "three tiles, so you can isolate the\l"
+    "Shedinja trainer by hugging the\l"
+    "northern wall.\p"
+
+    "Before the battle, visit the Move\n"
+    "Deleter and remove all of Liepard's\l"
+    "moves except for Trick or Assist.\p"
+
+    "Fight the Shedinja, use up all your PP,\n"
+    "and Struggle will get the KO."
 }
 
-// Use Cut to beat Dusclops (don't mention Zoroark, mention entry card)
 text HintsNPC_Trainer8_Solution{
-    "TBD (Trainer8 solution)"
+    "Teach Cut to Bagon and fight the\n"
+    "Dusclops trainer.\p"
+    "Use Cut."
 }
 
 // Use item ball was wall, puzzle solution
 text HintsNPC_IcePuzzleRareCandy_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Ice puzzle rare candy solution)"
 }
 

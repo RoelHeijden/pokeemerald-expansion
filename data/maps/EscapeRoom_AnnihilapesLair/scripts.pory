@@ -1,5 +1,4 @@
 
-const LOCALID_PRIMEAPE_BALL = 14
 
 
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
@@ -58,8 +57,6 @@ script EscapeRoom_AnnihilapesLair_SetLostItemVars{
 
 
 script EscapeRoom_AnnihilapesLair_FindPrimeape{
-    lockall
-
     // obtain primeape
     givemon(
         SPECIES_PRIMEAPE,
@@ -86,14 +83,17 @@ script EscapeRoom_AnnihilapesLair_FindPrimeape{
         speedIv=10
     )  
 
+    // set annihilape as fainted
+    healpartymon(SPECIES_PRIMEAPE, reverse=TRUE)
+
     // remove item
-    removeobject(LOCALID_PRIMEAPE_BALL)
     setflag(FLAG_PRIMEAPE_OBTAINED)
 
     // set rare candy flag
     setflag(FLAG_MAX_REVIVE_OBTAINED)
 
     // primeape obtained message
+    setflag(FLAG_FANFARE_NO_MUSIC_RESUME)
     playfanfare(MUS_OBTAIN_ITEM)
     message(PrimeapeObtainMessage)
     waitfanfare
@@ -106,23 +106,180 @@ script EscapeRoom_AnnihilapesLair_FindPrimeape{
         call(Common_EventScript_NameReceivedPartyMon)
     }
     closemessage
-    releaseall
 }
 
 script EscapeRoom_AnnihilapesLair_PrimeapeGrave1{
     lockall
-    msgbox(PrimeapeGraveNothing, MSGBOX_AUTOCLOSE)
-    waitmessage
+
+    // some things meant to be burried
+    if(flag(FLAG_GRAVE1_ROBBED)){
+        msgbox(PrimeapeGrave_PostScriptMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        return
+    }
+
+    // dig up grave?
+    msgbox(PrimeapeGrave_main, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+
+        msgbox(PrimeapeGrave_youSure1, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            msgbox(PrimeapeGrave_youSure2, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+
+                msgbox(PrimeapeGrave_youSure3, MSGBOX_YESNO)
+                if(var(VAR_RESULT) == YES){
+                    
+                    call(EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave)
+                    setflag(FLAG_GRAVE1_ROBBED)
+                }
+            }
+        }
+    }
     releaseall
 }
 
 script EscapeRoom_AnnihilapesLair_PrimeapeGrave2{
     lockall
-    msgbox(PrimeapeGraveNothing, MSGBOX_AUTOCLOSE)
-    waitmessage
+
+    // some things meant to be burried
+    if(flag(FLAG_GRAVE1_ROBBED)){
+        msgbox(PrimeapeGrave_PostScriptMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        return
+    }
+
+    // just an old grave
+    if(flag(FLAG_GRAVE2_ROBBED)){
+        msgbox(PrimeapeGrave_PostDigNothingMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+        return
+    }
+
+    // dig up grave?
+    msgbox(PrimeapeGrave_main, MSGBOX_YESNO)
+    if(var(VAR_RESULT) == YES){
+
+        msgbox(PrimeapeGrave_youSure1, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+
+            msgbox(PrimeapeGrave_youSure2, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+
+                msgbox(PrimeapeGrave_youSure3, MSGBOX_YESNO)
+                if(var(VAR_RESULT) == YES){
+
+                    // dig grave
+                    msgbox(PrimeapeGrave_DigTheGrave2, MSGBOX_DEFAULT)
+                    waitmessage
+                    
+                    // you find nothing
+                    msgbox(PrimeapeGrave_FindNothingMessage, MSGBOX_AUTOCLOSE)
+                    waitmessage
+                    setflag(FLAG_GRAVE2_ROBBED)
+                }
+            }
+        }
+    }
     releaseall
 }
 
-text PrimeapeGraveNothing{
+
+script EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave{
+    fadeoutbgm(0)
+    delay(20)
+
+    // dig grave
+    msgbox(PrimeapeGrave_DigTheGrave, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // exclamation mark
+    playse(SE_PIN)
+    applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark)
+    waitmovement(OBJ_EVENT_ID_PLAYER)
+    delay(50)
+
+    // ground shakes and roar
+    call(EscapeRoom_AnnihilapesLair_PrimeapeGrave_ApeRoar)
+    delay(20)
+
+    // obtain primeape
+    call(EscapeRoom_AnnihilapesLair_FindPrimeape)
+
+    // final message
+    delay(10)
+    msgbox(PrimeapeGrave_PostDigMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    fadeinbgm(0)
+}
+
+script EscapeRoom_AnnihilapesLair_PrimeapeGrave_ApeRoar{
+    playmoncry(SPECIES_GROUDON, CRY_MODE_NORMAL)
+	special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+    delay(10)
+    special(DoSealedChamberShakingEffect_Short)
+
+    // msgbox(GravestoneAnnihilapesRoar, MSGBOX_AUTOCLOSE)
+    waitmoncry
+	// waitmessage
+}
+
+
+////////////////////////////////////////// TEXT //////////////////////////////////////////
+
+
+text PrimeapeGrave_main{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
+    "It's an old grave.\p"
+    "Do you want to dig up the grave in\n"
+    "in search for treasure?"
+}
+
+text PrimeapeGrave_youSure1{
+    "Are you sure about this?"
+}
+
+text PrimeapeGrave_youSure2{
+    "Do you really want to rob a grave?"
+}
+
+text PrimeapeGrave_youSure3{
+    "Are you REALLY sure?"
+}
+
+text PrimeapeGrave_DigTheGrave{
+    "You carefully dig through the soil...\p"
+    "...\p"
+    "...\p"
+    "...\p"
+    "...\p"
     "..."
 }
+
+text PrimeapeGrave_DigTheGrave2{
+    "You carefully dig through the soil...\p"
+    "..."
+}
+
+text PrimeapeGrave_FindNothingMessage{
+    "You find nothing but dirt."
+}
+
+text PrimeapeGrave_PostDigNothingMessage{
+    "It's an old grave."
+}
+
+text PrimeapeGrave_PostDigMessage{
+    "Let's never doing this again..."
+}
+
+text PrimeapeGrave_PostScriptMessage{
+    "Some things are better left buried."
+}
+
