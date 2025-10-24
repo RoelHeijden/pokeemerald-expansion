@@ -111,7 +111,7 @@ script EscapeRoom_AnnihilapesLair_FindPrimeape{
 script EscapeRoom_AnnihilapesLair_PrimeapeGrave1{
     lockall
 
-    // some things meant to be burried
+    // enough digging for today
     if(flag(FLAG_GRAVE1_ROBBED)){
         msgbox(PrimeapeGrave_PostScriptMessage, MSGBOX_AUTOCLOSE)
         waitmessage
@@ -130,9 +130,17 @@ script EscapeRoom_AnnihilapesLair_PrimeapeGrave1{
 
                 msgbox(PrimeapeGrave_youSure3, MSGBOX_YESNO)
                 if(var(VAR_RESULT) == YES){
+
+                    msgbox(PrimeapeGrave_youSure4, MSGBOX_YESNO)
+                    if(var(VAR_RESULT) == YES){
+
+                        msgbox(PrimeapeGrave_youSure5, MSGBOX_YESNO)
+                        if(var(VAR_RESULT) == YES){
                     
-                    call(EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave)
-                    setflag(FLAG_GRAVE1_ROBBED)
+                            call(EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave)
+                            setflag(FLAG_GRAVE1_ROBBED)
+                        }
+                    }
                 }
             }
         }
@@ -142,49 +150,16 @@ script EscapeRoom_AnnihilapesLair_PrimeapeGrave1{
 
 script EscapeRoom_AnnihilapesLair_PrimeapeGrave2{
     lockall
-
-    // some things meant to be burried
     if(flag(FLAG_GRAVE1_ROBBED)){
-        msgbox(PrimeapeGrave_PostScriptMessage, MSGBOX_AUTOCLOSE)
+        msgbox(PrimeapeGrave2_postdig, MSGBOX_AUTOCLOSE)
         waitmessage
-        return
     }
-
-    // just an old grave
-    if(flag(FLAG_GRAVE2_ROBBED)){
-        msgbox(PrimeapeGrave_PostDigNothingMessage, MSGBOX_AUTOCLOSE)
+    else{
+        msgbox(PrimeapeGrave2_main, MSGBOX_AUTOCLOSE)
         waitmessage
-        return
-    }
-
-    // dig up grave?
-    msgbox(PrimeapeGrave_main, MSGBOX_YESNO)
-    if(var(VAR_RESULT) == YES){
-
-        msgbox(PrimeapeGrave_youSure1, MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-
-            msgbox(PrimeapeGrave_youSure2, MSGBOX_YESNO)
-            if(var(VAR_RESULT) == YES){
-
-                msgbox(PrimeapeGrave_youSure3, MSGBOX_YESNO)
-                if(var(VAR_RESULT) == YES){
-
-                    // dig grave
-                    msgbox(PrimeapeGrave_DigTheGrave2, MSGBOX_DEFAULT)
-                    waitmessage
-                    
-                    // you find nothing
-                    msgbox(PrimeapeGrave_FindNothingMessage, MSGBOX_AUTOCLOSE)
-                    waitmessage
-                    setflag(FLAG_GRAVE2_ROBBED)
-                }
-            }
-        }
     }
     releaseall
 }
-
 
 script EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave{
     fadeoutbgm(0)
@@ -234,11 +209,21 @@ script EscapeRoom_AnnihilapesLair_PrimeapeGrave_ApeRoar{
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 
-text PrimeapeGrave_main{
+text PrimeapeGrave2_main{
 //  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "It's an old grave.\p"
-    "Do you want to dig up the grave in\n"
-    "in search for treasure?"
+    "It's just an old grave."
+}
+
+text PrimeapeGrave2_postdig{
+    "Don't even think about it..."
+}
+
+text PrimeapeGrave_main{
+    "It's an old grave, but something about\n"
+    "it feels off.\p"
+    "...\p"
+    "Do you want to dig it up in search of\n"
+    "treasure?"
 }
 
 text PrimeapeGrave_youSure1{
@@ -246,40 +231,40 @@ text PrimeapeGrave_youSure1{
 }
 
 text PrimeapeGrave_youSure2{
-    "Do you really want to rob a grave?"
+    "You feel like you're being watched...\n"
+    "Still want to keep going?"
 }
 
 text PrimeapeGrave_youSure3{
+    "It's not too late to turn back.\n"
+    "You sure you want to continue?"
+}
+
+text PrimeapeGrave_youSure4{
+    "Do you really want to rob a grave?\n"
+    "Think of what your mother would say."
+}
+
+text PrimeapeGrave_youSure5{
+    "...\p"
     "Are you REALLY sure?"
 }
+
+
 
 text PrimeapeGrave_DigTheGrave{
     "You carefully dig through the soil...\p"
     "...\p"
     "...\p"
     "...\p"
-    "...\p"
     "..."
-}
-
-text PrimeapeGrave_DigTheGrave2{
-    "You carefully dig through the soil...\p"
-    "..."
-}
-
-text PrimeapeGrave_FindNothingMessage{
-    "You find nothing but dirt."
-}
-
-text PrimeapeGrave_PostDigNothingMessage{
-    "It's an old grave."
 }
 
 text PrimeapeGrave_PostDigMessage{
-    "Let's never doing this again..."
+    "That went well."
 }
 
 text PrimeapeGrave_PostScriptMessage{
-    "Some things are better left buried."
+    "You've done enough digging for today."
 }
 
