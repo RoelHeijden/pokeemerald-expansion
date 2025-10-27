@@ -210,7 +210,6 @@ script EscapeRoom_AnnihilapesLair_PrimeapeGrave_ApeRoar{
 
 
 text PrimeapeGrave2_main{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "It's just an old grave."
 }
 
@@ -250,8 +249,6 @@ text PrimeapeGrave_youSure5{
     "Are you REALLY sure?"
 }
 
-
-
 text PrimeapeGrave_DigTheGrave{
     "You carefully dig through the soil...\p"
     "...\p"
@@ -261,7 +258,7 @@ text PrimeapeGrave_DigTheGrave{
 }
 
 text PrimeapeGrave_PostDigMessage{
-    "That went well."
+    "Let's not do that again."
 }
 
 text PrimeapeGrave_PostScriptMessage{

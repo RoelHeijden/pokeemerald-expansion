@@ -1301,9 +1301,9 @@
 #define FLAG_SAFETY_GOGGLES_LARGE_HINT                 0x4DD
 
 #define FLAG_GRAVE1_ROBBED                                          0x4DE
-#define FLAG_GRAVE2_ROBBED                                           0x4DF
-#define FLAG_UNUSED_0x4E0                                           0x4E0 // Unused Flag
-#define FLAG_UNUSED_0x4E1                                           0x4E1 // Unused Flag
+#define FLAG_GET_ULTRA_BALL_SOLUTION                                0x4DF 
+#define FLAG_GET_ULTRA_BALL_SMALL_HINT                              0x4E0 
+#define FLAG_GET_ULTRA_BALL_LARGE_HINT                              0x4E1
 #define FLAG_UNUSED_0x4E2                                           0x4E2 // Unused Flag
 #define FLAG_UNUSED_0x4E3                                           0x4E3 // Unused Flag
 #define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag

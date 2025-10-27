@@ -395,7 +395,7 @@ script EscapeRoom_MapScripts_CheckZeraPredamageStep{
 script EscapeRoom_MapScripts_CheckRareCandyReviveStep{
     // liepard at 3 hp and located in section 1
     checkpartymonfullhp(SPECIES_LIEPARD)
-    if(var(VAR_0x8004) == 3 && var(VAR_LOCATED_AT_SECTION_X) == 1){
+    if(var(VAR_0x8004) == 3 && var(VAR_LOCATED_AT_SECTION_X) == 1 && flag(FLAG_RARE_CANDY1_OBTAINED)){
         setflag(FLAG_RARE_CANDY_REVIVE_COMPLETED)
 
         // ERROR CHECK
@@ -1171,6 +1171,10 @@ script EscapeRoom_EventScript_HintsNPC_SmallHint{
         msgbox(HintsNPC_AnnihilapeSpawn_SmallHint)
         handlehintorsolution(FLAG_ANNIHILAPE_SPAWNED_SMALL_HINT, FLAG_ANNIHILAPE_SPAWNED_SOLUTION)
     }
+    elif(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
+        msgbox(HintsNPC_UltraBall_SmallHint)
+        handlehintorsolution(FLAG_GET_ULTRA_BALL_SMALL_HINT, FLAG_GET_ULTRA_BALL_SOLUTION)
+    }
     // Zera catch predamage
     elif(flag(FLAG_ZERA_PREDAMAGE_COMPLETED) == FALSE){
         msgbox(HintsNPC_ZeraCatchPredamage_SmallHint)
@@ -1363,6 +1367,10 @@ script EscapeRoom_EventScript_HintsNPC_LargeHint{
         msgbox(HintsNPC_AnnihilapeSpawn_LargeHint)
         handlehintorsolution(FLAG_ANNIHILAPE_SPAWNED_LARGE_HINT, FLAG_ANNIHILAPE_SPAWNED_SOLUTION)
     }
+    elif(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
+        msgbox(HintsNPC_UltraBall_LargeHint)
+        handlehintorsolution(FLAG_GET_ULTRA_BALL_LARGE_HINT, FLAG_GET_ULTRA_BALL_SOLUTION)
+    }
     // Zera catch predamage
     elif(flag(FLAG_ZERA_PREDAMAGE_COMPLETED) == FALSE){
         msgbox(HintsNPC_ZeraCatchPredamage_LargeHint)
@@ -1554,6 +1562,10 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         msgbox(HintsNPC_AnnihilapeSpawn_Solution)
         handlehintorsolution(FLAG_ANNIHILAPE_SPAWNED_SOLUTION, FLAG_ANNIHILAPE_SPAWNED_SOLUTION)
     }
+    elif(flag(FLAG_POKE_BALL_OBTAINED) == FALSE){
+        msgbox(HintsNPC_UltraBall_Solution)
+        handlehintorsolution(FLAG_GET_ULTRA_BALL_SOLUTION, FLAG_GET_ULTRA_BALL_SOLUTION)
+    }
     // Zera catch predamage
     elif(flag(FLAG_ZERA_PREDAMAGE_COMPLETED) == FALSE){
         msgbox(HintsNPC_ZeraCatchPredamage_Solution)
@@ -1720,7 +1732,7 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
         // allow review previous hint
         msgbox(HintsNPC_ReviewPreviousStep, MSGBOX_YESNO)
         if(var(VAR_RESULT) == YES){
-            msgbox(HintsNPC_ToxicOrbSteal_Solution)
+            msgbox(HintsNPC_SecretPower_Solution_Refresher)
         }
     }
     // secret base rare candy
@@ -5970,7 +5982,7 @@ text HintsNPCSolutionAlreadyReceivedMessage{
 }
 
 text HintsNPC_ReviewPreviousStep{
-    "Need a refresher on the prior step?\n"
+    "Want to review the previous step?\n"
     "This won't add any extra time."
 }
 
@@ -6056,6 +6068,10 @@ text HintsNPC_SunStone_SmallHint{
     "You have the ability to progress!"
 }
 
+text HintsNPC_UltraBall_SmallHint{
+    "Someone's got something for you."
+}
+
 text HintsNPC_Trainer4_SmallHint{
     "Trump Trump Trump, I feel depleted.\n"
     "Assistable moves should be deleted."
@@ -6115,15 +6131,18 @@ text HintsNPC_Trainer8_SmallHint{
 }
 
 text HintsNPC_IcePuzzleRareCandy_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Ice puzzle rare candy - small hint)"
+    "Try taking just one item from the ice\n"
+    "puzzle.\p"
+    "Don't be greedy."
 }
 
 text HintsNPC_Trainer9_SmallHint{
-    "TBD (Trainer9 - small hint)"
+    "Need an extra ¥500?\n"
+    "Annihilape might help you out."
 }
 
 text HintsNPC_ToxicOrbSteal_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Toxic Orb - small hint)"
 }
 
@@ -6153,9 +6172,14 @@ text HintsNPC_AnnihilapeSpawn_LargeHint{
     "for you to enter."
 }
 
+text HintsNPC_UltraBall_LargeHint{
+    "There's an NPC you still haven't\n"
+    "interacted with!"
+}
+
 text HintsNPC_ZeraCatchPredamage_LargeHint{
     "How to pre-damage Ferrothorn for\n"
-    "Custap Berry use?\p"
+    "Custap Berry boosted Block?\p"
     "Grass Knot is great, but Florges is so\n"
     "heavy...\p"
     "Florges can run?\n"
@@ -6165,9 +6189,8 @@ text HintsNPC_ZeraCatchPredamage_LargeHint{
 text HintsNPC_ZeraoraCatch_LargeHint{
     "Block, Ingrain, Zeraora will stay.\n"
     "The Electric type stands in your way.\p"
-    "1 PP was all you need, now Ferrothorn\n"
-    "rolls away the weed.\p"
-    "That's when you'll catch it!" 
+    "One PP, its type will change.\n"
+    "Which move brings the catch in range?"
 }
 
 text HintsNPC_Trainer0_LargeHint{
@@ -6319,15 +6342,25 @@ text HintsNPC_Trainer8_LargeHint{
 }
 
 text HintsNPC_IcePuzzleRareCandy_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Ice puzzle rare candy - large hint)"
+    "Right now, TM Secret Power can't be\n"
+    "taken out of the ice puzzle.\p"
+    
+    "Escaping with the Rare Candy is\n"
+    "possible, but you'll need to find a new\l"
+    "angle.\p"
+
+    "Try to avoid instant gratification."
 }
 
 text HintsNPC_Trainer9_LargeHint{
-    "TBD (Trainer9 - large hint)"
+    "Twenty Rage Fists with Primeape and\n"
+    "you'll have everything you need.\p"
+    "Are there any trainers you could never\n"
+    "defeat?"
 }
 
 text HintsNPC_ToxicOrbSteal_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Toxic Orb - large hint)"
 }
 
@@ -6358,6 +6391,11 @@ text HintsNPC_AnnihilapeSpawn_Solution{
     "order: 1 8 3 7."
 }
 
+text HintsNPC_UltraBall_Solution{
+    "Talk to the NPC with the green hat to\n"
+    "obtain an Ultra Ball."
+}
+
 text HintsNPC_ZeraCatchPredamage_Solution{
     "1. Give Florges a Float Stone and fight\n"
     "the Annihilape.\p"
@@ -6373,7 +6411,7 @@ text HintsNPC_ZeraCatchPredamage_Solution{
 text HintsNPC_ZeraCatchPredamage_Solution_Refresher{
     "Pre-damage Ferrothorn by letting the\n"
     "Annihilape use Grass Knot.\p"
-    "Give Florges a Float Stone and use\n"
+    "Have Florges hold a Float Stone and use\n"
     "Camouflage to run away."
 }
 
@@ -6385,8 +6423,7 @@ text HintsNPC_ZeraoraCatch_Solution{
     "Grassy Terrain and Camouflage.\p"
     "3. Switch to Ferrothorn and use Steel\n"
     "Roller.\p"
-    "You can now catch Zeraora (using the\n"
-    "Ultra Ball given by the NPC)."
+    "You can now catch Zeraora."
 }
 
 text HintsNPC_Trainer0_Solution{
@@ -6710,25 +6747,50 @@ text HintsNPC_Trainer8_Solution{
     "Use Cut."
 }
 
-// Use item ball was wall, puzzle solution
 text HintsNPC_IcePuzzleRareCandy_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Ice puzzle rare candy solution)"
+    "At this point, only the Rare Candy can\n"
+    "be taken out of the ice puzzle.\p"
+
+    "To do so, the item ball must be used as\n"
+    "an obstacle within the puzzle itself.\p"
+
+    "The solution that follows:\p"
+
+    "{DOWN_ARROW}{RIGHT_ARROW}{UP_ARROW}{RIGHT_ARROW}{UP_ARROW}{RIGHT_ARROW}"
+    "{DOWN_ARROW}{LEFT_ARROW}{UP_ARROW}{LEFT_ARROW}{UP_ARROW}{LEFT_ARROW}"
+    "{DOWN_ARROW}{LEFT_ARROW}{DOWN_ARROW}{RIGHT_ARROW}{DOWN_ARROW} (ignore the\n"
+    "item) {LEFT_ARROW}{DOWN_ARROW}{RIGHT_ARROW}{UP_ARROW}{LEFT_ARROW} "
+    "(take the item) {DOWN_ARROW}{LEFT_ARROW}{UP_ARROW}."
 }
 
-// 20x Rage Fist, Evolve Annihilape, beat trainer9
 text HintsNPC_Trainer9_Solution{
-    "TBD (Trainer9 solution)"
+    "Have Primeape use Rage Fist 20 times\n"
+    "(Sentret is the easiest target), then\l"
+    "give it the Rare Candy to evolve into\l"
+    "Annihilape.\p"
+
+    "Now you're finally able to defeat the\n"
+    "Twins.\p"
+
+    "Keep using Rage Fist (start with the\n"
+    "Urshifu-Rapid-Strike) to win."
 }
 
-// note: this is used as reviewed step
-// Thief Muk, escape ice puzzle
 text HintsNPC_ToxicOrbSteal_Solution{
-    "TBD (Toxic Orb solution)"
+    "The Muk is holding a Toxic Orb.\p"
+
+    "Buy TM Thief, teach it to Annihilape,\n"
+    "and steal the Toxic Orb from Muk."
+}
+
+text HintsNPC_SecretPower_Solution_Refresher{
+    "Buy TM Thief, teach it to Annihilape,\n"
+    "and steal the Toxic Orb from Muk."
 }
 
 // max revive sequence vs Dusknoir
 text HintsNPC_SecretPower_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Secret Power solution)"
 }
 
@@ -7132,7 +7194,7 @@ text NicknameThisPokemonMessage2{
 text RescueBellExplainMessage{
     "Use the Rescue Bell to teleport out of\n"
     "the ice puzzle if you're stuck.\p"
-    "When used, newly obtained items will be\n"
+    "When used, any obtained items will be\n"
     "placed back inside the ice puzzle."
 }
 
@@ -7450,7 +7512,8 @@ text Trainer7A_Outro{
 
 text Trainer7A_PostBattle{
     // "dusclops? sus."
-    "fwuenqru? uwu."
+    // "fwuenqru? uwu."
+    "bsqajmnq? qsq."
 }
 
 
@@ -7545,8 +7608,7 @@ text Trainer11_PostBattle_B{
     "project of mine.\p"
 
     "An absurd amount of time, effort, and\n"
-    "care was put into every minor detail\l"
-    "of the game.\p"
+    "care was put into every small detail.\p"
 
     "If you enjoyed the experience, please\n"
     "let me know by commenting on the game's\l"

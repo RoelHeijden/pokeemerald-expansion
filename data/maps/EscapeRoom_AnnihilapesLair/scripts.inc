@@ -128,7 +128,7 @@ EscapeRoom_AnnihilapesLair_PrimeapeGrave1::
 	compare VAR_RESULT, YES
 	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave1_5
 EscapeRoom_AnnihilapesLair_PrimeapeGrave1_4:
-# 140 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 148 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	releaseall
 	return
 
@@ -165,181 +165,158 @@ EscapeRoom_AnnihilapesLair_PrimeapeGrave1_9:
 
 EscapeRoom_AnnihilapesLair_PrimeapeGrave1_11:
 # 134 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	call EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave
+	msgbox PrimeapeGrave_youSure4, MSGBOX_YESNO
 # 135 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave1_13
+	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave1_4
+
+EscapeRoom_AnnihilapesLair_PrimeapeGrave1_13:
+# 137 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	msgbox PrimeapeGrave_youSure5, MSGBOX_YESNO
+# 138 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	compare VAR_RESULT, YES
+	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave1_15
+	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave1_4
+
+EscapeRoom_AnnihilapesLair_PrimeapeGrave1_15:
+# 140 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	call EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave
+# 141 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	setflag FLAG_GRAVE1_ROBBED
 	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave1_4
 
 
 EscapeRoom_AnnihilapesLair_PrimeapeGrave2::
-# 144 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 152 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	lockall
-# 147 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 153 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	goto_if_set FLAG_GRAVE1_ROBBED, EscapeRoom_AnnihilapesLair_PrimeapeGrave2_2
-# 154 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	goto_if_set FLAG_GRAVE2_ROBBED, EscapeRoom_AnnihilapesLair_PrimeapeGrave2_5
+# 158 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	msgbox PrimeapeGrave2_main, MSGBOX_AUTOCLOSE
+# 159 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	waitmessage
+EscapeRoom_AnnihilapesLair_PrimeapeGrave2_1:
 # 161 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_main, MSGBOX_YESNO
-# 162 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	compare VAR_RESULT, YES
-	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave2_8
-EscapeRoom_AnnihilapesLair_PrimeapeGrave2_7:
-# 185 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_AnnihilapesLair_PrimeapeGrave2_2:
-# 148 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_PostScriptMessage, MSGBOX_AUTOCLOSE
-# 149 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	waitmessage
-	return
-
-EscapeRoom_AnnihilapesLair_PrimeapeGrave2_5:
+# 154 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	msgbox PrimeapeGrave2_postdig, MSGBOX_AUTOCLOSE
 # 155 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_PostDigNothingMessage, MSGBOX_AUTOCLOSE
-# 156 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	waitmessage
-	return
-
-EscapeRoom_AnnihilapesLair_PrimeapeGrave2_8:
-# 164 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_youSure1, MSGBOX_YESNO
-# 165 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	compare VAR_RESULT, YES
-	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave2_10
-	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave2_7
-
-EscapeRoom_AnnihilapesLair_PrimeapeGrave2_10:
-# 167 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_youSure2, MSGBOX_YESNO
-# 168 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	compare VAR_RESULT, YES
-	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave2_12
-	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave2_7
-
-EscapeRoom_AnnihilapesLair_PrimeapeGrave2_12:
-# 170 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_youSure3, MSGBOX_YESNO
-# 171 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	compare VAR_RESULT, YES
-	goto_if_eq EscapeRoom_AnnihilapesLair_PrimeapeGrave2_14
-	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave2_7
-
-EscapeRoom_AnnihilapesLair_PrimeapeGrave2_14:
-# 174 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_DigTheGrave2, MSGBOX_DEFAULT
-# 175 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	waitmessage
-# 178 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	msgbox PrimeapeGrave_FindNothingMessage, MSGBOX_AUTOCLOSE
-# 179 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	waitmessage
-# 180 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	setflag FLAG_GRAVE2_ROBBED
-	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave2_7
+	goto EscapeRoom_AnnihilapesLair_PrimeapeGrave2_1
 
 
 EscapeRoom_AnnihilapesLair_PrimeapeGrave_DigGrave::
-# 190 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 165 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	fadeoutbgm 0
-# 191 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 166 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 20
-# 194 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 169 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	msgbox PrimeapeGrave_DigTheGrave, MSGBOX_AUTOCLOSE
-# 195 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 170 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	waitmessage
-# 198 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 173 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	playse SE_PIN
-# 199 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 174 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_ExclamationMark
-# 200 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 175 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	waitmovement OBJ_EVENT_ID_PLAYER
-# 201 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 176 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 50
-# 204 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 179 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	call EscapeRoom_AnnihilapesLair_PrimeapeGrave_ApeRoar
-# 205 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 180 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 20
-# 208 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 183 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	call EscapeRoom_AnnihilapesLair_FindPrimeape
-# 211 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 186 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 10
-# 212 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 187 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	msgbox PrimeapeGrave_PostDigMessage, MSGBOX_AUTOCLOSE
-# 213 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 188 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	waitmessage
-# 215 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 190 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	fadeinbgm 0
 	return
 
 
 EscapeRoom_AnnihilapesLair_PrimeapeGrave_ApeRoar::
-# 219 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 194 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	playmoncry SPECIES_GROUDON, CRY_MODE_NORMAL
-# 220 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 195 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
-# 221 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 196 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 10
-# 222 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 197 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
-# 223 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 198 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 10
-# 224 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 199 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
-# 225 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 200 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	delay 10
-# 226 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 201 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	special DoSealedChamberShakingEffect_Short
-# 229 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 204 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	waitmoncry
 	return
 
 
+PrimeapeGrave2_main::
+# 212 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "It's just an old grave.$"
+
+PrimeapeGrave2_postdig::
+# 216 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "Don't even think about it...$"
+
 PrimeapeGrave_main::
-# 237 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "It's an old grave...\p"
-	.string "Do you want to dig up the grave in\n"
-	.string "in search for treasure?$"
+# 220 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "It's an old grave, but something about\n"
+	.string "it feels off.\p"
+	.string "...\p"
+	.string "Do you want to dig it up in search of\n"
+	.string "treasure?$"
 
 PrimeapeGrave_youSure1::
-# 244 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 228 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	.string "Are you sure about this?$"
 
 PrimeapeGrave_youSure2::
-# 248 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "Do you really want to rob a grave?$"
+# 232 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "You feel like you're being watched...\n"
+	.string "Still want to keep going?$"
 
 PrimeapeGrave_youSure3::
-# 252 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 237 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "It's not too late to turn back.\n"
+	.string "You sure you want to continue?$"
+
+PrimeapeGrave_youSure4::
+# 242 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "Do you really want to rob a grave?\n"
+	.string "Think of what your mother would say.$"
+
+PrimeapeGrave_youSure5::
+# 247 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "...\p"
 	.string "Are you REALLY sure?$"
 
 PrimeapeGrave_DigTheGrave::
-# 256 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+# 252 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
 	.string "You carefully dig through the soil...\p"
 	.string "...\p"
 	.string "...\p"
 	.string "...\p"
-	.string "...\p"
 	.string "...$"
-
-PrimeapeGrave_DigTheGrave2::
-# 265 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "You carefully dig through the soil...\p"
-	.string "...$"
-
-PrimeapeGrave_FindNothingMessage::
-# 270 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "You find nothing but dirt.$"
-
-PrimeapeGrave_PostDigNothingMessage::
-# 274 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "It's an old grave...$"
 
 PrimeapeGrave_PostDigMessage::
-# 278 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "I'm never doing this again.$"
+# 260 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "Let's not do that again.$"
 
 PrimeapeGrave_PostScriptMessage::
-# 282 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
-	.string "Some things are better left buried.$"
+# 264 "data/maps/EscapeRoom_AnnihilapesLair/scripts.pory"
+	.string "You've done enough digging for today.$"
