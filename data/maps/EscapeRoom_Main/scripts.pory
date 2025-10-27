@@ -1722,6 +1722,12 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
     elif(flag(FLAG_RARE_CANDY2_COMPLETED) == FALSE){
         msgbox(HintsNPC_IcePuzzleRareCandy_Solution)
         handlehintorsolution(FLAG_ICEPUZZLE_RARECANDY_SOLUTION, FLAG_ICEPUZZLE_RARECANDY_SOLUTION)
+
+        // ask view exact ice puzzle steps
+        msgbox(HintsNPC_AskViewExactIcePuzzleSolution, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            msgbox(HintsNPC_IcePuzzleRareCandy_Solution_IcePuzzleSteps)
+        }
     }
     // trainer 9
     elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
@@ -1737,6 +1743,12 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
     elif(flag(FLAG_SECRET_POWER_COMPLETED) == FALSE){
         msgbox(HintsNPC_SecretPower_Solution)
         handlehintorsolution(FLAG_SECRET_POWER_SOLUTION, FLAG_SECRET_POWER_SOLUTION)
+
+        // ask view exact ice puzzle steps
+        msgbox(HintsNPC_AskViewExactIcePuzzleSolution, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            msgbox(HintsNPC_SecretPower_Solution_IcePuzzleSteps)
+        }
 
         // allow review previous hint
         msgbox(HintsNPC_ReviewPreviousStep, MSGBOX_YESNO)
@@ -5999,6 +6011,11 @@ text HintsNPC_ReviewExactSequence{
     "Want to view the exact move sequence?"
 }
 
+text HintsNPC_AskViewExactIcePuzzleSolution{
+    "Want to view the exact ice puzzle\n"
+    "steps?"
+}
+
 // time added
 text HintsNPC15minAddedMessage{
     "15 minutes were added to your clock."
@@ -6155,19 +6172,23 @@ text HintsNPC_ToxicOrbSteal_SmallHint{
 }
 
 text HintsNPC_SecretPower_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Secret Power - small hint)"
+    "Make the right choice, revive, and\n"
+    "you'll have poison.\p"
+    "That's how you can unlock your Secret\n"
+    "Power."
 }
 
 text HintsNPC_RareCandy3_SmallHint{
-    "TBD (Rare Candy3 - small hint)"
+    "There are two Secret Bases!"
 }
 
 text HintsNPC_Trainer10_SmallHint{
-    "TBD (Trainer10 - small hint)"
+    "Kecleon was hit by Flamethrower!\n"
+    "Huh? Its type didn't change?"
 }
 
 text HintsNPC_Trainer11_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer11 - small hint)"
 }
 
@@ -6379,19 +6400,28 @@ text HintsNPC_ToxicOrbSteal_LargeHint{
 }
 
 text HintsNPC_SecretPower_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Secret Power - large hint)"
+    "Compared to a Choice Scarf, the\n"
+    "Dusknoir are slower.\p"
+    "Stall and revive, its PP will get lower.\p"
+
+    "The Toxic Orb triggers, let the poison\n"
+    "run its course.\p"
+    "Head to the ice, Secret Power is yours."
 }
 
 text HintsNPC_RareCandy3_LargeHint{
-    "TBD (Rare Candy3 - large hint)"
+    "Can you find the Secret Bases?\p"
+    "There's a wall indent and a tree.\n"
+    "Wait, where's the nurse NPC?"
 }
 
 text HintsNPC_Trainer10_LargeHint{
-    "TBD (Trainer10 - large hint)"
+    "Evolution is boring, don't you agree?"
+    ""
 }
 
 text HintsNPC_Trainer11_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer11 - large hint)"
 }
 
@@ -6767,10 +6797,10 @@ text HintsNPC_IcePuzzleRareCandy_Solution{
     "be taken out of the ice puzzle.\p"
 
     "To do so, the item ball must be used as\n"
-    "an obstacle within the puzzle itself.\p"
+    "an obstacle within the puzzle itself."
+}
 
-    "The solution that follows:\p"
-
+text HintsNPC_IcePuzzleRareCandy_Solution_IcePuzzleSteps{
     "{DOWN_ARROW}{RIGHT_ARROW}{UP_ARROW}{RIGHT_ARROW}{UP_ARROW}{RIGHT_ARROW}"
     "{DOWN_ARROW}{LEFT_ARROW}{UP_ARROW}{LEFT_ARROW}{UP_ARROW}{LEFT_ARROW}"
     "{DOWN_ARROW}{LEFT_ARROW}{DOWN_ARROW}{RIGHT_ARROW}{DOWN_ARROW} (ignore the\n"
@@ -6803,31 +6833,89 @@ text HintsNPC_SecretPower_Solution_Refresher{
     "and steal the Toxic Orb from Muk."
 }
 
-// max revive sequence vs Dusknoir
 text HintsNPC_SecretPower_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Secret Power solution)"
+    "You can smuggle TM Secret Power out of\n"
+    "the ice puzzle by whiting out due to\l"
+    "poison in the overworld.\p"
+
+    "To do this, first activate the stolen\n"
+    "Toxic Orb by battling a Dusknoir.\p"
+
+    "This requires the following setup:\p"
+
+    "1. Give Annihilape a Choice Scarf,\n"
+    "fight a Dusknoir and use Taunt until\l"
+    "Annihilape faints.\p"
+    "Don't send out another Pokémon, but use\n"
+    "the flee option instead.\p"
+
+    "2. Give Annihilape the Toxic Orb, give\n"
+    "Bagon the Choice Scarf, then fight\l"
+    "another Dusknoir and use Substitute\l"
+    "repeatedly.\p"
+
+    "3. Use the Max Revive on Annihilape to\n"
+    "burn a turn without using any PP.\p"
+    "Dusknoir should now be out of Memento\n"
+    "PP by the time Annihilape comes in.\p"
+
+    "4. Let Bagon faint from Struggle, send\n"
+    "out Annihilape, use any move, then run\l"
+    "from battle.\p"
+
+    "Annihilape should now be poisoned.\p"
+
+    "Return to the ice puzzle, grab TM\n"
+    "Secret Power, and run around until\l"
+    "Annihilape faints from poison."
 }
 
-// secret base locations
+text HintsNPC_SecretPower_Solution_IcePuzzleSteps{
+    "{DOWN_ARROW}{RIGHT_ARROW}{UP_ARROW}{RIGHT_ARROW}{UP_ARROW}{RIGHT_ARROW}"
+    "{DOWN_ARROW}{LEFT_ARROW}{UP_ARROW}{LEFT_ARROW}{UP_ARROW}{LEFT_ARROW}{DOWN_ARROW}"
+    "{LEFT_ARROW}{DOWN_ARROW}{RIGHT_ARROW}{DOWN_ARROW}{RIGHT_ARROW}{DOWN_ARROW}."
+}
+
 text HintsNPC_RareCandy3_Solution{
-    "TBD (Rare Candy3 solution)"
+    "There are two Secret Bases hidden\n"
+    "throughout the map.\p"
+
+    "1. There's a tree entrance in the first\n"
+    "area behind the Mart NPC.\p"
+
+    "2. There's a wall entrance southwest,\n"
+    "outside the cave of the 4th tablet.\p"
+
+    "Enter the first base to find a Solid\n"
+    "Board, then use it in the second base\l"
+    "to get a Rare Candy."
 }
 
-// cancel Bagon evolution, choice specs Flamethrower
 text HintsNPC_Trainer10_Solution{
-    "TBD (Trainer10 solution)"
+    "Color Change won't trigger when hit by\n"
+    "a Sheer Force-boosted move.\p"
+
+    "Use the Rare Candy on Bagon to learn\n"
+    "Flamethrower, but cancel the evolution\l"
+    "to keep Sheer Force.\p"
+
+    "Give Bagon a Choice Specs and start the\n"
+    "trainer battle leading with Annihilape.\p"
+
+    "1. Use Taunt, then Secret Power or Thief\n"
+    "until Taunt wears off, and repeat.\p"
+
+    "2. Send out Bagon and lock into\n"
+    "Flamethrower to win the battle."
 }
+
 
 //  -- complex battle solution --
+// not looking forward to this one
 text HintsNPC_Trainer11_Solution{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Trainer11 solution)"
 }
-
-
-
-
-
 
 
 // ANTI SOFTLOCK GUY
