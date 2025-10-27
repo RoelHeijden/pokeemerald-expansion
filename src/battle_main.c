@@ -4065,6 +4065,17 @@ void BattleTurnPassed(void)
         return;
     }
 
+
+    // ADDED
+    // check if Zera Block achieved
+    if(!FlagGet(FLAG_FLAG_ZERA_BLOCK_SUCCES)){
+        if(gBattleResults.battleTurnCounter == 0 
+           && gBattleMons[BATTLE_OPPOSITE(gBattlerAttacker)].species == SPECIES_ZERAORA){
+            FlagSet(FLAG_FLAG_ZERA_BLOCK_SUCCES);    
+        }
+    }
+
+    
     if (gBattleResults.battleTurnCounter < 0xFF)
     {
         gBattleResults.battleTurnCounter++;

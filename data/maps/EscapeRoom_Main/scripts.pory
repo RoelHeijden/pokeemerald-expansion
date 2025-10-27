@@ -371,10 +371,11 @@ script EscapeRoom_MapScripts_CheckIfSecretPowerObtained{
 }
 
 script EscapeRoom_MapScripts_CheckZeraPredamageStep{
-    // if ferrothorn hp below 20 (below 25%)
+    // mark pre damage if ferrothorn hp below 20 (below 25%) 
+    // only mark it the first time to prevent false positive error check
     checkpartymonfullhp(SPECIES_FERROTHORN)
-    if(var(VAR_0x8004) <= 19){
-        setflag(FLAG_ZERA_PREDAMAGE_COMPLETED)
+    if(var(VAR_0x8004) <= 19 && !flag(FLAG_FLAG_ZERA_PREDAMAGE_SUCCES)){
+        setflag(FLAG_FLAG_ZERA_PREDAMAGE_SUCCES)
 
         // ERROR CHECK
         // - ferro hp is 5
@@ -389,6 +390,14 @@ script EscapeRoom_MapScripts_CheckZeraPredamageStep{
             msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
             waitmessage
         }
+    }
+
+    // if ferro predamaged done
+    // and block succesfully used vs Zeraora
+    // and ultra ball obtained:
+    // mark step as completed
+    if(flag(FLAG_FLAG_ZERA_PREDAMAGE_SUCCES) && flag(FLAG_FLAG_ZERA_BLOCK_SUCCES) && flag(FLAG_POKE_BALL_OBTAINED)){
+        setflag(FLAG_ZERA_PREDAMAGE_COMPLETED)
     }
 }
 
@@ -6142,11 +6151,11 @@ text HintsNPC_Trainer9_SmallHint{
 }
 
 text HintsNPC_ToxicOrbSteal_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Toxic Orb - small hint)"
+    "Muk."
 }
 
 text HintsNPC_SecretPower_SmallHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Secret Power - small hint)"
 }
 
@@ -6178,8 +6187,8 @@ text HintsNPC_UltraBall_LargeHint{
 }
 
 text HintsNPC_ZeraCatchPredamage_LargeHint{
-    "How to pre-damage Ferrothorn for\n"
-    "Custap Berry boosted Block?\p"
+    "You should pre-damage Ferrothorn for\n"
+    "Custap Berry boosted Block.\p"
     "Grass Knot is great, but Florges is so\n"
     "heavy...\p"
     "Florges can run?\n"
@@ -6195,8 +6204,10 @@ text HintsNPC_ZeraoraCatch_LargeHint{
 
 text HintsNPC_Trainer0_LargeHint{
     "Struggling against Rhyperior?\n"
-    "TM Skill Swap is really useful!\p"
-    "Consider giving it to Florges."
+    "Skill Swap is really useful!\p"
+    "Wait, no...\n"
+    "TM Skill Swap is really useful!"
+    // "Consider giving it to Florges."
 }
 
 text HintsNPC_SafetyGoggles_LargeHint{
@@ -6353,18 +6364,22 @@ text HintsNPC_IcePuzzleRareCandy_LargeHint{
 }
 
 text HintsNPC_Trainer9_LargeHint{
-    "Twenty Rage Fists with Primeape and\n"
-    "you'll have everything you need.\p"
+    "Use twenty harmless Rage Fists, you'll\n"
+    "have everything you need.\p"
     "Are there any trainers you could never\n"
     "defeat?"
 }
 
 text HintsNPC_ToxicOrbSteal_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Toxic Orb - large hint)"
+    "My MUK ate a Moon Stone\n"
+    "and I can't get it out!\p"
+    "...\p"
+    "Sorry, that's the wrong escape room.\n"
+    "This Muk ate something else."
 }
 
 text HintsNPC_SecretPower_LargeHint{
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
     "TBD (Secret Power - large hint)"
 }
 
