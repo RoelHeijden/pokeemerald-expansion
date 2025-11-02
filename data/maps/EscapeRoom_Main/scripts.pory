@@ -1768,8 +1768,23 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
     }
     // trainer 11
     elif(flag(FLAG_TRAINER11_DEFEATED) == FALSE){
-        msgbox(HintsNPC_Trainer11_Solution)
         handlehintorsolution(FLAG_TRAINER11_SOLUTION, FLAG_TRAINER11_SOLUTION)
+
+        // first give move setup
+        msgbox(HintsNPC_Trainer11_Solution_MoveSetup, MSGBOX_YESNO)
+
+        // ask keep reading
+        if(var(VAR_RESULT) == YES)
+        {
+            msgbox(HintsNPC_Trainer11_Solution)
+
+            // ask view exact sequence
+            msgbox(HintsNPC_ReviewExactSequence, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                msgbox(HintsNPC_Trainer11_Solution_ExactSequence)
+            }
+
+        }
     }
 
 
@@ -6184,12 +6199,14 @@ text HintsNPC_RareCandy3_SmallHint{
 
 text HintsNPC_Trainer10_SmallHint{
     "Kecleon was hit by Flamethrower!\n"
-    "Huh? Its type didn't change?"
+    "Huh? Its type didn't change."
 }
 
 text HintsNPC_Trainer11_SmallHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer11 - small hint)"
+    "Both of your items are very important!\p"
+
+    "Can Heatran be poisoned?\n"
+    "It's a real struggle."
 }
 
 
@@ -6209,7 +6226,7 @@ text HintsNPC_UltraBall_LargeHint{
 
 text HintsNPC_ZeraCatchPredamage_LargeHint{
     "You should pre-damage Ferrothorn for\n"
-    "Custap Berry boosted Block.\p"
+    "Custap Berry Block against Zeraora.\p"
     "Grass Knot is great, but Florges is so\n"
     "heavy...\p"
     "Florges can run?\n"
@@ -6228,7 +6245,6 @@ text HintsNPC_Trainer0_LargeHint{
     "Skill Swap is really useful!\p"
     "Wait, no...\n"
     "TM Skill Swap is really useful!"
-    // "Consider giving it to Florges."
 }
 
 text HintsNPC_SafetyGoggles_LargeHint{
@@ -6285,8 +6301,10 @@ text HintsNPC_SunStone_LargeHint{
 text HintsNPC_Trainer4_LargeHint{
     "Beating Iron Bundle will require some\n"
     "preparation at the Dusknoir.\p"
-    "Assist has its move limitations, but\n"
-    "there's no pressure if you fail."
+
+    "Not every more can be used with Assist.\n"
+    "Don't you worry, there's no pressure if\l"
+    "you fail!\p"
 }
 
 text HintsNPC_TauntHerb_LargeHint{
@@ -6416,15 +6434,29 @@ text HintsNPC_RareCandy3_LargeHint{
 }
 
 text HintsNPC_Trainer10_LargeHint{
-    "Evolution is boring, don't you agree?"
-    ""
+    "Sheer Force has an interesting\n"
+    "interaction with Color Change.\p"
+    "Do you have a Pokémon with Sheer Force?"
 }
 
 text HintsNPC_Trainer11_LargeHint{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer11 - large hint)"
-}
+    "This battle is very tricky.\p"
+    
+    "You'll need to find a way to take out\n"
+    "Heatran with the Toxic Orb.\p"
 
+    "Wandering Spirit can be used to give\n"
+    "Heatran a new ability, but none of its\l"
+    "moves make any contact.\p"
+
+    "Try giving Heatran a Choice Specs and\n"
+    "see if you can force it to Struggle.\p"
+
+    "Did anyone say Disable Annihilape?\p"
+
+    "PS: The trainer will avoid attacking\n"
+    "into Destiny Bond."
+}
 
 // solutions
 //// SECTION 1 ////
@@ -6909,12 +6941,85 @@ text HintsNPC_Trainer10_Solution{
     "Flamethrower to win the battle."
 }
 
+text HintsNPC_Trainer11_Solution_MoveSetup{
+    "Your Pokémon will need the following\n"
+    "setup:\p"
 
-//  -- complex battle solution --
-// not looking forward to this one
+    "Annihilape (Choice Specs)\n"
+    "Rage Fist / Role Play / Mimic / Taunt.\p"
+
+    "Yamask (Toxic Orb)\n"
+    "Trick / Disable / Destiny Bond / X.\p"
+
+    "Want to continue?"
+}
+
 text HintsNPC_Trainer11_Solution{
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
-    "TBD (Trainer11 solution)"
+    "Your only way to win is to take out\n"
+    "Heatran with the Toxic Orb.\p"
+
+    "The key is to use Wandering Spirit and\n"
+    "Role Play to give Heatran Protean and\l"
+    "change its typing.\p"
+
+    "1. Heatran can only make contact with\n"
+    "Wandering Spirit via Struggle, which\l"
+    "you can force by using Disable after\l"
+    "giving it the Choice Specs.\p"
+
+    "2. Use Destiny Bond on the Disable turn\n"
+    "so Heatran's Struggle has to target\l"
+    "Annihilape, keeping Yamask alive.\p"
+
+    "This means Annihilape needs to be the\n"
+    "one using Disable, which requires\l"
+    "Mimicking it earlier in the fight.\p"
+
+    "3. Use Trick on the Struggle turn to\n"
+    "take back the Choice Specs and prevent\l"
+    "Heatran from Struggling twice."
+}
+
+text HintsNPC_Trainer11_Solution_ExactSequence{
+    "Lead: Annihilape (Choice Specs) and\n"
+    "Yamask (Toxic Orb).\p"
+    
+    "Turn 1: Role Play (any target) + Trick\n"
+    "(Kecleon, give Toxic Orb).\p"
+
+    "Turn 2: Role Play (any target) + Trick\n"
+    "(Annihilape, take Choice Specs).\p"
+
+    "Turn 3: Role Play (Yamask) + Trick\n"
+    "(Heatran, give Choice Specs).\p"
+
+    "Turn 4: Taunt (Heatran) + Disable\n"
+    "(Annihilape).\p"
+
+    "Turn 5: Mimic (Yamask) + Disable\n"
+    "(Annihilape).\p"
+    
+    "Turn 6: Disable (Heatran) + Destiny\n"
+    "Bond.\p"
+
+    "Turn 7: Role Play (Kecleon) + Trick\n"
+    "(Heatran, take Choice Specs).\p"
+
+    "Turn 8: Rage Fist (Heatran) + Trick\n"
+    "(Kecleon, take Toxic Orb).\p"
+
+    "Turn 9: X + Trick (Heatran, give Toxic\n"
+    "Orb).\p"
+    
+    "Turn 10: Taunt (Kecleon) + X.\n"
+    "Turn 11: X.\l"
+    "Turn 12: X.\l"
+    "Turn 13: Taunt (Kecleon).\l"
+    "Turn 14: X.\l"
+    "Turn 15: X.\l"
+    "Turn 16: Rage Fist.\p"
+
+    "Other variations may also be possible."
 }
 
 
@@ -7723,3 +7828,7 @@ text Trainer11_PostBattle_B{
     " - Ketch."
 }
 
+
+
+
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length

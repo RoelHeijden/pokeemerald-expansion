@@ -2583,6 +2583,7 @@ extern const u8 gText_HallOfFameDebut2[];
 extern const u8 gText_HallOfFameDebut3[];
 extern const u8 gText_HallOfFameDebut4[];
 extern const u8 gText_HallOfFameDebut5[];
+extern const u8 gText_HallOfFameDebut6[];
 extern const u8 gText_WinsLosses[];
 extern const u8 gText_PokemonTrades[];
 extern const u8 gText_BerryCrush[];

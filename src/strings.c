@@ -1253,13 +1253,26 @@ const u8 gJPText_BattlePoints[] = _("ゲ-ムポイント"); // Unused. Name pres
 const u8 gText_Var1sTrainerCard[] = _("{STR_VAR_1}'s TRAINER CARD");
 
 const u8 gText_HallOfFameDebut[] = _("idk what the origial was");  // CHANGED
-const u8 gText_HallOfFameDebut5[] = _("Thank me later.");  // ADDED
 
 // ADDED
-const u8 gText_HallOfFameDebut1[] = _("choice becomes a shackle");
-const u8 gText_HallOfFameDebut2[] = _("it lets the spirit wander"); 
-const u8 gText_HallOfFameDebut3[] = _("when iron changes shape");  
-const u8 gText_HallOfFameDebut4[] = _("let sickness end the flame"); 
+// const u8 gText_HallOfFameDebut1[] = _("choice becomes a shackle");
+// const u8 gText_HallOfFameDebut2[] = _("it lets the soul wander"); 
+// const u8 gText_HallOfFameDebut3[] = _("when iron changes shape");  
+// const u8 gText_HallOfFameDebut4[] = _("let toxins end the flame");  
+
+// const u8 gText_HallOfFameDebut1[] = _("We're no strangers to love.");
+// const u8 gText_HallOfFameDebut2[] = _("You know the rules and so do I."); 
+// const u8 gText_HallOfFameDebut3[] = _("A full commitment's what I'm thinkin'");  
+// const u8 gText_HallOfFameDebut4[] = _("of.");  
+// const u8 gText_HallOfFameDebut5[] = _("You wouldn't get this from any other");  
+// const u8 gText_HallOfFameDebut6[] = _("guy.");  
+
+const u8 gText_HallOfFameDebut1[] = _("");
+const u8 gText_HallOfFameDebut2[] = _(""); 
+const u8 gText_HallOfFameDebut3[] = _("");  
+const u8 gText_HallOfFameDebut4[] = _("");  
+const u8 gText_HallOfFameDebut5[] = _("");  
+const u8 gText_HallOfFameDebut6[] = _("Looking for hints?");  
 
 
 const u8 gText_LinkBattles[] = _("LINK BATTLES");

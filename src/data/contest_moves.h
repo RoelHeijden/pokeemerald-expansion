@@ -159,7 +159,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 10, // fling, taunt
+        .appeal = 10, // fling
         .jam = 0,
     },
     [CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS] =
@@ -327,7 +327,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS2] =
     {
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
-        .appeal = 30, // disable
+        .appeal = 30, // disable, taunt
         .jam = 0,
     },
     [CONTEST_EFFECT_HIGHLY_APPEALING2] =

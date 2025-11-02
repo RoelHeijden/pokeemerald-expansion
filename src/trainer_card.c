@@ -969,7 +969,8 @@ static bool8 PrintAllOnCardBack(void)
         PrintStatOnBackOfCard(1, gText_HallOfFameDebut2, sData->textNumLinkContests, sTrainerCardStatColors);
         PrintStatOnBackOfCard(2, gText_HallOfFameDebut3, sData->textNumLinkContests, sTrainerCardStatColors);
         PrintStatOnBackOfCard(3, gText_HallOfFameDebut4, sData->textNumLinkContests, sTrainerCardStatColors);
-        // PrintStatOnBackOfCard(5, gText_HallOfFameDebut5, sData->textNumLinkContests, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(4, gText_HallOfFameDebut5, sData->textNumLinkContests, sTrainerCardStatColors);
+        PrintStatOnBackOfCard(5, gText_HallOfFameDebut6, sData->textNumLinkContests, sTrainerCardStatColors);
 
         break;
     case 4:
