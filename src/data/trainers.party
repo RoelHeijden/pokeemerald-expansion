@@ -16880,7 +16880,7 @@ Name: Tim
 Class: PYRAMID_KING
 Pic: Expert M
 Gender: Male
-Music: Intense
+Music: Male
 Double Battle: No
 AI: AI_FLAG_SEQUENCE_SWITCHING
 
@@ -16908,7 +16908,7 @@ Name: Cut Guy
 Class: Tuber M
 Pic: Pokefan M
 Gender: Male
-Music: Intense
+Music: Male
 Double Battle: Yes
 
 Marowak-Alola (F) @ Rocky Helmet  
@@ -16930,8 +16930,8 @@ Careful Nature
 Name: 637574
 Class: Hex Maniac
 Pic: Hex Maniac
-Gender: Male
-Music: Intense
+Gender: Female
+Music: Male
 Items: Max Elixir
 Double Battle: No
 
@@ -16949,7 +16949,7 @@ Name: Rostic
 Class: Pokemaniac
 Pic: Pokemaniac
 Gender: Male
-Music: Intense
+Music: Male
 Double Battle: Yes
 AI: AI_FLAG_TRAINER3
 
@@ -16976,7 +16976,7 @@ Name: Ace
 Class: Triathlete
 Pic: Running Triathlete M
 Gender: Male
-Music: Intense
+Music: Cool
 Double Battle: No
 
 Iron Bundle @ Booster Energy  
@@ -16993,7 +16993,7 @@ Name: Barry J.
 Class: Rich Boy
 Pic: Rich Boy
 Gender: Male
-Music: Intense
+Music: Cool
 Double Battle: Yes
 AI: AI_FLAG_TRAINER5
 
@@ -17018,7 +17018,7 @@ Name: Abe
 Class: Bird Keeper
 Pic: Bird Keeper
 Gender: Male
-Music: Intense
+Music: Cool
 Double Battle: No
 
 Rayquaza @ Moon Stone
@@ -17064,7 +17064,7 @@ Name: Houdini
 Class: Psychic
 Pic: Psychic M
 Gender: Male
-Music: Intense
+Music: Suspicious
 Double Battle: No
 
 Zoroark (M) @ Life Orb  
@@ -17086,7 +17086,7 @@ Name: Ton & Tey
 Class: Twins
 Pic: Twins
 Gender: Male
-Music: Intense
+Music: Twins
 Double Battle: Yes
 AI: AI_FLAG_TRAINER9
 

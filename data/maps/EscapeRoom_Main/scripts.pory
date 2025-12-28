@@ -5737,37 +5737,38 @@ text SignMessage1_part1{
     "Outcomes are deterministic (0% or 100%)\l"
     "with Assist as sole exception.\p"
 
-    "4) You won't get softlocked.\n"
-    "The game has an anti-softlock system\l"
-    "to undo any mistake you could make.\l"
-    "This may include side effects (such as\l"
-    "healing your party) to prevent gaining\l"
-    "an advantage via the system.\p"
+    "4) There are no hidden items.\p"
+
+    "5) EXP gain from battling has been\n"
+    "disabled.\p"
+
+    "6) Any Pokémon could have custom IVs or\n"
+    "EVs, including wild Pokémon.\p"
 
     "Keep reading?"
 }
 
 text SignMessage1_part2{
-    "5) There are QOL features to further\n"
+    "7) Your party is fully healed each time\n"
+    "you beat a trainer.\p"
+
+    "8) You'll never get softlocked.\n"
+    "The game has an anti-softlock system\l"
+    "to undo any mistake you could make.\l"
+    "This may have side effects (such as\l"
+    "healing your party) to prevent gaining\l"
+    "an advantage via the system.\p"
+
+    "9) There are QOL features to further\n"
     "reduce the need for save states:\l"
+    "- You can run from trainers.\l"
     "- Wild battles can be forfeited.\l"
-    "- Lost items may return after battle.\l"
+    "- Used items may return after battle.\l"
     "- Pre-damaged states can be restored.\l"
     "- Losing far from the respawn lets you\l"
     "   warp back to the battle area.\p"
     "None of these features are required to\n"
-    "solve any of the puzzles.\p"
-
-    "6) Your party is fully healed each time\n"
-    "you beat a trainer.\p"
-
-    "7) Any Pokémon could have custom IVs or\n"
-    "EVs, including wild Pokémon.\p"
-
-    "8) EXP gain from battling has been\n"
-    "disabled.\p"
-
-    "9) There are no hidden items."
+    "solve any of the puzzles."
 }
 
 text MainSignWhatToRead{
@@ -6302,9 +6303,9 @@ text HintsNPC_Trainer4_LargeHint{
     "Beating Iron Bundle will require some\n"
     "preparation at the Dusknoir.\p"
 
-    "Not every more can be used with Assist.\n"
+    "Can Thief be used with Assist?\n"
     "Don't you worry, there's no pressure if\l"
-    "you fail!\p"
+    "you fail."
 }
 
 text HintsNPC_TauntHerb_LargeHint{

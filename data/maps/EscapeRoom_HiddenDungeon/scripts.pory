@@ -525,15 +525,14 @@ text YamaskReceivedMessage{
 }
 
 text YamaskGuyPostTradeMessage{
- // "This has been a true passion project wi"  -- max length
     "The trainer you're about to face can be\n"
     "a bit of a cheater.\p"
     "The Kecleon uses an illegal move and\n"
     "their Struggle always seems to find\l"
     "the optimal target.\p"
 
-    "Don't worry, you've got everything\n"
-    "needed to come out on top.\p"
+    "Don't worry, you've got everything you\n"
+    "need to come out on top.\p"
     "Good luck!"
 
     // "Your Choice Specs can no longer be\n"
@@ -550,7 +549,7 @@ text YamaskGuyFinalMessage{
 
 text YamaskGuyMainMessage{
     "You're almost there!\n"
-    "Only one more challenge remains.\p"
+    "Just one more challenge remains.\p"
     "It's a tough one though...\p"
     "Allow me to take your Bagon and provide\n"
     "you with something more suitable.\p"

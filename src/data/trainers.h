@@ -42194,7 +42194,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_EXPERT_M,
         .encounterMusic_gender = 
 #line 16883
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 16884
         .doubleBattle = FALSE,
 #line 16885
@@ -42284,7 +42284,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_POKEFAN_M,
         .encounterMusic_gender = 
 #line 16911
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 16912
         .doubleBattle = TRUE,
         .partySize = 2,
@@ -42348,8 +42348,10 @@ F_TRAINER_FEMALE |
 #line 16932
         .trainerPic = TRAINER_PIC_HEX_MANIAC,
         .encounterMusic_gender = 
+#line 16933
+F_TRAINER_FEMALE | 
 #line 16934
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 16935
         .items = { ITEM_MAX_ELIXIR },
 #line 16936
@@ -42392,7 +42394,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_POKEMANIAC,
         .encounterMusic_gender = 
 #line 16952
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_MALE,
 #line 16953
         .doubleBattle = TRUE,
 #line 16954
@@ -42458,7 +42460,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_RUNNING_TRIATHLETE_M,
         .encounterMusic_gender = 
 #line 16979
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_COOL,
 #line 16980
         .doubleBattle = FALSE,
         .partySize = 1,
@@ -42499,7 +42501,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_RICH_BOY,
         .encounterMusic_gender = 
 #line 16996
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_COOL,
 #line 16997
         .doubleBattle = TRUE,
 #line 16998
@@ -42562,7 +42564,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_BIRD_KEEPER,
         .encounterMusic_gender = 
 #line 17021
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_COOL,
 #line 17022
         .doubleBattle = FALSE,
         .partySize = 1,
@@ -42682,7 +42684,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_PSYCHIC_M,
         .encounterMusic_gender = 
 #line 17067
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,
 #line 17068
         .doubleBattle = FALSE,
         .partySize = 2,
@@ -42740,7 +42742,7 @@ F_TRAINER_FEMALE |
         .trainerPic = TRAINER_PIC_TWINS,
         .encounterMusic_gender = 
 #line 17089
-            TRAINER_ENCOUNTER_MUSIC_INTENSE,
+            TRAINER_ENCOUNTER_MUSIC_TWINS,
 #line 17090
         .doubleBattle = TRUE,
 #line 17091
