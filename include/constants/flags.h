@@ -1306,7 +1306,7 @@
 #define FLAG_GET_ULTRA_BALL_LARGE_HINT                              0x4E1
 #define FLAG_FLAG_ZERA_BLOCK_SUCCES                                 0x4E2
 #define FLAG_FLAG_ZERA_PREDAMAGE_SUCCES                             0x4E3
-#define FLAG_UNUSED_0x4E4                                           0x4E4 // Unused Flag
+#define FLAG_ESCAPE_ROPE_EE_USED                                    0x4E4
 #define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
 #define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
 #define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag

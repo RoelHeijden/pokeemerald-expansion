@@ -132,7 +132,7 @@
 #define VAR_FINAL_BATTLE_REACHED                               0x4070
 #define VAR_ROUTE118_STATE                               0x4071
 #define VAR_ROUTE119_STATE                               0x4072
-#define VAR_ROUTE120_STATE                               0x4073 // Unused Var
+#define VAR_ESCAPE_ROPE_EE_STATE                               0x4073 
 #define VAR_ROUTE121_STATE                               0x4074
 #define VAR_SMALL_HINTS_USED_COUNTER                      0x4075 
 #define VAR_LARGE_HINTS_USED_COUNTER                      0x4076

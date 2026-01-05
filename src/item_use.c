@@ -1038,6 +1038,15 @@ void Task_UseDigEscapeRopeOnField(u8 taskId)
 
 static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
 {
+    // ADDED
+    // escape rope easter egg
+    if (CanUseEscapeRopeEasterEgg() == TRUE)
+    {
+        SetEscapeWarp(MAP_GROUP(ESCAPE_ROOM_HIDDEN_DUNGEON), MAP_NUM(ESCAPE_ROOM_HIDDEN_DUNGEON), WARP_ID_NONE, 60, 12);
+        FlagSet(FLAG_ESCAPE_ROPE_EE_USED);
+        VarSet(VAR_ESCAPE_ROPE_EE_STATE, 1);
+    }
+
     Overworld_ResetStateAfterDigEscRope();
     if (I_KEY_ESCAPE_ROPE < GEN_8)
         RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -1056,9 +1065,10 @@ bool8 CanUseDigOrEscapeRopeOnCurMap(void)
         return FALSE;
 }
 
+
 void ItemUseOutOfBattle_EscapeRope(u8 taskId)
 {
-    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE)
+    if (CanUseDigOrEscapeRopeOnCurMap() == TRUE || CanUseEscapeRopeEasterEgg() == TRUE)
     {
         sItemUseOnFieldCB = ItemUseOnFieldCB_EscapeRope;
         SetUpItemUseOnFieldCallback(taskId);
@@ -1071,6 +1081,33 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
     {
         DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
     }
+}
+
+
+
+// ADDED
+bool8 CanUseEscapeRopeEasterEgg(void)
+{
+    struct ObjectEvent *playerObj = &gObjectEvents[gPlayerAvatar.objectEventId];
+    s16 x = playerObj->currentCoords.x;
+    s16 y = playerObj->currentCoords.y;
+
+    u8 mapGroup = gSaveBlock1Ptr->location.mapGroup;
+    u8 mapNum   = gSaveBlock1Ptr->location.mapNum;
+
+    // check for specific map and coordinate range
+    if(!FlagGet(FLAG_ESCAPE_ROPE_EE_USED)){
+        DebugPrintf("x: %d, y: %d", x, y);  
+        if (mapGroup == MAP_GROUP(ESCAPE_ROOM_MAIN)
+            && mapNum == MAP_NUM(ESCAPE_ROOM_MAIN)
+            && x == 54
+            && y == 24)  // take porymap coordinates, add 7 (47->54, 17->24) -- at least for the main map
+        {
+            DebugPrintf("check 3");
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 

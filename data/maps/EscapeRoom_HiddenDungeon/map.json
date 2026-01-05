@@ -303,6 +303,24 @@
       "var": "VAR_FINAL_BATTLE_REACHED",
       "var_value": "0",
       "script": "EscapeRoom_HiddenDungeon_FinaleReachedTrigger"
+    },
+    {
+      "type": "trigger",
+      "x": 60,
+      "y": 10,
+      "elevation": 0,
+      "var": "VAR_ESCAPE_ROPE_EE_STATE",
+      "var_value": "2",
+      "script": "EscapeRoom_HiddenDungeon_EscapeRopeEE_message2andwarp"
+    },
+    {
+      "type": "trigger",
+      "x": 60,
+      "y": 16,
+      "elevation": 0,
+      "var": "VAR_ESCAPE_ROPE_EE_STATE",
+      "var_value": "2",
+      "script": "EscapeRoom_HiddenDungeon_EscapeRopeEE_message2andwarp"
     }
   ],
   "bg_events": [
