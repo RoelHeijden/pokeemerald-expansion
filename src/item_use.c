@@ -1096,14 +1096,12 @@ bool8 CanUseEscapeRopeEasterEgg(void)
     u8 mapNum   = gSaveBlock1Ptr->location.mapNum;
 
     // check for specific map and coordinate range
-    if(!FlagGet(FLAG_ESCAPE_ROPE_EE_USED)){
-        DebugPrintf("x: %d, y: %d", x, y);  
+    if(!FlagGet(FLAG_ESCAPE_ROPE_EE_USED)){ 
         if (mapGroup == MAP_GROUP(ESCAPE_ROOM_MAIN)
             && mapNum == MAP_NUM(ESCAPE_ROOM_MAIN)
             && x == 54
             && y == 24)  // take porymap coordinates, add 7 (47->54, 17->24) -- at least for the main map
         {
-            DebugPrintf("check 3");
             return TRUE;
         }
     }
