@@ -5478,7 +5478,7 @@ static void CheckChangingTurnOrderEffects(void)
             && (gProtectStructs[battler].usedCustapBerry || gProtectStructs[battler].quickDraw)
             && !(gBattleMons[battler].status1 & STATUS1_SLEEP)
             && !(gDisableStructs[gBattlerAttacker].truantCounter))
-            // && !(gProtectStructs[battler].noValidMoves))
+            // && !(gProtectStructs[battler].noValidMoves))  // REMOVED FOR STRUGGLE CUSTAP
         {
             if (gProtectStructs[battler].usedCustapBerry)
             {
