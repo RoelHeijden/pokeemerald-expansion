@@ -5472,17 +5472,19 @@ static void CheckChangingTurnOrderEffects(void)
     {
         battler = gBattlerAttacker = gBattleStruct->quickClawBattlerId;
         gBattleStruct->quickClawBattlerId++;
+
         if (gChosenActionByBattler[battler] == B_ACTION_USE_MOVE
             && gChosenMoveByBattler[battler] != MOVE_FOCUS_PUNCH   // quick claw message doesn't need to activate here
             && (gProtectStructs[battler].usedCustapBerry || gProtectStructs[battler].quickDraw)
             && !(gBattleMons[battler].status1 & STATUS1_SLEEP)
-            && !(gDisableStructs[gBattlerAttacker].truantCounter)
-            && !(gProtectStructs[battler].noValidMoves))
+            && !(gDisableStructs[gBattlerAttacker].truantCounter))
+            // && !(gProtectStructs[battler].noValidMoves))
         {
             if (gProtectStructs[battler].usedCustapBerry)
             {
                 gLastUsedItem = gBattleMons[battler].item;
                 PREPARE_ITEM_BUFFER(gBattleTextBuff1, gLastUsedItem);
+
                 if (GetBattlerHoldEffect(battler, FALSE) == HOLD_EFFECT_CUSTAP_BERRY)
                 {
                     // don't record berry since its gone now
