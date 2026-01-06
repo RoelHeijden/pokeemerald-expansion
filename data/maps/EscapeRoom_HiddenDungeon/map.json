@@ -3,7 +3,7 @@
   "name": "EscapeRoom_HiddenDungeon",
   "layout": "LAYOUT_ESCAPE_ROOM_HIDDEN_DUNGEON",
   "music": "MUS_SEALED_CHAMBER",
-  "region_map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
+  "region_map_section": "MAPSEC_ESCAPE_ROOM_HIDDEN_DUNGEON",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",

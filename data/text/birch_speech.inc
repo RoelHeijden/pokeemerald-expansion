@@ -43,9 +43,15 @@ gText_Birch_BoyOrGirl2::
 
 
 gText_Birch_AndYouAre::
-	.string "Welcome to the Pokémon Escape Room!\p"
-	.string " $"
+	.string "Welcome to the Azkari Ruins Pokémon\n"
+	.string "escape room!\p"
 
+	.string "You'll be challenged to solve puzzles,\n"
+	.string "face tough battles, and find out-of-\l"
+	.string "the-box solutions in order to progress.\p"
+
+	.string " $"
+ 
 gText_Birch_BoyOrGirl::
 	.string "Please choose your character.$"
 
@@ -91,15 +97,12 @@ gText_Birch_ImportantInfo_part2::
     .string "healing your party) to prevent gaining\l"
     .string "an advantage via the system.\p"
 
-    .string "9) There are QOL features to further\n"
-    .string "reduce the need for save states:\l"
-	.string "- You can run from trainers.\l"
-    .string "- Wild battles can be forfeited.\l"
-    .string "- Used items may return after battle.\l"
-    .string "- Pre-damaged states can be restored.\l"
-    .string "- Losing far from the respawn lets you\l"
-    .string "   warp back to the battle area.\p"
-    .string "None of these features are required to\n"
+	.string "9) There are QOL features that further\n"
+    .string "reduce any need for save states, like\l"
+    .string "the option to restore a pre-damaged\l"
+    .string "state after losing.\p"
+
+    .string "They're strictly QOL and not required to\n"
     .string "solve any of the puzzles.\p"
 
 	.string "Your time starts now.\n"

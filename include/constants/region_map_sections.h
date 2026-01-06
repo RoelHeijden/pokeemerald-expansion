@@ -215,7 +215,10 @@
 #define MAPSEC_NAVEL_ROCK                   0xD3
 #define MAPSEC_TRAINER_HILL                 0xD4
 #define MAPSEC_ESCAPE_ROOM_MAIN             0xD5
-#define MAPSEC_NONE                         0xD6
+#define MAPSEC_ESCAPE_ROOM_RUINS            0xD6
+#define MAPSEC_ESCAPE_ROOM_TOMB             0xD7
+#define MAPSEC_ESCAPE_ROOM_HIDDEN_DUNGEON   0xD8
+#define MAPSEC_NONE                         0xD9
 
 #define METLOC_SPECIAL_EGG                  0xFD
 #define METLOC_IN_GAME_TRADE                0xFE

@@ -2481,7 +2481,7 @@ const struct Item gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Use to forfeit\n"
             "a wild battle.\n"
-            "(QoL feature)"),
+            "(QOL feature)"),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

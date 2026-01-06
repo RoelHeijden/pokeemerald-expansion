@@ -71,7 +71,7 @@ enum
 #define ENTRIES_PER_PAGE 5
 
 
-static const u8 sCreditsText_GameTitle[]                      = _("POKéMON ESCAPE ROOM 2");
+static const u8 sCreditsText_GameTitle[]                      = _("POKéMON AZKARI RUINS");
 
 static const u8 sCreditsText_Creator[]                        = _("Created by");
 static const u8 sCreditsText_Pokeemerald[]                    = _("Based on the Pokeemerald Decomp by");
@@ -87,8 +87,8 @@ static const u8 sCreditsText_SpecialThanks2[]                 = _("Special Thank
 static const u8 sCreditsText_ByKetch[]                      = _("By Ketch");
 static const u8 sCreditsText_Ketch[]                        = _("Ketch");
 static const u8 sCreditsText_Pret[]                         = _("pret");
-static const u8 sCreditsText_Tilesets1[]                          = _("Brom (Jungle & Ruins)");
-static const u8 sCreditsText_Tilesets2[]                          = _("Riuuji (Tomb Interior)");
+static const u8 sCreditsText_Tilesets1[]                          = _("Brom (main overworld map)");
+static const u8 sCreditsText_Tilesets2[]                          = _("Riuuji (tomb interior)");
 static const u8 sCreditsText_RH_Hideout[]                   = _("RH Hideout");
 static const u8 sCreditsText_Poryscript[]                   = _("Poryscript");
 static const u8 sCreditsText_Porymap[]                      = _("Porymap");

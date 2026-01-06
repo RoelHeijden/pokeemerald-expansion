@@ -4103,6 +4103,7 @@ script EscapeRoom_EventScript_Trainer11{
     else{
         msgbox(Trainer11_PostBattle_B, MSGBOX_AUTOCLOSE)
         waitmessage
+        call(EscapeRoom_EventScript_EndGame)
     }
     releaseall
 }
@@ -5771,16 +5772,24 @@ text SignMessage1_part2{
     "healing your party) to prevent gaining\l"
     "an advantage via the system.\p"
 
-    "9) There are QOL features to further\n"
-    "reduce the need for save states:\l"
-    "- You can run from trainers.\l"
-    "- Wild battles can be forfeited.\l"
-    "- Used items may return after battle.\l"
-    "- Pre-damaged states can be restored.\l"
-    "- Losing far from the respawn lets you\l"
-    "   warp back to the battle area.\p"
-    "None of these features are required to\n"
+    "9) There are QOL features that further\n"
+    "reduce any need for save states, like\l"
+    "the option to restore a pre-damaged\l"
+    "state after losing.\p"
+
+    "They're strictly QOL and not required to\n"
     "solve any of the puzzles."
+
+    // "9) There are QOL features to further\n"
+    // "reduce the need for save states:\l"
+    // "- You can run from trainers.\l"
+    // "- Wild battles can be forfeited.\l"
+    // "- Used items may return after battle.\l"
+    // "- Pre-damaged states can be restored.\l"
+    // "- Losing far from the respawn lets you\l"
+    // "   warp back to the battle area.\p"
+    // "None of these features are required to\n"
+    // "solve any of the puzzles."
 }
 
 text MainSignWhatToRead{
@@ -5819,19 +5828,6 @@ text MoveDeleterSignMessage{
     "A restored move will get:\n"
     "a) the PP amount it had when deleted.\l"
     "b) 0 PP if all other moves have 0 PP."
-}
-
-// end sign
-text EscapeRoomEndCongratz{
-    "Congratulations, you have\n"
-    "completed the escape room!"
-}
-
-text EndEscapeRoomSignMessage{
-    "Your final time: {STR_VAR_1}.\p"
-    "Small hints used: {STR_VAR_2}.\n"
-    "Large hints used: {STR_VAR_3}.\l"
-    "Solutions used: {STR_VAR_5}."
 }
 
 
@@ -7829,7 +7825,7 @@ text Trainer11_PostBattle_B{
     "project of mine.\p"
 
     "An absurd amount of time, effort, and\n"
-    "care was put into every small detail.\p"
+    "care was put into every detail.\p"
 
     "If you enjoyed the experience, please\n"
     "let me know by commenting on the game's\l"
@@ -7839,6 +7835,20 @@ text Trainer11_PostBattle_B{
 
     "Thank you so much for playing.\n"
     " - Ketch."
+}
+
+
+// end sign
+text EscapeRoomEndCongratz{
+    "Congratulations, you have\n"
+    "completed the escape room!"
+}
+
+text EndEscapeRoomSignMessage{
+    "Your final time: {STR_VAR_1}.\p"
+    "Small hints used: {STR_VAR_2}.\n"
+    "Large hints used: {STR_VAR_3}.\l"
+    "Solutions used: {STR_VAR_5}."
 }
 
 

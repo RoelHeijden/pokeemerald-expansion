@@ -3,7 +3,7 @@
   "name": "EscapeRoom_ShortcutRoute",
   "layout": "LAYOUT_ESCAPE_ROOM_SHORTCUT_ROUTE",
   "music": "MUS_CAVE_OF_ORIGIN",
-  "region_map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
+  "region_map_section": "MAPSEC_ESCAPE_ROOM_RUINS",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_UNDERGROUND",
