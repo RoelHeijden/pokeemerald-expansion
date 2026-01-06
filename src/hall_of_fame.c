@@ -401,7 +401,7 @@ static bool8 InitHallOfFameScreen(void)
         if (!gPaletteFade.active)
         {
             SetMainCallback2(CB2_HallOfFame);
-            PlayBGM(MUS_HALL_OF_FAME);
+            // PlayBGM(MUS_HALL_OF_FAME);
             return FALSE;
         }
         break;
@@ -426,6 +426,7 @@ void CB2_DoHallOfFameScreen(void)
     }
 }
 
+
 void CB2_DoHallOfFameScreenDontSaveData(void)
 {
     if (!InitHallOfFameScreen())
@@ -438,44 +439,44 @@ void CB2_DoHallOfFameScreenDontSaveData(void)
 
 static void Task_Hof_InitMonData(u8 taskId)
 {
-    u16 i, j;
+    // u16 i, j;
 
-    gTasks[taskId].tMonNumber = 0; // valid pokes
+    // gTasks[taskId].tMonNumber = 0; // valid pokes
 
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        u8 nickname[POKEMON_NAME_LENGTH + 1];
-        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
-        {
-            sHofMonPtr->mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
-            sHofMonPtr->mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
-            sHofMonPtr->mon[i].isShiny = GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY);
-            sHofMonPtr->mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
-            sHofMonPtr->mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
-            GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
-            for (j = 0; j < POKEMON_NAME_LENGTH; j++)
-                sHofMonPtr->mon[i].nickname[j] = nickname[j];
-            gTasks[taskId].tMonNumber++;
-        }
-        else
-        {
-            sHofMonPtr->mon[i].species = SPECIES_NONE;
-            sHofMonPtr->mon[i].tid = 0;
-            sHofMonPtr->mon[i].isShiny = FALSE;
-            sHofMonPtr->mon[i].personality = 0;
-            sHofMonPtr->mon[i].lvl = 0;
-            sHofMonPtr->mon[i].nickname[0] = EOS;
-        }
-    }
+    // for (i = 0; i < PARTY_SIZE; i++)
+    // {
+    //     u8 nickname[POKEMON_NAME_LENGTH + 1];
+    //     if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES))
+    //     {
+    //         sHofMonPtr->mon[i].species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+    //         sHofMonPtr->mon[i].tid = GetMonData(&gPlayerParty[i], MON_DATA_OT_ID);
+    //         sHofMonPtr->mon[i].isShiny = GetMonData(&gPlayerParty[i], MON_DATA_IS_SHINY);
+    //         sHofMonPtr->mon[i].personality = GetMonData(&gPlayerParty[i], MON_DATA_PERSONALITY);
+    //         sHofMonPtr->mon[i].lvl = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+    //         GetMonData(&gPlayerParty[i], MON_DATA_NICKNAME, nickname);
+    //         for (j = 0; j < POKEMON_NAME_LENGTH; j++)
+    //             sHofMonPtr->mon[i].nickname[j] = nickname[j];
+    //         gTasks[taskId].tMonNumber++;
+    //     }
+    //     else
+    //     {
+    //         sHofMonPtr->mon[i].species = SPECIES_NONE;
+    //         sHofMonPtr->mon[i].tid = 0;
+    //         sHofMonPtr->mon[i].isShiny = FALSE;
+    //         sHofMonPtr->mon[i].personality = 0;
+    //         sHofMonPtr->mon[i].lvl = 0;
+    //         sHofMonPtr->mon[i].nickname[0] = EOS;
+    //     }
+    // }
 
-    sHofFadePalettes = 0;
-    gTasks[taskId].tDisplayedMonId = 0;
-    gTasks[taskId].tPlayerSpriteID = SPRITE_NONE;
+    // sHofFadePalettes = 0;
+    // gTasks[taskId].tDisplayedMonId = 0;
+    // gTasks[taskId].tPlayerSpriteID = SPRITE_NONE;
 
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
-    }
+    // for (i = 0; i < PARTY_SIZE; i++)
+    // {
+    //     gTasks[taskId].tMonSpriteId(i) = SPRITE_NONE;
+    // }
 
     if (gTasks[taskId].tDontSaveData)
         gTasks[taskId].func = Task_Hof_SetMonDisplayTask;
@@ -485,36 +486,36 @@ static void Task_Hof_InitMonData(u8 taskId)
 
 static void Task_Hof_InitTeamSaveData(u8 taskId)
 {
-    u16 i;
-    struct HallofFameTeam *lastSavedTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
+    // u16 i;
+    // struct HallofFameTeam *lastSavedTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
 
-    if (!gHasHallOfFameRecords)
-    {
-        memset(gDecompressionBuffer, 0, SECTOR_SIZE * NUM_HOF_SECTORS);
-    }
-    else
-    {
-        if (LoadGameSave(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
-            memset(gDecompressionBuffer, 0, SECTOR_SIZE * NUM_HOF_SECTORS);
-    }
+    // if (!gHasHallOfFameRecords)
+    // {
+    //     memset(gDecompressionBuffer, 0, SECTOR_SIZE * NUM_HOF_SECTORS);
+    // }
+    // else
+    // {
+    //     if (LoadGameSave(SAVE_HALL_OF_FAME) != SAVE_STATUS_OK)
+    //         memset(gDecompressionBuffer, 0, SECTOR_SIZE * NUM_HOF_SECTORS);
+    // }
 
-    for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, lastSavedTeam++)
-    {
-        if (lastSavedTeam->mon[0].species == SPECIES_NONE)
-            break;
-    }
-    if (i >= HALL_OF_FAME_MAX_TEAMS)
-    {
-        struct HallofFameTeam *afterTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
-        struct HallofFameTeam *beforeTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
-        afterTeam++;
-        for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, beforeTeam++, afterTeam++)
-        {
-            *beforeTeam = *afterTeam;
-        }
-        lastSavedTeam--;
-    }
-    *lastSavedTeam = *sHofMonPtr;
+    // for (i = 0; i < HALL_OF_FAME_MAX_TEAMS; i++, lastSavedTeam++)
+    // {
+    //     if (lastSavedTeam->mon[0].species == SPECIES_NONE)
+    //         break;
+    // }
+    // if (i >= HALL_OF_FAME_MAX_TEAMS)
+    // {
+    //     struct HallofFameTeam *afterTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
+    //     struct HallofFameTeam *beforeTeam = (struct HallofFameTeam *)(gDecompressionBuffer);
+    //     afterTeam++;
+    //     for (i = 0; i < HALL_OF_FAME_MAX_TEAMS - 1; i++, beforeTeam++, afterTeam++)
+    //     {
+    //         *beforeTeam = *afterTeam;
+    //     }
+    //     lastSavedTeam--;
+    // }
+    // *lastSavedTeam = *sHofMonPtr;
 
     DrawDialogueFrame(0, FALSE);
     AddTextPrinterParameterized2(0, FONT_NORMAL, gText_SavingDontTurnOffPower, 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
@@ -549,8 +550,11 @@ static void Task_Hof_WaitToDisplayMon(u8 taskId)
     if (gTasks[taskId].tFrameCount)
         gTasks[taskId].tFrameCount--;
     else
-        gTasks[taskId].func = Task_Hof_SetMonDisplayTask;
+        StartCredits();
+        // gTasks[taskId].func = Task_Hof_SetMonDisplayTask;
 }
+
+
 
 static void Task_Hof_SetMonDisplayTask(u8 taskId)
 {

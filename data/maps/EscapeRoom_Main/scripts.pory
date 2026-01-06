@@ -5704,6 +5704,18 @@ script EscapeRoom_EventScript_AnnihilapeStatue{
 }
 
 
+script EscapeRoom_EventScript_EndGame{
+    lockall
+	setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
+    fadeoutbgm(0)
+    fadescreenspeed(FADE_TO_BLACK, 4)
+	special(GameClear)
+	waitstate
+	releaseall
+	end
+}
+
+
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
 

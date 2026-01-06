@@ -53,6 +53,7 @@ enum {
 #define tPlayerSpriteId    data[5]
 #define tRivalSpriteId     data[6]
 #define tSceneNum          data[7]
+#define tPagesInScene      data[8] // ADDED
 // data[8]-[10] are unused
 #define tNextMode          data[11]
 #define tTheEndDelay       data[12]
@@ -785,7 +786,8 @@ static void Task_UpdatePage(u8 taskId)
     case 3:
         if (!gPaletteFade.active)
         {
-            gTasks[taskId].tDelay = 115;
+            // gTasks[taskId].tDelay = 115;
+            gTasks[taskId].tDelay = 200;  // CHANGED
             gTasks[taskId].tState++;
         }
         return;
@@ -829,56 +831,57 @@ static void Task_UpdatePage(u8 taskId)
 
 #define PAGE_INTERVAL (PAGE_COUNT / 9) // 9 scenes (5 bike scenes, 4 Pokémon interludes)
 
+
 static u8 CheckChangeScene(u8 page, u8 taskId)
 {
-    // Starts with bike + ocean + morning (SCENE_OCEAN_MORNING)
+    // Starts SCENE_OCEAN_MORNING
 
-    if (page == PAGE_INTERVAL * 1)
+    if (page == 1)
     {
         // Pokémon interlude
         gTasks[taskId].tNextMode = MODE_SHOW_MONS;
     }
 
-    if (page == PAGE_INTERVAL * 2)
-    {
-        // Bike + ocean + sunset
-        gTasks[taskId].tSceneNum = SCENE_OCEAN_SUNSET;
-        gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
-    }
+    // if (page == 3)
+    // {
+    //     // Bike + ocean + sunset
+    //     gTasks[taskId].tSceneNum = SCENE_OCEAN_SUNSET;
+    //     gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
+    // }
 
-    if (page == PAGE_INTERVAL * 3)
-    {
-        // Pokémon interlude
-        gTasks[taskId].tNextMode = MODE_SHOW_MONS;
-    }
+    // if (page == 4)
+    // {
+    //     // Pokémon interlude
+    //     gTasks[taskId].tNextMode = MODE_SHOW_MONS;
+    // }
 
-    if (page == PAGE_INTERVAL * 4)
-    {
-        // Bike + forest + sunset
-        gTasks[taskId].tSceneNum = SCENE_FOREST_RIVAL_ARRIVE;
-        gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
-    }
+    // if (page == 3)
+    // {
+    //     // Bike + forest + sunset
+    //     gTasks[taskId].tSceneNum = SCENE_FOREST_RIVAL_ARRIVE;
+    //     gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
+    // }
 
-    if (page == PAGE_INTERVAL * 5)
-    {
-        // Pokémon interlude
-        gTasks[taskId].tNextMode = MODE_SHOW_MONS;
-    }
+    // if (page == 4)
+    // {
+    //     // Pokémon interlude
+    //     gTasks[taskId].tNextMode = MODE_SHOW_MONS;
+    // }
 
-    if (page == PAGE_INTERVAL * 6)
+    if (page == 3)
     {
         // Bike + forest + sunset
         gTasks[taskId].tSceneNum = SCENE_FOREST_CATCH_RIVAL;
         gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
     }
 
-    if (page == PAGE_INTERVAL * 7)
+    if (page == 4)
     {
         // Pokémon interlude
         gTasks[taskId].tNextMode = MODE_SHOW_MONS;
     }
 
-    if (page == PAGE_INTERVAL * 8)
+    if (page == 6)
     {
         // Bike + town + night
         gTasks[taskId].tSceneNum = SCENE_CITY_NIGHT;
@@ -893,6 +896,74 @@ static u8 CheckChangeScene(u8 page, u8 taskId)
 
     return FALSE;
 }
+
+
+
+// static u8 CheckChangeScene(u8 page, u8 taskId)
+// {
+//     // Starts with bike + ocean + morning (SCENE_OCEAN_MORNING)
+
+
+//     if (page == PAGE_INTERVAL * 1)
+//     {
+//         // Pokémon interlude
+//         gTasks[taskId].tNextMode = MODE_SHOW_MONS;
+//     }
+
+//     if (page == PAGE_INTERVAL * 2)
+//     {
+//         // Bike + ocean + sunset
+//         gTasks[taskId].tSceneNum = SCENE_OCEAN_SUNSET;
+//         gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
+//     }
+
+//     if (page == PAGE_INTERVAL * 3)
+//     {
+//         // Pokémon interlude
+//         gTasks[taskId].tNextMode = MODE_SHOW_MONS;
+//     }
+
+//     if (page == PAGE_INTERVAL * 4)
+//     {
+//         // Bike + forest + sunset
+//         gTasks[taskId].tSceneNum = SCENE_FOREST_RIVAL_ARRIVE;
+//         gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
+//     }
+
+//     if (page == PAGE_INTERVAL * 5)
+//     {
+//         // Pokémon interlude
+//         gTasks[taskId].tNextMode = MODE_SHOW_MONS;
+//     }
+
+//     if (page == PAGE_INTERVAL * 6)
+//     {
+//         // Bike + forest + sunset
+//         gTasks[taskId].tSceneNum = SCENE_FOREST_CATCH_RIVAL;
+//         gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
+//     }
+
+//     if (page == PAGE_INTERVAL * 7)
+//     {
+//         // Pokémon interlude
+//         gTasks[taskId].tNextMode = MODE_SHOW_MONS;
+//     }
+
+//     if (page == PAGE_INTERVAL * 8)
+//     {
+//         // Bike + town + night
+//         gTasks[taskId].tSceneNum = SCENE_CITY_NIGHT;
+//         gTasks[taskId].tNextMode = MODE_BIKE_SCENE;
+//     }
+
+//     if (gTasks[taskId].tNextMode != MODE_NONE)
+//     {
+//         // Returns true if changed
+//         return TRUE;
+//     }
+
+//     return FALSE;
+// }
 
 #define tDelay data[3]
 
