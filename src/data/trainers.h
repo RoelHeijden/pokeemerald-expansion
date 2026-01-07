@@ -42860,12 +42860,10 @@ F_TRAINER_FEMALE |
 #line 17133
     [TRAINER_CUSTOM_TRAINER11] =
     {
-#line 17134
-        .trainerName = _("Datacci"),
 #line 17135
         .trainerClass = TRAINER_CLASS_CHAMPION,
 #line 17136
-        .trainerPic = TRAINER_PIC_CHAMPION_WALLACE,
+        .trainerPic = TRAINER_PIC_STEVEN,
         .encounterMusic_gender = 
 #line 17138
             TRAINER_ENCOUNTER_MUSIC_SWIMMER,

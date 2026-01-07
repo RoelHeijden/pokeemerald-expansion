@@ -17131,9 +17131,9 @@ IVs: 0 Atk / 30 SpA / 17 SpD / 30 Spe
 
 
 === TRAINER_CUSTOM_TRAINER11 ===
-Name: Datacci
+Name: Rule
 Class: Champion
-Pic: Champion Wallace
+Pic: Steven
 Gender: Male
 Music: Swimmer
 Double Battle: Yes

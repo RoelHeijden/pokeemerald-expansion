@@ -76,12 +76,12 @@ static const u8 sCreditsText_GameTitle[]                      = _("POKéMON ANNI
 static const u8 sCreditsText_Creator[]                        = _("Created by");
 static const u8 sCreditsText_Pokeemerald[]                    = _("Based on the Pokeemerald Decomp by");
 
-static const u8 sCreditsText_Tilesets[]                       = _("Custom Tilesets");
+static const u8 sCreditsText_Tilesets[]                       = _("Tilesets");
 
-static const u8 sCreditsText_BattleBackgrounds[]              = _("Custom Battle Backgrounds");
+static const u8 sCreditsText_BattleBackgrounds[]              = _("Battle Backgrounds");
 static const u8 sCreditsText_TitleScreen[]                    = _("Title Screen");
 
-static const u8 sCreditsText_ToolsUsed[]                      = _("Tools Used");
+static const u8 sCreditsText_ToolsUsed[]                      = _("Tools used");
 static const u8 sCreditsText_SpecialThanks2[]                 = _("Special Thanks");
 
 static const u8 sCreditsText_ByKetch[]                      = _("By Ketch");

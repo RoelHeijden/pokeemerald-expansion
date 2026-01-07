@@ -5069,8 +5069,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         // trick trick trick, monkey use mimic. 
         // monkey use disable, trick trick trick.
         .description = COMPOUND_STRING(
-            "wrbcm vzlcd ttkkn, mhnmgg xsx mkoqf.\n"
-            "mhnmgg xsx dkuielx, ttkkn tkiem buivk."), // CHANGED
+            "kltgb ncmte evzwv, qfhvip odi dcxmt.\n"
+            "gzrbyj yjy omjumpv, ncmte evzwv xicno."), // CHANGED
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
