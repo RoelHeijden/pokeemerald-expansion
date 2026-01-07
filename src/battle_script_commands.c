@@ -7871,7 +7871,7 @@ static u32 GetTrainerMoneyToGive(u16 trainerId)
         moneyReward = 500;
     }
     if(trainerId == TRAINER_CUSTOM_TRAINER11){
-        moneyReward = 1500;  // final battle
+        moneyReward = 500;  // final battle
     }
     return moneyReward;
 }
