@@ -138,7 +138,7 @@
 #define VAR_LARGE_HINTS_USED_COUNTER                      0x4076
 #define VAR_FINAL_TIME_HOURS                              0x4077 
 #define VAR_FINAL_TIME_MINUTES                            0x4078
-#define VAR_ROUTE126_STATE                               0x4079 // Unused Var
+#define VAR_END_ESCAPE_ROOM_STATE                               0x4079 
 #define VAR_ROUTE127_STATE                               0x407A // Unused Var
 #define VAR_ROUTE128_STATE                               0x407B
 #define VAR_ROUTE129_STATE                               0x407C // Unused Var

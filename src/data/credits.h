@@ -71,7 +71,7 @@ enum
 #define ENTRIES_PER_PAGE 5
 
 
-static const u8 sCreditsText_GameTitle[]                      = _("POKéMON AZKARI RUINS");
+static const u8 sCreditsText_GameTitle[]                      = _("POKéMON ANNIHILAPE'S LAIR");
 
 static const u8 sCreditsText_Creator[]                        = _("Created by");
 static const u8 sCreditsText_Pokeemerald[]                    = _("Based on the Pokeemerald Decomp by");
@@ -87,8 +87,8 @@ static const u8 sCreditsText_SpecialThanks2[]                 = _("Special Thank
 static const u8 sCreditsText_ByKetch[]                      = _("By Ketch");
 static const u8 sCreditsText_Ketch[]                        = _("Ketch");
 static const u8 sCreditsText_Pret[]                         = _("pret");
-static const u8 sCreditsText_Tilesets1[]                          = _("Brom (main overworld map)");
-static const u8 sCreditsText_Tilesets2[]                          = _("Riuuji (tomb interior)");
+static const u8 sCreditsText_Tilesets1[]                        = _("Brombrombromley (TBD)");
+static const u8 sCreditsText_Tilesets2[]                        = _("Riuuji (TBD)");
 static const u8 sCreditsText_RH_Hideout[]                   = _("RH Hideout");
 static const u8 sCreditsText_Poryscript[]                   = _("Poryscript");
 static const u8 sCreditsText_Porymap[]                      = _("Porymap");
@@ -96,7 +96,7 @@ static const u8 sCreditsText_GraphicsGale[]                 = _("GraphicsGale");
 static const u8 sCreditsText_TilemapStudio[]                = _("Tilemap Studio");
 static const u8 sCreditsText_Accidental[]                   = _("Accidental");
 static const u8 sCreditsText_Datoneman[]                    = _("Datoneman");
-static const u8 sCreditsText_TBD[]                          = _("TBD");
+static const u8 sCreditsText_TBD[]                              = _("TBD");
 
 
 static const struct CreditsEntry sCreditsEntry_GameTitle            = { 69, TRUE,  sCreditsText_GameTitle };

@@ -442,6 +442,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_FindRescueBell",
       "flag": "FLAG_RESCUE_BELL_OBTAINED"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_WALLACE",
+      "x": 110,
+      "y": 21,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "EscapeRoom_EventScript_Trainer11",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_MR_BRINEYS_BOAT",
+      "x": 111,
+      "y": 23,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "NULL",
+      "flag": "0"
     }
   ],
   "warp_events": [
@@ -500,6 +526,13 @@
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
       "dest_warp_id": "7"
+    },
+    {
+      "x": 113,
+      "y": 11,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
+      "dest_warp_id": "13"
     }
   ],
   "coord_events": [
@@ -529,6 +562,33 @@
       "var": "VAR_RARE_CANDY2_STOLEN_CHECK",
       "var_value": "1",
       "script": "EscapeRoom_EventScript_CheckRareCandy2Stolen"
+    },
+    {
+      "type": "trigger",
+      "x": 113,
+      "y": 12,
+      "elevation": 0,
+      "var": "VAR_ESCAPE_ROPE_EE_STATE",
+      "var_value": "2",
+      "script": "EscapeRoom_EventScript_EscapeRopeEE_message2andwarp"
+    },
+    {
+      "type": "trigger",
+      "x": 113,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_ESCAPE_ROPE_EE_STATE",
+      "var_value": "2",
+      "script": "EscapeRoom_EventScript_EscapeRopeEE_message2andwarp"
+    },
+    {
+      "type": "trigger",
+      "x": 113,
+      "y": 18,
+      "elevation": 0,
+      "var": "VAR_END_ESCAPE_ROOM_STATE",
+      "var_value": "1",
+      "script": "EscapeRoom_EventScript_EndSign"
     }
   ],
   "bg_events": [
@@ -576,6 +636,14 @@
       "y": 24,
       "elevation": 0,
       "secret_base_id": "SECRET_BASE_YELLOW_CAVE4_1"
+    },
+    {
+      "type": "sign",
+      "x": 115,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_EndSign"
     }
   ]
 }

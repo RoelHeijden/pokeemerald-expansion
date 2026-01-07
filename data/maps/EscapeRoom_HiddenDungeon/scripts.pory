@@ -19,7 +19,6 @@ mapscripts EscapeRoom_HiddenDungeon_MapScripts {
         VAR_ASK_RESET_PREDAMAGE, 1: EscapeRoom_MapScripts_AskResetPredamage
         VAR_ASK_WARP_BACK, 1: EscapeRoom_MapScripts_AskWarpBack
         VAR_DO_SOMETHING_WRONG_MESSAGE, 1: EscapeRoom_MapScripts_SomethingWrongMessage
-        VAR_ESCAPE_ROPE_EE_STATE, 1: EscapeRoom_HiddenDungeon_EscapeRopeEE_message1
     ] 
 }
 
@@ -457,22 +456,6 @@ script EscapeRoom_HiddenDungeon_MoveRelearner{
 }
 
 
-// escape rope easter egg
-script EscapeRoom_HiddenDungeon_EscapeRopeEE_message1{
-    setvar(VAR_ESCAPE_ROPE_EE_STATE, 2)
-    playfanfare(MUS_OBTAIN_BADGE)
-    msgbox(EscapeRopeEEMessage1, MSGBOX_AUTOCLOSE)
-    waitfanfare
-}
-
-script EscapeRoom_HiddenDungeon_EscapeRopeEE_message2andwarp{
-    setvar(VAR_ESCAPE_ROPE_EE_STATE, 3)
-    msgbox(EscapeRopeEEMessage2, MSGBOX_AUTOCLOSE)
-    waitmessage
-    warpteleport(MAP_ESCAPE_ROOM_MAIN, 47, 17)
-    waitstate
-}
-
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -585,13 +568,5 @@ text MoveRelearnerEndMessage{
     "I'll be here if you need me."
 }
 
-// escape rope easter egg
-text EscapeRopeEEMessage1{
-    "Congratulations, you have\n"
-    "completed the escape room!"
-}
 
-text EscapeRopeEEMessage2{
-    "Just kidding."
-}
 

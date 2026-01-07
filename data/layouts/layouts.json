@@ -4414,7 +4414,7 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_MAIN",
       "name": "EscapeRoom_Main_Layout",
-      "width": 104,
+      "width": 132,
       "height": 42,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
@@ -4454,7 +4454,7 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_HIDDEN_DUNGEON",
       "name": "EscapeRoom_HiddenDungeon_Layout",
-      "width": 77,
+      "width": 81,
       "height": 35,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",

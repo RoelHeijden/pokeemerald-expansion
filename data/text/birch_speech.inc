@@ -43,8 +43,10 @@ gText_Birch_BoyOrGirl2::
 
 
 gText_Birch_AndYouAre::
-	.string "Welcome to the Azkari Ruins Pokémon\n"
-	.string "escape room!\p"
+	.string "Welcome to Pokémon Annihilape's Lair!\p"
+
+	.string "In case you weren't aware, this is a\n"
+	.string	"Pokémon escape room game.\p"
 
 	.string "You'll be challenged to solve puzzles,\n"
 	.string "face tough battles, and find out-of-\l"

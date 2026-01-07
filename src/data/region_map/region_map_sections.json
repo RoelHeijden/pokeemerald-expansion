@@ -1713,7 +1713,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_MAIN",
-      "name": "Azkari Ruins",
+      "name": "Alcei Ruins",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1721,7 +1721,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_RUINS",
-      "name": "Azkari Ruins",
+      "name": "Alcei Ruins",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1729,7 +1729,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_TOMB",
-      "name": "Azkari Ruins",
+      "name": "Alcei Ruins",
       "x": 8,
       "y": 4,
       "width": 1,
@@ -1737,7 +1737,7 @@
     },
     {
       "map_section": "MAPSEC_ESCAPE_ROOM_HIDDEN_DUNGEON",
-      "name": "Azkari Ruins",
+      "name": "Alcei Ruins",
       "x": 8,
       "y": 4,
       "width": 1,

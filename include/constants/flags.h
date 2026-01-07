@@ -1307,8 +1307,8 @@
 #define FLAG_FLAG_ZERA_BLOCK_SUCCES                                 0x4E2
 #define FLAG_FLAG_ZERA_PREDAMAGE_SUCCES                             0x4E3
 #define FLAG_ESCAPE_ROPE_EE_USED                                    0x4E4
-#define FLAG_UNUSED_0x4E5                                           0x4E5 // Unused Flag
-#define FLAG_UNUSED_0x4E6                                           0x4E6 // Unused Flag
+#define FLAG_HIDE_CHAMPION                                          0x4E5
+#define FLAG_FINAL_MESSAGE_READ                                     0x4E6
 #define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
 #define FLAG_UNUSED_0x4E8                                           0x4E8 // Unused Flag
 #define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag

@@ -541,7 +541,7 @@ static void Task_Hof_TrySaveData(u8 taskId)
     {
         PlaySE(SE_SAVE);
         gTasks[taskId].func = Task_Hof_WaitToDisplayMon;
-        gTasks[taskId].tFrameCount = 32;
+        gTasks[taskId].tFrameCount = 48;
     }
 }
 

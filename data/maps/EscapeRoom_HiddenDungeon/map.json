@@ -77,7 +77,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EscapeRoom_EventScript_Trainer11",
-      "flag": "0"
+      "flag": "FLAG_HIDE_CHAMPION"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAGMA_MEMBER_M",
@@ -274,6 +274,27 @@
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_ANNIHILAPES_LAIR",
       "dest_warp_id": "2"
+    },
+    {
+      "x": 60,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
+      "dest_warp_id": "12"
+    },
+    {
+      "x": 74,
+      "y": 10,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_HIDDEN_DUNGEON",
+      "dest_warp_id": "11"
+    },
+    {
+      "x": 74,
+      "y": 12,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_MAIN",
+      "dest_warp_id": "8"
     }
   ],
   "coord_events": [
@@ -303,24 +324,6 @@
       "var": "VAR_FINAL_BATTLE_REACHED",
       "var_value": "0",
       "script": "EscapeRoom_HiddenDungeon_FinaleReachedTrigger"
-    },
-    {
-      "type": "trigger",
-      "x": 60,
-      "y": 10,
-      "elevation": 0,
-      "var": "VAR_ESCAPE_ROPE_EE_STATE",
-      "var_value": "2",
-      "script": "EscapeRoom_HiddenDungeon_EscapeRopeEE_message2andwarp"
-    },
-    {
-      "type": "trigger",
-      "x": 60,
-      "y": 16,
-      "elevation": 0,
-      "var": "VAR_ESCAPE_ROPE_EE_STATE",
-      "var_value": "2",
-      "script": "EscapeRoom_HiddenDungeon_EscapeRopeEE_message2andwarp"
     }
   ],
   "bg_events": [
@@ -331,14 +334,6 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "EscapeRoom_EventScript_MainInfoSign"
-    },
-    {
-      "type": "sign",
-      "x": 60,
-      "y": 8,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EscapeRoom_EventScript_EndSign"
     }
   ]
 }

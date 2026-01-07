@@ -1042,7 +1042,7 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
     // escape rope easter egg
     if (CanUseEscapeRopeEasterEgg() == TRUE)
     {
-        SetEscapeWarp(MAP_GROUP(ESCAPE_ROOM_HIDDEN_DUNGEON), MAP_NUM(ESCAPE_ROOM_HIDDEN_DUNGEON), WARP_ID_NONE, 60, 12);
+        SetEscapeWarp(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 113, 16);
         FlagSet(FLAG_ESCAPE_ROPE_EE_USED);
         VarSet(VAR_ESCAPE_ROPE_EE_STATE, 1);
     }
@@ -1096,7 +1096,7 @@ bool8 CanUseEscapeRopeEasterEgg(void)
     u8 mapNum   = gSaveBlock1Ptr->location.mapNum;
 
     // check for specific map and coordinate range
-    if(!FlagGet(FLAG_ESCAPE_ROPE_EE_USED)){ 
+    if(!FlagGet(FLAG_ESCAPE_ROPE_EE_USED) && !FlagGet(FLAG_LIEPARD_OBTAINED)){ 
         if (mapGroup == MAP_GROUP(ESCAPE_ROOM_MAIN)
             && mapNum == MAP_NUM(ESCAPE_ROOM_MAIN)
             && x == 54
