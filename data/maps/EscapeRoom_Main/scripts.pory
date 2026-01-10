@@ -5357,6 +5357,8 @@ script EscapeRoom_EventScript_GraveStone1{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
 
     releaseall
 }
@@ -5382,6 +5384,9 @@ script EscapeRoom_EventScript_GraveStone2{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
 
     releaseall
 }
@@ -5417,6 +5422,16 @@ script EscapeRoom_EventScript_GraveStone3{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK2)  
 
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 1 || var(VAR_GRAVESTONE_EASTER_EGG) == 5){
+        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
+
     releaseall
 }
 
@@ -5441,6 +5456,14 @@ script EscapeRoom_EventScript_GraveStone4{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 3 || var(VAR_GRAVESTONE_EASTER_EGG) == 4){
+        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
 
     releaseall
 }
@@ -5467,6 +5490,9 @@ script EscapeRoom_EventScript_GraveStone5{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+
     releaseall
 }
 
@@ -5491,6 +5517,9 @@ script EscapeRoom_EventScript_GraveStone6{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
 
     releaseall
 }
@@ -5528,6 +5557,19 @@ script EscapeRoom_EventScript_GraveStone7{
         clearflag(FLAG_GRAVESTONE_CHECK2)
         clearflag(FLAG_GRAVESTONE_CHECK3)
     }
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 6 && !flag(FLAG_EASTER_EGG_STEP_1_COMPLETE)){
+        setflag(FLAG_EASTER_EGG_STEP_1_COMPLETE)
+
+        msgbox(GravestoneStepMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
+
     releaseall
 }
 
@@ -5561,7 +5603,16 @@ script EscapeRoom_EventScript_GraveStone8{
     // clear flags
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK3)  
-    
+
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 0){
+        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
     releaseall
 }
 
@@ -5587,6 +5638,14 @@ script EscapeRoom_EventScript_GraveStone9{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 2){
+        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
     releaseall
 }
 
@@ -5611,6 +5670,9 @@ script EscapeRoom_EventScript_GraveStone0{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
+
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
 
     releaseall
 }
@@ -7948,6 +8010,20 @@ text EndEscapeRoomSignMessage{
 text EscapeRopeEEMessage2{
     "Just kidding."
 }
+
+
+// main easter egg
+text EasterEggHintMessageNPC{
+    "Like scavenger hunts?\p"
+    "At the beginning of time it's already\n"
+    "too late."
+}
+
+text GravestoneStepMessage{
+    "Next step: TBD"
+}
+
+
 
 
 //  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
