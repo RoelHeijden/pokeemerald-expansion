@@ -45,6 +45,7 @@ const LOCALID_SECRET_SOLID_BOARD = 16
 
 const LOCALID_TRAINER11 = 5
 
+const LOCALID_CHAMPION_BF = 7
 
 
 movement _face_down {
@@ -4109,10 +4110,20 @@ script EscapeRoom_EventScript_Trainer11{
             waitmessage
             delay(30)
         }
-        msgbox(Trainer11_EndTheGame, MSGBOX_YESNO)
-        if(var(VAR_RESULT) == YES){
-            closemessage
-            call(EscapeRoom_EventScript_EndGame)
+
+        // easter egg ending
+        checkitem(ITEM_SS_TICKET)
+        if(var(VAR_RESULT) == TRUE){
+            call(EscapeRoom_EventScript_AlternativeEnding)
+        }
+
+        // main ending
+        else{
+            msgbox(Trainer11_EndTheGame, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                closemessage
+                call(EscapeRoom_EventScript_EndGame)
+            }
         }
     }
     releaseall
@@ -5792,6 +5803,20 @@ script EscapeRoom_EventScript_EndGame{
 	setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
 
     // enter boat
+    call(EscapeRoom_EventScript_EndGame_EnterBoat)
+
+    // fade music and screen
+    fadeoutbgm(0)
+    fadescreenspeed(FADE_TO_BLACK, 8)
+
+    // end credits
+	special(GameClear)
+	waitstate
+	releaseall
+	end
+}
+
+script EscapeRoom_EventScript_EndGame_EnterBoat{
     delay(20)
     if(var(VAR_FACING) == DIR_SOUTH){
         applymovement(OBJ_EVENT_ID_PLAYER, EnterBoat2)
@@ -5811,17 +5836,9 @@ script EscapeRoom_EventScript_EndGame{
 
     // start moving boat
     applymovement(LOCALID_BOAT, BoatSailAway)
-
-    // fade music and screen
-    fadeoutbgm(0)
-    fadescreenspeed(FADE_TO_BLACK, 8)
-
-    // end credits
-	special(GameClear)
-	waitstate
-	releaseall
-	end
 }
+
+
 
 movement EnterBoat1{
     face_down
@@ -5864,6 +5881,69 @@ script EscapeRoom_EventScript_EscapeRopeEE_message2andwarp{
     warpteleport(MAP_ESCAPE_ROOM_MAIN, 47, 17)
     waitstate
 }
+
+//// MAIN EASTER EGG ////
+script EscapeRoom_EventScript_AlternativeEnding{
+    lockall
+	setrespawn(HEAL_LOCATION_ESCAPE_ROOM_NURSE1)
+
+    // exclamation mark
+    playse(SE_PIN)
+    applymovement(LOCALID_CHAMPION, Common_Movement_ExclamationMark)
+    waitmovement(LOCALID_CHAMPION)
+    delay(30)
+
+    // message
+    msgbox(TakeEasterEggBoatMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // enter boat
+    call(EscapeRoom_EventScript_EndGame_EnterBoat)
+
+    // teleport to battle factory
+    delay(150)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 9, 10)
+    waitstate
+
+	releaseall
+	end
+}
+
+
+script EscapeRoom_EventScript_EasterEggFinalMessage{
+    // easter egg completed message
+    playfanfare(MUS_OBTAIN_BADGE)
+    msgbox(EasterEggCompletedMessage1)
+    waitfanfare
+    waitmessage
+
+    // final words
+    msgbox(EasterEggCompletedMessage2, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // remove NPC
+    fadescreen(FADE_TO_BLACK)
+    playse(SE_EXIT)
+    delay(15)
+    removeobject(LOCALID_CHAMPION_BF)
+    setflag(FLAG_HIDE_CHAMPION_BF)
+    fadescreen(FADE_FROM_BLACK)
+    waitse
+
+    // set easter egg as completed
+    setflag(FLAG_MAIN_EASTER_EGG_COMPLETED)
+    setvar(VAR_MAIN_EASTER_EGG_COMPLETED, 1)
+}
+
+
+
+
+script EscapeRoom_EventScript_ObtainBoatTicket{
+    lockall
+    giveitem(ITEM_SS_TICKET)
+    releaseall
+}
+
 
 
 
@@ -8013,16 +8093,33 @@ text EscapeRopeEEMessage2{
 
 
 // main easter egg
-text EasterEggHintMessageNPC{
-    "Like scavenger hunts?\p"
-    "At the beginning of time it's already\n"
-    "too late."
+text EasterEggHintMessage{
+    "You like scavenger hunts?\p"
+    "You'll have to start before time began."
 }
 
 text GravestoneStepMessage{
-    "Next step: TBD"
+    "Easter egg step 1 completed.\p"
+    "TBD"
 }
 
+text TakeEasterEggBoatMessage{
+    "An SS Ticket!?\p"
+
+    "I'm impressed... You've actually\n"
+    "managed to do it.\p"
+
+    "Alright, let's go."
+}
+
+text EasterEggCompletedMessage1{
+    "Congratulations, you have completed\n"
+    "the main easter egg!"
+}
+
+text EasterEggCompletedMessage2{
+    "Enjoy the Battle Factory!"
+}
 
 
 

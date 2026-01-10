@@ -59,11 +59,11 @@ const u8 gText_BirchBoy[] = _("BOY");
 const u8 gText_BirchGirl[] = _("GIRL");
 
 // NAMES CHANGED
-const u8 gText_DefaultNameStu[] = _("Ketch");
+const u8 gText_DefaultNameStu[] = _("Roel");
 const u8 gText_DefaultNameMilton[] = _("Acci");
 const u8 gText_DefaultNameTom[] = _("Datone");
-const u8 gText_DefaultNameKenny[] = _("Brom");
-const u8 gText_DefaultNameReid[] = _("Jacco");
+const u8 gText_DefaultNameKenny[] = _("Bromley");
+const u8 gText_DefaultNameReid[] = _("REID");
 const u8 gText_DefaultNameJude[] = _("JUDE");
 const u8 gText_DefaultNameJaxson[] = _("JAXSON");
 const u8 gText_DefaultNameEaston[] = _("EASTON");
@@ -81,7 +81,7 @@ const u8 gText_DefaultNameStanley[] = _("STANLEY");
 const u8 gText_DefaultNameQuincy[] = _("QUINCY");
 
 const u8 gText_DefaultNameKimmy[] = _("8394437");
-const u8 gText_DefaultNameTiara[] = _("Alice");
+const u8 gText_DefaultNameTiara[] = _("TIARA");
 const u8 gText_DefaultNameBella[] = _("BELLA");
 const u8 gText_DefaultNameJayla[] = _("JAYLA");
 const u8 gText_DefaultNameAllie[] = _("ALLIE");

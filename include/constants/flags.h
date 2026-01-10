@@ -1309,8 +1309,8 @@
 #define FLAG_ESCAPE_ROPE_EE_USED                                    0x4E4
 #define FLAG_HIDE_CHAMPION                                          0x4E5
 #define FLAG_FINAL_MESSAGE_READ                                     0x4E6
-#define FLAG_UNUSED_0x4E7                                           0x4E7 // Unused Flag
-#define FLAG_UNUSED_0x4E8                                           0x4E8 // Unused Flag
+#define FLAG_HIDE_CHAMPION_BF                                       0x4E7
+#define FLAG_MAIN_EASTER_EGG_COMPLETED                              0x4E8
 #define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag
 #define FLAG_UNUSED_0x4EA                                           0x4EA // Unused Flag
 #define FLAG_UNUSED_0x4EB                                           0x4EB // Unused Flag
