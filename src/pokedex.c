@@ -74,8 +74,8 @@ enum
 enum
 {
    ORDER_NUMERICAL,
+   ORDER_HEAVIEST,   // CHANGED ORDER
    ORDER_ALPHABETICAL,
-   ORDER_HEAVIEST,
    ORDER_LIGHTEST,
    ORDER_TALLEST,
    ORDER_SMALLEST
@@ -1349,7 +1349,7 @@ static const struct SearchOptionText sDexOrderOptions[] =
 {
     [ORDER_NUMERICAL]    = {gText_DexSortNumericalDescription, gText_DexSortNumericalTitle},
     // [ORDER_ALPHABETICAL] = {gText_DexSortAtoZDescription,      gText_DexSortAtoZTitle},
-    // [ORDER_HEAVIEST]     = {gText_DexSortHeaviestDescription,  gText_DexSortHeaviestTitle},
+    [ORDER_HEAVIEST]     = {gText_DexSortHeaviestDescription,  gText_DexSortHeaviestTitle},
     // [ORDER_LIGHTEST]     = {gText_DexSortLightestDescription,  gText_DexSortLightestTitle},
     // [ORDER_TALLEST]      = {gText_DexSortTallestDescription,   gText_DexSortTallestTitle},
     // [ORDER_SMALLEST]     = {gText_DexSortSmallestDescription,  gText_DexSortSmallestTitle},
@@ -1424,11 +1424,11 @@ static const u8 sPokedexModes[] = {DEX_MODE_HOENN, DEX_MODE_NATIONAL};
 static const u8 sOrderOptions[] =
 {
     ORDER_NUMERICAL,
-    ORDER_ALPHABETICAL,
+    // ORDER_ALPHABETICAL,
     ORDER_HEAVIEST,
-    ORDER_LIGHTEST,
-    ORDER_TALLEST,
-    ORDER_SMALLEST,
+    // ORDER_LIGHTEST,
+    // ORDER_TALLEST,
+    // ORDER_SMALLEST,
 };
 
 static const u8 sDexSearchTypeIds[NUMBER_OF_MON_TYPES] =
