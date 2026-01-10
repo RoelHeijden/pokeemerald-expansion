@@ -5909,7 +5909,6 @@ script EscapeRoom_EventScript_AlternativeEnding{
 	end
 }
 
-
 script EscapeRoom_EventScript_EasterEggFinalMessage{
     // easter egg completed message
     playfanfare(MUS_OBTAIN_BADGE)
@@ -5934,9 +5933,6 @@ script EscapeRoom_EventScript_EasterEggFinalMessage{
     setflag(FLAG_MAIN_EASTER_EGG_COMPLETED)
     setvar(VAR_MAIN_EASTER_EGG_COMPLETED, 1)
 }
-
-
-
 
 script EscapeRoom_EventScript_ObtainBoatTicket{
     lockall
