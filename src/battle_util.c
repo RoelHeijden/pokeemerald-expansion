@@ -11209,7 +11209,10 @@ u32 GetIllusionMonSpecies(u32 battler)
     if (side == B_SIDE_OPPONENT)
     {
         u16 species = GetMonData(illusionMon, MON_DATA_SPECIES);
-        GetSetPokedexFlag(species, FLAG_SET_SEEN);
+        u16 natDex = SpeciesToNationalPokedexNum(species);
+        if (natDex != 0){
+            GetSetPokedexFlag(natDex, FLAG_SET_SEEN);
+        }
     }
 
     if (illusionMon != NULL)
