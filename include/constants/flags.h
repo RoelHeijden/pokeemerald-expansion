@@ -1313,7 +1313,7 @@
 #define FLAG_MAIN_EASTER_EGG_COMPLETED                              0x4E8
 #define FLAG_EASTER_EGG_ROCK_SMACH_USED                             0x4E9 
 #define FLAG_HIDE_EASTER_EGG_HINT_0_NPC                             0x4EA
-#define FLAG_UNUSED_0x4EB                                           0x4EB // Unused Flag
+#define FLAG_HIDE_EASTER_EGG_SS_TICKET                              0x4EB
 #define FLAG_UNUSED_0x4EC                                           0x4EC // Unused Flag
 #define FLAG_UNUSED_0x4ED                                           0x4ED // Unused Flag 
 #define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag

@@ -1047,6 +1047,14 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
         VarSet(VAR_ESCAPE_ROPE_EE_STATE, 1);
     }
 
+    // ADDED
+    // main easter egg step
+    if (VarGet(VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG) == 1)
+    {
+        SetEscapeWarp(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 79, 8);
+    }
+
+    
     Overworld_ResetStateAfterDigEscRope();
     if (I_KEY_ESCAPE_ROPE < GEN_8)
         RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -1076,6 +1084,17 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
         // ADDED
         // Escape Rope return flag
         FlagSet(FLAG_RETURN_ESCAPE_ROPE);
+
+
+        // ADDED
+        // main easter egg step 3
+        if (FlagGet(FLAG_EASTER_EGG_ROCK_SMACH_USED) && VarGet(VAR_MAIN_EASTER_EGG_STATE) == 2
+            && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ESCAPE_ROOM_EGG_CAVE)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ESCAPE_ROOM_EGG_CAVE)
+            && (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 25))
+        {
+            VarSet(VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG, 1);
+        } 
     }
     else
     {

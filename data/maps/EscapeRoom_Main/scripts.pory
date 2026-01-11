@@ -35,7 +35,7 @@ const LOCALID_SMASH_ROCK2 = 32
 const LOCALID_RESCUE_BELL = 33
 const LOCALID_CHAMPION = 34
 const LOCALID_BOAT = 35
-const _DUMMY_6 = 36
+const LOCALID_HIDDEN_SS_TICKET = 36
 const _DUMMY_7 = 37
 const _DUMMY_8 = 38
 const _DUMMY_9 = 39
@@ -84,6 +84,7 @@ mapscripts EscapeRoom_Main_MapScripts {
         VAR_DO_ERROR_MESSAGE, 1: EscapeRoom_MapScripts_DoErrorMessage
         VAR_JUST_ESCAPED_ICE_PUZZLE, 1: EscapeRoom_MapScripts_CheckIcePuzzleItemReturns
         VAR_ESCAPE_ROPE_EE_STATE, 1: EscapeRoom_EventScript_EscapeRopeEE_message1
+        VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG, 1: EscapeRoom_EventScript_MainEasterEggStep3Complete
     ] 
 }
 
@@ -106,6 +107,7 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     // unspawn easter egg hint 0 npc
     if(flag(FLAG_FINAL_MESSAGE_READ) == FALSE){
         setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
+        setflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
     }
 }
 
@@ -701,6 +703,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_GetItems)
     call(EscapeRoom_MapScripts_TurnOfBagUse)
     setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
+    setflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
     setflag(FLAG_HIDE_ANNIHILAPE)
     setflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
@@ -5959,12 +5962,6 @@ script EscapeRoom_EventScript_EasterEggFinalMessage{
     setvar(VAR_MAIN_EASTER_EGG_COMPLETED, 1)
 }
 
-script EscapeRoom_EventScript_ObtainBoatTicket{
-    lockall
-    giveitem(ITEM_SS_TICKET)
-    releaseall
-}
-
 // step 0
 script EscapeRoom_EventScript_MainEasterStep0_HintNPC{
     lockall
@@ -5992,8 +5989,10 @@ script EscapeRoom_EventScript_MainEasterEggStep1Complete{
 
     msgbox(EasterEggStep1Completed_HintMessage, MSGBOX_AUTOCLOSE)
     waitmessage
-    delay(10)
+    delay(15)
 
+    playse(SE_SUCCESS)
+    waitse
     msgbox(EasterEggStep1Completed, MSGBOX_AUTOCLOSE)
     waitmessage
 
@@ -6002,27 +6001,17 @@ script EscapeRoom_EventScript_MainEasterEggStep1Complete{
 }
 
 // step 2
-script EscapeRoom_EventScript_MainEasterEggStep2WallSign{
-    lockall
-    if(flag(FLAG_EASTER_EGG_ROCK_SMACH_USED) == FALSE){
-        msgbox(EasterEggStep2WallSignMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-    else{
-        msgbox(EasterEggStep2WallSignMessageOpened, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-    releaseall
-}
-
 script EscapeRoom_EventScript_MainEasterEggStep2Complete{
     lockall
     setvar(VAR_MAIN_EASTER_EGG_STATE, 2)
     setvar(VAR_MAIN_EASTER_EGG_STEP2_COMPLETE_MSG, 0)
+    delay(40)
 
-    delay(30)
+    playse(SE_SUCCESS)
+    waitse
     msgbox(EasterEggStep2Completed, MSGBOX_AUTOCLOSE)
     waitmessage
+
     releaseall
 }
 
@@ -6034,6 +6023,30 @@ script EscapeRoom_EventScript_MainEasterEggStep3WallSign{
     releaseall
 }
 
+script EscapeRoom_EventScript_MainEasterEggStep3Complete{
+    lockall
+    setvar(VAR_MAIN_EASTER_EGG_STATE, 3)
+    setvar(VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG, 0)
+
+    playse(SE_SUCCESS)
+    waitse
+    msgbox(EasterEggStep3Completed, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // spawn ss ticket
+    clearflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
+
+    releaseall
+}
+
+// final step
+script EscapeRoom_EventScript_MainEasterEggObtainBoatTicket{
+    lockall
+    setvar(VAR_MAIN_EASTER_EGG_STATE, 4)
+    giveitem(ITEM_SS_TICKET)
+    removeobject(LOCALID_HIDDEN_SS_TICKET)
+    releaseall
+}
 
 
 
@@ -8208,32 +8221,24 @@ text EasterEggHintMessage{
 }
 
 text EasterEggStep1Completed{
-    "(Easter egg step 1)"
+    "EASTER EGG STEP 1"
 }
 
 text EasterEggStep2Completed{
-    "(Easter egg step 2)"
+    "EASTER EGG STEP 2"
 }
 
 text EasterEggStep3Completed{
-    "(Easter egg step 3)"
+    "EASTER EGG STEP 3"
 }
 
 text EasterEggStep1Completed_HintMessage{
     "Thud!"
 }
 
-text EasterEggStep2WallSignMessage{
-    "TBD"
-}
-
-text EasterEggStep2WallSignMessageOpened{
-    "There's a big hole in the wall."
-}
-
 text EasterEggStep3WallSignMessage{
-    "Yhzvi Ltaempcc hyy knis vhz kvgwns..."  
-    // key = CAVE ESCAPE
+    "Zhxrg Vzdpbnej lxg bnvq bke zrqwvg..."  
+    // key = DATACCI
     // "Where Trapinch dug into the ground..."
 }
 
