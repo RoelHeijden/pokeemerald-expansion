@@ -42,6 +42,7 @@ const _DUMMY_9 = 39
 
 const LOCALID_SECRET_BASE_CANDY = 16
 const LOCALID_SECRET_SOLID_BOARD = 16
+const LOCALID_SECRET_EE_HINT_NPC = 17
 
 const LOCALID_TRAINER11 = 5
 
@@ -98,6 +99,13 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     if(flag(FLAG_TRAINER3_DEFEATED)){
         setobjectxyperm(LOCALID_TRAINER3, 62, 10)
         setobjectmovementtype(LOCALID_TRAINER3, MOVEMENT_TYPE_FACE_LEFT)
+    }
+
+    // TEMPORARY
+    // can be removed when save files are outdated
+    // unspawn easter egg hint 0 npc
+    if(flag(FLAG_FINAL_MESSAGE_READ) == FALSE){
+        setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
     }
 }
 
@@ -692,6 +700,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_SetRespawn)
     call(EscapeRoom_MapScripts_GetItems)
     call(EscapeRoom_MapScripts_TurnOfBagUse)
+    setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
     setflag(FLAG_HIDE_ANNIHILAPE)
     setflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
@@ -4109,6 +4118,11 @@ script EscapeRoom_EventScript_Trainer11{
             msgbox(Trainer11_PostBattle_B, MSGBOX_AUTOCLOSE)
             waitmessage
             delay(30)
+
+            // allow start easter egg hint
+            if(var(VAR_MAIN_EASTER_EGG_STATE) == 0){
+                clearflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
+            }
         }
 
         // easter egg ending
@@ -5344,6 +5358,11 @@ script EscapeRoom_EventScript_GraveStone1{
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
 
+
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+
+
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
@@ -5368,9 +5387,6 @@ script EscapeRoom_EventScript_GraveStone1{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
-    // Easter egg
-    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
-
     releaseall
 }
 
@@ -5378,6 +5394,11 @@ script EscapeRoom_EventScript_GraveStone2{
     lockall
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
+
+
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+
 
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
@@ -5396,9 +5417,6 @@ script EscapeRoom_EventScript_GraveStone2{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
-    // Easter egg
-    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
-
     releaseall
 }
 
@@ -5406,6 +5424,16 @@ script EscapeRoom_EventScript_GraveStone3{
     lockall
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
+
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 1 || var(VAR_GRAVESTONE_EASTER_EGG) == 5){
+        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
 
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
@@ -5433,16 +5461,6 @@ script EscapeRoom_EventScript_GraveStone3{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK2)  
 
-
-    // Easter egg
-    if(var(VAR_GRAVESTONE_EASTER_EGG) == 1 || var(VAR_GRAVESTONE_EASTER_EGG) == 5){
-        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
-    }
-    else{
-        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
-    }
-
-
     releaseall
 }
 
@@ -5451,22 +5469,6 @@ script EscapeRoom_EventScript_GraveStone4{
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
 
-    // end if final check was reached
-    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
-        end
-    }
-    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
-        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
-        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
-        // reset msg
-        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-
-    // clear flags
-    clearflag(FLAG_GRAVESTONE_CHECK1)
-    clearflag(FLAG_GRAVESTONE_CHECK2)
-    clearflag(FLAG_GRAVESTONE_CHECK3)
 
     // Easter egg
     if(var(VAR_GRAVESTONE_EASTER_EGG) == 3 || var(VAR_GRAVESTONE_EASTER_EGG) == 4){
@@ -5476,13 +5478,6 @@ script EscapeRoom_EventScript_GraveStone4{
         setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
     }
 
-    releaseall
-}
-
-script EscapeRoom_EventScript_GraveStone5{
-    lockall
-    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
 
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
@@ -5501,8 +5496,35 @@ script EscapeRoom_EventScript_GraveStone5{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone5{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+
     // Easter egg
     setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
 
     releaseall
 }
@@ -5512,6 +5534,11 @@ script EscapeRoom_EventScript_GraveStone6{
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
 
+
+    // Easter egg
+    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    
+
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
@@ -5529,9 +5556,6 @@ script EscapeRoom_EventScript_GraveStone6{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
-    // Easter egg
-    setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
-
     releaseall
 }
 
@@ -5540,6 +5564,17 @@ script EscapeRoom_EventScript_GraveStone7{
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
 
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 6 && var(VAR_MAIN_EASTER_EGG_STATE) == 0){
+        setvar(VAR_MAIN_EASTER_EGG_STATE, 1)
+        call(EscapeRoom_EventScript_MainEasterEggStep1Complete)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
+
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
         end
@@ -5547,8 +5582,6 @@ script EscapeRoom_EventScript_GraveStone7{
 
     if(flag(FLAG_GRAVESTONE_CHECK3) == TRUE)
     {
-        // msgbox(GravestoneClickMessage, MSGBOX_AUTOCLOSE)
-        // waitmessage
         setflag(FLAG_GRAVESTONE_CHECK4)
         call(EscapeRoom_EventScript_SpawnAnnihilape)
     }
@@ -5569,18 +5602,6 @@ script EscapeRoom_EventScript_GraveStone7{
         clearflag(FLAG_GRAVESTONE_CHECK3)
     }
 
-    // Easter egg
-    if(var(VAR_GRAVESTONE_EASTER_EGG) == 6 && !flag(FLAG_EASTER_EGG_STEP_1_COMPLETE)){
-        setflag(FLAG_EASTER_EGG_STEP_1_COMPLETE)
-
-        msgbox(GravestoneStepMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-    else{
-        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
-    }
-
-
     releaseall
 }
 
@@ -5588,6 +5609,16 @@ script EscapeRoom_EventScript_GraveStone8{
     lockall
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
+
+
+    // Easter egg
+    if(var(VAR_GRAVESTONE_EASTER_EGG) == 0){
+        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
+    }
+    else{
+        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+    }
+
 
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
@@ -5615,15 +5646,6 @@ script EscapeRoom_EventScript_GraveStone8{
     clearflag(FLAG_GRAVESTONE_CHECK1)
     clearflag(FLAG_GRAVESTONE_CHECK3)  
 
-
-    // Easter egg
-    if(var(VAR_GRAVESTONE_EASTER_EGG) == 0){
-        addvar(VAR_GRAVESTONE_EASTER_EGG, 1)
-    }
-    else{
-        setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
-    }
-
     releaseall
 }
 
@@ -5632,22 +5654,6 @@ script EscapeRoom_EventScript_GraveStone9{
     msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
     waitmessage
 
-    // end if final check was reached
-    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
-        end
-    }
-    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
-        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
-        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
-        // reset msg
-        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
-        waitmessage
-    }
-
-    // clear flags
-    clearflag(FLAG_GRAVESTONE_CHECK1)
-    clearflag(FLAG_GRAVESTONE_CHECK2)
-    clearflag(FLAG_GRAVESTONE_CHECK3)
 
     // Easter egg
     if(var(VAR_GRAVESTONE_EASTER_EGG) == 2){
@@ -5657,13 +5663,6 @@ script EscapeRoom_EventScript_GraveStone9{
         setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
     }
 
-    releaseall
-}
-
-script EscapeRoom_EventScript_GraveStone0{
-    lockall
-    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
-    waitmessage
 
     // end if final check was reached
     if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
@@ -5682,8 +5681,35 @@ script EscapeRoom_EventScript_GraveStone0{
     clearflag(FLAG_GRAVESTONE_CHECK2)
     clearflag(FLAG_GRAVESTONE_CHECK3)
 
+    releaseall
+}
+
+script EscapeRoom_EventScript_GraveStone0{
+    lockall
+    msgbox(GravestoneNoneMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+
     // Easter egg
     setvar(VAR_GRAVESTONE_EASTER_EGG, 0)
+
+
+    // end if final check was reached
+    if(flag(FLAG_GRAVESTONE_CHECK4) == TRUE){
+        end
+    }
+    elif(flag(FLAG_GRAVESTONE_CHECK1) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK2) == TRUE ||
+        flag(FLAG_GRAVESTONE_CHECK3) == TRUE){
+        // reset msg
+        msgbox(GravestoneResetMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
+    // clear flags
+    clearflag(FLAG_GRAVESTONE_CHECK1)
+    clearflag(FLAG_GRAVESTONE_CHECK2)
+    clearflag(FLAG_GRAVESTONE_CHECK3)
 
     releaseall
 }
@@ -5838,8 +5864,6 @@ script EscapeRoom_EventScript_EndGame_EnterBoat{
     applymovement(LOCALID_BOAT, BoatSailAway)
 }
 
-
-
 movement EnterBoat1{
     face_down
     walk_down
@@ -5881,6 +5905,7 @@ script EscapeRoom_EventScript_EscapeRopeEE_message2andwarp{
     warpteleport(MAP_ESCAPE_ROOM_MAIN, 47, 17)
     waitstate
 }
+
 
 //// MAIN EASTER EGG ////
 script EscapeRoom_EventScript_AlternativeEnding{
@@ -5937,6 +5962,75 @@ script EscapeRoom_EventScript_EasterEggFinalMessage{
 script EscapeRoom_EventScript_ObtainBoatTicket{
     lockall
     giveitem(ITEM_SS_TICKET)
+    releaseall
+}
+
+// step 0
+script EscapeRoom_EventScript_MainEasterStep0_HintNPC{
+    lockall
+    faceplayer
+    msgbox(EasterEggHintMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // remove NPC
+    fadescreen(FADE_TO_BLACK)
+    delay(15)
+    removeobject(LOCALID_SECRET_EE_HINT_NPC)
+    setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
+    fadescreen(FADE_FROM_BLACK)
+
+    releaseall
+}
+
+// step 1
+script EscapeRoom_EventScript_MainEasterEggStep1Complete{
+    playse(SE_CLICK)
+    special(DoSealedChamberShakingEffect_Short)
+    delay(5)
+    special(DoSealedChamberShakingEffect_Short)
+    lockall
+
+    msgbox(EasterEggStep1Completed_HintMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    delay(10)
+
+    msgbox(EasterEggStep1Completed, MSGBOX_AUTOCLOSE)
+    waitmessage
+
+    // despawn hint npc
+    setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
+}
+
+// step 2
+script EscapeRoom_EventScript_MainEasterEggStep2WallSign{
+    lockall
+    if(flag(FLAG_EASTER_EGG_ROCK_SMACH_USED) == FALSE){
+        msgbox(EasterEggStep2WallSignMessage, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    else{
+        msgbox(EasterEggStep2WallSignMessageOpened, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+    releaseall
+}
+
+script EscapeRoom_EventScript_MainEasterEggStep2Complete{
+    lockall
+    setvar(VAR_MAIN_EASTER_EGG_STATE, 2)
+    setvar(VAR_MAIN_EASTER_EGG_STEP2_COMPLETE_MSG, 0)
+
+    delay(30)
+    msgbox(EasterEggStep2Completed, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
+// step 3
+script EscapeRoom_EventScript_MainEasterEggStep3WallSign{
+    lockall
+    msgbox(EasterEggStep3WallSignMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
     releaseall
 }
 
@@ -8089,16 +8183,6 @@ text EscapeRopeEEMessage2{
 
 
 // main easter egg
-text EasterEggHintMessage{
-    "You like scavenger hunts?\p"
-    "You'll have to start before time began."
-}
-
-text GravestoneStepMessage{
-    "Easter egg step 1 completed.\p"
-    "TBD"
-}
-
 text TakeEasterEggBoatMessage{
     "An SS Ticket!?\p"
 
@@ -8115,6 +8199,42 @@ text EasterEggCompletedMessage1{
 
 text EasterEggCompletedMessage2{
     "Enjoy the Battle Factory!"
+}
+
+text EasterEggHintMessage{
+    "Interested in easter eggs?\p"
+    "The first clue lies before the\n"
+    "beginning of time."
+}
+
+text EasterEggStep1Completed{
+    "(Easter egg step 1)"
+}
+
+text EasterEggStep2Completed{
+    "(Easter egg step 2)"
+}
+
+text EasterEggStep3Completed{
+    "(Easter egg step 3)"
+}
+
+text EasterEggStep1Completed_HintMessage{
+    "Thud!"
+}
+
+text EasterEggStep2WallSignMessage{
+    "TBD"
+}
+
+text EasterEggStep2WallSignMessageOpened{
+    "There's a big hole in the wall."
+}
+
+text EasterEggStep3WallSignMessage{
+    "Yhzvi Ltaempcc hyy knis vhz kvgwns..."  
+    // key = CAVE ESCAPE
+    // "Where Trapinch dug into the ground..."
 }
 
 

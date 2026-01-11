@@ -10,11 +10,30 @@ const LOCALID_NURSE = 7
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_EggCave_MapScripts {
+    MAP_SCRIPT_ON_LOAD: EggCave_SetWallOnLoad
     MAP_SCRIPT_ON_RESUME: EscapeRoom_EggCave_OnResumeMapScripts
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
+        VAR_MAIN_EASTER_EGG_STEP2_COMPLETE_MSG, 1: EscapeRoom_EventScript_MainEasterEggStep2Complete
     ] 
+}
+
+// easter egg breakable wall
+script EggCave_SetWallOnLoad{
+    if(var(VAR_MAIN_EASTER_EGG_STATE) >= 1){
+        if(flag(FLAG_EASTER_EGG_ROCK_SMACH_USED)){
+            // setmetatile(17, 3, METATILE_Cave_SealedChamberEntrance_TopLeft, TRUE)
+            // setmetatile(17, 4, METATILE_Cave_SealedChamberEntrance_BottomLeft, TRUE)
+            setmetatile(18, 3, METATILE_Cave_SealedChamberEntrance_TopMid, TRUE)
+            setmetatile(18, 4, METATILE_Cave_SealedChamberEntrance_BottomMid, FALSE)
+            // setmetatile(19, 3, METATILE_Cave_SealedChamberEntrance_TopRight, TRUE)
+            // setmetatile(19, 4, METATILE_Cave_SealedChamberEntrance_BottomRight, TRUE)
+        }
+        else{
+            setmetatile(18, 4, METATILE_Cave_SealedChamberBraille_Mid, TRUE)            
+        }
+    }
 }
 
 
@@ -87,11 +106,9 @@ script EscapeRoom_EventScript_TrapinchBlocksPlayer{
     releaseall
 }
 
-
 movement PlayerFaceUp{
     face_up
 }
-
 movement TrapinchMoveIn{
     face_down
     walk_faster_down * 2
@@ -202,26 +219,22 @@ script EscapeRoom_EventScript_RescueNurse{
 movement MoveNurseFaceRight {
     face_right
 }
-
 movement MoveNurseToPlayer{
     face_up
     walk_fast_up
     face_right
     walk_fast_right * 2
 }
-
 movement MoveNurseAway {
     walk_fast_right * 3
     face_down
     walk_fast_down
 }
-
 movement MovePlayerAside {
     face_up
     walk_up
     face_down
 }
-
 movement PlayerFaceLeft {
     face_left
 }

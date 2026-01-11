@@ -1311,11 +1311,11 @@
 #define FLAG_FINAL_MESSAGE_READ                                     0x4E6
 #define FLAG_HIDE_CHAMPION_BF                                       0x4E7
 #define FLAG_MAIN_EASTER_EGG_COMPLETED                              0x4E8
-#define FLAG_UNUSED_0x4E9                                           0x4E9 // Unused Flag
-#define FLAG_UNUSED_0x4EA                                           0x4EA // Unused Flag
+#define FLAG_EASTER_EGG_ROCK_SMACH_USED                             0x4E9 
+#define FLAG_HIDE_EASTER_EGG_HINT_0_NPC                             0x4EA
 #define FLAG_UNUSED_0x4EB                                           0x4EB // Unused Flag
 #define FLAG_UNUSED_0x4EC                                           0x4EC // Unused Flag
-#define FLAG_EASTER_EGG_STEP_1_COMPLETE                             0x4ED 
+#define FLAG_UNUSED_0x4ED                                           0x4ED // Unused Flag 
 #define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag
 #define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
 

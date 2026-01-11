@@ -59,7 +59,7 @@ const u8 gText_BirchBoy[] = _("BOY");
 const u8 gText_BirchGirl[] = _("GIRL");
 
 // NAMES CHANGED
-const u8 gText_DefaultNameStu[] = _("Roel");
+const u8 gText_DefaultNameStu[] = _("Ketch");
 const u8 gText_DefaultNameMilton[] = _("Acci");
 const u8 gText_DefaultNameTom[] = _("Datone");
 const u8 gText_DefaultNameKenny[] = _("Bromley");

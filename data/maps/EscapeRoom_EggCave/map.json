@@ -134,6 +134,20 @@
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_MAIN",
       "dest_warp_id": "6"
+    },
+    {
+      "x": 18,
+      "y": 4,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 33,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_ESCAPE_ROOM_EGG_CAVE",
+      "dest_warp_id": "4"
     }
   ],
   "coord_events": [
@@ -148,6 +162,21 @@
     }
   ],
   "bg_events": [
-
+    {
+      "type": "sign",
+      "x": 18,
+      "y": 1,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_MainEasterEggStep2WallSign"
+    },
+    {
+      "type": "sign",
+      "x": 33,
+      "y": 5,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EscapeRoom_EventScript_MainEasterEggStep3WallSign"
+    }
   ]
 }

@@ -3592,13 +3592,58 @@ u16 GetSpeciesWeight(u16 species)
     return gSpeciesInfo[SanitizeSpeciesId(species)].weight;
 }
 
+// const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
+// {
+//     const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
+//     if (learnset == NULL)
+//         return gSpeciesInfo[SPECIES_NONE].levelUpLearnset;
+//     return learnset;
+// }
+
+// CHANGED
+// added Rock smash to Annihilape moveset for easter egg
 const struct LevelUpMove *GetSpeciesLevelUpLearnset(u16 species)
 {
-    const struct LevelUpMove *learnset = gSpeciesInfo[SanitizeSpeciesId(species)].levelUpLearnset;
-    if (learnset == NULL)
-        return gSpeciesInfo[SPECIES_NONE].levelUpLearnset;
-    return learnset;
+    static struct LevelUpMove modifiedLearnset[64];
+    const struct LevelUpMove *base;
+    int i = 0;
+
+    species = SanitizeSpeciesId(species);
+    base = gSpeciesInfo[species].levelUpLearnset;
+
+    if (base == NULL)
+        base = gSpeciesInfo[SPECIES_NONE].levelUpLearnset;
+
+    // Copy base learnset
+    while (base[i].move != LEVEL_UP_MOVE_END)
+    {
+        modifiedLearnset[i] = base[i];
+        i++;
+    }
+
+    // Conditionally append
+    if (species == SPECIES_ANNIHILAPE
+        && VarGet(VAR_MAIN_EASTER_EGG_STATE) >= 1
+        && FlagGet(FLAG_FINAL_MESSAGE_READ))
+    {
+        modifiedLearnset[i++] = (struct LevelUpMove){
+            .level = 35,
+            .move  = MOVE_ROCK_SMASH
+        };
+    }
+
+    // Proper terminator
+    modifiedLearnset[i] = (struct LevelUpMove){
+        .level = 0,
+        .move  = LEVEL_UP_MOVE_END
+    };
+
+    return modifiedLearnset;
 }
+
+
+
+
 
 const u16 *GetSpeciesTeachableLearnset(u16 species)
 {

@@ -137,6 +137,22 @@ bool8 SetUpFieldMove_RockSmash(void)
         gPostMenuFieldCallback = FieldCallback_RockSmash;
         return TRUE;
     }
+    // ADDED
+    // easter egg
+    else if (!FlagGet(FLAG_EASTER_EGG_ROCK_SMACH_USED) && VarGet(VAR_MAIN_EASTER_EGG_STATE) == 1
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(ESCAPE_ROOM_EGG_CAVE)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(ESCAPE_ROOM_EGG_CAVE)
+        && (gSaveBlock1Ptr->pos.x == 18 && gSaveBlock1Ptr->pos.y == 5))
+    {
+        FlagSet(FLAG_EASTER_EGG_ROCK_SMACH_USED);
+        VarSet(VAR_MAIN_EASTER_EGG_STEP2_COMPLETE_MSG, 1);
+        
+        gSpecialVar_Result = GetCursorSelectionMonId();
+        gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
+        gPostMenuFieldCallback = SetUpPuzzleEffectRegirock;
+
+        return TRUE;
+    }
     else
     {
         return FALSE;

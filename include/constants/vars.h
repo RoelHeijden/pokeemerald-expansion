@@ -142,8 +142,8 @@
 #define VAR_GRAVESTONE_EASTER_EGG                              0x407A
 #define VAR_ROUTE128_STATE                               0x407B
 #define VAR_MAIN_EASTER_EGG_COMPLETED                    0x407C
-#define VAR_ROUTE130_STATE                               0x407D // Unused Var
-#define VAR_ROUTE131_STATE                               0x407E // Unused Var
+#define VAR_MAIN_EASTER_EGG_STATE                        0x407D 
+#define VAR_MAIN_EASTER_EGG_STEP2_COMPLETE_MSG           0x407E
 #define VAR_ROUTE132_STATE                               0x407F // Unused Var
 #define VAR_ROUTE133_STATE                               0x4080 // Unused Var
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var

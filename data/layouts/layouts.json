@@ -4444,7 +4444,7 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_EGG_CAVE",
       "name": "EscapeRoom_EggCave_Layout",
-      "width": 30,
+      "width": 38,
       "height": 30,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_Cave",
