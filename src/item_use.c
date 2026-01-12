@@ -1098,9 +1098,6 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
             && (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 25))
         {
             VarSet(VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG, 1);
-
-            // spawn extra rock in ice puzzle
-            // MapGridSetMetatileIdAt(80 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_EscapeRoomIceRock);
         } 
     }
     else

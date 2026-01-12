@@ -89,7 +89,7 @@ mapscripts EscapeRoom_Main_MapScripts {
     ] 
 }
 
-
+// easter egg ice tile
 script EscapeRoom_MapScript_SetIcePuzzleRockOnLoad{
     if(var(VAR_MAIN_EASTER_EGG_STATE) >= 3){
         setmetatile(80, 19, METATILE_EscapeRoomIceRock, TRUE)
@@ -617,14 +617,17 @@ script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
 
     // EASTER EGG 
     // return SS ticket
-    checkitem(ITEM_SS_TICKET)
-    if(var(VAR_RESULT) == TRUE){
-        removeitem(ITEM_SS_TICKET)
-        clearflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
+    if(!flag(FLAG_SS_TICKET_OBTAINED)){
+        checkitem(ITEM_SS_TICKET)
+        if(var(VAR_RESULT) == TRUE){
+            removeitem(ITEM_SS_TICKET)
+            clearflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
 
-        msgbox(SSTicketReturned, MSGBOX_AUTOCLOSE)
-        waitmessage
+            msgbox(SSTicketReturned, MSGBOX_AUTOCLOSE)
+            waitmessage
+        }
     }
+
 
 
     // TM Secret Power
@@ -707,7 +710,6 @@ script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
 
     releaseall
 }
-
 
 
 //// ON WARP ////
@@ -5949,7 +5951,7 @@ script EscapeRoom_EventScript_AlternativeEnding{
 
     // teleport to battle factory
     delay(150)
-    warp(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 9, 10)
+    warp(MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 9, 7)
     waitstate
 
 	releaseall
@@ -6069,6 +6071,13 @@ script EscapeRoom_EventScript_MainEasterEggObtainBoatTicket{
     releaseall
 }
 
+// battle factory sign
+script EscapeRoom_EventScript_BattleFactorySign{
+    lockall
+    msgbox(EasterEggFirstCompletedMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
 
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
@@ -8226,19 +8235,36 @@ text TakeEasterEggBoatMessage{
     "An SS Ticket!?\p"
 
     "I'm impressed... You've actually\n"
-    "managed to do it.\p"
+    "managed to get it.\p"
 
     "Alright, let's go."
 }
 
 text EasterEggCompletedMessage1{
     "Congratulations, you have completed\n"
-    "the main easter egg!"
+    "the easter egg!"
 }
 
 text EasterEggCompletedMessage2{
+    "You may be one of the first to complete\n"
+    "this easter egg.\p"
+
+    "In the case you are, please notify me\n"
+    "(Ketch) and get your name added ingame\l"
+    "on the sign above.\p"
+
+    "...\p"
+
     "Enjoy the Battle Factory!"
 }
+
+text EasterEggFirstCompletedMessage{
+    "No one else has managed to complete\n"
+    "the easter egg yet.\p"
+    "(at least at the time this version was\n"
+    "released)"
+}
+
 
 text EasterEggHintMessage{
     "Interested in easter eggs?\p"

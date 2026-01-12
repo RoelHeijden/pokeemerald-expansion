@@ -42,6 +42,7 @@ script EscapeRoom_HiddenDungeon_MapScript_OnResumeScripts{
     call(EscapeRoom_HiddenDungeon_SetLostItemVars)
     call(EscapeRoom_MapScripts_CheckIfSecretPowerObtained)
     call(EscapeRoom_HiddenDungeon_CheckIfToxicOrbObtained)
+    call(EscapeRoom_HiddenDungeon_CheckIfSSTicketObtained)
 
     // check if ask pre-damage restore
     // sets var if true
@@ -126,6 +127,15 @@ script EscapeRoom_MapScripts_SomethingWrongMessage{
     releaseall
 }
 
+// easter egg ss ticket steal
+script EscapeRoom_HiddenDungeon_CheckIfSSTicketObtained{
+    if(!flag(FLAG_SS_TICKET_OBTAINED)){
+        checkitem(ITEM_SS_TICKET)
+        if(var(VAR_RESULT) == TRUE){
+            setflag(FLAG_SS_TICKET_OBTAINED)
+        }
+    }
+}
 
 
 ////////////////////////////////////////// EVENT SCRIPTS //////////////////////////////////////////
