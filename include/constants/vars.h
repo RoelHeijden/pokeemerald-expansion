@@ -145,7 +145,7 @@
 #define VAR_MAIN_EASTER_EGG_STATE                        0x407D 
 #define VAR_MAIN_EASTER_EGG_STEP2_COMPLETE_MSG           0x407E
 #define VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG           0x407F
-#define VAR_ROUTE133_STATE                               0x4080 // Unused Var
+#define VAR_RANDOM_NAMES_OBTAINED                        0x4080
 #define VAR_ROUTE134_STATE                               0x4081 // Unused Var
 #define VAR_LITTLEROOT_HOUSES_STATE_MAY                  0x4082
 #define VAR_UNUSED_0x4083                                0x4083 // Unused Var

@@ -81,7 +81,7 @@ const u8 gText_DefaultNameStanley[] = _("STANLEY");
 const u8 gText_DefaultNameQuincy[] = _("QUINCY");
 
 const u8 gText_DefaultNameKimmy[] = _("8394437");
-const u8 gText_DefaultNameTiara[] = _("TIARA");
+const u8 gText_DefaultNameTiara[] = _("8394437");
 const u8 gText_DefaultNameBella[] = _("BELLA");
 const u8 gText_DefaultNameJayla[] = _("JAYLA");
 const u8 gText_DefaultNameAllie[] = _("ALLIE");

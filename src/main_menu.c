@@ -2179,7 +2179,19 @@ void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
     if (gSaveBlock2Ptr->playerGender == MALE)
         name = sMalePresetNames[nameId];
     else
+    {
+        // ADDED
+        // prevent secret code name on first try
+        if (VarGet(VAR_RANDOM_NAMES_OBTAINED) < 2)
+        {
+            nameId = 2 + (Random() % (NUM_PRESET_NAMES - 2));
+        }
         name = sFemalePresetNames[nameId];
+
+        // increment name tries
+        VarSet(VAR_RANDOM_NAMES_OBTAINED, VarGet(VAR_RANDOM_NAMES_OBTAINED) + 1);
+    }
+
     for (i = 0; i < PLAYER_NAME_LENGTH; i++)
         gSaveBlock2Ptr->playerName[i] = name[i];
     gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
