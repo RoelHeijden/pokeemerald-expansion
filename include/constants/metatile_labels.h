@@ -121,6 +121,7 @@
 #define METATILE_Cave_CrackedFloor                       0x22F
 #define METATILE_Cave_CrackedFloor_Hole                  0x206
 #define METATILE_Cave_EntranceCover                      0x229
+#define METATILE_Cave_EscapeRoomIceRock                  0x39A
 #define METATILE_Cave_NormalCaveWall                     0x219
 #define METATILE_Cave_SealedChamberBraille_Mid           0x235
 #define METATILE_Cave_SealedChamberEntrance_BottomLeft   0x232
@@ -790,5 +791,8 @@
 #define METATILE_RSMossdeepGym_RedArrow_Up     0x20D
 #define METATILE_RSMossdeepGym_Switch_Down     0x239
 #define METATILE_RSMossdeepGym_Switch_Up       0x238
+
+// ADDED
+#define METATILE_EscapeRoomIceRock  0x39A
 
 #endif // GUARD_METATILE_LABELS_H

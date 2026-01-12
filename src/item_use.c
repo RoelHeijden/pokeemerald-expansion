@@ -46,6 +46,10 @@
 #include "constants/songs.h"
 #include "constants/map_types.h"
 
+// ADDED
+#include "constants/metatile_labels.h"
+
+
 static void SetUpItemUseCallback(u8);
 static void FieldCB_UseItemOnField(void);
 static void Task_CallItemUseOnFieldCallback(u8);
@@ -1054,7 +1058,7 @@ static void ItemUseOnFieldCB_EscapeRope(u8 taskId)
         SetEscapeWarp(MAP_GROUP(ESCAPE_ROOM_MAIN), MAP_NUM(ESCAPE_ROOM_MAIN), WARP_ID_NONE, 79, 8);
     }
 
-    
+
     Overworld_ResetStateAfterDigEscRope();
     if (I_KEY_ESCAPE_ROPE < GEN_8)
         RemoveBagItem(gSpecialVar_ItemId, 1);
@@ -1094,6 +1098,9 @@ void ItemUseOutOfBattle_EscapeRope(u8 taskId)
             && (gSaveBlock1Ptr->pos.x == 5 && gSaveBlock1Ptr->pos.y == 25))
         {
             VarSet(VAR_MAIN_EASTER_EGG_STEP3_COMPLETE_MSG, 1);
+
+            // spawn extra rock in ice puzzle
+            // MapGridSetMetatileIdAt(80 + MAP_OFFSET, 19 + MAP_OFFSET, METATILE_EscapeRoomIceRock);
         } 
     }
     else

@@ -66,6 +66,7 @@ movement _face_left {
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_Main_MapScripts {
+    MAP_SCRIPT_ON_LOAD: EscapeRoom_MapScript_SetIcePuzzleRockOnLoad
     MAP_SCRIPT_ON_TRANSITION: EscapeRoom_MapScript_OnTransitionScripts
     MAP_SCRIPT_ON_RESUME: EscapeRoom_MapScript_OnResumeScripts
 
@@ -89,6 +90,11 @@ mapscripts EscapeRoom_Main_MapScripts {
 }
 
 
+script EscapeRoom_MapScript_SetIcePuzzleRockOnLoad{
+    if(var(VAR_MAIN_EASTER_EGG_STATE) >= 3){
+        setmetatile(80, 19, METATILE_EscapeRoomIceRock, TRUE)
+    }
+}
 
 script EscapeRoom_MapScript_OnTransitionScripts{
     // set annihilape hint npc movement
@@ -607,6 +613,19 @@ script EscapeRoom_MapScripts_DoErrorMessage{
 script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
     lockall
     setvar(VAR_JUST_ESCAPED_ICE_PUZZLE, 0)
+
+
+    // EASTER EGG 
+    // return SS ticket
+    checkitem(ITEM_SS_TICKET)
+    if(var(VAR_RESULT) == TRUE){
+        removeitem(ITEM_SS_TICKET)
+        clearflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
+
+        msgbox(SSTicketReturned, MSGBOX_AUTOCLOSE)
+        waitmessage
+    }
+
 
     // TM Secret Power
     // if secret power obtained but not yet succesfully stolen
@@ -6033,6 +6052,9 @@ script EscapeRoom_EventScript_MainEasterEggStep3Complete{
     msgbox(EasterEggStep3Completed, MSGBOX_AUTOCLOSE)
     waitmessage
 
+    // spawn extra rock
+    setmetatile(80, 19, METATILE_EscapeRoomIceRock, TRUE)
+
     // spawn ss ticket
     clearflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
 
@@ -6042,7 +6064,6 @@ script EscapeRoom_EventScript_MainEasterEggStep3Complete{
 // final step
 script EscapeRoom_EventScript_MainEasterEggObtainBoatTicket{
     lockall
-    setvar(VAR_MAIN_EASTER_EGG_STATE, 4)
     giveitem(ITEM_SS_TICKET)
     removeobject(LOCALID_HIDDEN_SS_TICKET)
     releaseall
@@ -7672,6 +7693,11 @@ text RareCandy2Returned{
 
 text MonForgotSecretPower{
     "{STR_VAR_1}'s Secret Power was removed."
+}
+
+text SSTicketReturned{
+    "The SS Ticket was returned to its\n"
+    "previous location."
 }
 
 
