@@ -42387,7 +42387,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER3] =
     {
 #line 16948
-        .trainerName = _("Rostic"),
+        .trainerName = _("rostic"),
 #line 16949
         .trainerClass = TRAINER_CLASS_POKEMANIAC,
 #line 16950

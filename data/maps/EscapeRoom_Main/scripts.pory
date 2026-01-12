@@ -45,8 +45,8 @@ const LOCALID_SECRET_SOLID_BOARD = 16
 const LOCALID_SECRET_EE_HINT_NPC = 17
 
 const LOCALID_TRAINER11 = 5
-
 const LOCALID_CHAMPION_BF = 7
+const LOCALID_EE_WALL_SIGN = 8
 
 
 movement _face_down {
@@ -111,10 +111,11 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     // TEMPORARY
     // can be removed when save files are outdated
     // unspawn easter egg hint 0 npc
-    if(flag(FLAG_FINAL_MESSAGE_READ) == FALSE){
-        setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
-        setflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
-    }
+    // if(flag(FLAG_FINAL_MESSAGE_READ) == FALSE){
+    //     setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
+    //     setflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
+    //     setflag(FLAG_HIDE_EASTER_EGG_WALL_SIGN)
+    // }
 }
 
 script EscapeRoom_MapScript_OnResumeScripts{
@@ -725,6 +726,7 @@ script EscapeRoom_MapScript_GameStartScripts{
     call(EscapeRoom_MapScripts_TurnOfBagUse)
     setflag(FLAG_HIDE_EASTER_EGG_HINT_0_NPC)
     setflag(FLAG_HIDE_EASTER_EGG_SS_TICKET)
+    setflag(FLAG_HIDE_EASTER_EGG_WALL_SIGN)
     setflag(FLAG_HIDE_ANNIHILAPE)
     setflag(FLAG_HIDE_ROCKSMASH_TUNNEL_NPC)
     setobjectmovementtype(LOCALID_APE_HINT_NPC, MOVEMENT_TYPE_FACE_UP)
@@ -6022,6 +6024,13 @@ script EscapeRoom_EventScript_MainEasterEggStep1Complete{
 }
 
 // step 2
+script EscapeRoom_EventScript_MainEasterEggStep2WallSign{
+    lockall
+    msgbox(EasterEggStep2WallSignMessage, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
 script EscapeRoom_EventScript_MainEasterEggStep2Complete{
     lockall
     setvar(VAR_MAIN_EASTER_EGG_STATE, 2)
@@ -6032,6 +6041,10 @@ script EscapeRoom_EventScript_MainEasterEggStep2Complete{
     waitse
     msgbox(EasterEggStep2Completed, MSGBOX_AUTOCLOSE)
     waitmessage
+
+    // remove wall sign
+    removeobject(LOCALID_EE_WALL_SIGN)
+    setflag(FLAG_HIDE_EASTER_EGG_WALL_SIGN)
 
     releaseall
 }
@@ -6087,7 +6100,7 @@ text SomethingsGoneWrongMessage{
     "Something has gone wrong.\p"
     "You may have found an unintended\n"
     "solution that can break the game.\p"
-    "Consider contacting Ketchupplant."
+    "Consider contacting Ketch."
 }
 
 text RespawnChangeMessage{
@@ -8259,17 +8272,15 @@ text EasterEggCompletedMessage2{
 }
 
 text EasterEggFirstCompletedMessage{
-    "No one else has managed to complete\n"
-    "the easter egg yet.\p"
-    "(at least at the time this version was\n"
-    "released)"
+    "You're the first to complete the\n"
+    "easter egg!\p"
+    "(assuming your game is up to date)"
 }
-
 
 text EasterEggHintMessage{
     "Interested in easter eggs?\p"
-    "The first clue lies before the\n"
-    "beginning of time."
+    "Your first clue exists before time\n"
+    "begins."
 }
 
 text EasterEggStep1Completed{
@@ -8288,11 +8299,17 @@ text EasterEggStep1Completed_HintMessage{
     "Thud!"
 }
 
+text EasterEggStep2WallSignMessage{
+    "I see you like easter eggs."
+}
+
 text EasterEggStep3WallSignMessage{
     "Zhxrg Vzdpbnej lxg bnvq bke zrqwvg..."  
     // key = DATACCI
     // "Where Trapinch dug into the ground..."
 }
+
+
 
 
 
