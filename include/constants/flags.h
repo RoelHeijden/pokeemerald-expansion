@@ -1316,7 +1316,7 @@
 #define FLAG_HIDE_EASTER_EGG_SS_TICKET                              0x4EB
 #define FLAG_SS_TICKET_OBTAINED                                     0x4EC
 #define FLAG_HIDE_EASTER_EGG_WALL_SIGN                              0x4ED 
-#define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag
+#define FLAG_MAIN_EASTER_EGG_CAN_START                              0x4EE
 #define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
