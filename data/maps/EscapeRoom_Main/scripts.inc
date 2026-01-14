@@ -9987,12 +9987,11 @@ HintsNPC_RareCandyRevive_LargeHint::
 HintsNPC_Trainer6_LargeHint::
 # 6754 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You'll need to set up for Aipom to use\n"
-	.string "Custap Endeavor vs Rayquaza.\p"
-	.string "Oh... You want to use Endeavor against\n"
-	.string "a Ghost type?\p"
+	.string "Custap Endeavor against Rayquaza.\p"
+	.string "Oh... You want to use Endeavor into a\n"
+	.string "Ghost type?\p"
 	.string "It's tricky, but with the right item, it\n"
-	.string "might just work.\p"
-	.string "Endeavor for you, Endeavor for me.$"
+	.string "might just work.$"
 
 HintsNPC_MapSwitches_LargeHint::
 # 6767 "data/maps/EscapeRoom_Main/scripts.pory"
@@ -11304,12 +11303,12 @@ EasterEggCannotStart::
 	.string "escape room.$"
 
 EasterEggCompletedMessage1::
-# 8278 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8277 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Congratulations, you have completed\n"
 	.string "the easter egg!$"
 
 EasterEggCompletedMessage2::
-# 8283 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8282 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You may be one of the first to complete\n"
 	.string "this easter egg.\p"
 	.string "In the case you are, please notify me\n"
@@ -11319,37 +11318,37 @@ EasterEggCompletedMessage2::
 	.string "Enjoy the Battle Factory!$"
 
 EasterEggFirstCompletedMessage::
-# 8296 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8295 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You're the first to complete the\n"
 	.string "easter egg!\p"
 	.string "(assuming your game is up to date)$"
 
 EasterEggHintMessage::
-# 8302 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8301 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Interested in easter eggs?\p"
 	.string "Your first clue exists before time\n"
 	.string "begins.$"
 
 EasterEggStep1Completed::
-# 8308 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8307 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "EASTER EGG STEP 1$"
 
 EasterEggStep2Completed::
-# 8312 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8311 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "EASTER EGG STEP 2$"
 
 EasterEggStep3Completed::
-# 8316 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8315 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "EASTER EGG STEP 3$"
 
 EasterEggStep1Completed_HintMessage::
-# 8320 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8319 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thud!$"
 
 EasterEggStep2WallSignMessage::
-# 8324 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8323 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I see you like easter eggs.$"
 
 EasterEggStep3WallSignMessage::
-# 8328 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8327 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Zhxrg Vzdpbnej lxg bnvq bke zrqwvg...$"

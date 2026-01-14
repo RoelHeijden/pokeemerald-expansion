@@ -6753,15 +6753,15 @@ text HintsNPC_RareCandyRevive_LargeHint{
 
 text HintsNPC_Trainer6_LargeHint{
     "You'll need to set up for Aipom to use\n"
-    "Custap Endeavor vs Rayquaza.\p"
+    "Custap Endeavor against Rayquaza.\p"
 
-    "Oh... You want to use Endeavor against\n"
-    "a Ghost type?\p"
+    "Oh... You want to use Endeavor into a\n"
+    "Ghost type?\p"
 
     "It's tricky, but with the right item, it\n"
-    "might just work.\p"
+    "might just work."
 
-    "Endeavor for you, Endeavor for me."
+    // "Endeavor for you, Endeavor for me."
 }
 
 text HintsNPC_MapSwitches_LargeHint{
