@@ -34,6 +34,9 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "constants/items.h"
+// added
+#include "event_data.h"
+
 
 struct EvoInfo
 {
@@ -769,6 +772,11 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished())
         {
+            // ADDED
+            if(GetMonData(mon, MON_DATA_SPECIES, 0) == SPECIES_PRIMEAPE){
+                FlagSet(FLAG_ANNIHILAPE_EVOLUTION_COMPLETED);
+            }
+            
             u32 zero = 0;
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);

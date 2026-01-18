@@ -1166,7 +1166,7 @@ void ItemUseOutOfBattle_EscapeRope2(u8 taskId)
     // check for specific map and coordinate range
     if (mapGroup == MAP_GROUP(ESCAPE_ROOM_MAIN)
         && mapNum == MAP_NUM(ESCAPE_ROOM_MAIN)
-        && x >= 77
+        && x >= 77 && x <= 102
         && (y >= 17 || x >= 90))  
     {
         if (isUsingRegistered)

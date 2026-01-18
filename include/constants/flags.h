@@ -513,9 +513,9 @@
 #define FLAG_DEFEATED_HO_OH                  0x1DC
 #define FLAG_DEFEATED_LUGIA                  0x1DD
 
-#define FLAG_UNUSED_0x1DE                    0x1DE // Unused Flag
-#define FLAG_UNUSED_0x1DF                    0x1DF // Unused Flag
-#define FLAG_UNUSED_0x1E0                    0x1E0 // Unused Flag
+#define FLAG_APE_EVOLUTION_SMALL_HINT        0x1DE 
+#define FLAG_APE_EVOLUTION_LARGE_HINT        0x1DF
+#define FLAG_APE_EVOLUTION_SOLUTION          0x1E0
 #define FLAG_UNUSED_0x1E1                    0x1E1 // Unused Flag
 #define FLAG_UNUSED_0x1E2                    0x1E2 // Unused Flag
 #define FLAG_UNUSED_0x1E3                    0x1E3 // Unused Flag
@@ -1193,7 +1193,7 @@
 #define FLAG_ITEM_ROUTE_111_ELIXIR                                  0x476
 #define FLAG_ITEM_ROUTE_113_HYPER_POTION                            0x477
 #define FLAG_ITEM_ROUTE_115_HEAL_POWDER                             0x478
-#define FLAG_RARE_CANDY_REVIVE_COMPLETED                                           0x479 // Unused Flag aaaaaaaaaaaaaaaaaaaaa
+#define FLAG_RARE_CANDY_REVIVE_COMPLETED                            0x479
 #define FLAG_ITEM_ROUTE_116_POTION                                  0x47A
 #define FLAG_ITEM_ROUTE_119_ELIXIR_2                                0x47B
 #define FLAG_ITEM_ROUTE_120_REVIVE                                  0x47C
@@ -1317,7 +1317,7 @@
 #define FLAG_SS_TICKET_OBTAINED                                     0x4EC
 #define FLAG_HIDE_EASTER_EGG_WALL_SIGN                              0x4ED 
 #define FLAG_MAIN_EASTER_EGG_CAN_START                              0x4EE
-#define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
+#define FLAG_ANNIHILAPE_EVOLUTION_COMPLETED                         0x4EF
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1

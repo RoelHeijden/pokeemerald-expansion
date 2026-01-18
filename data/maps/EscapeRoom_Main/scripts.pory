@@ -425,7 +425,6 @@ script EscapeRoom_MapScripts_CheckRareCandyReviveStep{
             msgbox(SomethingsGoneWrongMessage, MSGBOX_AUTOCLOSE)
             waitmessage
         }
-
     }
 }
 
@@ -1335,6 +1334,11 @@ script EscapeRoom_EventScript_HintsNPC_SmallHint{
         msgbox(HintsNPC_IcePuzzleRareCandy_SmallHint)
         handlehintorsolution(FLAG_ICEPUZZLE_RARECANDY_SMALL_HINT, FLAG_ICEPUZZLE_RARECANDY_SOLUTION)
     }
+    // ape evolution
+    elif(flag(FLAG_ANNIHILAPE_EVOLUTION_COMPLETED) == FALSE){
+        msgbox(HintsNPC_ApeEvolution_SmallHint)
+        handlehintorsolution(FLAG_APE_EVOLUTION_SMALL_HINT, FLAG_APE_EVOLUTION_SOLUTION)
+    }
     // trainer 9
     elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer9_SmallHint)
@@ -1530,6 +1534,11 @@ script EscapeRoom_EventScript_HintsNPC_LargeHint{
     elif(flag(FLAG_RARE_CANDY2_COMPLETED) == FALSE){
         msgbox(HintsNPC_IcePuzzleRareCandy_LargeHint)
         handlehintorsolution(FLAG_ICEPUZZLE_RARECANDY_LARGE_HINT, FLAG_ICEPUZZLE_RARECANDY_SOLUTION)
+    }
+    // ape evolution
+    elif(flag(FLAG_ANNIHILAPE_EVOLUTION_COMPLETED) == FALSE){
+        msgbox(HintsNPC_ApeEvolution_LargeHint)
+        handlehintorsolution(FLAG_APE_EVOLUTION_LARGE_HINT, FLAG_APE_EVOLUTION_SOLUTION)
     }
     // trainer 9
     elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
@@ -1762,6 +1771,11 @@ script EscapeRoom_EventScript_HintsNPC_Solution{
             msgbox(HintsNPC_IcePuzzleRareCandy_Solution_IcePuzzleSteps)
         }
     }
+    // ape evolution
+    elif(flag(FLAG_ANNIHILAPE_EVOLUTION_COMPLETED) == FALSE){
+        msgbox(HintsNPC_ApeEvolution_Solution)
+        handlehintorsolution(FLAG_APE_EVOLUTION_SOLUTION, FLAG_APE_EVOLUTION_SOLUTION)
+    }
     // trainer 9
     elif(flag(FLAG_TRAINER9_DEFEATED) == FALSE){
         msgbox(HintsNPC_Trainer9_Solution)
@@ -1915,6 +1929,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
     clearflag(FLAG_TEMP_2) // an item was returned, no heal
     clearflag(FLAG_TEMP_3) // mental herb return while mental herb sack active
     clearflag(FLAG_TEMP_4) // ether return pp messaging
+    clearflag(FLAG_TEMP_5) // max revive always fully heal
 
     //// FIELD ITEMS ////
 
@@ -1953,6 +1968,7 @@ script EscapeRoom_EventScript_ReturnLostItems{
         giveitem(ITEM_MAX_REVIVE)
         clearflag(FLAG_RETURN_MAX_REVIVE)
         setflag(FLAG_TEMP_1)  // heal
+        setflag(FLAG_TEMP_5)  // always fully heal
     }
 
 
@@ -2084,8 +2100,9 @@ script EscapeRoom_EventScript_ReturnLostItems{
         elif(flag(FLAG_TEMP_1) == TRUE){
 
             // only heal if a mon in the party is not at 100% hp
+            // or if max revive returned (flag 5)
             checkpartyfullhp
-            if(var(VAR_RESULT) == FALSE){
+            if(var(VAR_RESULT) == FALSE || flag(FLAG_TEMP_5) == TRUE){
                 call(EscapeRoom_EventScript_AntiSoftlockPartyHeal)
             }
         }
@@ -4670,6 +4687,12 @@ script EscapeRoom_EventScript_Trainer11PostBattle{
     removeobject(LOCALID_TRAINER11)
     setflag(FLAG_HIDE_CHAMPION)
 
+    // remove Secret Power undo
+    removetaughtmove(SPECIES_ANNIHILAPE, MOVE_SECRET_POWER)
+    removetaughtmove(SPECIES_PRIMEAPE, MOVE_SECRET_POWER)
+    removetaughtmove(SPECIES_BAGON, MOVE_SECRET_POWER)
+    removetaughtmove(SPECIES_SHELGON, MOVE_SECRET_POWER)
+
     releaseall
     end
 }
@@ -6575,9 +6598,12 @@ text HintsNPC_IcePuzzleRareCandy_SmallHint{
     "Don't be greedy."
 }
 
+text HintsNPC_ApeEvolution_SmallHint{
+    "Annihilape would be nice." 
+}
+
 text HintsNPC_Trainer9_SmallHint{
-    "Need an extra ¥500?\n"
-    "Annihilape might help you out."
+    "Where can you get an extra ¥500?"
 }
 
 text HintsNPC_ToxicOrbSteal_SmallHint{
@@ -6800,11 +6826,15 @@ text HintsNPC_IcePuzzleRareCandy_LargeHint{
     "Try to avoid instant gratification."
 }
 
+text HintsNPC_ApeEvolution_LargeHint{
+    "Can you find a way to evolve your\n"
+    "Primeape?\p"
+    "Rage Fist is very important."
+}
+
 text HintsNPC_Trainer9_LargeHint{
-    "Use twenty harmless Rage Fists, you'll\n"
-    "have everything you need.\p"
-    "Are there any trainers you could never\n"
-    "defeat?"
+    "Annihilape is very neat.\n"
+    "Any trainers you could never defeat?"
 }
 
 text HintsNPC_ToxicOrbSteal_LargeHint{
@@ -6816,13 +6846,14 @@ text HintsNPC_ToxicOrbSteal_LargeHint{
 }
 
 text HintsNPC_SecretPower_LargeHint{
-    "Compared to a Choice Scarf, the\n"
-    "Dusknoir are slower.\p"
-    "Stall and revive, its PP will get lower.\p"
+    "You must be poisoned to obtain Secret\n"
+    "Power.\p"
 
-    "The Toxic Orb triggers, let the poison\n"
-    "run its course.\p"
-    "Head to the ice, Secret Power is yours."
+    "You can stall out Dusknoir by using\n"
+    "Substitute, but need something clever\l"
+    "for the final Memento PP.\p"
+
+    "Three different items will be required."
 }
 
 text HintsNPC_RareCandy3_LargeHint{
@@ -7238,17 +7269,24 @@ text HintsNPC_IcePuzzleRareCandy_Solution_IcePuzzleSteps{
     "(take the item) {DOWN_ARROW}{LEFT_ARROW}{UP_ARROW}."
 }
 
-text HintsNPC_Trainer9_Solution{
+text HintsNPC_ApeEvolution_Solution{
     "Have Primeape use Rage Fist 20 times\n"
-    "(Sentret is the easiest target), then\l"
-    "give it the Rare Candy to evolve into\l"
-    "Annihilape.\p"
+    "(Sentret is the easiest target).\p"
 
-    "Now you're finally able to defeat the\n"
-    "Twins.\p"
+    "You can now give it the Rare Candy to\n"
+    "evolve into Annihilape."
+}
+
+text HintsNPC_Trainer9_Solution{
+    "You're finally able to defeat the\n"
+    "Urshifu twins.\p"
 
     "Keep using Rage Fist (start with the\n"
     "Urshifu-Rapid-Strike) to win."
+
+    // "Give Bagon a Choice Scarf and on turn 1\n"
+    // "use Hidden Power into Annihilape to\l"
+    // "boost the Rage Fist damage.\p"
 }
 
 text HintsNPC_ToxicOrbSteal_Solution{
@@ -8064,8 +8102,8 @@ text Trainer4_Outro{
 }
 
 text Trainer4_PostBattle{
-    "Did you know 5(A->L) + 2(L->O) = 525?"
-    // "Did you know that 5A(L) + 2L(O) = 525?"
+    // "Did you know 5(A->L) + 2(L->O) = 525?"
+    "Did you know that 5A + 2L = 525?"
 }
 
 
@@ -8122,8 +8160,7 @@ text Trainer7A_Outro{
 }
 
 text Trainer7A_PostBattle{
-    // "dusclops? sus."
-    // "fwuenqru? uwu."
+    // dusclops? sus.
     "bsqajmnq? qsq."
 }
 
@@ -8185,8 +8222,11 @@ text Trainer9_PostBattle{
 text Trainer10_Intro{
     "Darwinism?\n"
     "More like Schmarminism...\p"
-    "Kecleon doesn't need any changes!"
+    "Kecleon has changed enough already!"
+    // "Kecleon doesn't need any changes!"
 }
+
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
 
 text Trainer10_Outro{
     "What a struggle!"
@@ -8219,7 +8259,7 @@ text Trainer11_PostBattle_B{
     "project of mine.\p"
 
     "An absurd amount of time, effort, and\n"
-    "care was put into every small detail.\p"
+    "care went into every small detail.\p"
 
     "If you enjoyed the experience, please\n"
     "let me know via the game's thread on\l"

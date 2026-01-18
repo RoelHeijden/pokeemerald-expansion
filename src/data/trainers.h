@@ -42677,7 +42677,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER8] =
     {
 #line 17063
-        .trainerName = _("Houdini"),
+        .trainerName = _("Hans"),
 #line 17064
         .trainerClass = TRAINER_CLASS_PSYCHIC,
 #line 17065
