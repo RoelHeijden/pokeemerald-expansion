@@ -10574,9 +10574,9 @@ HintsNPC_Trainer11_Solution_ExactSequence::
 # 7419 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Lead: Annihilape (Choice Specs) and\n"
 	.string "Yamask (Toxic Orb).\p"
-	.string "Turn 1: Role Play (any target) + Trick\n"
+	.string "Turn 1: Role Play (Yamask) + Trick\n"
 	.string "(Kecleon, give Toxic Orb).\p"
-	.string "Turn 2: Role Play (any target) + Trick\n"
+	.string "Turn 2: Role Play (Yamask) + Trick\n"
 	.string "(Annihilape, take Choice Specs).\p"
 	.string "Turn 3: Role Play (Yamask) + Trick\n"
 	.string "(Heatran, give Choice Specs).\p"
@@ -11283,31 +11283,31 @@ Trainer10_Intro::
 	.string "Kecleon has changed enough already!$"
 
 Trainer10_Outro::
-# 8231 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8229 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "What a struggle!$"
 
 Trainer10_PostBattle::
-# 8235 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8233 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So Kecleon isn't the only Pokémon with\n"
 	.string "the ability to change?$"
 
 Trainer11_Intro::
-# 8242 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8240 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "So you've finally made it to the end...\p"
 	.string "No more hints.\p"
 	.string "No more clues.\p"
 	.string "It's time for your final test.$"
 
 Trainer11_Outro::
-# 8249 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8247 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "...$"
 
 Trainer11_PostBattle_A::
-# 8253 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8251 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Please read the sign first.$"
 
 Trainer11_PostBattle_B::
-# 8257 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8255 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "This game has been a true passion\n"
 	.string "project of mine.\p"
 	.string "An absurd amount of time, effort, and\n"
@@ -11320,46 +11320,46 @@ Trainer11_PostBattle_B::
 	.string " - Ketch.$"
 
 Trainer11_EndTheGame::
-# 8274 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8272 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Wanna get out of here?$"
 
 EscapeRoomEndCongratz::
-# 8280 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8278 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Congratulations, you have completed\n"
 	.string "the escape room!$"
 
 EndEscapeRoomSignMessage::
-# 8285 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8283 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Your final time: {STR_VAR_1}.\p"
 	.string "Small hints used: {STR_VAR_2}.\n"
 	.string "Large hints used: {STR_VAR_3}.\l"
 	.string "Solutions used: {STR_VAR_5}.$"
 
 EscapeRopeEEMessage2::
-# 8294 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8292 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Just kidding.$"
 
 TakeEasterEggBoatMessage::
-# 8300 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8298 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "An SS Ticket!?\p"
 	.string "I'm impressed... You've actually\n"
 	.string "managed to get it.\p"
 	.string "Alright, let's go.$"
 
 EasterEggCannotStart::
-# 8309 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8307 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Nothing happened.\p"
 	.string "Perhaps you should try this on a save\n"
 	.string "file that has already completed the\l"
 	.string "escape room.$"
 
 EasterEggCompletedMessage1::
-# 8317 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8315 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Congratulations, you have completed\n"
 	.string "the easter egg!$"
 
 EasterEggCompletedMessage2::
-# 8322 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8320 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You may be one of the first to complete\n"
 	.string "this easter egg.\p"
 	.string "In the case you are, please notify me\n"
@@ -11369,37 +11369,37 @@ EasterEggCompletedMessage2::
 	.string "Enjoy the Battle Factory!$"
 
 EasterEggFirstCompletedMessage::
-# 8335 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8333 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "You're the first to complete the\n"
 	.string "easter egg!\p"
 	.string "(assuming your game is up to date)$"
 
 EasterEggHintMessage::
-# 8341 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8339 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Interested in easter eggs?\p"
 	.string "Your first clue exists before time\n"
 	.string "begins.$"
 
 EasterEggStep1Completed::
-# 8347 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8345 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "EASTER EGG STEP 1$"
 
 EasterEggStep2Completed::
-# 8351 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8349 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "EASTER EGG STEP 2$"
 
 EasterEggStep3Completed::
-# 8355 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8353 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "EASTER EGG STEP 3$"
 
 EasterEggStep1Completed_HintMessage::
-# 8359 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8357 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Thud!$"
 
 EasterEggStep2WallSignMessage::
-# 8363 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8361 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "I see you like easter eggs.$"
 
 EasterEggStep3WallSignMessage::
-# 8367 "data/maps/EscapeRoom_Main/scripts.pory"
+# 8365 "data/maps/EscapeRoom_Main/scripts.pory"
 	.string "Zhxrg Vzdpbnej lxg bnvq bke zrqwvg...$"

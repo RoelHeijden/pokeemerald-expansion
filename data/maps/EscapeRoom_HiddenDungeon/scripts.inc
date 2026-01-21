@@ -596,8 +596,20 @@ EscapeRoom_HiddenDungeon_MoveRelearner::
 	return
 
 
-AskBagonTrade::
+EscapeRoom_HiddenDungeon_MovesetSign::
+# 471 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	lockall
+# 472 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	msgbox Trainer11_MovesetSign, MSGBOX_AUTOCLOSE
+# 473 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	waitmessage
 # 474 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	releaseall
+	return
+
+
+AskBagonTrade::
+# 482 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Trying to get past the guard?\p"
 	.string "I might be able to help you out.\n"
 	.string "How badly do you want in?\p"
@@ -608,30 +620,30 @@ AskBagonTrade::
 	.string "Do we have a deal?$"
 
 BagonReceivedMessage::
-# 489 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 497 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Bagon!$"
 
 BagonTradeDeclined::
-# 493 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 501 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Suit yourself.$"
 
 BagonTradePostTrade::
-# 497 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 505 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hehehehe!$"
 
 DungeonGuardIntro::
-# 504 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 512 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
 	.string "I'll need to see an entry card, or you\n"
 	.string "are not getting through.$"
 
 DungeonGuardShowsCard::
-# 510 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 518 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "(You hesitantly hold up your rainbow-\n"
 	.string "colored entry card.)$"
 
 DungeonGuardGivesEntry::
-# 515 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 523 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hmmm...\p"
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
@@ -641,15 +653,15 @@ DungeonGuardGivesEntry::
 	.string "You're clear to enter.$"
 
 DungeonGuardPostEntry::
-# 525 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 533 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hm... Cute entry card though.$"
 
 YamaskReceivedMessage::
-# 533 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 541 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Yamask!$"
 
 YamaskGuyPostTradeMessage::
-# 537 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 545 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "The trainer you're about to face can be\n"
 	.string "a bit of a cheater.\p"
 	.string "The Kecleon uses an illegal move and\n"
@@ -660,11 +672,11 @@ YamaskGuyPostTradeMessage::
 	.string "Good luck!$"
 
 YamaskGuyFinalMessage::
-# 556 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 564 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Wow... Well done!$"
 
 YamaskGuyMainMessage::
-# 560 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 568 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "You're almost there!\n"
 	.string "Just one more challenge remains.\p"
 	.string "It's a tough one though...\p"
@@ -673,11 +685,22 @@ YamaskGuyMainMessage::
 	.string "You wouldn't stand a chance otherwise.$"
 
 MoveRelearnerMainMessage::
-# 571 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 579 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hi, I'm your Move Tutor.\p"
 	.string "Which of your Pokémon should I teach a\n"
 	.string "new move?$"
 
 MoveRelearnerEndMessage::
-# 577 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 585 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "I'll be here if you need me.$"
+
+Trainer11_MovesetSign::
+# 591 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	.string "Heatran (Flame Body, lvl 100)\n"
+	.string "- Body Press (10 pp)\l"
+	.string "- Hyper Beam (5 pp)\p"
+	.string "Kecleon (Protean, lvl 20)\n"
+	.string "- Jungle Healing (10 pp)\p"
+	.string "Sableye (Prankster, lvl 5)\n"
+	.string "- Foresight (40 pp)\p"
+	.string "None of the Pokémon carry an item.$"

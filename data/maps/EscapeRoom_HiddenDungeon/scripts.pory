@@ -466,6 +466,14 @@ script EscapeRoom_HiddenDungeon_MoveRelearner{
 }
 
 
+// moveset sign
+script EscapeRoom_HiddenDungeon_MovesetSign{
+    lockall
+    msgbox(Trainer11_MovesetSign, MSGBOX_AUTOCLOSE)
+    waitmessage
+    releaseall
+}
+
 
 ////////////////////////////////////////// TEXT //////////////////////////////////////////
 
@@ -579,4 +587,19 @@ text MoveRelearnerEndMessage{
 }
 
 
+// moveset sign
+text Trainer11_MovesetSign{
+    "Heatran (Flame Body, lvl 100)\n"
+    "- Body Press (10 pp)\l"
+    "- Hyper Beam (5 pp)\p"
 
+    "Kecleon (Protean, lvl 20)\n"
+    "- Jungle Healing (10 pp)\p"
+
+    "Sableye (Prankster, lvl 5)\n"
+    "- Foresight (40 pp)\p"
+
+    "None of the Pokémon carry an item."
+}
+
+//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length

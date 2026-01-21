@@ -7420,10 +7420,10 @@ text HintsNPC_Trainer11_Solution_ExactSequence{
     "Lead: Annihilape (Choice Specs) and\n"
     "Yamask (Toxic Orb).\p"
     
-    "Turn 1: Role Play (any target) + Trick\n"
+    "Turn 1: Role Play (Yamask) + Trick\n"
     "(Kecleon, give Toxic Orb).\p"
 
-    "Turn 2: Role Play (any target) + Trick\n"
+    "Turn 2: Role Play (Yamask) + Trick\n"
     "(Annihilape, take Choice Specs).\p"
 
     "Turn 3: Role Play (Yamask) + Trick\n"
@@ -8225,8 +8225,6 @@ text Trainer10_Intro{
     "Kecleon has changed enough already!"
     // "Kecleon doesn't need any changes!"
 }
-
-//  "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"    -- max length
 
 text Trainer10_Outro{
     "What a struggle!"
