@@ -16876,7 +16876,7 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
 
 === TRAINER_CUSTOM_TRAINER0 ===
-Name: Tim
+Name: Tim Moore
 Class: PYRAMID_KING
 Pic: Expert M
 Gender: Male
@@ -16927,7 +16927,7 @@ Careful Nature
 
 
 === TRAINER_CUSTOM_TRAINER2 ===
-Name: 637574
+Name: 4375743f
 Class: Hex Maniac
 Pic: Hex Maniac
 Gender: Female
@@ -17106,7 +17106,7 @@ Adamant Nature
 
 
 === TRAINER_CUSTOM_TRAINER10 ===
-Name: Ivo
+Name: Flint
 Class: Youngster
 Pic: School Kid M
 Gender: Male

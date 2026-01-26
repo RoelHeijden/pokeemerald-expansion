@@ -42187,7 +42187,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER0] =
     {
 #line 16879
-        .trainerName = _("Tim"),
+        .trainerName = _("Tim Moore"),
 #line 16880
         .trainerClass = TRAINER_CLASS_PYRAMID_KING,
 #line 16881
@@ -42342,7 +42342,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER2] =
     {
 #line 16930
-        .trainerName = _("637574"),
+        .trainerName = _("4d6f77AAAA"),
 #line 16931
         .trainerClass = TRAINER_CLASS_HEX_MANIAC,
 #line 16932
