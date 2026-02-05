@@ -491,8 +491,8 @@ EscapeRoom_HiddenDungeon_BagonYamaskTrade_1:
 # 381 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	removemon SPECIES_SHELGON
 # 382 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	givemon SPECIES_YAMASK_GALAR, 5, abilityNum = 0, nature = NATURE_HASTY, gender = MON_MALE, move1 = MOVE_ASTONISH, move2 = MOVE_HAZE, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 0, hpIv = 0, atkIv = 31, defIv = 0, speedIv = 31, spAtkIv = 31, spDefIv = 31
-# 404 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	givemon SPECIES_YAMASK_GALAR, 10, abilityNum = 0, nature = NATURE_SERIOUS, gender = MON_MALE, move1 = MOVE_ASTONISH, move2 = MOVE_HAZE, move3 = MOVE_NONE, move4 = MOVE_NONE, hpEv = 0, atkEv = 252, spAtkEv = 252, hpIv = 0, atkIv = 31, defIv = 0, speedIv = 31, spAtkIv = 31, spDefIv = 31
+# 406 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	setflag FLAG_YAMASK_OBTAINED
 	return
 
@@ -505,111 +505,111 @@ EscapeRoom_HiddenDungeon_BagonYamaskTrade_2:
 
 
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower::
-# 409 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 411 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkpartyitem 0
-# 410 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 412 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_RemoveTMSecretPower_3
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_1:
-# 413 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 415 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkpartyitem 1
-# 414 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 416 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_RemoveTMSecretPower_8
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_6:
-# 417 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 419 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	checkitem ITEM_TM43
-# 418 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 420 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_RESULT, TRUE
 	goto_if_eq EscapeRoom_HiddenDungeon_RemoveTMSecretPower_11
 	return
 
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_2:
-# 411 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 413 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	removepartyitem 0
 	goto EscapeRoom_HiddenDungeon_RemoveTMSecretPower_1
 
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_3:
-# 410 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 412 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_0x8005, ITEM_TM43
 	goto_if_eq EscapeRoom_HiddenDungeon_RemoveTMSecretPower_2
 	goto EscapeRoom_HiddenDungeon_RemoveTMSecretPower_1
 
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_7:
-# 415 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 417 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	removepartyitem 1
 	goto EscapeRoom_HiddenDungeon_RemoveTMSecretPower_6
 
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_8:
-# 414 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 416 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	compare VAR_0x8005, ITEM_TM43
 	goto_if_eq EscapeRoom_HiddenDungeon_RemoveTMSecretPower_7
 	goto EscapeRoom_HiddenDungeon_RemoveTMSecretPower_6
 
 EscapeRoom_HiddenDungeon_RemoveTMSecretPower_11:
-# 419 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 421 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	removeitem ITEM_TM43
 	return
 
 
 EscapeRoom_HiddenDungeon_YamaskGuy::
-# 425 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 426 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	lock
-# 428 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 429 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	goto_if_unset FLAG_TRAINER11_DEFEATED, EscapeRoom_HiddenDungeon_YamaskGuy_2
-# 433 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox YamaskGuyFinalMessage, MSGBOX_NPC
 # 434 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	msgbox YamaskGuyFinalMessage, MSGBOX_NPC
+# 435 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 EscapeRoom_HiddenDungeon_YamaskGuy_1:
-# 437 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 438 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
 EscapeRoom_HiddenDungeon_YamaskGuy_2:
-# 429 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox YamaskGuyPostTradeMessage, MSGBOX_NPC
 # 430 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	msgbox YamaskGuyPostTradeMessage, MSGBOX_NPC
+# 431 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
 	goto EscapeRoom_HiddenDungeon_YamaskGuy_1
 
 
 EscapeRoom_HiddenDungeon_MoveRelearner::
-# 443 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	lockall
 # 444 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	lockall
+# 445 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	faceplayer
-# 447 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox MoveRelearnerMainMessage, MSGBOX_DEFAULT
 # 448 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	msgbox MoveRelearnerMainMessage, MSGBOX_DEFAULT
+# 449 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 451 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	special ChooseMonForMoveRelearner
 # 452 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	special ChooseMonForMoveRelearner
+# 453 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitstate
-# 461 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox MoveRelearnerEndMessage, MSGBOX_DEFAULT
 # 462 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	msgbox MoveRelearnerEndMessage, MSGBOX_DEFAULT
+# 463 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	waitmessage
-# 465 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 466 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
 
 EscapeRoom_HiddenDungeon_MovesetSign::
-# 471 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	lockall
 # 472 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	msgbox Trainer11_MovesetSign, MSGBOX_AUTOCLOSE
+	lockall
 # 473 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
-	waitmessage
+	msgbox Trainer11_MovesetSign, MSGBOX_AUTOCLOSE
 # 474 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+	waitmessage
+# 475 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	releaseall
 	return
 
 
 AskBagonTrade::
-# 482 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 483 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Trying to get past the guard?\p"
 	.string "I might be able to help you out.\n"
 	.string "How badly do you want in?\p"
@@ -620,30 +620,30 @@ AskBagonTrade::
 	.string "Do we have a deal?$"
 
 BagonReceivedMessage::
-# 497 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 498 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Bagon!$"
 
 BagonTradeDeclined::
-# 501 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 502 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Suit yourself.$"
 
 BagonTradePostTrade::
-# 505 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 506 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hehehehe!$"
 
 DungeonGuardIntro::
-# 512 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 513 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Access to this zone is restricted.\p"
 	.string "I'll need to see an entry card, or you\n"
 	.string "are not getting through.$"
 
 DungeonGuardShowsCard::
-# 518 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 519 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "(You hesitantly hold up your rainbow-\n"
 	.string "colored entry card.)$"
 
 DungeonGuardGivesEntry::
-# 523 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 524 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hmmm...\p"
 	.string "This doesn't look like one of our usual\n"
 	.string "entry cards.\p"
@@ -653,15 +653,15 @@ DungeonGuardGivesEntry::
 	.string "You're clear to enter.$"
 
 DungeonGuardPostEntry::
-# 533 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 534 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hm... Cute entry card though.$"
 
 YamaskReceivedMessage::
-# 541 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 542 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "{PLAYER} received a Yamask!$"
 
 YamaskGuyPostTradeMessage::
-# 545 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 546 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "The trainer you're about to face can be\n"
 	.string "a bit of a cheater.\p"
 	.string "The Kecleon uses an illegal move and\n"
@@ -672,11 +672,11 @@ YamaskGuyPostTradeMessage::
 	.string "Good luck!$"
 
 YamaskGuyFinalMessage::
-# 564 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 565 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Wow... Well done!$"
 
 YamaskGuyMainMessage::
-# 568 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 569 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "You're almost there!\n"
 	.string "Just one more challenge remains.\p"
 	.string "It's a tough one though...\p"
@@ -685,22 +685,22 @@ YamaskGuyMainMessage::
 	.string "You wouldn't stand a chance otherwise.$"
 
 MoveRelearnerMainMessage::
-# 579 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 580 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Hi, I'm your Move Tutor.\p"
 	.string "Which of your Pokémon should I teach a\n"
 	.string "new move?$"
 
 MoveRelearnerEndMessage::
-# 585 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 586 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "I'll be here if you need me.$"
 
 Trainer11_MovesetSign::
-# 591 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
+# 592 "data/maps/EscapeRoom_HiddenDungeon/scripts.pory"
 	.string "Heatran (Flame Body, lvl 100)\n"
 	.string "- Body Press (10 pp)\l"
-	.string "- Hyper Beam (5 pp)\p"
-	.string "Kecleon (Protean, lvl 20)\n"
+	.string "- Tera Blast (10 pp)\p"
+	.string "Kecleon (Protean, lvl 25)\n"
 	.string "- Jungle Healing (10 pp)\p"
-	.string "Sableye (Prankster, lvl 5)\n"
+	.string "Sableye (Prankster, lvl 10)\n"
 	.string "- Foresight (40 pp)\p"
 	.string "None of the Pokémon carry an item.$"

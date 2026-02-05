@@ -5605,11 +5605,12 @@ void ItemUseCB_TMHM(u8 taskId, TaskFunc task)
 // ADDED
 static void AddTaughtMove(u16 species, u16 oldMove, u16 newMove)
 {
-    // only store: Thief, Cut, Skill Swap, Secret Power, or Flamethrower
+    // only store: Thief, Cut, Skill Swap, Secret Power, Taunt, or Flamethrower
     if (newMove == MOVE_THIEF 
     || newMove == MOVE_CUT 
     || newMove == MOVE_SKILL_SWAP 
     || newMove == MOVE_SECRET_POWER
+    || newMove == MOVE_TAUNT
     || newMove == MOVE_FLAMETHROWER) {
     } else {
         return;

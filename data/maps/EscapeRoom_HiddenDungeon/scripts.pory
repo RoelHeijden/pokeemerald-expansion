@@ -381,9 +381,9 @@ script EscapeRoom_HiddenDungeon_BagonYamaskTrade{
     removemon(SPECIES_SHELGON) // also remove any Shelgon juussssttt in case
     givemon(
         SPECIES_YAMASK_GALAR,
-        5,
+        10,
         abilityNum=0, // wandering spirit
-        nature=NATURE_HASTY,
+        nature=NATURE_SERIOUS,
         gender=MON_MALE, 
         move1=MOVE_ASTONISH,
         move2=MOVE_HAZE,
@@ -391,6 +391,8 @@ script EscapeRoom_HiddenDungeon_BagonYamaskTrade{
         move4=MOVE_NONE,
         // EVs:
         hpEv=0, 
+        atkEv=252,
+        spAtkEv=252,
         // IVs:
         hpIv=0,
         atkIv=31,
@@ -419,7 +421,6 @@ script EscapeRoom_HiddenDungeon_RemoveTMSecretPower{
         removeitem(ITEM_TM43)
     }
 }
-
 
 script EscapeRoom_HiddenDungeon_YamaskGuy{
     lock
@@ -591,12 +592,12 @@ text MoveRelearnerEndMessage{
 text Trainer11_MovesetSign{
     "Heatran (Flame Body, lvl 100)\n"
     "- Body Press (10 pp)\l"
-    "- Hyper Beam (5 pp)\p"
+    "- Tera Blast (10 pp)\p"
 
-    "Kecleon (Protean, lvl 20)\n"
+    "Kecleon (Protean, lvl 25)\n"
     "- Jungle Healing (10 pp)\p"
 
-    "Sableye (Prankster, lvl 5)\n"
+    "Sableye (Prankster, lvl 10)\n"
     "- Foresight (40 pp)\p"
 
     "None of the Pokémon carry an item."

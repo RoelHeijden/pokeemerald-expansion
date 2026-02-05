@@ -42342,7 +42342,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER2] =
     {
 #line 16930
-        .trainerName = _("4d6f77AAAA"),
+        .trainerName = _("4375743f"),
 #line 16931
         .trainerClass = TRAINER_CLASS_HEX_MANIAC,
 #line 16932
@@ -42798,7 +42798,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER10] =
     {
 #line 17109
-        .trainerName = _("Ivo"),
+        .trainerName = _("Flint"),
 #line 17110
         .trainerClass = TRAINER_CLASS_YOUNGSTER,
 #line 17111
@@ -42882,7 +42882,7 @@ F_TRAINER_FEMALE |
 #line 17142
             .gender = TRAINER_MON_MALE,
 #line 17144
-            .ev = TRAINER_PARTY_EVS(244, 32, 232, 0, 0, 0),
+            .ev = TRAINER_PARTY_EVS(140, 32, 248, 0, 88, 0),
 #line 17146
             .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),
 #line 17143
@@ -42890,12 +42890,12 @@ F_TRAINER_FEMALE |
 #line 17146
             .lvl = 100,
 #line 17145
-            .nature = NATURE_IMPISH,
+            .nature = NATURE_RELAXED,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
 #line 17146
                 MOVE_BODY_PRESS,
-                MOVE_HYPER_BEAM,
+                MOVE_TERA_BLAST,
             },
             },
             {
@@ -42903,35 +42903,37 @@ F_TRAINER_FEMALE |
             .species = SPECIES_KECLEON,
 #line 17149
             .gender = TRAINER_MON_FEMALE,
-#line 17153
-            .iv = TRAINER_PARTY_IVS(31, 31, 0, 31, 31, 31),
+#line 17152
+            .ev = TRAINER_PARTY_EVS(0, 252, 0, 0, 0, 0),
+#line 17154
+            .iv = TRAINER_PARTY_IVS(12, 31, 0, 31, 31, 31),
 #line 17150
             .ability = ABILITY_PROTEAN,
 #line 17151
-            .lvl = 20,
-#line 17152
-            .nature = NATURE_HASTY,
+            .lvl = 25,
+#line 17153
+            .nature = NATURE_LONELY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17154
+#line 17155
                 MOVE_JUNGLE_HEALING,
             },
             },
             {
-#line 17156
-            .species = SPECIES_SABLEYE,
-#line 17156
-            .gender = TRAINER_MON_MALE,
-#line 17159
-            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 17157
-            .ability = ABILITY_PRANKSTER,
+            .species = SPECIES_SABLEYE,
+#line 17157
+            .gender = TRAINER_MON_MALE,
+#line 17160
+            .iv = TRAINER_PARTY_IVS(31, 0, 31, 31, 31, 31),
 #line 17158
-            .lvl = 5,
+            .ability = ABILITY_PRANKSTER,
+#line 17159
+            .lvl = 10,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
             .moves = {
-#line 17160
+#line 17161
                 MOVE_FORESIGHT,
             },
             },

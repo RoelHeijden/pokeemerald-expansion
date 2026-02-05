@@ -2955,6 +2955,30 @@ script EscapeRoom_EventScript_UndoOtherActions{
         }
     }
 
+    // trade: Dunsparce -> Taunt
+    elif(flag(FLAG_DUNSPARCE_TRADE_ACCEPTED) && !flag(FLAG_ROCK_SMASH_GUY_MOVED)){
+
+        // dont allow if in section 1 (during first mental herb sack line)
+        // repeat softlock guy dialogue loop
+        if(flag(FLAG_AT_SOFTLOCK_GUY_1)){
+            msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_DEFAULT)
+            waitmessage
+
+            // loop back to initial option menu
+            setflag(FLAG_ANTI_SOFTLOCK_LOOP)
+        }
+        else{
+            msgbox(AntiSoftlockAskUndoDunsparceTrade, MSGBOX_YESNO)
+            if(var(VAR_RESULT) == YES){
+                call(EscapeRoom_EventScript_UndoDunsparceTrade)
+            }            
+        }
+    }
+
+    // Rare Candy in ice puzzle
+
+
+
     // no actions to be undone
     else{
         msgbox(AntiSoftlockNoActionsToUndo, MSGBOX_DEFAULT)
@@ -3043,6 +3067,50 @@ script EscapeRoom_EventScript_UndoFlorgesTrade{
     // allow trade again
     clearflag(FLAG_FLORGES_TRADE_ACCEPTED)
 }
+
+
+script EscapeRoom_EventScript_UndoDunsparceTrade{
+    // undo taunt move teach
+    istaughtmovepresent(SPECIES_LIEPARD, MOVE_TAUNT)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_LIEPARD)
+        setvar(VAR_0x8008, MOVE_TAUNT)
+        call(EscapeRoom_EventScript_UndoMoveTeach)
+    }
+    istaughtmovepresent(SPECIES_AIPOM, MOVE_TAUNT)
+    if(var(VAR_RESULT) == TRUE){
+        setvar(VAR_0x8007, SPECIES_AIPOM)
+        setvar(VAR_0x8008, MOVE_TAUNT)
+        call(EscapeRoom_EventScript_UndoMoveTeach) 
+    }
+
+    // remove taunt TM
+    checkpartyitem(0)
+    if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM12){
+        removepartyitem(0)
+    }
+    checkpartyitem(1)
+    if(var(VAR_RESULT) == TRUE && var(VAR_0x8005) == ITEM_TM12){
+        removepartyitem(1)
+    }
+    checkitem(ITEM_TM12)
+    if(var(VAR_RESULT) == TRUE){
+        removeitem(ITEM_TM12)
+    }
+
+
+    // trade mons
+    restoremonfrompc(SPECIES_DUNSPARCE)
+
+    // message
+    message(PlayerObtainedDunsparceMessage)
+    playfanfare(MUS_OBTAIN_ITEM)
+    waitfanfare
+
+    // allow trade again
+    clearflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
+}
+
 
 
 // LIEPARD
@@ -3489,6 +3557,8 @@ script EscapeRoom_MoveRockSmashNPC{
     // prevent Mental Herb restore
     removelostitem(ITEM_MENTAL_HERB)
 
+    // prevent Taunt teach undo
+    removetaughtmove(SPECIES_AIPOM, MOVE_TAUNT)
 
     // ERROR CHECK
     // - 0 money
@@ -4710,7 +4780,6 @@ script EscapeRoom_EventScript_TradeZeraForHMCut{
     msgbox(AskZeraCutTradeMessage, MSGBOX_YESNO)
     if(var(VAR_RESULT) == YES){
 
-
         // check if Zera in party (sanity check)
         checkpartymon(SPECIES_ZERAORA)
         copyvar(VAR_0x8004, VAR_RESULT) // store monslot for bye-bye message
@@ -4747,26 +4816,26 @@ script EscapeRoom_EventScript_TradeFerroVsDunsparce{
     // post trade 
     if(flag(FLAG_FERRO_TRADE_ACCEPTED) == TRUE){
 
-        // allow retrade
-        if(!flag(FLAG_TRAINER3_DEFEATED)){
-            msgbox(FerroTradeAskRetrade, MSGBOX_YESNO)
-            waitmessage
-            if(var(VAR_RESULT) == YES){
-                call(EscapeRoom_EventScript_UndoFerroTrade)
+        // // allow retrade
+        // if(!flag(FLAG_TRAINER3_DEFEATED)){
+        //     msgbox(FerroTradeAskRetrade, MSGBOX_YESNO)
+        //     waitmessage
+        //     if(var(VAR_RESULT) == YES){
+        //         call(EscapeRoom_EventScript_UndoFerroTrade)
 
-                msgbox(FerroTradeUndoAccepted, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-            else{
-                msgbox(FerroTradeUndoDeclined, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-        }
-        // final script
-        else{
-            msgbox(FerroTradePostTrade, MSGBOX_NPC)
-            waitmessage
-        }
+        //         msgbox(FerroTradeUndoAccepted, MSGBOX_AUTOCLOSE)
+        //         waitmessage
+        //     }
+        //     else{
+        //         msgbox(FerroTradeUndoDeclined, MSGBOX_AUTOCLOSE)
+        //         waitmessage
+        //     }
+        // }
+        // // final script
+        // else{
+        msgbox(FerroTradePostTrade, MSGBOX_NPC)
+        waitmessage
+        // }
     }
     else{
         // ask trade
@@ -4844,25 +4913,25 @@ script EscapeRoom_EventScript_TradeFlorgesForEgg{
     if(flag(FLAG_FLORGES_TRADE_ACCEPTED) == TRUE){
         
         // ask undo trade
-        if(!flag(FLAG_LIEPARD_OBTAINED)){
-            msgbox(FlorgesTradeAskRetrade, MSGBOX_YESNO)
-            waitmessage
-            if(var(VAR_RESULT) == YES){
-                call(EscapeRoom_EventScript_UndoFlorgesTrade)
+        // if(!flag(FLAG_LIEPARD_OBTAINED)){
+        //     msgbox(FlorgesTradeAskRetrade, MSGBOX_YESNO)
+        //     waitmessage
+        //     if(var(VAR_RESULT) == YES){
+        //         call(EscapeRoom_EventScript_UndoFlorgesTrade)
 
-                msgbox(FlorgesTradeUndoAccepted, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-            else{
-                msgbox(FlorgesTradeUndoDeclined, MSGBOX_AUTOCLOSE)
-                waitmessage
-            }
-        }
+        //         msgbox(FlorgesTradeUndoAccepted, MSGBOX_AUTOCLOSE)
+        //         waitmessage
+        //     }
+        //     else{
+        //         msgbox(FlorgesTradeUndoDeclined, MSGBOX_AUTOCLOSE)
+        //         waitmessage
+        //     }
+        // }
         // final script
-        else{
-            msgbox(FlorgesTradePostTrade, MSGBOX_NPC)
-            waitmessage
-        } 
+        // else{
+        msgbox(FlorgesTradePostTrade, MSGBOX_NPC)
+        waitmessage
+        // } 
     }
     else{
         // ask trade
@@ -4932,6 +5001,9 @@ script EscapeRoom_EventScript_SellDunsparce{
                 releaseall
                 end
             }
+
+            // make Dunsparce backup in pc
+            backupmontopc(SPECIES_DUNSPARCE)
 
             // message
             msgbox(AskDunsparceReturnAcceptedMessage, MSGBOX_DEFAULT)
@@ -5126,7 +5198,6 @@ script EscapeRoom_EventScript_FindRescueBell{
 
     releaseall
 }
-
 
 
 //// MAP SWITCHES ////
@@ -6881,10 +6952,15 @@ text HintsNPC_Trainer11_LargeHint{
     "Try giving Heatran a Choice Specs and\n"
     "see if you can force it to Struggle.\p"
 
-    "Did anyone say Disable Annihilape?\p"
+    "It will avoid attacking into Destiny\n"
+    "Bond so use that to your advantage.\p"
 
-    "PS: The trainer will avoid attacking\n"
-    "into Destiny Bond."
+    "...\p"
+
+    "Did anyone say Disable Annihilape?"
+
+    // "PS: The trainer will avoid attacking\n"
+    // "into Destiny Bond."
 }
 
 // solutions
@@ -7391,8 +7467,8 @@ text HintsNPC_Trainer11_Solution_MoveSetup{
 }
 
 text HintsNPC_Trainer11_Solution{
-    "Your only way to win is to take out\n"
-    "Heatran with the Toxic Orb.\p"
+    "You can win by taking out Heatran with\n"
+    "the Toxic Orb.\p"
 
     "The key is to use Wandering Spirit and\n"
     "Role Play to give Heatran Protean and\l"
@@ -7455,7 +7531,7 @@ text HintsNPC_Trainer11_Solution_ExactSequence{
     "Turn 15: X.\l"
     "Turn 16: Rage Fist.\p"
 
-    "Other variations may also be possible."
+    "Other variations are possible as well."
 }
 
 
@@ -7598,6 +7674,11 @@ text AntiSoftlockAskUndoFerroTrade{
 text AntiSoftlockAskUndoFlorgesTrade{
     "Would you like to undo your latest\n"
     "Pokémon trade and get back Florges?"
+}
+
+text AntiSoftlockAskUndoDunsparceTrade{
+    "Would you like to undo your latest\n"
+    "trade and get back Dunsparce?"
 }
 
 
@@ -8004,6 +8085,10 @@ text DunsparceTradePostTrade{
     "It's so good to be back together!"
 }
 
+text PlayerObtainedDunsparceMessage{
+    "{PLAYER} received a Dunsparce!" 
+}
+
 
 // BATTLES - OTHER
 text DoubleBattle_NotEnoughMons{
@@ -8214,7 +8299,8 @@ text Trainer9_Outro{
 }
 
 text Trainer9_PostBattle{
-    "Is this your last time passing through?"
+    // "Is this your last time passing through?"
+    "Are we done now?"
 }
 
 
@@ -8231,8 +8317,7 @@ text Trainer10_Outro{
 }
 
 text Trainer10_PostBattle{
-    "So Kecleon isn't the only Pokémon with\n"
-    "the ability to change?"
+    "Kecleon's ability is amazing!"
 }
 
 

@@ -17141,21 +17141,22 @@ AI: AI_FLAG_TRAINER11 / AI_FLAG_SEQUENCE_SWITCHING
 
 Heatran (M)  
 Ability: Flame Body  
-EVs: 244 HP / 32 Atk / 232 Def  
-Impish Nature  
+EVs: 140 HP / 32 Atk / 248 Def / 88 SpA  
+Relaxed Nature  
 - Body Press  
-- Hyper Beam  
+- Tera Blast   
 
 Kecleon (F) 
 Ability: Protean  
-Level: 20   
-Hasty Nature  
-IVs: 0 Def  
+Level: 25   
+EVs: 252 Atk  
+Lonely Nature  
+IVs: 12 HP / 0 Def  
 - Jungle Healing  
 
 Sableye (M) 
 Ability: Prankster  
-Level: 5  
+Level: 10  
 IVs: 0 Atk  
 - Foresight  
  
