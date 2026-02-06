@@ -620,7 +620,6 @@ script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
     }
 
 
-
     // TM Secret Power
     // if secret power obtained but not yet succesfully stolen
     if(!flag(FLAG_SECRET_POWER_COMPLETED) && flag(FLAG_SECRET_POWER_OBTAINED)){
@@ -660,11 +659,11 @@ script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
     }
 
     // RARE CANDY
-    // if secret power obtained but not yet succesfully stolen
+    // if rare candy obtained but not yet succesfully stolen
     if(!flag(FLAG_RARE_CANDY2_COMPLETED) && flag(FLAG_RARE_CANDY2_OBTAINED)){
         setvar(VAR_RARE_CANDY2_STOLEN_CHECK, 0)
 
-        clearflag(FLAG_TEMP_2) // will notify if Secret Power was removed as item
+        clearflag(FLAG_TEMP_2) // will notify if rare candy was removed as item
 
         // remove Rare Candy item
         checkpartyitem(0)
@@ -2976,7 +2975,12 @@ script EscapeRoom_EventScript_UndoOtherActions{
     }
 
     // Rare Candy in ice puzzle
-
+    elif(flag(FLAG_RARE_CANDY2_COMPLETED) && !flag(FLAG_TRAINER9_DEFEATED)){
+        msgbox(AntiSoftlockAskUndoIcePuzzleRareCandy, MSGBOX_YESNO)
+        if(var(VAR_RESULT) == YES){
+            call(EscapeRoom_EventScript_UndoIcePuzzleRareCandy)
+        }
+    }
 
 
     // no actions to be undone
@@ -3068,7 +3072,6 @@ script EscapeRoom_EventScript_UndoFlorgesTrade{
     clearflag(FLAG_FLORGES_TRADE_ACCEPTED)
 }
 
-
 script EscapeRoom_EventScript_UndoDunsparceTrade{
     // undo taunt move teach
     istaughtmovepresent(SPECIES_LIEPARD, MOVE_TAUNT)
@@ -3111,6 +3114,10 @@ script EscapeRoom_EventScript_UndoDunsparceTrade{
     clearflag(FLAG_DUNSPARCE_TRADE_ACCEPTED)
 }
 
+script EscapeRoom_EventScript_UndoIcePuzzleRareCandy{
+    clearflag(FLAG_RARE_CANDY2_COMPLETED)
+    call(EscapeRoom_MapScripts_CheckIcePuzzleItemReturns)
+}
 
 
 // LIEPARD
@@ -7679,6 +7686,11 @@ text AntiSoftlockAskUndoFlorgesTrade{
 text AntiSoftlockAskUndoDunsparceTrade{
     "Would you like to undo your latest\n"
     "trade and get back Dunsparce?"
+}
+
+text AntiSoftlockAskUndoIcePuzzleRareCandy{
+    "Would you like to place the Rare Candy\n"
+    "back inside the ice puzzle?"
 }
 
 
