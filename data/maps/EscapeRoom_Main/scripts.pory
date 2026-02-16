@@ -658,6 +658,7 @@ script EscapeRoom_MapScripts_CheckIcePuzzleItemReturns{
         clearflag(FLAG_SECRET_POWER_OBTAINED)
     }
 
+
     // RARE CANDY
     // if rare candy obtained but not yet succesfully stolen
     if(!flag(FLAG_RARE_CANDY2_COMPLETED) && flag(FLAG_RARE_CANDY2_OBTAINED)){
@@ -3966,6 +3967,25 @@ script EscapeRoom_EventScript_UndoRareCandy_IcePuzzle{
 
     // reset rare candy2 used var
     setvar(VAR_RARE_CANDY_2_USED_ON, SPECIES_NONE)
+
+
+    // check rare candy heals if mons not all 100% hp
+    checkpartyfullhp
+    if(var(VAR_RESULT) == FALSE){
+
+        // heal leveled down mon
+        checkpartymonfullhp(VAR_0x8005)
+        if(var(VAR_RESULT) == FALSE){
+            // only heal leveled down mon
+            healpartymon(VAR_0x8005, reverse=FALSE)
+            playse(SE_USE_ITEM)
+            waitse
+
+            // message
+            msgbox(AntiSoftlockSomeOfPartyHealed, MSGBOX_DEFAULT)
+            waitmessage 
+        }
+    }
 }
 
 script EscapeRoom_EventScript_CheckRareCandy2Stolen{
