@@ -485,8 +485,8 @@
   ],
   "warp_events": [
     {
-      "x": 63,
-      "y": 19,
+      "x": 58,
+      "y": 38,
       "elevation": 0,
       "dest_map": "MAP_ESCAPE_ROOM_ANNIHILAPES_LAIR",
       "dest_warp_id": "0"

@@ -6485,7 +6485,7 @@ text Nurse_Ask_heal{
     "Should I heal your Pokémon?"
 }
 
-text Nurse_Heal_End{
+text Nurse_Heal_End{ 
     "As good as new!"
 }
 
