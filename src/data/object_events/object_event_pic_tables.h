@@ -1394,3 +1394,16 @@ static const struct SpriteFrameImage sPicTable_LiepardOld[] = {
     overworld_frame(gObjectEventPic_LiepardOld, 4, 4, 4),
     overworld_frame(gObjectEventPic_LiepardOld, 4, 4, 5),
 };
+
+
+// ADDED
+static const struct SpriteFrameImage sPicTable_RotatingTabletOld[] = {
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 0), // down
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 1), // up
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 2), // left
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 3), // right
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 4), // sw
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 5), // nw
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 6), // ne
+    overworld_frame(gObjectEventPic_RotatingTabletOld, 2, 4, 7), // se
+};

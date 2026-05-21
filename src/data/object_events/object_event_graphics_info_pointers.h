@@ -212,6 +212,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Wingull;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Annihilape; // ADDED
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Trapinch; // ADDED
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Liepard; // ADDED
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RotatingTablet; // ADDED
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_KecleonBridgeShadow;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_TuberMSwimming;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Azurill;
@@ -496,6 +497,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_ANNIHILAPE] =               &gObjectEventGraphicsInfo_Annihilape,
     [OBJ_EVENT_GFX_TRAPINCH] =                 &gObjectEventGraphicsInfo_Trapinch,
     [OBJ_EVENT_GFX_LIEPARD] =                  &gObjectEventGraphicsInfo_Liepard,
+    [OBJ_EVENT_GFX_ROTATING_TABLET] =          &gObjectEventGraphicsInfo_RotatingTablet,
 };
 
 const struct ObjectEventGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[] = {

@@ -28,7 +28,7 @@
       "flag": "FLAG_HIDE_SMASH_ROCK1"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_DEOXYS_TRIANGLE",
+      "graphics_id": "OBJ_EVENT_GFX_ROTATING_TABLET",
       "x": 13,
       "y": 3,
       "elevation": 0,

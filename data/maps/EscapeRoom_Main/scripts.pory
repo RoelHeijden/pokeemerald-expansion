@@ -5311,6 +5311,14 @@ script EscapeRoom_EventScript_MapSwitch2{
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
 
+
+        // play animation
+        // LOCALID_MAP_SWITCH2
+        applymovement(LOCALID_MAP_SWITCH2, _face_left)
+        waitmovement(LOCALID_MAP_SWITCH2)
+
+
+
         // full circle: back to north
         if(var(VAR_MAP_SWITCH_2) >= 4){
             setvar(VAR_MAP_SWITCH_2, 0)

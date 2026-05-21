@@ -385,6 +385,11 @@ const u16 gObjectEventPal_Trapinch[] = INCBIN_U16("graphics/object_events/palett
 const u32 gObjectEventPic_LiepardOld[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/liepard.4bpp");
 const u16 gObjectEventPal_Liepard[] = INCBIN_U16("graphics/object_events/palettes/liepard.gbapal");
 
+// ADDED
+const u32 gObjectEventPic_RotatingTabletOld[] = INCBIN_U32("graphics/object_events/pics/misc/TabletObjects1.4bpp");
+const u16 gObjectEventPal_RotatingTablet[] = INCBIN_U16("graphics/object_events/palettes/TabletObjects1.gbapal");
+
+
 
 const u32 gObjectEventPic_VigorothMover[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/vigoroth_mover.4bpp");
 const u32 gObjectEventPic_SudowoodoTree[] = INCBIN_U32("graphics/object_events/pics/pokemon_old/sudowoodo_tree.4bpp");
