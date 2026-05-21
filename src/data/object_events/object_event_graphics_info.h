@@ -4748,6 +4748,7 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RotatingTablet = {
     .oam = &gObjectEventBaseOam_16x32,
     .subspriteTables = sOamTables_16x32,
     .anims = sAnimTable_Standard,
+    // .anims = sAnimTable_RotatingTablet,
     .images = sPicTable_RotatingTabletOld,
     .affineAnims = gDummySpriteAffineAnimTable,
 };

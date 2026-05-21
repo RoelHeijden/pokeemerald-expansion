@@ -3,7 +3,7 @@ const LOCALID_TABLET1 = 2
 const LOCALID_TABLETS_COOK_NPC = 3
 const LOCALID_RARE_CANDY = 4
 const LOCALID_TRAPINCH = 5
-const LOCALID_TABLET2 = 6
+const LOCALID_TABLET4 = 6
 const LOCALID_NURSE = 7
 
 
@@ -12,6 +12,7 @@ const LOCALID_NURSE = 7
 mapscripts EscapeRoom_EggCave_MapScripts {
     MAP_SCRIPT_ON_LOAD: EggCave_SetWallOnLoad
     MAP_SCRIPT_ON_RESUME: EscapeRoom_EggCave_OnResumeMapScripts
+    MAP_SCRIPT_ON_TRANSITION: EscapeRoom_EggCave_OnTransitionScripts
 
     MAP_SCRIPT_ON_FRAME_TABLE [
         VAR_RETRIEVED_HELD_ITEM, 1: EscapeRoom_MapScripts_RetrievedItemMessage
@@ -33,6 +34,36 @@ script EggCave_SetWallOnLoad{
         else{
             setmetatile(18, 4, METATILE_Cave_SealedChamberBraille_Mid, TRUE)            
         }
+    }
+}
+
+script EscapeRoom_EggCave_OnTransitionScripts{
+    // set tablet 1 facing correctly
+    if(var(VAR_MAP_SWITCH_1) == 0){
+        setobjectmovementtype(LOCALID_TABLET1, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 1){
+        setobjectmovementtype(LOCALID_TABLET1, MOVEMENT_TYPE_FACE_LEFT)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 2){
+        setobjectmovementtype(LOCALID_TABLET1, MOVEMENT_TYPE_FACE_UP)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 3){
+        setobjectmovementtype(LOCALID_TABLET1, MOVEMENT_TYPE_FACE_RIGHT)
+    }
+
+    // set tablet 4 facing correctly
+    if(var(VAR_MAP_SWITCH_4) == 0){
+        setobjectmovementtype(LOCALID_TABLET4, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 1){
+        setobjectmovementtype(LOCALID_TABLET4, MOVEMENT_TYPE_FACE_LEFT)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 2){
+        setobjectmovementtype(LOCALID_TABLET4, MOVEMENT_TYPE_FACE_UP)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 3){
+        setobjectmovementtype(LOCALID_TABLET4, MOVEMENT_TYPE_FACE_RIGHT)
     }
 }
 

@@ -13,8 +13,7 @@ const LOCALID_EXP_CANDY = 10
 ////////////////////////////////////////// MAP SCRIPTS //////////////////////////////////////////
 
 mapscripts EscapeRoom_ShortcutRoute_MapScripts {
-    // MAP_SCRIPT_ON_LOAD: SetWallOnLoad
-    MAP_SCRIPT_ON_TRANSITION: CheckResetRocks
+    MAP_SCRIPT_ON_TRANSITION: EscapeRoom_ShortcutRoute_OnTransitionScripts
     MAP_SCRIPT_ON_RESUME: EscapeRoom_ShortcutRoute_OnResumeMapScripts
 
     MAP_SCRIPT_ON_FRAME_TABLE [
@@ -23,6 +22,26 @@ mapscripts EscapeRoom_ShortcutRoute_MapScripts {
     ] 
 }
 
+
+script EscapeRoom_ShortcutRoute_OnTransitionScripts{
+    // check reset rocks
+    call(ResetSmashRock1)
+    call(ResetShuckleSmashRocks)
+
+    // set tablet 3 facing correctly
+    if(var(VAR_MAP_SWITCH_3) == 0){
+        setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 1){
+        setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_LEFT)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 2){
+        setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_UP)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 3){
+        setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_RIGHT)
+    }
+}
 
 script EscapeRoom_ShortcutRoute_OnResumeMapScripts {
     call(CheckIfBerryJuiceObtained)
@@ -56,11 +75,6 @@ script SetWallOnLoad{
         setmetatile(9, 1, METATILE_Cave_SealedChamberBraille_Mid, TRUE)
         setmetatile(10, 1, METATILE_Cave_SealedChamberBraille_Mid, TRUE) 
     }
-}
-
-script CheckResetRocks{
-    call(ResetSmashRock1)
-    call(ResetShuckleSmashRocks)
 }
 
 script ResetSmashRock1{

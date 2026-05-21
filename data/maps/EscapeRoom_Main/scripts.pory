@@ -48,6 +48,11 @@ const LOCALID_TRAINER11 = 5
 const LOCALID_CHAMPION_BF = 7
 const LOCALID_EE_WALL_SIGN = 8
 
+const LOCALID_MAP_SWITCH1 = 2
+const LOCALID_MAP_SWITCH3 = 2
+const LOCALID_MAP_SWITCH4 = 6
+
+
 
 movement _face_down {
     face_down
@@ -106,6 +111,20 @@ script EscapeRoom_MapScript_OnTransitionScripts{
     if(flag(FLAG_TRAINER3_DEFEATED)){
         setobjectxyperm(LOCALID_TRAINER3, 62, 10)
         setobjectmovementtype(LOCALID_TRAINER3, MOVEMENT_TYPE_FACE_LEFT)
+    }
+
+    // set tablet 2 facing correctly
+    if(var(VAR_MAP_SWITCH_2) == 0){
+        setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_DOWN)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 1){
+        setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_LEFT)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 2){
+        setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_UP)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 3){
+        setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_RIGHT)
     }
 }
 
@@ -5245,28 +5264,51 @@ script EscapeRoom_EventScript_MapSwitch1{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_1) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_1) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_1) == 2){
         msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
-    if(var(VAR_MAP_SWITCH_1) == 3){
+    if(var(VAR_MAP_SWITCH_1) == 1){
         msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 2){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_1) == 3){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
 
     // change direction
     if(var(VAR_RESULT) == YES){
         playse(SE_CLICK)
+
         addvar(VAR_MAP_SWITCH_1, 1)
+        if(var(VAR_MAP_SWITCH_1) >= 4){
+            setvar(VAR_MAP_SWITCH_1, 0)
+        }
+
+        // message
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
 
-        // full circle: back to north
-        if(var(VAR_MAP_SWITCH_1) >= 4){
-            setvar(VAR_MAP_SWITCH_1, 0)
+        // play animation
+        if(var(VAR_MAP_SWITCH_1) == 0){
+            applymovement(LOCALID_MAP_SWITCH1, _face_down)
+            waitmovement(LOCALID_MAP_SWITCH1)
+            setobjectmovementtype(LOCALID_MAP_SWITCH1, MOVEMENT_TYPE_FACE_DOWN)
+        }
+        if(var(VAR_MAP_SWITCH_1) == 1){
+            applymovement(LOCALID_MAP_SWITCH1, _face_left)
+            waitmovement(LOCALID_MAP_SWITCH1)
+            setobjectmovementtype(LOCALID_MAP_SWITCH1, MOVEMENT_TYPE_FACE_LEFT)
+        }
+        if(var(VAR_MAP_SWITCH_1) == 2){
+            applymovement(LOCALID_MAP_SWITCH1, _face_up)
+            waitmovement(LOCALID_MAP_SWITCH1)
+            setobjectmovementtype(LOCALID_MAP_SWITCH1, MOVEMENT_TYPE_FACE_UP)
+        }
+        if(var(VAR_MAP_SWITCH_1) == 3){
+            applymovement(LOCALID_MAP_SWITCH1, _face_right)
+            waitmovement(LOCALID_MAP_SWITCH1)
+            setobjectmovementtype(LOCALID_MAP_SWITCH1, MOVEMENT_TYPE_FACE_RIGHT)
         }
 
         // check for correct solution
@@ -5292,36 +5334,51 @@ script EscapeRoom_EventScript_MapSwitch2{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_2) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_2) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_2) == 2){
         msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
-    if(var(VAR_MAP_SWITCH_2) == 3){
+    if(var(VAR_MAP_SWITCH_2) == 1){
         msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 2){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_2) == 3){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
 
     // change direction
     if(var(VAR_RESULT) == YES){
         playse(SE_CLICK)
+
         addvar(VAR_MAP_SWITCH_2, 1)
+        if(var(VAR_MAP_SWITCH_2) >= 4){ 
+            setvar(VAR_MAP_SWITCH_2, 0)
+        }
+
+        // message
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
 
-
         // play animation
-        // LOCALID_MAP_SWITCH2
-        applymovement(LOCALID_MAP_SWITCH2, _face_left)
-        waitmovement(LOCALID_MAP_SWITCH2)
-
-
-
-        // full circle: back to north
-        if(var(VAR_MAP_SWITCH_2) >= 4){
-            setvar(VAR_MAP_SWITCH_2, 0)
+        if(var(VAR_MAP_SWITCH_2) == 0){
+            applymovement(LOCALID_MAP_SWITCH2, _face_down)
+            waitmovement(LOCALID_MAP_SWITCH2)
+            setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_DOWN)
+        }
+        if(var(VAR_MAP_SWITCH_2) == 1){
+            applymovement(LOCALID_MAP_SWITCH2, _face_left)
+            waitmovement(LOCALID_MAP_SWITCH2)
+            setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_LEFT)
+        }
+        if(var(VAR_MAP_SWITCH_2) == 2){
+            applymovement(LOCALID_MAP_SWITCH2, _face_up)
+            waitmovement(LOCALID_MAP_SWITCH2)
+            setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_UP)
+        }
+        if(var(VAR_MAP_SWITCH_2) == 3){
+            applymovement(LOCALID_MAP_SWITCH2, _face_right)
+            waitmovement(LOCALID_MAP_SWITCH2)
+            setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_RIGHT)
         }
 
         // check for correct solution
@@ -5346,28 +5403,51 @@ script EscapeRoom_EventScript_MapSwitch3{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_3) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_3) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_3) == 2){
         msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
-    if(var(VAR_MAP_SWITCH_3) == 3){
+    if(var(VAR_MAP_SWITCH_3) == 1){
         msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 2){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_3) == 3){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
 
     // change direction
     if(var(VAR_RESULT) == YES){
         playse(SE_CLICK)
+
         addvar(VAR_MAP_SWITCH_3, 1)
+        if(var(VAR_MAP_SWITCH_3) >= 4){
+            setvar(VAR_MAP_SWITCH_3, 0)
+        }
+
+        // message
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
 
-        // full circle: back to north
-        if(var(VAR_MAP_SWITCH_3) >= 4){
-            setvar(VAR_MAP_SWITCH_3, 0)
+        // play animation
+        if(var(VAR_MAP_SWITCH_3) == 0){
+            applymovement(LOCALID_MAP_SWITCH3, _face_down)
+            waitmovement(LOCALID_MAP_SWITCH3)
+            setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_DOWN)
+        }
+        if(var(VAR_MAP_SWITCH_3) == 1){
+            applymovement(LOCALID_MAP_SWITCH3, _face_left)
+            waitmovement(LOCALID_MAP_SWITCH3)
+            setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_LEFT)
+        }
+        if(var(VAR_MAP_SWITCH_3) == 2){
+            applymovement(LOCALID_MAP_SWITCH3, _face_up)
+            waitmovement(LOCALID_MAP_SWITCH3)
+            setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_UP)
+        }
+        if(var(VAR_MAP_SWITCH_3) == 3){
+            applymovement(LOCALID_MAP_SWITCH3, _face_right)
+            waitmovement(LOCALID_MAP_SWITCH3)
+            setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_RIGHT)
         }
         
         // check for correct solution
@@ -5397,28 +5477,51 @@ script EscapeRoom_EventScript_MapSwitch4{
 
     // ask to change tablet direction
     if(var(VAR_MAP_SWITCH_4) == 0){
-        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_4) == 1){
-        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
-    }
-    if(var(VAR_MAP_SWITCH_4) == 2){
         msgbox(MapSwitchPointedSouth, MSGBOX_YESNO)
     }
-    if(var(VAR_MAP_SWITCH_4) == 3){
+    if(var(VAR_MAP_SWITCH_4) == 1){
         msgbox(MapSwitchPointedWest, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 2){
+        msgbox(MapSwitchPointedNorth, MSGBOX_YESNO)
+    }
+    if(var(VAR_MAP_SWITCH_4) == 3){
+        msgbox(MapSwitchPointedEast, MSGBOX_YESNO)
     }
 
     // change direction
     if(var(VAR_RESULT) == YES){
         playse(SE_CLICK)
+
         addvar(VAR_MAP_SWITCH_4, 1)
+        if(var(VAR_MAP_SWITCH_4) >= 4){
+            setvar(VAR_MAP_SWITCH_4, 0)
+        }
+
+        // message
         msgbox(RotatedSwitchSoundMessage, MSGBOX_AUTOCLOSE)
         waitmessage
 
-        // full circle: back to north
-        if(var(VAR_MAP_SWITCH_4) >= 4){
-            setvar(VAR_MAP_SWITCH_4, 0)
+        // play animation
+        if(var(VAR_MAP_SWITCH_4) == 0){
+            applymovement(LOCALID_MAP_SWITCH4, _face_down)
+            waitmovement(LOCALID_MAP_SWITCH4)
+            setobjectmovementtype(LOCALID_MAP_SWITCH4, MOVEMENT_TYPE_FACE_DOWN)
+        }
+        if(var(VAR_MAP_SWITCH_4) == 1){
+            applymovement(LOCALID_MAP_SWITCH4, _face_left)
+            waitmovement(LOCALID_MAP_SWITCH4)
+            setobjectmovementtype(LOCALID_MAP_SWITCH4, MOVEMENT_TYPE_FACE_LEFT)
+        }
+        if(var(VAR_MAP_SWITCH_4) == 2){
+            applymovement(LOCALID_MAP_SWITCH4, _face_up)
+            waitmovement(LOCALID_MAP_SWITCH4)
+            setobjectmovementtype(LOCALID_MAP_SWITCH4, MOVEMENT_TYPE_FACE_UP)
+        }
+        if(var(VAR_MAP_SWITCH_4) == 3){
+            applymovement(LOCALID_MAP_SWITCH4, _face_right)
+            waitmovement(LOCALID_MAP_SWITCH4)
+            setobjectmovementtype(LOCALID_MAP_SWITCH4, MOVEMENT_TYPE_FACE_RIGHT)
         }
         
         // check for correct solution
@@ -5429,10 +5532,10 @@ script EscapeRoom_EventScript_MapSwitch4{
 
 script EscapeRoom_EventScript_CheckSwitchesCorrect{
     if(
-        var(VAR_MAP_SWITCH_1) == 2 &&  // south -- Onix 0095
-        var(VAR_MAP_SWITCH_2) == 1 &&  // east  -- Toedscruel 0949
-        var(VAR_MAP_SWITCH_3) == 3 &&  // west  -- Dusknoir 0477
-        var(VAR_MAP_SWITCH_4) == 3     // west  -- Dunsparce 0206
+        var(VAR_MAP_SWITCH_1) == 2 &&  // north -- Onix 0095
+        var(VAR_MAP_SWITCH_2) == 3 &&  // east  -- Toedscruel 0949
+        var(VAR_MAP_SWITCH_3) == 1 &&  // west  -- Dusknoir 0477
+        var(VAR_MAP_SWITCH_4) == 1     // west  -- Dunsparce 0206
     ){
         lockall
         call(EscapeRoom_EventScript_SwitchesOpenDoorSequence)
@@ -6430,60 +6533,57 @@ text RotatedSwitchSoundMessage{
 }
 
 text MapSwitchDoorOpened{
-    "Something just opened..."
+    // "Something just opened..."
+    "???"
 }
 
 text MApSwitchesAlreadySolved{
-    "The tablet is locked in place."
+    "The totem is locked in place."
 }
 
 // engraving messages
 text MapSwitchTablet1_Onix{
-    // "It's a stone tablet with an engraving\n"
-    // "of an Onix."
-    "It's a stone tablet engraved with the\n"
-    "number 95."
+    // Onix
+    "The totem is engraved with the number\n"
+    "95."
 }
 
 text MapSwitchTablet2_Toedscruel{
-    // "It's a stone tablet with an engraving\n"
-    // "of a Toedscruel."
-    "It's a stone tablet engraved with the\n"
-    "number 949."
+    // Toedscruel
+    "The totem is engraved with the number\n"
+    "949."
 }
 
 text MapSwitchTablet3_Dusknoir{
-    // "It's a stone tablet with an engraving\n"
-    // "of a Dusknoir."
-    "It's a stone tablet engraved with the\n"
-    "number 477."
+    // Dusknoir
+    "The totem is engraved with the number\n"
+    "477."
 }
 
 text MapSwitchTablet4_Dunsparce{
-    // "It's a stone tablet with an engraving\n"
-    // "of a Dunsparce."
-    "It's a stone tablet engraved with the\n"
-    "number 206."
+    // Dunsparce
+    "The totem is engraved with the number\n"
+    "206."
 }
 
 // direction messages
 text MapSwitchPointedNorth{
-    "The tablet is pointed north.\n"
+    "The totem is facing north.\n"
     "Do you want to change its direction?"
 }
 
 text MapSwitchPointedEast{
-    "The tablet is pointed east.\n"
+    "The totem is facing east.\n"
     "Do you want to change its direction?"
 }
 
 text MapSwitchPointedSouth{
-    "The tablet is pointed south.\n"
+    "The totem is facing south.\n"
     "Do you want to change its direction?"
 }
 
 text MapSwitchPointedWest{
-    "The tablet is pointed west.\n"
+    "The totem is facing west.\n"
     "Do you want to change its direction?"
 }
 
@@ -6683,7 +6783,7 @@ text HintsNPC_Trainer6_SmallHint{
 }
 
 text HintsNPC_MapSwitches_SmallHint{
-    "The tablet numbers may have something\n"
+    "The totem numbers may have something\n"
     "to do with Pokémon..."
 }
 
@@ -6897,7 +6997,7 @@ text HintsNPC_Trainer6_LargeHint{
 }
 
 text HintsNPC_MapSwitches_LargeHint{
-    "Four stone tablets, have you seen?\n"
+    "Four totems, have you seen?\n"
     "The numbers Mason, what do they mean!\p"
     "Every Pokémon has their own.\n"
     "In numerical order they are shown.\p"
@@ -7329,15 +7429,15 @@ text HintsNPC_Trainer6_Solution{
 }
 
 text HintsNPC_MapSwitches_Solution{
-    "Each of the four tablets is engraved\n"
+    "Each of the four totems is engraved\n"
     "with the Pokédex entry number of a\l"
     "Pokémon you've encountered.\p"
 
-    "For each tablet, open the matching\n"
+    "For each totem, open the matching\n"
     "Pokédex entry and check the Pokémon's\l"
     "encounter area.\p"
 
-    "Align the tablet to the highlighted\n"
+    "Align the totems to the highlighted\n"
     "part of the map (north, east, south, or\l"
     "west)."
 }
@@ -7463,7 +7563,7 @@ text HintsNPC_RareCandy3_Solution{
     "area behind the Mart NPC.\p"
 
     "2. There's a wall entrance southwest,\n"
-    "outside the cave of the 4th tablet.\p"
+    "outside the cave of the 4th totem.\p"
 
     "Enter the first base to find a Solid\n"
     "Board, then use it in the second base\l"
@@ -7783,7 +7883,7 @@ text AnnihilapeHintMessage{
 
 // TABLETS HINT NPC
 text FourTabletsHintMessage1{
-    "Do you see that strange tablet?\p"
+    "Do you see that strange totem?\p"
     "I'm looking for more of them!\n"
     "I wonder what they do."
 }
@@ -7794,7 +7894,7 @@ text FourTabletsHintMessage2{
 }
 
 text FourTabletsHintMessage3{
-    "What was that earthquake???"
+    "What was that earthquake?"
 }
 
 
@@ -8261,7 +8361,7 @@ text Trainer6_Intro{
 }
 
 text Trainer6_Outro{
-    "Oh how the tablets have turned."
+    "Oh how the tables have turned."
 }
 
 text Trainer6_PostBattle{

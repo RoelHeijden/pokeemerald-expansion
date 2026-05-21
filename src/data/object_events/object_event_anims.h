@@ -1539,68 +1539,55 @@ static const struct StepAnimTable sStepAnimTables[] = {
 
 
 
-// ADDED
-static const union AnimCmd sAnim_RotatingTablet_FaceSouth[] =
-{
-    ANIMCMD_FRAME(0, 16),
-    ANIMCMD_JUMP(0),
-};
 
-static const union AnimCmd sAnim_RotatingTablet_FaceWest[] =
-{
-    ANIMCMD_FRAME(2, 16),
-    ANIMCMD_JUMP(0),
-};
 
-static const union AnimCmd sAnim_RotatingTablet_FaceNorth[] =
-{
-    ANIMCMD_FRAME(1, 16),
-    ANIMCMD_JUMP(0),
-};
 
-static const union AnimCmd sAnim_RotatingTablet_FaceEast[] =
-{
-    ANIMCMD_FRAME(3, 16),
-    ANIMCMD_JUMP(0),
-};
+
+// static const union AnimCmd sAnim_RotatingTablet_SpinAround[] =
+// {
+//     ANIMCMD_FRAME(4, 4),
+//     ANIMCMD_FRAME(2, 56),
+//     ANIMCMD_FRAME(5, 4),
+//     ANIMCMD_FRAME(1, 56),
+//     ANIMCMD_FRAME(6, 4),
+//     ANIMCMD_FRAME(3, 56),
+//     ANIMCMD_FRAME(7, 4),
+//     ANIMCMD_FRAME(0, 56),
+//     ANIMCMD_JUMP(0),
+// };
 
 static const union AnimCmd sAnim_RotatingTablet_RotateSouth[] =
 {
-    ANIMCMD_FRAME(7, 8),
-    ANIMCMD_FRAME(0, 16),
-    ANIMCMD_JUMP(0),
+    ANIMCMD_FRAME(7, 4),
+    ANIMCMD_FRAME(0, 8),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_RotatingTablet_RotateWest[] =
 {
-    ANIMCMD_FRAME(4, 8),
-    ANIMCMD_FRAME(2, 16),
-    ANIMCMD_JUMP(0),
+    ANIMCMD_FRAME(4, 4),
+    ANIMCMD_FRAME(2, 8),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_RotatingTablet_RotateNorth[] =
 {
-    ANIMCMD_FRAME(5, 8),
-    ANIMCMD_FRAME(1, 16),
-    ANIMCMD_JUMP(0),
+    ANIMCMD_FRAME(5, 4),
+    ANIMCMD_FRAME(1, 8),
+    ANIMCMD_END,
 };
 
 static const union AnimCmd sAnim_RotatingTablet_RotateEast[] =
 {
-    ANIMCMD_FRAME(6, 8),
-    ANIMCMD_FRAME(3, 16),
-    ANIMCMD_JUMP(0),
+    ANIMCMD_FRAME(6, 4),
+    ANIMCMD_FRAME(3, 8),
+    ANIMCMD_END,
 };
 
-// ADDED
 static const union AnimCmd *const sAnimTable_RotatingTablet[] = {
-    [ANIM_STD_FACE_SOUTH] = sAnim_RotatingTablet_FaceSouth,
-    [ANIM_STD_FACE_NORTH] = sAnim_RotatingTablet_FaceNorth,
-    [ANIM_STD_FACE_WEST] = sAnim_RotatingTablet_FaceWest,
-    [ANIM_STD_FACE_EAST] = sAnim_RotatingTablet_FaceEast,
-    [ANIM_ROTATE_TABLET_S] = sAnim_RotatingTablet_RotateSouth,
-    [ANIM_ROTATE_TABLET_W] = sAnim_RotatingTablet_RotateWest,
-    [ANIM_ROTATE_TABLET_N] = sAnim_RotatingTablet_RotateNorth,
-    [ANIM_ROTATE_TABLET_E] = sAnim_RotatingTablet_RotateEast,
+    [ANIM_STD_FACE_SOUTH] = sAnim_RotatingTablet_RotateSouth,
+    [ANIM_STD_FACE_NORTH] = sAnim_RotatingTablet_RotateNorth,
+    [ANIM_STD_FACE_WEST] = sAnim_RotatingTablet_RotateWest,
+    [ANIM_STD_FACE_EAST] = sAnim_RotatingTablet_RotateEast,
 };
 
