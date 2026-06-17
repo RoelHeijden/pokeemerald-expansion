@@ -42187,7 +42187,7 @@ F_TRAINER_FEMALE |
     [TRAINER_CUSTOM_TRAINER0] =
     {
 #line 16879
-        .trainerName = _("Tim Moore"),
+        .trainerName = _("Tim Miller"),
 #line 16880
         .trainerClass = TRAINER_CLASS_PYRAMID_KING,
 #line 16881

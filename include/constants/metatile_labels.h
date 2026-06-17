@@ -788,7 +788,7 @@
 #define METATILE_Underwater_RockWall     0x21E
 
 // Other
-#define METATILE_EscapeRoomIceRock             0x39A
+#define METATILE_EscapeRoomIceRock             0x019
 #define METATILE_RSMossdeepGym_RedArrow_Down   0x205
 #define METATILE_RSMossdeepGym_RedArrow_Left   0x20C
 #define METATILE_RSMossdeepGym_RedArrow_Right  0x204

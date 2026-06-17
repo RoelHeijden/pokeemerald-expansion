@@ -4414,8 +4414,8 @@
     {
       "id": "LAYOUT_ESCAPE_ROOM_MAIN",
       "name": "EscapeRoom_Main_Layout",
-      "width": 132,
-      "height": 42,
+      "width": 130,
+      "height": 55,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_CableClub",
       "border_filepath": "data/layouts/EscapeRoom_Main/border.bin",

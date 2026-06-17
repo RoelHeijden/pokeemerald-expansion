@@ -5551,8 +5551,32 @@ script EscapeRoom_EventScript_SwitchesOpenDoorSequence{
     delay(40)
 	special(DoSealedChamberShakingEffect_Short)
 	waitstate
+
+
+    applymovement(LOCALID_MAP_SWITCH1, _face_down)
+    waitmovement(LOCALID_MAP_SWITCH1)
+    setobjectmovementtype(LOCALID_MAP_SWITCH1, MOVEMENT_TYPE_FACE_DOWN)
+    setvar(VAR_MAP_SWITCH_1, 0)
+
+    applymovement(LOCALID_MAP_SWITCH2, _face_down)
+    waitmovement(LOCALID_MAP_SWITCH2)
+    setobjectmovementtype(LOCALID_MAP_SWITCH2, MOVEMENT_TYPE_FACE_DOWN)
+    setvar(VAR_MAP_SWITCH_2, 0)
+
+    applymovement(LOCALID_MAP_SWITCH3, _face_down)
+    waitmovement(LOCALID_MAP_SWITCH3)
+    setobjectmovementtype(LOCALID_MAP_SWITCH3, MOVEMENT_TYPE_FACE_DOWN)
+    setvar(VAR_MAP_SWITCH_3, 0)
+
+    applymovement(LOCALID_MAP_SWITCH4, _face_down)
+    waitmovement(LOCALID_MAP_SWITCH4)
+    setobjectmovementtype(LOCALID_MAP_SWITCH4, MOVEMENT_TYPE_FACE_DOWN)
+    setvar(VAR_MAP_SWITCH_4, 0)
+
+
 	playse(SE_DOOR)
     delay(40)
+
     msgbox(MapSwitchDoorOpened, MSGBOX_DEFAULT)
 	closemessage
     fadeinbgm(0)      
@@ -8546,8 +8570,8 @@ text EasterEggCompletedMessage2{
     "You may be one of the first to complete\n"
     "this easter egg.\p"
 
-    "In the case you are, please notify me\n"
-    "(Ketch) and get your name added ingame\l"
+    "In the case you are, please notify the\n"
+    "creator and get your name added ingame\l"
     "on the sign above.\p"
 
     "...\p"
@@ -8556,15 +8580,16 @@ text EasterEggCompletedMessage2{
 }
 
 text EasterEggFirstCompletedMessage{
-    "You're the first to complete the\n"
-    "easter egg!\p"
-    "(assuming your game is up to date)"
+    "It seems you're the first to have\n"
+    "completed the easter egg!\p"
+    "(assuming your game's version is up to\n"
+    "date)"
 }
 
 text EasterEggHintMessage{
-    "Interested in easter eggs?\p"
-    "Your first clue exists before time\n"
-    "begins."
+    "Do you like easter eggs?\p"
+    "The first clue exists before the\n"
+    "beginning of time."
 }
 
 text EasterEggStep1Completed{
@@ -8584,7 +8609,7 @@ text EasterEggStep1Completed_HintMessage{
 }
 
 text EasterEggStep2WallSignMessage{
-    "I see you like easter eggs."
+    "..."
 }
 
 text EasterEggStep3WallSignMessage{
