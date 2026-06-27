@@ -4417,7 +4417,7 @@
       "width": 130,
       "height": 55,
       "primary_tileset": "gTileset_General",
-      "secondary_tileset": "gTileset_CableClub",
+      "secondary_tileset": "gTileset_JungleRuins",
       "border_filepath": "data/layouts/EscapeRoom_Main/border.bin",
       "blockdata_filepath": "data/layouts/EscapeRoom_Main/map.bin"
     },
