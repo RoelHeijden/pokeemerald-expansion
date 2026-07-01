@@ -11207,6 +11207,10 @@ u32 GetIllusionMonSpecies(u32 battler)
     // unlock pokemon in pokedex as seen
     u8 side = GetBattlerSide(battler);
     if (side == B_SIDE_OPPONENT)
+    // {
+    //     u16 species = GetMonData(illusionMon, MON_DATA_SPECIES);
+    //     GetSetPokedexFlag(species, FLAG_SET_SEEN);
+    // }
     {
         u16 species = GetMonData(illusionMon, MON_DATA_SPECIES);
         u16 natDex = SpeciesToNationalPokedexNum(species);
